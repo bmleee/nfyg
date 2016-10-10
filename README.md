@@ -1,3 +1,17 @@
+## [7Pictures](https://7pictures.co.kr) Sever Stack
+	Image 없음..
+ - nginx
+ - CloudFront
+ - node.js
+ - express
+ - mongodb
+ - ....
+ - front: React.js
+
+
+
+
+
 ```
 express-with-react-boilerplate
 +- express-app/	# express app.js, gulped
@@ -31,18 +45,5 @@ express-with-react-boilerplate
 ```
 ## usage
 ```
-	npm install && bower install && npm start
+$ npm install && bower install && gulp
 ```
-
-## express with react bolierplate
- - webpacked express app is served in express-app/
- - react isomorphic is not applied
-
-## gulp, babel plugins
- check package.json
-
-
-## Todos
- 1. apply react-redux
- 2. proxy : express, react routing
- 3. bin directory : express-app.js proxy-server.js

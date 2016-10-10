@@ -7,7 +7,7 @@ var UglifyJsPlugin = new webpack.optimize.UglifyJsPlugin({
 
 module.exports = {
 	// configure for express.js
-	entry: './src/react/app.js',
+	entry: './src/react/App.js',
 
 	output: {
 		path: __dirname + '/public',
