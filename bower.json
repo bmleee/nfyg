@@ -1,0 +1,22 @@
+{
+  "name": "react-express-boilerplate",
+  "description": "i do",
+  "main": "index.js",
+  "authors": [
+    "4000D"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/4000D/express-with-react-boilerplate",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.1.1",
+    "underscore": "^1.8.3",
+    "font-awesome": "^4.6.3"
+  }
+}

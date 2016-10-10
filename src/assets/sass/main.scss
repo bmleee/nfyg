@@ -1,0 +1,104 @@
+@import "../../../node_modules/react-image-gallery/styles/scss/image-gallery.scss";
+// @import "./react-components/ThumbnailSlider/_ThumbnailSlider.scss";
+@import "../../react/components/**/*";
+
+
+.body {
+	div {
+		text-align: center;
+	}
+}
+
+.present-project-list-container {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: flex-start;
+	width: 100%;
+
+	.present-project-list-item {
+		display: block;
+		width: 30%;
+
+		img {
+			width: 100%;
+		}
+	}
+}
+
+.future-project-list-container {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: flex-start;
+	width: 100%;
+
+	.future-project-list-item {
+		width: 23%;
+
+		img {
+			width: 100%;
+		}
+	}
+}
+
+
+.recent-exhibition-list {
+
+	.recent-exhibition-list-container {
+		display: flex;
+		flex-flow: row wrap;
+		justify-content: flex-start;
+		width: 100%;
+
+		.recent-exhibition-list-item {
+			width: 30%;
+
+			img {
+				width: 100%;
+			}
+		}
+
+	}
+
+}
+
+
+.magazine-list {
+
+	.magazine-list-container {
+		display: flex;
+		flex-flow: row wrap;
+		justify-content: flex-start;
+		width: 100%;
+
+		.magazine-list-item {
+			width: 30%;
+
+			img {
+				width: 100%;
+			}
+		}
+
+	}
+
+}
+
+
+.past-project-list {
+
+	.past-project-list-container {
+		display: flex;
+		flex-flow: row wrap;
+		justify-content: flex-start;
+		width: 100%;
+
+		.past-project-list-item {
+			width: 30%;
+
+			img {
+				width: 100%;
+			}
+		}
+
+	}
+
+}
