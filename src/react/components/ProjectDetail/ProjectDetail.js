@@ -373,7 +373,7 @@ class ProjectDetail extends Component {
 			qna
 		};
 	}
-
+	
 	_onSelectOptionChange(o) {
 		let { indirectSupporters } = this.state;
 

@@ -5,8 +5,7 @@ import { Nav, Footer } from './components/Common';
 
 import { TodoApp, Test } from './components';
 
-
-import { Home } from './components/Home';
+import Home from './components/Home/containers/HomeContainer';
 
 import { ProjectDetail } from './components/ProjectDetail';
 import { Overview as ProjectDetailOverview } from './components/ProjectDetail/Overview';

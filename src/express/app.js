@@ -40,8 +40,8 @@ app.use(bodyParser.urlencoded({ extended: true}));
 
 app.use(express.static(publicPath));
 
-import todoRoutes from './routes/Todos';
-app.use('/api/todos', todoRoutes);
+import router from './routes';
+app.use('/api', router);
 
 app.use((request, response) => {
 	const memoryHistory = createMemoryHistory(request.url);
