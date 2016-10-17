@@ -3,10 +3,6 @@
 import React, { Component, PropTypes } from 'react'
 import Select from 'react-select'
 
-// import {
-// 	,
-// 	} from './';
-
 import { PostComments } from '../Post/';
 
 const borderStyle = { border: '1px solid gray' }

@@ -7,60 +7,14 @@ import {
 import 'babel-polyfill';
 
 class ExhibitionDetail extends Component {
-	constructor() {
-		super(...arguments);
+	constructor(props) {
+		super(props);
 
 		console.log('ExhibitionDetail.constructor : this.props', this.props);
-
-		this.state = Object.assign({}, this.props.exhibition)
-
-		this.getChildContext 				= this.getChildContext.bind(this)
 	}
-
-	getChildContext() {
-		let {
-			heading,
-			overview,
-			recommendedExhibitions,
-			artworks,
-			post,
-			qna,
-		} = this.state; // TODO: exhibition should be fetch in async way
-
-		return {
-			heading,
-			overview,
-			recommendedExhibitions,
-			artworks,
-			post,
-			qna,
-		};
-	}
-
 
 	render() {
-		let {
-			heading,
-			overview,
-			recommendedExhibitions,
-			artworks,
-			post,
-			qna,
-	 } = this.state; // TODO: exhibition should be fetch in async way
-
-	 console.log('ExhibitionDetail.render : this.state', this.state);
-
-		let children = this.props.children
-			&& React.cloneElement(this.props.children, {
-				heading,
-				overview,
-				recommendedExhibitions,
-				artworks,
-				post,
-				qna,
-			});
-
-		console.log('ExhibitionDetail.render : children', children);
+		const { heading } = this.props.exhibition
 
 		return (
 			<div className="project-detail">
@@ -68,22 +22,12 @@ class ExhibitionDetail extends Component {
 
 				<ExhibitionDetailTab />
 
-				{ /* this.props.children /* Overview, Post, Ranking, QnA */ }
-				{ children /* Overview, Post, Ranking, QnA */ }
+				{ this.props.children /* Overview, Post, Ranking, QnA */ }
+				{/* { children /* Overview, Post, Ranking, QnA */ } */}
 			</div>
 			)
 	}
 
-}
-
-
-ExhibitionDetail.childContextTypes = {
-	heading: PropTypes.any,
-	overview: PropTypes.any,
-	recommendedExhibitions: PropTypes.any,
-	artworks: PropTypes.any,
-	post: PropTypes.any,
-	qna: PropTypes.any,
 }
 
 export default ExhibitionDetail;
