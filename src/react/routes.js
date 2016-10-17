@@ -15,11 +15,11 @@ import { QnA as ProjectDetailQnA } from './components/ProjectDetail/QnA';
 
 import { Exhibitions } from './components/Exhibitions';
 
-import { ExhibitionDetail } from './components/Exhibitions/ExhibitionDetail';
-import { Overview as ExhibitionDetailOverview } from './components/Exhibitions/ExhibitionDetail/Overview';
-import { Artworks as ExhibitionDetailArtworks } from './components/Exhibitions/ExhibitionDetail/Artworks';
-import { Post as ExhibitionDetailPost } from './components/Exhibitions/ExhibitionDetail/Post';
-import { QnA as ExhibitionDetailQnA } from './components/Exhibitions/ExhibitionDetail/QnA';
+import ExhibitionDetail 													from './components/Exhibitions/ExhibitionDetail/containers/ExhibitionDetailContainer';
+import { Overview as ExhibitionDetailOverview } 	from './components/Exhibitions/ExhibitionDetail/components/Overview';
+import { Artworks as ExhibitionDetailArtworks } 	from './components/Exhibitions/ExhibitionDetail/components/Artworks';
+import { Post as ExhibitionDetailPost } 					from './components/Exhibitions/ExhibitionDetail/components/Post';
+import { QnA as ExhibitionDetailQnA } 						from './components/Exhibitions/ExhibitionDetail/components/QnA';
 
 import { Magazines } from './components/Magazines';
 import { MagazineDetail } from './components/Magazines/MagazineDetail';

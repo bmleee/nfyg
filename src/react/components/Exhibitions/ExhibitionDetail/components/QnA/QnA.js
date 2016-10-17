@@ -1,5 +1,7 @@
-import React, { Component, PropTypes } from 'react';
-import Select from 'react-select';
+'use strict'
+
+import React, { Component, PropTypes } from 'react'
+import Select from 'react-select'
 
 // import {
 // 	,
