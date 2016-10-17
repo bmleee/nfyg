@@ -1,0 +1,23 @@
+.project-detail-ranking {
+	display: flex;
+	flex-flow: column;
+
+	.project-detail-ranking-info {
+
+	}
+
+	.project-detail-ranking-container {
+
+		.project-detail-ranking-item {
+			display: flex;
+			flex-flow: column;
+
+			.sharing-icon {
+				width: 36px;
+				height: 36px;
+			}
+
+		}
+
+	}
+}

@@ -1,0 +1,16 @@
+.recent-exhibition-list {
+
+	.recent-exhibition-list-container {
+		display: flex;
+		flex-flow: row wrap;
+
+		.recent-exhibition-list-item {
+			display: flex;
+			flex-flow: column;
+
+			width: 28%;
+		}
+
+	}
+
+}

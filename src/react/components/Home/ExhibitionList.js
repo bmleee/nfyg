@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router';
 
 import 'babel-polyfill';
 
@@ -16,12 +17,12 @@ class ExhibitionList extends Component {
 			linkToExhibition,
 		}, index) => (
 			<div key={index} className="recent-exhibition-list-item">
-				<img src={imgSrc} alt=""/>
+				<img src={imgSrc} alt="" mode="fit"/>
 				{title}
 				<br/>
-				<img src={iconSrc} alt=""/> { name } | { location } | { schedule }
+				<img width={36} src={iconSrc} alt=""/> { name } | { location } | { schedule }
 				<br/>
-				<button href={linkToExhibition}>전시 더 보기</button>
+				<Link to="/exhibitions/detail"><button href={linkToExhibition}>전시 더 보기</button></Link>
 			</div>
 		))
 
@@ -31,7 +32,9 @@ class ExhibitionList extends Component {
 					{ items }
 				</div>
 				<div>
-					<button>더 많은 전시 보기</button>
+
+					<Link to="/exhibitions"><button>더 많은 전시 보기</button></Link>
+
 				</div>
 			</div>
 
@@ -39,9 +42,6 @@ class ExhibitionList extends Component {
 	}
 
 }
-
-
-
 
 ExhibitionList.propTypes = {
 	exhibitions: PropTypes.arrayOf(PropTypes.shape({

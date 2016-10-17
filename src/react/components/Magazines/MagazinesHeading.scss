@@ -1,0 +1,14 @@
+.magazines-heading {
+	display: flex;
+	flex-flow: column;
+
+	.magazines-heading-nav {
+		display: flex;
+		flex-flow: row;
+	}
+
+	.magazines-heading-category-container {
+		display: flex;
+		flex-flow: row;
+	}
+}

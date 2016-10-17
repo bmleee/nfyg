@@ -1,0 +1,14 @@
+.exhibition-detail-recommended-exhibitions {
+	display: flex;
+	flex-flow: column;
+
+	.exhibition-detail-recommended-exhibitions-item {
+		display: flex;
+		flex-flow: column;
+
+		& > img {
+			width: 200px;	
+		}
+
+	}
+}

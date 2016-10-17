@@ -21,7 +21,7 @@ class MagazineList extends Component {
 				<img src={imgSrc} alt=""/>
 				{title}
 				<br/>
-				<img src={iconSrc} alt=""/> { name } | { categories.join(' ') }
+				<img width={36} src={iconSrc} alt=""/> { name } | { categories.join(' ') }
 				<br/>
 				<ul>
 					{ descriptions.map((d, index) => <li key={index}>{d}</li>) }

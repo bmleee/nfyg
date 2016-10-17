@@ -1,0 +1,15 @@
+.present-project-list-container {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: flex-start;
+	width: 100%;
+
+	.present-project-list-item {
+		display: block;
+		width: 30%;
+
+		img {
+			width: 100%;
+		}
+	}
+}

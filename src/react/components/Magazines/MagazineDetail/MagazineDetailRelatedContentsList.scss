@@ -1,0 +1,28 @@
+
+.magazine-detail-related-contents-list {
+	display: flex;
+	flex-flow: row;
+
+	// TODO: combine two duplicate container-item
+	.magazine-detail-related-contents-list-magazine-container {
+		display: flex;
+		flex-flow: column;
+
+		width: 50%;
+		.magazine-detail-related-contents-list-magazine-item {
+			display: flex;
+			flex-flow: column;
+		}
+	}
+
+	.magazine-detail-related-contents-list-exhibition-container {
+		display: flex;
+		flex-flow: column;
+
+		width: 50%;
+		.magazine-detail-related-contents-list-exhibition-item{
+			display: flex;
+			flex-flow: column;
+		}
+	}
+}

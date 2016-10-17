@@ -1,0 +1,11 @@
+.magazines-list {
+	display: flex;
+	flex-flow: row wrap;
+
+	.magazine-list-item {
+
+		& > a img {
+			width: 100%;
+		}
+	}
+}

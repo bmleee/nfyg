@@ -1,0 +1,19 @@
+.past-project-list {
+
+	.past-project-list-container {
+		display: flex;
+		flex-flow: row wrap;
+		justify-content: flex-start;
+		width: 100%;
+
+		.past-project-list-item {
+			width: 30%;
+
+			img:first-child {
+				width: 100%;
+			}
+		}
+
+	}
+
+}

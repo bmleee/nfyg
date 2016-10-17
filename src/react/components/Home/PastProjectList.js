@@ -24,7 +24,7 @@ class PastProjectList extends Component {
 				<img src={imgSrc} alt=""/>
 				{title}
 				<br/>
-				<img src={iconSrc} alt=""/> { name }
+				<img width={36} src={iconSrc} alt=""/> { name }
 				<br/>
 				총 후원액 {currentMoney} | 목표 후원액 {targetMoney} | 직접 후원 {numDirectSupports}명 | 간접 후원 {numIndirectSupports}명 _신청마감_
 			</div>

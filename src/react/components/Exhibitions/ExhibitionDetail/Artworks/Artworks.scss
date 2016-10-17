@@ -1,0 +1,11 @@
+.exhibition-detail-artworks {
+	display: inline-block;
+
+	.exhibition-detail-artworks-item {
+		display: block;
+
+		& > img {
+			width: auto;
+		}
+	}
+}

@@ -1,0 +1,20 @@
+
+.magazine-list {
+
+	.magazine-list-container {
+		display: flex;
+		flex-flow: row wrap;
+		justify-content: flex-start;
+
+		.magazine-list-item {
+			width: 30%;
+
+			img:first-child {
+				width: 100%;
+			}
+
+		}
+
+	}
+
+}

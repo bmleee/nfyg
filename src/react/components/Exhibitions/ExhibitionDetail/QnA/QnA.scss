@@ -1,0 +1,19 @@
+.project-detail-qna {
+	display: flex;
+	flex-flow: column;
+
+	.project-detail-qna-form {
+		display: flex;
+		flex-flow: column;
+
+		& > div {
+			display: flex;
+			flex-flow: row;
+
+			& > div {
+				width: 100%;
+			}
+		}
+	}
+
+}

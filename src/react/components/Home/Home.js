@@ -10,7 +10,7 @@ import {
 	HomeInfo,
 	HomeHeading,
 
-} from './'
+} from './';
 
 import 'babel-polyfill';
 
@@ -76,86 +76,86 @@ const presentProjects = [
 const futureProjects = [
 	{
 		imgSrc: '/assets/images/future-project-list-thumbnail.jpg',
-		title: '유기견 초상 장호성 작가의 사진집 프로젝트',
+		title: '유기견 초상 장호성 작가의 사진집 프로젝트1',
 		descriptions: [
 			'거리의 수많은 동물들, ',
 			'Urban beast들을 담은 사진집을 출간합니다.',
 		],
 		creator: {
 			name: '장호성',
-			iconSrc: 'assets/images/...',
+			iconSrc: 'assets/images/sample-icon.svg',
 		},
 	},
 	{
 		imgSrc: '/assets/images/future-project-list-thumbnail.jpg',
-		title: '유기견 초상 장호성 작가의 사진집 프로젝트',
+		title: '유기견 초상 장호성 작가의 사진집 프로젝트2',
 		descriptions: [
 			'거리의 수많은 동물들, ',
 			'Urban beast들을 담은 사진집을 출간합니다.',
 		],
 		creator: {
 			name: '장호성',
-			iconSrc: 'assets/images/...',
+			iconSrc: 'assets/images/sample-icon.svg',
 		},
 	},
 	{
 		imgSrc: '/assets/images/future-project-list-thumbnail.jpg',
-		title: '유기견 초상 장호성 작가의 사진집 프로젝트',
+		title: '유기견 초상 장호성 작가의 사진집 프로젝트3',
 		descriptions: [
 			'거리의 수많은 동물들, ',
 			'Urban beast들을 담은 사진집을 출간합니다.',
 		],
 		creator: {
 			name: '장호성',
-			iconSrc: 'assets/images/...',
+			iconSrc: 'assets/images/sample-icon.svg',
 		},
 	},
 	{
 		imgSrc: '/assets/images/future-project-list-thumbnail.jpg',
-		title: '유기견 초상 장호성 작가의 사진집 프로젝트',
+		title: '유기견 초상 장호성 작가의 사진집 프로젝트4',
 		descriptions: [
 			'거리의 수많은 동물들, ',
 			'Urban beast들을 담은 사진집을 출간합니다.',
 		],
 		creator: {
 			name: '장호성',
-			iconSrc: 'assets/images/...',
+			iconSrc: 'assets/images/sample-icon.svg',
 		},
 	},
 	{
 		imgSrc: '/assets/images/future-project-list-thumbnail.jpg',
-		title: '유기견 초상 장호성 작가의 사진집 프로젝트',
+		title: '유기견 초상 장호성 작가의 사진집 프로젝트5',
 		descriptions: [
 			'거리의 수많은 동물들, ',
 			'Urban beast들을 담은 사진집을 출간합니다.',
 		],
 		creator: {
 			name: '장호성',
-			iconSrc: 'assets/images/...',
+			iconSrc: 'assets/images/sample-icon.svg',
 		},
 	},
 	{
 		imgSrc: '/assets/images/future-project-list-thumbnail.jpg',
-		title: '유기견 초상 장호성 작가의 사진집 프로젝트',
+		title: '유기견 초상 장호성 작가의 사진집 프로젝트6',
 		descriptions: [
 			'거리의 수많은 동물들, ',
 			'Urban beast들을 담은 사진집을 출간합니다.',
 		],
 		creator: {
 			name: '장호성',
-			iconSrc: 'assets/images/...',
+			iconSrc: 'assets/images/sample-icon.svg',
 		},
 	},
 	{
 		imgSrc: '/assets/images/future-project-list-thumbnail.jpg',
-		title: '유기견 초상 장호성 작가의 사진집 프로젝트',
+		title: '유기견 초상 장호성 작가의 사진집 프로젝트7',
 		descriptions: [
 			'거리의 수많은 동물들, ',
 			'Urban beast들을 담은 사진집을 출간합니다.',
 		],
 		creator: {
 			name: '장호성',
-			iconSrc: 'assets/images/...',
+			iconSrc: 'assets/images/sample-icon.svg',
 		},
 	},
 ];
@@ -169,7 +169,7 @@ const futureProjects = [
 		 title: '시간이 있는 공간',
 		 creator: {
 			 name: '장호성',
-			 iconSrc: 'assets/images/...',
+			 iconSrc: 'assets/images/sample-icon.svg',
 		 },
 		 schedule: '9.30 ~ 10.27',
 		 location: '​가비터(강남구 강남대로106길 29)',
@@ -180,7 +180,7 @@ const futureProjects = [
 		 title: '시간이 있는 공간',
 		 creator: {
 			 name: '장호성',
-			 iconSrc: 'assets/images/...',
+			 iconSrc: 'assets/images/sample-icon.svg',
 		 },
 		 schedule: '9.30 ~ 10.27',
 		 location: '​가비터(강남구 강남대로106길 29)',
@@ -191,7 +191,7 @@ const futureProjects = [
 		 title: '시간이 있는 공간',
 		 creator: {
 			 name: '장호성',
-			 iconSrc: 'assets/images/...',
+			 iconSrc: 'assets/images/sample-icon.svg',
 		 },
 		 schedule: '9.30 ~ 10.27',
 		 location: '​가비터(강남구 강남대로106길 29)',
@@ -202,7 +202,7 @@ const futureProjects = [
 		 title: '시간이 있는 공간',
 		 creator: {
 			 name: '장호성',
-			 iconSrc: 'assets/images/...',
+			 iconSrc: 'assets/images/sample-icon.svg',
 		 },
 		 schedule: '9.30 ~ 10.27',
 		 location: '​가비터(강남구 강남대로106길 29)',
@@ -213,7 +213,7 @@ const futureProjects = [
 		 title: '시간이 있는 공간',
 		 creator: {
 			 name: '장호성',
-			 iconSrc: 'assets/images/...',
+			 iconSrc: 'assets/images/sample-icon.svg',
 		 },
 		 schedule: '9.30 ~ 10.27',
 		 location: '​가비터(강남구 강남대로106길 29)',
@@ -224,7 +224,7 @@ const futureProjects = [
 		 title: '시간이 있는 공간',
 		 creator: {
 			 name: '장호성',
-			 iconSrc: 'assets/images/...',
+			 iconSrc: 'assets/images/sample-icon.svg',
 		 },
 		 schedule: '9.30 ~ 10.27',
 		 location: '​가비터(강남구 강남대로106길 29)',
@@ -246,7 +246,7 @@ const artMagazines = [
 		],
 		creator: {
 			name: '들창코',
-			iconSrc: '/assets/images/...',
+			iconSrc: '/assets/images/sample-icon.svg',
 		},
 		categories: [ '보물섬', '지도' ],
 	},
@@ -260,7 +260,7 @@ const artMagazines = [
 		],
 		creator: {
 			name: '들창코',
-			iconSrc: '/assets/images/...',
+			iconSrc: '/assets/images/sample-icon.svg',
 		},
 		categories: [ '보물섬', '지도' ],
 	},
@@ -274,7 +274,7 @@ const artMagazines = [
 		],
 		creator: {
 			name: '들창코',
-			iconSrc: '/assets/images/...',
+			iconSrc: '/assets/images/sample-icon.svg',
 		},
 		categories: [ '보물섬', '지도' ],
 	},
@@ -288,7 +288,7 @@ const artMagazines = [
 		],
 		creator: {
 			name: '들창코',
-			iconSrc: '/assets/images/...',
+			iconSrc: '/assets/images/sample-icon.svg',
 		},
 		categories: [ '보물섬', '지도' ],
 	},
@@ -302,7 +302,7 @@ const artMagazines = [
 		],
 		creator: {
 			name: '들창코',
-			iconSrc: '/assets/images/...',
+			iconSrc: '/assets/images/sample-icon.svg',
 		},
 		categories: [ '보물섬', '지도' ],
 	},
@@ -318,7 +318,7 @@ const pastProjects = [
 		title: '목욕탕',
 		creator: {
 			name: 'HOPP',
-			iconSrc: '/assets/images/...',
+			iconSrc: '/assets/images/sample-icon.svg',
 		},
 		currentMoney: 1200000,
 		targetMoney: 1000000,
@@ -330,7 +330,7 @@ const pastProjects = [
 		title: '목욕탕',
 		creator: {
 			name: 'HOPP',
-			iconSrc: '/assets/images/...',
+			iconSrc: '/assets/images/sample-icon.svg',
 		},
 		currentMoney: 1200000,
 		targetMoney: 1000000,
@@ -342,7 +342,7 @@ const pastProjects = [
 		title: '목욕탕',
 		creator: {
 			name: 'HOPP',
-			iconSrc: '/assets/images/...',
+			iconSrc: '/assets/images/sample-icon.svg',
 		},
 		currentMoney: 1200000,
 		targetMoney: 1000000,
@@ -354,7 +354,7 @@ const pastProjects = [
 		title: '목욕탕',
 		creator: {
 			name: 'HOPP',
-			iconSrc: '/assets/images/...',
+			iconSrc: '/assets/images/sample-icon.svg',
 		},
 		currentMoney: 1200000,
 		targetMoney: 1000000,
@@ -366,7 +366,7 @@ const pastProjects = [
 		title: '목욕탕',
 		creator: {
 			name: 'HOPP',
-			iconSrc: '/assets/images/...',
+			iconSrc: '/assets/images/sample-icon.svg',
 		},
 		currentMoney: 1200000,
 		targetMoney: 1000000,

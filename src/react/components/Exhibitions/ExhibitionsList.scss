@@ -1,0 +1,14 @@
+.exhibitions-list {
+	display: flex;
+	flex-flow: row wrap;
+
+	.exhibitions-list-item {
+		display: flex;
+		flex-flow: column;
+
+		& > a img {
+			width: 100%;
+		}
+	}
+
+}

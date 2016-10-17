@@ -1,3 +1,8 @@
+## unresolve issues
+```
+	https://github.com/node-inspector/node-inspector/issues/905 https://github.com/node-inspector/node-inspector/issues/905#issuecomment-251864127
+```
+
 ## [7Pictures](https://7pictures.co.kr) Sever Stack
 	Image 없음..
  - nginx

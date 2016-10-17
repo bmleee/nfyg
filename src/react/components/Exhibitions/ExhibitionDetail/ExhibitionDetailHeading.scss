@@ -1,0 +1,21 @@
+.exhibition-detail-heading {
+	& > img {
+		// position: absolute;
+		width: 100%;
+		height: 100%;
+		// background-size: contain;
+	}
+
+	.exhibition-detail-info {
+		// position: absolute;
+		color: white;
+
+		display: flex;
+		flex-flow: column;
+
+		.sharing-icon {
+			width: 24px; height: 24px; margin-bottom:3px !important; vertical-align:middle;
+		}
+
+	}
+}
