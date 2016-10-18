@@ -17,9 +17,11 @@ import { renderRoute } from './lib/utils';
 
 import path from 'path';
 
+import { EXPRESS_PORT, MONGODB_URL } from '../../env';
+
 import mongoose from 'mongoose';
 mongoose.Promise = Q.Promise;
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect(MONGODB_URL);
 const db = mongoose.connection;
 db.once('open', () => {
 	console.log('mongoose is connected');
@@ -57,7 +59,7 @@ app.use((request, response) => {
 	})
 });
 
-import { EXPRESS_PORT } from '../../env';
+
 const server = app.listen(EXPRESS_PORT, () => {
 	console.log(`Express listening on port ${EXPRESS_PORT}`);
 });
