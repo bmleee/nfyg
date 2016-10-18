@@ -49,6 +49,9 @@ class ExhibitionsHeading extends Component {
 			</div>
 		))
 
+		console.log('ExhibitionsHeading.props', this.props)
+		console.log('ExhibitionsHeading.items', items)
+
 		return (
 			<div className="exhibitions-heading">
 				<Slider {...sliderSettings} >

@@ -15,12 +15,12 @@ class Magazines extends Component {
 
 		return (
 			<div className="magazines">
-				
+
 				<MagazinesHeading
 					currentCategory={currentCategory}
 					categories={categories}
 					_onChangeCategory={_onChangeCategory} />
-
+				
 				<MagazinesList magazines={filteredMagazines} />
 
 			</div>

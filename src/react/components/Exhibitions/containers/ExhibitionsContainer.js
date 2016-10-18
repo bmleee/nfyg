@@ -24,7 +24,7 @@ class ExhibitionsContainer extends Component {
 		const newExhibitions = await fetchJSONFile('exhibitions')
 
 		this.setState({
-			exhibition: newExhibitions,
+			exhibitions: newExhibitions,
 			filteredExhibitions: newExhibitions,
 			loaded: true
 		})

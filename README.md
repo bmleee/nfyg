@@ -3,6 +3,10 @@
 ### 1. 소스코드 수정
 
 ### 2. 서버 실행 후 작업 내역 확인
+- 상단 Run 버튼 클릭
+- 터미널의 커맨드 탭에 gulp라고 나와있으면 성공
+	- 다른 명령어가 있다면, gulp로 수정하고 엔터
+- https://seven-renewal-styling-a4000d.c9users.io/ 에서 확인 가능
 
 ### 3. git에 코드 수정 내역 반영
 ```bash
@@ -10,6 +14,7 @@ $ git add --all
 $ git commit -m "수정한 소스 코드 설명"
 $ git push origin master
 ```
+__커밋 단위는 개별 파일 또는 기능별로 나누어서 해야합니다!__
 
 ## unresolve issues
 ```
