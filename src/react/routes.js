@@ -13,7 +13,7 @@ import { Post as ProjectDetailPost } from './components/ProjectDetail/Post';
 import { Ranking as ProjectDetailRanking } from './components/ProjectDetail/Ranking';
 import { QnA as ProjectDetailQnA } from './components/ProjectDetail/QnA';
 
-import { Exhibitions } from './components/Exhibitions';
+import Exhibitions  from './components/Exhibitions/containers/ExhibitionsContainer';
 
 import ExhibitionDetail 													from './components/Exhibitions/ExhibitionDetail/containers/ExhibitionDetailContainer';
 import { Overview as ExhibitionDetailOverview } 	from './components/Exhibitions/ExhibitionDetail/components/Overview';

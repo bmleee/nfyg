@@ -136,28 +136,11 @@ class Exhibitions extends Component {
 	constructor() {
 		super(...arguments);
 
-		this.state = Object.assign({}, {
-			exhibitions,
-			filteredExhibitions: exhibitions,
-			listFilter: '',
-		});
-
-		this._onChangeFilter			= this._onChangeFilter.bind(this);
-	}
-
-	_onChangeFilter(filter) {
-		let newList = [];
-
-		if (filter.length > 0) newList = this.state.exhibitions.filter( s => s.state === filter)
-		else newList = Object.assign([], this.state.exhibitions)
-
-		this.setState({
-			filteredExhibitions: newList
-		})
+		this._onChangeFilter = this.props._onChangeFilter
 	}
 
 	render() {
-		const { exhibitions, filteredExhibitions } = this.state;
+		const { exhibitions, filteredExhibitions } = this.props;
 
 		return (
 			<div className="exhibitioins">

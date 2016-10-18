@@ -9,6 +9,19 @@ const API_HEADERS = {
 	contentType: 'application/json',
 }
 
+export async function fetchJSONFile(fileName) {
+	try {
+		const res = await fetch(`${API_URL}/${fileName}`, { headers: API_HEADERS })
+
+		if(res.ok) return Promise.resolve(res.json())
+		else return Promise.reject(new Error(`Error while fetch ${fileName}.json`))
+	} catch (e) {
+		console.error(e);
+		return Promise.resolve({}) // return empty object literal
+	}
+}
+
+
 export async function fetchHome() {
 	try {
 		const res = await fetch(`${API_URL}/home`, { headers: API_HEADERS })
