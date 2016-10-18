@@ -1,7 +1,9 @@
 import 'whatwg-fetch';
 import 'babel-polyfill';
 
-const API_URL = 'http://localhost:3000/api/todos';
+const current_url = document.URL
+const tokens = current_url.split('/')
+const API_URL = `${tokens[0]}://${tokens[2]}/api/todos`
 const API_HEADERS = {
 	'Content-Type': 'application/json',
 }

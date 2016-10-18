@@ -3,10 +3,11 @@ import 'babel-polyfill'
 
 import { EXPRESS_PORT } from '../../../env'
 
-// TODO: chagne /api/test-api to ...
-const API_URL = `http://localhost:${EXPRESS_PORT}/api/test-api`
+const current_url = document.URL
+const tokens = current_url.split('/')
+const API_URL = `/api/test-api`
 const API_HEADERS = {
-	contentType: 'application/json',
+	'Content-Type': 'application/json',
 }
 
 export async function fetchJSONFile(fileName) {
