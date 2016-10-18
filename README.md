@@ -1,3 +1,16 @@
+## 협업 루틴
+
+### 1. 소스코드 수정
+
+### 2. 서버 실행 후 작업 내역 확인
+
+### 3. git에 코드 수정 내역 반영
+```bash
+$ git add --all
+$ git commit -m "수정한 소스 코드 설명"
+$ git push origin master
+```
+
 ## unresolve issues
 ```
 	https://github.com/node-inspector/node-inspector/issues/905 https://github.com/node-inspector/node-inspector/issues/905#issuecomment-251864127
