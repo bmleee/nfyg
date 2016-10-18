@@ -45,13 +45,15 @@ class ExhibitionsContainer extends Component {
 	render() {
 		const { exhibitions, filteredExhibitions, listFilter } = this.state
 
-		return (
+		return this.state.loaded
+		?
 			<Exhibitions
 				_onChangeFilter={this._onChangeFilter}
 				exhibitions={exhibitions}
 				filteredExhibitions={filteredExhibitions}
 				listFilter={listFilter} />
-		)
+		:
+			<div></div>
 	}
 }
 

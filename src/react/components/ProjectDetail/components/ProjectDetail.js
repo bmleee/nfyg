@@ -4,7 +4,35 @@ import {
 	ProjectTab,
 } from './';
 
-import 'babel-polyfill';
+class ProjectDetail extends Component {
+
+	render() {
+		let {
+			heading,
+			rewards,
+			overview,
+			post,
+			ranking,
+			indirectSupporters,
+			directSupporters,
+			qna,
+
+	 } = this.props; // TODO: project should be fetch in async way
+
+		return (
+			<div className="project-detail">
+				<ProjectHeading { ...heading } />
+
+				<ProjectTab />
+
+				{ this.props.children /* Overview, Post, Ranking, QnA */ }
+			</div>
+			)
+	}
+
+}
+
+export default ProjectDetail;
 
 const project = {
 	// ProjectHeading
@@ -338,100 +366,3 @@ const project = {
 		]
 	}
 }
-
-class ProjectDetail extends Component {
-	constructor() {
-		super(...arguments);
-
-		this.state = Object.assign({}, project);
-
-		this.getChildContext 				= this.getChildContext.bind(this);
-		this._onSelectOptionChange 	= this._onSelectOptionChange.bind(this);
-	}
-
-	getChildContext() {
-		let {
-			heading,
-			rewards,
-			overview,
-			post,
-			ranking,
-			indirectSupporters,
-			directSupporters,
-			qna,
-		} = this.state; // TODO: project should be fetch in async way
-
-		return {
-			heading,
-			rewards,
-			overview,
-			post,
-			ranking,
-			indirectSupporters,
-			directSupporters,
-			_onSelectOptionChange: this._onSelectOptionChange.bind(this),
-			qna
-		};
-	}
-	
-	_onSelectOptionChange(o) {
-		let { indirectSupporters } = this.state;
-
-
-		this.setState({
-			indirectSupporters: _.sortBy(indirectSupporters, o.value).reverse(),
-		})
-
-		console.log(_.sortBy(indirectSupporters, o.value));
-	}
-
-	render() {
-		let {
-			heading,
-			rewards,
-			overview,
-			post,
-			ranking,
-			indirectSupporters,
-			directSupporters,
-			qna
-	 } = this.state; // TODO: project should be fetch in async way
-
-		let children = this.props.children
-			&& React.cloneElement(this.props.children, {
-				ranking,
-				indirectSupporters,
-				directSupporters,
-				_onSelectOptionChange: this._onSelectOptionChange,
-			});
-
-		console.log('children', children);
-
-		return (
-			<div className="project-detail">
-				<ProjectHeading { ...heading } />
-
-				<ProjectTab />
-
-				{ /* this.props.children /* Overview, Post, Ranking, QnA */ }
-				{ children /* Overview, Post, Ranking, QnA */ }
-			</div>
-			)
-	}
-
-}
-
-
-ProjectDetail.childContextTypes = {
-	heading: PropTypes.any,
-	rewards: PropTypes.any,
-	overview: PropTypes.any,
-	post: PropTypes.any,
-	ranking: PropTypes.any,
-	indirectSupporters: PropTypes.any,
-	directSupporters: PropTypes.any,
-	_onSelectOptionChange: PropTypes.any,
-	qna: PropTypes.any,
-}
-
-export default ProjectDetail;

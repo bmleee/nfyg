@@ -7,11 +7,11 @@ import { TodoApp, Test } from './components';
 
 import Home from './components/Home/containers/HomeContainer';
 
-import { ProjectDetail } from './components/ProjectDetail';
-import { Overview as ProjectDetailOverview } from './components/ProjectDetail/Overview';
-import { Post as ProjectDetailPost } from './components/ProjectDetail/Post';
-import { Ranking as ProjectDetailRanking } from './components/ProjectDetail/Ranking';
-import { QnA as ProjectDetailQnA } from './components/ProjectDetail/QnA';
+import ProjectDetail 															from './components/ProjectDetail/containers/ProjectDetailContainer';
+import { Overview as ProjectDetailOverview } 			from './components/ProjectDetail/components/Overview';
+import { Post as ProjectDetailPost } 							from './components/ProjectDetail/components/Post';
+import { Ranking as ProjectDetailRanking } 				from './components/ProjectDetail/components/Ranking';
+import { QnA as ProjectDetailQnA } 								from './components/ProjectDetail/components/QnA';
 
 import Exhibitions  from './components/Exhibitions/containers/ExhibitionsContainer';
 
@@ -21,8 +21,8 @@ import { Artworks as ExhibitionDetailArtworks } 	from './components/Exhibitions/
 import { Post as ExhibitionDetailPost } 					from './components/Exhibitions/ExhibitionDetail/components/Post';
 import { QnA as ExhibitionDetailQnA } 						from './components/Exhibitions/ExhibitionDetail/components/QnA';
 
-import { Magazines } from './components/Magazines';
-import { MagazineDetail } from './components/Magazines/MagazineDetail';
+import Magazines from './components/Magazines/containers/MagazinesContainer';
+import MagazineDetail from './components/Magazines/MagazineDetail/containers/MagazineDetailContainer'
 
 const App = ({ children }) => (
 	<div>

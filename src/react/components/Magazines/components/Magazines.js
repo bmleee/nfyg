@@ -7,6 +7,32 @@ import {
 
 import 'babel-polyfill'
 
+
+class Magazines extends Component {
+
+	render() {
+		const { Magazines, filteredMagazines, categories, currentCategory, _onChangeCategory } = this.props;
+
+		return (
+			<div className="magazines">
+				
+				<MagazinesHeading
+					currentCategory={currentCategory}
+					categories={categories}
+					_onChangeCategory={_onChangeCategory} />
+
+				<MagazinesList magazines={filteredMagazines} />
+
+			</div>
+		)
+	}
+
+}
+
+
+export default Magazines;
+
+
 const categories = ['전체', '문화공간', '전시 / 미술관', '예술 컨텐츠', '예술 정보', '구매 및 소장', '구매']
 const magazines = [
 	{
@@ -385,53 +411,3 @@ const magazines = [
 	},
 
 ]
-
-class Magazines extends Component {
-
-	constructor() {
-		super(...arguments);
-
-		this.state = Object.assign({}, {
-			magazines,
-			categories,
-			filteredMagazines: magazines,
-			currentCategory: categories[0],
-		});
-
-		this._onChangeCategory			= this._onChangeCategory.bind(this);
-	}
-
-	_onChangeCategory(category) {
-		let newList = [];
-
-		if (category === categories[0]) newList = Object.assign([], this.state.magazines)
-		else newList = this.state.magazines.filter( s => s.category === category)
-
-		this.setState({
-			filteredMagazines: newList,
-			currentCategory: category,
-		})
-	}
-
-	render() {
-		console.log('im im magazine');
-		const { Magazines, filteredMagazines, categories, currentCategory } = this.state;
-
-		return (
-			<div className="magazines">
-
-				<MagazinesHeading
-					currentCategory={currentCategory}
-					categories={categories}
-					_onChangeCategory={this._onChangeCategory} />
-
-				<MagazinesList magazines={filteredMagazines} />
-
-			</div>
-		)
-	}
-
-}
-
-
-export default Magazines;

@@ -6,6 +6,28 @@ import {
 	MagazineDetailRelatedContentsList
 } from './'
 
+class MagazineDetail extends Component {
+
+	render() {
+		const { title, creator, imgSrc, category, descriptions, contents } = magazine;
+
+		return (
+			<div className="magazine-detail">
+				<MagazineDetailHeading {...magazine} />
+
+				<MegazineDetailContents contents={contents} />
+
+				<MagazineDetailRelatedContentsList
+					relatedMagazines={relatedMagazines}
+					relatedExhibitions={relatedExhibitions} />
+			</div>
+		)
+	}
+
+}
+
+export default MagazineDetail;
+
 const relatedMagazines = [
 	{
 		id: 'magazine_sample_id_or_exhibition_sample_id',
@@ -76,27 +98,3 @@ const magazine = {
 		}
 	],
 }
-
-
-class MagazineDetail extends Component {
-
-	render() {
-		const { title, creator, imgSrc, category, descriptions, contents } = magazine;
-
-		return (
-			<div className="magazine-detail">
-				<MagazineDetailHeading {...magazine} />
-
-				<MegazineDetailContents contents={contents} />
-				
-				<MagazineDetailRelatedContentsList
-					relatedMagazines={relatedMagazines}
-					relatedExhibitions={relatedExhibitions} />
-			</div>
-		)
-	}
-
-}
-
-
-export default MagazineDetail;
