@@ -4,7 +4,9 @@
   "description": "i do",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:forever": "forever start bin/express-server.js",
+    "restart:forever": "forever stopall && npm run start:forever"
   },
   "author": "4000D",
   "license": "ISC",
