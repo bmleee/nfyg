@@ -6,4 +6,4 @@ bower_components
 public/**/*
 bin/
 .gulp-cache
-npm-debug.log
+npm-debug.log*
