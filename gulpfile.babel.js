@@ -215,12 +215,12 @@ gulp.task('watch', () => {
 // gulp.task('start', ['babel-express'], () => {
 gulp.task('start', ['webpack-express'], () => {
   return nodemon({
-    execMap: {
-      js: 'node_modules/.bin/node-inspector & node --debug'
-      // js: 'node --inspect --debug-brk' // for Node.js 6.3+. ref to https://github.com/node-inspector/node-inspector/issues/905 ,https://github.com/node-inspector/node-inspector/issues/905#issuecomment-251864127
-    },
-    ext: 'js',
-    ignore: ['.idea/*', 'node_modules/*'],
+    // execMap: {
+    //   js: 'node_modules/.bin/node-inspector & node --debug'
+    //   // js: 'node --inspect --debug-brk' // for Node.js 6.3+. ref to https://github.com/node-inspector/node-inspector/issues/905 ,https://github.com/node-inspector/node-inspector/issues/905#issuecomment-251864127
+    // },
+    // ext: 'js',
+    // ignore: ['.idea/*', 'node_modules/*'],
     script: DEST.EXPRESS + '/express-server.js',
     watch: DEST.EXPRESS,
     verbose: true,
