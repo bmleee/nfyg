@@ -1,13 +1,3 @@
-## 협업 루틴
-### 1. 소스코드 수정 (src폴더)
-
-
-### 2. gulp로 수정 내역 반영 (public, bin폴더)
-
-### 3. 서버 실행 후 수정 내역 확인
-
-### 4. github에 소스 코드 올리기
-
 ## unresolve issues
 ```
 	https://github.com/node-inspector/node-inspector/issues/905 https://github.com/node-inspector/node-inspector/issues/905#issuecomment-251864127
