@@ -4,6 +4,7 @@ import { Route, IndexRoute, Link } from 'react-router';
 import { Nav, Footer } from './components/Common';
 
 import { TodoApp, Test } from './components';
+import ProjectEditor from './components/ProjectEditor/ProjectEditor'
 
 import Home from './components/Home/containers/HomeContainer';
 
@@ -79,7 +80,7 @@ const routes = (
 
 		<Route path="todos" component={TodoApp}></Route>
 
-		<Route path="test" component={Test}></Route>
+		<Route path="test" component={ProjectEditor}></Route>
 	</Route>
 )
 
