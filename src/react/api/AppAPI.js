@@ -3,8 +3,6 @@ import 'babel-polyfill'
 
 import { EXPRESS_PORT } from '../../../env'
 
-const current_url = document.URL
-const tokens = current_url.split('/')
 const API_URL = `/api/test-api`
 const API_HEADERS = {
 	'Content-Type': 'application/json',
