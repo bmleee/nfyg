@@ -31,10 +31,8 @@ class ExhibitionList extends Component {
 				<div className="recent-exhibition-list-container">
 					{ items }
 				</div>
-				<div>
-
+				<div className="recent-exhibition-list-button">
 					<Link to="/exhibitions"><button>더 많은 전시 보기</button></Link>
-
 				</div>
 			</div>
 

@@ -24,24 +24,26 @@ class Home extends Component {
 		} = this.props;
 
 		return (
-			<div>
+			<div className="home">
 				<HomeHeader />
-				<HomeInfo title="공유로 후원한 금액" amount={10000} />
-
-				<HomeHeading title="진행 중인 프로젝트" />
-				<PresentProjectList projects={presentProjects} />
-
-				<HomeHeading title="준비 중인 프로젝트" />
-				<FutureProjectList projects={futureProjects} />
-
-				<HomeHeading title="최근 전시" />
-				<ExhibitionList exhibitions={recentExhibitions} />
-
-				<HomeHeading title="매거진" />
-				<MagazineList magazines={artMagazines} />
-
-				<HomeHeading title="종료된 프로젝트" />
-				<PastProjectList projects={pastProjects} />
+				<div className ="home-body">
+					<HomeInfo title="공유로 후원한 금액" amount={10000} />
+	
+					<HomeHeading title="진행 중인 프로젝트" />
+					<PresentProjectList projects={presentProjects} />
+	
+					<HomeHeading title="준비 중인 프로젝트" />
+					<FutureProjectList projects={futureProjects} />
+	
+					<HomeHeading title="최근 전시" />
+					<ExhibitionList exhibitions={recentExhibitions} />
+	
+					<HomeHeading title="매거진" />
+					<MagazineList magazines={artMagazines} />
+	
+					<HomeHeading title="종료된 프로젝트" />
+					<PastProjectList projects={pastProjects} />
+				</div>
 			</div>
 			)
 	}

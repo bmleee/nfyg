@@ -6,7 +6,7 @@ const style = {
 }
 
 const HomeHeading = ({ title, }) => (
-	<div>
+	<div className="home-heading">
 		<h4>{ title }</h4>
 		<div className="home-heading-seperator"
 		 	style={style} />

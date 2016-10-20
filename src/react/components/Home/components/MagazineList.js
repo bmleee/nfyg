@@ -35,7 +35,7 @@ class MagazineList extends Component {
 				<div className="magazine-list-container">
 					{ items }
 				</div>
-				<div>
+				<div className="magazine-list-button">
 					<button>더 많은 매거진 보기</button>
 				</div>
 			</div>

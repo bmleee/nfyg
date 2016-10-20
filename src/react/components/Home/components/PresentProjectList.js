@@ -70,7 +70,7 @@ class PresentProjectList extends Component {
 		);
 
 		return (
-			<div>
+			<div className="present-project-list">
 				<div className="present-project-list-container">
 					{ projectList.slice(0, this.state.count) }
 				</div>

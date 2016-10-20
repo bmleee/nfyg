@@ -36,7 +36,7 @@ class PastProjectList extends Component {
 				<div className="past-project-list-container">
 					{ items }
 				</div>
-				<div>
+				<div className="past-project-list-button">
 					<button>더 많은 매거진 보기</button>
 				</div>
 			</div>
