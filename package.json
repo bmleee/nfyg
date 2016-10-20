@@ -12,6 +12,7 @@
   "author": "4000D",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.6.10",
     "body-parser": "^1.15.2",
     "bootstrap": "^3.3.7",
     "draft-js": "^0.9.1",
@@ -23,6 +24,7 @@
     "mongoose": "^4.6.2",
     "morgan": "^1.7.0",
     "q": "^1.4.1",
+    "query-string": "^4.2.3",
     "react": "^15.3.2",
     "react-addons-css-transition-group": "^15.3.2",
     "react-addons-update": "^15.3.2",

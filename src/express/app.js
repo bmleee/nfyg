@@ -42,7 +42,7 @@ app.use(bodyParser.urlencoded({ extended: true}));
 
 app.use(express.static(publicPath));
 
-import router from './routes';
+import router from './controllers';
 app.use('/api', router);
 
 app.use((request, response) => {

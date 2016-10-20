@@ -1,5 +1,4 @@
 import express from 'express';
-import TodoController from '../controllers/TodoController';
 import TodoModel from '../models/TodoModel';
 
 const router = express.Router();
