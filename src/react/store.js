@@ -11,6 +11,7 @@ import { routerReducer, routerMiddleware } from 'react-router-redux';
 import thunk from 'react-thunk';
 
 import { todos } from './reducers';
+import { ProjectEditor } from './reducers'
 
 export const DevTools = createDevTools(
 	<DockMonitor toggleVisibilityKey="ctrl-h" changePositionKey="ctrl-q">
@@ -18,14 +19,24 @@ export const DevTools = createDevTools(
 	</DockMonitor>
 );
 
+
+const makeReducer = () => combineReducers({
+		routing: routerReducer,
+		todos,
+		ProjectEditor,
+})
+
 /**
  * TODO: add reducers
  */
 export function configureStore(history, initialState) {
-	const reducer = combineReducers({
-		routing: routerReducer,
-		todos,
-	});
+	//const reducer = combineReducers({
+	//	routing: routerReducer,
+	//	todos,
+	//	ProjectEditor,
+	//});
+
+	const reducer = makeReducer()
 
 	const logger = (store) => (next) => (action) => {
 	  if(typeof action !== "function"){
@@ -46,7 +57,7 @@ export function configureStore(history, initialState) {
 		compose(
 			applyMiddleware(
 				logger,
-				routerMiddleware(history),
+				routerMiddleware(history)
 			)
 		),
 		applyMiddleware(thunk),
@@ -54,4 +65,10 @@ export function configureStore(history, initialState) {
 	);
 
 	return store;
+}
+
+export function makeDefaultStore() {
+	return createStore(
+		makeReducer()
+	)
 }

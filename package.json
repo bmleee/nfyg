@@ -4,7 +4,8 @@
   "description": "i do",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha --compilers js:babel-core/register --require ./test/index.js --recursive",
+    "test:watch": "npm run test -- --watch",
     "start": "gulp",
     "start:forever": "forever start bin/express-server.js",
     "restart:forever": "forever stopall && npm run start:forever"
@@ -15,6 +16,8 @@
     "aws-sdk": "^2.6.10",
     "body-parser": "^1.15.2",
     "bootstrap": "^3.3.7",
+    "chai": "^3.5.0",
+    "crypto": "0.0.3",
     "draft-js": "^0.9.1",
     "ejs": "^2.5.2",
     "express": "^4.14.0",
@@ -23,6 +26,7 @@
     "lodash": "^4.16.4",
     "mongoose": "^4.6.2",
     "morgan": "^1.7.0",
+    "multer": "^1.2.0",
     "q": "^1.4.1",
     "query-string": "^4.2.3",
     "react": "^15.3.2",

@@ -10,7 +10,7 @@ const API_HEADERS = {
 
 export async function fetchJSONFile(fileName) {
 	try {
-		const res = await fetch(`${API_URL}/${fileName}`, { headers: API_HEADERS })
+		const res = await fetch(`${API_URL}/read/${fileName}`, { headers: API_HEADERS })
 
 		if(res.ok) return Promise.resolve(res.json())
 		else return Promise.reject(new Error(`Error while fetch ${fileName}.json`))

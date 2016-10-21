@@ -7,3 +7,4 @@ public/**/*
 bin/
 .gulp-cache
 npm-debug.*
+.tern-project

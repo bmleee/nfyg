@@ -1,14 +1,16 @@
-import aws from 'aws-sdk'
+import AWS from 'aws-sdk'
 import { AWS_ACCESS_KEY, AWS_SECRET_KEY, S3_IMAGE_BUCKET } from '../../../env'
+import { getSignedRequest } from '../lib/utils'
 
 import express from 'express'
 
 const router = express.Router();
 
 router.get('/sign', async (req, res) => {
-	aws.config.update({ accessKeyId: AWS_ACCESS_KEY, secretAccessKey: AWS_SECRET_KEY})
+	AWS.config.update({ accessKeyId: AWS_ACCESS_KEY, secretAccessKey: AWS_SECRET_KEY, region: 'ap-northeast-2' })
 
-	const s3 = new aws.S3()
+	const s3 = new AWS.S3({signatureVersion: 'v4'})
+
 	const options = {
 		Bucket: S3_IMAGE_BUCKET,
 		Key: req.query.file_name,

@@ -224,6 +224,7 @@ gulp.task('start', ['webpack-express'], () => {
     script: DEST.EXPRESS + '/express-server.js',
     watch: DEST.EXPRESS,
     verbose: true,
+    env: { 'DEBUG': 'express:*' }
   })
 });
 

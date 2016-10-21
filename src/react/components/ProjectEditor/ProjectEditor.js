@@ -1,11 +1,12 @@
 import React, { Component, PropType } from 'react'
 import update from 'react-addons-update'
 
-import { sign_request, image_upload } from '../../../lib/utils'
+import { sign_request, image_upload, upload_file } from '../../lib/utils'
 
 // import { Map, fromJS } from 'immutable'
 
-const SideBar = (props) => (
+
+const SideBar = ({onClick,...props}) => (
 	<div className="editor-sidebar" {...props} >
 		<button>H1</button>
 		<button>H2</button>
@@ -16,6 +17,7 @@ const SideBar = (props) => (
 	</div>
 )
 
+
 const EditorBody = ({ contents, ...props}) => (
 	<div className="editor-body">
 		{ props.children }
@@ -24,6 +26,7 @@ const EditorBody = ({ contents, ...props}) => (
 
 const CreatorForm = ({ creator: { name, iconSrc, description }, onChangeHandlers, parent }) => (
 	<div className="editor-creator-form">
+		<h3>Creator Form</h3>
 		<div>
 			<span>Name</span>
 			<input type="text" name="creator-name" value={name}
@@ -33,14 +36,89 @@ const CreatorForm = ({ creator: { name, iconSrc, description }, onChangeHandlers
 			<span>Icon</span>
 			<input type="file" name="creator-icon-src" ref={(c) => parent._creator_icon_src = c}
 				onChange={ (e) => onChangeHandlers.iconSrc(e.target.value) } />
+			<img src={iconSrc} alt="Insert Creator's icon"/>
 		</div>
 		<div>
 			<span>description</span>
-			<input type="textarea" name="creator-description"
+			<input type="textarea" name="creator-description" rows="4" cols="50"
 				onChange={ (e) => onChangeHandlers.description(e.target.value) } />
 		</div>
 	</div>
 )
+
+const HeadingForm = ({ heading: {imgSrc, logoSrc, title, dateFrom, dateTo, currentMoney, targetMoney }, onChangeHandlers, parent }) => (
+	<div>
+		<h3>Heading Form</h3>
+		<div>
+			<span>Image Source</span>
+			<input type="file" ref={(c) => parent._heading_img_src = c} />
+		</div>
+		<div>
+			<span>Logo Source</span>
+			<input type="file" ref={(c) => parent._heading_logo_src = c} />
+		</div>
+		<div>
+			<span>Title</span>
+			<input type="text" onChange={ (e) => onChangeHandlers.title(e.target.value) } />
+		</div>
+		<div>
+			<span>Date From</span>
+			<input type="date" onChange={ (e) => onChangeHandlers.dateFrom(e.target.value) } />
+		</div>
+		<div>
+			<span>Date To</span>
+			<input type="date" onChange={ (e) => onChangeHandlers.dateTo(e.target.value) } />
+		</div>
+		<div>
+			<span>Target Money</span>
+			<input type="number" onChange={ (e) => onChangeHandlers.targetMoney(e.target.value) } />
+		</div>
+	</div>
+)
+
+const renderContents = (contents) => (
+	<div className="contents-container">
+		{
+			contents.map( ({type, content, ...other}, index) => {
+
+				switch (type) {
+					case 'h1' :
+						return <h1>{content}</h1>
+					case 'h2' :
+						return <h2>{content}</h2>
+					case 'text' :
+						return <span className="contents-item-text">{content}</span>
+					case 'image' :
+						return <img className="contents-item-image" src={content} style={{width: '77%'}} />
+				}
+
+			})
+		}
+	</div>
+)
+
+const OverviewForm = ({ overview: { part1, part2 }, onChangeHandlers, parent, ...props }) => {
+	return (
+		<div>
+			<h3>Overview Form</h3>
+			<div>
+				<h4>Overview - part1</h4>
+				<div>
+					{ renderContents(part1) }
+				</div>
+				<Sidebar onClick={onChangeHandlers.part1.insert} />
+			</div>
+
+			<div>
+				<h4>Overview - part2</h4>
+				<div>
+					{ renderContents(part2) }
+				</div>
+				<Sidebar />
+			</div>
+		</div>
+	)
+}
 
 class ProjectEditor extends Component {
 
@@ -54,14 +132,14 @@ class ProjectEditor extends Component {
 			imgSrc: '',
 			logoSrc: '',
 			title: '',
-			dayFrom: null,
+			dateFrom: null,
 			dateTo: null,
 			currentMoney: -1,
 			targetMoney: -1,
 		},
 		overview: {
-			part1: [], // { type, content }
-			part2: [], // { type, content }
+			part1: [ {type: 'text', content: 'sample text content' } ], // { type, content }
+			part2: [ {type: 'image', content: '/assets/images/sample-icon.svg'} ], // { type, content }
 		},
 		rewards: [], // { title, description }
 		post: {
@@ -77,33 +155,44 @@ class ProjectEditor extends Component {
 			name: 				(v) => { this.setState(update(this.state, { creator: { name: { $set: v } } } )) },
 			// iconSrc: 			(v) => { this.setState(update(this.state, { creator: { iconSrc: { $set: v } } } )) },
 			iconSrc: 			async (v) => {
-											const file = this._creator_icon_src.files[0]
-											if (!file) return
+				const file = this._creator_icon_src.files[0]
+				if (!file) return
 
-											let { signed_request, url } = await sign_request(file)
+				const { imgSrc } = await upload_file(file)
 
-											if (!signed_request) {
-												console.error(Error('Cannot get signed request'))
-												return
-											}
-
-											console.log(`signed request: `, signed_request)
-
-											let res = await image_upload(file, signed_request, url)
-											console.log(res);
-
-										},
+				this.setState(update(this.state, { creator: { iconSrc: { $set: imgSrc } } }))
+			},
 			description: 	(v) => { this.setState(update(this.state, { creator: { description: { $set: v } } } )) },
 		},
 		heading: {
-			imgSrc: 			(v) => { this.setState(update(this.state, { heading: { imgSrc: { $set: v } } } )) },
-			logoSrc:			(v) => { this.setState(update(this.state, { heading: { logoSrc: { $set: v } } } )) },
+			imgSrc: 			async (v) => {
+				const file = this._heading_img_src.files[0]
+				if (!file) return
+
+				const { imgSrc } = await upload_file(file)
+
+				this.setState(update(this.state, { heading: { imgSrc: { $set: imgSrc } } } ))
+			},
+			logoSrc:			async (v) => {
+				const file = this._heading_logo_src.files[0]
+				if (!file) return
+
+				const { imgSrc } = await upload_file(file)
+
+				this.setState(update(this.state, { heading: { logoSrc: { $set: imgSrc } } } ))
+			},
 			title: 				(v) => { this.setState(update(this.state, { heading: { title: { $set: v } } } )) },
-			dayFrom: 			(v) => { this.setState(update(this.state, { heading: { dayFrom: { $set: v } } } )) },
+			dateFrom: 		(v) => { this.setState(update(this.state, { heading: { dayFrom: { $set: v } } } )) },
 			dateTo:				(v) => { this.setState(update(this.state, { heading: { dateTo: { $set: v } } } )) },
-			currentMoney: (v) => { this.setState(update(this.state, { heading: { currentMoney: { $set: v } } } )) },
 			targetMoney: 	(v) => { this.setState(update(this.state, { heading: { targetMoney: { $set: v } } } )) },
 		},
+		overview: {
+			part1: {
+				insert: ({type, content}) => {
+					this.setState(update(this.state, { overview: {part1: {$push: ({type, content}) } } } ))
+				}
+			}
+		}
 	}
 
 	render() {
@@ -117,6 +206,16 @@ class ProjectEditor extends Component {
 						creator={this.state.creator}
 						onChangeHandlers={this.inputOnChangeHandlers.creator} />
 
+					<HeadingForm
+						parent={this}
+						heading={this.state.heading}
+						onChangeHandlers={this.inputOnChangeHandlers.heading}
+						/>
+
+					<OverviewForm
+						parent={this}
+						overview={this.state.overview}
+						onChangeHandlers={this.inputOnChangeHandlers.overview} />
 				</EditorBody>
 
 				<SideBar />
