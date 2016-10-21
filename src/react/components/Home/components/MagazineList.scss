@@ -6,15 +6,54 @@
 		flex-flow: row wrap;
 		justify-content: flex-start;
 
-		.magazine-list-item {
-			width: 30%;
-
-			img:first-child {
-				width: 100%;
-			}
-
-		}
 
 	}
 
 }
+.magazine-list-item:first-child .ma-thumbnail {
+	position: relative;
+	padding-top :85.8%;
+	overflow : hidden;
+}
+.ma-thumbnail {
+	position: relative;
+	padding-top :70%;
+	overflow : hidden;
+}
+.ma-centered {
+	 position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    -webkit-transform: translate(50%,50%);
+    -ms-transform: translate(50%,50%);
+    transform: translate(50%,50%);
+}
+
+.magazine-list-item:first-child img.home-magazine-image {
+position: absolute;
+    top: 0;
+    left: 0;   
+    width: auto;
+    height: 100%;
+    -webkit-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+}
+img.home-magazine-image {
+position: absolute;
+    top: 0;
+    left: 0;   
+    max-width: 100%;
+    height: auto;
+    -webkit-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+}
+
+div.magazine-list-button {
+	border-bottom : 1px solid #ddd;
+	padding-bottom : 40px;
+}
+

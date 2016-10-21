@@ -18,7 +18,11 @@ class MagazineList extends Component {
 			categories,
 		}, index) => (
 			<div key={index} className="magazine-list-item">
-				<img src={imgSrc} alt=""/>
+				<div className="ma-thumbnail">
+					<div className="ma-centered">
+					<img className="home-magazine-image" src={imgSrc} alt=""/>
+					</div>
+				</div>
 				{title}
 				<br/>
 				<img width={36} src={iconSrc} alt=""/> { name } | { categories.join(' ') }
@@ -36,7 +40,7 @@ class MagazineList extends Component {
 					{ items }
 				</div>
 				<div className="magazine-list-button">
-					<button>더 많은 매거진 보기</button>
+					<button className="more-ex-button">Explore the Magazine</button>
 				</div>
 			</div>
 		)

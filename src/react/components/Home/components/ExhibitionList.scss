@@ -1,5 +1,6 @@
 .recent-exhibition-list {
-
+	border-bottom : 1px solid #ddd;
+	padding-bottom : 20px;
 	.recent-exhibition-list-container {
 		display: flex;
 		flex-flow: row wrap;
@@ -7,10 +8,35 @@
 		.recent-exhibition-list-item {
 			display: flex;
 			flex-flow: column;
-
-			width: 28%;
 		}
 
 	}
 
+}
+
+.ex-thumbnail {
+	position: relative;
+	padding-top :56.25%;
+	overflow : hidden;
+}
+.ex-centered {
+	 position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    -webkit-transform: translate(50%,50%);
+    -ms-transform: translate(50%,50%);
+    transform: translate(50%,50%);
+}
+
+img.home-exhibition-image {
+position: absolute;
+    top: 0;
+    left: 0;   
+    max-width: 100%;
+    height: auto;
+    -webkit-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
 }

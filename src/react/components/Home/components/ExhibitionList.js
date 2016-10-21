@@ -17,7 +17,11 @@ class ExhibitionList extends Component {
 			linkToExhibition,
 		}, index) => (
 			<div key={index} className="recent-exhibition-list-item">
-				<img src={imgSrc} alt="" mode="fit"/>
+				<div className="ex-thumbnail">
+					<div className="ex-centered">
+						<img className="home-exhibition-image" src={imgSrc} alt="" mode="fit"/>
+					</div>
+				</div>
 				{title}
 				<br/>
 				<img width={36} src={iconSrc} alt=""/> { name } | { location } | { schedule }
@@ -32,8 +36,8 @@ class ExhibitionList extends Component {
 					{ items }
 				</div>
 				<div className="recent-exhibition-list-button">
-					<Link to="/exhibitions"><button>더 많은 전시 보기</button></Link>
-				</div>
+					<Link to="/exhibitions"><button className="more-ex-button">View All</button></Link>
+			    </div>
 			</div>
 
 		)

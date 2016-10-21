@@ -32,11 +32,10 @@ class Home extends Component {
 					<HomeHeading title="진행 중인 프로젝트" />
 					<PresentProjectList projects={presentProjects} />
 	
-					<HomeHeading title="준비 중인 프로젝트" />
-					<FutureProjectList projects={futureProjects} />
-	
+					
 					<HomeHeading title="최근 전시" />
 					<ExhibitionList exhibitions={recentExhibitions} />
+					
 	
 					<HomeHeading title="매거진" />
 					<MagazineList magazines={artMagazines} />

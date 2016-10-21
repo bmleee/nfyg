@@ -210,10 +210,33 @@
       "title": "들창코 프로젝트 ",
       "imgSrc": "/assets/images/magazine-thumbnail.jpg",
       "descriptions": [
-        "보물섬 남해의 보물창고 이야기",
-        "경남 남해에는 돌로 만든 50년 된 창고가 있따.",
-        "15년 7월, 멈춰진 시간을 살고 있던 돌창고는 젊은 문화 기획자와 도예작가를 만나 다시 문을 열게 되었다."
-      ],
+       ],
+      "creator": {
+        "name": "들창코",
+        "iconSrc": "/assets/images/sample-icon.svg"
+      },
+      "categories": [
+        "보물섬",
+        "지도"
+      ]
+    },{
+      "title": "들창코 프로젝트 ",
+      "imgSrc": "/assets/images/magazine-thumbnail.jpg",
+      "descriptions": [
+        ],
+      "creator": {
+        "name": "들창코",
+        "iconSrc": "/assets/images/sample-icon.svg"
+      },
+      "categories": [
+        "보물섬",
+        "지도"
+      ]
+    },{
+      "title": "들창코 프로젝트 ",
+      "imgSrc": "/assets/images/magazine-thumbnail.jpg",
+      "descriptions": [
+        ],
       "creator": {
         "name": "들창코",
         "iconSrc": "/assets/images/sample-icon.svg"
@@ -227,10 +250,7 @@
       "title": "들창코 프로젝트 ",
       "imgSrc": "/assets/images/magazine-thumbnail.jpg",
       "descriptions": [
-        "보물섬 남해의 보물창고 이야기",
-        "경남 남해에는 돌로 만든 50년 된 창고가 있따.",
-        "15년 7월, 멈춰진 시간을 살고 있던 돌창고는 젊은 문화 기획자와 도예작가를 만나 다시 문을 열게 되었다."
-      ],
+        ],
       "creator": {
         "name": "들창코",
         "iconSrc": "/assets/images/sample-icon.svg"
@@ -244,10 +264,7 @@
       "title": "들창코 프로젝트 ",
       "imgSrc": "/assets/images/magazine-thumbnail.jpg",
       "descriptions": [
-        "보물섬 남해의 보물창고 이야기",
-        "경남 남해에는 돌로 만든 50년 된 창고가 있따.",
-        "15년 7월, 멈춰진 시간을 살고 있던 돌창고는 젊은 문화 기획자와 도예작가를 만나 다시 문을 열게 되었다."
-      ],
+       ],
       "creator": {
         "name": "들창코",
         "iconSrc": "/assets/images/sample-icon.svg"
@@ -261,10 +278,7 @@
       "title": "들창코 프로젝트 ",
       "imgSrc": "/assets/images/magazine-thumbnail.jpg",
       "descriptions": [
-        "보물섬 남해의 보물창고 이야기",
-        "경남 남해에는 돌로 만든 50년 된 창고가 있따.",
-        "15년 7월, 멈춰진 시간을 살고 있던 돌창고는 젊은 문화 기획자와 도예작가를 만나 다시 문을 열게 되었다."
-      ],
+       ],
       "creator": {
         "name": "들창코",
         "iconSrc": "/assets/images/sample-icon.svg"
@@ -278,10 +292,7 @@
       "title": "들창코 프로젝트 ",
       "imgSrc": "/assets/images/magazine-thumbnail.jpg",
       "descriptions": [
-        "보물섬 남해의 보물창고 이야기",
-        "경남 남해에는 돌로 만든 50년 된 창고가 있따.",
-        "15년 7월, 멈춰진 시간을 살고 있던 돌창고는 젊은 문화 기획자와 도예작가를 만나 다시 문을 열게 되었다."
-      ],
+       ],
       "creator": {
         "name": "들창코",
         "iconSrc": "/assets/images/sample-icon.svg"
