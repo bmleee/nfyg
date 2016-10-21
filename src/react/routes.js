@@ -27,19 +27,24 @@ import MagazineDetail from './components/Magazines/MagazineDetail/containers/Mag
 
 const App = ({ children }) => (
 	<div>
+		<div>
+			Test Links:
+			{' '}
+			<Link to="/">Home</Link>
+			{' '}
+			<Link to="/">Projects</Link>
+			{' '}
+			<Link to="/exhibitions">Exhibitions</Link>
+			{' '}
+			<Link to="/magazines">Magazines</Link>
+			{' '}
+			<Link to="/test">Test Component</Link>
+		</div>
+		
 		<Nav></Nav>
-		Links:
-		{' '}
-		<Link to="/">Home</Link>
-		{' '}
-		<Link to="/">Projects</Link>
-		{' '}
-		<Link to="/exhibitions">Exhibitions</Link>
-		{' '}
-		<Link to="/magazines">Magazines</Link>
-		{' '}
-		<Link to="/test">Test Component</Link>
+		
 		{ children }
+		
 		<Footer></Footer>
 	</div>
 );

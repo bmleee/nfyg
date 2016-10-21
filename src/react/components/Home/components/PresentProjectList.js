@@ -52,6 +52,7 @@ class PresentProjectList extends Component {
 				numIndirectSupports,
 				remainingDays,
 			}, index) => (
+				<div className="present-project-list-item-container">
 				<div className="present-project-list-item" key={index}>
 					<Link to="/projects"> // TODO: include :project_name
 						<img src={imgSrc} width="100%" height="auto"  />
@@ -66,15 +67,18 @@ class PresentProjectList extends Component {
 						{currentMoney}원 | 직접후원 {numDirectSupports}명 | 간접후원 {numIndirectSupports}명 | {remainingDays}일 남음
 					</div>
 				</div>
+				</div>
 			)
 		);
 
 		return (
-			<div>
+			<div className="present-project-list">
 				<div className="present-project-list-container">
 					{ projectList.slice(0, this.state.count) }
 				</div>
-				<button onClick={this.expandList.bind(this)}>더 많은 프로젝트 보기</button>
+				<div className="present-more-project">
+				<button className="present-more-button" onClick={this.expandList.bind(this)}>View More Projects</button>
+				</div>
 			</div>
 
 		)

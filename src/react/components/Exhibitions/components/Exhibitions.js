@@ -153,10 +153,10 @@ class Exhibitions extends Component {
 
 				<ExhibitionsHeading exhibitions={exhibitions} />
 
-				<div>
-					<button onClick={ () => this._onChangeFilter('') }>All</button>
-					<button onClick={ () => this._onChangeFilter('in-exhibition') }>진행중인 전시</button>
-					<button onClick={ () => this._onChangeFilter('closed') }>끝난 전시</button>
+				<div className="ex-button">
+					<button className="ex-buttons" onClick={ () => this._onChangeFilter('') }>All</button>
+					<button className="ex-buttons" onClick={ () => this._onChangeFilter('in-exhibition') }>진행중인 전시</button>
+					<button className="ex-buttons" onClick={ () => this._onChangeFilter('closed') }>끝난 전시</button>
 				</div>
 
 				<ExhibitionsList exhibitions={filteredExhibitions} />

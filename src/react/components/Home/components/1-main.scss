@@ -1,0 +1,175 @@
+// FONT
+
+// desktop&all ↓↓↓↓
+.magazine-list-container {
+    display : block !important;
+}
+.magazine-list-item:first-child {
+    width : 40%;
+    padding : 10px 10px;
+    height : auto;
+    float : left;
+}
+.magazine-list-item  {
+    width : 20%;
+    padding : 10px 10px;
+    height : auto;
+    vertical-align : top;
+    display : inline-block;
+}
+.slick-dots {
+    bottom : -45px;
+}
+button.present-more-button, button.present-more-button:active, button.more-ex-button, button.more-ex-button:active {
+    padding-bottom :3px;
+    background:none;
+    border:none;
+    outline : none;
+    border-bottom:1px solid #000;
+    font-size : 16px;
+    font-weight : 500;
+    color : #000;
+    font-family : 'Adobe Garamond W08','adobe-garamond-pro','AGaramondPro-Regular','Times New Roman','Times','serif' ;
+}
+div.recent-exhibition-list-button, div.magazine-list-button {
+    text-align :center;
+    padding : 20px 0px;
+}
+    img.home-exhibition-image {
+        width : 100%;
+        height : auto;
+    }
+    div.present-project-list-item-caption {
+        padding : 8px 10px;
+    }
+    div.recent-exhibition-list-item {
+        width : 33.3333%;
+        padding : 5px 5px;
+    }
+    div.home-body {
+    padding: 0px 50px;
+}
+    div.home-heading {
+        text-align : left;
+        padding : 25px 0px;
+    }
+    div.home-info {
+    padding-top : 30px;
+    padding-bottom : 20px;
+    text-align : center;
+    border-bottom : 1px solid #ddd;
+}
+div.present-project-list-item {
+    margin : 0px 5px;
+    border : 1px solid #ddd;
+}
+div.present-project-list-item-container {
+    width : 33.3333% !important;
+    padding-top : 5px;
+}
+div.present-more-project {
+    text-align :center;
+    padding : 20px 0px;
+}
+    h4 {
+        font-size:18px;
+        font-weight:500;
+    }
+    h3 {
+        font-size:24px;
+        font-weight:600;
+    }
+    h2 {
+        font-size:30px;
+        font-weight:600;
+    }
+// tablet ↓↓↓↓
+@media (max-width: 991px) {
+   div.home-body {
+    padding: 0px 30px;
+}
+h4 {
+        font-size:16px;
+        font-weight:600;
+    }
+    h3 {
+        font-size:22px;
+        font-weight:700;
+    }
+    h2 {
+        font-size:28px;
+        font-weight:800;
+    }
+    div.present-project-list-item {
+    margin : 0px 3px;
+    border : 1px solid #ddd;
+}
+div.present-project-list-item-container {
+    width : 100% !important;
+    padding : 5px 0px;
+}
+div.recent-exhibition-list-item {
+        width : 49.999%;
+        padding : 5px 5px;
+    }
+    .magazine-list-container {
+    display : flex !important;
+}
+    .magazine-list-item:first-child {
+    width : 100% !important;
+    padding : 5px 5px !important;
+    height : auto;
+    margin-bottom : 15px;
+}
+    .magazine-list-item {
+    width : 49.999% !important;
+    padding : 5px 5px !important;
+    margin-bottom : 15px;
+}
+ 
+// mobile ↓↓↓↓ 
+@media (max-width: 500px) {
+ div.home-body {
+    padding: 0px 10px;
+}
+h4 {
+        font-size:15px;
+        font-weight:600;
+    }
+    h3 {
+        font-size:20px;
+        font-weight:700;
+    }
+    h2 {
+        font-size:24px;
+        font-weight:700;
+    }
+    div.present-project-list-item {
+    margin : 0px 3px;
+    border : 1px solid #ddd;
+}
+div.present-project-list-item-container {
+    width : 100% !important;
+    padding : 5px 0px;
+}
+div.recent-exhibition-list-item {
+        width : 100%;
+        padding : 5px 5px;
+    }
+    .magazine-list-container {
+    display : flex !important;
+}
+   .magazine-list-item:first-child {
+    width : 100% !important;
+    padding : 5px 5px !important;
+    margin-bottom : 15px;
+    height : auto;
+}
+    .magazine-list-item {
+    width : 49.999% !important;
+    padding : 5px 5px !important;
+    margin-bottom : 15px;
+}
+}
+}
+
