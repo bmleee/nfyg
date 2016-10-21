@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { fetchHome } from '../../../api/AppAPI'
+import { fetchJSONFile } from '../../../api/AppAPI'
 
 import { Home } from '../components'
 
@@ -16,7 +16,7 @@ class HomeContainer extends Component {
 	}
 
 	async componentDidMount() {
-		const newHome = await fetchHome()
+		const newHome = await fetchJSONFile('home')
 
 		this.setState({ home: newHome, loaded: true })
 	}

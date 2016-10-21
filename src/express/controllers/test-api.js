@@ -2,8 +2,6 @@ import fs from 'fs'
 import path from 'path'
 import express from 'express'
 
-console.log(__dirname);
-
 const router = express.Router();
 
 router.get('/', (req, res) => {

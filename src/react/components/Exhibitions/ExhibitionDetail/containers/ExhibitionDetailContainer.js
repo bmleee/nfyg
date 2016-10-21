@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { fetchExhibitionDetail } from '../../../../api/AppAPI'
+import { fetchJSONFile } from '../../../../api/AppAPI'
 
 import { ExhibitionDetail } from '../components'
 
@@ -38,7 +38,7 @@ class ExhibitionDetailContainer extends Component {
 	}
 
 	async componentDidMount() {
-		const newExhibition = await fetchExhibitionDetail()
+		const newExhibition = await fetchJSONFile('exhibition')
 
 		this.setState({ exhibition: newExhibition, loaded: true })
 	}
