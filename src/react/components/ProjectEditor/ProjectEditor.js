@@ -1,4 +1,6 @@
 import React, { Component, PropType } from 'react'
+import { connect } from 'react-redux'
+
 import update from 'react-addons-update'
 
 import { sign_request, image_upload, upload_file } from '../../lib/utils'
@@ -120,7 +122,7 @@ const OverviewForm = ({ overview: { part1, part2 }, onChangeHandlers, parent, ..
 	)
 }
 
-class ProjectEditor extends Component {
+export class ProjectEditor extends Component {
 
 	state = {
 		creator: {
@@ -225,4 +227,8 @@ class ProjectEditor extends Component {
 	}
 }
 
-export default ProjectEditor
+const mapStateToProps = (state) => ({
+	ProjectEditor: state.ProjectEditor
+})
+
+export const ProjectEditorContainer = connect(mapStateToProps)(ProjectEditor)
