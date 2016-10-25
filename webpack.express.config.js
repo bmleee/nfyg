@@ -10,6 +10,10 @@ var UglifyJsPlugin = new webpack.optimize.UglifyJsPlugin({
 		warnings: false
 	}
 })
+var DefinePlugin = new webpack.DefinePlugin({
+	'process.env.NODE_ENV': process.env.NODE_ENV && 'development',
+	'process.env.BROWSER': JSON.stringify(false)
+})
 
 fs.readdirSync(path.resolve(__dirname, 'node_modules'))
     .filter(x => ['.bin'].indexOf(x) === -1)
@@ -48,6 +52,7 @@ module.exports = {
 	},
 	plugins: [
 		// UglifyJsPlugin
+		DefinePlugin
 	]
 
 }
