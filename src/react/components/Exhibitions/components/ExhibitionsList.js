@@ -16,7 +16,11 @@ class ExhibitionsList extends Component {
 		}, index) => (
 			<div className="exhibitions-list-item" style={style}>
 				<Link to="/exhibitions/detail">
-					<img src={imgSrc} alt=""/>
+					<div className="ex-thumbnail">
+						<div className="ex-centered">
+							<img className="home-exhibition-image" src={imgSrc} alt=""/>
+						</div>
+					</div>
 				</Link>
 				<span>{title}{' '}{state}</span>
 				<span>{schedule} @ {location}</span>

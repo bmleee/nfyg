@@ -19,3 +19,22 @@
 
 	}
 }
+
+.project-sharing-icon, .project-sharing-info {
+	margin-bottom : 8px;
+}
+
+.sharing-icon:first-child {
+	margin-right : 5px;
+	margin-left : 0px;
+}
+.sharing-icon {
+	margin-right : 5px;
+	margin-left : 10px;
+}
+
+.sharing-fb-icon {
+	margin-left : -9px;
+	border-radius : 50px;
+	border : 3px solid #fff;
+}

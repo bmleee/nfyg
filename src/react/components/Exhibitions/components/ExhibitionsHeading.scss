@@ -6,3 +6,20 @@
 	}
 
 }
+
+.slick-slider {
+	padding : 30px 50px 20px 50px;
+}
+
+.slick-next:before, .slick-prev:before {
+	color : #0d0d0d;
+	opacity : 1;
+}
+
+.slick-prev {
+	left : 1.2%;
+}
+
+.slick-next {
+	right : 1.2%;
+}

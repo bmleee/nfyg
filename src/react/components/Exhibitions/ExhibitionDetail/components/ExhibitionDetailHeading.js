@@ -15,7 +15,7 @@ class ExhibitionDetailHeading extends Component {
 		} = this.props;
 
 		const sharingInfo = recent3Users.map( (fbId, index) => (
-			<img key={index} width={26} height={26} src={`https://graph.facebook.com/${fbId}/picture`} scale="0"/>
+			<img className="sharing-fb-icon" key={index} width={32} height={32} src={`https://graph.facebook.com/${fbId}/picture`} scale="0"/>
 		) )
 
 		let infoBackground = {
@@ -33,19 +33,27 @@ class ExhibitionDetailHeading extends Component {
 			<div className="exhibition-detail-heading">
 
 				<div className="exhibition-detail-info" style={infoBackground}>
-					<div>
-						<img src={logoSrc} alt=""/>
-						D-{remainingDays}
+					<div className="project-info">
+						<div className="project-sponsor-logo">
+							<img src={logoSrc} alt=""/>
+							D-{remainingDays}
+						</div>
+						<h1 className="project-title">{title}</h1>
+						<div className="project-info-bottom">
+							<div className="project-sharing-info">
+								{sharingInfo} 외 {numSupporters - sharingInfo.length}명과 함께하는 중
+							</div>
+							<div className="project-location">
+								{location} / {schedule}
+							</div>
+						</div>
 					</div>
-					<h4>{title}</h4>
-					<div>
-						{sharingInfo} 외 {numSupporters - sharingInfo.length}명과 함께하는 중
-					</div>
-					<div>
-						{location} / {schedule}
-					</div>
-					<button>초대장 발송하기(공유하기)</button>
 				</div>
+				
+				<div className="exhibition-share-button-cover">
+					<button className="share-button">초대장 발송하기</button>
+				</div>
+				
 			</div>
 			)
 	}

@@ -1,5 +1,77 @@
+div.Select.Select--single.is-searchable.has-value {
+	padding-bottom : 20px;
+	border-bottom : 1px solid #999;
+}
+.project-detail-ranking-item {
+	padding-top : 20px;
+	padding-bottom : 20px;
+	border-top : 1px solid #999;
+}
+.project-detail-ranking-item:first-child {
+	border : none;
+}
+
+.project-detail-overview {
+	padding : 0px 180px;
+}
+.project-detail-post, .project-detail-ranking, .project-detail-qna {
+	padding : 0px 300px;
+}
+.project-detail-overview-info {
+	width : 75%;
+}
+.project-detail-reward, .exhibition-detail-recommended-exhibitions {
+	width : 25%;
+	padding-left : 20px;
+}
 .project-detail {
 	display: flex;
 	flex-flow: column;
 
+}
+
+.project-info {
+	padding-top : 180px;
+	text-align : center;
+	height : 500px;
+	background : rgba(0, 0, 0, 0.4);
+}
+.project-info-bottom {
+	margin-top : 120px;
+}
+
+@media (max-width: 991px) {
+	.project-detail-overview, .project-detail-post, .project-detail-ranking, .project-detail-qna {
+	padding : 0px 40px;
+}
+.project-info {
+	padding-top : 100px;
+	height : 360px;
+}
+.project-info-bottom {
+	margin-top : 80px;
+}
+@media (max-width: 500px) {
+	.project-detail-overview {
+		flex-flow: column;
+	}
+	.project-detail-overview-info {
+	width : 100%;
+}
+.project-detail-reward, .exhibition-detail-recommended-exhibitions {
+	width : 100%;
+	padding-left : 0px;
+	padding-top : 20px;
+}
+	.project-detail-overview, .project-detail-post, .project-detail-ranking, .project-detail-qna {
+	padding : 0px 10px;
+}
+	.project-info {
+	padding-top : 50px;
+	height : 270px;
+}
+.project-info-bottom {
+	margin-top : 40px;
+}
+}	
 }

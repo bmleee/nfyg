@@ -1,4 +1,7 @@
 // desktop&all ↓↓↓↓
+.exhibition-detail-heading .exhibition-detail-info, .project-detail-heading .project-detail-info {
+ height : 500px;
+}
 .exhibitions-list {
 	padding : 20px 35px;
 }
@@ -24,6 +27,9 @@ button.ex-buttons, button.ex-buttons:active   {
 
 // tablet ↓↓↓↓
 @media (max-width: 991px) {
+	.exhibition-detail-heading .exhibition-detail-info, .project-detail-heading .project-detail-info {
+ height : 360px;
+}
 	.ex-button {
 	padding : 30px 30px 0px 30px !important;
 }
@@ -37,6 +43,9 @@ button.ex-buttons, button.ex-buttons:active   {
 
 // mobile ↓↓↓↓
 @media (max-width: 500px) {
+		.exhibition-detail-heading .exhibition-detail-info, .project-detail-heading .project-detail-info {
+ height : 270px;
+}
 	.ex-button {
 	padding : 30px 10px 0px 10px !important;
 }

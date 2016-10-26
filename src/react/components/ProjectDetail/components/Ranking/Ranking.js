@@ -24,11 +24,11 @@ class Ranking extends Component {
 	 	} = this.props;
 
 		const directInfo = (
-			<div className="project-detail-ranking-info" style={borderStyle} >
+			<div className="project-detail-ranking-info">
 				{
 					recent3DirectSupporters.map( (fbId, index) =>
 						// border-width: 1px; border-style: solid; border-color: rgb(75, 112, 154); border-radius: 100px; margin-bottom: 5px !important;
-						<img key={index} width={50} height={50}
+						<img className="ranking-fb-icon" key={index} width={40} height={40}
 							src={`https://graph.facebook.com/${fbId}/picture`} />
 					)
 				}
@@ -37,11 +37,11 @@ class Ranking extends Component {
 		)
 
 		const indirectInfo = (
-			<div className="project-detail-ranking-info" style={borderStyle} >
+			<div className="project-detail-ranking-info">
 				{
 					recent3IndirectSupporters.map( (fbId, index) =>
 						// border-width: 1px; border-style: solid; border-color: rgb(75, 112, 154); border-radius: 100px; margin-bottom: 5px !important;
-						<img key={index} width={50} height={50}
+						<img className="ranking-fb-icon" key={index} width={40} height={40}
 							src={`https://graph.facebook.com/${fbId}/picture`} />
 					)
 				}
@@ -81,14 +81,20 @@ class Ranking extends Component {
 			shares,
 			rank,
 		}, index) => (
-			<div key={index} className="project-detail-ranking-item" style={borderStyle} >
-				<div>
-					<img key={index} width={50} height={50}
+			<div key={index} className="project-detail-ranking-item">
+				<div className="project-ranking-th">
+				    <p>
+					<img className="ranking-fb-icon-list" key={index} width={50} height={50}
 						src={`https://graph.facebook.com/${fbId}/picture`} />
-					<span>{name}{' '}{money}원을 후원함</span>
-					<span>{String(new Date(support_at)) /* TODO: Date to string... */}</span>
+					</p>
+						
+					<p className="sharing-summary">
+					    <span>{name}{' '}{String(new Date(support_at)) /* TODO: Date to string... */}</span>
+					    <span>{message}</span>
+					    <span>{money}원을 후원함</span>
+			        </p>
 				</div>
-				<span>{message}</span>
+						
 				{ rankToCaption(rank) }
 				<div>
 					<img className="sharing-icon" src="https://7pictures.co.kr/wp-content/uploads/2016/08/likes.png" scale="0" />

@@ -53,20 +53,24 @@ class PresentProjectList extends Component {
 				remainingDays,
 			}, index) => (
 				<div className="present-project-list-item-container">
-				<div className="present-project-list-item" key={index}>
-					<Link to="/projects"> // TODO: include :project_name
-						<img src={imgSrc} width="100%" height="auto"  />
-					</Link>
-					<div className="present-project-list-item-caption">
-						{title}
-						<br />
-						{creator}의 프로젝트
-						<br />
-						프로젝트 진행 바
-						<br />
-						{currentMoney}원 | 직접후원 {numDirectSupports}명 | 간접후원 {numIndirectSupports}명 | {remainingDays}일 남음
+					<div className="present-project-list-item" key={index}>
+						<Link to="/projects"> {/* TODO: include :project_name */}
+							<div className="pr-thumbnail">
+								<div className="ex-centered">
+									<img className="home-exhibition-image" src={imgSrc} />
+								</div>
+							</div>
+						</Link>
+						<div className="present-project-list-item-caption">
+							{title}
+							<br />
+							{creator}의 프로젝트
+							<br />
+							프로젝트 진행 바
+							<br />
+							{currentMoney}원 | 직접후원 {numDirectSupports}명 | 간접후원 {numIndirectSupports}명 | {remainingDays}일 남음
+						</div>
 					</div>
-				</div>
 				</div>
 			)
 		);
@@ -77,7 +81,7 @@ class PresentProjectList extends Component {
 					{ projectList.slice(0, this.state.count) }
 				</div>
 				<div className="present-more-project">
-				<button className="present-more-button" onClick={this.expandList.bind(this)}>View More Projects</button>
+					<button className="present-more-button" onClick={this.expandList.bind(this)}>View More Projects</button>
 				</div>
 			</div>
 
