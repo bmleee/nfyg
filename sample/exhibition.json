@@ -47,18 +47,44 @@
   "artworks": [
     {
       "imgSrc": "https://i2.wp.com/7pictures.co.kr/wp-content/uploads/2016/10/floating-sweet-pumpkins4_30x100cm_acrylic-on-koreanpaper_2016.jpg?zoom=2&fit=710%2C211&ssl=1",
+      "width": 1200,
+      "height": 355,
       "description": "Blossom light, the moon, acrylic on canvas 30cm_2016 / 300,000원"
     },
     {
-      "imgSrc": "https://i2.wp.com/7pictures.co.kr/wp-content/uploads/2016/10/floating-sweet-pumpkins4_30x100cm_acrylic-on-koreanpaper_2016.jpg?zoom=2&fit=710%2C211&ssl=1",
+      "imgSrc": "https://farm8.staticflickr.com/7263/8168484671_f47b9e53bf_c.jpg",
+      "width": 800,
+      "height": 213,
       "description": "Blossom light, the moon, acrylic on canvas 30cm_2016 / 300,000원"
     },
     {
-      "imgSrc": "https://i2.wp.com/7pictures.co.kr/wp-content/uploads/2016/10/floating-sweet-pumpkins4_30x100cm_acrylic-on-koreanpaper_2016.jpg?zoom=2&fit=710%2C211&ssl=1",
+      "imgSrc": "https://farm8.staticflickr.com/7263/8168486479_79a7f0e94d.jpg",
+      "width": 500,
+      "height": 333,
       "description": "Blossom light, the moon, acrylic on canvas 30cm_2016 / 300,000원"
     },
     {
-      "imgSrc": "https://i2.wp.com/7pictures.co.kr/wp-content/uploads/2016/10/floating-sweet-pumpkins4_30x100cm_acrylic-on-koreanpaper_2016.jpg?zoom=2&fit=710%2C211&ssl=1",
+      "imgSrc": "https://farm8.staticflickr.com/7131/8168489795_5c175f6db2.jpg",
+      "width": 500,
+      "height": 333,
+      "description": "Blossom light, the moon, acrylic on canvas 30cm_2016 / 300,000원"
+    },
+    {
+      "imgSrc": "https://farm8.staticflickr.com/7114/8167106653_6a0b30be75.jpg",
+      "width": 500,
+      "height": 333,
+      "description": "Blossom light, the moon, acrylic on canvas 30cm_2016 / 300,000원"
+    },
+    {
+      "imgSrc": "https://farm9.staticflickr.com/8346/8164213200_65d636cc47.jpg",
+      "width": 292,
+      "height": 427,
+      "description": "Blossom light, the moon, acrylic on canvas 30cm_2016 / 300,000원"
+    },
+    {
+      "imgSrc": "https://farm9.staticflickr.com/8200/8187467060_11a5e3a79e.jpg",
+      "width": 500,
+      "height": 333,
       "description": "Blossom light, the moon, acrylic on canvas 30cm_2016 / 300,000원"
     }
   ],
