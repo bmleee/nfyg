@@ -9,6 +9,7 @@ import { routerReducer, routerMiddleware } from 'react-router-redux';
 
 // middlewares
 import thunk from 'react-thunk';
+import { remoteActionMiddleware } from './middlewares'
 
 import { todos } from './reducers';
 import { ProjectEditor } from './reducers'
@@ -57,6 +58,7 @@ export function configureStore(history, initialState) {
 		compose(
 			applyMiddleware(
 				logger,
+				// remoteActionMiddleware(socket), // TODO: activate to send action to server
 				routerMiddleware(history)
 			)
 		),
