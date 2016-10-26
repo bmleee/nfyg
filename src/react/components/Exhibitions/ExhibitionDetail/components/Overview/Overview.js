@@ -49,7 +49,7 @@ class Overview extends Component {
 					{item1}
 					{ this.state.seeMore ? item2 : <button onClick={this._onClick}>더보기</button> }
 
-					<button>공유로 예술 후원</button>
+					{/* <button>공유로 예술 후원</button> */}
 				</div>
 				<RecommendedExhibitions recommendedExhibitions={recommendedExhibitions} />
 			</div>

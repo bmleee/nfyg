@@ -9,7 +9,7 @@
 - https://seven-renewal-styling-a4000d.c9users.io/ 에서 확인 가능
 
 ### 3. git에 코드 수정 내역 반영
-```bash
+```bash 
 $ git add --all
 $ git commit -m "수정한 소스 코드 설명"
 $ git push origin master

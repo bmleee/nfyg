@@ -21,3 +21,32 @@
 
 	}
 }
+
+.ranking-fb-icon {
+	border-radius : 50px;
+	border : 2px solid #4b709a;
+	margin-left : -10px;
+}
+
+.ranking-fb-icon-list {
+	border-radius : 50px;
+	border : 2px solid #4b709a;
+}
+
+.project-detail-ranking-info:first-child {
+	margin-bottom : 10px;
+}
+.project-detail-ranking-info {
+	text-align : center;
+	margin-bottom : 30px;
+}
+.Select-clear {
+	display : none;
+}
+.sharing-summary {
+	width : 70%;
+}
+
+.project-ranking-th {
+	display : flex;
+}

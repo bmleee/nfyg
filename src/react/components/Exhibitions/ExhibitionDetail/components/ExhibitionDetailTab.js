@@ -7,12 +7,12 @@ class ExhibitionDetailTab extends Component {
 
 		// TODO: Apply :project_name
 		return (
-			<div className="exhibition-detail-tab">
-				<Link to="/exhibitions/detail/"><button>Overview</button></Link>
-				<Link to="/exhibitions/detail/artworks"><button>Artworks</button></Link>
-				<Link to="/exhibitions/detail/post"><button>Post</button></Link>
-				<Link to="/exhibitions/detail/qna"><button>문의</button></Link>
-				<button>작가의 소식받기</button>
+			<div className="project-detail-tab">
+				<Link to="/exhibitions/detail/"><button className="project-tab">Overview</button></Link>
+				<Link to="/exhibitions/detail/artworks"><button className="project-tab">Artworks</button></Link>
+				<Link to="/exhibitions/detail/post"><button className="project-tab">Post</button></Link>
+				<Link to="/exhibitions/detail/qna"><button className="project-tab">문의</button></Link>
+				{/* <button>작가의 소식받기</button> */}
 			</div>
 			)
 	}
