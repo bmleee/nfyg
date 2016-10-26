@@ -1,6 +1,17 @@
-// FONT
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css);
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css);
 
+// FONT
+div, span, h1, h2, h3, h4, button {
+    font-family : 'Spoqa Han Sans', 'Spoqa Han Sans JP', 'Sans-serif';
+}
 // desktop&all ↓↓↓↓
+a, a:hover, a:focus {
+    color : #000;
+    border : none;
+    outline : none;
+    text-decoration : none;
+}
 .share-button {
 	position: fixed;
     bottom: 10px;
@@ -46,7 +57,7 @@ button.present-more-button, button.present-more-button:active, button.more-ex-bu
     font-size : 16px;
     font-weight : 500;
     color : #000;
-    font-family : 'Adobe Garamond W08','adobe-garamond-pro','AGaramondPro-Regular','Times New Roman','Times','serif' ;
+    font-family : 'Spoqa Han Sans', 'Spoqa Han Sans JP', 'Sans-serif' ;
 }
 div.recent-exhibition-list-button, div.magazine-list-button {
     text-align :center;
@@ -88,8 +99,12 @@ div.present-more-project {
     text-align :center;
     padding : 20px 0px;
 }
+    h5 {
+        font-size:16px;
+        font-weight:500;
+    }
     h4 {
-        font-size:18px;
+        font-size:20px;
         font-weight:600;
     }
     h3 {
@@ -103,6 +118,10 @@ div.present-more-project {
     h1 {
         font-size :36px;
         font-weight :800;
+    }
+    p, span {
+        font-size : 16px;
+        font-weight : 400;
     }
 // tablet ↓↓↓↓
 @media (max-width: 991px) {
@@ -126,8 +145,12 @@ div.present-more-project {
    div.home-body {
     padding: 0px 30px;
 }
-h4 {
-        font-size:16px;
+    h5 {
+        font-size:14px;
+        font-weight:500;
+    }
+    h4 {
+        font-size:18px;
         font-weight:600;
     }
     h3 {
@@ -141,6 +164,10 @@ h4 {
     h1 {
         font-size :32px;
         font-weight :800;
+    }
+    p, span {
+        font-size : 14px;
+        font-weight : 400;
     }
     div.present-project-list-item {
     margin : 0px 3px;
@@ -191,8 +218,12 @@ div.recent-exhibition-list-item {
  div.home-body {
     padding: 0px 10px;
 }
-h4 {
-        font-size:15px;
+    h5 {
+        font-size:14px;
+        font-weight:500;
+    }
+    h4 {
+        font-size:17px;
         font-weight:600;
     }
     h3 {
@@ -206,6 +237,10 @@ h4 {
     h1 {
         font-size :28px;
         font-weight :800;
+    }
+    p, span {
+        font-size : 14px;
+        font-weight : 400;
     }
     div.present-project-list-item {
     margin : 0px 3px;

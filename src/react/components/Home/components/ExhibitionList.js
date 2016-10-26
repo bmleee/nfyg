@@ -19,14 +19,16 @@ class ExhibitionList extends Component {
 			<div key={index} className="recent-exhibition-list-item">
 				<div className="ex-thumbnail">
 					<div className="ex-centered">
+						<Link to="/exhibitions/detail">
 						<img className="home-exhibition-image" src={imgSrc} alt="" mode="fit"/>
+						</Link>
 					</div>
 				</div>
-				{title}
-				<br/>
-				<img width={36} src={iconSrc} alt=""/> { name } | { location } | { schedule }
-				<br/>
-				<Link to="/exhibitions/detail"><button href={linkToExhibition}>전시 더 보기</button></Link>
+				<div className="ex-list-info">
+				<Link to="/exhibitions/detail"><h4>{title}</h4></Link>
+				<p>{ location } | { schedule }</p>
+				<p className="ex-artist-name"><img className="ex-icon" width={26} height={26} src={iconSrc} alt=""/>{"   "}{ name }</p>
+				</div>
 			</div>
 		))
 

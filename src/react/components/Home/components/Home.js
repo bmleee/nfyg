@@ -40,8 +40,8 @@ class Home extends Component {
 					<HomeHeading title="매거진" />
 					<MagazineList magazines={artMagazines} />
 	
-					<HomeHeading title="종료된 프로젝트" />
-					<PastProjectList projects={pastProjects} />
+					{/* <HomeHeading title="종료된 프로젝트" />
+					<PastProjectList projects={pastProjects} /> */}
 				</div>
 			</div>
 			)

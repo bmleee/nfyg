@@ -62,13 +62,11 @@ class PresentProjectList extends Component {
 							</div>
 						</Link>
 						<div className="present-project-list-item-caption">
-							{title}
+							<h4>{title}</h4>
+							<h5>{creator}의 프로젝트</h5>
+							<p>프로젝트 진행 바
 							<br />
-							{creator}의 프로젝트
-							<br />
-							프로젝트 진행 바
-							<br />
-							{currentMoney}원 | 직접후원 {numDirectSupports}명 | 간접후원 {numIndirectSupports}명 | {remainingDays}일 남음
+							{currentMoney}원 | 직접후원 {numDirectSupports}명 | 간접후원 {numIndirectSupports}명 | {remainingDays}일 남음</p>
 						</div>
 					</div>
 				</div>

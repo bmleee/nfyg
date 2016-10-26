@@ -5,7 +5,7 @@ import 'babel-polyfill';
 
 // TODO: activate lazy loading
 const options = {
-	slideInterval: 2000,
+	slideInterval: 20000,
 	infinite: true,
 	showThumbnails: false,
 	showFullscreenButton: false,
