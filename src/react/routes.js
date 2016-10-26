@@ -4,7 +4,7 @@ import { Route, IndexRoute, Link } from 'react-router';
 import { Nav, Footer } from './components/Common';
 
 import { TodoApp, Test } from './components';
-import ProjectEditor from './components/ProjectEditor/ProjectEditor'
+import { ProjectEditor, ProjectEditorContainer } from './components/ProjectEditor/ProjectEditor'
 
 import Home from './components/Home/containers/HomeContainer';
 
@@ -38,13 +38,15 @@ const App = ({ children }) => (
 			{' '}
 			<Link to="/magazines">Magazines</Link>
 			{' '}
+			<Link to="/project-editor">Project Editor</Link>
+			{' '}
 			<Link to="/test">Test Component</Link>
 		</div>
-		
+
 		<Nav></Nav>
-		
+
 		{ children }
-		
+
 		<Footer></Footer>
 	</div>
 );
@@ -60,6 +62,7 @@ const routes = (
 			<Route path="post" component={ ProjectDetailPost }></Route>
 			<Route path="ranking" component={ ProjectDetailRanking }></Route>
 			<Route path="qna" component={ ProjectDetailQnA }></Route>
+			<Route path="new" component={ ProjectEditorContainer }></Route>
 		</Route>
 
 		<Route path="exhibitions" component={Exhibitions}>
@@ -83,9 +86,9 @@ const routes = (
 			<Route path="qna" component={ ExhibitionDetailQnA }></Route>
 		</Route>
 
-		<Route path="todos" component={TodoApp}></Route>
+		<Route path="project-editor" component={ProjectEditorContainer}></Route>
 
-		<Route path="test" component={ProjectEditor}></Route>
+		<Route path="test" component={ProjectEditorContainer}></Route>
 	</Route>
 )
 

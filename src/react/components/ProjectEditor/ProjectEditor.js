@@ -1,6 +1,10 @@
-// TODO: child's refs -> ref..?
-// TODO: initial input value from props ...
-// TODO: content 에 에디터 기능 추가 : WYS...
+// ContentViewr에서는 contentType=='text'이면 content.toString('html') && dangerouslyInsertHtml? 이용~
+/**
+ * Todos
+ *  1. onChange = throttle(onChange)
+ *  2. overview.partN.content[contentType == 'text']의 툴바 : not focus 일때 보여주지 않기
+ *  3. overview.partN.content 에 onMoved, onDeleted 적용하기 : Drag and Drop / Delete Button
+ */
 
 import { ProjectEditorConstants as CONSTANTS } from '../../constants'
 
@@ -13,14 +17,21 @@ import update from 'react-addons-update'
 import { sign_request, image_upload, upload_file } from '../../lib/utils'
 import * as actionCreators from '../../actions/ProjectEditorActionCreators'
 // import { Map, fromJS } from 'immutable'
-import RichTextEditor from 'react-rte'
+
+import { canUseDOM } from '../../../lib/utils'
+
+// when window object is undeclared...
+if(canUseDOM) {
+	window.RichTextEditor = require('react-rte').default
+} else {
+	global.RichTextEditor = {}
+}
 
 // content style
 const H1Style = {
 	fontSize: '24px',
 	fontWeight: '400'
 }
-
 const H2Style = {
 	fontSize: '20px',
 	fontWeight: '400'
@@ -40,7 +51,7 @@ const SideBar = ({onClick,...props}) => (
 		<button onClick={ () => onClick('h1') }>H1</button>
 		<button onClick={ () => onClick('h2') }>H2</button>
 		<button onClick={ () => onClick('quote') }>Quote</button>
-		<button onClick={ () => onClick('text', RichTextEditor.createEmptyValue()) }>Text</button>
+		<button onClick={ () => onClick('text', RichTextEditor.createEmptyValue() ) }>Text</button>
 		<button onClick={ () => onClick('image') }>Image</button>
 	</div>
 )
@@ -68,8 +79,8 @@ const CreatorForm = ({ creator: { name, iconSrc, description }, onChangeHandlers
 		</div>
 		<div>
 			<span>description</span>
-			<input type="textarea" name="creator-description" rows="4" cols="50"
-				onChange={ (e) => onChangeHandlers.description(e.target.value) } />
+			<textarea name="creator-description"
+								rows="4" cols="50" onChange={(e) => onChangeHandlers.description(e.target.value)} />
 		</div>
 	</div>
 )
@@ -113,27 +124,24 @@ const renderContents = (contents, onChangeHandlers) => (
 			contents.map( ({contentType, content, ...other}, index) => {
 				switch (contentType) {
 					case 'h1' :
-						return <input type="text" style={H1Style} value={content}
+						return <input key={index} type="text" style={H1Style} value={content}
 													onChange={ (e) => onChangeHandlers.contentChanged(index, e.target.value) } />
 					case 'h2' :
-						return <input type="text" style={H2Style} value={content}
-													onChange={ (e) => onChangeHandlers.contentChanged(index, e.target.value) } />
-					case 'text' :
-						return <input type="text" style={textStyle} value={content}
+						return <input key={index} type="text" style={H2Style} value={content}
 													onChange={ (e) => onChangeHandlers.contentChanged(index, e.target.value) } />
 					//case 'text' :
-					//	return <RichTextEditor value={content}
-					//					onChange={ (v) => onChangeHandlers.contentChanged(index, v) } />
+					//	return <textarea rows="5" cols="50" style={textStyle} value={content}
+					//								onChange={ (e) => onChangeHandlers.contentChanged(index, e.target.value) } />
+					case 'text' :
+						return <RichTextEditor key={index} value={content} onChange={ (v) => onChangeHandlers.contentChanged(index, v) } />
           case 'image' : // TODO: change onChangeHandlers.overview.part1.contentChanged
 						return (
-                <div>
+                <div key={index}>
                   <input type="file" style={imageStyle} // ref={`part1_image${index}`}
                          onChange={ () => onChangeHandlers.contentChanged(index, undefined, contentType) } />
                   <img src={content} style={imageStyle} />
                 </div>
               )
-
-
 				}
 
 			})
@@ -155,10 +163,10 @@ const OverviewForm = ({ overview: { part1, part2 }, onChangeHandlers, parent, ..
 
 			<div>
 				<h4>Overview - part2</h4>
-				<div>
-					{ renderContents(part2) }
+				<div ref={(c) => parent._overview_part2 = c}>
+					{ renderContents(part2, onChangeHandlers.part2) }
 				</div>
-				<SideBar />
+				<SideBar onClick={onChangeHandlers.part2.newContent} />
 			</div>
 		</div>
 	)
@@ -203,27 +211,51 @@ export class ProjectEditor extends Component {
 			targetMoney: 	(v) => {this.props.updateHeadingTargetMoney(v)},
 		},
 		overview: {
+			// TODO: refactor below
 			part1: {
 				newContent: (contentType, content) => {this.props.part1NewContent(contentType, content)},
 				contentChanged: async (index, v, type) => {
-          if (type === 'image') {
-            console.log('should be input', this._overview_part1)
-            const file = this._overview_part1
-              .children[0] // div.contents-container
-              .children[index] // index-th case-statement
-              .children[0] // input[type="file"] && contentType === image
-              .files[0] // uploaded file
+					console.log('text.onChange', v);
+					if (type === 'image') {
+						const file = this._overview_part1
+							.children[0] // div.contents-container
+							.children[index] // index-th case-statement
+							.children[0] // input[type="file"] && contentType === image
+							.files[0] // uploaded file
 
-            if(!file) return
+						if(!file) return
 
-            const { imgSrc } = await upload_file(file)
-            this.props.part1ContentChanged(index, imgSrc)
-          } else {
-            this.props.part1ContentChanged(index, v.toString('html'))
-          }
-        },
+						const { imgSrc } = await upload_file(file)
+						this.props.part1ContentChanged(index, imgSrc)
+					} else {
+						this.props.part1ContentChanged(index, v)
+					}
+				},
 				contentMoved: (preIndex, postIndex) => {this.props.part1ContentMoved(preIndex, postIndex)},
 				contentDeleted: (index) => {this.props.part1ContentDeleted(index)}
+			},
+		part2: {
+			// same as above
+			newContent: (contentType, content) => {this.props.part2NewContent(contentType, content)},
+			contentChanged: async (index, v, type) => {
+				console.log('text.onChange', v);
+				if (type === 'image') {
+					const file = this._overview_part2
+						.children[0] // div.contents-container
+						.children[index] // index-th case-statement
+						.children[0] // input[type="file"] && contentType === image
+						.files[0] // uploaded file
+
+					if(!file) return
+
+					const { imgSrc } = await upload_file(file)
+					this.props.part2ContentChanged(index, imgSrc)
+				} else {
+					this.props.part2ContentChanged(index, v)
+				}
+			},
+			contentMoved: (preIndex, postIndex) => {this.props.part2ContentMoved(preIndex, postIndex)},
+			contentDeleted: (index) => {this.props.part2ContentDeleted(index)}
 			}
 		}
 	}
@@ -254,17 +286,23 @@ export class ProjectEditor extends Component {
 						onChangeHandlers={this.inputOnChangeHandlers.overview} />
 				</EditorBody>
 
-				<SideBar />
+				<h5>Dev Buton</h5>
         <button onClick={ () => console.log(this) }>Log this</button>
 				<button onClick={ () => console.log(this.state) }>Log State</button>
 				<button onClick={ () => console.log(this.props) }>Log Props</button>
+				<button onClick={ () => {
+					console.log('PART1')
+					overview.part1
+						.filter( ({contentType}) => contentType === 'text' )
+						.forEach(({content}) => console.log(content.toString('html')))
 
-				<h3>RichTextEditor Test</h3>
+					console.log('PART2')
+					overview.part2
+					.filter( ({contentType}) => contentType === 'text' )
+					.forEach(({content}) => console.log(content.toString('html')))
 
+				} }>Text to Html String</button>
 
-				<div className="data-content-test" dataPlacement="above" dataContent="This is written in data-content attribute of dig element. 한글도 가능하나요?">
-					helo
-				</div>
 			</div>
 		)
 	}

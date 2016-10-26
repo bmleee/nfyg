@@ -40,6 +40,7 @@
     "react-redux": "^4.4.5",
     "react-router": "^2.8.1",
     "react-router-redux": "^4.0.6",
+    "react-rte": "^0.10.1",
     "react-select": "^1.0.0-rc.2",
     "react-slick": "^0.14.5",
     "react-thunk": "^1.0.0",

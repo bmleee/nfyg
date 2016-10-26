@@ -23,8 +23,10 @@ const defaultState = () => {
       targetMoney: -1,
     },
     overview: {
-      part1: [ {contentType: 'text', content: 'sample text content' } ], // { type, content }
-      part2: [ {contentType: 'image', content: '/assets/images/sample-icon.svg'} ], // { type, content }
+      // part1: [ {contentType: 'text', content: 'sample text content' } ], // { type, content }
+      // part2: [ {contentType: 'image', content: '/assets/images/sample-icon.svg'} ], // { type, content }
+      part1: [],
+      part2: []
     },
     rewards: [], // { title, description }
     post: {
