@@ -10,7 +10,7 @@ import renderReact from './middlewares/reactUtils'
 
 import router from './controllers'; // express router
 
-import { EXPRESS_PORT, MONGODB_URL } from '../../env';
+import { EXPRESS_PORT, MONGODB_URL } from '../../env'; 
 
 import mongoose from 'mongoose';
 mongoose.Promise = Q.Promise;
