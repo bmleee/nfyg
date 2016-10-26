@@ -6,7 +6,7 @@ var dbconfig = {
 
 
 module.exports = {
-	EXPRESS_PORT: process.env.PORT || 3003,
+	EXPRESS_PORT: process.env.PORT || 8080,
 	MONGODB_URL: `mongodb://${dbconfig.dbuser}:${dbconfig.dbpassword}@ds041643.mlab.com:41643/seven_pictures`,
 
 	AWS_ACCESS_KEY: 'AKIAIFTTMP67OCZRKABQ',
