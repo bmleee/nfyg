@@ -45,6 +45,7 @@ app.use(express.static(publicPath));
 import router from './controllers';
 app.use('/api', router);
 
+// TODO: move below to middleware dir
 app.use((request, response) => {
 	const memoryHistory = createMemoryHistory(request.url);
 	const store = configureStore(memoryHistory);
@@ -63,17 +64,3 @@ app.use((request, response) => {
 const server = app.listen(EXPRESS_PORT, () => {
 	console.log(`Express listening on port ${EXPRESS_PORT}`);
 });
-
-function test_func() {
-	return new Promise(function(resolve, reject) {
-		setInterval( function() {
-			resolve('return from test_func after 1sec');
-		}, 1000)
-	});
-}
-
-async function test_func2() {
-	let ret = await test_func();
-
-	return ret;
-}
