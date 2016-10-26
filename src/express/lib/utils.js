@@ -3,35 +3,6 @@ import { renderToString } from 'react-dom/server'
 import { Provider } from 'react-redux'
 import { RouterContext } from 'react-router';
 
-import serialize from 'serialize-javascript'
-
-// https://github.com/pro-react/sample-code/blob/master/chapter%208/universal-react/server.js
-export function getPropsFromRoute({ routes }, componentProps) {
-	let props = {};
-	let lastRoute = routes[routes.length - 1];
-
-	routes.reduceRight( (pre, cur) => {
-		componentProps.forEach(componentProp => {
-			if (!props[componentProp] && cur.component[componentProp]) {
-				props[componentProp] = cur.component[componentProp];
-			}
-		});
-	}, lastRoute);
-	return props;
-}
-
-export function renderRoute({ response, routes, renderProps, store, history }) {
-	const content = renderToString(
-		<Provider store={store} history={history}>
-			<RouterContext {...renderProps} />
-		</Provider>
-	);
-
-	response.render('index', {
-		content: content,
-		initialState: serialize(store.getState()),
-	});
-}
 
 // not used
 // https://coderwall.com/p/56a9ja/uploading-to-s3-returns-signaturedoesnotmatch
@@ -42,7 +13,6 @@ export function getSignedRequest(file, AWS_ACCESS_KEY, AWS_SECRET_KEY, S3_BUCKET
 	let amz_headers = "x-amz-acl:public-read";
 
 	let put_request = "PUT\n\n"+file.type+"\n"+expires+"\n"+amz_headers+"\n/"+S3_BUCKET+"/"+file.name;
-
 	let signature = crypto.createHmac('AWS4-HMAC-SHA256', AWS_SECRET_KEY).update(put_request).digest('base64');
 	signature = signature.replace('+','%2B')
 	                                 .replace('/','%2F')

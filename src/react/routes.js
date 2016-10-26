@@ -88,7 +88,7 @@ const routes = (
 
 		<Route path="project-editor" component={ProjectEditorContainer}></Route>
 
-		<Route path="test" component={ProjectEditorContainer}></Route>
+		<Route path="test" component={Test}></Route>
 	</Route>
 )
 
