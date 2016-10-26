@@ -11,8 +11,9 @@ var UglifyJsPlugin = new webpack.optimize.UglifyJsPlugin({
 	}
 })
 var DefinePlugin = new webpack.DefinePlugin({
-	'process.env.NODE_ENV': process.env.NODE_ENV && 'development',
-	'process.env.BROWSER': JSON.stringify(false)
+	'process.env': {
+		BROWSER: JSON.stringify(false)
+	}
 })
 
 fs.readdirSync(path.resolve(__dirname, 'node_modules'))
