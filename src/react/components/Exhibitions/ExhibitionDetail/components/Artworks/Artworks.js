@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 // import Lightbox from 'react-images';
 import Gallery from 'react-photo-gallery';
 
-
 const borderStyle = {
 	border: '1px solid gray'
 }
@@ -10,8 +9,6 @@ const borderStyle = {
 class Artworks extends Component {
 
 	render() {
-		console.log('this.props', this.props);
-		console.log('this.context', this.context);
 		const {
 			artworks,
 	 	} = this.props;
@@ -27,30 +24,24 @@ class Artworks extends Component {
 			</div>
 		))
 
+		const fixedWidth = 300;
+		const fixedHeight = 300;
 
 		const input = artworks.map( ({
-			imgSrc, description,
+			imgSrc, description, width, height
 		}, index) => ({
 			src: imgSrc,
-			width: '50%',
-			height: 'auto',
-			aspectRatio: 1,
+			width: fixedWidth,
+			// height: 300,
+			aspectRatio: width / height,
 			lightboxImage:{
 		    src: imgSrc,
-		    srcset: [
-					`${imgSrc} 1024w`,
-					`${imgSrc} 800w`,
-					`${imgSrc} 320w`,
-		    ],
 				caption: description,
 	    }
 		}))
 
-		console.log(input);
-		{/* { items } */}
-
 		return (
-			<div className="exhibition-detail-artworks">
+			<div className="exhibition-detail-artworks" style={{width: '88%'}}>
 				{/* <Lightbox images={input}  /> */}
 				<Gallery photos={input} />
 			</div>

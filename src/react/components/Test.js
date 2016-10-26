@@ -57,6 +57,87 @@ import { Editor, EditorState } from 'draft-js';
 // export default TestDraftJS;
 
 
-import RichEditor from './RichEditor';
+// import RichEditor from './RichEditor';
+//
+// export default (props) => <RichEditor {...props} />
 
-export default (props) => <RichEditor {...props} />
+
+import Masonry from 'react-masonry-component'
+
+const masonryOptions = {
+	transitionDuration: 0
+}
+
+export default class Test extends Component {
+	render() {
+		const childElements = [
+			(<li className="grid-item">
+				<img width={400} height={1000}
+					src="https://i2.wp.com/7pictures.co.kr/wp-content/uploads/2016/10/floating-sweet-pumpkins4_30x100cm_acrylic-on-koreanpaper_2016.jpg?zoom=2&fit=710%2C211&ssl=1" alt="" />
+			</li>),
+			(<li className="grid-item">
+				<img width={600} height={200}
+					src="https://i2.wp.com/7pictures.co.kr/wp-content/uploads/2016/10/floating-sweet-pumpkins4_30x100cm_acrylic-on-koreanpaper_2016.jpg?zoom=2&fit=710%2C211&ssl=1" alt="" />
+			</li>),
+			(<li className="grid-item">
+				<img  width={600} height={200}
+					src="https://i2.wp.com/7pictures.co.kr/wp-content/uploads/2016/10/floating-sweet-pumpkins4_30x100cm_acrylic-on-koreanpaper_2016.jpg?zoom=2&fit=710%2C211&ssl=1" alt="" />
+			</li>)
+		]
+		return (
+			<Masonry
+				className={'grid'} // default ''
+				elementType={'ul'} // default 'div'
+				options={masonryOptions} // default {}
+				disableImagesLoaded={false} // default false
+				updateOnEachImageLoad={false} // default false and works only if disableImagesLoaded is false
+				>
+				{childElements}
+			</Masonry>
+		);
+
+		// return ( <div> helo</div>)
+
+	}
+}
+
+
+// import { canUseDOM } from '../../lib/utils'
+//
+// if(canUseDOM) {
+// 	window.MasonryMixin = require('react-masonry-mixin')(React)
+// } else {
+// 	global.MasonryMixin = () => () => ({})
+// }
+//
+// const masonryOptions = {
+//     transitionDuration: 0
+// };
+//
+//
+// export default class Test extends Component {
+// 		mixins = [MasonryMixin(React)('grid', masonryOptions)]
+//
+// 		render() {
+// 			const childElements = [
+// 				(<li className="grid-item">
+// 					<img width={400} height={1000}
+// 						src="https://i2.wp.com/7pictures.co.kr/wp-content/uploads/2016/10/floating-sweet-pumpkins4_30x100cm_acrylic-on-koreanpaper_2016.jpg?zoom=2&fit=710%2C211&ssl=1" alt="" />
+// 				</li>),
+// 				(<li className="grid-item">
+// 					<img width={600} height={200}
+// 						src="https://i2.wp.com/7pictures.co.kr/wp-content/uploads/2016/10/floating-sweet-pumpkins4_30x100cm_acrylic-on-koreanpaper_2016.jpg?zoom=2&fit=710%2C211&ssl=1" alt="" />
+// 				</li>),
+// 				(<li className="grid-item">
+// 					<img  width={600} height={200}
+// 						src="https://i2.wp.com/7pictures.co.kr/wp-content/uploads/2016/10/floating-sweet-pumpkins4_30x100cm_acrylic-on-koreanpaper_2016.jpg?zoom=2&fit=710%2C211&ssl=1" alt="" />
+// 				</li>)
+// 			]
+//
+// 			return (
+// 				<div ref="grid" className="grid">
+// 					{childElements}
+// 				</div>
+// 			)
+// 		}
+// }
