@@ -3,19 +3,12 @@ import bodyParser from 'body-parser'
 import logger from 'morgan'
 import serialize from 'serialize-javascript'
 import Q from 'q'
+import path from 'path'
 
-import React from 'react'
-import { renderToString } from 'react-dom/server'
-import { Provider } from 'react-redux'
-import { createMemoryHistory, match, RouterContext } from 'react-router'
-import { syncHistoryWithStore } from 'react-router-redux';
+// middlewares
+import renderReact from './middlewares/reactUtils'
 
-import { configureStore } from '../react/store'; // why ../../src ?
-import reactRoutes from '../../src/react/routes';
-
-import { renderRoute } from './lib/utils';
-
-import path from 'path';
+import router from './controllers'; // express router
 
 import { EXPRESS_PORT, MONGODB_URL } from '../../env';
 
@@ -42,24 +35,9 @@ app.use(bodyParser.urlencoded({ extended: true}));
 
 app.use(express.static(publicPath));
 
-import router from './controllers';
 app.use('/api', router);
 
-// TODO: move below to middleware dir
-app.use((request, response) => {
-	const memoryHistory = createMemoryHistory(request.url);
-	const store = configureStore(memoryHistory);
-	const history = syncHistoryWithStore(memoryHistory, store);
-
-	match({ history, routes: reactRoutes, location: request.url}, (error, redirectLocation, renderProps) => {
-		if (error) response.status(500).send(error.message);
-		else if (redirectLocation) response.status(302).redirect(redirectLocation.pathname + redirectLocation.search);
-		else if (renderProps) {
-			renderRoute({ response, routes: reactRoutes, renderProps, store, history });
-		} else response.status(404).render('404');
-	})
-});
-
+app.use(renderReact);
 
 const server = app.listen(EXPRESS_PORT, () => {
 	console.log(`Express listening on port ${EXPRESS_PORT}`);
