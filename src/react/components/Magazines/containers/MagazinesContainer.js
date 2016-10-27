@@ -35,7 +35,8 @@ class MagazinesContainer extends Component {
 	}
 
 	_onChangeCategory(category) {
-		let newList = [];
+		const { categories } = this.state
+		let newList = []
 
 		if (category === categories[0]) newList = Object.assign([], this.state.magazines)
 		else newList = this.state.magazines.filter( s => s.category === category)

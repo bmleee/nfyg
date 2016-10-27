@@ -6,7 +6,7 @@
 ### exhibition detail
 
 ### magazines
- 1. 카테고리 버튼들 ==> 한 줄에, 좌우로 스크롤할 수 있게 :: 티몬 어플 참조
+ 1. 카테고리에 속하는 매거진이 없을 경우 :: No such magazines!
 ---
 
 ## 협업 루틴
@@ -20,7 +20,7 @@
 - https://seven-renewal-styling-a4000d.c9users.io/ 에서 확인 가능
 
 ### 3. git에 코드 수정 내역 반영
-```bash 
+```bash
 $ git add --all
 $ git commit -m "수정한 소스 코드 설명"
 $ git push origin master
