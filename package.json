@@ -37,6 +37,7 @@
     "react-dom": "^15.3.2",
     "react-image-gallery": "^0.7.2",
     "react-images": "^0.5.1",
+    "react-masonry-component": "^4.2.2",
     "react-materialize": "^0.17.0",
     "react-photo-gallery": "^4.2.14",
     "react-redux": "^4.4.5",
