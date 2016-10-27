@@ -1,5 +1,21 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
+import Slider from 'react-slick';
+import MediaQuery from 'react-responsive'
+
+
+// TODO: nextArrow, prevArrow 에 컴포넌트 넣기
+
+const sliderSettings = {
+	dots: false,
+	infinite: false,
+	speed: 1000,
+	slidesToShow: 4,
+	slidesToScroll: 2,
+	initialSlide: 0,
+};
+
+
 
 const style = {
 	width: `${100 * 0.95 / 3}%`,
@@ -10,11 +26,21 @@ class MagazinesHeading extends Component {
 
 	render() {
 		const { categories, currentCategory, _onChangeCategory } = this.props;
-		const categoryList = categories.map( (c, index) => (
-			<div className="magazines-heading-category-item"><p>
-				<button className="magazine-category-button" onClick={ () => _onChangeCategory(c) }>{c}</button></p>
-			</div>
-		))
+
+		const categoryButtons = categories.map( (c, index) => (
+				<div className="magazines-heading-category-item">
+					<p>
+						<button className="magazine-category-button" onClick={ () => _onChangeCategory(c) }>{c}</button>
+					</p>
+				</div>
+			))
+		const categoryNav = window.innerWidth > 900
+			?	categoryButtons
+			: [(
+					<Slider {...sliderSettings}>
+						{categoryButtons}
+					</Slider>
+				)]
 
 		return (
 			<div className="magazines-heading">
@@ -22,7 +48,7 @@ class MagazinesHeading extends Component {
 					<h2>Magazine</h2>
 				</div>
 				<div className="magazines-heading-category-container">
-					{ categoryList }
+					{ categoryNav }
 				</div>
 			</div>
 		)
