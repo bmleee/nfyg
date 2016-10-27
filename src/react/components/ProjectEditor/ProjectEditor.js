@@ -20,6 +20,8 @@ import * as actionCreators from '../../actions/ProjectEditorActionCreators'
 
 import { canUseDOM } from '../../../lib/utils'
 
+import _ from 'lodash' // use throttle or debounce
+
 // when window object is undeclared...
 if(canUseDOM) {
 	window.RichTextEditor = require('react-rte').default

@@ -1,6 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 // import Lightbox from 'react-images';
 import Gallery from 'react-photo-gallery';
+import Masonry from 'react-masonry-component'
+
+const masonryOptions = {
+	transitionDuration: 0,
+	percentPosition: true,
+}
 
 const borderStyle = {
 	border: '1px solid gray'
@@ -13,13 +19,17 @@ class Artworks extends Component {
 			artworks,
 	 	} = this.props;
 
+		const gridWidth = window.innerWidth > 900
+			? '33.333%'
+			: '50%'
+
 		console.log('artworks', artworks);
 
 		const items = artworks.map( ({
-			imgSrc, description,
+			imgSrc, description, width, height
 		}, index) => (
-			<div key={index} className="exhibition-detail-artworks-item">
-				<img src={imgSrc} alt=""/>
+			<div key={index} className="exhibition-detail-artworks-item grid-item" style={{width: gridWidth}}>
+				<img src={imgSrc} alt="" width={'100%'}/>
 				<span>{description}</span>
 			</div>
 		))
@@ -44,7 +54,12 @@ class Artworks extends Component {
 			<div className="exhibition-artworks-container">
 			<div className="exhibition-detail-artworks" style={{width: '100%'}}>
 				{/* <Lightbox images={input}  /> */}
-				<Gallery photos={input} />
+				{/* <Gallery photos={input} /> */}
+				<Masonry
+					className="grid"
+					options={masonryOptions} >
+					{ items }
+				</Masonry>
 			</div>
 			</div>
 		)
