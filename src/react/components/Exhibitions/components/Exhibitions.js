@@ -145,10 +145,10 @@ class Exhibitions extends Component {
 		return (
 			<div className="exhibitioins">
 				<div className="exhibitions-nav">
-					<h3>Exhibition_</h3>
-					<span>7Pictures는 좋은 전시를 소개하고 있습니다.</span>
-					<button>전시 등록</button>
-					<input type="text"/>
+					<h2>Featured Exhibitions
+					<div className="exhibition-register-container">
+					<button className="exhibition-register">전시 등록</button>
+					</div></h2>
 				</div>
 
 				<ExhibitionsHeading exhibitions={exhibitions} />

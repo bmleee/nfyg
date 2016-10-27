@@ -51,7 +51,7 @@ class Overview extends Component {
 
 					{/* <button>공유로 예술 후원</button> */}
 				</div>
-				<RecommendedExhibitions recommendedExhibitions={recommendedExhibitions} />
+				{/* <RecommendedExhibitions recommendedExhibitions={recommendedExhibitions} /> */}
 			</div>
 		)
 	}

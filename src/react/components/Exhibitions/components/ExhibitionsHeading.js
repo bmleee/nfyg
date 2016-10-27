@@ -17,16 +17,16 @@ const sliderSettings = {
 		settings: {
 			slidesToShow: 2,
 			slidesToScroll: 2,
-			infinite: true,
-			dots: false
 		}
 	}, {
 		breakpoint: 900,
 		settings: {
 			slidesToShow: 1,
-			slidesToScroll: 1
+			slidesToScroll: 1,
+			dots: true
 		}
-	}]
+	}],
+	// variableWidth: true
 };
 
 
@@ -36,18 +36,20 @@ class ExhibitionsHeading extends Component {
 		console.log(this.props);
 
 		const { exhibitions } = this.props;
-
+		
 		const items = exhibitions.map( ({
 			imgSrc, title, state, creator: {name, iconSrc,}, schedule, location,
-		}, index) => (
-			<div key={index} className="exhibitions-heading-item">
-				<Link to="/exhibitions/detail">
-					<img src={imgSrc} alt=""/>
-				</Link>
-				<span>{title}</span>
-				<span>{schedule} @ {location}</span>
-			</div>
-		))
+		}, index) => {
+			return (
+				<div key={index} className="exhibitions-heading-item">
+					<Link to="/exhibitions/detail">
+						<img src={imgSrc} alt=""/>
+					</Link>
+					<span>{title}</span>
+					<span>{schedule} @ {location}</span>
+				</div>
+			)
+		})
 
 		console.log('ExhibitionsHeading.props', this.props)
 		console.log('ExhibitionsHeading.items', items)

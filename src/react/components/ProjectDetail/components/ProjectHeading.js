@@ -43,7 +43,7 @@ class ProjectHeading extends Component {
 							D-{remainingDays}
 						</div>
 						<h1 className="project-title">{title}</h1>
-						<div className="project-info-bottom">
+						<div className="project-info-bottom"><p>
 							<div className="project-sharing-icon">
 								<img className="sharing-icon" src="https://7pictures.co.kr/wp-content/uploads/2016/08/likes.png" scale="0" />
 								{ likes }
@@ -57,7 +57,7 @@ class ProjectHeading extends Component {
 							</div>
 							<div className="project-current-money">
 							{currentMoney}원 후원 중 :: {currentMoney / targetMoney}%
-							</div>
+							</div></p>
 						</div>
 					</div>
 				</div>

@@ -3,8 +3,27 @@
 	flex-flow: column;
 
 	.exhibitions-nav {
-		display: flex;
-		flex-flow: row;
+		display: inline-block;
 	}
 	
+}
+
+.exhibition-register-container {
+	float : right;
+}
+
+button.exhibition-register, button.exhibition-register:focus {
+	font-size : 18px;
+	font-weight : 500;
+	font-style : normal !important;
+	padding : 15px 20px;
+	border-radius : 0px;
+	border : 1px solid #eee;
+	background-color : transparent;
+	color : #000;
+	outline : none;
+}
+
+button.exhibition-register:hover {
+	color : #4b709a;
 }

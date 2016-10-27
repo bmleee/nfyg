@@ -11,18 +11,16 @@ class MagazinesHeading extends Component {
 	render() {
 		const { categories, currentCategory, _onChangeCategory } = this.props;
 		const categoryList = categories.map( (c, index) => (
-			<div className="magazines-heading-category-item">
-				<button onClick={ () => _onChangeCategory(c) }>{c}</button>
+			<div className="magazines-heading-category-item"><p>
+				<button className="magazine-category-button" onClick={ () => _onChangeCategory(c) }>{c}</button></p>
 			</div>
 		))
 
 		return (
 			<div className="magazines-heading">
 				<div className="magazines-heading-nav">
-					<h3>Magazine_</h3>
-					<span>예술, 문화 입문부터 성장까지 함께합니다</span>
+					<h2>Magazine</h2>
 				</div>
-
 				<div className="magazines-heading-category-container">
 					{ categoryList }
 				</div>

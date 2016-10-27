@@ -29,15 +29,15 @@ class Home extends Component {
 				<div className ="home-body">
 					<HomeInfo title="공유로 후원한 금액" amount={10000} />
 	
-					<HomeHeading title="진행 중인 프로젝트" />
+					<HomeHeading title="What's on?" />
 					<PresentProjectList projects={presentProjects} />
 	
 					
-					<HomeHeading title="최근 전시" />
+					<HomeHeading title="Featured Exhibitions" />
 					<ExhibitionList exhibitions={recentExhibitions} />
 					
 	
-					<HomeHeading title="매거진" />
+					<HomeHeading title="7Pictures Magazine" />
 					<MagazineList magazines={artMagazines} />
 	
 					{/* <HomeHeading title="종료된 프로젝트" />

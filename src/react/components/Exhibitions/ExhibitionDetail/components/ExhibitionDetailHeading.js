@@ -50,9 +50,9 @@ class ExhibitionDetailHeading extends Component {
 					</div>
 				</div>
 				
-				<div className="exhibition-share-button-cover">
+				{/* <div className="exhibition-share-button-cover">
 					<button className="share-button">초대장 발송하기</button>
-				</div>
+				</div> */}
 				
 			</div>
 			)

@@ -41,9 +41,11 @@ class Artworks extends Component {
 		}))
 
 		return (
-			<div className="exhibition-detail-artworks" style={{width: '88%'}}>
+			<div className="exhibition-artworks-container">
+			<div className="exhibition-detail-artworks" style={{width: '100%'}}>
 				{/* <Lightbox images={input}  /> */}
 				<Gallery photos={input} />
+			</div>
 			</div>
 		)
 	}

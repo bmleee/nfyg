@@ -62,7 +62,7 @@ class PresentProjectList extends Component {
 							</div>
 						</Link>
 						<div className="present-project-list-item-caption">
-							<h4>{title}</h4>
+							<Link to="/projects"><h4>{title}</h4></Link>
 							<h5>{creator}의 프로젝트</h5>
 							<p>프로젝트 진행 바
 							<br />
@@ -79,7 +79,11 @@ class PresentProjectList extends Component {
 					{ projectList.slice(0, this.state.count) }
 				</div>
 				<div className="present-more-project">
-					<button className="present-more-button" onClick={this.expandList.bind(this)}>View More Projects</button>
+					{
+						this.state.numProjects < this.state.count
+							? <button className="present-more-button" onClick={this.expandList.bind(this)}>View More Projects</button>
+							: null
+					}
 				</div>
 			</div>
 
