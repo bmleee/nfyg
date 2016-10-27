@@ -42,11 +42,17 @@ class ExhibitionsHeading extends Component {
 		}, index) => {
 			return (
 				<div key={index} className="exhibitions-heading-item">
+					<div className="ex-thumbnail">
+						<div className="ex-centered">
 					<Link to="/exhibitions/detail">
-						<img src={imgSrc} alt=""/>
+						<img className="home-exhibition-image" src={imgSrc} alt=""/>
 					</Link>
-					<span>{title}</span>
-					<span>{schedule} @ {location}</span>
+					</div>
+					</div>
+					<div className="exhibition-heading-item-info">
+					<h4>{title}</h4>
+					<p>{schedule} @ {location}</p>
+					</div>
 				</div>
 			)
 		})

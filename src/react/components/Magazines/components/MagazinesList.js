@@ -25,12 +25,18 @@ class MagazinesList extends Component {
 			let description = descriptions.map((d, index) => (<span key={index}>{d}<br/></span>));
 			return (
 				<div className="magazine-menu-list-item" style={style}>
-					<Link to="magazines/detail"><img src={imgSrc} alt=""/></Link>
+					<div className="ma-menu-thumbnail">
+					<div className="ma-centered">
+					<Link to="magazines/detail"><img className="home-magazine-image" src={imgSrc} alt=""/></Link>
+					</div>
+					</div>
+					<div className="magazine-list-item-info">
 					<div>
-					     <h4>{category} | { title }</h4>
-						 <p><img src={iconSrc} alt=""/> {name}</p>
+					     <h4>{ title }</h4>
+						 <p><img src={iconSrc} width={28} height={28} alt=""/> {name} | {category}</p>
 					</div>
 					{description}
+					</div>
 				</div>
 			)
 		})
