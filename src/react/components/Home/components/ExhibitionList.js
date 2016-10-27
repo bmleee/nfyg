@@ -25,7 +25,7 @@ class ExhibitionList extends Component {
 					</div>
 				</div>
 				<div className="ex-list-info">
-				<Link to="/exhibitions/detail"><h4>{title}</h4></Link>
+					<Link to="/exhibitions/detail"><h4>{title}</h4></Link>
 				<p>{ location } | { schedule }</p>
 				<p className="ex-artist-name"><img className="ex-icon" width={26} height={26} src={iconSrc} alt=""/>{"   "}{ name }</p>
 				</div>

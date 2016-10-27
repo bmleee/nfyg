@@ -1,5 +1,69 @@
+.magazine-menu-list-item {
+	width : 33.33333%;
+	height: auto;
+    vertical-align: top;
+    display: inline-block;
+    padding :10px;
+}
+.magazines-list {
+	padding : 40px 40px 20px 40px;
+}
+.magazine-category-button, .magazine-category-button:focus {
+	background:none;
+	border : none;
+	outline : none;
+	color : #000;
+}
+.magazine-category-button:hover {
+	color : #4b709a;
+}
 .magazines {
 	display: flex;
 	flex-flow: column;
+}
+.magazines-heading-nav {
+    padding : 15px 50px 20px 50px;
+    display : inline-block;
+}
+.magazines-heading-category-container {
+	margin: 0px 50px 0px 50px;
+    padding: 20px 0px 18px 0px;
+    border-top: 1px solid #eee;
+    border-bottom : 1px solid #eee;
+}
 
+@media (max-width: 991px) {
+	.magazine-menu-list-item {
+	width : 49.99999%;
+}
+	.magazines-list {
+	padding : 35px 20px 20px 20px;
+}
+	.magazines-heading-nav {
+    padding : 15px 30px 20px 30px;
+}
+.magazines-heading-category-container {
+	margin: 0px 30px 0px 30px;
+    padding: 18px 0px 16px 0px;
+    border-top: 1px solid #eee;
+    border-bottom : 1px solid #eee;
+}
+
+@media (max-width: 500px) {
+	.magazine-menu-list-item {
+	width : 100%;
+}
+	.magazines-list {
+	padding : 30px 0px 20px 0px;
+}
+    .magazines-heading-nav {
+    padding : 10px 10px 15px 10px;
+}
+.magazines-heading-category-container {
+	margin: 0px 10px 0px 10px;
+    padding: 15px 0px 14px 0px;
+    border-top: 1px solid #eee;
+    border-bottom : 1px solid #eee;
+}
+}   
 }

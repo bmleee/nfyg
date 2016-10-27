@@ -1,16 +1,23 @@
 // desktop&all ↓↓↓↓
+.Select-multi-value-wrapper {
+	border-right: 1px solid #ececec;
+}
 .exhibition-detail-heading .exhibition-detail-info, .project-detail-heading .project-detail-info {
  height : 500px;
 }
 .exhibitions-list {
-	padding : 20px 35px;
+	padding : 20px 40px;
+}
+.exhibitions-nav {
+	padding : 15px 50px 20px 50px;
+	display : inline-block;
 }
 .ex-button {
 	padding : 30px 50px 0px 50px;
 }
 .exhibitions-list-item {
 	width : 33.3333% !important;
-	padding : 10px 15px;
+	padding : 10px 10px;
 }
 button.ex-buttons, button.ex-buttons:active   {
     padding-bottom :3px;
@@ -36,6 +43,10 @@ button.ex-buttons, button.ex-buttons:active   {
 	.exhibitions-list {
 	padding : 20px 20px !important;
 }
+.exhibitions-nav {
+	padding : 15px 30px 20px 30px;
+	display : inline-block;
+}
 .exhibitions-list-item {
 	width : 49.999% !important;
 	padding : 5px 10px !important;
@@ -51,6 +62,10 @@ button.ex-buttons, button.ex-buttons:active   {
 }
 	.exhibitions-list {
 	padding : 20px 0px !important;
+}
+.exhibitions-nav {
+	padding : 10px 10px 15px 10px;
+	display : inline-block;
 }
 .exhibitions-list-item {
 	width : 100% !important;

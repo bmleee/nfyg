@@ -6,6 +6,15 @@ div, span, h1, h2, h3, h4, button {
     font-family : 'Spoqa Han Sans', 'Spoqa Han Sans JP', 'Sans-serif';
 }
 // desktop&all ↓↓↓↓
+.Select-control {
+    border-radius: 0px !important;
+    border : 3px solid #eee;
+    
+}
+::selection {
+    background-color : #4b709a;
+    color : #fff;
+}
 a, a:hover, a:focus {
     color : #000;
     border : none;
@@ -26,8 +35,9 @@ a, a:hover, a:focus {
     border-radius: 4px;
     z-index: 55;
     margin: 0 auto;
-    width: 700px;
+    width: 900px;
     background : #4b709a;
+    border : none;
 }
 .magazine-list-container {
     display : block !important;
@@ -109,19 +119,22 @@ div.present-more-project {
     }
     h3 {
         font-size:24px;
-        font-weight:700;
+        font-weight:700; 
     }
-    h2 {
-        font-size:30px;
-        font-weight:700;
+    h2 { //page name
+        font-size:38px;
+        font-weight:500;
+        font-style:italic;
+        font-family:'Adobe Garamond W08','adobe-garamond-pro','AGaramondPro-Regular','Times New Roman','Times','serif';
     }
     h1 {
-        font-size :36px;
-        font-weight :800;
+        font-size :40px;
+        font-weight :700;
     }
     p, span {
         font-size : 16px;
         font-weight : 400;
+        margin : 0px !important;
     }
 // tablet ↓↓↓↓
 @media (max-width: 991px) {
@@ -139,7 +152,7 @@ div.present-more-project {
     border-radius: 4px;
     z-index: 55;
     margin: 0 auto;
-    width: 500px;
+    width: 95%;
     background : #4b709a;
 }
    div.home-body {
@@ -158,8 +171,8 @@ div.present-more-project {
         font-weight:700;
     }
     h2 {
-        font-size:28px;
-        font-weight:700;
+        font-size:32px;
+        font-weight:500;
     }
     h1 {
         font-size :32px;
@@ -212,7 +225,7 @@ div.recent-exhibition-list-item {
     border-radius: 4px;
     z-index: 55;
     margin: 0 auto;
-    width: 320px;
+    width: 95%;
     background : #4b709a;
 }
  div.home-body {
@@ -231,8 +244,8 @@ div.recent-exhibition-list-item {
         font-weight:700;
     }
     h2 {
-        font-size:24px;
-        font-weight:700;
+        font-size:28px;
+        font-weight:500;
     }
     h1 {
         font-size :28px;

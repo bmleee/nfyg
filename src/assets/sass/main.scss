@@ -8,4 +8,9 @@
 		text-align: center;
 	}
 }
- 
+
+button, button:focus, html input[type="button"], input[type="reset"], input[type="submit"] {
+	-webkit-appearance:none;
+	-webkit-border-radius:0;
+	-webkit-outline : none;
+}
