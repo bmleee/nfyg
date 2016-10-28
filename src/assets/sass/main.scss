@@ -2,6 +2,11 @@
 // @import "./react-components/ThumbnailSlider/_ThumbnailSlider.scss";
 @import "../../react/components/**/*";
 
+// http://stackoverflow.com/questions/17756649/disable-the-horizontal-scroll
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
 
 .body {
 	div {

@@ -13,9 +13,9 @@ const sliderSettings = {
 	slidesToShow: 4,
 	slidesToScroll: 2,
 	initialSlide: 0,
+	swipeToSlide: true,
+	variableWidth: true,
 };
-
-
 
 const style = {
 	width: `${100 * 0.95 / 3}%`,
@@ -34,6 +34,8 @@ class MagazinesHeading extends Component {
 					</p>
 				</div>
 			))
+
+		// wrap buttons with react-slick in mobile
 		const categoryNav = window.innerWidth > 900
 			?	categoryButtons
 			: [(
