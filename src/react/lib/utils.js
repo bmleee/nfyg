@@ -1,4 +1,5 @@
-// import fetch from 'isomorphic-fetch'
+import { Display } from '../constants'
+
 import 'whatwg-fetch'
 
 export async function sign_request(file) {
@@ -74,3 +75,8 @@ export async function upload_file(file) {
   // console.log(res);
 
 }
+
+export const displayType = window && window.innerWidth &&
+  window.innerWidth > 900 ? Display.DESKTOP
+    : window.innerWidth > 500 ? Display.TABLET
+      : Display.MOBILE

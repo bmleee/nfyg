@@ -1,7 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 // import Lightbox from 'react-images';
-import Gallery from 'react-photo-gallery';
+// import Gallery from 'react-photo-gallery';
 import Masonry from 'react-masonry-component'
+
+import { displayType } from '../../../../../lib/utils'
+import { Display } from '../../../../../constants'
 
 const masonryOptions = {
 	transitionDuration: 0,
@@ -19,9 +22,7 @@ class Artworks extends Component {
 			artworks,
 	 	} = this.props;
 
-		const gridWidth = window.innerWidth > 900
-			? '33.333%'
-			: '50%'
+		const gridWidth = displayType === Display.DESKTOP ? '33.333%' : '50%'
 
 		console.log('artworks', artworks);
 

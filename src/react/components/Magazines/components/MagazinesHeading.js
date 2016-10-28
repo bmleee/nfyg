@@ -3,6 +3,9 @@ import { Link } from 'react-router';
 import Slider from 'react-slick';
 import MediaQuery from 'react-responsive'
 
+import { displayType } from '../../../lib/utils'
+import { Display } from '../../../constants'
+
 
 // TODO: nextArrow, prevArrow 에 컴포넌트 넣기
 
@@ -36,8 +39,7 @@ class MagazinesHeading extends Component {
 			))
 
 		// wrap buttons with react-slick in mobile
-		const categoryNav = window.innerWidth > 900
-			?	categoryButtons
+		const categoryNav = displayType === Display.DESKTOP ? categoryButtons
 			: [(
 					<Slider {...sliderSettings}>
 						{categoryButtons}

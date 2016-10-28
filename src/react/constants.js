@@ -52,5 +52,11 @@ module.exports = {
 		}
 
 
+	},
+
+	Display: {
+		MOBILE: 'display is mobilde',
+		TABLET: 'display is tablet',
+		DESKTOP: 'display is desktop',
 	}
 }
