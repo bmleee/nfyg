@@ -14,10 +14,11 @@ const sliderSettings = {
 	infinite: false,
 	speed: 1000,
 	slidesToShow: 4,
-	slidesToScroll: 2,
+	slidesToScroll: 4,
 	initialSlide: 0,
 	swipeToSlide: true,
 	variableWidth: true,
+	centerMode: false,
 };
 
 const style = {
