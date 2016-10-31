@@ -7,6 +7,10 @@
 
 ### magazines
  1. 카테고리에 속하는 매거진이 없을 경우 :: No such magazines!
+
+### User/Login
+
+### User/Profile
 ---
 
 ## 협업 루틴
