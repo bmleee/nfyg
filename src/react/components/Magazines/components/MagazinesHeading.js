@@ -14,10 +14,11 @@ const sliderSettings = {
 	infinite: false,
 	speed: 1000,
 	slidesToShow: 4,
-	slidesToScroll: 2,
+	slidesToScroll: 4,
 	initialSlide: 0,
 	swipeToSlide: true,
 	variableWidth: true,
+	centerMode: false,
 };
 
 const style = {
@@ -39,7 +40,7 @@ class MagazinesHeading extends Component {
 			))
 
 		// wrap buttons with react-slick in mobile
-		const categoryNav = displayType === Display.DESKTOP ? categoryButtons
+		const categoryNav = displayType(window.innerWidth) === Display.DESKTOP ? categoryButtons
 			: [(
 					<Slider {...sliderSettings}>
 						{categoryButtons}

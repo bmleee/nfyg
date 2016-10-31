@@ -76,7 +76,7 @@ export async function upload_file(file) {
 
 }
 
-export const displayType = window && window.innerWidth &&
-  window.innerWidth > 900 ? Display.DESKTOP
-    : window.innerWidth > 500 ? Display.TABLET
+export const displayType = (innerWidth) =>
+  innerWidth > 900 ? Display.DESKTOP
+    : innerWidth > 500 ? Display.TABLET
       : Display.MOBILE

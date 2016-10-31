@@ -142,9 +142,11 @@ import { Editor, EditorState } from 'draft-js';
 // 		}
 // }
 
+import { facebook_login } from '../../lib/firebase'
+
 const  Test = ({}) => (
 	<div>
-		Test
+		<button onClick={facebook_login}>Facebook Login</button>
 	</div>
 	)
 export default Test
