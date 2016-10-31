@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router';
 
 import 'babel-polyfill';
 
@@ -38,7 +39,7 @@ class MagazineList extends Component {
 					{ items }
 				</div>
 				<div className="magazine-list-button">
-					<button className="more-ex-button">Explore the Magazine</button>
+					<Link to="/magazines"><button className="more-ex-button">Explore the Magazine</button></Link>
 				</div>
 			</div>
 		)

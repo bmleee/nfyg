@@ -76,8 +76,7 @@ const relatedExhibitions = [
 
 
 const magazine = {
-	title: `'Across the Universe' 어지인 작가
-2016. 10. 7 ~ 11. 4 @레빗홀`,
+	title: `'Across the Universe' 어지인 작가`,
 	creator: {
 		name: '어지인',
 		iconSrc: 'https://7pictures.co.kr/wp-content/plugins/korea-sns/icons/facebook.png',

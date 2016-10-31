@@ -7,9 +7,9 @@ class MagazineDetailHeading extends Component {
 		const { title, creator, imgSrc, category, descriptions, contents } = this.props;
 
 		return (
-			<div className="magazine-detail-heading" style={border}>
-				<img src={imgSrc} alt=""/>
-				<h3> {title} </h3>
+			<div className="magazine-detail-heading">
+				{/* <img src={imgSrc} alt=""/> */}
+				<h2> {title} </h2>
 			</div>
 		)
 	}
