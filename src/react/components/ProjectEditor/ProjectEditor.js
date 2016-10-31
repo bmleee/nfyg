@@ -1,9 +1,8 @@
 // ContentViewr에서는 contentType=='text'이면 content.toString('html') && dangerouslyInsertHtml? 이용~
 /**
  * Todos
- *  1. onChange = throttle(onChange)
- *  2. overview.partN.content[contentType == 'text']의 툴바 : not focus 일때 보여주지 않기
- *  3. overview.partN.content 에 onMoved, onDeleted 적용하기 : Drag and Drop / Delete Button
+ *  1. overview.partN.content[contentType == 'text']의 툴바 : not focus 일때 보여주지 않기
+ *  2. overview.partN.content 에 onMoved, onDeleted 적용하기 : Drag and Drop / Delete Button
  */
 
 import { ProjectEditorConstants as CONSTANTS } from '../../constants'
@@ -18,7 +17,7 @@ import { sign_request, image_upload, upload_file } from '../../lib/utils'
 import * as actionCreators from '../../actions/ProjectEditorActionCreators'
 // import { Map, fromJS } from 'immutable'
 
-import { canUseDOM } from '../../../lib/utils'
+import { canUseDOM, throttle } from '../../../lib/utils'
 
 import _ from 'lodash' // use throttle or debounce
 
