@@ -22,7 +22,7 @@ class Artworks extends Component {
 			artworks,
 	 	} = this.props;
 
-		const gridWidth = displayType === Display.DESKTOP ? '33.333%' : '50%'
+		const gridWidth = displayType(window.innerWidth) === Display.DESKTOP ? '33.333%' : '50%'
 
 		console.log('artworks', artworks);
 

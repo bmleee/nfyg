@@ -40,7 +40,7 @@ class MagazinesHeading extends Component {
 			))
 
 		// wrap buttons with react-slick in mobile
-		const categoryNav = displayType === Display.DESKTOP ? categoryButtons
+		const categoryNav = displayType(window.innerWidth) === Display.DESKTOP ? categoryButtons
 			: [(
 					<Slider {...sliderSettings}>
 						{categoryButtons}
