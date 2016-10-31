@@ -217,7 +217,6 @@ export class ProjectEditor extends Component {
 			part1: {
 				newContent: (contentType, content) => {this.props.part1NewContent(contentType, content)},
 				contentChanged: async (index, v, type) => {
-					console.log('text.onChange', v);
 					if (type === 'image') {
 						const file = this._overview_part1
 							.children[0] // div.contents-container
@@ -240,7 +239,6 @@ export class ProjectEditor extends Component {
 			// same as above
 			newContent: (contentType, content) => {this.props.part2NewContent(contentType, content)},
 			contentChanged: async (index, v, type) => {
-				console.log('text.onChange', v);
 				if (type === 'image') {
 					const file = this._overview_part2
 						.children[0] // div.contents-container
