@@ -48,17 +48,23 @@
 }
 
 .slick-prev:before {
-	content : '＜';
+	content : "";
 	color : #000;
-	font-size : 26px;
+	font-size : 30px;
 	font-weight : 600;
+	font-family : Ionicons;
+	width : 26px !important;
+	height : 26px !important;
 }
 
 .slick-next:before {
-	content : '＞';
+	content : "";
 	color : #000;
-	font-size : 26px;
+	font-size : 30px;
 	font-weight : 600;
+	font-family : Ionicons;
+	width : 26px !important;
+	height : 26px !important;
 }
 
 .slick-next:before:hover, .slick-prev:before:hover {

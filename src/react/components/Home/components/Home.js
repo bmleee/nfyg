@@ -13,7 +13,7 @@ import {
 } from './';
 
 class Home extends Component {
-
+	
 	render() {
 		const {
 			presentProjects,
@@ -43,6 +43,19 @@ class Home extends Component {
 					{/* <HomeHeading title="종료된 프로젝트" />
 					<PastProjectList projects={pastProjects} /> */}
 				</div>
+				
+		        <script
+			      dangerouslySetInnerHTML={{ __html:
+			        `
+			          require(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us13.list-manage.com","uuid":"7ab71f9618a27f6e6f7e4a94f","lid":"c7e4765340"}) })
+			        `
+			      }}
+			    />
+
+			    <script src="https://s3.amazonaws.com/downloads.mailchimp.com/js/signup-forms/popup/embed.js"
+			    	// dataDojoConfig="usePlainJson: true, isDebug: false"
+			    	/>
+
 			</div>
 			)
 	}

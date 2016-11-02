@@ -83,27 +83,27 @@ class Ranking extends Component {
 		}, index) => (
 			<div key={index} className="project-detail-ranking-item">
 				<div className="project-ranking-th">
-				    <p>
+				    <p className="sharing-fb-icon-list">
 					<img className="ranking-fb-icon-list" key={index} width={50} height={50}
 						src={`https://graph.facebook.com/${fbId}/picture`} />
 					</p>
 						
 					<p className="sharing-summary">
-					    <span>{name}{' '}{String(new Date(support_at)) /* TODO: Date to string... */}</span>
+					    <span><p className="sharing-name">{name}</p>{' '}{String(new Date(support_at)) /* TODO: Date to string... */}</span>
 					    <span>{message}</span>
-					    <span>{money}원을 후원함</span>
+					    <span><p className="sharing-money">{money}</p>원을 후원함</span>
 			        </p>
+			        <p className="likes-num"><h4 className="likes-text">{ likes }</h4>
+					<img className="sharing-icon" src="https://7pictures.co.kr/wp-content/uploads/2016/08/likes.png" scale="0" />좋아요</p>
 				</div>
 						
-				{ rankToCaption(rank) }
-				<div>
-					<img className="sharing-icon" src="https://7pictures.co.kr/wp-content/uploads/2016/08/likes.png" scale="0" />
-					{ likes }
-					<img className="sharing-icon" src="https://7pictures.co.kr/wp-content/uploads/2016/08/comment.png" scale="0" />
+				{/* rankToCaption(rank) */}
+				
+					{/* <img className="sharing-icon" src="https://7pictures.co.kr/wp-content/uploads/2016/08/comment.png" scale="0" />
 					{ comments }
 					<img className="sharing-icon" src="https://7pictures.co.kr/wp-content/uploads/2016/08/share.png" scale="0" />
-					{ shares }
-				</div>
+					{ shares } */} 
+				
 			</div>
 		))
 

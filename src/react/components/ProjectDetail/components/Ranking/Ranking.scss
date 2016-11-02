@@ -1,3 +1,13 @@
+.sharing-name {
+	font-size : 18px;
+	font-weight : 800;
+	display : inline-block;
+}
+.sharing-money {
+	color : #4b709a;
+	display : inline-block;
+}
+
 .project-detail-ranking {
 	display: flex;
 	flex-flow: column;
@@ -13,8 +23,10 @@
 			flex-flow: column;
 
 			.sharing-icon {
-				width: 36px;
-				height: 36px;
+				width: 16px;
+				height: 16px;
+				margin-bottom : 2px;
+				margin-left: 0px !important;
 			}
 
 		}
@@ -24,13 +36,15 @@
 
 .ranking-fb-icon {
 	border-radius : 50px;
-	border : 2px solid #4b709a;
+	border : 2px solid #fff;
 	margin-left : -10px;
 }
 
 .ranking-fb-icon-list {
 	border-radius : 50px;
-	border : 2px solid #4b709a;
+	-webkit-box-shadow: 1px 1px 2px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 1px 1px 2px 0px rgba(0,0,0,0.75);
+box-shadow: 1px 1px 2px 0px rgba(0,0,0,0.75);
 }
 
 .project-detail-ranking-info:first-child {
@@ -44,9 +58,45 @@
 	display : none;
 }
 .sharing-summary {
-	width : 70%;
+	width : 80%;
 }
 
 .project-ranking-th {
-	display : flex;
+	display : block;
+}
+
+.likes-num, .likes-icon {
+	text-align : center;
+	font-weight : 600;
+	float : right;
+	vertical-align : middle;
+}
+
+.sharing-summary {
+	display : inline-block;
+	vertical-align : top;
+}
+
+.sharing-fb-icon-list {
+	display : inline-block;
+	vertical-align : top;
+	margin-right : 15px !important;
+}
+
+.likes-text {
+	color : #4b709a;
+	font-weight : 800;
+}
+
+@media (max-width: 991px) {
+
+.sharing-summary {
+	width : 65%;
+}
+@media (max-width: 500px) {
+
+.sharing-summary {
+	width : 57%;
+}
+}
 }
