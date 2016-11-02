@@ -1,0 +1,52 @@
+[
+  {
+    "sponserName": "7Pictures",
+    "description": "예술 프로젝트에 대한 새로운 기부 문화를 만드는 7Pictures 입니다.",
+    "imgSrc": "https://i0.wp.com/7pictures.co.kr/wp-content/uploads/2016/08/7pictures_후원기업.jpg?fit=1004%2C378&ssl=1",
+    "money": 3000000,
+    "contacts": {
+      "homepage": "https://7pictures.co.kr",
+      "facebook": "https://www.facebook.com/7pictures/?fref=ts"
+    }
+  },
+  {
+    "sponserName": "7Pictures",
+    "description": "예술 프로젝트에 대한 새로운 기부 문화를 만드는 7Pictures 입니다.",
+    "imgSrc": "https://i2.wp.com/7pictures.co.kr/wp-content/uploads/2016/08/월디페_후원기업.jpg?fit=1004%2C378&ssl=1",
+    "money": 3000000,
+    "contacts": {
+      "homepage": "https://7pictures.co.kr",
+      "blog": "https://www.facebook.com/7pictures/?fref=ts"
+    }
+  },
+  {
+    "sponserName": "7Pictures",
+    "description": "예술 프로젝트에 대한 새로운 기부 문화를 만드는 7Pictures 입니다.",
+    "imgSrc": "https://i0.wp.com/7pictures.co.kr/wp-content/uploads/2016/08/7pictures_후원기업.jpg?fit=1004%2C378&ssl=1",
+    "money": 3000000,
+    "contacts": {
+      "homepage": "https://7pictures.co.kr",
+      "facebook": "https://www.facebook.com/7pictures/?fref=ts"
+    }
+  },
+  {
+    "sponserName": "7Pictures",
+    "description": "예술 프로젝트에 대한 새로운 기부 문화를 만드는 7Pictures 입니다.",
+    "imgSrc": "https://i2.wp.com/7pictures.co.kr/wp-content/uploads/2016/08/샘시크_후원기업.jpg?fit=1004%2C378&ssl=1",
+    "money": 3000000,
+    "contacts": {
+      "blog": "https://7pictures.co.kr",
+      "facebook": "https://www.facebook.com/7pictures/?fref=ts"
+    }
+  },
+  {
+    "sponserName": "7Pictures",
+    "description": "예술 프로젝트에 대한 새로운 기부 문화를 만드는 7Pictures 입니다.",
+    "imgSrc": "https://i2.wp.com/7pictures.co.kr/wp-content/uploads/2016/08/월디페_후원기업.jpg?fit=1004%2C378&ssl=1",
+    "money": 3000000,
+    "contacts": {
+      "blog": "https://7pictures.co.kr",
+      "facebook": "https://www.facebook.com/7pictures/?fref=ts"
+    }
+  }
+]

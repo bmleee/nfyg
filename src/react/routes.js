@@ -26,6 +26,7 @@ import Magazines from './components/Magazines/containers/MagazinesContainer';
 import MagazineDetail from './components/Magazines/MagazineDetail/containers/MagazineDetailContainer'
 
 import Login from './components/User/Login/Login'
+import { Sponser } from './components/Sponsor'
 
 const App = ({ children }) => (
 	<div>
@@ -43,6 +44,8 @@ const App = ({ children }) => (
 			<Link to="/project-editor">Project Editor</Link>
 			{' '}
 			<Link to="/login">Login</Link>
+			{' '}
+			<Link to="/sponser">Sponser</Link>
 			{' '}
 			<Link to="/test">Test Component</Link>
 		</div>
@@ -93,6 +96,7 @@ const routes = (
 		<Route path="project-editor" component={ProjectEditorContainer}></Route>
 
 		<Route path="login" component={Login}></Route>
+		<Route path="sponser" component={Sponser}></Route>
 
 		<Route path="test" component={Test}></Route>
 	</Route>
