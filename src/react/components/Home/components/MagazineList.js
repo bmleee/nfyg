@@ -21,10 +21,10 @@ class MagazineList extends Component {
 			<div key={index} className="magazine-list-item">
 				<div className="ma-thumbnail">
 					<div className="ma-centered">
-					<img className="home-magazine-image" src={imgSrc} alt=""/>
+					<Link to="magazines/detail"><img className="home-magazine-image" src={imgSrc} alt=""/></Link>
 					</div>
 				</div>
-				<h4>{title}</h4>
+				<Link to="magazines/detail"><h4>{title}</h4></Link>
 				<p><img className="ex-icon" width={26} height={26} src={iconSrc} alt=""/> { name } | { categories.join(' ') }</p>
 				{/* <ul>
 					{ descriptions.map((d, index) => <li key={index}>{d}</li>) }

@@ -1,6 +1,7 @@
 .project-detail-overview {
 	display: flex;
-	flex-flow: row;
+	flex-flow: column;
+	margin-bottom : 60px !important;
 
 	.project-detail-overview-info {
 		display: flex;

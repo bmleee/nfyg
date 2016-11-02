@@ -20,15 +20,19 @@
         width: 100%; }
 
 .slick-prev {
-  top : 40%;
-  left: -2vw; }
+  top : 35%;
+  left: -2vw;
+  transform : scale(1, 2.5);
+}
   @media (max-width: 900px) {
     .slick-prev {
       display: none !important; } }
 
 .slick-next {
-  top : 40%;
-  right: -2vw; }
+  top : 35%;
+  right: -2vw;
+  transform : scale(1, 2.5);
+}
   @media (max-width: 900px) {
     .slick-next {
       display: none !important; } }

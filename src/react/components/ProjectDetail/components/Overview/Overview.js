@@ -45,12 +45,12 @@ class Overview extends Component {
 		// TODO: part1, part2: 에디터로 작성한 부분. 글, 동영상, 사진, ... 등 이쁘게 보여주기
 		return (
 			<div className="project-detail-overview">
+				<ProjectReward rewards={rewards} />
+				
 				<div className="project-detail-overview-info">
 					{item1}
 					{ this.state.seeMore ? item2 : <button onClick={this._onClick}>더보기</button> }
 				</div>
-				
-				<ProjectReward rewards={rewards} />
 			</div>
 		)
 	}
