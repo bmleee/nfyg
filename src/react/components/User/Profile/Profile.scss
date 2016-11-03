@@ -1,0 +1,27 @@
+.profile {
+
+	.sharing-icon { width: 20px; height: 20px; }
+
+	.profile-indirect-supports-container {
+		display: flex;
+		flex-flow: row wrap;
+
+		.profile-indirect-supports-item {
+			width: 500px;
+
+			img:first-child { width: 100%; }
+		}
+
+	}
+
+	.profile-direct-supports-container {
+		display: flex;
+		flex-flow: row wrap;
+
+		.profile-direct-supports-item {
+			width: 500px;
+
+			img:first-child { width: 100%; }
+		}
+	}
+}

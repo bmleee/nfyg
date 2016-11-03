@@ -25,7 +25,8 @@ import { QnA as ExhibitionDetailQnA } 						from './components/Exhibitions/Exhib
 import Magazines from './components/Magazines/containers/MagazinesContainer';
 import MagazineDetail from './components/Magazines/MagazineDetail/containers/MagazineDetailContainer'
 
-import Login from './components/User/Login/Login'
+import { Login, Profile } from './components/User'
+
 import { Sponser } from './components/Sponsor'
 
 const App = ({ children }) => (
@@ -44,6 +45,8 @@ const App = ({ children }) => (
 			<Link to="/project-editor">Project Editor</Link>
 			{' '}
 			<Link to="/login">Login</Link>
+			{' '}
+			<Link to="/profile">Profile</Link>
 			{' '}
 			<Link to="/sponser">Sponser</Link>
 			{' '}
@@ -96,6 +99,7 @@ const routes = (
 		<Route path="project-editor" component={ProjectEditorContainer}></Route>
 
 		<Route path="login" component={Login}></Route>
+		<Route path="profile" component={Profile}></Route>
 		<Route path="sponser" component={Sponser}></Route>
 
 		<Route path="test" component={Test}></Route>
