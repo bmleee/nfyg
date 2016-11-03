@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import FontAwesome from 'react-fontawesome'
 
 import { facebook_login } from '../../../../lib/firebase'
 
@@ -16,16 +17,17 @@ class Login extends Component {
 	render() {
 		return (
 			<div className="user-login">
-				<div className="user-login-id">
-					<span>ID</span>
-					<input type="text" name="user_id" ref="user_id"/>
+				<button className="fb-login-btn" onClick={this._onFacebookClick}>
+				<FontAwesome className="fb-login-icon" name='facebook' size='lg' />
+				페이스북으로 로그인
+				</button>
+				<div>
+					<input type="text" className="user-login-id" name="user_id" placeholder="이메일" ref="user_id"/>
 				</div>
-				<div className="user-login-password">
-					<span>PW</span>
-					<input type="password" name="user_password" ref="user_password" autocomplete="off" />
+				<div>
+					<input type="password" className="user-login-password" name="user_password" placeholder="비밀번호" ref="user_password" autocomplete="off" />
 				</div>
-				<button onClick={this._onClick}>Login</button>
-				<button onClick={this._onFacebookClick}>페이스북으로 로그인</button>
+				<button className="login-btn" onClick={this._onClick}>LOG IN</button>
 			</div>
 
 		)

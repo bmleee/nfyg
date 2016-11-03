@@ -1,0 +1,45 @@
+.user-login {
+    width : 340px;
+    margin : 100px auto 60px auto;
+    text-align : center;
+    border : 1px solid #eee;
+    padding : 50px 30px;
+}
+
+.fb-login-btn, .login-btn {
+    background : #000;
+    width : 280px;
+    color : #fff;
+    height : 45px;
+    border : none;
+    outline : none;
+    font-size : 15px;
+    font-weight : 700;
+}
+
+.fb-login-icon {
+    margin-right : 7px !important;
+}
+
+.fb-login-btn {
+    margin-bottom : 60px;
+}
+
+.login-btn {
+    margin-top : 60px;
+}
+
+.user-login-id {
+    width : 279px;
+    border : 2px solid #eee;
+    margin-bottom : 20px;
+    height : 45px;
+    padding-left : 10px;
+}
+
+.user-login-password {
+    width : 279px;
+    border : 2px solid #eee;
+    height : 45px;
+    padding-left : 10px;
+}
