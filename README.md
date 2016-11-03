@@ -9,8 +9,20 @@
  1. 카테고리에 속하는 매거진이 없을 경우 :: No such magazines!
 
 ### User/Login
+ 1. Server-side Authentication 로직과 연동
 
 ### User/Profile
+
+### Sponsers / Sponser Detail
+ 1. 스폰서 별 개인 페이지 할당
+ 2. 스폰서각 후원한 프로젝트 리스트 업
+  - 진행중인 프로젝트: 해당 프로젝트로 링크 연결
+  - 종료된 프로젝트: 스폰서가 남긴 후기로 연결
+    - 후기 페이지
+
+__추가 페이지: 스폰서 개인 페이지, 후기 페이지, 후기 작성 페이지__  
+http://sharencare.me/sponsors/23 참조
+
 ---
 
 ## 협업 루틴
