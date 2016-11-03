@@ -1,0 +1,3 @@
+[submodule "src/react/components/react-rte"]
+	path = src/react/components/react-rte
+	url = https://github.com/sevenpictures/react-rte
