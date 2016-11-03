@@ -3,7 +3,7 @@ import FontAwesome from 'react-fontawesome'
 
 import { fetchJSONFile } from '../../api/AppAPI'
 
-class Sponser extends Component {
+class Sponsers extends Component {
 
 	state = {
 		sponsers: []
@@ -11,8 +11,6 @@ class Sponser extends Component {
 
 	async componentDidMount() {
 		const sponsers = await fetchJSONFile('sponsers')
-
-		console.log(sponsers)
 
 		this.setState({
 			sponsers
@@ -79,8 +77,6 @@ class Sponser extends Component {
 				</div>
 			))
 
-		console.log(sponserList);
-
 		return (
 			<div className="sponser">
 				<div className="sponser-haeding">
@@ -97,4 +93,4 @@ class Sponser extends Component {
 
 }
 
-export default Sponser
+export default Sponsers
