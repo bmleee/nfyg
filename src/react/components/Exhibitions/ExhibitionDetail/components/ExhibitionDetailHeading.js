@@ -1,4 +1,7 @@
 import React, { Component, PropTypes } from 'react';
+import FontAwesome from 'react-fontawesome'
+
+import KakaoImage from '~/src/assets/images/kakaotalk.svg'
 
 class ExhibitionDetailHeading extends Component {
 
@@ -24,7 +27,7 @@ class ExhibitionDetailHeading extends Component {
 			backgroundPosition: 'center center',
 			backgroundRepeat: 'no-repeat'
 		}
-
+		
 		/**
 		 * Issue
 		 * 	- 사진을 background image 혹은 img 태그로 삽입...
@@ -37,6 +40,7 @@ class ExhibitionDetailHeading extends Component {
 						<div className="project-sponsor-logo">
 							<img src={logoSrc} alt=""/>
 							D-{remainingDays}
+							<KakaoImage width={40} height={40} />
 						</div>
 						<h1 className="project-title">{title}</h1>
 						<div className="project-info-bottom">
@@ -50,9 +54,12 @@ class ExhibitionDetailHeading extends Component {
 					</div>
 				</div>
 				
-				{/* <div className="exhibition-share-button-cover">
-					<button className="share-button">초대장 발송하기</button>
-				</div> */}
+				 <div className="share-button">
+					<button className="share-button-facebook"><FontAwesome name='facebook' size='lg' /></button>
+					<button className="share-button-twitter"><FontAwesome name='twitter' size='lg' /></button>
+					<button className="share-button-kakao"><FontAwesome name='envelope' size='lg' /></button>
+					<button className="share-button-url"><FontAwesome name='link' size='lg' /></button>
+				</div> 
 				
 			</div>
 			)

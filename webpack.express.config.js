@@ -48,7 +48,8 @@ module.exports = {
 				],
 				exclude: /node_modules/,
 			},
-			{ test:  /\.json$/, loader: 'json-loader' }
+			{ test:  /\.json$/, loader: 'json-loader' },
+			{ test: /\.svg$/, loader: 'babel!react-svg' },
 		]
 	},
 	plugins: [

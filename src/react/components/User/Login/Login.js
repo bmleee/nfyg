@@ -16,11 +16,13 @@ class Login extends Component {
 
 	render() {
 		return (
+			<div className="login-page">
 			<div className="user-login">
 				<button className="fb-login-btn" onClick={this._onFacebookClick}>
 				<FontAwesome className="fb-login-icon" name='facebook' size='lg' />
 				페이스북으로 로그인
 				</button>
+				<p className="login-more">또는</p>
 				<div>
 					<input type="text" className="user-login-id" name="user_id" placeholder="이메일" ref="user_id"/>
 				</div>
@@ -29,7 +31,7 @@ class Login extends Component {
 				</div>
 				<button className="login-btn" onClick={this._onClick}>LOG IN</button>
 			</div>
-
+		</div>
 		)
 	}
 }
