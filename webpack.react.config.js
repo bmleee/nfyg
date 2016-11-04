@@ -39,6 +39,7 @@ module.exports = {
 				],
 			},
 			{test: /\.global\.css$/, loader: 'style!raw'},
+			{ test: /\.svg$/, loader: 'babel!react-svg' }
 		]
 	},
 	plugins: [

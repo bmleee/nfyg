@@ -1,9 +1,15 @@
+.login-page {
+    background : #eee;
+    width: 100%;
+    padding : 100px 0px 100px 0px;
+}
 .user-login {
-    width : 340px;
-    margin : 100px auto 60px auto;
+    width : 345px;
+    margin : 0px auto;
     text-align : center;
-    border : 1px solid #eee;
+    border : 1px solid #ddd;
     padding : 50px 30px;
+    background : #fff;
 }
 
 .fb-login-btn, .login-btn {
@@ -16,30 +22,44 @@
     font-size : 15px;
     font-weight : 700;
 }
+.fb-login-btn:hover, .login-btn:hover {
+    background : #4b709a;
+    transition : opacity, 250ms;
+}
 
 .fb-login-icon {
-    margin-right : 7px !important;
+    margin-right : 8px !important;
 }
 
 .fb-login-btn {
-    margin-bottom : 60px;
+    margin-bottom : 25px;
+}
+
+.login-more {
+    margin-bottom : 25px;
+    font-size : 14px;
 }
 
 .login-btn {
-    margin-top : 60px;
+    margin-top : 10px;
 }
 
 .user-login-id {
-    width : 279px;
+    width : 280px;
     border : 2px solid #eee;
-    margin-bottom : 20px;
+    margin-bottom : 10px;
+    height : 45px;
+    padding-left : 10px;
+}
+.user-login-password {
+    width : 280px;
+    border : 2px solid #eee;
     height : 45px;
     padding-left : 10px;
 }
 
-.user-login-password {
-    width : 279px;
-    border : 2px solid #eee;
-    height : 45px;
-    padding-left : 10px;
+.user-login-id:focus, .user-login-password:focus {
+    outline : none;
+    border : 2px solid #4b709a;
+    transition : opacity, 250ms;
 }

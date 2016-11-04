@@ -29,9 +29,12 @@ class Sponsers extends Component {
 				contacts: { homepage, facebook, blog }
 			}) => (
 				<div className="sponser-list-item">
-					<img src={imgSrc} alt=""/>
-
-					<div>
+					<div className="sponsor-thumbnail">
+					<div className="sponsor-centered">
+					<img className="sponsor-logo-image" src={imgSrc} alt=""/>
+					</div>
+					</div>
+					{/* <div>
 						<span>{sponserName}</span>
 						<span>
 							{
@@ -40,13 +43,13 @@ class Sponsers extends Component {
 									: `후원 예정`
 							}
 						</span>
-					</div>
-
-					<p>
+					</div> */}
+					<div className="sponsor-description">
+					<p className="sponsor-description-text">
 						{description}
 					</p>
-
-					{/* https://www.npmjs.com/package/react-fontawesome */}
+					</div>
+					{/* https://www.npmjs.com/package/react-fontawesome 
 					<div className="sponser-icons">
 						{
 							!!homepage
@@ -72,7 +75,7 @@ class Sponsers extends Component {
 									</a>
 								: null
 						}
-					</div>
+					</div>  */}
 
 				</div>
 			))
@@ -80,10 +83,9 @@ class Sponsers extends Component {
 		return (
 			<div className="sponser">
 				<div className="sponser-haeding">
-					<h2>예술 후원 기업</h2>
-					<p>지속적인 문화예술 활동을 가능하게 해주는 기업/단체</p>
+					<h2>Sponsors</h2>
+					{/* <p>지속적인 문화예술 활동을 가능하게 해주는 기업/단체</p> */}
 				</div>
-
 				<div className="sponser-list-container">
 					{ sponserList }
 				</div>

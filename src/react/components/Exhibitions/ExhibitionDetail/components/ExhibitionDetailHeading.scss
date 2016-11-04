@@ -19,3 +19,34 @@
 
 	}
 }
+
+.share-button-facebook, .share-button-twitter, .share-button-kakao, .share-button-url {
+	width : 25%;
+	display : inline-block;
+	height: 50px;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 20px;
+	background : #fff;
+	color : #4b709a;
+    border : 1px solid #ccc;
+}
+.share-button-facebook, .share-button-twitter, .share-button-kakao {
+	border-right : none;
+}
+
+.share-button-facebook:hover, .share-button-twitter:hover, .share-button-kakao:hover, .share-button-url:hover {
+	background : #4b709a;
+	color : #fff;
+}
+.share-button-facebook:focus, .share-button-twitter:focus, .share-button-kakao:focus, .share-button-url:focus {
+	outline : none;
+	background : #4b709a;
+	color : #fff;
+}
+
+.kakao-icon {
+	width : 28px;
+	height : 28px;
+	fill : #4b709a;
+}

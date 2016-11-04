@@ -19,9 +19,110 @@
 		flex-flow: row wrap;
 
 		.profile-direct-supports-item {
-			width: 500px;
-
-			img:first-child { width: 100%; }
+			img:first-child {
+				height : 110px;
+				max-width: 100%;
+				float : left;
+			}
 		}
 	}
+}
+.direct-display-img-container {
+	width : 20%;
+	display : inline-block;
+}
+.direct-display-name-container {
+	width : 61%;
+	display : inline-block;
+	vertical-align : top;
+}
+.direct-display-name {
+	font-weight : 700;
+	float : left;
+	width : 100%;
+	padding-left : 12px;
+}
+.direct-display-money {
+	float : right;
+	width : 18%;
+	padding-right : 4px;
+	text-align : right;
+}
+.direct-display-name, .direct-display-money {
+	display: inline-block;
+}
+.profile-direct-supports-item {
+	width : 100%;
+	padding : 5px;
+	margin-top : 10px;
+	border : 1px solid #999;
+	border-radius : 2px;
+	padding-bottom : 0px;
+}
+.direct-supports-container {
+	width : 800px;
+	margin : 0px auto 60px auto;
+}
+.indirect-support {
+	width : 800px;
+	margin : 0px auto 20px auto;
+	padding-bottom : 50px;
+	border-bottom : 1px solid #999;
+}
+.profile-thumbnail-container {
+	text-align : center;
+	width : 800px;
+	margin : 50px auto 20px auto;
+	padding-bottom : 50px;
+	border-bottom : 1px solid #999;
+}
+.profile-user-thumbnail {
+	border-radius : 100px;
+	margin-bottom : 10px;
+	-webkit-box-shadow: 1px 1px 2px 0px rgba(0,0,0,0.6);
+	-moz-box-shadow: 1px 1px 2px 0px rgba(0,0,0,0.6);
+	box-shadow: 1px 1px 2px 0px rgba(0,0,0,0.6);
+}
+
+.indirect-support-detail-likes, .indirect-support-detail-comments, .indirect-support-detail-shares  {
+	display :inline-block;
+	width : 33.33333%;
+	text-align : center;
+	height : 60px;
+	margin-top : 30px;
+}
+.indirect-support-detail-comments {
+	border-left : 1px solid #999;
+	border-right : 1px solid #999;
+}
+.indirect-support-h4 {
+	display : inline-block;
+}
+
+@media (max-width: 991px) {
+	.profile-direct-supports-item {
+	width : 100%;
+}
+	.direct-supports-container {
+		width : 95%;
+		margin : 0px auto 15px auto;
+		padding-bottom : 25px;
+	}
+	.indirect-support {
+	width : 95%;
+	margin : 0px auto 15px auto;
+	padding-bottom : 25px;
+}
+.profile-thumbnail-container {
+	text-align : center;
+	width : 95%;
+	margin : 50px auto 15px auto;
+	padding-bottom : 35px;
+	border-bottom : 1px solid #999;
+}
+@media (max-width: 500px) {
+	.profile .profile-direct-supports-container .profile-direct-supports-item img:first-child {
+		height : 70px;
+	}
+}
 }

@@ -61,7 +61,7 @@ class ProjectHeading extends Component {
 						</div>
 					</div>
 				</div>
-				<button className="share-button">공유로 예술 후원</button>
+				<button className="share-button">공유로 프로젝트 후원하기</button>
 			</div>
 			)
 	}

@@ -58,7 +58,8 @@ module.exports = {
 					'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
 				],
 			},
-			{test: /\.global\.css$/, loader: 'style!raw'},
+			{ test: /\.global\.css$/, loader: 'style!raw' },
+			{ test: /\.svg$/, loader: 'babel!react-svg' },
 		]
 	},
 	plugins: [
