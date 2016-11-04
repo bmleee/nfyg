@@ -32,7 +32,7 @@
 	display : inline-block;
 }
 .direct-display-name-container {
-	width : 65%;
+	width : 61%;
 	display : inline-block;
 	vertical-align : top;
 }
@@ -44,7 +44,7 @@
 }
 .direct-display-money {
 	float : right;
-	width : 14%;
+	width : 18%;
 	padding-right : 4px;
 	text-align : right;
 }
@@ -122,7 +122,7 @@
 }
 @media (max-width: 500px) {
 	.profile .profile-direct-supports-container .profile-direct-supports-item img:first-child {
-		height : 80px;
+		height : 70px;
 	}
 }
 }

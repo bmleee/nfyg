@@ -27,7 +27,7 @@ import MagazineDetail from './components/Magazines/MagazineDetail/containers/Mag
 
 import { Login, Profile } from './components/User'
 
-import { Sponser } from './components/Sponsor'
+import { Sponsers } from './components/Sponsors'
 
 const App = ({ children }) => (
 	<div>
@@ -48,7 +48,7 @@ const App = ({ children }) => (
 			{' '}
 			<Link to="/profile">Profile</Link>
 			{' '}
-			<Link to="/sponser">Sponser</Link>
+			<Link to="/sponsers">Sponsers</Link>
 			{' '}
 			<Link to="/test">Test Component</Link>
 		</div>
@@ -100,7 +100,7 @@ const routes = (
 
 		<Route path="login" component={Login}></Route>
 		<Route path="profile" component={Profile}></Route>
-		<Route path="sponser" component={Sponser}></Route>
+		<Route path="sponsers" component={Sponsers}></Route>
 
 		<Route path="test" component={Test}></Route>
 	</Route>
