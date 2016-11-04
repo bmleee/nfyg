@@ -6,6 +6,50 @@ import update from 'react-addons-update';
 
 import 'babel-polyfill';
 
+const defaultNewState = () => ({
+  project: {
+    abstract: {
+      long_title: '',     //
+      short_title: '',    //
+      imgSrc: '',         //
+      category: '',       // 건강, 라이프, ...
+      project_name: '',   // projects/:project_name
+    },
+    fuding: {
+      currentMonoey: 0,   // 직접 / 간접 후원에 의해 추가됨
+      targetMoney: 0,
+      dateFrom: null,     // 작성 완료 한 시간
+      dateTo: null,
+      rewards: []         // { title, description, isDirectSupport: T/F, threshold: 직접 후원 금액 또는 좋아요, 리공유 수 }
+    },
+    overview: {           // Overview 탭에 보여줄 내용
+      intro: null,
+      part1: [],          // { cointentType, content }
+      part2: []
+    },
+    post: {
+      intro_message: '',  // POST 탭 가장 위에 보여줄 메시지
+      posts: []           // { opened, author: {name, iconSrc}, title, created_at, numSupporters, likes, contents: [ {contentType, content} ], comments: [ { author: {name, iconSrc}, content}] }
+      // OPOST 댓글 .좋아요...   
+    },
+    qna: {
+      selectOptions: [],  // { value, label }
+      posts: []           // same as post.posts
+    },
+    ranking: {
+      recent3DirectSupporters: [],    // user fb_id
+      recent3IndirectSupporters: [],  // user fb_id
+      directSupporters: [],           // { uid, fb_id, display_name, photoURL, money, support_at }
+      indirectSupporters: [],         // { uid, fb_id, display_name, photoURL, message, likes, comments, shares, rank, support_at }
+    }
+  },
+  creator: {
+    imgSrc: '',
+    name: '',
+    location: '',
+  }
+})
+
 const defaultState = () => {
   return {
     creator: {

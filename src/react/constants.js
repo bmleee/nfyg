@@ -50,8 +50,123 @@ module.exports = {
 				DESCRIPTION_UPDATED: 'POST_HEADING_DESCRIPTION_UPDATED',
 			}
 		}
+	},
 
-
+	/**
+	 * 한번에 작성 / 수정 할 부분(Read도 Project 객체 받을 때 한번에 받아옴)
+	 *  - creator.*
+	 *  - project.abstract.*
+	 *  - project.funding.*
+	 *  - project.overview.*
+	 *  - project.posts.intro_message
+	 * CRUD 부분(부분적으로 CRUD)
+	 *	C: 서버에 올리고, 업로드 성공하면 로컬 상태 변경
+	 *	R: 서버에서 Posts를 읽어 옴. 로컬 상태 업데이트 (배열 사이즈가 0에서 Posts.length로)
+	 *	U: 서버에 PUT request 요청 후, 변경 성공하면 로컬 상태 변경
+	 *	D: 서버에 DELETE request 요청 후, 삭제 성공하면 로컬 상태 변경
+	 *  - project.posts.posts
+	 *  - project.posts.posts.comments
+	 *  - project.qna.posts
+	 *  - project.ranking.{directSupporters, indirectSupporters}
+	 *			수정 페이지에서 열람 가능해야 함
+	 *
+	 * 다른 API에 의해 변경 되는 부분. (단순히 Read, Update만 해도 됨)
+	 *  - project.ranking.{recent3DirectSupporters, recent3IndirectSupporters} :
+	 */
+	ProjectEditorNewConstants: {
+		project: {
+			abstract: {
+				longTitle: 'PROJECT ABSTRACT LONG TITLE',
+	      shortTitle: 'PROJECT ABSTRACT SHORT TITLE',
+	      imgSrc: 'PROJECT ABSTRACT IMAGE SOURCE',
+	      category: 'PROJECT ABSTRACT CATEGORY',
+	      projectName: 'PROJECT ABSTRACT PROJECT NAME',
+			},
+			funding: {
+				currentMonoey: 'PROJECT FUNDING CURRENT MONEY',
+				targetMoney: 'PROJECT FUNDING TARGET MONEY',
+				dateFrom: 'PROJECT FUNDING DATE FROM',
+				dateTo: 'PROJECT FUNDING DATE TO',
+				rewards: { // array
+					created: 'PROJECT FUNDING REWARD CREATED',
+					changed: 'PROJECT FUNDING REWARD CHANGED',
+					removed: 'PROJECT FUNDING REWARD REMOVED',
+					moved: 'PROJECT FUNDING REWARD MOVED',
+				}
+			},
+			overview: {
+				intro: 'PROJECT OVERVIEW INTRO',
+				part1: { // array
+					created: 'PROJECT OVERVIEW PART1 CREATED',
+					changed: 'PROJECT OVERVIEW PART1 CHANGED',
+					removed: 'PROJECT OVERVIEW PART1 REMOVED',
+					moved: 'PROJECT OVERVIEW PART1 MOVED',
+				},
+				part2: { // array
+					created: 'PROJECT OVERVIEW PART2 CREATED',
+					changed: 'PROJECT OVERVIEW PART2 CHANGED',
+					removed: 'PROJECT OVERVIEW PART2 REMOVED',
+					moved: 'PROJECT OVERVIEW PART2 MOVED',
+				},
+			},
+			post: {
+				intro: 'PROJECT POST INTRO',
+				posts: { // CRUID
+					created: 'PROJECT POST POSTS CREATED',
+					read: 'PROJECT POST POSTS READ',
+					updated: 'PROJECT POST POSTS UPDATED',
+					deleted: 'PROJECT POST POSTS DELETED',
+					error: 'PROJECT POST POSTS ERROR',
+					comments: { // CRUD
+						created: 'PROJECT POST POSTS COMMENTS CREATED',
+						read: 'PROJECT POST POSTS COMMENTS READ',
+						updated: 'PROJECT POST POSTS COMMENTS UPDATED',
+						deleted: 'PROJECT POST POSTS COMMENTS DELETED',
+						error: 'PROJECT POST POSTS COMMENTS ERROR'
+					}
+				},
+			},
+			qna: {
+				intro: 'PROJECT QNA INTRO',
+				posts: { // CRUD
+					created: 'PROJECT QnA POSTS CREATED',
+					read: 'PROJECT QnA POSTS READ',
+					updated: 'PROJECT QnA POSTS UPDATED',
+					deleted: 'PROJECT QnA POSTS DELETED',
+					error: 'PROJECT QnA POSTS ERROR',
+					comments: { // CRUD
+						created: 'PROJECT QnA POSTS COMMENTS CREATED',
+						read: 'PROJECT QnA POSTS COMMENTS READ',
+						updated: 'PROJECT QnA POSTS COMMENTS UPDATED',
+						deleted: 'PROJECT QnA POSTS COMMENTS DELETED',
+						error: 'PROJECT QnA POSTS COMMENTS ERROR'
+					}
+				}
+			},
+			ranking: {
+				recent3DirectSupporters: 'PROJECT RANKING RECENT 3 DIRECT SUPPORTERS',
+				recent3IndirectSupporters: 'PROJECT RANKING RECENT 3 INDIRECT SUPPORTERS',
+				directSupporters: { // CRUD
+					created: 'PROJECT RANKING POSTS CREATED',
+					read: 'PROJECT POST POSTS READ',
+					updated: 'PROJECT POST POSTS UPDATED',
+					deleted: 'PROJECT POST POSTS DELETED',
+					error: 'PROJECT POST POSTS ERROR'
+				},
+				indirectSupporters: { // CRUD
+					created: 'PROJECT POST POSTS CREATED',
+					read: 'PROJECT POST POSTS READ',
+					updated: 'PROJECT POST POSTS UPDATED',
+					deleted: 'PROJECT POST POSTS DELETED',
+					error: 'PROJECT POST POSTS ERROR'
+				},
+			}
+		},
+		creator: {
+			imgSrc: 'CREATOR IAMGE SOURCE',
+			name: 'CREATOR NAME',
+			location: 'CREATOR LOCATION'
+		}
 	},
 
 	Display: {

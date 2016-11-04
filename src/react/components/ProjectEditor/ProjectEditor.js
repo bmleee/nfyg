@@ -15,17 +15,28 @@ import update from 'react-addons-update'
 
 import { sign_request, image_upload, upload_file } from '../../lib/utils'
 import * as actionCreators from '../../actions/ProjectEditorActionCreators'
-// import { Map, fromJS } from 'immutable'
 
 import { canUseDOM, throttle } from '../../../lib/utils'
 
 import _ from 'lodash' // use throttle or debounce
 
+import 'babel-polyfill'
+
 // when window object is undeclared...
 if(canUseDOM) {
-	window.RichTextEditor = require('react-rte').default
+	const rte = require('../react-rte/src/RichTextEditor')
+	console.log('rte', rte);
+	window.RichTextEditor = rte.default
+	window.RichTextEditor.createEmptyValue = rte.createEmptyValue
+
+	const Editor = require('../react-rte/src/SevenEditor')
+	console.log('Editor', Editor);
+	window.Editor = Editor.default
 } else {
-	global.RichTextEditor = {}
+	global.RichTextEditor = {
+		createEmptyValue() {}
+	}
+	global.Editor = {}
 }
 
 // content style
@@ -175,6 +186,14 @@ const OverviewForm = ({ overview: { part1, part2 }, onChangeHandlers, parent, ..
 
 export class ProjectEditor extends Component {
 
+	// TODO: handle on state.overview.partN changed
+	state = {
+		overview: {
+			part1: RichTextEditor.createEmptyValue(),
+			part2: RichTextEditor.createEmptyValue()
+		}
+	}
+
   inputOnChangeHandlers = {
 		creator: {
 			name: (v) => {this.props.updateCreatorName(v)},
@@ -236,7 +255,8 @@ export class ProjectEditor extends Component {
 			},
 		part2: {
 			// same as above
-			newContent: (contentType, content) => {this.props.part2NewContent(contentType, content)},
+			// newContent: (contentType, content) => {this.props.part2NewContent(contentType, content)},
+			newContent: (contentType, content) => {this.props.asyncPart2Handlers(contentType, content)},
 			contentChanged: async (index, v, type) => {
 				if (type === 'image') {
 					const file = this._overview_part2
@@ -264,46 +284,61 @@ export class ProjectEditor extends Component {
 	render() {
 		const { creator, heading, overview, rewards, post} = this.props.ProjectEditor
 
-		return (
-			<div className="editor">
+		if (!canUseDOM) {
+			return (<div>Loading...</div>)
+		} else {
+			return (
+				<div className="editor">
 
-				<EditorBody>
-					<CreatorForm
-						parent={this}
-						creator={creator}
-						onChangeHandlers={this.inputOnChangeHandlers.creator} />
+					<EditorBody>
+						<CreatorForm
+							parent={this}
+							creator={creator}
+							onChangeHandlers={this.inputOnChangeHandlers.creator} />
 
-					<HeadingForm
-						parent={this}
-						heading={heading}
-						onChangeHandlers={this.inputOnChangeHandlers.heading}
-						/>
+						<HeadingForm
+							parent={this}
+							heading={heading}
+							onChangeHandlers={this.inputOnChangeHandlers.heading}
+							/>
 
-					<OverviewForm
-						parent={this}
-						overview={overview}
-						onChangeHandlers={this.inputOnChangeHandlers.overview} />
-				</EditorBody>
+						<OverviewForm
+							parent={this}
+							overview={overview}
+							onChangeHandlers={this.inputOnChangeHandlers.overview} />
+					</EditorBody>
 
-				<h5>Dev Buton</h5>
-        <button onClick={ () => console.log(this) }>Log this</button>
-				<button onClick={ () => console.log(this.state) }>Log State</button>
-				<button onClick={ () => console.log(this.props) }>Log Props</button>
-				<button onClick={ () => {
-					console.log('PART1')
-					overview.part1
+					<h5>Dev Buton</h5>
+	        <button onClick={ () => console.log(this) }>Log this</button>
+					<button onClick={ () => console.log(this.state) }>Log State</button>
+					<button onClick={ () => console.log(this.props) }>Log Props</button>
+					<button onClick={ () => {
+						console.log('PART1')
+						overview.part1
+							.filter( ({contentType}) => contentType === 'text' )
+							.forEach(({content}) => console.log(content.toString('html')))
+
+						console.log('PART2')
+						overview.part2
 						.filter( ({contentType}) => contentType === 'text' )
 						.forEach(({content}) => console.log(content.toString('html')))
 
-					console.log('PART2')
-					overview.part2
-					.filter( ({contentType}) => contentType === 'text' )
-					.forEach(({content}) => console.log(content.toString('html')))
+					} }>Text to Html String</button>
 
-				} }>Text to Html String</button>
+					<RichTextEditor
+						value={this.state.overview.part1}
+						className="react-rte-demo"
+						placeholder="Tell a story"
+						toolbarClassName="demo-toolbar"
+						editorClassName="demo-editor"
+					/>
 
-			</div>
-		)
+					<Editor />
+
+
+				</div>
+			)
+		}
 	}
 }
 
