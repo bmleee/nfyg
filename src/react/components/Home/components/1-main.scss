@@ -20,10 +20,14 @@ a, a:hover, a:focus {
     border : none;
     outline : none;
     text-decoration : none;
+    transition : opacity, 220ms;
 }
-.share-button {
+button:hover, button:focus {
+    transition : opacity, 220ms;
+}
+.share-button, .share-button:focus {
 	position: fixed;
-    bottom: 10px;
+    bottom: 0px;
     left: 0px;
     right: 0px;
     height: 50px;
@@ -31,13 +35,14 @@ a, a:hover, a:focus {
     font-size: 18px;
     font-weight: 600;
     line-height: 20px;
-    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26),0 2px 10px 0 rgba(0,0,0,0.22);
-    border-radius: 4px;
+    box-shadow: 0 2px 3px 0 rgba(0,0,0,0.26),0 2px 4px 0 rgba(0,0,0,0.22);
+    border-radius: 0px;
     z-index: 55;
     margin: 0 auto;
     width: 900px;
     background : #4b709a;
     border : none;
+    outline : none;
 }
 .magazine-list-container {
     display : block !important;
@@ -134,13 +139,13 @@ div.present-more-project {
     p, span {
         font-size : 16px;
         font-weight : 400;
-        margin : 0px !important;
+        margin : 0px;
     }
 // tablet ↓↓↓↓
 @media (max-width: 991px) {
     .share-button {
 	position: fixed;
-    bottom: 10px;
+    bottom: 0px;
     left: 0px;
     right: 0px;
     height: 50px;
@@ -148,11 +153,11 @@ div.present-more-project {
     font-size: 18px;
     font-weight: 600;
     line-height: 20px;
-    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26),0 2px 10px 0 rgba(0,0,0,0.22);
-    border-radius: 4px;
+    box-shadow: 0 2px 3px 0 rgba(0,0,0,0.26),0 2px 4px 0 rgba(0,0,0,0.22);
+    border-radius: 0px;
     z-index: 55;
     margin: 0 auto;
-    width: 95%;
+    width: 100%;
     background : #4b709a;
 }
    div.home-body {
@@ -213,7 +218,7 @@ div.recent-exhibition-list-item {
 @media (max-width: 500px) {
     .share-button {
 	position: fixed;
-    bottom: 10px;
+    bottom: 0px;
     left: 0px;
     right: 0px;
     height: 50px;
@@ -221,11 +226,11 @@ div.recent-exhibition-list-item {
     font-size: 18px;
     font-weight: 600;
     line-height: 20px;
-    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26),0 2px 10px 0 rgba(0,0,0,0.22);
-    border-radius: 4px;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26),0 2px 4px 0 rgba(0,0,0,0.22);
+    border-radius: 0px;
     z-index: 55;
     margin: 0 auto;
-    width: 95%;
+    width: 100%;
     background : #4b709a;
 }
  div.home-body {
