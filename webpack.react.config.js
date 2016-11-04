@@ -28,7 +28,17 @@ module.exports = {
 			{
 				test: /masonry|imagesloaded|fizzy\-ui\-utils|desandro\-|outlayer|get\-size|doc\-ready|eventie|eventemitter/,
 				loader: 'imports?define=>false&this=>window'
-			}
+			},
+			// from react-rte/webpack.config.js
+			{
+				test: /\.css$/,
+				exclude: /\.global\.css$/,
+				loaders: [
+					'style?sourceMap',
+					'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
+				],
+			},
+			{test: /\.global\.css$/, loader: 'style!raw'},
 		]
 	},
 	plugins: [

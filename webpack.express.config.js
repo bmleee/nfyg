@@ -48,7 +48,17 @@ module.exports = {
 				],
 				exclude: /node_modules/,
 			},
-			{ test:  /\.json$/, loader: 'json-loader' }
+			{ test:  /\.json$/, loader: 'json-loader' },
+			// from react-rte/webpack.config.js
+			{
+				test: /\.css$/,
+				exclude: /\.global\.css$/,
+				loaders: [
+					'style?sourceMap',
+					'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
+				],
+			},
+			{test: /\.global\.css$/, loader: 'style!raw'},
 		]
 	},
 	plugins: [
