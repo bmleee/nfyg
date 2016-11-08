@@ -19,3 +19,31 @@ export async function fetchJSONFile(fileName) {
 		return Promise.resolve({}) // return empty object literal
 	}
 }
+
+export async function upload_file(file) {
+  const data = new FormData(); // wrap the file to form-data
+  data.append('file', file);
+
+  const res = await fetch(`/api/test-api/upload/${file.name}`, {
+    method: 'post',
+    body: data,
+  })
+
+  return res.json()
+
+  // let { signed_request, url, ...rest } = await sign_request(file)
+  //
+  // if (!signed_request) {
+  // 	console.log(rest)
+  // 	console.error(Error('Cannot get signed request'))
+  // 	return
+  // }
+  //
+  // console.log(`signed request: `, signed_request)
+  // console.log(`url: `, url)
+  // console.log(`rest: `, rest)
+  //
+  // let res = await image_upload(file, signed_request, url)
+  // console.log(res);
+
+}
