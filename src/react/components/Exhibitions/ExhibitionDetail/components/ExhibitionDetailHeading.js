@@ -36,28 +36,18 @@ class ExhibitionDetailHeading extends Component {
 			<div className="exhibition-detail-heading">
 
 				<div className="exhibition-detail-info" style={infoBackground}>
-					<div className="project-info">
-						<div className="project-sponsor-logo">
-							<img src={logoSrc} alt=""/>
-							D-{remainingDays}
-							<KakaoImage width={40} height={40} />
-						</div>
-						<h1 className="project-title">{title}</h1>
-						<div className="project-info-bottom">
-							<div className="project-sharing-info">
-								{sharingInfo} 외 {numSupporters - sharingInfo.length}명과 함께하는 중
-							</div>
-							<div className="project-location">
-								{location} / {schedule}
-							</div>
-						</div>
+					<div className="exhibition-info">
+						<h1 className="exhibition-title">{title}</h1>
+							<h4 className="project-location">
+								{schedule} @{location}
+							</h4>
 					</div>
 				</div>
 				
 				 <div className="share-button">
 					<button className="share-button-facebook"><FontAwesome name='facebook' size='lg' /></button>
 					<button className="share-button-twitter"><FontAwesome name='twitter' size='lg' /></button>
-					<button className="share-button-kakao"><FontAwesome name='envelope' size='lg' /></button>
+					<button className="share-button-kakao"><KakaoImage className="kakao-icon" width={28} height={28} /></button>
 					<button className="share-button-url"><FontAwesome name='link' size='lg' /></button>
 				</div> 
 				

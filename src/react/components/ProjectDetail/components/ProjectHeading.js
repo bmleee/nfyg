@@ -39,24 +39,25 @@ class ProjectHeading extends Component {
 				<div className="project-detail-info" style={infoBackground}>
 					<div className="project-info">
 						<div className="project-sponsor-logo">
-							<img src={logoSrc} alt=""/>
-							D-{remainingDays}
+							{/* <img src={logoSrc} width={32} height={32} alt=""/> */}
+							<p>후원사명</p>
 						</div>
 						<h1 className="project-title">{title}</h1>
 						<div className="project-info-bottom"><p>
-							<div className="project-sharing-icon">
+							{/* <div className="project-sharing-icon">
 								<img className="sharing-icon" src="https://7pictures.co.kr/wp-content/uploads/2016/08/likes.png" scale="0" />
 								{ likes }
 								<img className="sharing-icon" src="https://7pictures.co.kr/wp-content/uploads/2016/08/comment.png" scale="0" />
 								{ comments }
 								<img className="sharing-icon" src="https://7pictures.co.kr/wp-content/uploads/2016/08/share.png" scale="0" />
 								{ shares }
-							</div>
+							</div> 
 							<div className="project-sharing-info">
 								{sharingInfo} 외 {numIndirectSupports}명이 공유로 후원함
-							</div>
+							</div> */}
 							<div className="project-current-money">
-							{currentMoney}원 후원 중 :: {currentMoney / targetMoney}%
+							<div>{currentMoney}원 후원 중 :: {currentMoney / targetMoney}%</div>
+							<h5>{remainingDays}일 남음</h5>
 							</div></p>
 						</div>
 					</div>

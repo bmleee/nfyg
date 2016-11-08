@@ -68,7 +68,7 @@ class Profile extends Component {
 				<p className="direct-display-name">{display_name}</p>
 				<p className="direct-display-name">{display_name}</p>
 				</div>
-				<p className="direct-display-money">{ money.toLocaleString() }원</p>
+				<div className="direct-display-money">{ money.toLocaleString() }원</div>
 			</div>
 		) )
 

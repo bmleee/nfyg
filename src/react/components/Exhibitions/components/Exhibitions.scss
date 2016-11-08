@@ -3,20 +3,26 @@
 	flex-flow: column;
 
 	.exhibitions-nav {
-		display: inline-block;
+		display: block;
 	}
 	
 }
-
+.featured-ex {
+	display : inline-block;
+	float : left;
+	margin-top : 10px;
+}
 .exhibition-register-container {
+	display : inline-block;
 	float : right;
 }
 
 button.exhibition-register, button.exhibition-register:focus {
-	font-size : 18px;
+	font-size : 17px;
 	font-weight : 500;
 	font-style : normal !important;
-	padding : 15px 20px;
+	padding : 10px 22px;
+	margin-top : 6px;
 	border-radius : 0px;
 	border : 1px solid #eee;
 	background-color : transparent;
@@ -26,4 +32,19 @@ button.exhibition-register, button.exhibition-register:focus {
 
 button.exhibition-register:hover {
 	color : #4b709a;
+}
+
+@media (max-width: 991px) {
+button.exhibition-register {
+	font-size : 16px;
+	padding : 10px 15px;
+	margin-top : 6px;
+}
+@media (max-width: 500px) {
+button.exhibition-register {
+	font-size : 14px;
+	padding : 6px 10px;
+	margin-top : 9px;
+}	
+}
 }

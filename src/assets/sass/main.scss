@@ -14,8 +14,8 @@ html, body {
 	}
 }
 
-button, button:focus, html input[type="button"], input[type="reset"], input[type="submit"] {
+button, button:focus, html input[type="button"], input[type="reset"], input[type="submit"], input, textarea {
 	-webkit-appearance:none;
-	-webkit-border-radius:0;
+	-webkit-border-radius: 0px;
 	-webkit-outline : none;
 }

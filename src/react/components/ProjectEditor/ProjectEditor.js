@@ -24,12 +24,12 @@ import 'babel-polyfill'
 
 // when window object is undeclared...
 if(canUseDOM) {
-	const rte = require('../react-rte/src/RichTextEditor')
+	const rte = require('~/src/react/components/react-rte/src/RichTextEditor')
 	console.log('rte', rte);
 	window.RichTextEditor = rte.default
 	window.RichTextEditor.createEmptyValue = rte.createEmptyValue
 
-	const Editor = require('../react-rte/src/SevenEditor')
+	const Editor = require('~/src/react/components/react-rte/src/SevenEditor')
 	console.log('Editor', Editor);
 	window.Editor = Editor.default
 } else {

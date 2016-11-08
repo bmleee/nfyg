@@ -18,6 +18,7 @@ class Login extends Component {
 		return (
 			<div className="login-page">
 			<div className="user-login">
+			<img className="login-7pictures-logo" src="http://52.78.180.103:8080/assets/images/7pictures_logo.png" />
 				<button className="fb-login-btn" onClick={this._onFacebookClick}>
 					<FontAwesome className="fb-login-icon" name='facebook' size='lg' />
 					페이스북으로 로그인

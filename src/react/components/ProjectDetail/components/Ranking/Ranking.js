@@ -34,8 +34,8 @@ class Ranking extends Component {
 				}
 				외 { directSupporters.length - recent3DirectSupporters.length }명이 직접 후원함
 			</div>
-		)
-
+		) 
+		
 		const indirectInfo = (
 			<div className="project-detail-ranking-info">
 				{
@@ -45,7 +45,7 @@ class Ranking extends Component {
 							src={`https://graph.facebook.com/${fbId}/picture`} />
 					)
 				}
-				외 { indirectSupporters.length - recent3IndirectSupporters.length }명이 간접 후원함
+				외 { indirectSupporters.length - recent3IndirectSupporters.length }명이 공유로 후원함
 			</div>
 		)
 
@@ -91,9 +91,9 @@ class Ranking extends Component {
 					<p className="sharing-summary">
 					    <span><p className="sharing-name">{name}</p>{' '}{String(new Date(support_at)) /* TODO: Date to string... */}</span>
 					    <span>{message}</span>
-					    <span><p className="sharing-money">{money}</p>원을 후원함</span>
+					    <span><p className="sharing-money">{money.toLocaleString()}</p>원을 후원함</span>
 			        </p>
-			        <p className="likes-num"><h4 className="likes-text">{ likes }</h4>
+			        <p className="likes-num"><h4 className="likes-text">{ likes.toLocaleString() }</h4>
 					<img className="sharing-icon" src="https://7pictures.co.kr/wp-content/uploads/2016/08/likes.png" scale="0" />좋아요</p>
 				</div>
 						
@@ -109,7 +109,7 @@ class Ranking extends Component {
 
 		return (
 			<div className="project-detail-ranking">
-				{ directInfo }
+				{/* directInfo */}
 				{ indirectInfo }
 
 				<Select name="project-detail-ranking-select"
