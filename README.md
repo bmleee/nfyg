@@ -23,6 +23,10 @@
 __추가 페이지: 스폰서 개인 페이지, 후기 페이지, 후기 작성 페이지__  
 http://sharencare.me/sponsors/23 참조
 
+### react-rte / RichTextEditor
+ 1. 파일 업로드 API에서 ProjectEditor id별로 파일을 구분할 수 있어야 함
+  - hashed id
+  - unique file name
 ---
 
 ## 협업 루틴

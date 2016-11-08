@@ -31,7 +31,7 @@ router.post('/upload/:file_name', upload.single('file'), (req, res) => {
   console.log(`imgSrc: ${imgSrc}`)
 
 	res.status(200).json({
-    imgSrc,
+    sourceURL: imgSrc,
   })
 })
 

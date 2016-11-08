@@ -13,7 +13,7 @@ import { bindActionCreators } from 'redux'
 
 import update from 'react-addons-update'
 
-import { sign_request, image_upload, upload_file } from '../../lib/utils'
+import { upload_file } from '~/src/react/api/AppAPI'
 import * as actionCreators from '../../actions/ProjectEditorActionCreators'
 
 import { canUseDOM, throttle } from '../../../lib/utils'
@@ -202,9 +202,9 @@ export class ProjectEditor extends Component {
 				const file = this._creator_icon_src.files[0]
 				if (!file) return
 
-				const { imgSrc } = await upload_file(file)
+				const { sourceURL } = await upload_file(file)
 
-				this.props.updateCreatorIconSrc(imgSrc)
+				this.props.updateCreatorIconSrc(sourceURL)
 			},
 			description: 	(v) => {this.props.updateCreatorDescription(v)},
 		},
@@ -213,17 +213,17 @@ export class ProjectEditor extends Component {
 				const file = this._heading_img_src.files[0]
 				if (!file) return
 
-				const { imgSrc } = await upload_file(file)
+				const { sourceURL } = await upload_file(file)
 
-				this.props.updateHeadingImgSrc(imgSrc)
+				this.props.updateHeadingImgSrc(sourceURL)
 			},
 			logoSrc:			async (v) => {
 				const file = this._heading_logo_src.files[0]
 				if (!file) return
 
-				const { imgSrc } = await upload_file(file)
+				const { sourceURL } = await upload_file(file)
 
-				this.props.updateHeadingLogoSrc(imgSrc)
+				this.props.updateHeadingLogoSrc(sourceURL)
 			},
 			title: 				(v) => {this.props.updateHeadingTitle(v)},
 			dateFrom: 		(v) => {this.props.updateHeadingDateFrom(v)},
@@ -244,8 +244,8 @@ export class ProjectEditor extends Component {
 
 						if(!file) return
 
-						const { imgSrc } = await upload_file(file)
-						this.props.part1ContentChanged(index, imgSrc)
+						const { sourceURL } = await upload_file(file)
+						this.props.part1ContentChanged(index, sourceURL)
 					} else {
 						this.props.part1ContentChanged(index, v)
 					}
@@ -267,8 +267,8 @@ export class ProjectEditor extends Component {
 
 					if(!file) return
 
-					const { imgSrc } = await upload_file(file)
-					this.props.part2ContentChanged(index, imgSrc)
+					const { sourceURL } = await upload_file(file)
+					this.props.part2ContentChanged(index, sourceURL)
 				} else {
 					this.props.part2ContentChanged(index, v)
 				}
@@ -325,16 +325,7 @@ export class ProjectEditor extends Component {
 
 					} }>Text to Html String</button>
 
-					<RichTextEditor
-						value={this.state.overview.part1}
-						className="react-rte-demo"
-						placeholder="Tell a story"
-						toolbarClassName="demo-toolbar"
-						editorClassName="demo-editor"
-					/>
-
 					<Editor />
-
 
 				</div>
 			)

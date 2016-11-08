@@ -33,8 +33,6 @@ export async function image_upload(file, signed_request, url) {
   let res = await fetch(signed_request, options)
   return res.json()
 
-
-
   // var xhr = new XMLHttpRequest()
   // xhr.open("PUT", signed_request)
   // xhr.setRequestHeader('x-amz-acl', 'public-read')
@@ -46,34 +44,6 @@ export async function image_upload(file, signed_request, url) {
   // }
   //
   // xhr.send(file)
-}
-
-export async function upload_file(file) {
-  const data = new FormData(); // wrap the file to form-data
-  data.append('file', file);
-
-  const res = await fetch(`/api/test-api/upload/${file.name}`, {
-    method: 'post',
-    body: data,
-  })
-
-  return res.json()
-
-  // let { signed_request, url, ...rest } = await sign_request(file)
-  //
-  // if (!signed_request) {
-  // 	console.log(rest)
-  // 	console.error(Error('Cannot get signed request'))
-  // 	return
-  // }
-  //
-  // console.log(`signed request: `, signed_request)
-  // console.log(`url: `, url)
-  // console.log(`rest: `, rest)
-  //
-  // let res = await image_upload(file, signed_request, url)
-  // console.log(res);
-
 }
 
 export const displayType = (innerWidth) =>
