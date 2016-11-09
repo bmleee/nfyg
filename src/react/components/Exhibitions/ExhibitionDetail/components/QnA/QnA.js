@@ -91,7 +91,6 @@ class QnA extends Component {
 
 				{ items}
 
-				<button>공유로 예술후원(열람하기)</button>
 			</div>
 		)
 	}

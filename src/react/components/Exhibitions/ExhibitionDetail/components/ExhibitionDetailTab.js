@@ -10,7 +10,7 @@ class ExhibitionDetailTab extends Component {
 			<div className="project-detail-tab">
 				<Link to="/exhibitions/detail/"><button className="project-tab">Overview</button></Link>
 				<Link to="/exhibitions/detail/artworks"><button className="project-tab">Artworks</button></Link>
-				<Link to="/exhibitions/detail/post"><button className="project-tab">Post</button></Link>
+				{/* <Link to="/exhibitions/detail/post"><button className="project-tab">Post</button></Link> */}
 				<Link to="/exhibitions/detail/qna"><button className="project-tab">문의</button></Link>
 				{/* <button>작가의 소식받기</button> */}
 			</div>
