@@ -76,23 +76,29 @@ const EditorBody = ({ contents, ...props}) => (
 )
 
 const CreatorForm = ({ creator: { name, iconSrc, description }, onChangeHandlers, parent }) => (
-	<div className="editor-creator-form">
-		<h3>Creator Form</h3>
-		<div>
-			<span>Name</span>
-			<input type="text" name="creator-name" value={name}
+	<div className="editor-project-form">
+		<h3>프로젝트 개요</h3>
+		<div className="input-project-name-container">
+			<p>프로젝트 제목</p>
+			<input className="input-project-name" type="text" name="creator-name" placeholder="프로젝트 제목을 입력해주세요" value={name}
 				onChange={ (e) => onChangeHandlers.name(e.target.value) } />
 		</div>
-		<div>
-			<span>Icon</span>
-			<input type="file" name="creator-icon-src" ref={(c) => parent._creator_icon_src = c}
+		<div className="input-project-img-container">
+			<p>프로젝트 대표 이미지</p>
+			<input className="input-project-img" type="file" name="creator-icon-src" ref={(c) => parent._creator_icon_src = c}
 				onChange={ (e) => onChangeHandlers.iconSrc(e.target.value) } />
-			<img src={iconSrc} alt="Insert Creator's icon"/>
+			<img src={iconSrc} alt="Insert Project image"/>
 		</div>
-		<div>
-			<span>description</span>
-			<textarea name="creator-description"
+		<div className="input-project-description-container">
+			<p>프로젝트 요약</p>
+			<textarea className="input-project-description" name="creator-description"
 								rows="4" cols="50" onChange={(e) => onChangeHandlers.description(e.target.value)} />
+		</div>
+		<div className="input-project-category-container">
+			<p>프로젝트 카테고리</p>
+		</div>
+		<div className="input-project-url-container">
+			<p>프로젝트 주소</p>
 		</div>
 	</div>
 )

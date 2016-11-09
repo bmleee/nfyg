@@ -3,3 +3,15 @@
 	display: flex;
 	flex-flow: column;
 }
+
+.input-project-name {
+	width : 100%;
+}
+.input-project-description {
+	width : 100%;
+	max-width : 100%;
+}
+.input-project-name-container, .input-project-img-container, .input-project-description-container,
+.input-project-category-container, .input-project-url-container {
+	margin-top : 20px;
+}

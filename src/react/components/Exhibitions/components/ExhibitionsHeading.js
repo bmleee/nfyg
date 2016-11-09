@@ -49,10 +49,10 @@ class ExhibitionsHeading extends Component {
 					</Link>
 					</div>
 					</div>
-					<div className="exhibition-heading-item-info">
+					{/* <div className="exhibition-heading-item-info">
 					<h4>{title}</h4>
 					<p>{schedule} @ {location}</p>
-					</div>
+					</div> */}
 				</div>
 			)
 		})

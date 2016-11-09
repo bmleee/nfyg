@@ -7,15 +7,17 @@
 			width: 93%;
 			
 			
-			@media (max-width: 900px) {
-			width: 96%;
+			@media (max-width: 991px) {
+			width: 93%;
 			margin-bottom: 20px;
 			
 			.slick-dots {
 				bottom: -35px;
 			}
 			}
-			
+			@media (max-width: 500px) {
+				width: 96%;
+			}
 		.slick-prev, .slick-next {
 			display : none !important;
 		}
@@ -41,7 +43,7 @@
 	.slick-slider {
 	.slick-prev, .slick-next {
 			display : block !important;
-			@media (max-width: 900px) {
+			@media (max-width: 991px) {
 		display: none !important;
 	}
 		}
@@ -52,7 +54,7 @@
 	left : -2.2vw;
 	width : 24px !important;
 	height : 24px !important;
-	@media (max-width: 900px) {
+	@media (max-width: 991px) {
 		display: none !important;
 	}
 }
@@ -61,7 +63,7 @@
 	right : -2.2vw;
 	width : 24px !important;
 	height : 24px !important;
-	@media (max-width: 900px) {
+	@media (max-width: 991px) {
 		display: none !important;
 	}
 }

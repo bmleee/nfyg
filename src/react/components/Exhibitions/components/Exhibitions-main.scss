@@ -1,6 +1,13 @@
 // desktop&all ↓↓↓↓
+.slick-dots li.slick-active button:before {
+    opacity: 1;
+    color: #4b709a;
+}
+.slick-dots li button:before {
+    color: #4b709a;
+}
 .slick-prev, .slick-next {
-	top : 40%;
+	top : 50%;
 }
 .Select-multi-value-wrapper {
 	border-right: 1px solid #ececec;

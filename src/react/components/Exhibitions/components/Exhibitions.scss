@@ -18,11 +18,11 @@
 }
 
 button.exhibition-register, button.exhibition-register:focus {
-	font-size : 17px;
+	font-size : 16px;
 	font-weight : 500;
 	font-style : normal !important;
-	padding : 10px 22px;
-	margin-top : 6px;
+	padding : 10px 15px;
+	margin-top : 7px;
 	border-radius : 0px;
 	border : 1px solid #eee;
 	background-color : transparent;
@@ -31,14 +31,16 @@ button.exhibition-register, button.exhibition-register:focus {
 }
 
 button.exhibition-register:hover {
-	color : #4b709a;
+	background-color : #4b709a;
+	border : none;
+	color : #fff;
 }
 
 @media (max-width: 991px) {
 button.exhibition-register {
-	font-size : 16px;
-	padding : 10px 15px;
-	margin-top : 6px;
+	font-size : 15px;
+	padding : 8px 12px;
+	margin-top : 7px;
 }
 @media (max-width: 500px) {
 button.exhibition-register {

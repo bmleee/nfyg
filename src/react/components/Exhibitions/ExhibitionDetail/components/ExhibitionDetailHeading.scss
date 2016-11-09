@@ -53,13 +53,15 @@
 .share-button-facebook:hover, .share-button-twitter:hover, .share-button-kakao:hover, .share-button-url:hover {
 	background : #4b709a;
 	color : #fff;
-	fill : #fff
+	fill : #fff;
+	border : none;
 }
 .share-button-facebook:focus, .share-button-twitter:focus, .share-button-kakao:focus, .share-button-url:focus {
 	outline : none;
 	background : #4b709a;
 	color : #fff;
-	fill : #fff
+	fill : #fff;
+	border : none;
 }
 
 @media (max-width: 991px) {

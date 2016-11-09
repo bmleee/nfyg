@@ -136,13 +136,17 @@ div.present-more-project {
         font-size :40px;
         font-weight :700;
     }
-    p, span {
+    p:not([data-offset-key]),
+    p:not([data-text]),
+    span:not([data-offset-key])
+    span:not([data-text]) {
         font-size : 15px;
         font-weight : 400;
         margin : 0px;
     }
 // tablet ↓↓↓↓
 @media (max-width: 991px) {
+     
     .share-button {
 	position: fixed;
     bottom: 0px;
@@ -183,7 +187,10 @@ div.present-more-project {
         font-size :32px;
         font-weight :800;
     }
-    p, span {
+    p:not([data-offset-key]),
+    p:not([data-text]),
+    span:not([data-offset-key])
+    span:not([data-text]) {
         font-size : 13px;
         font-weight : 400;
     }
@@ -216,6 +223,37 @@ div.recent-exhibition-list-item {
  
 // mobile ↓↓↓↓ 
 @media (max-width: 500px) {
+    .image-gallery-slides {
+   width: 100%; 
+}
+
+.image-gallery-slide {
+ position: absolute;
+    padding-top: 110%;
+    overflow: hidden;
+}
+
+.image-gallery-image {
+position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    -webkit-transform: translate(50%,50%);
+    -ms-transform: translate(50%,50%);
+    transform: translate(50%,50%);
+}
+
+.image-gallery-slide img {
+	width : auto;
+	height : auto;
+	position: absolute;
+    	top: 0;
+   	left: 0;   
+   	-webkit-transform: translate(-50%,-50%);
+    	-ms-transform: translate(-50%,-50%);
+    	transform: translate(-50%,-50%);
+}
     .share-button {
 	position: fixed;
     bottom: 0px;
@@ -256,7 +294,10 @@ div.recent-exhibition-list-item {
         font-size :28px;
         font-weight :800;
     }
-    p, span {
+    p:not([data-offset-key]),
+    p:not([data-text]),
+    span:not([data-offset-key])
+    span:not([data-text]) {
         font-size : 13px;
         font-weight : 400;
     }
