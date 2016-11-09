@@ -142,11 +142,75 @@ import { Editor, EditorState } from 'draft-js';
 // 		}
 // }
 
-import { facebook_login } from '../../lib/firebase'
+// import { facebook_login } from '../../lib/firebase'
+//
+// const  Test = ({}) => (
+// 	<div>
+// 		<button onClick={facebook_login}>Facebook Login</button>
+// 	</div>
+// 	)
 
-const  Test = ({}) => (
-	<div>
-		<button onClick={facebook_login}>Facebook Login</button>
-	</div>
-	)
+import { canUseDOM } from '../../lib/utils'
+if(canUseDOM) {
+	const _SevenEditor = require('./react-rte/src/SevenEditor')
+	const _Editor = require('./react-rte/src/RichTextEditor')
+	console.log('canUseDOM._SevenEditor', _SevenEditor);
+	console.log('canUseDOM._Editor', _Editor);
+	window._SevenEditor = _SevenEditor.default
+	window._Editor = _Editor.default
+	window._Editor.createEmptyValue = _Editor.createEmptyValue
+	console.log('window._Editor', window._Editor);
+} else {
+	global._SevenEditor = () => (<div>Loading...</div>)
+	global._Editor = () => (<div>Loading...</div>)
+	global._Editor.createEmptyValue = () => '1'
+}
+
+
+class Test extends Component {
+	state = {
+		value: _Editor.createEmptyValue(),
+		sevenValue: _Editor.createEmptyValue()
+	}
+
+	onChange = (value) => this.setState({value})
+	sevenOnChange = (sevenValue) => this.setState({sevenValue})
+
+	render() {
+		return (
+			<div>
+				<h1>h1</h1>
+				<h2>h2</h2>
+				<h3>h3</h3>
+				<h4>h4</h4>
+				<_SevenEditor
+				 	onChange={this.sevenOnChange}
+				/>
+				<h4>_SevenEditor.value.toString('html')</h4>
+				<div>
+					 {this.state.sevenValue.toString('html')}
+				</div>
+				<h4> html rendering result</h4>
+				<div dangerouslySetInnerHTML={{__html: this.state.sevenValue.toString('html')}}>
+				</div>
+
+				<_Editor
+					value={this.state.value}
+					onChange={this.onChange}
+					editorClassName="test-editor"
+				 />
+				 <h4>_Editor.value.toString('html')</h4>
+				 <div>
+					 	{this.state.value.toString('html')}
+				 </div>
+				 <h4> html rendering result</h4>
+				 <div dangerouslySetInnerHTML={{__html: this.state.value.toString('html')}}>
+				 </div>
+
+			</div>
+		)
+	}
+
+}
+
 export default Test
