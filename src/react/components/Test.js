@@ -167,7 +167,7 @@ if(canUseDOM) {
 }
 
 
-class Test extends Component {
+class Test1 extends Component {
 	state = {
 		value: _Editor.createEmptyValue(),
 		sevenValue: _Editor.createEmptyValue()
@@ -213,4 +213,45 @@ class Test extends Component {
 
 }
 
-export default Test
+
+import FormWrapper from '~/src/react/components/FormWrapper/FormWrapper'
+
+const TestChildren = ({onChange, value}) => (
+	<input type="text" onChange={onChange} value={value}/>
+)
+
+class Test2 extends Component {
+	state = {
+		value: ''
+	}
+
+	_onSubmit = (value) => {
+		console.log('New value: ', value);
+		this.setState({value})
+	}
+
+	render() {
+		let {
+			value
+		} = this.state
+		
+		return (
+			<FormWrapper
+				title="Test wrapper title"
+
+				// value type
+				valueType="number"
+
+				alt="대제목을 입력하세요"
+				initialValue={value}
+				submitCaption="입력"
+				onSubmit={this._onSubmit}
+			>
+				<TestChildren />
+			</FormWrapper>
+		)
+	}
+
+}
+
+export { Test1, Test2 }
