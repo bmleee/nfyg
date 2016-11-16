@@ -24,11 +24,13 @@ class MagazineList extends Component {
 					<Link to="magazines/detail"><img className="home-magazine-image" src={imgSrc} alt=""/></Link>
 					</div>
 				</div>
+				<div className="home-magazine-list-item">
 				<Link to="magazines/detail"><h4>{title}</h4></Link>
-				<p><img className="ex-icon" width={26} height={26} src={iconSrc} alt=""/> { name } | { categories.join(' ') }</p>
+				<p><img className="magazine-writer-icon" width={24} height={24} src={iconSrc} alt=""/> { name } | { categories.join(' ') }</p>
 				{/* <ul>
 					{ descriptions.map((d, index) => <li key={index}>{d}</li>) }
 				</ul> */}
+				</div>
 			</div>
 		))
 

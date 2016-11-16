@@ -22,8 +22,8 @@ class ExhibitionsList extends Component {
 						</div>
 					</div>
 				</Link>
-				<h4>{title}{' '}{state}</h4>
-				<p>{schedule} @ {location}</p>
+				<Link to="/exhibitions/detail"><h4>{title}{' '}{state}</h4></Link>
+				<p className="ex-location-schedule">{schedule} @ {location}</p>
 			</div>
 		))
 

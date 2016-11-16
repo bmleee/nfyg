@@ -33,9 +33,9 @@ class MagazinesList extends Component {
 					<div className="magazine-list-item-info">
 					<div>
 					     <Link to="magazines/detail"><h4>{ title }</h4></Link>
-						 <p><img src={iconSrc} width={28} height={28} alt=""/> {name} | {category}</p>
+						 <p><img className="magazine-writer-icon" src={iconSrc} width={24} height={24} alt=""/> {name} | {category}</p>
 					</div>
-					{description}
+					<p className="magazine-description">{description}</p>
 					</div>
 				</div>
 			)

@@ -20,8 +20,8 @@ class PresentProjectList extends Component {
 
 		this.state = {
 			numProjects: 0,
-			count: 3,
-			windowSize: 3,
+			count: 4,
+			windowSize: 4,
 		}
 	}
 
@@ -62,7 +62,7 @@ class PresentProjectList extends Component {
 							</div>
 						</Link>
 						<div className="present-project-list-item-caption">
-							<Link to="/projects"><h4>{title}</h4></Link>
+							<Link to="/projects"><h3 className="project-list-title">{title}</h3></Link>
 							<h5>{creator}의 프로젝트</h5>
 							<p>프로젝트 진행 바
 							<br />

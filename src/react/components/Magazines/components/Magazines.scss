@@ -1,3 +1,7 @@
+.magazine-writer-icon {
+	border-radius : 50px;
+	margin-bottom : 3px;
+}
 .ma-menu-thumbnail {
 	position: relative;
 	padding-top :60%;
@@ -24,7 +28,7 @@
 	color : #000;
 }
 .magazine-category-button:hover {
-	color : #4b709a;
+	color : #f55035;
 }
 .magazines {
 	display: flex;
@@ -59,8 +63,13 @@
 }
 
 @media (max-width: 500px) {
+	.magazine-writer-icon {
+		width : 18px !important;
+		height : 18px !important;
+	}
 	.magazine-menu-list-item {
-	width : 100%;
+	width : 49.9999%;
+	padding : 3px;
 }
 	.magazines-list {
 	padding : 30px 0px 20px 0px;
@@ -73,6 +82,12 @@
     padding: 14px 0px 14px 0px;
     border-top: 1px solid #eee;
     border-bottom : 1px solid #eee;
+}
+.magazine-description {
+	display : none !important;
+}
+.magazine-list-item-info {
+	padding : 0px 6px 6px 6px;
 }
 }   
 }

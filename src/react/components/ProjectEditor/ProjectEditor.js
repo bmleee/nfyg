@@ -85,9 +85,11 @@ const CreatorForm = ({ creator: { name, iconSrc, description }, onChangeHandlers
 		</div>
 		<div className="input-project-img-container">
 			<p>프로젝트 대표 이미지</p>
+			<div className="project-img-container">
 			<input className="input-project-img" type="file" name="creator-icon-src" ref={(c) => parent._creator_icon_src = c}
 				onChange={ (e) => onChangeHandlers.iconSrc(e.target.value) } />
-			<img src={iconSrc} alt="Insert Project image"/>
+			<img src={iconSrc}/>
+			</div>
 		</div>
 		<div className="input-project-description-container">
 			<p>프로젝트 요약</p>

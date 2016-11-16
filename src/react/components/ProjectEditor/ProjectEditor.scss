@@ -15,3 +15,17 @@
 .input-project-category-container, .input-project-url-container {
 	margin-top : 20px;
 }
+
+.project-img-container {
+	display : inline-block;
+	border : 2px solid #999;
+	border-radius : 4px;
+}
+
+.input-project-img {
+	display : inline-block;
+	text-align : center !important;
+	padding : 140px 60px;
+	width : auto;
+	height : auto;
+}

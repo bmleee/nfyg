@@ -3,6 +3,7 @@ import {
 	ExhibitionDetailHeading,
 	ExhibitionDetailTab,
 } from './';
+import $ from 'jquery';
 
 import 'babel-polyfill';
 
@@ -12,12 +13,25 @@ class ExhibitionDetail extends Component {
 
 		console.log('ExhibitionDetail.constructor : this.props', this.props);
 	}
+	
+	componentDidMount() {
+		
+		console.log("$(document).on( 'scroll', '#project-detail', function(){ ... }")
+
+		$(document).on( 'scroll', '#project-detail', function(){
+		    console.log('Event Fired');
+		});
+
+	}
+
+
+
 
 	render() {
 		const { heading } = this.props.exhibition
 
 		return (
-			<div className="project-detail">
+			<div className="project-detail" id="project-detail">
 				<ExhibitionDetailHeading { ...heading } />
 
 				<ExhibitionDetailTab />
@@ -49,6 +63,74 @@ const exhibition = {
 	// Overview
 	overview: {
 		part1: [
+			{
+				type: 'text',
+				content: 'Overview Part1'
+			},
+			{
+				type: 'text',
+				content: 'Overview Part1'
+			},
+			{
+				type: 'text',
+				content: 'Overview Part1'
+			},
+			{
+				type: 'text',
+				content: 'Overview Part1'
+			},
+			{
+				type: 'text',
+				content: 'Overview Part1'
+			},
+			{
+				type: 'text',
+				content: 'Overview Part1'
+			},
+			{
+				type: 'text',
+				content: 'Overview Part1'
+			},
+			{
+				type: 'text',
+				content: 'Overview Part1'
+			},
+			{
+				type: 'text',
+				content: 'Overview Part1'
+			},
+			{
+				type: 'text',
+				content: 'Overview Part1'
+			},
+			{
+				type: 'text',
+				content: 'Overview Part1'
+			},
+			{
+				type: 'text',
+				content: 'Overview Part1'
+			},
+			{
+				type: 'text',
+				content: 'Overview Part1'
+			},
+			{
+				type: 'text',
+				content: 'Overview Part1'
+			},
+			{
+				type: 'text',
+				content: 'Overview Part1'
+			},
+			{
+				type: 'text',
+				content: 'Overview Part1'
+			},
+			{
+				type: 'text',
+				content: 'Overview Part1'
+			},
 			{
 				type: 'text',
 				content: 'Overview Part1'

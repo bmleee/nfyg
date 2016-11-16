@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 
 class ExhibitionDetailTab extends Component {
-
+	
 	render() {
 
 		// TODO: Apply :project_name

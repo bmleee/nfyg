@@ -12,12 +12,17 @@
 }
 .magazine-list-item:first-child .ma-thumbnail {
 	position: relative;
-	padding-top :86.8%;
+	height : 385px;
+	width : auto;
 	overflow : hidden;
+	@media (max-width: 991px) {
+	    	height : 260px;
+	}
 }
 .ma-thumbnail {
 	position: relative;
-	padding-top :70%;
+	height : 135px;
+	width : auto;
 	overflow : hidden;
 }
 .ma-centered {
@@ -40,6 +45,10 @@ position: absolute;
     -webkit-transform: translate(-50%,-50%);
     -ms-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);
+    @media (max-width: 991px) {
+        max-width: 100%;
+        height: auto;
+    }
 }
 img.home-magazine-image {
 position: absolute;

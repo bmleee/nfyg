@@ -29,7 +29,7 @@
     font-weight : 700;
 }
 .fb-login-btn:hover, .login-btn:hover {
-    background : #4b709a;
+    background : #f55035;
     transition : opacity, 250ms;
 }
 
@@ -42,7 +42,7 @@
 }
 
 .login-more {
-    margin-bottom : 25px;
+    margin-bottom : 25px !important;
     font-size : 14px;
 }
 
@@ -66,6 +66,6 @@
 
 .user-login-id:focus, .user-login-password:focus {
     outline : none;
-    border : 2px solid #4b709a;
+    border : 2px solid #f55035;
     transition : opacity, 250ms;
 }
