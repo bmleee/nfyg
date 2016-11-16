@@ -4,6 +4,7 @@
  1. ALL, 진행중인 전시, 끝난 전시 버튼 ==> 진행중인 전시, 날짜별 필터링(select-option) :: DB 구조 모두 결정 된 후에 하는게 좋을듯!
 
 ### exhibition detail
+ 1. tab에 jquery 넣기..
 
 ### magazines
  1. 카테고리에 속하는 매거진이 없을 경우 :: No such magazines!
@@ -27,6 +28,20 @@ http://sharencare.me/sponsors/23 참조
  1. 파일 업로드 API에서 ProjectEditor id별로 파일을 구분할 수 있어야 함
   - hashed id
   - unique file name
+ 2. 텍스트 정렬 - react-rte
+ 3. Imasge 삽입 후 HTML로 반환받기...
+
+### ProjectEditor
+ - Funding.Reward
+  1. Rewards가 존재할 경우, Wrapper 에서 어떻게 보여줄지?
+
+ 1. 서버와 연동
+  -  ProjectEditor.new ..
+  - ProjectEditor.edit ..
+ 2. Redux 로 상태 저장하기
+  - [project-temp-id]: proejct-editor ...
+
+
 ---
 
 ## 협업 루틴

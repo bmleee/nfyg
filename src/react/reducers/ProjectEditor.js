@@ -9,11 +9,11 @@ import 'babel-polyfill';
 const defaultNewState = () => ({
   project: {
     abstract: {
-      long_title: '',     //
-      short_title: '',    //
+      longTitle: '',     //
+      shortTitle: '',    //
       imgSrc: '',         //
       category: '',       // 건강, 라이프, ...
-      project_name: '',   // projects/:project_name
+      projectName: '',   // projects/:project_name
     },
     fuding: {
       currentMonoey: 0,   // 직접 / 간접 후원에 의해 추가됨
@@ -28,9 +28,9 @@ const defaultNewState = () => ({
       part2: []
     },
     post: {
-      intro_message: '',  // POST 탭 가장 위에 보여줄 메시지
+      intro: '',  // POST 탭 가장 위에 보여줄 메시지
       posts: []           // { opened, author: {name, iconSrc}, title, created_at, numSupporters, likes, contents: [ {contentType, content} ], comments: [ { author: {name, iconSrc}, content}] }
-      // OPOST 댓글 .좋아요...   
+      // OPOST 댓글 .좋아요...
     },
     qna: {
       selectOptions: [],  // { value, label }
