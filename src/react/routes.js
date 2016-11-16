@@ -4,7 +4,6 @@ import { Route, IndexRoute, Link } from 'react-router';
 import { Nav, Footer } from './components/Common';
 
 import { TodoApp, Test1, Test2 } from './components';
-import { ProjectEditor, ProjectEditorContainer } from './components/ProjectEditor/ProjectEditor'
 
 import Home from './components/Home/containers/HomeContainer';
 
@@ -24,6 +23,11 @@ import { QnA as ExhibitionDetailQnA } 						from './components/Exhibitions/Exhib
 
 import Magazines from './components/Magazines/containers/MagazinesContainer';
 import MagazineDetail from './components/Magazines/MagazineDetail/containers/MagazineDetailContainer'
+
+import ProjectEditor 			from './components/ProjectEditor/ProjectEditor'
+import Abstract 	from './components/ProjectEditor/components/Abstract/Abstract'
+import Funding 	from './components/ProjectEditor/components/Funding/Funding'
+import Overview 	from './components/ProjectEditor/components/Overview/Overview'
 
 import { Login, Profile } from './components/User'
 
@@ -74,7 +78,7 @@ const routes = (
 			<Route path="post" component={ ProjectDetailPost }></Route>
 			<Route path="ranking" component={ ProjectDetailRanking }></Route>
 			<Route path="qna" component={ ProjectDetailQnA }></Route>
-			<Route path="new" component={ ProjectEditorContainer }></Route>
+			<Route path="new" component={ ProjectEditor }></Route>
 		</Route>
 
 		<Route path="exhibitions" component={Exhibitions}>
@@ -98,7 +102,12 @@ const routes = (
 			<Route path="qna" component={ ExhibitionDetailQnA }></Route>
 		</Route>
 
-		<Route path="project-editor" component={ProjectEditorContainer}></Route>
+		<Route path="project-editor" component={ProjectEditor}>
+			<IndexRoute component={Abstract} />
+			<Route path="abstract" component={ Abstract }></Route>
+			<Route path="funding" component={ Funding }></Route>
+			<Route path="overview" component={ Overview }></Route>
+		</Route>
 
 		<Route path="login" component={Login}></Route>
 		<Route path="profile" component={Profile}></Route>
