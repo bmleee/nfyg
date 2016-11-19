@@ -1,20 +1,33 @@
 // http://stackoverflow.com/questions/31102035/how-can-i-use-webpack-with-express
 
 var webpack = require('webpack');
+var environments = require('gulp-environments');
+
+var babelParams = {
+	cacheDirectory: true,
+	presets: ['es2015', 'stage-0', 'react'],
+}
+
 var path = require('path');
 var fs = require('fs');
 var nodeModules = {};
 
-var UglifyJsPlugin = new webpack.optimize.UglifyJsPlugin({
-	compress: {
-		warnings: false
-	}
-})
 var DefinePlugin = new webpack.DefinePlugin({
 	'process.env': {
 		BROWSER: JSON.stringify(false)
 	}
 })
+var plugins = environments.production() ? [
+	new webpack.optimize.DedupePlugin(),
+	new webpack.optimize.UglifyJsPlugin(),
+	DefinePlugin,
+] : [
+	new webpack.optimize.OccurenceOrderPlugin(),
+	new webpack.NoErrorsPlugin(),
+	new webpack.HotModuleReplacementPlugin(),
+	DefinePlugin
+];
+
 
 fs.readdirSync(path.resolve(__dirname, 'node_modules'))
     .filter(x => ['.bin'].indexOf(x) === -1)
@@ -29,7 +42,9 @@ module.exports = {
 		__dirname: false
 	},
 
-	entry: './src/express/app.js',
+	entry: [
+		'./src/express/app.js',
+	],
 	output: {
 		path: __dirname + '/bin',
 		filename: 'express-server.js'
@@ -43,8 +58,7 @@ module.exports = {
 					// 'imports?document=this',
 
 					// 'react-hot',
-					'babel-loader'
-					//,'jsx-loader'
+					'babel-loader?' + JSON.stringify(babelParams)
 				],
 				exclude: /node_modules/,
 			},
@@ -62,9 +76,5 @@ module.exports = {
 			{ test: /\.svg$/, loader: 'babel!react-svg' },
 		]
 	},
-	plugins: [
-		// UglifyJsPlugin
-		DefinePlugin
-	]
-
+	plugins: plugins
 }

@@ -4,6 +4,7 @@ import { Route, IndexRoute, Link } from 'react-router';
 import { Nav, Footer } from './components/Common';
 
 import { TodoApp, Test1, Test2 } from './components';
+import Test3 from './components/Test3'
 
 import Home from './components/Home/containers/HomeContainer';
 
@@ -57,6 +58,8 @@ const App = ({ children }) => (
 			<Link to="/test1">Test1</Link>
 			{' '}
 			<Link to="/test2">Test2</Link>
+			{' '}
+			<Link to="/test3">Test3</Link>
 		</div>
 
 		<Nav></Nav>
@@ -115,6 +118,7 @@ const routes = (
 
 		<Route path="test1" component={Test1}></Route>
 		<Route path="test2" component={Test2}></Route>
+		<Route path="test3" component={Test3}></Route>
 	</Route>
 )
 

@@ -32,6 +32,7 @@ http://sharencare.me/sponsors/23 참조
  3. Imasge 삽입 후 HTML로 반환받기...
 
 ### ProjectEditor
+ - __이미지 삽입 후 HTML로 전환__
  - Funding.Reward
   1. Rewards가 존재할 경우, Wrapper 에서 어떻게 보여줄지?
 

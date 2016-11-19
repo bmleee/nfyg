@@ -1,16 +1,30 @@
+var path = require('path');
 var webpack = require('webpack');
-var UglifyJsPlugin = new webpack.optimize.UglifyJsPlugin({
-	compress: {
-		warnings: false
-	}
-})
+var environments = require('gulp-environments');
+
+var babelParams = {
+	cacheDirectory: true,
+	presets: ['es2015', 'stage-0', 'react'],
+}
+
+var plugins = environments.production() ? [
+	new webpack.optimize.DedupePlugin(),
+	new webpack.optimize.UglifyJsPlugin(),
+] : [
+	new webpack.optimize.OccurenceOrderPlugin(),
+	new webpack.NoErrorsPlugin(),
+	new webpack.HotModuleReplacementPlugin(),
+];
 
 module.exports = {
-	// configure for express.js
-	entry: './src/react/App.js',
+	// configure for react.app
+	entry: [
+		'./src/react/App.js',
+	],
 
 	output: {
-		path: __dirname + '/public',
+		path: path.join(__dirname, '/public'),
+		publicPath: path.join(__dirname, '/public'),
 		filename: 'react-app.js'
 	},
 
@@ -18,13 +32,10 @@ module.exports = {
 		loaders: [
 			{
 				test: /\.js$/,
-				loader: 'babel-loader',
-				exclude: /node_modules/,
-				query: {
-					cacheDirectory: true,
-					presets: ['es2015', 'stage-2', 'react']
-				}
+				exclude: /(node_modules|bower_components)/,
+				loaders: ['babel-loader?' + JSON.stringify(babelParams), 'webpack-module-hot-accept'],
 			},
+			// masonry
 			{
 				test: /masonry|imagesloaded|fizzy\-ui\-utils|desandro\-|outlayer|get\-size|doc\-ready|eventie|eventemitter/,
 				loader: 'imports?define=>false&this=>window'
@@ -42,7 +53,7 @@ module.exports = {
 			{ test: /\.svg$/, loader: 'babel!react-svg' }
 		]
 	},
-	plugins: [
-		// UglifyJsPlugin
-	]
+
+	debug: environments.development(),
+	plugins: plugins
 }

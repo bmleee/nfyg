@@ -1,12 +1,12 @@
 {
-  "name": "react-express-boilerplate",
-  "description": "i do",
+  "name": "seven-main",
+  "description": "https://7pictures.co.kr",
   "main": "index.js",
   "authors": [
     "4000D"
   ],
   "license": "ISC",
-  "homepage": "https://github.com/4000D/express-with-react-boilerplate",
+  "homepage": "https://github.com/sevenpictures/seven_main",
   "ignore": [
     "**/.*",
     "node_modules",
@@ -15,8 +15,13 @@
     "tests"
   ],
   "dependencies": {
+    "desandro-matches-selector": "~2.0.0",
+    "font-awesome": "^4.6.3",
+    "ev-emitter": "^1.0.0",
+    "fizzy-ui-utils": "^2.0.0",
+    "get-size": "^2.0.2",
     "jquery": "^3.1.1",
     "underscore": "^1.8.3",
-    "font-awesome": "^4.6.3"
+    "masonry": "^4.1.1"
   }
 }

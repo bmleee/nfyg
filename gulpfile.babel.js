@@ -1,6 +1,13 @@
 'use strict';
+import path from 'path';
 import gulp from 'gulp';
 import gutil from 'gulp-util'; // for logging
+import environments from 'gulp-environments';
+import runSequence from 'run-sequence';
+
+let development = environments.development;
+let production = environments.production;
+
 
 // bower
 import bower from 'gulp-bower';
@@ -29,12 +36,19 @@ let cache = new Cache();
 
 import nodemon from 'gulp-nodemon'; // watch and restart express server
 
-import webpack from 'gulp-webpack';
+import webpack from 'webpack';
+import webpackStream from 'webpack-stream';
+
+import webpackDevMiddleware from 'webpack-dev-middleware';
+import webpackHotMiddleware from 'webpack-hot-middleware';
+
 import webpackExpressConfig from './webpack.express.config';
 import webpackBrowserConfig from './webpack.browser.config';
 import webpackReactConfig from './webpack.react.config';
 
+
 import browserSync from 'browser-sync';
+import { DEV_PORT } from './env';
 
 const DIR = {
   SRC: 'src',
@@ -66,47 +80,60 @@ const DEST = {
   BOWER: DIR.PUBLIC + '/bower_components/',
 };
 
-// replaced with webpack-express
-gulp.task('babel-express', () => {
-  return gulp.src(SRC.EXPRESS)
-    // .pipe( cache.filter() )
-    .pipe( babel({
-      presets: ['es2015'],
-      plugins: ["transform-runtime", "transform-async-to-generator"]
-    }) )
-    // .pipe( cache.cache() )
-    .pipe( gulp.dest(DEST.EXPRESS) )
-});
+const ENTRY = {
+  EXPRESS: 'src/express/app.js',
+  REACT: 'src/react/App.js',
+  BROWSER: 'src/assets/js/main.js'
+}
 
-gulp.task('webpack-react', () => {
-  return gulp.src('src/react/App.js')
+// helper functions
+const buildDone = (err, stats) => {
+  if(err) throw new gutil.PluginError("webpack", err);
+  gutil.log('[webpack]', stats.toString({
+    colors: true,
+    chunkModules: false,
+    assets: false,
+    version: false,
+    hash: false
+  }))
+};
+
+const watcherRunner = (watcher) => {
+  let notify = (event) => {
+    gutil.log(`File ${gutil.colors.yellow(event.path)} was ${gutil.colors.magenta(event.type)}`);
+  }
+
+  for(let key in watcher) watcher[key].on('change', notify);
+}
+
+
+gulp.task('dist', ['dist:react', 'dist:browser', 'dist:express'], () => {})
+gulp.task('dist:react', () => {
+  return gulp.src(ENTRY.REACT)
     .pipe( cache.filter() )
-    .pipe( webpack(webpackReactConfig) )
+    .pipe(webpackStream(webpackReactConfig, webpack, buildDone))
     .pipe( cache.cache() )
-    .pipe( gulp.dest(DEST.REACT) )
-});
-
-gulp.task('webpack-browser', () => {
-	return gulp.src('src/assets/js/main.js')
+    .pipe(gulp.dest(DEST.REACT))
+})
+gulp.task('dist:browser', () => {
+  return gulp.src(ENTRY.BROWSER)
     .pipe( cache.filter() )
-		.pipe( webpack(webpackBrowserConfig) )
+    .pipe(webpackStream(webpackBrowserConfig, webpack, buildDone))
     .pipe( cache.cache() )
-		.pipe( gulp.dest(DEST.JS) )
-});
-
-gulp.task('webpack-express', () => {
-  return gulp.src('src/express/app.js')
+    .pipe(gulp.dest(DEST.JS))
+})
+gulp.task('dist:express', () => {
+  return gulp.src(ENTRY.EXPRESS)
     .pipe( cache.filter() )
-    .pipe( webpack(webpackExpressConfig) )
+    .pipe(webpackStream(webpackExpressConfig, webpack, buildDone))
     .pipe( cache.cache() )
-    .pipe( gulp.dest(DEST.EXPRESS) )
-});
-
-gulp.task('bootstrap', ['bootstrap-css', 'bootstrap-js'], () => {
-  // Do nothing. Just chaining
+    .pipe(gulp.dest(DEST.EXPRESS))
 })
 
-gulp.task('bootstrap-css', () => {
+const bundler = webpack(webpackReactConfig);
+
+gulp.task('bootstrap', ['bootstrap:css', 'bootstrap:js'], () => {})
+gulp.task('bootstrap:css', () => {
   return gulp.src('./bootstrap.config.json')
     .pipe( bsConfig.css({
       compress: true,
@@ -114,8 +141,7 @@ gulp.task('bootstrap-css', () => {
     }) )
     .pipe( gulp.dest(DEST.CSS) );
 });
-
-gulp.task('bootstrap-js', () => {
+gulp.task('bootstrap:js', () => {
   return gulp.src('./bootstrap.config.json')
     .pipe( bsConfig.js({
       compress: true,
@@ -124,6 +150,8 @@ gulp.task('bootstrap-js', () => {
     .pipe( gulp.dest(DEST.JS) );
 });
 
+gulp.task('assets', ['css', 'sass', 'fonts', 'google-web-fonts', 'images', 'html', 'bower']);
+gulp.task('assets:watch', ['assets', 'watch:assets']);
 gulp.task('css', () => {
   return gulp.src(SRC.CSS)
     .pipe( cleanCSS({compatibility: 'ie8'}) )
@@ -133,7 +161,6 @@ gulp.task('css', () => {
     }) )
     .pipe( gulp.dest(DEST.CSS) );
 });
-
 gulp.task('sass', () => {
   return gulp.src(SRC.SASS)
     .pipe( bulkSass() )
@@ -146,12 +173,10 @@ gulp.task('sass', () => {
     .pipe( cleanCSS({compatibility: 'ie8'}) )
     .pipe( gulp.dest(DEST.SASS) )
 });
-
 gulp.task('fonts', () => {
   return gulp.src(SRC.FONTS)
     .pipe( gulp.dest(DEST.FONTS) );
 });
-
 gulp.task('google-web-fonts', () => {
   return gulp.src('./fonts.list')
     .pipe( googleWebFonts({
@@ -160,19 +185,16 @@ gulp.task('google-web-fonts', () => {
     }) )
     .pipe( gulp.dest(DEST.FONTS) );
 });
-
-gulp.task('html', () => {
-  return gulp.src(SRC.HTML)
-    .pipe( htmlmin({collapseWhitespace: true}) )
-    .pipe( gulp.dest(DEST.HTML) );
-});
-
 gulp.task('images', () => {
   return gulp.src(SRC.IMAGES)
     .pipe( imagemin() )
     .pipe( gulp.dest(DEST.IMAGES) );
 });
-
+gulp.task('html', () => {
+  return gulp.src(SRC.HTML)
+    .pipe( htmlmin({collapseWhitespace: true}) )
+    .pipe( gulp.dest(DEST.HTML) );
+});
 gulp.task('bower', () => {
   return bower({ directory: './public/bower_components', cwd: __dirname })
     .pipe( gulp.dest(DEST.BOWER) );
@@ -181,46 +203,35 @@ gulp.task('bower', () => {
 gulp.task('clean', () => {
   return del.sync([
     'public/assets/',
-    'public/bower_components/',
-    'public/*.js',
-    'public/*.html',
-    DIR.BIN,
+    'public/bower_components',
   ]);
 });
 
-gulp.task('watch', () => {
+gulp.task('watch:assets', () => {
   let watcher = {
-    // babel_express: gulp.watch(SRC.EXPRESS, ['babel-express']),
-		webpack_react: gulp.watch(SRC.REACT, ['webpack-react']),
-		webpack_browser: gulp.watch(SRC.JS, ['webpack-browser']),
-    webpack_express: gulp.watch(SRC.EXPRESS, ['webpack-express']),
     css: gulp.watch(SRC.CSS, ['css']),
     sass: gulp.watch(SRC.SASS, ['sass']),
     google_web_fonts: gulp.watch('./fonts.list', ['google-web-fonts']),
     html: gulp.watch(SRC.HTML, ['html']),
     images: gulp.watch(SRC.IMAGES, ['images']),
     bootstrap: gulp.watch('./bootstrap.config.json', ['bootstrap']),
-    // babel: gulp.watch(SRC.SERVER, ['babel']),
+    dist_browser: gulp.watch(SRC.JS, ['dist:browser']),
   };
 
-  let notify = (event) => {
-    gutil.log(`File ${gutil.colors.yellow(event.path)} was ${gutil.colors.magenta(event.type)}`);
-  }
+  watcherRunner(watcher);
+});
+gulp.task('watch:webpack', () => {
+  let watcher = {
+		dist_react: gulp.watch(SRC.REAC, ['dist:react']),
+    dist_express: gulp.watch(SRC.EXPRESS, ['dist:express']),
+  };
 
-  for(let key in watcher) watcher[key].on('change', notify);
+  watcherRunner(watcher);
 });
 
-
-
-// gulp.task('start', ['babel-express'], () => {
-gulp.task('start', ['webpack-express'], () => {
+gulp.task('start', ['start:alone', 'dist:express'], () => {});
+gulp.task('start:alone', () => {
   return nodemon({
-    // execMap: {
-    //   js: 'node_modules/.bin/node-inspector & node --debug'
-    //   // js: 'node --inspect --debug-brk' // for Node.js 6.3+. ref to https://github.com/node-inspector/node-inspector/issues/905 ,https://github.com/node-inspector/node-inspector/issues/905#issuecomment-251864127
-    // },
-    // ext: 'js',
-    // ignore: ['.idea/*', 'node_modules/*'],
     script: DEST.EXPRESS + '/express-server.js',
     watch: DEST.EXPRESS,
     verbose: true,
@@ -228,21 +239,18 @@ gulp.task('start', ['webpack-express'], () => {
   })
 });
 
-gulp.task('browser-sync', () => {
-  browserSync.init(null, {
-    proxy: 'http://localhost:3000',
-    files: ['public/**/*.*'],
-    port: 7000
-  })
-});
-
 gulp.task('default', [
-  'clean', 'bower',
-  'webpack-browser', 'webpack-react', 'webpack-express',
-  'css', 'sass', 'fonts', 'google-web-fonts',
-  'html', 'images', 'bootstrap',
-  'start', 'watch',
+  'clean', 'bower', 'assets:watch',
+  'dist', 'start', 'watch',
   // 'browser-sync',
 ], () => {
   gutil.log('Gulp is running')
 });
+
+gulp.task('dev', () => {
+  setTimeout(() => runSequence('clean', 'assets:watch', 'start:alone'), 10000) // make sure that bin/express-app.js exists
+})
+
+gulp.task('build', () => {
+  runSequence('clean', ['bower', 'assets', 'dist'])
+})
