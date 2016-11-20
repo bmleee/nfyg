@@ -40,7 +40,6 @@ module.exports = {
 
 	output: {
 		path: path.join(__dirname, '/public'),
-		publicPath: path.join(__dirname, '/public'),
 		filename: 'react-app.js'
 	},
 
@@ -49,7 +48,7 @@ module.exports = {
 			{
 				test: /\.js$/,
 				exclude: /(node_modules|bower_components)/,
-				loaders: ['babel-loader?' + JSON.stringify(babelParams), 'webpack-module-hot-accept'],
+				loaders: ['babel-loader?' + JSON.stringify(babelParams)],
 			},
 			// masonry
 			{

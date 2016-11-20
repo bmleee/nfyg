@@ -1,4 +1,4 @@
-// import React, { Component } from 'react';
+import React, { Component } from 'react';
 // import Editor from 'draft-js-plugins-editor';
 // import { EditorState, RichUtils } from 'draft-js';
 // import { canUseDOM } from '~/src/lib/utils'
@@ -208,5 +208,5 @@
 //   );
 // };
 
-const t = () => (<div>loading...</div>)
+const t = () => (<div>!_!</div>)
 export default t;

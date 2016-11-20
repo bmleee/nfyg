@@ -20,9 +20,9 @@ var plugins = environments.production() ?
 	DefinePlugin
 ] :
 [
-	new webpack.optimize.OccurenceOrderPlugin(),
-	new webpack.NoErrorsPlugin(),
-	new webpack.HotModuleReplacementPlugin(),
+	// new webpack.optimize.OccurenceOrderPlugin(),
+	// new webpack.NoErrorsPlugin(),
+	// new webpack.HotModuleReplacementPlugin(),
 	DefinePlugin
 ];
 

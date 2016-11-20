@@ -63,9 +63,6 @@ module.exports = {
 			{
 				test: /\.js$/,
 				loaders: [
-					// 'imports?document=this',
-
-					// 'react-hot',
 					'babel-loader?' + JSON.stringify(babelParams)
 				],
 				exclude: /node_modules/,
