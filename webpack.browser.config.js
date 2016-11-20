@@ -1,14 +1,29 @@
 var webpack = require('webpack');
-var UglifyJsPlugin = new webpack.optimize.UglifyJsPlugin({
-	compress: {
-		warnings: false
-	}
-})
+var environments = require('gulp-environments');
+
+var plugins = environments.production() ? [
+	new webpack.optimize.DedupePlugin(),
+	new webpack.optimize.UglifyJsPlugin({
+		compress: {
+			warnings: false
+		}
+	}),
+	new webpack.DefinePlugin({
+		'process.env': {
+			BROWSER: JSON.stringify(true),
+			NODE_ENV: JSON.stringify('production')
+		}
+	})
+] : [
+	new webpack.optimize.OccurenceOrderPlugin(),
+	new webpack.NoErrorsPlugin(),
+	new webpack.HotModuleReplacementPlugin(),
+	DefinePlugin
+];
 
 module.exports = {
 	// configure for web browser
 	entry: './src/assets/js/main.js',
-	watch: true,
 
 	output: {
 		path: __dirname + '/public/js',
@@ -28,7 +43,5 @@ module.exports = {
 			}
 		]
 	},
-	plugins: [
-		// UglifyJsPlugin
-	]
+	plugins: plugins
 }

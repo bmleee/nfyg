@@ -9,10 +9,11 @@
     "start": "nodemon bin/express-app.js",
     "start:forever": "forever start bin/express-server.js",
     "restart:forever": "forever stopall && npm run start:forever",
-    "dev": "NODE_ENV=development concurrently --kill-others -p \"[{name}]\" -n \"REACT,EXPRESS,GULP\" -c \"bgGreen.bold,bgBlue.bold,bgRed.bold\" \"npm run dev:react\" \"npm run dev:express\" \"gulp dev\" ",
-    "dev:react": "webpack --config webpack.react.config.js --watch",
-    "dev:express": "webpack --config webpack.express.config.js --watch",
-    "build": "gulp build"
+    "dev": "gulp",
+    "build": "npm run build:react && npm run build:express && npm run build:browser",
+    "build:react": "NODE_ENV=production webpack --config webpack.react.config.js --progress -p",
+    "build:express": "NODE_ENV=production webpack --config webpack.express.config.js --progress -p",
+    "build:browser": "NODE_ENV=production webpack --config webpack.browser.config.js --progress -p"
   },
   "author": "4000D",
   "license": "ISC",

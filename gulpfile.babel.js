@@ -109,28 +109,32 @@ const watcherRunner = (watcher) => {
 
 gulp.task('dev', ['dev:react', 'dev:browser', 'dev:express'], () => {})
 gulp.task('dev:react', () => {
+  const config = Object.assign({watch: true}, webpackReactConfig)
+
   return gulp.src(ENTRY.REACT)
     .pipe( cache.filter() )
-    .pipe(webpackStream(webpackReactConfig, webpack, buildDone))
+    .pipe(webpackStream(config, webpack, buildDone))
     .pipe( cache.cache() )
     .pipe(gulp.dest(DEST.REACT))
 })
 gulp.task('dev:browser', () => {
+  const config = Object.assign({watch: true}, webpackBrowserConfig)
+
   return gulp.src(ENTRY.BROWSER)
     .pipe( cache.filter() )
-    .pipe(webpackStream(webpackBrowserConfig, webpack, buildDone))
+    .pipe(webpackStream(config, webpack, buildDone))
     .pipe( cache.cache() )
     .pipe(gulp.dest(DEST.JS))
 })
 gulp.task('dev:express', () => {
+  const config = Object.assign({watch: true}, webpackExpressConfig)
+
   return gulp.src(ENTRY.EXPRESS)
     .pipe( cache.filter() )
-    .pipe(webpackStream(webpackExpressConfig, webpack, buildDone))
+    .pipe(webpackStream(config, webpack, buildDone))
     .pipe( cache.cache() )
     .pipe(gulp.dest(DEST.EXPRESS))
 })
-
-const bundler = webpack(webpackReactConfig);
 
 gulp.task('bootstrap', ['bootstrap:css', 'bootstrap:js'], () => {})
 gulp.task('bootstrap:css', () => {

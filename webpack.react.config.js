@@ -9,17 +9,26 @@ var babelParams = {
 
 var plugins = environments.production() ? [
 	new webpack.optimize.DedupePlugin(),
-	new webpack.optimize.UglifyJsPlugin(),
+	new webpack.optimize.UglifyJsPlugin({
+		compress: {
+			warnings: false
+		}
+	}),
+	new webpack.DefinePlugin({
+		'process.env': {
+			BROWSER: JSON.stringify(true),
+			NODE_ENV: JSON.stringify('production')
+		}
+	})
 ] : [
 	new webpack.optimize.OccurenceOrderPlugin(),
 	new webpack.NoErrorsPlugin(),
 	new webpack.HotModuleReplacementPlugin(),
+	DefinePlugin
 ];
 
 module.exports = {
 	// configure for react.app
-	watch: true,
-
 	entry: [
 		'./src/react/App.js',
 	],

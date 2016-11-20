@@ -12,22 +12,25 @@ var path = require('path');
 var fs = require('fs');
 var nodeModules = {};
 
-var DefinePlugin = new webpack.DefinePlugin({
-	'process.env': {
-		BROWSER: JSON.stringify(false)
-	}
-})
 var plugins = environments.production() ? [
 	new webpack.optimize.DedupePlugin(),
-	new webpack.optimize.UglifyJsPlugin(),
-	DefinePlugin,
+	new webpack.optimize.UglifyJsPlugin({
+		compress: {
+			warnings: false
+		}
+	}),
+	new webpack.DefinePlugin({
+		'process.env': {
+			BROWSER: JSON.stringify(true),
+			NODE_ENV: JSON.stringify('production')
+		}
+	})
 ] : [
 	new webpack.optimize.OccurenceOrderPlugin(),
 	new webpack.NoErrorsPlugin(),
 	new webpack.HotModuleReplacementPlugin(),
 	DefinePlugin
 ];
-
 
 fs.readdirSync(path.resolve(__dirname, 'node_modules'))
     .filter(x => ['.bin'].indexOf(x) === -1)
@@ -37,7 +40,6 @@ module.exports = {
 	// configure for express.js
 	name: 'server',
 	target: 'node',
-	watch: true,
 
 	node: {
 		__dirname: false

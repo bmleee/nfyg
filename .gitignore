@@ -3,8 +3,8 @@ seven_main.iml
 DS_store
 node_modules
 bower_components
-public/**/*
-bin/
+public
+bin
 .gulp-cache
 npm-debug.*
 .tern-project
