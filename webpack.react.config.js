@@ -7,20 +7,25 @@ var babelParams = {
 	presets: ['es2015', 'stage-0', 'react'],
 }
 
-var plugins = environments.production() ? [
+var DefinePlugin = new webpack.DefinePlugin({
+	'process.env': {
+		BROWSER: JSON.stringify(true),
+		NODE_ENV: JSON.stringify( environments.production() ? 'production' : 'development')
+	}
+})
+
+
+var plugins = environments.production() ?
+[
 	new webpack.optimize.DedupePlugin(),
 	new webpack.optimize.UglifyJsPlugin({
 		compress: {
 			warnings: false
 		}
 	}),
-	new webpack.DefinePlugin({
-		'process.env': {
-			BROWSER: JSON.stringify(true),
-			NODE_ENV: JSON.stringify('production')
-		}
-	})
-] : [
+	DefinePlugin
+] :
+[
 	new webpack.optimize.OccurenceOrderPlugin(),
 	new webpack.NoErrorsPlugin(),
 	new webpack.HotModuleReplacementPlugin(),
