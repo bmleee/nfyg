@@ -208,6 +208,10 @@ gulp.task('clean', () => {
   return del.sync([
     'public/assets/',
     'public/bower_components',
+    'bin/*.hot-update.js',
+    'bin/*.hot-update.json',
+    'public/*.hot-update.js',
+    'public/*.hot-update.json',
   ]);
 });
 
