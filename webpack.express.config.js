@@ -37,6 +37,7 @@ module.exports = {
 	// configure for express.js
 	name: 'server',
 	target: 'node',
+	watch: true,
 
 	node: {
 		__dirname: false

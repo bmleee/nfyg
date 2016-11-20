@@ -107,22 +107,22 @@ const watcherRunner = (watcher) => {
 }
 
 
-gulp.task('dist', ['dist:react', 'dist:browser', 'dist:express'], () => {})
-gulp.task('dist:react', () => {
+gulp.task('dev', ['dev:react', 'dev:browser', 'dev:express'], () => {})
+gulp.task('dev:react', () => {
   return gulp.src(ENTRY.REACT)
     .pipe( cache.filter() )
     .pipe(webpackStream(webpackReactConfig, webpack, buildDone))
     .pipe( cache.cache() )
     .pipe(gulp.dest(DEST.REACT))
 })
-gulp.task('dist:browser', () => {
+gulp.task('dev:browser', () => {
   return gulp.src(ENTRY.BROWSER)
     .pipe( cache.filter() )
     .pipe(webpackStream(webpackBrowserConfig, webpack, buildDone))
     .pipe( cache.cache() )
     .pipe(gulp.dest(DEST.JS))
 })
-gulp.task('dist:express', () => {
+gulp.task('dev:express', () => {
   return gulp.src(ENTRY.EXPRESS)
     .pipe( cache.filter() )
     .pipe(webpackStream(webpackExpressConfig, webpack, buildDone))
@@ -220,17 +220,8 @@ gulp.task('watch:assets', () => {
 
   watcherRunner(watcher);
 });
-gulp.task('watch:webpack', () => {
-  let watcher = {
-		dist_react: gulp.watch(SRC.REAC, ['dist:react']),
-    dist_express: gulp.watch(SRC.EXPRESS, ['dist:express']),
-  };
 
-  watcherRunner(watcher);
-});
-
-gulp.task('start', ['start:alone', 'dist:express'], () => {});
-gulp.task('start:alone', () => {
+gulp.task('start', () => {
   return nodemon({
     script: DEST.EXPRESS + '/express-server.js',
     watch: DEST.EXPRESS,
@@ -240,17 +231,13 @@ gulp.task('start:alone', () => {
 });
 
 gulp.task('default', [
-  'clean', 'bower', 'assets:watch',
-  'dist', 'start', 'watch',
-  // 'browser-sync',
+
 ], () => {
-  gutil.log('Gulp is running')
+  runSequence(
+    'clean',
+    ['bower', 'assets:watch'],
+    'start',
+    'dev',
+  );
+  gutil.log('Gulp is running');
 });
-
-gulp.task('dev', () => {
-  setTimeout(() => runSequence('clean', 'assets:watch', 'start:alone'), 10000) // make sure that bin/express-app.js exists
-})
-
-gulp.task('build', () => {
-  runSequence('clean', ['bower', 'assets', 'dist'])
-})

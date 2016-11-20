@@ -18,6 +18,8 @@ var plugins = environments.production() ? [
 
 module.exports = {
 	// configure for react.app
+	watch: true,
+
 	entry: [
 		'./src/react/App.js',
 	],

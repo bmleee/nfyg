@@ -8,6 +8,7 @@ var UglifyJsPlugin = new webpack.optimize.UglifyJsPlugin({
 module.exports = {
 	// configure for web browser
 	entry: './src/assets/js/main.js',
+	watch: true,
 
 	output: {
 		path: __dirname + '/public/js',
