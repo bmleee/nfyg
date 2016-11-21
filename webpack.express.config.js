@@ -19,7 +19,6 @@ var DefinePlugin = new webpack.DefinePlugin({
 	}
 })
 
-
 var plugins = environments.production() ?
 [
 	new webpack.optimize.DedupePlugin(),
@@ -71,13 +70,21 @@ module.exports = {
 			// from react-rte/webpack.config.js
 			{
 				test: /\.css$/,
-				exclude: /\.global\.css$/,
+				exclude: /(\.global|plugin)\.css$/,
 				loaders: [
-					'style?sourceMap',
+					'isomorphic-style-loader?sourceMap',
+					// 'style-loader?sourceMap',
 					'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
 				],
 			},
 			{ test: /\.global\.css$/, loader: 'style!raw' },
+			// from draft-js mention plugin
+			{
+				test: /plugin\.css$/,
+				loaders: [
+					'style', 'css',
+				],
+			},
 			{ test: /\.svg$/, loader: 'babel!react-svg' },
 		]
 	},
