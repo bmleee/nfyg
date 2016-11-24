@@ -59,8 +59,9 @@ module.exports = {
 				test: /\.css$/,
 				exclude: /(\.global|plugin)\.css$/,
 				loaders: [
-					'isomorphic-style-loader?sourceMap',
+					// 'isomorphic-style-loader?sourceMap',
 					// 'style-loader?sourceMap',
+					'style?sourceMap',
 					'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
 				],
 			},
@@ -69,13 +70,16 @@ module.exports = {
 			{
 				test: /plugin\.css$/,
 				loaders: [
-					'style', 'css',
+					'style', 'raw',
+					'css',
 				],
 			},
 			{test: /\.global\.css$/, loader: 'style!raw'},
 			{ test: /\.svg$/, loader: 'babel!react-svg' }
 		]
 	},
+	resolveLoader: { fallback: __dirname + "/node_modules" },
+
 
 	debug: environments.development(),
 	plugins: plugins

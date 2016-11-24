@@ -1,3 +1,4 @@
+'use strict'
 import fs from 'fs'
 import path from 'path'
 import express from 'express'
@@ -20,7 +21,6 @@ const storage = multer.diskStorage({
 })
 
 const upload = multer({ storage })
-
 router.get('/', (req, res) => {
 	res.status(200).send('hello')
 })
@@ -41,5 +41,25 @@ router.get('/read/:file_name', (req, res) => {
 	res.status(200).json(JSON.parse(file))
 })
 
+const signupMulter = multer()
+router.post('/signup', signupMulter.array(), async (req, res) => {
+  const {
+    email, pw, display_name, photoURL
+  } =  req.body;
+
+  console.log('headers: ', req.headers);
+  console.log('/signin email', email);
+  console.log('/signin pw', pw);
+  console.log('/signin display_name', display_name);
+  console.log('/signin photoURL', photoURL);
+
+  // if (!!email && !!pw && !!display_name)
+  //   res.redirect('/')
+  // else
+  //   res.redirect('/signup')
+  res.json({
+    response: 'response!'
+  })
+})
 
 export default router;

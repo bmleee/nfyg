@@ -77,16 +77,21 @@ module.exports = {
 					'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
 				],
 			},
-			{ test: /\.global\.css$/, loader: 'style!raw' },
+			{ test: /\.global\.css$/, loader: 'isomorphic-style-loader!raw' },
 			// from draft-js mention plugin
 			{
 				test: /plugin\.css$/,
 				loaders: [
-					'style', 'css',
+					'isomorphic-style-loader', 'raw',
+					'css',
 				],
 			},
 			{ test: /\.svg$/, loader: 'babel!react-svg' },
 		]
 	},
+
+	resolveLoader: { fallback: path.resolve(__dirname, "/node_modules") },
+
+	debug: environments.development(),
 	plugins: plugins
 }

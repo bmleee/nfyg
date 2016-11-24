@@ -1,5 +1,8 @@
 ## Todos
 
+### gulp
+ 1. environments 대신 process.env.NODE_ENV 직접 이용
+
 ### exhibitions
  1. ALL, 진행중인 전시, 끝난 전시 버튼 ==> 진행중인 전시, 날짜별 필터링(select-option) :: DB 구조 모두 결정 된 후에 하는게 좋을듯!
 

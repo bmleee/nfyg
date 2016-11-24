@@ -30,8 +30,7 @@ import Abstract 	from './components/ProjectEditor/components/Abstract/Abstract'
 import Funding 	from './components/ProjectEditor/components/Funding/Funding'
 import Overview 	from './components/ProjectEditor/components/Overview/Overview'
 
-import { Login, Profile } from './components/User'
-
+import { Login, Profile, Signup } from './components/User'
 import { Sponsers } from './components/Sponsors'
 
 const App = ({ children }) => (
@@ -50,6 +49,8 @@ const App = ({ children }) => (
 			<Link to="/project-editor">Project Editor</Link>
 			{' '}
 			<Link to="/login">Login</Link>
+			{' '}
+			<Link to="/signup">Signup</Link>
 			{' '}
 			<Link to="/profile">Profile</Link>
 			{' '}
@@ -113,6 +114,7 @@ const routes = (
 		</Route>
 
 		<Route path="login" component={Login}></Route>
+		<Route path="signup" component={Signup}></Route>
 		<Route path="profile" component={Profile}></Route>
 		<Route path="sponsers" component={Sponsers}></Route>
 
