@@ -16,6 +16,7 @@ export default class Signup extends Component {
 		let email = this.refs.email.value;
 		let pw = this.refs.pw.value;
 		let display_name = this.refs.display_name.value;
+		let nick_name = this.refs.nick_name.value;
 		let photoURL = '/assets/images/user_default.png';
 
 		let form = new FormData(this.refs.form);
@@ -48,6 +49,7 @@ export default class Signup extends Component {
 					<input type="email" placeholder="Email" ref="email" name="email"/>
 					<input type="password" placeholder="Password" ref="pw" name="pw"/>
 					<input type="text" placeholder="이름" ref="display_name" name="display_name"/>
+					<input type="text" placeholder="닉네임" ref="nick_name" name="nick_name"/>
 					<input type="hidden" ref="display_name" value="/assets/images/user_default.png"/>
 					<input type="submit" value="회원가입"/>
 					{/* <button onClick={this._submit}>회원가입</button> */}
