@@ -16,10 +16,10 @@ div, span, h1, h2, h3, h4, button {
     color : #fff;
 }
 a, a:hover, a:focus {
-    color : #000;
-    border : none;
-    outline : none;
-    text-decoration : none;
+    color : #000 !important;
+    border : none !important;
+    outline : none !important;
+    text-decoration : none !important;
     transition : opacity, 220ms;
 }
 button:hover, button:focus {
@@ -115,7 +115,7 @@ div.present-project-list-item-container {
 }
 div.present-more-project {
     text-align :center;
-    padding : 20px 0px;
+    padding : 30px 0px 20px 0px;
 }
     h5 {
         font-size:15px;
