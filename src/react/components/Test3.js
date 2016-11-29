@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { EditorState, ContentState, convertFromRaw } from 'draft-js'
 import SevenEditor, { Viewer } from './DraftEditor/SevenEditor'
 
 // import AddImageEditor from './DraftEditor/AddImageEditor'
