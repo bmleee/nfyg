@@ -7,6 +7,6 @@ var dbconfig = {
 
 module.exports = {
 	DEV_PORT: 3002,
-	EXPRESS_PORT: process.env.PORT || 8080,
+	EXPRESS_PORT: process.env.PORT || 3100,
 	MONGODB_URL: `mongodb://${dbconfig.dbuser}:${dbconfig.dbpassword}@ds041643.mlab.com:41643/seven_pictures`,
 };
