@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { EditorState } from 'draft-js';
-import { stateToHTML } from 'draft-js-export-html';
-import { stateFromHTML } from 'draft-js-import-html';
+import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
 
-import Editor from 'draft-js-plugins-editor';
+import Editor, { createEditorStateWithText } from 'draft-js-plugins-editor';
+
 import {
 	linkifyPlugin,
 	sideToolbarPlugin,
@@ -39,19 +38,21 @@ const { InlineToolbar } = inlineToolbarPlugin;
 const { UndoButton, RedoButton } = undoPlugin;
 const { AlignmentTool } = alignmentPlugin;
 
-
-
 export default class SevenEditor extends Component {
 	state = {
 		editorState: EditorState.createEmpty(),
 	};
 
 	onChange = (editorState) => {
+		console.log('arguments', arguments);
 		this.setState({
 			editorState,
 		});
 
-		if(this.props.onChange) this.props.onChange(editorState)
+		// avoid editorState === null
+		if(editorState && this.props.onChange) {
+			this.props.onChange(convertToRaw(editorState.getCurrentContent()))
+		}
 	};
 
 	focus = () => {
@@ -59,12 +60,15 @@ export default class SevenEditor extends Component {
 	};
 
 	render() {
+		let editorState = this.state.editorState;
+
 		return (
 			<div className={editorStyles.wrapper}>
 
 				<div className={editorStyles.editor} onClick={this.focus}>
 					<Editor
-						editorState={this.state.editorState}
+						editorState={editorState}
+						onCompositionEnd={this.onChange}
 						onChange={this.onChange}
 						plugins={plugins}
 						ref={(node) => this.editor = node}
@@ -77,13 +81,36 @@ export default class SevenEditor extends Component {
 					<AlignmentTool />
 					<ImageAdd
 						editorState={this.state.editorState}
-	          onChange={this.onChange}
-	          modifier={imagePlugin.addImage}
+						onChange={this.onChange}
+						modifier={imagePlugin.addImage}
 					/>
 					<UndoButton />
 					<RedoButton />
 				</div>
+			</div>
+		);
+	}
+}
 
+export class Viewer extends Component {
+	render() {
+		let {
+			raw
+		} = this.props;
+
+		const editorState = raw ?
+			EditorState.createWithContent(convertFromRaw(raw)) :
+			createEditorStateWithText('')
+
+		return (
+			<div className={editorStyles.wrapper}>
+				<div className={editorStyles.editor}>
+					<Editor
+						editorState={editorState}
+						readOnly={true}
+						plugins={plugins}
+					/>
+				</div>
 			</div>
 		);
 	}
