@@ -25,17 +25,19 @@ class _Dropzone extends Component {
 
 		return (
 			<div className="dropzone-container">
-				<Dropzone
-					onDrop={_onDrop}
-					{...this.props} >
-					<div>Try dropping some files here, or click to select files to upload.</div>
-				</Dropzone>
+
 				{
-					this.state.acceptedFiles.length > 0
-						? this.state.acceptedFiles.map(file => (
+					this.state.acceptedFiles.length > 0 ?
+						this.state.acceptedFiles.map(file => (
 							<img src={file.preview} alt=""/>
 						))
-						: null
+						: (
+							<Dropzone
+								onDrop={_onDrop}
+								{...this.props} >
+								<div>Try dropping some files here, or click to select files to upload.</div>
+							</Dropzone>
+						)
 				}
 			</div>
 
