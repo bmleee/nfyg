@@ -45,6 +45,14 @@ http://sharencare.me/sponsors/23 참조
  2. Redux 로 상태 저장하기
   - [project-temp-id]: proejct-editor ...
 
+### Draft-js
+ - 사용할 플러그인
+  1. 이미지
+  2. 사이드바
+  3. 인라인툴바
+  4. 언두
+  5. Linkinfy
+  6. 
 
 ---
 

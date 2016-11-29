@@ -62,19 +62,24 @@ module.exports = {
 					// 'isomorphic-style-loader?sourceMap',
 					// 'style-loader?sourceMap',
 					'style?sourceMap',
-					'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
+					// 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
+					'css?modules&importLoaders=1&localIdentName=[name]__[local]',
 				],
 			},
 			{ test: /\.global\.css$/, loader: 'style!raw' },
-			// from draft-js mention plugin
+			// from draft-js plugins
 			{
 				test: /plugin\.css$/,
+				// loaders: [
+				// 	'style', 'css'
+				// ],
 				loaders: [
-					'style', 'raw',
-					'css',
+					'style?sourceMap',
+					// 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
+					'css?modules&importLoaders=1&localIdentName=[local]',
 				],
+
 			},
-			{test: /\.global\.css$/, loader: 'style!raw'},
 			{ test: /\.svg$/, loader: 'babel!react-svg' }
 		]
 	},

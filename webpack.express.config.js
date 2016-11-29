@@ -78,12 +78,16 @@ module.exports = {
 				],
 			},
 			{ test: /\.global\.css$/, loader: 'isomorphic-style-loader!raw' },
-			// from draft-js mention plugin
+			// from draft-js plugins
 			{
 				test: /plugin\.css$/,
+				// loaders: [
+				// 	'isomorphic-style-loader', 'raw', 'css-loader'
+				// ],
 				loaders: [
-					'isomorphic-style-loader', 'raw',
-					'css',
+					'isomorphic-style-loader?sourceMap',
+					// 'style-loader?sourceMap',
+					'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
 				],
 			},
 			{ test: /\.svg$/, loader: 'babel!react-svg' },
