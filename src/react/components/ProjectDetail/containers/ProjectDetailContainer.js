@@ -15,8 +15,8 @@ class ProjectDetailContainer extends Component {
 			ranking: {},
 			indirectSupporters: {},
 			directSupporters: {},
+			selectValue: '',
 			qna: {},
-
 			loaded: false,
 		}
 
@@ -42,37 +42,12 @@ class ProjectDetailContainer extends Component {
 		})
 	}
 
-	getChildContext() {
-		let {
-			heading,
-			rewards,
-			overview,
-			post,
-			ranking,
-			indirectSupporters,
-			directSupporters,
-			qna,
-		} = this.state; // TODO: project should be fetch in async way
-
-		return {
-			heading,
-			rewards,
-			overview,
-			post,
-			ranking,
-			indirectSupporters,
-			directSupporters,
-			_onSelectOptionChange: this._onSelectOptionChange,
-			qna
-		};
-	}
-
 	_onSelectOptionChange(o) {
 		let { indirectSupporters } = this.state;
 
-
 		this.setState({
 			indirectSupporters: _.sortBy(indirectSupporters, o.value).reverse(),
+			selectValue: o.value,
 		})
 
 		console.log(_.sortBy(indirectSupporters, o.value));
@@ -87,7 +62,8 @@ class ProjectDetailContainer extends Component {
 			ranking,
 			indirectSupporters,
 			directSupporters,
-			qna
+			selectValue,
+			qna,
 	 } = this.state; // TODO: project should be fetch in async way
 
 		let children = this.props.children
@@ -95,6 +71,7 @@ class ProjectDetailContainer extends Component {
 				ranking,
 				indirectSupporters,
 				directSupporters,
+				selectValue,
 				_onSelectOptionChange: this._onSelectOptionChange,
 				getChildContext: this.getChildContext,
 			});
