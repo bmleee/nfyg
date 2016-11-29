@@ -8,3 +8,5 @@ bin
 .gulp-cache
 npm-debug.*
 .tern-project
+.c9
+env.js
