@@ -142,6 +142,11 @@ export default class ProjectEditor extends Component {
 				creatorDescription: { $set: creatorDescription }
 			}
 		})),
+		_onSponsorNameSubmit: (sponsorName) => this.setState(update(this.state, {
+			sponsor: {
+				sponsorName: { $set: sponsorName }
+			}
+		})),
 	}
 
 	// Funding

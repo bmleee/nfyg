@@ -68,7 +68,11 @@ const CreatorDescriptionWrapper = ({value}) => !!value
 const CreatorDescriptionName = ({value, onChange}) =>
 	<textarea rows="3" cols="45" value={value} onChange={onChange}/>
 
-
+const SponsorNameWrapper = ({value}) => !!value
+? <span>{value}</span>
+: <span>스폰서 이름을 입력해주세요</span>
+const SponsorNameForm = ({value, onChange}) =>
+	<input type="text" value={value} onChange={onChange}/>
 
 const Abstract = ({
 	abstract: {
@@ -83,6 +87,9 @@ const Abstract = ({
 		creatorImgSrc,
 		creatorDescription,
 	},
+	sponsor: {
+		sponsorName,
+	},
 
 	// onSubmit callbacks
 	_onLongTitleSubmit,
@@ -94,6 +101,8 @@ const Abstract = ({
 	_onCreatorNameSubmit,
 	_onCreatorImgSrcSubmit,
 	_onCreatorDescriptionSubmit,
+
+	_onSponsorNameSubmit,
 }) => {
 
 
@@ -187,6 +196,19 @@ const Abstract = ({
 				onSubmit={_onCreatorDescriptionSubmit}
 				Wrapper={CreatorDescriptionWrapper}
 				Form={CreatorDescriptionName}
+			/>
+
+			<span>-----</span>
+
+			<FormWrapper
+				title="Sponsor Name"
+				valueType={VALUE_TYPE.TEXT}
+				alt="스폰서 이름을 입력 해 주세요"
+				initialValue={sponsorName}
+				submitCaption="입력하기"
+				onSubmit={_onSponsorNameSubmit}
+				Wrapper={SponsorNameWrapper}
+				Form={SponsorNameForm}
 			/>
 
 		</div>
