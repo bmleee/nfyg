@@ -19,6 +19,7 @@
   "license": "ISC",
   "dependencies": {
     "aws-sdk": "^2.6.10",
+    "axion": "^0.1.0",
     "body-parser": "^1.15.2",
     "bootstrap": "^3.3.7",
     "chai": "^3.5.0",
