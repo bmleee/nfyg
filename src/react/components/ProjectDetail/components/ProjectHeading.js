@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import Progress from 'react-progressbar';
 
 class ProjectHeading extends Component {
 
@@ -35,15 +36,14 @@ class ProjectHeading extends Component {
 		 */
 		return (
 			<div className="project-detail-heading">
-
 				<div className="project-detail-info" style={infoBackground}>
 					<div className="project-info">
 						<div className="project-sponsor-logo">
 							{/* <img src={logoSrc} width={32} height={32} alt=""/> */}
-							<p>후원사명</p>
+							<p className="project-sponsor-name">후원사명</p>
 						</div>
 						<h1 className="project-title">{title}</h1>
-						<div className="project-info-bottom"><p>
+						<div className="project-info-bottom">
 							{/* <div className="project-sharing-icon">
 								<img className="sharing-icon" src="https://7pictures.co.kr/wp-content/uploads/2016/08/likes.png" scale="0" />
 								{ likes }
@@ -55,15 +55,19 @@ class ProjectHeading extends Component {
 							<div className="project-sharing-info">
 								{sharingInfo} 외 {numIndirectSupports}명이 공유로 후원함
 							</div> */}
+							<p>
 							<div className="project-current-money">
-							<div>{currentMoney}원 후원 중 :: {currentMoney / targetMoney}%</div>
-							<h5>{remainingDays}일 남음</h5>
-							</div></p>
+							</div>
+							</p>
 						</div>
+						<h4 className="project-heading-summary">D-{remainingDays}  /  {currentMoney / targetMoney * 100}%  /  {currentMoney.toLocaleString()}원</h4>
 					</div>
+					
+					<Progress completed={75} />
 				</div>
 				<button className="share-button">공유로 프로젝트 후원하기</button>
 			</div>
+			
 			)
 	}
 

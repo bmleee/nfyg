@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import 'whatwg-fetch'
+import FontAwesome from 'react-fontawesome'
+
+import { facebook_login } from '../../../../lib/firebase'
 
 const API_URL = '/api/test-api/signup'
 const API_HEADERS = {
@@ -40,32 +43,41 @@ export default class Signup extends Component {
 
 		}
 	}
+	
+	_onFacebookClick = () => {
+		facebook_login()
+	}
 
 	render() {
 
 		return (
-			<div>
+			<div className="login-page">
+			<div className="user-login">
+			<img className="login-7pictures-logo" src="//52.78.180.103:8080/assets/images/7pictures_logo.png" />
+				<button className="fb-login-btn" onClick={this._onFacebookClick}>
+					<FontAwesome className="fb-login-icon" name='facebook' size='lg' />
+					페이스북으로 회원가입
+				</button>
+				<p className="login-more">또는</p>
+				
 				<form ref="form" method="post" action="/api/users/signup" encType="multipart/form-data" onSubmit={this._submit}>
 					<div>
-						<label>Email:</label>
-						<input type="email" name="email" />
+						<input type="email" className="user-login-id" name="email" placeholder="이메일" />
 					</div>
 					<div>
-						<label>Password:</label>
-						<input type="password" name="password" />
+						<input type="password" className="user-login-password" name="password" placeholder="비밀번호" />
 					</div>
 					<div>
-						<label>이름:</label>
-						<input type="text" name="user_name" />
+						<input type="text" className="user-login-username" name="user_name" placeholder="이름" />
 					</div>
+					{/* <div>
+						<input type="text" className="user-login-id" name="nick_name" placeholder="닉네임" />
+					</div> */}
 					<div>
-						<label>닉네임:</label>
-						<input type="text" name="nick_name" />
-					</div>
-					<div>
-						<input type="submit" value="Sign up" />
+						<input type="submit" className="login-btn" value="JOIN 7Pictures" />
 					</div>
 				</form>
+			</div>
 			</div>
 		)
 	}

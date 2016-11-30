@@ -12,7 +12,7 @@ div, span, h1, h2, h3, h4, button {
     
 }
 ::selection {
-    background-color : #f55035;
+    background-color : #4b709a;
     color : #fff;
 }
 a, a:hover, a:focus {
@@ -40,7 +40,7 @@ button:hover, button:focus {
     z-index: 55;
     margin: 0 auto;
     width: 699px;
-    background : #f55035;
+    background : #4b709a;
     border : none;
     outline : none;
 }
@@ -87,6 +87,7 @@ div.recent-exhibition-list-button, div.magazine-list-button {
     }
     div.present-project-list-item-caption {
         padding : 8px 10px;
+        height : 125px;
     }
     div.recent-exhibition-list-item {
         width : 33.3333%;
@@ -168,7 +169,7 @@ div.present-more-project {
     z-index: 55;
     margin: 0 auto;
     width: 100%;
-    background : #f55035;
+    background : #4b709a;
 }
    div.home-body {
     padding: 0px 20px;
@@ -233,6 +234,9 @@ div.recent-exhibition-list-item {
  
 // mobile ↓↓↓↓ 
 @media (max-width: 500px) {
+    div.present-project-list-item-caption {
+        height : 120px;
+    }
     .image-gallery-slides {
    width: 100%; 
 }
@@ -281,7 +285,7 @@ position: absolute;
     z-index: 55;
     margin: 0 auto;
     width: 100%;
-    background : #f55035;
+    background : #4b709a;
 }
  div.home-body {
     padding: 0px;

@@ -16,7 +16,22 @@
 		.sharing-icon {
 			width: 24px; height: 24px; margin-bottom:3px !important; vertical-align:middle;
 		}
-
+		.progressbar-container {
+			height : 7px;
+			background : #ddd;
+			border-radius : 0px 0px 0px 0px;
+			@media (max-width: 500px) {
+				height : 5px;
+			}
+		}
+		.progressbar-progress {
+			height : 7.3px !important;
+			background : -webkit-linear-gradient(left, #4b709a 0%, #DB96DB 100%);
+			border-radius : 0px 0px 0px 0px !important;
+			@media (max-width: 500px) {
+				height : 5.3px !important;
+			}
+		}
 	}
 }
 
@@ -38,4 +53,17 @@
 	border-radius : 50px;
 	border : 2px solid #fff;
 	margin-bottom : 4.5px;
+}
+
+.project-title {
+	margin-top : 10px;
+}
+.project-sponsor-name {
+	padding : 3px 5px;
+	border : 1px solid #fff;
+	border-radius : 1px;
+	display : inline-block;
+}
+.project-heading-summary {
+	color :rgba(255, 255, 255, 0.9);
 }
