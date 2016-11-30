@@ -14,7 +14,7 @@ import * as actionCreators from '../../actions/ProjectEditorActionCreators'
 import { canUseDOM } from '~/src/lib/utils'
 
 import _ from 'lodash' // use throttle or debounce
-
+import 'whatwg-fetch'
 import 'babel-polyfill'
 
 export default class ProjectEditor extends Component {
@@ -33,6 +33,10 @@ export default class ProjectEditor extends Component {
 			creatorName: '',
 			creatorImgSrc: '',
 			creatorLocation: ''
+		},
+
+		sponser: {
+			sponserName: '',
 		},
 
 		// Funding
@@ -60,6 +64,10 @@ export default class ProjectEditor extends Component {
 		}
 	}
 
+	componentWillMount() {
+		// 서버에서 State를 가져와 채워야 한다면 ...
+	}
+
   render() {
 		let {
 			children
@@ -81,7 +89,9 @@ export default class ProjectEditor extends Component {
 		} else {
 			return (
 				<div className="project-editor">
-					<ProjectEditorTab />
+					<ProjectEditorTab
+						saveProject={this.saveProject}
+					/>
 					 { children }
 				</div>
 			)
@@ -230,18 +240,39 @@ export default class ProjectEditor extends Component {
 				}
 			}))
 		},
-		_onPart1Submit: (value) => this.setState(update(this.state, {
+		_onPart1Submit: (raw) => this.setState(update(this.state, {
 			overview: {
-				part1: { $set: value.toString('html') }
+				part1: { $set: raw }
 			}
 		})),
-		_onPart2Submit: (value) => this.setState(update(this.state, {
+		_onPart2Submit: (raw) => this.setState(update(this.state, {
 			overview: {
-				part2: { $set: value.toString('html') }
+				part2: { $set: raw }
 			}
 		}))
 	}
+
+	// 서버로 전송
+	saveProject = async () => {
+		console.log('this', this)
+		console.log('state', JSON.stringify(this.state, undefined, 4));
+
+	// 	const API_URL = `/api/...`
+	// 	const API_HEADERS = {
+	// 	}
+	//
+	// 	const res = await fetch(API_URL, {
+	// 		headers: API_HEADERS,
+	// 		// ... authenticate!
+	// 	})
+	}
+
+	// 서버에서 받기
+	fetchProject = async () => {
+
+	}
 }
+
 
 // const mapStateToProps = (state) => ({
 // 	ProjectEditor: state.ProjectEditor
@@ -254,4 +285,3 @@ export default class ProjectEditor extends Component {
 // 	mapStateToProps,
 // 	mapDispatchToProps
 // )(ProjectEditor)
-
