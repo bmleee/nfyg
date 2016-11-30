@@ -35,8 +35,8 @@ export default class ProjectEditor extends Component {
 			creatorLocation: ''
 		},
 
-		sponser: {
-			sponserName: '',
+		sponsor: {
+			sponsorName: '',
 		},
 
 		// Funding

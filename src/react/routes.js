@@ -31,7 +31,7 @@ import Funding 	from './components/ProjectEditor/components/Funding/Funding'
 import Overview 	from './components/ProjectEditor/components/Overview/Overview'
 
 import { Login, Profile, Signup } from './components/User'
-import { Sponsers } from './components/Sponsors'
+import { Sponsors } from './components/Sponsors'
 
 const App = ({ children }) => (
 	<div>
@@ -54,7 +54,7 @@ const App = ({ children }) => (
 			{' '}
 			<Link to="/profile">Profile</Link>
 			{' '}
-			<Link to="/sponsers">Sponsers</Link>
+			<Link to="/sponsors">Sponsors</Link>
 			{' '}
 			<Link to="/test1">Test1</Link>
 			{' '}
@@ -116,7 +116,7 @@ const routes = (
 		<Route path="login" component={Login}></Route>
 		<Route path="signup" component={Signup}></Route>
 		<Route path="profile" component={Profile}></Route>
-		<Route path="sponsers" component={Sponsers}></Route>
+		<Route path="sponsors" component={Sponsors}></Route>
 
 		<Route path="test1" component={Test1}></Route>
 		<Route path="test2" component={Test2}></Route>
