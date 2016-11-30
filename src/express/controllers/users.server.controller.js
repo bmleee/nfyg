@@ -127,12 +127,12 @@ exports.saveOAuthUserProfile = function(req, profile, done) {
 			// If a user could not be found, create a new user, otherwise, continue to the next middleware
 			if (!user) {
 				// Set a possible base username
-				var possibleUsername = profile.username || ((profile.email) ? profile.email.split('@')[0] : '');
+				var possibleEmail = ((profile.email) ? profile.email.split('@')[0] : '');
 
 				// Find a unique available username
-				User.findUniqueUsername(possibleUsername, null, function(availableUsername) {
+				User.findUniqueUsername(possibleEmail, null, function(availableEmail) {
 					// Set the available user name
-					profile.username = availableUsername;
+					profile.email = availableEmail;
 
 					// Create the user
 					user = new User(profile);
