@@ -1,28 +1,9 @@
 import React, { Component, PropTypes, Children } from 'react'
+import Editor from '~/src/react/components/DraftEditor/SevenEditor'
+
 import cx from 'classnames'
 
 import { VALUE_TYPE } from './constants'
-
-// when window object is undeclared...
-import { canUseDOM } from '~/src/lib/utils'
-if(canUseDOM) {
-	const rte = require('~/src/react/components/react-rte/src/RichTextEditor')
-	const SevenEditor = require('~/src/react/components/react-rte/src/SevenEditor')
-	console.log('rte', rte);
-	window.RichTextEditor = rte.default
-	window.RichTextEditor.createEmptyValue = rte.createEmptyValue
-	window.RichTextEditor.createValueFromString = rte.createValueFromString
-	window.SevenEditor = SevenEditor.default
-} else {
-	global.RichTextEditor = {
-		createEmptyValue() {},
-		createValueFromString() {}
-	}
-	global.Editor = {}
-	global.SevenEditor = {}
-}
-
-
 
 /**
  * children
@@ -30,10 +11,6 @@ if(canUseDOM) {
  * 	[1] : form to show when open
  */
 export default class FormWrapper extends Component {
-	state = {
-		open: false,
-		value: null
-	}
 	static propTypes = {
 		title: PropTypes.string.isRequired,
 
@@ -53,18 +30,19 @@ export default class FormWrapper extends Component {
 
 	constructor(props) {
 		super(props)
-
 		const {
 			initialValue,
 			valueType,
 			handlers
 		} = this.props
 
-		let value = this._defaultValue(valueType, initialValue)
 
 		if (!!handlers) this.handlers = this._bindHandlers(handlers)
 
-		this.setState({ value })
+		this.state = {
+			open: false,
+			value: this._defaultValue(this.props.valueType, this.props.initialValue),
+		}
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -72,9 +50,6 @@ export default class FormWrapper extends Component {
 		switch (valueType) {
 			case VALUE_TYPE.RICH_TEXT:
 				let value = this._defaultValue(valueType, initialValue)
-				console.log('componentWillReceiveProps.value', value);
-				console.log('componentWillReceiveProps.value.toString()', value.toString('html'));
-				console.log('componentWillReceiveProps.value.getEditorState()', value.getEditorState);
 				this.setState({ value })
 				break;
 			default:
@@ -95,15 +70,12 @@ export default class FormWrapper extends Component {
 			className,
 			children,
 			Form,
-			Wrapper
+			Wrapper,
+			initialValue,
 		} = this.props
 
-		if (valueType === VALUE_TYPE.RICH_TEXT) {
-			if (!value) value = RichTextEditor.createEmptyValue()
-			else if (typeof value === 'string') value = this._defaultValue(valueType, value)
-		}
-
 		console.log('FormWrapper.value', value);
+		console.log('FormWrapper.valueType', valueType);
 
 		className = cx('form-wrapper', className)
 
@@ -111,7 +83,7 @@ export default class FormWrapper extends Component {
 			<div className={className}>
 				<span className="form-wrapper-title">{title}</span>
 				<div className="form-wrapper-value">
-					<Wrapper value={value} handlers={this.handlers} />
+					<Wrapper value={initialValue} handlers={this.handlers} />
 				</div>
 				<button onClick={this._onClose}>{submitCaption}</button>
 			</div>
@@ -169,10 +141,11 @@ export default class FormWrapper extends Component {
 
 	_defaultValue = (valueType, initialValue) => {
 		switch (valueType) {
+			case VALUE_TYPE.MONEY:
+			case VALUE_TYPE.NUMBER:
+				return 0
 			case VALUE_TYPE.RICH_TEXT:
-				let v = !!initialValue ? RichTextEditor.createValueFromString(initialValue, 'html') : RichTextEditor.createEmptyValue()
-				console.log('_defaultValue.value', v);
-				return v;
+				return initialValue || '';
 			default:
 				return ''
 		}
