@@ -40,11 +40,12 @@ const { AlignmentTool } = alignmentPlugin;
 
 export default class SevenEditor extends Component {
 	state = {
-		editorState: EditorState.createEmpty(),
-	};
+		editorState: this.props.raw ?
+			EditorState.createWithContent(convertFromRaw(this.props.raw)) :
+			EditorState.createEmpty(),
+	}
 
 	onChange = (editorState) => {
-		console.log('arguments', arguments);
 		this.setState({
 			editorState,
 		});
@@ -68,7 +69,6 @@ export default class SevenEditor extends Component {
 				<div className={editorStyles.editor} onClick={this.focus}>
 					<Editor
 						editorState={editorState}
-						onCompositionEnd={this.onChange}
 						onChange={this.onChange}
 						plugins={plugins}
 						ref={(node) => this.editor = node}
