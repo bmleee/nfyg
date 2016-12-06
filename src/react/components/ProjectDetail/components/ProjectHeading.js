@@ -4,6 +4,7 @@ import Progress from 'react-progressbar';
 class ProjectHeading extends Component {
 
 	render() {
+		console.log('ProjectHeading', this);
 		const {
 			abstract: {
 				longTitle,
@@ -41,7 +42,6 @@ class ProjectHeading extends Component {
 
 		} = this.props;
 
-		console.log('ProjectHeading', this);
 
 		let remainingDays = ( new Date(dateTo).getTime() - new Date(dateFrom).getTime() ) / 1000 / 60 / 60 / 24
 
@@ -68,7 +68,7 @@ class ProjectHeading extends Component {
 							<img src={sponsorLogoSrc} width={32} height={32} alt=""/>
 							<p>{sponsorDisplayName}</p>
 						</div>
-						<h1 className="project-title">{title}</h1>
+						<h1 className="project-title">{longTitle}</h1>
 						<div className="project-info-bottom">
 							{/* <div className="project-sharing-icon">
 								<img className="sharing-icon" src="https://7pictures.co.kr/wp-content/uploads/2016/08/likes.png" scale="0" />
@@ -86,7 +86,7 @@ class ProjectHeading extends Component {
 								</div>
 							</p>
 						</div>
-						<div className="project-supporters-num">공유후원 {numIndirectSupports}명 | 리워드후원 {numDirectSupports}명</div>
+						<div className="project-supporters-num">공유후원 {indirectSupporters.length}명 | 리워드후원 {directSupporters.length}명</div>
 						<Progress completed={Math.round(currentMoney / targetMoney * 100)} />
 						<div className="project-heading-summary-money">
 						<div className="project-heading-summary-percent">{Math.round(currentMoney / targetMoney * 100)}<span className="heading-summary-status">%</span></div>

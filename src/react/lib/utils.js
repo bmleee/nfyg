@@ -75,6 +75,7 @@ export function value2label (options, targetValue) {
 export function date2string (date) {
   if (typeof date === 'string' || typeof date === 'number') {
     date = new Date(date)
-  } 
-  return date.toISOString().slice(0,10).replace(/-/g,".");
+  }
+  return date.toISOString().slice(0,10).replace(/-/g,".")
+    .split('.').map(x => Number(x)).join('.');
 }

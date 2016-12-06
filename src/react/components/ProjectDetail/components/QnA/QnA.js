@@ -7,6 +7,8 @@ import Select from 'react-select';
 
 import { PostComments } from '../Post/';
 
+import {date2string} from '~/src/react/lib/utils'
+
 const borderStyle = { border: '1px solid gray' }
 
 
@@ -64,7 +66,7 @@ class QnA extends Component {
 				</div>
 				<div>
 					<span>함께하고 있는 후원자: {numSupporters}명</span>
-					<span>작성일: {created_at}</span>
+					<span>작성일: {date2string(created_at)}</span>
 				</div>
 				<div>
 					{ post.map( ({type, content}, index) => (

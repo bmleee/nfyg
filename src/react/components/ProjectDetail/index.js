@@ -58,6 +58,8 @@ export default class ProjectDetailContainer extends Component {
 	async componentDidMount() {
 		const res = await fetchJSONFile('project')
 
+		console.log('loaded project', res);
+
 		this.setState({
 			...res,
 			loaded: true,
