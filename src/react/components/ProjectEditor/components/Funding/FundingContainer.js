@@ -5,7 +5,7 @@ import update from 'immutability-helper'
 
 export default class FundingContainer extends Component {
 	state = {
-		currentMonoey: 0,   // 직접 / 간접 후원에 의해 추가됨
+		currentMoney: 0,   // 직접 / 간접 후원에 의해 추가됨
 		targetMoney: 0,
 		dateFrom: new Date().toISOString().substring(0, 10),     							// 작성 시작 일
 		dateTo: new Date(Date.now() + 1000 * 60 * 60 * 24).toISOString().substring(0, 10),	// 바로 다음날

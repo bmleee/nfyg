@@ -1,7 +1,12 @@
 import React, { Component, PropTypes } from 'react'
 import Select from 'react-select'
+
 import FormWrapper from '~/src/react/components/FormWrapper/FormWrapper'
 import { VALUE_TYPE } from '~/src/react/components/FormWrapper/constants'
+
+import { SelectOptions } from '~/src/react/constants'
+import { value2label } from '~/src/react/lib/utils'
+
 
 const TargetMoneyWrapper = ({value}) => !!value
 ? (
@@ -35,11 +40,7 @@ const RewardWrapper = ({value, handlers}) => {
 			<div className="reward-wrapper-item">
 				<span>{title}</span>
 				<span>{description}</span>
-				{
-					isDirectSupport
-						? '직접 후원'
-						: '간접 후원'
-				}
+				{value2label(SelectOptions.Reward, isDirectSupport)}
 				<span>{thresholdMoney.toLocaleString()}원</span>
 				<button onClick={() => deleteReward(index)}>삭제하기</button>
 			</div>
@@ -85,10 +86,7 @@ const RewardForm = ({value, handlers, ...otherProps}) => {
 				<span>직 / 간접 후원 여부</span>
 				<Select
 					value={isDirectSupport} onChange={_onIsDirectSupport}
-					options={[
-						{value: true, label: '직접 후원'},
-						{value: false, label: '간접 후원'}
-					]}
+					options={SelectOptions.Reward}
 				/>
 			</div>
 

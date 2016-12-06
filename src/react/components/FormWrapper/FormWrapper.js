@@ -5,11 +5,6 @@ import cx from 'classnames'
 
 import { VALUE_TYPE } from './constants'
 
-/**
- * children
- * 	[0] : wrapper to show when !open
- * 	[1] : form to show when open
- */
 export default class FormWrapper extends Component {
 	static propTypes = {
 		title: PropTypes.string.isRequired,
@@ -19,7 +14,7 @@ export default class FormWrapper extends Component {
 		initialValue: PropTypes.any.isRequired, // value from parent component
 		submitCaption: PropTypes.any.isRequired, // text to guide user to submit
 		onSubmit: PropTypes.any.isRequired, // callback when user want to save new value
-		handlers: PropTypes.func, // callback when user want to save new value
+		handlers: PropTypes.any, // callback when user want to save new value
 
 		form: PropTypes.node.isRequired,
 		wrapper: PropTypes.node.isRequired,
@@ -68,7 +63,6 @@ export default class FormWrapper extends Component {
 			alt,
 			submitCaption,
 			className,
-			children,
 			Form,
 			Wrapper,
 			initialValue,
@@ -109,10 +103,9 @@ export default class FormWrapper extends Component {
 				value = e.value
 				break
 			case VALUE_TYPE.REWARD:
-				console.log('REWARD CHANGED');
-				console.log('VALUE', this.state.value);
+			case VALUE_TYPE.ARTWORK:
+			case VALUE_TYPE.RECOMMEND:
 				return;
-				break;
 			case VALUE_TYPE.RICH_TEXT:
 				value = e;
 				break;
@@ -133,6 +126,7 @@ export default class FormWrapper extends Component {
 		})
 	}
 	_onSubmit = () => {
+		console.log('FormWrapper._onSubmit', this.state.value);
 		this.props.onSubmit(this.state.value)
 		this.setState({
 			open: false,
@@ -144,8 +138,13 @@ export default class FormWrapper extends Component {
 			case VALUE_TYPE.MONEY:
 			case VALUE_TYPE.NUMBER:
 				return 0
+
 			case VALUE_TYPE.RICH_TEXT:
 				return initialValue || '';
+
+			case VALUE_TYPE.REWARD:
+			case VALUE_TYPE.ARTWORK:
+			case VALUE_TYPE.RECOMMEND:
 			default:
 				return ''
 		}
@@ -154,6 +153,7 @@ export default class FormWrapper extends Component {
 
 	_bindHandlers = (handlers) => {
 		let _handlers = {}
+		console.log('handlers catched', handlers)
 		for(let k of Object.keys(handlers)) {
 			_handlers[k] = handlers[k].bind(this)
 		}

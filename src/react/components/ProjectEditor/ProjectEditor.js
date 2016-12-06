@@ -3,7 +3,7 @@ import ProjectEditorTab from './ProjectEditorTab'
 
 import update from 'immutability-helper'
 
-import { ProjectEditorConstants as CONSTANTS } from '../../constants'
+import axios from 'axios'
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -27,12 +27,15 @@ export default class ProjectEditor extends Component {
 			imgSrc: '',         //
 			category: '',       // 건강, 라이프, ...
 			projectName: '',   // projects/:project_name
+			state: '', 			 // not_started, started, finished
+			postIntro: '',
 		},
 
 		creator: {
 			creatorName: '',
 			creatorImgSrc: '',
-			creatorLocation: ''
+			creatorLocation: '',
+			creatorDescription: '',
 		},
 
 		sponsor: {
@@ -41,7 +44,7 @@ export default class ProjectEditor extends Component {
 
 		// Funding
 		funding: {
-			currentMonoey: 0,   // 직접 / 간접 후원에 의해 추가됨
+			currentMoney: 0,   // 직접 / 간접 후원에 의해 추가됨
 			targetMoney: 0,
 			dateFrom: new Date().toISOString().substring(0, 10),     							// 작성 시작 일
 			dateTo: new Date(Date.now() + 1000 * 60 * 60 * 24).toISOString().substring(0, 10),	// 바로 다음날
@@ -90,7 +93,7 @@ export default class ProjectEditor extends Component {
 			return (
 				<div className="project-editor">
 					<ProjectEditorTab
-						saveProject={this.saveProject}
+						save={this.save}
 					/>
 					 { children }
 				</div>
@@ -107,12 +110,12 @@ export default class ProjectEditor extends Component {
 				}
 			}))
 		},
-		_onShortTitleSubmit: () => (shortTitle) => this.setState(update(this.state, {
+		_onShortTitleSubmit: (shortTitle) => this.setState(update(this.state, {
 			abstract: {
 				shortTitle: { $set: shortTitle }
 			}
 		})),
-		_onImgSrcSubmit: () => (imgSrc) => this.setState(update(this.state, {
+		_onImgSrcSubmit: (imgSrc) => this.setState(update(this.state, {
 			abstract: {
 				imgSrc: { $set: imgSrc }
 			}
@@ -125,6 +128,16 @@ export default class ProjectEditor extends Component {
 		_onProjectNameSubmit: (projectName) => this.setState(update(this.state, {
 			abstract: {
 				projectName: { $set: projectName }
+			}
+		})),
+		_onStateSubmit: (state) => this.setState(update(this.state, {
+			abstract: {
+				state: { $set: state }
+			}
+		})),
+		_onPostIntroSubmit: (postIntro) => this.setState(update(this.state, {
+			abstract: {
+				postIntro: { $set: postIntro }
 			}
 		})),
 		_onCreatorNameSubmit: (creatorName) => this.setState(update(this.state, {
@@ -258,18 +271,13 @@ export default class ProjectEditor extends Component {
 	}
 
 	// 서버로 전송
-	saveProject = async () => {
-		console.log('this', this)
-		console.log('state', JSON.stringify(this.state, undefined, 4));
-
-	// 	const API_URL = `/api/...`
-	// 	const API_HEADERS = {
-	// 	}
-	//
-	// 	const res = await fetch(API_URL, {
-	// 		headers: API_HEADERS,
-	// 		// ... authenticate!
-	// 	})
+	save = async () => {
+		try {
+			const res = await axios.post(API_URL, {...this.state})
+			console.log('save response', res);
+		} catch (e) {
+			console.error('save error', e);
+		}
 	}
 
 	// 서버에서 받기

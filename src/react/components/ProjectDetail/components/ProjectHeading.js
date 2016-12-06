@@ -4,19 +4,45 @@ class ProjectHeading extends Component {
 
 	render() {
 		const {
-			imgSrc,
-			logoSrc,
-			title,
-			remainingDays,
-			likes,
-			shares,
-			comments,
-			numIndirectSupports,
-			numDirectSupports,
-			recent3Users,
-			currentMoney,
-			targetMoney
+			abstract: {
+				longTitle,
+				shortTitle,
+				imgSrc,
+				category,
+			},
+
+			creator: {
+				creatorName,
+				creatorImgSrc,
+			},
+
+			sponsor: {
+				sponsorDisplayName,
+				sponsorLogoSrc,
+			},
+
+			funding: {
+				currentMoney,
+				targetMoney,
+				dateFrom,
+				dateTo,
+			},
+
+			summary: {
+				likes,
+				shares,
+				comments,
+				recent3Users,
+			},
+
+			directSupporters,
+			indirectSupporters,
+
 		} = this.props;
+
+		console.log('ProjectHeading', this);
+
+		let remainingDays = ( new Date(dateTo).getTime() - new Date(dateFrom).getTime() ) / 1000 / 60 / 60 / 24
 
 		const sharingInfo = recent3Users.map( (fbId, index) => (
 			<img className="sharing-fb-icon" key={index} width={32} height={32} src={`https://graph.facebook.com/${fbId}/picture`} scale="0"/>
@@ -38,10 +64,10 @@ class ProjectHeading extends Component {
 				<div className="project-detail-info" style={infoBackground}>
 					<div className="project-info">
 						<div className="project-sponsor-logo">
-							{/* <img src={logoSrc} width={32} height={32} alt=""/> */}
-							<p>후원사명</p>
+							<img src={sponsorLogoSrc} width={32} height={32} alt=""/>
+							<p>{sponsorDisplayName}</p>
 						</div>
-						<h1 className="project-title">{title}</h1>
+						<h1 className="project-title">{longTitle}</h1>
 						<div className="project-info-bottom">
 							<p>
 								{/* <div className="project-sharing-icon">
@@ -68,21 +94,6 @@ class ProjectHeading extends Component {
 			)
 	}
 
-}
-
-ProjectHeading.propTypes = {
-	imgSrc: PropTypes.string.isRequired,
-	logoSrc: PropTypes.string.isRequired,
-	title: PropTypes.string.isRequired,
-	remainingDays: PropTypes.number.isRequired,
-	likes: PropTypes.number.isRequired,
-	shares: PropTypes.number.isRequired,
-	comments: PropTypes.number.isRequired,
-	numIndirectSupports: PropTypes.number.isRequired,
-	numDirectSupports: PropTypes.number.isRequired,
-	recent3Users: PropTypes.arrayOf(PropTypes.any).isRequired,
-	currentMoney: PropTypes.number.isRequired,
-	targetMoney: PropTypes.number.isRequired,
 }
 
 export default ProjectHeading;

@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import Select from 'react-select';
 
+import {date2string} from '~/src/react/lib/utils';
+
 import _ from 'lodash';
 
 import 'babel-polyfill';
@@ -90,7 +92,7 @@ class Ranking extends Component {
 					</p>
 
 					<p className="sharing-summary">
-				    <span><p className="sharing-name">{name}</p>{' '}{String(new Date(support_at)) /* TODO: Date to string... */}</span>
+				    <span><p className="sharing-name">{name}</p>{' '}{date2string(support_at) /* TODO: Date to string... */}</span>
 				    <span>{message}</span>
 				    <span><p className="sharing-money">{money.toLocaleString()}</p>원을 후원함</span>
 	        </p>
@@ -131,37 +133,5 @@ class Ranking extends Component {
 
 }
 
-Ranking.contextTypes = {
-	ranking: PropTypes.shape({
-		recent3DirectSupporters: PropTypes.arrayOf(
-			PropTypes.string.isRequired,
-		).isRequired,
-		recent3IndirectSupporters: PropTypes.arrayOf(
-			PropTypes.string.isRequired,
-		).isRequired,
-		selectOptions: PropTypes.arrayOf(PropTypes.shape({
-			value: PropTypes.string.isRequired,
-			label: PropTypes.string.isRequired,
-		})).isRequired,
-	}).isRequired,
-	directSupporters: PropTypes.arrayOf(PropTypes.shape({
-		fbId: PropTypes.string.isRequired,
-		name: PropTypes.string.isRequired,
-		money: PropTypes.number.isRequired,
-		support_at: PropTypes.number.isRequired,
-	}).isRequired).isRequired,
-	indirectSupporters: PropTypes.arrayOf(PropTypes.shape({
-		fbId: PropTypes.string.isRequired,
-		name: PropTypes.string.isRequired,
-		money: PropTypes.number.isRequired,
-		support_at: PropTypes.number.isRequired,
-		message: PropTypes.string.isRequired,
-		likes: PropTypes.number.isRequired,
-		comments: PropTypes.number.isRequired,
-		shares: PropTypes.number.isRequired,
-		rank: PropTypes.number.isRequired,
-	}).isRequired).isRequired,
-	_onSelectOptionChange: PropTypes.func.isRequired,
-}
 
 export default Ranking;
