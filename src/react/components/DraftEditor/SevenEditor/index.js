@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
+import {stateToHTML} from 'draft-js-export-html';
 
 import Editor, { createEditorStateWithText } from 'draft-js-plugins-editor';
 
@@ -50,9 +51,14 @@ export default class SevenEditor extends Component {
 			editorState,
 		});
 
+		// prop to FormWrapper, ...
 		// avoid editorState === null
-		if(editorState && this.props.onChange) {
-			this.props.onChange(convertToRaw(editorState.getCurrentContent()))
+		if(editorState && this.props.onChangeToRaw) {
+			this.props.onChangeToRaw(convertToRaw(editorState.getCurrentContent()))
+		}
+
+		if(editorState && this.props.onChangeToHtml) {
+			this.props.onChangeToHtml(stateToHTML(editorState.getCurrentContent()))
 		}
 	};
 
@@ -98,13 +104,22 @@ export class Viewer extends Component {
 			raw
 		} = this.props;
 
-		const editorState = raw ?
-			EditorState.createWithContent(convertFromRaw(raw)) :
-			createEditorStateWithText('')
+		if (typeof raw === 'string') raw = JSON.parse(raw);
+
+		let editorState;
+
+		try {
+			editorState = EditorState.createWithContent(convertFromRaw(raw));
+		} catch (e) {
+			console.error(e)
+			editorState = createEditorStateWithText('');
+		}
+
+
 
 		return (
-			<div className={editorStyles.wrapper}>
-				<div className={editorStyles.editor}>
+			<div className={editorStyles.viewerWrapper}>
+				<div className={editorStyles.viewer}>
 					<Editor
 						editorState={editorState}
 						readOnly={true}
