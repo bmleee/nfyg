@@ -2,7 +2,11 @@
 	display: flex;
 	flex-flow: column;
 	align-items: center;
-	
+	width : 1275px;
+	margin : 0px auto;
+	@media (max-width: 1172px) {
+		width : 100%;
+	}
 	.slick-slider {
 			width: 93%;
 			

@@ -35,11 +35,10 @@ button:hover, button:focus {
     font-size: 18px;
     font-weight: 600;
     line-height: 20px;
-    box-shadow: 0 2px 3px 0 rgba(0,0,0,0.26),0 2px 4px 0 rgba(0,0,0,0.22);
     border-radius: 0px;
     z-index: 55;
     margin: 0 auto;
-    width: 699px;
+    width: 700px;
     background : #4b709a;
     border : none;
     outline : none;
@@ -94,7 +93,12 @@ div.recent-exhibition-list-button, div.magazine-list-button {
         padding : 5px 5px 20px 5px;
     }
     div.home-body {
-    padding: 0px 50px;
+        width : 1172px;
+        margin : 0px auto;
+        @media (max-width: 1192px) {
+            width : 100%;
+            padding : 0px 20px;
+        }
 }
     div.home-heading {
         text-align : left;
@@ -164,7 +168,6 @@ div.present-more-project {
     font-size: 18px;
     font-weight: 600;
     line-height: 20px;
-    box-shadow: 0 2px 3px 0 rgba(0,0,0,0.26),0 2px 4px 0 rgba(0,0,0,0.22);
     border-radius: 0px;
     z-index: 55;
     margin: 0 auto;
@@ -172,6 +175,7 @@ div.present-more-project {
     background : #4b709a;
 }
    div.home-body {
+       width : 100%;
     padding: 0px 20px;
 }
     h5 {
@@ -280,7 +284,6 @@ position: absolute;
     font-size: 18px;
     font-weight: 600;
     line-height: 20px;
-    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26),0 2px 4px 0 rgba(0,0,0,0.22);
     border-radius: 0px;
     z-index: 55;
     margin: 0 auto;

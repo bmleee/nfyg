@@ -65,10 +65,11 @@ class PresentProjectList extends Component {
 						<div className="present-project-list-item-caption">
 							<Link to="/projects"><h3 className="project-list-title">{title}</h3></Link>
 							<h5>{creator}의 프로젝트</h5>
-							<Progress completed={75} />
+							<Progress completed={Math.round(currentMoney / targetMoney * 100)} />
 							<div className="project-summary-detail">
-							<div className="project-remain-days">D-{remainingDays} | {currentMoney / targetMoney * 100}%</div>
-							<div className="project-summary-current-money">{currentMoney}원</div>
+							<div className="project-remain-days">{Math.round(currentMoney / targetMoney * 100)}%</div>
+							<div className="project-summary-current-money">D-{remainingDays}</div>
+							{currentMoney}원
 							</div>
 						    {/* 직접후원 {numDirectSupports}명 | 간접후원 {numIndirectSupports}명 */}
 						</div>
@@ -85,7 +86,7 @@ class PresentProjectList extends Component {
 				<div className="present-more-project">
 					{
 						this.state.numProjects < this.state.count
-							? <button className="present-more-button" onClick={this.expandList.bind(this)}>View More Projects</button>
+							? <button className="present-more-button" onClick={this.expandList.bind(this)}> 프로젝트 더보기</button>
 							: null
 					}
 				</div>

@@ -20,7 +20,7 @@
 	}
 }
 .exhibition-info {
-	padding-top : 200px;
+	padding-top : 180px;
 	text-align : center;
 	height : 500px;
 	background : rgba(0, 0, 0, 0.35);
@@ -34,7 +34,7 @@
 	display : none;
 }
 .share-button-facebook, .share-button-twitter, .share-button-url {
-	width : 33.33333%;
+	width : 33.3333333333%;
 	display : inline-block;
 	height: 50px;
     font-size: 18px;
@@ -43,7 +43,7 @@
 	background : #fff;
 	color : #4b709a;
 	fill : #4b709a;
-    border : 1px solid #ccc;
+    border : 1px solid #ddd;
 }
 
 .share-button-facebook, .share-button-twitter, .share-button-kakao {
@@ -58,9 +58,6 @@
 }
 .share-button-facebook:focus, .share-button-twitter:focus, .share-button-kakao:focus, .share-button-url:focus {
 	outline : none;
-	background : #4b709a;
-	color : #fff;
-	fill : #fff;
 	border : none;
 }
 
@@ -75,19 +72,19 @@
 	background : #fff;
 	color : #4b709a;
 	fill : #4b709a;
-    border : 1px solid #ccc;
+    border : 1px solid #ddd;
 	}
 	.share-button-facebook, .share-button-twitter, .share-button-kakao {
 	border-right : none;
 }
 .exhibition-info {
-	padding-top : 120px;
-	height : 360px;
+	padding-top : 145px;
+	height : 400px;
 }
 @media (max-width: 500px) {
 	.exhibition-info {
-	padding-top : 85px;
-	height : 270px;
+	padding-top : 145px;
+	height : 400px;
 }
 }
 }

@@ -60,10 +60,13 @@ class ProjectHeading extends Component {
 							</div>
 							</p>
 						</div>
-						<h4 className="project-heading-summary">D-{remainingDays}  /  {currentMoney / targetMoney * 100}%  /  {currentMoney.toLocaleString()}원</h4>
+						<div className="project-supporters-num">공유후원 {numIndirectSupports}명 | 리워드후원 {numDirectSupports}명</div>
+						<Progress completed={Math.round(currentMoney / targetMoney * 100)} />
+						<div className="project-heading-summary-money">
+						<div className="project-heading-summary-percent">{Math.round(currentMoney / targetMoney * 100)}<span className="heading-summary-status">%</span></div>
+						<div className="project-heading-summary-dday">D-{remainingDays}<span className="heading-summary-status"></span></div>
+						{currentMoney.toLocaleString()}<span className="heading-summary-status">원</span></div>
 					</div>
-					
-					<Progress completed={75} />
 				</div>
 				<button className="share-button">공유로 프로젝트 후원하기</button>
 			</div>

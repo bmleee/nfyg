@@ -4,8 +4,13 @@ import {
 	ExhibitionDetailTab,
 } from './';
 import $ from 'jquery';
+import ScrollToTop from 'react-scroll-up';
 
 import 'babel-polyfill';
+
+const scrollStyle = {
+  cursor: 'pointer',
+}
 
 class ExhibitionDetail extends Component {
 	constructor(props) {
@@ -38,6 +43,9 @@ class ExhibitionDetail extends Component {
 
 				{ this.props.children /* Overview, Post, Ranking, QnA */ }
 				{/* { children /* Overview, Post, Ranking, QnA */ } */}
+				<ScrollToTop showUnder={180} style={scrollStyle} duration={0} >
+				<button className="back-to-top" />
+				</ScrollToTop>
 			</div>
 			)
 	}
