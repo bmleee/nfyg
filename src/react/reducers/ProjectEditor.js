@@ -16,7 +16,7 @@ const defaultNewState = () => ({
       projectName: '',   // projects/:project_name
     },
     fuding: {
-      currentMonoey: 0,   // 직접 / 간접 후원에 의해 추가됨
+      currentMoney: 0,   // 직접 / 간접 후원에 의해 추가됨
       targetMoney: 0,
       dateFrom: null,     // 작성 완료 한 시간
       dateTo: null,

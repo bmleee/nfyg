@@ -5,19 +5,45 @@ class ProjectHeading extends Component {
 
 	render() {
 		const {
-			imgSrc,
-			logoSrc,
-			title,
-			remainingDays,
-			likes,
-			shares,
-			comments,
-			numIndirectSupports,
-			numDirectSupports,
-			recent3Users,
-			currentMoney,
-			targetMoney
+			abstract: {
+				longTitle,
+				shortTitle,
+				imgSrc,
+				category,
+			},
+
+			creator: {
+				creatorName,
+				creatorImgSrc,
+			},
+
+			sponsor: {
+				sponsorDisplayName,
+				sponsorLogoSrc,
+			},
+
+			funding: {
+				currentMoney,
+				targetMoney,
+				dateFrom,
+				dateTo,
+			},
+
+			summary: {
+				likes,
+				shares,
+				comments,
+				recent3Users,
+			},
+
+			directSupporters,
+			indirectSupporters,
+
 		} = this.props;
+
+		console.log('ProjectHeading', this);
+
+		let remainingDays = ( new Date(dateTo).getTime() - new Date(dateFrom).getTime() ) / 1000 / 60 / 60 / 24
 
 		const sharingInfo = recent3Users.map( (fbId, index) => (
 			<img className="sharing-fb-icon" key={index} width={32} height={32} src={`https://graph.facebook.com/${fbId}/picture`} scale="0"/>
@@ -39,8 +65,8 @@ class ProjectHeading extends Component {
 				<div className="project-detail-info" style={infoBackground}>
 					<div className="project-info">
 						<div className="project-sponsor-logo">
-							{/* <img src={logoSrc} width={32} height={32} alt=""/> */}
-							<p className="project-sponsor-name">후원사명</p>
+							<img src={sponsorLogoSrc} width={32} height={32} alt=""/>
+							<p>{sponsorDisplayName}</p>
 						</div>
 						<h1 className="project-title">{title}</h1>
 						<div className="project-info-bottom">
@@ -51,13 +77,13 @@ class ProjectHeading extends Component {
 								{ comments }
 								<img className="sharing-icon" src="https://7pictures.co.kr/wp-content/uploads/2016/08/share.png" scale="0" />
 								{ shares }
-							</div> 
+							</div>
 							<div className="project-sharing-info">
 								{sharingInfo} 외 {numIndirectSupports}명이 공유로 후원함
 							</div> */}
 							<p>
-							<div className="project-current-money">
-							</div>
+								<div className="project-current-money">
+								</div>
 							</p>
 						</div>
 						<div className="project-supporters-num">공유후원 {numIndirectSupports}명 | 리워드후원 {numDirectSupports}명</div>
@@ -70,25 +96,10 @@ class ProjectHeading extends Component {
 				</div>
 				<button className="share-button">공유로 프로젝트 후원하기</button>
 			</div>
-			
+
 			)
 	}
 
-}
-
-ProjectHeading.propTypes = {
-	imgSrc: PropTypes.string.isRequired,
-	logoSrc: PropTypes.string.isRequired,
-	title: PropTypes.string.isRequired,
-	remainingDays: PropTypes.number.isRequired,
-	likes: PropTypes.number.isRequired,
-	shares: PropTypes.number.isRequired,
-	comments: PropTypes.number.isRequired,
-	numIndirectSupports: PropTypes.number.isRequired,
-	numDirectSupports: PropTypes.number.isRequired,
-	recent3Users: PropTypes.arrayOf(PropTypes.any).isRequired,
-	currentMoney: PropTypes.number.isRequired,
-	targetMoney: PropTypes.number.isRequired,
 }
 
 export default ProjectHeading;

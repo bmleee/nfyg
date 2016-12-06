@@ -1,23 +1,21 @@
 ## Todos
 
-### gulp
- 1. environments 대신 process.env.NODE_ENV 직접 이용
-
 ### exhibitions
  1. ALL, 진행중인 전시, 끝난 전시 버튼 ==> 진행중인 전시, 날짜별 필터링(select-option) :: DB 구조 모두 결정 된 후에 하는게 좋을듯!
-
-### exhibition detail
- 1. tab에 jquery 넣기..
+ 2. artworks 클릭하면 크게 보여주기
 
 ### magazines
  1. 카테고리에 속하는 매거진이 없을 경우 :: No such magazines!
 
-### User/Login
- 1. Server-side Authentication 로직과 연동
-
 ### User/Profile
 
 ### Sponsers / Sponser Detail
+ - 멤버
+  1. 스폰서 이름
+  2. 스폰서 로고 이미지
+  3. 스폰서 메인 이미지
+  4. 스폰서 설명
+
  1. 스폰서 별 개인 페이지 할당
  2. 스폰서각 후원한 프로젝트 리스트 업
   - 진행중인 프로젝트: 해당 프로젝트로 링크 연결
@@ -27,23 +25,22 @@
 __추가 페이지: 스폰서 개인 페이지, 후기 페이지, 후기 작성 페이지__  
 http://sharencare.me/sponsors/23 참조
 
-### react-rte / RichTextEditor
- 1. 파일 업로드 API에서 ProjectEditor id별로 파일을 구분할 수 있어야 함
-  - hashed id
-  - unique file name
- 2. 텍스트 정렬 - react-rte
- 3. Imasge 삽입 후 HTML로 반환받기...
-
 ### ProjectEditor
- - __이미지 삽입 후 HTML로 전환__
- - Funding.Reward
-  1. Rewards가 존재할 경우, Wrapper 에서 어떻게 보여줄지?
-
  1. 서버와 연동
-  -  ProjectEditor.new ..
+  - ProjectEditor.new ..
   - ProjectEditor.edit ..
- 2. Redux 로 상태 저장하기
-  - [project-temp-id]: proejct-editor ...
+
+
+### PostEditor
+ 1. SevenEditor 로 작성
+ 2. 서버에 Edit request 보내기
+
+### QnAEditor
+ 1. 그냥 input[type='text'] 로 글 작성하기
+
+### ExhibitioinEditor
+
+
 
 ### Draft-js
  - 사용할 플러그인
@@ -52,7 +49,7 @@ http://sharencare.me/sponsors/23 참조
   3. 인라인툴바
   4. 언두
   5. Linkinfy
-  6. 
+  6.
 
 ---
 
