@@ -48,7 +48,7 @@ export const updateProjectAbstractCategory = (category) => ({ type: _CONSTANTS.p
 export const updateProjectAbstractProjectName = (projectName) => ({ type: _CONSTANTS.project.abstract.projectName, payload: {projectName} })
 
 // project.funding
-export const updateProjectFundingCurrentMoney = (currentMonoey) => ({ type: _CONSTANTS.project.funding.currentMonoey, payload: {currentMonoey}, })
+export const updateProjectFundingCurrentMoney = (currentMoney) => ({ type: _CONSTANTS.project.funding.currentMoney, payload: {currentMoney}, })
 export const updateProjectFundingTargetMoney = (targetMoney) => ({ type: _CONSTANTS.project.funding.targetMoney, payload: {targetMoney}, })
 export const updateProjectFundingDateFrom = (dateFrom) => ({ type: _CONSTANTS.project.funding.dateFrom, payload: {dateFrom}, })
 export const updateProjectFundingDateTo = (dateTo) => ({ type: _CONSTANTS.project.funding.dateTo, payload: {dateTo}, })
