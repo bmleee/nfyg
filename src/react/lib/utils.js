@@ -50,3 +50,31 @@ export const displayType = (innerWidth) =>
   innerWidth > 900 ? Display.DESKTOP
     : innerWidth > 500 ? Display.TABLET
       : Display.MOBILE
+
+/**
+ * react-select option value to label
+ * @param  {[type]} options     [description]
+ * @param  {[type]} targetValue [description]
+ * @return {[type]}             [description]
+ */
+export function value2label (options, targetValue) {
+  for(let {value, label} of options) {
+    if (value === targetValue) {
+      console.log('returned: ', label)
+      return label;
+    }
+  }
+  return '';
+}
+
+/**
+ * [date2string description]
+ * @param  {Date}   date [description]
+ * @return {string}      YYYY-MM-DD
+ */
+export function date2string (date) {
+  if (typeof date === 'string' || typeof date === 'number') {
+    date = new Date(date)
+  } 
+  return date.toISOString().slice(0,10).replace(/-/g,".");
+}
