@@ -1,408 +1,366 @@
 {
-  "heading": {
-    "imgSrc": "https://i0.wp.com/7pictures.co.kr/wp-content/uploads/edd/2016/10/KakaoTalk_20161008_150354358.jpg?resize=1024%2C590&ssl=1",
-    "logoSrc": "https://graph.facebook.com/10153932539601313/picture",
-    "title": "목욕관",
-    "remainingDays": 7,
-    "likes": 500,
-    "shares": 103,
-    "comments": 75,
-    "numIndirectSupports": 11,
-    "numDirectSupports": 103,
-    "recent3Users": [
-      "10153932539601313",
-      "10153932539601313",
-      "10153932539601313"
-    ],
-    "currentMoney": 137200,
-    "targetMoney": 1000000
-  },
-  "overview": {
-    "part1": [
-      {
-        "type": "text",
-        "content": "Overview Part1"
-      },
-      {
-        "type": "text",
-        "content": "Overview Part1"
-      },
-      {
-        "type": "text",
-        "content": "Overview Part1"
-      },
-      {
-        "type": "text",
-        "content": "Overview Part1"
-      },
-      {
-        "type": "text",
-        "content": "Overview Part1"
-      },
-      {
-        "type": "text",
-        "content": "Overview Part1"
-      },
-      {
-        "type": "text",
-        "content": "Overview Part1"
-      },
-      {
-        "type": "text",
-        "content": "Overview Part1"
-      },
-      {
-        "type": "text",
-        "content": "Overview Part1"
-      },
-      {
-        "type": "text",
-        "content": "Overview Part1"
-      },
-      {
-        "type": "text",
-        "content": "Overview Part1"
-      },
-      {
-        "type": "text",
-        "content": "Overview Part1"
-      },
-      {
-        "type": "text",
-        "content": "Overview Part1"
-      },
-      {
-        "type": "text",
-        "content": "Overview Part1"
-      },
-      {
-        "type": "text",
-        "content": "Overview Part1"
-      },
-      {
-        "type": "text",
-        "content": "Overview Part1"
-      },
-      {
-        "type": "text",
-        "content": "Overview Part1"
-      },
-      {
-        "type": "text",
-        "content": "Overview Part1"
-      }
-    ],
-    "part2": [
-      {
-        "type": "text",
-        "content": "Overview Part2"
-      }
-    ]
-  },
-  "rewards": [
-    {
-      "title": "공유: 1000원\n좋아요/리공유/댓글: 200원",
-      "description": "프로젝트 공유로 후원된 금액을 ‘7Pictures’에서 후원합니다."
-    },
-    {
-      "title": "공유: 1000원\n좋아요/리공유/댓글: 200원",
-      "description": "프로젝트 공유로 후원된 금액을 ‘7Pictures’에서 후원합니다."
-    },
-    {
-      "title": "공유: 1000원\n좋아요/리공유/댓글: 200원",
-      "description": "프로젝트 공유로 후원된 금액을 ‘7Pictures’에서 후원합니다."
-    }
-  ],
-  "post": {
-    "heading": {
-      "iconSrc": "https://i0.wp.com/7pictures.co.kr/wp-content/themes/unity/templates/campaign/thumbimg/yshproject.png?zoom=2&ssl=1",
-      "description": "'목욕관'의 소식을 더 보길 원하신다면, 소식을 공유하거나 직접 후원해주세요.\n목욕관이 후원자분들에게만 제공하고 있는 소식과 자료들을 바로 보실 수 있습니다!\n"
+    "abstract": {
+      "longTitle": "목욕탕에서 일어나는 일",
+      "shortTitle": "목욕관",
+      "imgSrc": "https://i0.wp.com/7pictures.co.kr/wp-content/uploads/edd/2016/10/KakaoTalk_20161008_150354358.jpg?resize=1024%2C590&ssl=1",
+      "category": "생활",
+      "projectName": "hopp"
     },
     "creator": {
-      "name": "SAMCHIC",
-      "iconSrc": "https://i0.wp.com/7pictures.co.kr/wp-content/themes/unity/templates/campaign/thumbimg/yshproject.png?zoom=2&ssl=1",
-      "description": "청담 헤어 트렌드를 리드하는 프리미엄 헤어살롱 쌤시크 입니다."
+      "creatorName": "hopp",
+      "creatorImgSrc": "https://graph.facebook.com/10153932539601313/picture",
+      "creatorLocation": "서울",
+      "creatorDescription": "HOPP 입니다."
     },
-    "posts": [
-      {
-        "opened": false,
-        "author": {
-          "name": "SAMCHIC",
-          "iconSrc": "https://i0.wp.com/7pictures.co.kr/wp-content/themes/unity/templates/campaign/thumbimg/yshproject.png?zoom=2&ssl=1"
-        },
-        "title": "유니온 아트페어가 개최됩니다.",
-        "created_at": "1992년 4월 8일",
-        "numSupporters": 69,
-        "likes": 10,
-        "post": [
+    "sponsor": {
+      "sponsorName": "7pictures",
+      "sponsorDisplayName": "7pictures",
+      "sponsorLogoSrc": "http://i0.wp.com/7pictures.co.kr/wp-content/themes/unity/templates/campaign/thumbimg2/flowerwall3.jpg",
+      "sponsorImgSrc": "http://i1.wp.com/7pictures.co.kr/wp-content/uploads/edd/2016/11/FLRY_%ED%9B%84%EC%9B%90%EA%B8%B0%EC%97%85.jpg?w=1004",
+      "sponsorDescription": "‘꽃을 매개로 더 많은 사람들이 소통하고 위로하는 세상’을 만들고자 하는 비영리 단체"
+    },
+    "funding": {
+      "currentMoney": 2000,
+      "targetMoney": 1000000,
+      "dateFrom": "2016-11-30",
+      "dateTo": "2016-12-01",
+      "reward": {
+        "rewards": [
           {
-            "type": "text",
-            "content": "텍스트를 불러옵니다."
+            "title": "공유 리워드1",
+            "description": "공유를 통해 1000원 이상 후원해준 분들을 위한 리워드",
+            "isDirectSupport": false,
+            "thresholdMoney": 1000
           },
           {
-            "type": "video",
-            "content": "비디오를 로딩 합니다."
-          }
-        ],
-        "comments": [
-          {
-            "author": {
-              "name": "7Pictures-댓글",
-              "iconSrc": "https://graph.facebook.com/10153932539601313/picture"
-            },
-            "content": "7Pictures는 유니온 아트페어를 후원합니다."
-          }
-        ]
-      },
-      {
-        "opened": true,
-        "author": {
-          "name": "SAMCHIC",
-          "iconSrc": "https://i0.wp.com/7pictures.co.kr/wp-content/themes/unity/templates/campaign/thumbimg/yshproject.png?zoom=2&ssl=1"
-        },
-        "title": "유니온 아트페어가 개최됩니다.",
-        "created_at": "1992년 4월 8일",
-        "numSupporters": 69,
-        "likes": 10,
-        "post": [
-          {
-            "type": "text",
-            "content": "텍스트를 불러옵니다."
+            "title": "공유 리워드2",
+            "description": "공유를 통해 10000원 이상 후원해준 분들을 위한 리워드",
+            "isDirectSupport": false,
+            "thresholdMoney": 10000
           },
           {
-            "type": "video",
-            "content": "비디오를 로딩 합니다."
+            "title": "선물A",
+            "description": "40000원 이상 후원해주신 분들을 위한 리워드",
+            "isDirectSupport": true,
+            "thresholdMoney": 40000
           }
         ],
-        "comments": [
-          {
-            "author": {
-              "name": "7Pictures",
-              "iconSrc": "https://graph.facebook.com/10153932539601313/picture"
+        "newReward": {
+          "title": "",
+          "description": "",
+          "isDirectSupport": false,
+          "thresholdMoney": 0
+        }
+      }
+    },
+    "overview": {
+      "intro": "intro message",
+      "part1": "{\"entityMap\":{\"0\":{\"type\":\"image\",\"mutability\":\"IMMUTABLE\",\"data\":{\"src\":\"/uploads/user_default.png\"}},\"1\":{\"type\":\"image\",\"mutability\":\"IMMUTABLE\",\"data\":{\"src\":\"/uploads/favicon.ico\",\"alignment\":\"center\"}}},\"blocks\":[{\"key\":\"33h3v\",\"text\":\"sadfsdf\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}},{\"key\":\"f9s8u\",\"text\":\"asdfasfa\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}},{\"key\":\"bstai\",\"text\":\"asdf\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}},{\"key\":\"10hso\",\"text\":\" \",\"type\":\"atomic\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[{\"offset\":0,\"length\":1,\"key\":0}],\"data\":{}},{\"key\":\"cor9t\",\"text\":\"\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}},{\"key\":\"c26gs\",\"text\":\" \",\"type\":\"atomic\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[{\"offset\":0,\"length\":1,\"key\":1}],\"data\":{}},{\"key\":\"d5hdp\",\"text\":\"\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}]}",
+      "part2": "{\"entityMap\":{\"0\":{\"type\":\"image\",\"mutability\":\"IMMUTABLE\",\"data\":{\"src\":\"/uploads/user_default.png\"}},\"1\":{\"type\":\"image\",\"mutability\":\"IMMUTABLE\",\"data\":{\"src\":\"/uploads/favicon.ico\",\"alignment\":\"center\"}}},\"blocks\":[{\"key\":\"33h3v\",\"text\":\"sadfsdf\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}},{\"key\":\"f9s8u\",\"text\":\"asdfasfa\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}},{\"key\":\"bstai\",\"text\":\"asdf\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}},{\"key\":\"10hso\",\"text\":\" \",\"type\":\"atomic\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[{\"offset\":0,\"length\":1,\"key\":0}],\"data\":{}},{\"key\":\"cor9t\",\"text\":\"\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}},{\"key\":\"c26gs\",\"text\":\" \",\"type\":\"atomic\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[{\"offset\":0,\"length\":1,\"key\":1}],\"data\":{}},{\"key\":\"d5hdp\",\"text\":\"\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}]}"
+    },
+    "summary": {
+      "remainingDays": 7,
+      "likes": 500,
+      "shares": 103,
+      "comments": 75,
+      "numIndirectSupports": 11,
+      "numDirectSupports": 103,
+      "recent3Users": [
+        "10153932539601313",
+        "10153932539601313",
+        "10153932539601313"
+      ]
+    },
+    "post": {
+      "heading": {
+        "iconSrc": "https://i0.wp.com/7pictures.co.kr/wp-content/themes/unity/templates/campaign/thumbimg/yshproject.png?zoom=2&ssl=1",
+        "description": "'목욕관'의 소식을 더 보길 원하신다면, 소식을 공유하거나 직접 후원해주세요.\n목욕관이 후원자분들에게만 제공하고 있는 소식과 자료들을 바로 보실 수 있습니다!\n"
+      },
+      "creator": {
+        "name": "SAMCHIC",
+        "iconSrc": "https://i0.wp.com/7pictures.co.kr/wp-content/themes/unity/templates/campaign/thumbimg/yshproject.png?zoom=2&ssl=1",
+        "description": "청담 헤어 트렌드를 리드하는 프리미엄 헤어살롱 쌤시크 입니다."
+      },
+      "posts": [
+        {
+          "opened": false,
+          "author": {
+            "name": "SAMCHIC",
+            "iconSrc": "https://i0.wp.com/7pictures.co.kr/wp-content/themes/unity/templates/campaign/thumbimg/yshproject.png?zoom=2&ssl=1"
+          },
+          "title": "유니온 아트페어가 개최됩니다.",
+          "created_at": "1992-4-8",
+          "numSupporters": 69,
+          "likes": 10,
+          "post": [
+            {
+              "type": "text",
+              "content": "텍스트를 불러옵니다."
             },
-            "content": "7Pictures는 유니온 아트페어를 후원합니다."
-          }
-        ]
-      }
-    ]
-  },
-  "ranking": {
-    "recent3DirectSupporters": [
-      "10153932539601313",
-      "10153932539601313",
-      "10153932539601313"
-    ],
-    "recent3IndirectSupporters": [
-      "10153932539601313",
-      "10153932539601313",
-      "10153932539601313"
-    ],
-    "selectOptions": [
+            {
+              "type": "video",
+              "content": "비디오를 로딩 합니다."
+            }
+          ],
+          "comments": [
+            {
+              "author": {
+                "name": "7Pictures-댓글",
+                "iconSrc": "https://graph.facebook.com/10153932539601313/picture"
+              },
+              "content": "7Pictures는 유니온 아트페어를 후원합니다."
+            }
+          ]
+        },
+        {
+          "opened": true,
+          "author": {
+            "name": "SAMCHIC",
+            "iconSrc": "https://i0.wp.com/7pictures.co.kr/wp-content/themes/unity/templates/campaign/thumbimg/yshproject.png?zoom=2&ssl=1"
+          },
+          "title": "유니온 아트페어가 개최됩니다.",
+          "created_at": "1992-4-8",
+          "numSupporters": 69,
+          "likes": 10,
+          "post": [
+            {
+              "type": "text",
+              "content": "텍스트를 불러옵니다."
+            },
+            {
+              "type": "video",
+              "content": "비디오를 로딩 합니다."
+            }
+          ],
+          "comments": [
+            {
+              "author": {
+                "name": "7Pictures",
+                "iconSrc": "https://graph.facebook.com/10153932539601313/picture"
+              },
+              "content": "7Pictures는 유니온 아트페어를 후원합니다."
+            }
+          ]
+        }
+      ]
+    },
+    "ranking": {
+      "recent3DirectSupporters": [
+        "10153932539601313",
+        "10153932539601313",
+        "10153932539601313"
+      ],
+      "recent3IndirectSupporters": [
+        "10153932539601313",
+        "10153932539601313",
+        "10153932539601313"
+      ],
+      "selectOptions": [
+        {
+          "value": "support_at",
+          "label": "최신순"
+        },
+        {
+          "value": "likes",
+          "label": "좋아요순"
+        },
+        {
+          "value": "money",
+          "label": "금액순"
+        }
+      ]
+    },
+    "directSupporters": [
       {
-        "value": "support_at",
-        "label": "최신순"
+        "fbId": "10153932539601313",
+        "name": "전희재",
+        "money": 34000,
+        "support_at": 1476254937264
       },
       {
-        "value": "likes",
-        "label": "좋아요순"
+        "fbId": "10153932539601313",
+        "name": "전희재",
+        "money": 34000,
+        "support_at": 1476254937264
       },
       {
-        "value": "money",
-        "label": "금액순"
+        "fbId": "10153932539601313",
+        "name": "전희재",
+        "money": 34000,
+        "support_at": 1476254937264
+      },
+      {
+        "fbId": "10153932539601313",
+        "name": "전희재",
+        "money": 34000,
+        "support_at": 1476254937264
+      },
+      {
+        "fbId": "10153932539601313",
+        "name": "전희재",
+        "money": 34000,
+        "support_at": 1476254937264
       }
-    ]
-  },
-  "directSupporters": [
-    {
-      "fbId": "10153932539601313",
-      "name": "전희재",
-      "money": 34000,
-      "support_at": 1476254937264
-    },
-    {
-      "fbId": "10153932539601313",
-      "name": "전희재",
-      "money": 34000,
-      "support_at": 1476254937264
-    },
-    {
-      "fbId": "10153932539601313",
-      "name": "전희재",
-      "money": 34000,
-      "support_at": 1476254937264
-    },
-    {
-      "fbId": "10153932539601313",
-      "name": "전희재",
-      "money": 34000,
-      "support_at": 1476254937264
-    },
-    {
-      "fbId": "10153932539601313",
-      "name": "전희재",
-      "money": 34000,
-      "support_at": 1476254937264
+    ],
+    "indirectSupporters": [
+      {
+        "fbId": "10153932539601313",
+        "name": "전희재",
+        "money": 3400,
+        "support_at": 1476254937224,
+        "message": "본격 '목욕'문화 잡지라.... 안에 내용부터, 공연까지 심상치 않은 프로젝트입니다-",
+        "likes": 1,
+        "comments": 20,
+        "shares": 3,
+        "rank": 2
+      },
+      {
+        "fbId": "10153932539601313",
+        "name": "전희재",
+        "money": 1234,
+        "support_at": 1476354537264,
+        "message": "본격 '목욕'문화 잡지라.... 안에 내용부터, 공연까지 심상치 않은 프로젝트입니다-",
+        "likes": 10,
+        "comments": 20,
+        "shares": 3,
+        "rank": 3
+      },
+      {
+        "fbId": "10153932539601313",
+        "name": "전희재",
+        "money": 1111,
+        "support_at": 1476254337264,
+        "message": "본격 '목욕'문화 잡지라.... 안에 내용부터, 공연까지 심상치 않은 프로젝트입니다-",
+        "likes": 100,
+        "comments": 20,
+        "shares": 3,
+        "rank": 4
+      },
+      {
+        "fbId": "10153932539601313",
+        "name": "전희재",
+        "money": 1,
+        "support_at": 1476554933264,
+        "message": "본격 '목욕'문화 잡지라.... 안에 내용부터, 공연까지 심상치 않은 프로젝트입니다-",
+        "likes": 1000,
+        "comments": 20,
+        "shares": 3,
+        "rank": 5
+      },
+      {
+        "fbId": "10153932539601313",
+        "name": "전희재",
+        "money": 342323000,
+        "support_at": 1432254937264,
+        "message": "본격 '목욕'문화 잡지라.... 안에 내용부터, 공연까지 심상치 않은 프로젝트입니다-",
+        "likes": 10000,
+        "comments": 20,
+        "shares": 3,
+        "rank": 1
+      }
+    ],
+    "qna": {
+      "selectOptions": [
+        {
+          "value": "to-all",
+          "label": "모두에게"
+        },
+        {
+          "value": "to-creator",
+          "label": "창작자에게"
+        }
+      ],
+      "posts": [
+        {
+          "opened": true,
+          "author": {
+            "name": "SAMCHIC",
+            "iconSrc": "https://i0.wp.com/7pictures.co.kr/wp-content/themes/unity/templates/campaign/thumbimg/yshproject.png?zoom=2&ssl=1"
+          },
+          "title": "유니온 아트페어가 개최됩니다.",
+          "created_at": "1992-4-8",
+          "numSupporters": 69,
+          "likes": 10,
+          "post": [
+            {
+              "type": "text",
+              "content": "텍스트를 불러옵니다."
+            },
+            {
+              "type": "video",
+              "content": "비디오를 로딩 합니다."
+            }
+          ],
+          "comments": [
+            {
+              "author": {
+                "name": "7Pictures",
+                "iconSrc": "https://graph.facebook.com/10153932539601313/picture"
+              },
+              "content": "7Pictures는 유니온 아트페어를 후원합니다."
+            }
+          ]
+        },
+        {
+          "opened": true,
+          "author": {
+            "name": "SAMCHIC",
+            "iconSrc": "https://i0.wp.com/7pictures.co.kr/wp-content/themes/unity/templates/campaign/thumbimg/yshproject.png?zoom=2&ssl=1"
+          },
+          "title": "유니온 아트페어가 개최됩니다.",
+          "created_at": "1992-4-8",
+          "numSupporters": 69,
+          "likes": 10,
+          "post": [
+            {
+              "type": "text",
+              "content": "텍스트를 불러옵니다."
+            },
+            {
+              "type": "video",
+              "content": "비디오를 로딩 합니다."
+            }
+          ],
+          "comments": [
+            {
+              "author": {
+                "name": "7Pictures",
+                "iconSrc": "https://graph.facebook.com/10153932539601313/picture"
+              },
+              "content": "7Pictures는 유니온 아트페어를 후원합니다."
+            }
+          ]
+        },
+        {
+          "opened": true,
+          "author": {
+            "name": "SAMCHIC",
+            "iconSrc": "https://i0.wp.com/7pictures.co.kr/wp-content/themes/unity/templates/campaign/thumbimg/yshproject.png?zoom=2&ssl=1"
+          },
+          "title": "유니온 아트페어가 개최됩니다.",
+          "created_at": "1992-4-8",
+          "numSupporters": 69,
+          "likes": 10,
+          "post": [
+            {
+              "type": "text",
+              "content": "텍스트를 불러옵니다."
+            },
+            {
+              "type": "video",
+              "content": "비디오를 로딩 합니다."
+            }
+          ],
+          "comments": [
+            {
+              "author": {
+                "name": "7Pictures",
+                "iconSrc": "https://graph.facebook.com/10153932539601313/picture"
+              },
+              "content": "7Pictures는 유니온 아트페어를 후원합니다."
+            }
+          ]
+        }
+      ]
     }
-  ],
-  "indirectSupporters": [
-    {
-      "fbId": "10153932539601313",
-      "name": "전희재",
-      "money": 3400,
-      "support_at": 1476254937224,
-      "message": "본격 '목욕'문화 잡지라.... 안에 내용부터, 공연까지 심상치 않은 프로젝트입니다-",
-      "likes": 1,
-      "comments": 20,
-      "shares": 3,
-      "rank": 2
-    },
-    {
-      "fbId": "10153932539601313",
-      "name": "전희재",
-      "money": 1234,
-      "support_at": 1476354537264,
-      "message": "본격 '목욕'문화 잡지라.... 안에 내용부터, 공연까지 심상치 않은 프로젝트입니다-",
-      "likes": 10,
-      "comments": 20,
-      "shares": 3,
-      "rank": 3
-    },
-    {
-      "fbId": "10153932539601313",
-      "name": "전희재",
-      "money": 1111,
-      "support_at": 1476254337264,
-      "message": "본격 '목욕'문화 잡지라.... 안에 내용부터, 공연까지 심상치 않은 프로젝트입니다-",
-      "likes": 100,
-      "comments": 20,
-      "shares": 3,
-      "rank": 4
-    },
-    {
-      "fbId": "10153932539601313",
-      "name": "전희재",
-      "money": 1,
-      "support_at": 1476554933264,
-      "message": "본격 '목욕'문화 잡지라.... 안에 내용부터, 공연까지 심상치 않은 프로젝트입니다-",
-      "likes": 1000,
-      "comments": 20,
-      "shares": 3,
-      "rank": 5
-    },
-    {
-      "fbId": "10153932539601313",
-      "name": "전희재",
-      "money": 342323000,
-      "support_at": 1432254937264,
-      "message": "본격 '목욕'문화 잡지라.... 안에 내용부터, 공연까지 심상치 않은 프로젝트입니다-",
-      "likes": 10000,
-      "comments": 20,
-      "shares": 3,
-      "rank": 1
-    }
-  ],
-  "qna": {
-    "selectOptions": [
-      {
-        "value": "to-all",
-        "label": "모두에게"
-      },
-      {
-        "value": "to-creator",
-        "label": "창작자에게"
-      }
-    ],
-    "posts": [
-      {
-        "opened": true,
-        "author": {
-          "name": "SAMCHIC",
-          "iconSrc": "https://i0.wp.com/7pictures.co.kr/wp-content/themes/unity/templates/campaign/thumbimg/yshproject.png?zoom=2&ssl=1"
-        },
-        "title": "유니온 아트페어가 개최됩니다.",
-        "created_at": "1992년 4월 8일",
-        "numSupporters": 69,
-        "likes": 10,
-        "post": [
-          {
-            "type": "text",
-            "content": "텍스트를 불러옵니다."
-          },
-          {
-            "type": "video",
-            "content": "비디오를 로딩 합니다."
-          }
-        ],
-        "comments": [
-          {
-            "author": {
-              "name": "7Pictures",
-              "iconSrc": "https://graph.facebook.com/10153932539601313/picture"
-            },
-            "content": "7Pictures는 유니온 아트페어를 후원합니다."
-          }
-        ]
-      },
-      {
-        "opened": true,
-        "author": {
-          "name": "SAMCHIC",
-          "iconSrc": "https://i0.wp.com/7pictures.co.kr/wp-content/themes/unity/templates/campaign/thumbimg/yshproject.png?zoom=2&ssl=1"
-        },
-        "title": "유니온 아트페어가 개최됩니다.",
-        "created_at": "1992년 4월 8일",
-        "numSupporters": 69,
-        "likes": 10,
-        "post": [
-          {
-            "type": "text",
-            "content": "텍스트를 불러옵니다."
-          },
-          {
-            "type": "video",
-            "content": "비디오를 로딩 합니다."
-          }
-        ],
-        "comments": [
-          {
-            "author": {
-              "name": "7Pictures",
-              "iconSrc": "https://graph.facebook.com/10153932539601313/picture"
-            },
-            "content": "7Pictures는 유니온 아트페어를 후원합니다."
-          }
-        ]
-      },
-      {
-        "opened": true,
-        "author": {
-          "name": "SAMCHIC",
-          "iconSrc": "https://i0.wp.com/7pictures.co.kr/wp-content/themes/unity/templates/campaign/thumbimg/yshproject.png?zoom=2&ssl=1"
-        },
-        "title": "유니온 아트페어가 개최됩니다.",
-        "created_at": "1992년 4월 8일",
-        "numSupporters": 69,
-        "likes": 10,
-        "post": [
-          {
-            "type": "text",
-            "content": "텍스트를 불러옵니다."
-          },
-          {
-            "type": "video",
-            "content": "비디오를 로딩 합니다."
-          }
-        ],
-        "comments": [
-          {
-            "author": {
-              "name": "7Pictures",
-              "iconSrc": "https://graph.facebook.com/10153932539601313/picture"
-            },
-            "content": "7Pictures는 유니온 아트페어를 후원합니다."
-          }
-        ]
-      }
-    ]
   }
-}
