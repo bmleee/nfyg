@@ -9,7 +9,7 @@
 
 ### User/Profile
 
-### Sponsers / Sponser Detail
+### Sponsors / Sponsor Detail
  - 멤버
   1. 스폰서 이름
   2. 스폰서 로고 이미지
