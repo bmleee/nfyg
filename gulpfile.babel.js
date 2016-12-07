@@ -82,7 +82,7 @@ const DEST = {
 
 const ENTRY = {
   EXPRESS: 'src/express/app.js',
-  REACT: 'src/react/App.js',
+  REACT: 'src/react/index.js',
   BROWSER: 'src/assets/js/main.js'
 }
 

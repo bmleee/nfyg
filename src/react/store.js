@@ -8,7 +8,8 @@ import DockMonitor from 'redux-devtools-dock-monitor';
 import { routerReducer, routerMiddleware } from 'react-router-redux';
 
 // middlewares
-import thunk from 'react-thunk';
+import thunk from 'redux-thunk';
+
 import { remoteActionMiddleware } from './middlewares'
 
 import { todos } from './reducers';
@@ -31,12 +32,6 @@ const makeReducer = () => combineReducers({
  * TODO: add reducers
  */
 export function configureStore(history, initialState) {
-	//const reducer = combineReducers({
-	//	routing: routerReducer,
-	//	todos,
-	//	ProjectEditor,
-	//});
-
 	const reducer = makeReducer()
 
 	const logger = (store) => (next) => (action) => {
@@ -58,12 +53,12 @@ export function configureStore(history, initialState) {
 		compose(
 			applyMiddleware(
 				logger,
+				thunk,
+				routerMiddleware(history),
+				...devTools,
 				// remoteActionMiddleware(socket), // TODO: activate to send action to server
-				routerMiddleware(history)
 			)
 		),
-		applyMiddleware(thunk), // doesn't work
-		...devTools
 	);
 
 	return store;

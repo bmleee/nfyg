@@ -34,7 +34,7 @@ var plugins = environments.production() ?
 module.exports = {
 	// configure for react.app
 	entry: [
-		'./src/react/App.js',
+		'./src/react/index.js',
 	],
 
 	output: {
