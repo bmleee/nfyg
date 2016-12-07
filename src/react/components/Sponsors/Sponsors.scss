@@ -30,7 +30,7 @@
 img.sponsor-logo-image {
 position: absolute;
     top: 0;
-    left: 0;   
+    left: 0;
     max-width: 100%;
     height: auto;
     -webkit-transform: translate(-50%,-50%);
@@ -38,24 +38,36 @@ position: absolute;
     transform: translate(-50%,-50%);
 }
 
-.sponser {
-	.sponser-list-container {
+.sponsor {
+	.sponsor-list-container {
 		display: flex;
 		flex-flow: row wrap;
 
-		.sponser-list-item {
+		.sponsor-list-item {
 			img {
 			}
 		}
 	}
 }
-.sponser-haeding {
-      padding : 15px 50px 20px 50px;
+.sponsor-haeding {
+		width : 1172px;
+        margin : 0px auto;
+        padding : 15px 0px 20px 0px;
+        @media (max-width: 1192px) {
+            width : 100%;
+            padding : 15px 50px 20px 50px;
+        }
 	}
-.sponser-list-container {
-	padding : 30px 40px 20px 40px;
-}
-.sponser-list-item {
+.sponsor-list-container {
+		width : 1192px;
+        margin : 0px auto;
+        padding : 30px 0px 20px 0px;
+        @media (max-width: 1192px) {
+            width : 100%;
+            padding : 30px 40px 20px 40px;
+        }
+	}
+.sponsor-list-item {
 	width : 33.33333%;
 	height: auto;
     vertical-align: top;
@@ -63,23 +75,23 @@ position: absolute;
     padding :10px;
 }
 @media (max-width: 991px) {
-.sponser-haeding {
+.sponsor-haeding {
       padding : 15px 30px 20px 30px;
 	}
-.sponser-list-container {
+.sponsor-list-container {
 	padding : 30px 20px 20px 20px;
 }
-.sponser-list-item {
+.sponsor-list-item {
 	width : 49.99999%;
 }
 @media (max-width: 500px) {
-.sponser-haeding {
+.sponsor-haeding {
       padding : 10px 10px 10px 10px;
 	}
-.sponser-list-container {
+.sponsor-list-container {
 	padding : 10px 0px 20px 0px;
 }
-.sponser-list-item {
+.sponsor-list-item {
 	width : 49.9999%;
 	padding :3px;
 }

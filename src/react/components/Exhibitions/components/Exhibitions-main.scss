@@ -4,10 +4,10 @@
 }
 .slick-dots li.slick-active button:before {
     opacity: 1;
-    color: #f55035;
+    color: #4b709a;
 }
 .slick-dots li button:before {
-    color: #f55035;
+    color: #4b709a;
 }
 .slick-prev, .slick-next {
 	top : 50%;
@@ -19,14 +19,31 @@
  height : 500px;
 }
 .exhibitions-list {
+	width : 1192px;
+	margin : 0px auto;
+	padding : 20px 0px;
+	@media (max-width: 1192px) {
+	width : 100%;
 	padding : 20px 40px;
+	}
 }
 .exhibitions-nav {
+	width : 1172px;
+	margin : 0px auto;
+	padding : 30px 0px 20px 0px;
+	@media (max-width: 1192px) {
+	width : 100%;
 	padding : 30px 50px 20px 50px;
-	display : inline-block;
+	}
 }
 .ex-button {
+	width : 1172px;
+	margin : 0px auto;
+	padding : 30px 0px 0px 0px;
+	@media (max-width: 1192px) {
+	width : 100%;
 	padding : 30px 50px 0px 50px;
+	}
 }
 .exhibitions-list-item {
 	width : 33.3333% !important;
@@ -56,11 +73,11 @@ button.ex-buttons, button.ex-buttons:active   {
 	.exhibitions-list {
 	padding : 20px 20px !important;
 }
-.exhibitions-nav {
+	.exhibitions-nav {
 	padding : 20px 30px 20px 30px;
 	display : inline-block;
 }
-.exhibitions-list-item {
+	.exhibitions-list-item {
 	width : 49.999% !important;
 	padding : 5px !important;
 }

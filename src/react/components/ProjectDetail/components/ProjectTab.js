@@ -1,17 +1,33 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 
+const buttonClassName = 'project-tab-button';
+const appliedClassName = 'project-tab-button-clicked';
+
 class ProjectTab extends Component {
-
 	render() {
+		
+		const url = document.URL;
+	
+		const isPost = document.URL.includes('projects/post')
+		const isRanking = document.URL.includes('projects/ranking')
+		const isQnA = document.URL.includes('projects/qna')
+		const isOverview = !(isPost || isRanking || isQnA)
 
+		const overviewClassName = isOverview ? `${buttonClassName} ${appliedClassName}` : buttonClassName
+		const postClassName = isPost ? `${buttonClassName} ${appliedClassName}` : buttonClassName
+		const rankClassName = isRanking ? `${buttonClassName} ${appliedClassName}` : buttonClassName
+		const qnaClassName = isQnA ? `${buttonClassName} ${appliedClassName}` : buttonClassName
+	
+		console.log('qnaClassName', qnaClassName);
+	
 		// TODO: Apply :project_name
 		return (
 			<div className="project-detail-tab">
-				<Link to="/projects/"><button className="project-tab">Overview</button></Link>
-				<Link to="/projects/post"><button className="project-tab">Post</button></Link>
-				<Link to="/projects/ranking"><button className="project-tab">공유 랭킹</button></Link>
-				<Link to="/projects/qna"><button className="project-tab">문의</button></Link>
+				<Link to="/projects/"><button className={overviewClassName}>소 개</button></Link>
+				<Link to="/projects/post"><button className={postClassName}>소 식<img className="tab-red-dot" src="/assets/images/red-dot.png" width={4} height={4} /></button></Link>
+				<Link to="/projects/ranking"><button className={rankClassName}>응 원</button></Link>
+				<Link to="/projects/qna"><button className={qnaClassName}>문 의</button></Link>
 				{/* <button className="project-support-button">후원하기</button> */}
 			</div>
 			)

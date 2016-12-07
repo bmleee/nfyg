@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
+import Progress from 'react-progressbar';
 
 import 'babel-polyfill';
 
@@ -64,9 +65,13 @@ class PresentProjectList extends Component {
 						<div className="present-project-list-item-caption">
 							<Link to="/projects"><h3 className="project-list-title">{title}</h3></Link>
 							<h5>{creator}의 프로젝트</h5>
-							<p>프로젝트 진행 바
-							<br />
-							{currentMoney}원 | 직접후원 {numDirectSupports}명 | 간접후원 {numIndirectSupports}명 | {remainingDays}일 남음</p>
+							<Progress completed={Math.round(currentMoney / targetMoney * 100)} />
+							<div className="project-summary-detail">
+							<div className="project-remain-days">{Math.round(currentMoney / targetMoney * 100)}%</div>
+							<div className="project-summary-current-money">D-{remainingDays}</div>
+							{currentMoney}원
+							</div>
+						    {/* 직접후원 {numDirectSupports}명 | 간접후원 {numIndirectSupports}명 */}
 						</div>
 					</div>
 				</div>
@@ -81,7 +86,7 @@ class PresentProjectList extends Component {
 				<div className="present-more-project">
 					{
 						this.state.numProjects < this.state.count
-							? <button className="present-more-button" onClick={this.expandList.bind(this)}>View More Projects</button>
+							? <button className="present-more-button" onClick={this.expandList.bind(this)}> 프로젝트 더보기</button>
 							: null
 					}
 				</div>

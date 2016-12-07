@@ -1,46 +1,28 @@
 import React, { Component, PropTypes } from 'react'
+import Editor from '~/src/react/components/DraftEditor/SevenEditor'
 import Select from 'react-select'
 import FormWrapper from '~/src/react/components/FormWrapper/FormWrapper'
+
 import { VALUE_TYPE } from '~/src/react/components/FormWrapper/constants'
 import { canUseDOM } from '~/src/lib/utils'
-// when window object is undeclared...
-if(canUseDOM) {
-	const rte = require('~/src/react/components/react-rte/src/RichTextEditor')
-	const SevenEditor = require('~/src/react/components/react-rte/src/SevenEditor')
-	console.log('rte', rte);
-	window.RichTextEditor = rte.default
-	window.RichTextEditor.createEmptyValue = rte.createEmptyValue
-	window.RichTextEditor.createValueFromString = rte.createValueFromString
-	window.SevenEditor = SevenEditor.default
-} else {
-	global.RichTextEditor = {
-		createEmptyValue() {},
-		createValueFromString() {}
-	}
-	global.Editor = {}
-	global.SevenEditor = {}
-}
 
 
 const IntroWrapper = ({value}) => !!value
-? (
-	<span>{value}</span>
-)
-: (
-	<span>소개 문구를 입력하세요</span>
-)
-const IntroForm = ({value, onChange}) => (
-	<input type="text" value={value} onChange={onChange} />
-)
+? <span>{value}</span>
+: <span>소개 문구를 입력하세요</span>
 
-const Part1Wrapper = ({value}) => (
+const IntroForm = ({value, onChange}) =>
+	<input type="text" value={value} onChange={onChange} />
+
+
+const Part1Wrapper = ({value}) =>
 	<span>항상 보여지는 소개 문구를 입력하세요</span>
-)
+
 const Part1Form = ({value, onChange}) => (
 	<div>
-		<RichTextEditor
-			value={value}
-			onChange={onChange}
+		<Editor
+			raw={value}
+			onChangeToRaw={onChange}
 		/>
 	</div>
 )
@@ -49,9 +31,9 @@ const Part2Wrapper = ({value}) => (
 )
 const Part2Form = ({value, onChange}) => (
 	<div>
-		<RichTextEditor
-			value={value}
-			onChange={onChange}
+		<Editor
+			raw={value}
+			onChangeToRaw={onChange}
 		/>
 	</div>
 )
@@ -62,7 +44,7 @@ const Overview = ({
 		part1,
 		part2,
 	},
-	
+
 	// onSubmit callbacks
 	_onIntroSubmit,
 	_onPart1Submit,
@@ -71,8 +53,6 @@ const Overview = ({
 	// onChange callbacks
 	rewardHandlers,
 
-	// to use refs...
-	parent
 }) => {
 	return (
 		<div className="funding-container">

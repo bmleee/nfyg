@@ -24,7 +24,7 @@ export const DevTools = createDevTools(
 const makeReducer = () => combineReducers({
 		routing: routerReducer,
 		todos,
-		ProjectEditor,
+		// ProjectEditor,
 })
 
 /**

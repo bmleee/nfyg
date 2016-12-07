@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import Select from 'react-select';
 
+import {date2string} from '~/src/react/lib/utils';
+
 import _ from 'lodash';
 
 import 'babel-polyfill';
@@ -20,6 +22,7 @@ class Ranking extends Component {
 			},
 			directSupporters,
 			indirectSupporters,
+			selectValue,
 			_onSelectOptionChange,
 	 	} = this.props;
 
@@ -34,8 +37,8 @@ class Ranking extends Component {
 				}
 				외 { directSupporters.length - recent3DirectSupporters.length }명이 직접 후원함
 			</div>
-		) 
-		
+		)
+
 		const indirectInfo = (
 			<div className="project-detail-ranking-info">
 				{
@@ -83,27 +86,29 @@ class Ranking extends Component {
 		}, index) => (
 			<div key={index} className="project-detail-ranking-item">
 				<div className="project-ranking-th">
-				    <p className="sharing-fb-icon-list">
-					<img className="ranking-fb-icon-list" key={index} width={50} height={50}
-						src={`https://graph.facebook.com/${fbId}/picture`} />
+			    <p className="sharing-fb-icon-list">
+						<img className="ranking-fb-icon-list" key={index} width={50} height={50}
+							src={`https://graph.facebook.com/${fbId}/picture`} />
 					</p>
-						
+
 					<p className="sharing-summary">
-					    <span><p className="sharing-name">{name}</p>{' '}{String(new Date(support_at)) /* TODO: Date to string... */}</span>
-					    <span>{message}</span>
-					    <span><p className="sharing-money">{money.toLocaleString()}</p>원을 후원함</span>
-			        </p>
-			        <p className="likes-num"><h4 className="likes-text">{ likes.toLocaleString() }</h4>
-					<img className="sharing-icon" src="https://7pictures.co.kr/wp-content/uploads/2016/08/likes.png" scale="0" />좋아요</p>
+				    <span><p className="sharing-name">{name}</p>{' '}{date2string(support_at) /* TODO: Date to string... */}</span>
+				    <span>{message}</span>
+				    <span><p className="sharing-money">{money.toLocaleString()}</p>원을 후원함</span>
+	        </p>
+		        <p className="likes-num">
+							<h4 className="likes-text">{ likes.toLocaleString() }</h4>
+							<img className="sharing-icon" src="https://7pictures.co.kr/wp-content/uploads/2016/08/likes.png" scale="0" />좋아요
+						</p>
 				</div>
-						
+
 				{/* rankToCaption(rank) */}
-				
+
 					{/* <img className="sharing-icon" src="https://7pictures.co.kr/wp-content/uploads/2016/08/comment.png" scale="0" />
 					{ comments }
 					<img className="sharing-icon" src="https://7pictures.co.kr/wp-content/uploads/2016/08/share.png" scale="0" />
-					{ shares } */} 
-				
+					{ shares } */}
+
 			</div>
 		))
 
@@ -113,7 +118,7 @@ class Ranking extends Component {
 				{ indirectInfo }
 
 				<Select name="project-detail-ranking-select"
-				 	value="support_at"
+				 	value={selectValue}
 					options={selectOptions}
 					onChange={_onSelectOptionChange} />
 
@@ -128,37 +133,5 @@ class Ranking extends Component {
 
 }
 
-Ranking.contextTypes = {
-	ranking: PropTypes.shape({
-		recent3DirectSupporters: PropTypes.arrayOf(
-			PropTypes.string.isRequired,
-		).isRequired,
-		recent3IndirectSupporters: PropTypes.arrayOf(
-			PropTypes.string.isRequired,
-		).isRequired,
-		selectOptions: PropTypes.arrayOf(PropTypes.shape({
-			value: PropTypes.string.isRequired,
-			label: PropTypes.string.isRequired,
-		})).isRequired,
-	}).isRequired,
-	directSupporters: PropTypes.arrayOf(PropTypes.shape({
-		fbId: PropTypes.string.isRequired,
-		name: PropTypes.string.isRequired,
-		money: PropTypes.number.isRequired,
-		support_at: PropTypes.number.isRequired,
-	}).isRequired).isRequired,
-	indirectSupporters: PropTypes.arrayOf(PropTypes.shape({
-		fbId: PropTypes.string.isRequired,
-		name: PropTypes.string.isRequired,
-		money: PropTypes.number.isRequired,
-		support_at: PropTypes.number.isRequired,
-		message: PropTypes.string.isRequired,
-		likes: PropTypes.number.isRequired,
-		comments: PropTypes.number.isRequired,
-		shares: PropTypes.number.isRequired,
-		rank: PropTypes.number.isRequired,
-	}).isRequired).isRequired,
-	_onSelectOptionChange: PropTypes.func.isRequired,
-}
 
 export default Ranking;

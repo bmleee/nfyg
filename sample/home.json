@@ -39,16 +39,6 @@
       "numDirectSupports": 100,
       "numIndirectSupports": 300,
       "remainingDays": 3
-    },
-    {
-      "imgSrc": "/assets/images/present-project-list-thumbnail.jpg",
-      "creator": "HOPP",
-      "title": "목욕관",
-      "currentMoney": 30,
-      "targetMoney": 100,
-      "numDirectSupports": 100,
-      "numIndirectSupports": 300,
-      "remainingDays": 3
     }
   ],
   "futureProjects": [

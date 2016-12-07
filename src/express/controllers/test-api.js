@@ -41,8 +41,8 @@ router.get('/read/:file_name', (req, res) => {
 	res.status(200).json(JSON.parse(file))
 })
 
-const signupMulter = multer()
-router.post('/signup', signupMulter.array(), async (req, res) => {
+const singleMulter = multer()
+router.post('/signup', singleMulter.array(), async (req, res) => {
   const {
     email, pw, display_name, photoURL
   } =  req.body;
@@ -59,6 +59,34 @@ router.post('/signup', signupMulter.array(), async (req, res) => {
   //   res.redirect('/signup')
   res.json({
     response: 'response!'
+  })
+})
+
+router.post('/project', singleMulter.array(), async (req, res) => {
+  console.log('/project body', JSON.stringify(req.body, undefined, 4));
+  res.json({
+    body: req.body
+  })
+})
+
+router.post('/exhibition', singleMulter.array(), async (req, res) => {
+  console.log('/exhibition body', JSON.stringify(req.body, undefined, 4));
+  res.json({
+    body: req.body
+  })
+})
+
+router.post('/magazine', singleMulter.array(), async (req, res) => {
+  console.log('/magazine body', JSON.stringify(req.body, undefined, 4));
+  res.json({
+    body: req.body
+  })
+})
+
+router.post('/sponsor', singleMulter.array(), async (req, res) => {
+  console.log('/sponsor body', JSON.stringify(req.body, undefined, 4));
+  res.json({
+    body: req.body
   })
 })
 

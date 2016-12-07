@@ -3,39 +3,39 @@ import FontAwesome from 'react-fontawesome'
 
 import { fetchJSONFile } from '../../api/AppAPI'
 
-class Sponsers extends Component {
+class Sponsors extends Component {
 
 	state = {
-		sponsers: []
+		sponsors: []
 	}
 
 	async componentDidMount() {
-		const sponsers = await fetchJSONFile('sponsers')
+		const sponsors = await fetchJSONFile('sponsors')
 
 		this.setState({
-			sponsers
+			sponsors
 		})
 	}
 
 	render() {
-		const { sponsers } = this.state
+		const { sponsors } = this.state
 
-		const sponserList = sponsers.map(({
-				sponserName,
+		const sponsorList = sponsors.map(({
+				sponsorName,
 				description,
 				imgSrc,
 				logoSrc,
 				money,
 				contacts: { homepage, facebook, blog }
 			}) => (
-				<div className="sponser-list-item">
+				<div className="sponsor-list-item">
 					<div className="sponsor-thumbnail">
 					<div className="sponsor-centered">
 					<img className="sponsor-logo-image" src={imgSrc} alt=""/>
 					</div>
 					</div>
 					{/* <div>
-						<span>{sponserName}</span>
+						<span>{sponsorName}</span>
 						<span>
 							{
 								!!money && money > 0
@@ -50,11 +50,11 @@ class Sponsers extends Component {
 					</p>
 					</div>
 					{/* https://www.npmjs.com/package/react-fontawesome 
-					<div className="sponser-icons">
+					<div className="sponsor-icons">
 						{
 							!!homepage
 								?	<a href={homepage}>
-										<FontAwesome className='sponser-icon-homepage' name='home'
+										<FontAwesome className='sponsor-icon-homepage' name='home'
 										 size='lg' />
 								  </a>
 							 	: null
@@ -62,7 +62,7 @@ class Sponsers extends Component {
 						{
 							!!facebook
 								? <a href={facebook}>
-										<FontAwesome className='sponser-icon-facebook' name='facebook'
+										<FontAwesome className='sponsor-icon-facebook' name='facebook'
 											size='lg' />
 									</a>
 								: null
@@ -70,7 +70,7 @@ class Sponsers extends Component {
 						{
 							!!blog
 								? <a href={blog}>
-										<FontAwesome className='sponser-icon-blog' name='pencil'
+										<FontAwesome className='sponsor-icon-blog' name='pencil'
 										  size='lg'/>
 									</a>
 								: null
@@ -81,13 +81,13 @@ class Sponsers extends Component {
 			))
 
 		return (
-			<div className="sponser">
-				<div className="sponser-haeding">
+			<div className="sponsor">
+				<div className="sponsor-haeding">
 					<h2>Sponsors</h2>
 					{/* <p>지속적인 문화예술 활동을 가능하게 해주는 기업/단체</p> */}
 				</div>
-				<div className="sponser-list-container">
-					{ sponserList }
+				<div className="sponsor-list-container">
+					{ sponsorList }
 				</div>
 			</div>
 		)
@@ -95,4 +95,4 @@ class Sponsers extends Component {
 
 }
 
-export default Sponsers
+export default Sponsors

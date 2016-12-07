@@ -7,6 +7,8 @@ import Select from 'react-select';
 
 import { PostComments } from '../Post/';
 
+import {date2string} from '~/src/react/lib/utils'
+
 const borderStyle = { border: '1px solid gray' }
 
 
@@ -43,8 +45,7 @@ class QnA extends Component {
 	}
 
 	render() {
-		console.log('QnA.context', this.context);
-		let { qna: { selectOptions, posts } } = this.context;
+		let { qna: { selectOptions, posts } } = this.props;
 
 
 		const items = posts.map( ({
@@ -65,7 +66,7 @@ class QnA extends Component {
 				</div>
 				<div>
 					<span>함께하고 있는 후원자: {numSupporters}명</span>
-					<span>작성일: {created_at}</span>
+					<span>작성일: {date2string(created_at)}</span>
 				</div>
 				<div>
 					{ post.map( ({type, content}, index) => (
@@ -100,35 +101,6 @@ class QnA extends Component {
 
 }
 
-QnA.contextTypes = {
-	qna: PropTypes.shape({
-		selectOptions: PropTypes.arrayOf(PropTypes.shape({
-			value: PropTypes.string.isRequired,
-			label: PropTypes.string.isRequired,
-		})).isRequired,
-		posts: PropTypes.arrayOf(PropTypes.shape({
-			opened: PropTypes.bool.isRequired,
-			author: PropTypes.shape({
-				name: PropTypes.string.isRequired,
-				iconSrc: PropTypes.string.isRequired,
-			}).isRequired,
-			title: PropTypes.string.isRequired,
-			created_at: PropTypes.string.isRequired, // TODO: date type!
-			numSupporters: PropTypes.number.isRequired,
-			likes: PropTypes.number.isRequired,
-			post: PropTypes.arrayOf(PropTypes.shape({
-				type: PropTypes.string.isRequired,
-				content: PropTypes.string.isRequired,
-			})).isRequired,
-			comments: PropTypes.arrayOf(PropTypes.shape({
-				author: PropTypes.shape({
-					name: PropTypes.string.isRequired,
-					iconSrc: PropTypes.string.isRequired,
-				}).isRequired,
-				content: PropTypes.string.isRequired,
-			})).isRequired,
-		})).isRequired,
 
-	}).isRequired,
-}
+
 export default QnA;

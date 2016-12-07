@@ -22,3 +22,41 @@
 	padding-top :55%;
 	overflow : hidden;
 }
+
+.progressbar-container {
+	height : 2.5px;
+	background : #eee;
+	border-radius : 1px;
+}
+.progressbar-progress {
+	height : 2.8px !important;
+	background : -webkit-linear-gradient(left, #4b709a 0%, #DB96DB 100%);
+	border-radius : 1px !important;
+}
+.project-summary-detail {
+	display : block;
+	margin-top : 5px;
+	text-align : center;
+	color : #0c0c0c;
+	font-weight : 600;
+	font-size : 18px;
+}
+.project-remain-days {
+	display : inline-block;
+	float : left;
+	color : #444;
+	font-weight : 500;
+	font-size : 16px;
+}
+.project-summary-current-money {
+	display : inline-block;
+	float : right;
+	color : #444;
+	font-weight : 500;
+	font-size : 16px;
+}
+.present-more-button:before {
+	font-family : Ionicons;
+	content : "\f48a";
+	font-weight : 700;
+}

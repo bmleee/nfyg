@@ -16,7 +16,30 @@
 		.sharing-icon {
 			width: 24px; height: 24px; margin-bottom:3px !important; vertical-align:middle;
 		}
-
+		.progressbar-container {
+			width : 700px;
+			margin : 8px auto;
+			height : 8px;
+			background-color: #ddd;
+			background-image: repeating-linear-gradient(45deg, transparent, transparent 5px, rgba(255,255,255,.35) 5px, rgba(255,255,255,.65) 10px);
+			border-radius : 5px;
+			@media (max-width: 991px) {
+				width : 85%;
+				margin : 8px auto;
+			@media (max-width: 500px) {
+				height : 5.5px;
+				width : 90%;
+			}
+			}
+		}
+		.progressbar-progress {
+			height : 8.2px !important;
+			background : -webkit-linear-gradient(left, #4b709a 0%, #DB96DB 100%);
+			border-radius : 4px !important;
+			@media (max-width: 500px) {
+				height : 5.6px !important;
+			}
+		}
 	}
 }
 
@@ -38,4 +61,68 @@
 	border-radius : 50px;
 	border : 2px solid #fff;
 	margin-bottom : 4.5px;
+}
+
+.project-title {
+	margin-top : 10px;
+}
+.project-sponsor-name {
+	padding : 3px 5px;
+	border : 1px solid #fff;
+	border-radius : 2px;
+	display : inline-block;
+}
+
+.project-heading-summary-money {
+	display : inline-block;
+	text-align : center;
+	width : 700px;
+	font-size: 20px;
+	@media (max-width: 991px) {
+				width : 85%;
+				font-size: 18px;
+			@media (max-width: 500px) {
+				width : 90%;
+				font-size: 16px;
+			}
+			}
+}
+.project-heading-summary-percent {
+	display : inline-block;
+	float : left;
+	text-align : left;
+	width: 120px;
+	@media (max-width: 991px) {
+				width: 100px;
+			@media (max-width: 500px) {
+				width: 80px;
+			}
+			}
+}
+.project-heading-summary-dday {
+	display : inline-block;
+	float : right;
+	text-align : right;
+	width: 120px;
+	@media (max-width: 991px) {
+				width: 100px;
+			@media (max-width: 500px) {
+				width: 80px;
+			}
+			}
+}
+.heading-summary-status {
+	display : inline-block;
+	font-size: 14px;
+	margin-top : 4px;
+	margin-left: 2px;
+	@media (max-width: 991px) {
+				font-size: 12px;
+			@media (max-width: 500px) {
+				font-size: 12px;
+			}
+			}
+}
+.project-supporters-num {
+	color : #ddd;
 }

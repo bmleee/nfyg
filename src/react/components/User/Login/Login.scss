@@ -29,7 +29,7 @@
     font-weight : 700;
 }
 .fb-login-btn:hover, .login-btn:hover {
-    background : #f55035;
+    background : #4b709a;
     transition : opacity, 250ms;
 }
 
@@ -63,9 +63,16 @@
     height : 45px;
     padding-left : 10px;
 }
+.user-login-username {
+    width : 280px;
+    border : 2px solid #eee;
+    margin-top : 10px;
+    height : 45px;
+    padding-left : 10px;
+}
 
-.user-login-id:focus, .user-login-password:focus {
+.user-login-id:focus, .user-login-password:focus, .user-login-username:focus {
     outline : none;
-    border : 2px solid #f55035;
+    border : 2px solid #4b709a;
     transition : opacity, 250ms;
 }

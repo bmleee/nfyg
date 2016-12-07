@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { Viewer } from '~/src/react/components/DraftEditor/SevenEditor';
 
 import {
 	ProjectReward,
@@ -25,53 +26,31 @@ class Overview extends Component {
 	}
 
 	render() {
-		// const { overview: { part1, part2 }, rewards } = this.props;
-		const { overview: { part1, part2 }, rewards } = this.context;
+		let {
+			overview: {
+				intro,
+				part1,
+				part2
+			},
+			funding: {
+				reward: {
+					rewards
+				}
+			}
+		} = this.props;
 
-		let item1 = part1.map( ({type, content}, index) => (
-			<div key={index}>
-				<span>{type}</span>
-				<span>{content}</span>
-			</div>
-		))
-
-		let item2 = part2.map( ({type, content}, index) => (
-			<div key={index}>
-				<span>{type}</span>
-				<span>{content}</span>
-			</div>
-		))
-
-		// TODO: part1, part2: 에디터로 작성한 부분. 글, 동영상, 사진, ... 등 이쁘게 보여주기
 		return (
 			<div className="project-detail-overview">
 				<ProjectReward rewards={rewards} />
-				
+
 				<div className="project-detail-overview-info">
-					{item1}
-					{ this.state.seeMore ? item2 : <button onClick={this._onClick}>더보기</button> }
+					<Viewer raw={part1} />
+					{ this.state.seeMore ? <Viewer raw={part2} /> : <button onClick={this._onClick}>더보기</button> }
 				</div>
 			</div>
 		)
 	}
 
-}
-
-Overview.contextTypes = {
-	overview: PropTypes.shape({
-		part1: PropTypes.arrayOf(PropTypes.shape({
-			type: PropTypes.string.isRequired,
-			content: PropTypes.string.isRequired,
-		})).isRequired,
-		part2: PropTypes.arrayOf(PropTypes.shape({
-			type: PropTypes.string.isRequired,
-			content: PropTypes.string.isRequired,
-		})).isRequired,
-	}).isRequired,
-	rewards: PropTypes.arrayOf(PropTypes.shape({
-		title: PropTypes.string.isRequired,
-		description: PropTypes.string.isRequired,
-	}).isRequired).isRequired,
 }
 
 export default Overview;

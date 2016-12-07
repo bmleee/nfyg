@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { EditorState } from 'draft-js';
-import { stateToHTML } from 'draft-js-export-html';
-import { stateFromHTML } from 'draft-js-import-html';
+import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
+import {stateToHTML} from 'draft-js-export-html';
 
-import Editor from 'draft-js-plugins-editor';
+import Editor, { createEditorStateWithText } from 'draft-js-plugins-editor';
+
 import {
 	linkifyPlugin,
 	sideToolbarPlugin,
@@ -39,19 +39,27 @@ const { InlineToolbar } = inlineToolbarPlugin;
 const { UndoButton, RedoButton } = undoPlugin;
 const { AlignmentTool } = alignmentPlugin;
 
-
-
 export default class SevenEditor extends Component {
 	state = {
-		editorState: EditorState.createEmpty(),
-	};
+		editorState: this.props.raw ?
+			EditorState.createWithContent(convertFromRaw(this.props.raw)) :
+			EditorState.createEmpty(),
+	}
 
 	onChange = (editorState) => {
 		this.setState({
 			editorState,
 		});
 
-		if(this.props.onChange) this.props.onChange(editorState)
+		// prop to FormWrapper, ...
+		// avoid editorState === null
+		if(editorState && this.props.onChangeToRaw) {
+			this.props.onChangeToRaw(convertToRaw(editorState.getCurrentContent()))
+		}
+
+		if(editorState && this.props.onChangeToHtml) {
+			this.props.onChangeToHtml(stateToHTML(editorState.getCurrentContent()))
+		}
 	};
 
 	focus = () => {
@@ -59,12 +67,14 @@ export default class SevenEditor extends Component {
 	};
 
 	render() {
+		let editorState = this.state.editorState;
+
 		return (
 			<div className={editorStyles.wrapper}>
 
 				<div className={editorStyles.editor} onClick={this.focus}>
 					<Editor
-						editorState={this.state.editorState}
+						editorState={editorState}
 						onChange={this.onChange}
 						plugins={plugins}
 						ref={(node) => this.editor = node}
@@ -77,13 +87,45 @@ export default class SevenEditor extends Component {
 					<AlignmentTool />
 					<ImageAdd
 						editorState={this.state.editorState}
-	          onChange={this.onChange}
-	          modifier={imagePlugin.addImage}
+						onChange={this.onChange}
+						modifier={imagePlugin.addImage}
 					/>
 					<UndoButton />
 					<RedoButton />
 				</div>
+			</div>
+		);
+	}
+}
 
+export class Viewer extends Component {
+	render() {
+		let {
+			raw
+		} = this.props;
+
+		if (typeof raw === 'string') raw = JSON.parse(raw);
+
+		let editorState;
+
+		try {
+			editorState = EditorState.createWithContent(convertFromRaw(raw));
+		} catch (e) {
+			console.error(e)
+			editorState = createEditorStateWithText('');
+		}
+
+
+
+		return (
+			<div className={editorStyles.viewerWrapper}>
+				<div className={editorStyles.viewer}>
+					<Editor
+						editorState={editorState}
+						readOnly={true}
+						plugins={plugins}
+					/>
+				</div>
 			</div>
 		);
 	}
