@@ -54,5 +54,10 @@ const server = app.listen(EXPRESS_PORT, () => {
 	console.log(`Express listening on port ${EXPRESS_PORT}`);
 });
 
+process.on('exit', (code) => {
+	console.log(`process exit on code ${code}`);
+	server.close();
+})
+
 // for gulp-hot-reload to catch
 module.exports = app

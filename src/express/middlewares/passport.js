@@ -3,6 +3,7 @@
 
 // Load the module dependencies
 var passport = require('passport'),
+	LocalStrategy = require('passport-local').Strategy,
 	mongoose = require('mongoose');
 
 // Define the Passport configuration method
