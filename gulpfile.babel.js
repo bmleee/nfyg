@@ -234,7 +234,8 @@ gulp.task('start', () => {
     script: DEST.EXPRESS + '/express-server.js',
     watch: DEST.EXPRESS,
     verbose: true,
-    env: { 'DEBUG': 'express:*' }
+    env: { 'DEBUG': 'seven-main' }
+    // env: { 'DEBUG': 'express:*' }
   })
 });
 

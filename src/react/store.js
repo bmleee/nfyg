@@ -40,7 +40,7 @@ export function configureStore(history, initialState) {
 	const reducer = makeReducer()
 
 	const logger = (store) => (next) => (action) => {
-	  if(typeof action !== "function"){
+	  if(typeof action !== "function" && !action.type.includes('@@router/LOCATION_CHANGE')){
 	    console.log('dispatching:', action);
 	  }
 	  return next(action);
@@ -48,7 +48,7 @@ export function configureStore(history, initialState) {
 
 	let devTools = [];
 
-	if (typeof document !== 'undefined') {
+	if (typeof document !== 'undefined' && process.env.NODE_ENV !== 'production') {
 		devTools = [ DevTools.instrument() ];
 	}
 
@@ -62,7 +62,7 @@ export function configureStore(history, initialState) {
 				routerMiddleware(history)
 			)
 		),
-		applyMiddleware(thunk),
+		applyMiddleware(thunk), // doesn't work
 		...devTools
 	);
 

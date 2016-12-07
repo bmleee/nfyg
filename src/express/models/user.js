@@ -27,9 +27,9 @@ var UserSchema = new Schema({
 	nick_name: {
 		type: String,
 		// Set a unique 'username' index
-		unique: true,
+		// unique: true,
 		// Validate 'username' value existance
-		required: 'Username is required',
+		// required: 'Username is required',
 		// Trim the 'username' field
 		trim: true
 	},

@@ -38,9 +38,8 @@ http://sharencare.me/sponsors/23 참조
 ### QnAEditor
  1. 그냥 input[type='text'] 로 글 작성하기
 
-### ExhibitioinEditor
-
-
+### Header
+ - Flash / Popup 를 Common/Header 에 넣기
 
 ### Draft-js
  - 사용할 플러그인
