@@ -1,4 +1,6 @@
 import fetch from 'isomorphic-fetch'
+import axios from 'axios'
+
 import 'babel-polyfill'
 
 import { EXPRESS_PORT } from '../../../env'
@@ -46,4 +48,13 @@ export async function upload_file(file) {
   // let res = await image_upload(file, signed_request, url)
   // console.log(res);
 
+}
+
+export async function fetchUserAndData() {
+	const config = {
+		url: `/api/auth/fetch${window.location.pathname}`,
+		withCredentials: true,
+	}
+	const response = await axios.request(config)
+	return response
 }
