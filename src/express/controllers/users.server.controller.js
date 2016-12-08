@@ -1,4 +1,3 @@
-// Invoke 'strict' JavaScript mode
 'use strict';
 
 // Load the module dependencies
@@ -129,12 +128,12 @@ exports.saveOAuthUserProfile = function(req, profile, done) {
 			// If a user could not be found, create a new user, otherwise, continue to the next middleware
 			if (!user) {
 				// Set a possible base username
-				var possibleEmail = ((profile.email) ? profile.email.split('@')[0] : '');
+				var possibleUsername = profile.username || ((profile.email) ? profile.email.split('@')[0] : '');
 
 				// Find a unique available username
-				User.findUniqueUsername(possibleEmail, null, function(availableEmail) {
+				User.findUniqueUsername(possibleUsername, null, function(availableUsername) {
 					// Set the available user name
-					profile.email = availableEmail;
+					profile.username = availableUsername;
 
 					// Create the user
 					user = new User(profile);
