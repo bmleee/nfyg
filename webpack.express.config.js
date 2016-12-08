@@ -91,6 +91,9 @@ module.exports = {
 				],
 			},
 			{ test: /\.svg$/, loader: 'babel!react-svg' },
+			// react-notifications
+			{ test: /\.(png|woff(2)?|eot|ttf)(\?[a-z0-9=.]+)?$/, loader: 'url-loader?limit=100000' },
+			{ test: /\.svg\?[a-z0-9=.]+$/, loader: 'url-loader?limit=100000' },
 		]
 	},
 

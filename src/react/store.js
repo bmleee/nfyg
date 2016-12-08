@@ -50,15 +50,16 @@ export function configureStore(history, initialState) {
 	const store = createStore(
 		reducer,
 		initialState,
-		compose(
-			applyMiddleware(
-				logger,
-				thunk,
-				routerMiddleware(history),
-				...devTools,
-				// remoteActionMiddleware(socket), // TODO: activate to send action to server
-			)
-		),
+		applyMiddleware(
+			logger,
+			thunk,
+			routerMiddleware(history),
+			// ...devTools,
+			// remoteActionMiddleware(socket), // TODO: activate to send action to server
+		)
+		// compose(
+		//
+		// ),
 	);
 
 	return store;

@@ -1,58 +1,117 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router';
+import { Nav, Footer, NotFound, Header } from './components/Common';
+import update from 'immutability-helper'
 
+import axios from 'axios'
 
-import { Nav, Footer } from './components/Common';
+import { fetchUserAndData } from './api/AppAPI'
+import { canUseDOM } from '~/src/lib/utils'
+
+let previousLocation = ''
 
 export default class App extends Component {
+
 	state = {
-		previousLocation: {},
-		authority_level: 10000,
-		
+		modal: {},
+		flashs: [],
+		user: {
+			isLoggedIn: false,
+			isAuthorized: true, // can see this page?
+		},
+		data: {}
+	}
+
+	// modal: {
+	// 	type: 'Unauthorized',
+	// 	message: `you are not supposed to access this page`,
+	// 	isOpen: false
+	// },
+	// flashs: [{}]
+	// setFlash({type: "LoginFailure", message: "you have to login", level: "error", autoDismiss: 3})
+
+	constructor(props) {
+		super(props)
+
+		if(canUseDOM){
+			console.log('constructor.previousLocation', document.URL);
+			previousLocation = document.URL
+
+			// TODO: check routing auth
+			this.fetchUserAndData()
+		}
+
+	}
+
+	componentWillReceiveProps(nextProps) {
+		// app location changed
+		if (canUseDOM) {
+
+			if (previousLocation !== document.URL) {
+				previousLocation = document.URL
+				console.log('previousLocation', previousLocation);
+
+				// TODO: check routing auth
+				this.fetchUserAndData()
+			}
+
+		}
 	}
 
 	render() {
-		const {
-			children
-		} = this.props
+		const children = this.props.children && React.cloneElement(this.props.children, {
+			...this.modalHandlers,
+			...this.flashHandlers,
+		})
 
-		console.log('App', this);
+
+		if(typeof window !== 'undefined') window.setFlash = this.flashHandlers.setFlash
 
 		return (
 			<div>
-				<div>
-					Test Links:
-					{' '}
-					<Link to="/"><button>Home</button></Link>
-					{' '}
-					<Link to="/"><button>Project</button></Link>
-					{' '}
-					<Link to="/exhibitions"><button>Exhibitions</button></Link>
-					{' '}
-					<Link to="/magazines"><button>Magazines</button></Link>
-					{' '}
-					<Link to="/project-editor"><button>Project Editor</button></Link>
-					{' '}
-					<Link to="/exhibition-editor"><button>Exhibition Editor</button></Link>
-					{' '}
-					<Link to="/magazine-editor"><button>Magazine Editor</button></Link>
-					{' '}
-					<Link to="/sponsor-editor"><button>Sponsor Editor</button></Link>
-					{' '}
-					<Link to="/login"><button>Login</button></Link>
-					{' '}
-					<Link to="/signup"><button>Signup</button></Link>
-					{' '}
-					<Link to="/profile"><button>Profile</button></Link>
-					{' '}
-					<Link to="/sponsors"><button>Sponsors</button></Link>
-					{' '}
-					<Link to="/test1"><button>Test1</button></Link>
-					{' '}
-					<Link to="/test2"><button>Test2</button></Link>
-					{' '}
-					<Link to="/test3"><button>Test3</button></Link>
-				</div>
+				{
+					process.env.NODE_ENV !== 'production'
+						? <div>
+							Test Links:
+							{' '}
+							<Link to="/"><button>Home</button></Link>
+							{' '}
+							<Link to="/"><button>Project</button></Link>
+							{' '}
+							<Link to="/exhibitions"><button>Exhibitions</button></Link>
+							{' '}
+							<Link to="/magazines"><button>Magazines</button></Link>
+							{' '}
+							<Link to="/project-editor"><button>Project Editor</button></Link>
+							{' '}
+							<Link to="/exhibition-editor"><button>Exhibition Editor</button></Link>
+							{' '}
+							<Link to="/magazine-editor"><button>Magazine Editor</button></Link>
+							{' '}
+							<Link to="/sponsor-editor"><button>Sponsor Editor</button></Link>
+							{' '}
+							<Link to="/login"><button>Login</button></Link>
+							{' '}
+							<Link to="/signup"><button>Signup</button></Link>
+							{' '}
+							<Link to="/profile"><button>Profile</button></Link>
+							{' '}
+							<Link to="/sponsors"><button>Sponsors</button></Link>
+							{' '}
+							<Link to="/test1"><button>Test1</button></Link>
+							{' '}
+							<Link to="/test2"><button>Test2</button></Link>
+							{' '}
+							<Link to="/test3"><button>Test3</button></Link>
+						</div>
+						: null
+				}
+
+				<Header
+					{...this.state}
+					{...this.modalHandlers}
+					{...this.flashHandlers}
+				/>
 
 				<Nav></Nav>
 
@@ -61,5 +120,33 @@ export default class App extends Component {
 				<Footer></Footer>
 			</div>
 		)
+	}
+
+	modalHandlers = {
+		setModal: (modal) => { this.setState({ modal }) },
+		unsetModal: () => { this.setState({ modal: { isOpen: false } }) }
+	}
+
+	flashHandlers = {
+		// https://www.npmjs.com/package/react-notification-system
+		setFlash: (flash) => {
+			this.setState(update(this.state, {
+				flashs: {
+					$push: [{...flash}]
+				}
+			}))
+		},
+
+		clearFlash: () => {
+			this.setState(update(this.state, {
+				flashs: { $set: [] }
+			}))
+		}
+	}
+
+	fetchUserAndData = async () => {
+		const res = await fetchUserAndData()
+		console.log('fetchUserAndData.res', res)
+		console.log('fetchUserAndData.res.data', res.data)
 	}
 }
