@@ -77,5 +77,5 @@ export function date2string (date) {
     date = new Date(date)
   }
   return date.toISOString().slice(0,10).replace(/-/g,".")
-    .split('.').map(x => Number(x)).join('.');
+    .split('.').map(Number).join('.');
 }
