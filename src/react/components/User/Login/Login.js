@@ -1,20 +1,14 @@
 import React, { Component, PropTypes } from 'react'
 import FontAwesome from 'react-fontawesome'
 
+import axios from 'axios'
+
 import { facebook_login } from '../../../../lib/firebase'
 
 class Login extends Component {
-	_onClick = () => {
-		console.log(this)
-		console.log(`ID: ${this.refs.user_id.value}`)
-		console.log(`PW: ${this.refs.user_password.value}`)
-	}
-
-	_onFacebookClick = () => {
-		facebook_login()
-	}
 
 	render() {
+		console.log('Login', this);
 		return (
 			<div className="login-page">
 			<div className="user-login">
@@ -32,11 +26,32 @@ class Login extends Component {
 					<div>
 						<input type="password" className="user-login-password" name="password" placeholder="비밀번호" ref="password" autoComplete="off" />
 					</div>
-					<input type="submit" className="login-btn" value="LOG IN" />
+					<input type="submit" className="login-btn" value="LOG IN" onClick={this._onLocalClick} />
 				</form>
 			</div>
 		</div>
 		)
+	}
+
+	_onLocalClick = (e) => {
+		// e.preventDefault()
+
+		// const form = new FormData()
+		//
+		// form.append('email', this.refs.email.value);
+		// form.append('password', this.refs.password.value);
+		//
+		//
+		//
+		// // form.append('refer')
+		//
+		// console.log(this)
+		// console.log(`ID: ${this.refs.email.value}`)
+		// console.log(`PW: ${this.refs.password.value}`)
+	}
+
+	_onFacebookClick = () => {
+		facebook_login()
 	}
 }
 
