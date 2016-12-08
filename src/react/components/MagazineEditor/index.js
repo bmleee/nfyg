@@ -9,7 +9,7 @@ import { canUseDOM } from '~/src/lib/utils'
 
 const API_URL = '/api/test-api/magazine'
 
-export default class ExhibitionEditor extends Component {
+export default class MagazineEditor extends Component {
 
 	state = {
 		abstract: {
