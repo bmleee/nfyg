@@ -4,14 +4,20 @@ import { autoIncrement } from '../lib/db'
 
 const Schema = mongoose.Schema;
 
+export const restrictedNames = ['overview', 'post', 'ranking', 'abstract', 'artworks', 'qna']
+
 // Define a new 'ProjectSchema'
-var ProjectSchema = new Schema({
+const ProjectSchema = new Schema({
 	abstract: {
 		longTitle: {type: String, required: true},
 		shortTitle: {type: String, required: true},
 		imgSrc: {type: String, required: true},
 		category: {type: String, required: true}, // refers to react/constants/selectOptions
-		projectName: {type: String, required: true, unique: true},
+		projectName: {type: String, required: true, unique: true, validate: [
+			function(projectName) {
+				return restrictedNames.includes(projectName);
+			}, `project name can't be one of ${restrictedNames}`
+		]},
 		state: {type: String, required: true},     // refers to react/constants/selectOptions
 		postIntro: {type: String, required: true},
 	},
