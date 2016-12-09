@@ -58,3 +58,6 @@ process.on('exit', (code) => {
 
 // for gulp-hot-reload to catch
 module.exports = app
+
+
+import './lib/initdb'
