@@ -52,7 +52,7 @@ const routes = (
 	<Route path="/" component={App}>
 		<IndexRoute component={Home}></IndexRoute>
 
-		<Route path="projects" component={ProjectDetail}>
+		<Route path="projects/:projectName" component={ProjectDetail}>
 			// Project Detail: Overview, Post, Ranking, QnA, ...
 			<IndexRoute component={ProjectDetailOverview} />
 			<Route path="post" component={ ProjectDetailPost }></Route>
