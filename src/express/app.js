@@ -59,5 +59,5 @@ process.on('exit', (code) => {
 // for gulp-hot-reload to catch
 module.exports = app
 
-
-import './lib/initdb'
+// if(process.env.NODE_ENV === 'development')
+	require('./lib/initdb')
