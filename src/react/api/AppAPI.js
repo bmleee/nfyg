@@ -52,9 +52,20 @@ export async function upload_file(file) {
 
 export async function fetchUserAndData() {
 	const config = {
+		method: 'get',
 		url: `/api/auth/fetch${window.location.pathname}`,
 		withCredentials: true,
 	}
-	const response = await axios.request(config)
-	return response
+
+	console.log(`/api/auth/fetch${window.location.pathname}`);
+
+
+	try {
+		const response = await axios.request(config)
+		console.log(`response: ${response.data}`);
+		return response
+	} catch (e) {
+		console.error(`error ${e}`);
+	}
+
 }

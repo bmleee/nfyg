@@ -13,8 +13,8 @@ let previousLocation = ''
 export default class App extends Component {
 
 	state = {
-		modal: {},
-		flashs: [],
+		modal: {}, // { type, message, }
+		flashs: [], // { type?, message, level, ... }
 		user: {
 			isLoggedIn: false,
 			isAuthorized: true, // can see this page?
@@ -22,23 +22,12 @@ export default class App extends Component {
 		data: {}
 	}
 
-	// modal: {
-	// 	type: 'Unauthorized',
-	// 	message: `you are not supposed to access this page`,
-	// 	isOpen: false
-	// },
-	// flashs: [{}]
-	// setFlash({type: "LoginFailure", message: "you have to login", level: "error", autoDismiss: 3})
-
 	constructor(props) {
 		super(props)
 
 		if(canUseDOM){
 			console.log('constructor.previousLocation', document.URL);
 			previousLocation = document.URL
-
-			// TODO: check routing auth
-			this.fetchUserAndData()
 		}
 
 	}
@@ -56,6 +45,11 @@ export default class App extends Component {
 			}
 
 		}
+	}
+
+	componentDidMount() {
+		// TODO: check routing auth
+		this.fetchUserAndData()
 	}
 
 	render() {
@@ -144,9 +138,11 @@ export default class App extends Component {
 		}
 	}
 
-	fetchUserAndData = async () => {
-		const res = await fetchUserAndData()
-		console.log('fetchUserAndData.res', res)
-		console.log('fetchUserAndData.res.data', res.data)
+	fetchUserAndData = () => {
+		(async() => {
+			const res = await fetchUserAndData()
+			console.log('fetchUserAndData.res', res)
+			console.log('fetchUserAndData.res.data', res.data)
+		})()
 	}
 }
