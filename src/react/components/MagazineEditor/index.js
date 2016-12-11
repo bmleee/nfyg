@@ -16,6 +16,7 @@ export default class MagazineEditor extends Component {
 			longTitle: '',
 			shortTitle: '',
 			imgSrc: '',
+			// TODO: add category
 			magazineName: '',
 		},
 
@@ -249,6 +250,7 @@ export default class MagazineEditor extends Component {
 	}
 
 	save = async () => {
+		console.log('state', this.state);
 		try {
 			const res = await axios.post(API_URL, {...this.state})
 			console.log('save response', res);

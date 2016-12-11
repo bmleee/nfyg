@@ -271,6 +271,7 @@ export default class ExhibitionEditor extends Component {
 	}
 
 	save = async () => {
+		console.log('state', this.state);
 		try {
 			const res = await axios.post(API_URL, {...this.state})
 			console.log('save response', res);

@@ -13,6 +13,8 @@ import * as actionCreators from '../../actions/ProjectEditorActionCreators'
 
 import { canUseDOM } from '~/src/lib/utils'
 
+const API_URL = '/api/test-api/sponsor'
+
 import _ from 'lodash' // use throttle or debounce
 import 'whatwg-fetch'
 import 'babel-polyfill'
@@ -272,6 +274,7 @@ export default class ProjectEditor extends Component {
 
 	// 서버로 전송
 	save = async () => {
+		console.log('state', this.state);
 		try {
 			const res = await axios.post(API_URL, {...this.state})
 			console.log('save response', res);
