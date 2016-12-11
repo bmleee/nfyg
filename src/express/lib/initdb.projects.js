@@ -2,9 +2,10 @@ import UserModel from '../models/user'
 import ProjectModel from '../models/project'
 import SponsorModel from '../models/sponsor'
 
+import { range, asyncparallelfor } from '../../lib/utils'
 import { randomString } from './utils'
 
-const createProject = async (state) => {
+const createProject = async ({sponsor, state}) => {
 	return await ProjectModel.create({
 		"abstract": {
 			"longTitle": "sample project long title",
@@ -21,7 +22,7 @@ const createProject = async (state) => {
 				"creatorLocation": "서울",
 				"creatorDescription": "i'm creator"
 		},
-		"sponsor": sponsor._id,
+		"sponsor": sponsor,
 		"funding": {
 				"currentMoney": 0,
 				"targetMoney": 1000000,
@@ -48,6 +49,7 @@ const createProject = async (state) => {
 										"thresholdMoney": 1000000
 								}
 						],
+
 						"newReward": {
 								"title": "",
 								"description": "",
@@ -105,25 +107,22 @@ export default async function initProject() {
 	let sponsor = await SponsorModel.findOne({sponsorName: '7pictures'})
 
 
-
-
-	for (var i = 0; i < max_projects - preparing; i++) {
+	asyncparallelfor(range(preparing, max_projects), async (_) => {
 		try {
-			await createProject('preparing')
+			await createProject({sponsor: sponsor._id, state: 'preparing'})
 		} catch (e) {}
-	}
-	for (var i = 0; i < max_projects - in_progress; i++) {
-		try {
-			await createProject('in_progress')
-		} catch (e) {}
-	}
-	for (var i = 0; i < max_projects - completed; i++) {
-		try {
-			await createProject('completed')
-		} catch (e) {}
-	}
+	})
 
+	asyncparallelfor(range(in_progress, max_projects), async (_) => {
+		try {
+			await createProject({sponsor: sponsor._id, state: 'in_progress'})		} catch (e) {}
+	})
 
+	asyncparallelfor(range(completed, max_projects), async (_) => {
+		try {
+			await createProject({sponsor: sponsor._id, state: 'completed'})		} catch (e) {}
+	})
+	
 	try {
 		let sponsor = await SponsorModel.findOne({sponsorName: '7pictures'})
 		await ProjectModel.create({
@@ -132,7 +131,7 @@ export default async function initProject() {
         "shortTitle": "sample project short title",
         "imgSrc": "https://i0.wp.com/7pictures.co.kr/wp-content/uploads/edd/2016/10/KakaoTalk_20161008_150354358.jpg?resize=1024%2C590&ssl=1",
         "category": "health",
-        "projectName": "sample_project2",
+        "projectName": "7pictures",
         "state": "preparing",
         "postIntro": "test project intro"
 	    },
