@@ -4,7 +4,7 @@ import { autoIncrement } from '../lib/db'
 
 const Schema = mongoose.Schema;
 
-export const restrictedNames = ['overview', 'post', 'ranking', 'abstract', 'artworks', 'qna']
+export const restrictedNames = ['overview', 'post', 'ranking', 'abstract', 'artworks', 'qna', 'edit', 'new']
 
 // Define a new 'ProjectSchema'
 const ProjectSchema = new Schema({
@@ -15,7 +15,7 @@ const ProjectSchema = new Schema({
 		category: {type: String, required: true}, // refers to react/constants/selectOptions
 		projectName: {type: String, required: true, unique: true, validate: [
 			function(projectName) {
-				return restrictedNames.includes(projectName);
+				return !restrictedNames.includes(projectName);
 			}, `project name can't be one of ${restrictedNames}`
 		]},
 		state: {type: String, required: true},     // refers to react/constants/selectOptions
@@ -75,5 +75,84 @@ ProjectSchema.set('toJSON', {
 	virtuals: true
 });
 
+ProjectSchema.methods.toFormat = function (type) {
+	switch (type) {
+		case 'home':
+
+			switch (this.abstract.state) {
+				case 'preparing':
+					return {
+						imgSrc: this.abstract.imgSrc,
+						title: this.abstract.shortTitle,
+						descriptions: [
+							"거리의 수많은 동물들, ",
+			        "Urban beast들을 담은 사진집을 출간합니다."
+						],
+						creator: {
+							name: this.creator.creatorName,
+							iconSrc: this.creator.creatorImgSrc,
+						},
+						link: `/projects/${this.abstract.projectName}`,
+					}
+				case 'in_progress':
+					return {
+						imgSrc: this.abstract.imgSrc,
+						creator: this.creator.creatorName,
+						title: this.abstract.shortTitle,
+						targetMoney: this.funding.targetMoney,
+						currentMoney: this.funding.currentMoney,
+						numDirectSupports: Math.floor(Math.random() * 30), // TODO: from DirectSupport
+						numIndirectSupports: Math.floor(Math.random() * 300), // TODO: from IndirectSupport
+						remainingDays: ( new Date(this.funding.dateTo).getTime() - new Date(this.funding.dateFrom).getTime() ) / 1000 / 60 / 60 / 24,
+						link: `/projects/${this.abstract.projectName}`,
+					}
+				case 'completed':
+					return {
+						imgSrc: this.abstract.imgSrc,
+						title: this.abstract.shortTitle,
+						creator: {
+							name: this.creator.creatorName,
+							iconSrc: this.creator.creatorImgSrc,
+						},
+						targetMoney: this.funding.targetMoney,
+						currentMoney: this.funding.currentMoney,
+						numDirectSupports: Math.floor(Math.random() * 30), // TODO: from DirectSupport
+						numIndirectSupports: Math.floor(Math.random() * 300), // TODO: from IndirectSupport
+						link: `/projects/${this.abstract.projectName}`,
+					}
+			}
+
+		default:
+			return ''
+	}
+}
+
+ProjectSchema.methods.pushPost = async function (post_id) {
+	try {
+		let posts = this.posts || []
+		posts.push(post_id)
+		this.posts = Array.from(new Set(posts))
+		return await this.save()
+	} catch (e) {
+		console.error(e);
+		throw e
+	}
+}
+
+ProjectSchema.methods.pushQnA = async function (_id) {
+	try {
+		let qnas = this.qnas || []
+		qnas.push(_id)
+		this.qnas = Array.from(new Set(qnas))
+		return await this.save()
+	} catch (e) {
+		console.error(e);
+		throw e
+	}
+}
+
+
+
 // Create the 'User' model out of the 'ProjectSchema'
-module.exports = mongoose.model('Project', ProjectSchema);
+const ProjectModel = mongoose.model('Project', ProjectSchema);
+export default ProjectModel

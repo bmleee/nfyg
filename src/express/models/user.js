@@ -3,10 +3,12 @@ import mongoose from 'mongoose'
 import crypto from 'crypto'
 import { autoIncrement } from '../lib/db'
 
+export const access_levels = [0, 1, 10, 100]
+
 const Schema = mongoose.Schema;
 
 // Define a new 'UserSchema'
-var UserSchema = new Schema({
+const UserSchema = new Schema({
 	id: {
 		type: Number,
 		required: true,
@@ -17,9 +19,15 @@ var UserSchema = new Schema({
 		required: 'name is required',
 		trim: true
 	},
-	role: {
-		type: String,
-		default: 'user',
+	/*
+	 0 : nomal user
+	 1 : artist, can publish / edit project, exhibition
+	 10 : editor, can publish / edit magazine
+	 100 : admin, can do anything
+	 */
+	access_level: {
+		type: Number,
+		default: 0,
 	},
 	email: {
 		type: String,
@@ -143,4 +151,5 @@ UserSchema.set('toJSON', {
 });
 
 // Create the 'User' model out of the 'UserSchema'
-module.exports = mongoose.model('User', UserSchema);
+const UserModel = mongoose.model('User', UserSchema);
+export default UserModel
