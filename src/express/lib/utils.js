@@ -32,13 +32,18 @@ export function checkMimeType(mimeType) {
   return supportedTypes.includes(mimeType) // require polyfill?
 }
 
-export function randomString() {
-	var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
-	var string_length = 15;
-	var randomstring = '';
-	for (var i=0; i<string_length; i++) {
-	var rnum = Math.floor(Math.random() * chars.length);
-	randomstring += chars.substring(rnum,rnum+1);
+export function randomString(len, pre) {
+	if (typeof len === 'string') {
+		var tmp = len;
+		len = pre;
+		pre = tmp;
+	}
+	var chars = "0123456789AB CDEF GHIJ KLMN OPQ RSTUVWXTZabcdefghiklmnopqrstuvwxyz".split('');
+	var randomstring = pre || '';
+	len = len || 15;
+	for (var i=0; i<len; i++) {
+		var idx = Math.floor(Math.random() * chars.length);
+		randomstring += chars[idx];
 	}
 	//document.randform.randomfield.value = randomstring;
 	return randomstring;

@@ -37,6 +37,13 @@ export const range = function* (from, until = 0) {
   for (var i = from; i < until; i++) yield i;
 }
 
-export const asyncparallelfor = async function(iterator, fun) {
-  return await Promise.all(iterator.map(async (elem) => fun(elem) ))
+export const rangeArray = (from, until = 0) => {
+  if (from > until) [from, until] = [until, from];
+  return Array.from({length: until - from}, () => from++)
+}
+
+export const asyncparallelfor = async function (iterator, fun) {
+  return await Promise.all(iterator.map(
+    async (e) => await fun(e)
+  ))
 }
