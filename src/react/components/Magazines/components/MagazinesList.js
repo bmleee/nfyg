@@ -1,5 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
+import { value2label } from '~/src/react/lib/utils'
+import { SelectOptions } from '~/src/react/constants'
+
+const selectOptions = SelectOptions.MagazineCategory
 
 const style = {
 	height: 'auto',
@@ -18,22 +22,21 @@ class MagazinesList extends Component {
 			},
 			imgSrc,
 			category,
-			descriptions,
-			contents,
-			artworks,
+			description,
+			link
 		}, index) => {
-			let description = descriptions.map((d, index) => (<span key={index}>{d}<br/></span>));
+
 			return (
 				<div className="magazine-menu-list-item" style={style}>
 					<div className="ma-menu-thumbnail">
 					<div className="ma-centered">
-					<Link to="magazines/detail"><img className="home-magazine-image" src={imgSrc} alt=""/></Link>
+					<Link to={link}><img className="home-magazine-image" src={imgSrc} alt=""/></Link>
 					</div>
 					</div>
 					<div className="magazine-list-item-info">
 					<div>
-					     <Link to="magazines/detail"><h4>{ title }</h4></Link>
-						 <p><img className="magazine-writer-icon" src={iconSrc} width={24} height={24} alt=""/> {name} | {category}</p>
+					     <Link to={link}><h4>{ title }</h4></Link>
+						 <p><img className="magazine-writer-icon" src={iconSrc} width={24} height={24} alt=""/> {name} | {value2label(selectOptions, category)}</p>
 					</div>
 					<p className="magazine-description">{description}</p>
 					</div>

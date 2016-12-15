@@ -1,31 +1,18 @@
 import React, { Component, PropTypes } from 'react';
+import { Viewer } from '~/src/react/components/DraftEditor/SevenEditor'
 
 const border = { border: '1px solid gray' }
 
 class MagazineDetailContents extends Component {
 	render() {
-		const { contents, } = this.props;
-
-		let items = contents.map( ({type, content}, index) => (
-			<div className="magazine-detail-contents-item" style={border}>
-				{ type } : { content }
-			</div>
-		))
+		const { content, } = this.props;
 
 		return (
 			<div className="magazine-detail-contents">
-				{ items }
+				<Viewer raw={content} />
 			</div>
 		)
 	}
 }
-
-MagazineDetailContents.propTypes = {
-	contents: PropTypes.shape({
-		type: PropTypes.string.isRequired,
-		content: PropTypes.string.isRequired,
-	}).isRequired,
-}
-
 
 export default MagazineDetailContents;

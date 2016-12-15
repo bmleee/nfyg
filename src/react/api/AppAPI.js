@@ -59,11 +59,11 @@ export async function fetchUserAndData() {
 
 	console.log(`/api/auth/fetch${window.location.pathname}`);
 
-
 	try {
 		const response = await axios.request(config)
-		console.log(`response: ${response.data}`);
-		return response
+		// console.log(`response: `, response);
+		// console.log(`response.data: `, response.data);
+		return response.data
 	} catch (e) {
 		console.error(`error ${e}`);
 	}

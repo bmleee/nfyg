@@ -33,10 +33,20 @@ export const SelectOptions = {
 		{value: true, label: '직접 후원'},
 		{value: false, label: '간접 후원'}
 	],
-	
+
 	Artwork: [
 		{ "value": true, "label": "판매완료" },
 		{ "value": false, "label": "판매중" },
 	],
+
+	MagazineCategory: [
+		{ "value": '', "label": "전체" },
+		{ "value": 'culture space', "label": "문화 공간" },
+		{ "value": 'exhibition / museum', "label": "전시 / 미술관" },
+		{ "value": 'art content', "label": "예술 컨텐츠" },
+		{ "value": 'art infomation', "label": "예술 정보" },
+		{ "value": 'purchase / collection', "label": "구매 및 소장" },
+		{ "value": 'purchase', "label": "구매" },
+	]
 
 }

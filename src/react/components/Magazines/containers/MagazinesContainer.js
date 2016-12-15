@@ -1,45 +1,56 @@
 import React, { Component, PropTypes } from 'react'
-import { fetchJSONFile } from '../../../api/AppAPI'
-
 import { Magazines } from '../components'
+
+import { fetchJSONFile, fetchUserAndData } from '../../../api/AppAPI'
+import { label2value } from '~/src/react/lib/utils'
+
+import { SelectOptions } from '../../../constants'
+
 
 import 'babel-polyfill'
 
+const selectOptions = SelectOptions.MagazineCategory
+const categories = selectOptions.map(v => v.label)
+
 class MagazinesContainer extends Component {
-	constructor(props) {
-		super(props)
 
-		this.state = {
-			magazines: [],
-			categories: [],
-			filteredMagazines: [],
-			currentCategory: '',
+	state = {
+		magazines: [],
+		categories: categories,
+		filteredMagazines: [], // TODO: filter magazine by category? what API do
+		currentCategory: categories[0],
 
-			loaded: false,
-		}
-
-		this._onChangeCategory = this._onChangeCategory.bind(this);
+		loaded: false,
 	}
 
 	async componentDidMount() {
+
+		const {
+			user,
+			data: { magazines }
+		} = await fetchUserAndData()
+
+		console.log('fetchUserAndData', magazines);
+
 		const res = await fetchJSONFile('magazines')
 
+		this.props.setUser(user)
 		this.setState({
-			magazines: res.magazines,
-			categories: res.categories,
-			filteredMagazines: res.magazines,
-			currentCategory: res.categories[0],
-
+			magazines: magazines,
+			filteredMagazines: magazines,
 			loaded: true,
 		})
 	}
 
-	_onChangeCategory(category) {
+	_onChangeCategory = (category) => {
 		const { categories } = this.state
+
+
+		console.log('category', category);
 		let newList = []
 
 		if (category === categories[0]) newList = Object.assign([], this.state.magazines)
-		else newList = this.state.magazines.filter( s => s.category === category)
+		else newList = this.state.magazines.filter( s => s.category === label2value(selectOptions, category) )
 
 		this.setState({
 			filteredMagazines: newList,
@@ -49,6 +60,8 @@ class MagazinesContainer extends Component {
 
 	render() {
 		const { magazines, filteredMagazines, categories, currentCategory } = this.state;
+
+		console.log('MagazinesContainer', this);
 
 		return this.state.loaded
 		?

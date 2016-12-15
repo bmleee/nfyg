@@ -18,6 +18,7 @@ export default class MagazineEditor extends Component {
 			imgSrc: '',
 			// TODO: add category
 			magazineName: '',
+			description: '',
 		},
 
 		creator: {
@@ -126,6 +127,11 @@ export default class MagazineEditor extends Component {
 				creatorDescription: { $set: creatorDescription }
 			}
 		})),
+		_onDescriptionSubmit: (description)  => this.setState(update(this.state, {
+			abstract: {
+				description: { $set: description }
+			}
+		}))
 	}
 
 	// Content

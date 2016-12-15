@@ -14,18 +14,18 @@ class ExhibitionList extends Component {
 			creator: { name, iconSrc, },
 			location,
 			schedule,
-			linkToExhibition,
+			link,
 		}, index) => (
 			<div key={index} className="recent-exhibition-list-item">
 				<div className="ex-thumbnail">
 					<div className="ex-centered">
-						<Link to="/exhibitions/detail">
+						<Link to={link}>
 						<img className="home-exhibition-image" src={imgSrc} alt="" mode="fit"/>
 						</Link>
 					</div>
 				</div>
 				<div className="ex-list-info">
-					<Link to="/exhibitions/detail"><h4 className="ex-list-title">{title}{" : "}{name}</h4></Link>
+					<Link to={link}><h4 className="ex-list-title">{title}{" : "}{name}</h4></Link>
 				<p className="ex-location-schedule">{ location } | { schedule }</p>
 				{/* <p className="ex-artist-name"><img className="ex-icon" width={26} height={26} src={iconSrc} alt=""/>{"   "}{ name }</p> */}
 				</div>

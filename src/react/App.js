@@ -18,8 +18,7 @@ export default class App extends Component {
 		user: {
 			isLoggedIn: false,
 			isAuthorized: true, // can see this page?
-		},
-		data: {}
+		}
 	}
 
 	constructor(props) {
@@ -32,30 +31,11 @@ export default class App extends Component {
 
 	}
 
-	componentWillReceiveProps(nextProps) {
-		// app location changed
-		if (canUseDOM) {
-
-			if (previousLocation !== document.URL) {
-				previousLocation = document.URL
-				console.log('previousLocation', previousLocation);
-
-				// TODO: check routing auth
-				this.fetchUserAndData()
-			}
-
-		}
-	}
-
-	componentDidMount() {
-		// TODO: check routing auth
-		this.fetchUserAndData()
-	}
-
 	render() {
 		const children = this.props.children && React.cloneElement(this.props.children, {
 			...this.modalHandlers,
 			...this.flashHandlers,
+			setUser: this.setUser,
 		})
 
 
@@ -116,6 +96,16 @@ export default class App extends Component {
 		)
 	}
 
+	setUser = (user) => {
+		console.log('setUser.user', user);
+		this.setState(update(this.state, {
+			user: {
+				isLoggedIn: { $set: user.isLoggedIn },
+				isAuthorized: { $set: user.isAuthorized },
+			}
+		}))
+	}
+
 	modalHandlers = {
 		setModal: (modal) => { this.setState({ modal }) },
 		unsetModal: () => { this.setState({ modal: { isOpen: false } }) }
@@ -138,11 +128,4 @@ export default class App extends Component {
 		}
 	}
 
-	fetchUserAndData = () => {
-		(async() => {
-			const res = await fetchUserAndData()
-			console.log('fetchUserAndData.res', res)
-			console.log('fetchUserAndData.res.data', res.data)
-		})()
-	}
 }

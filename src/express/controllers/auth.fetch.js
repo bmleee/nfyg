@@ -135,17 +135,24 @@ router.get('/projects/:projectName/edit', async (req, res) => {
 router.get('/magazines', async (req, res) => {
 	console.log('/magazines/', );
 
-	const magazines = await MagazineModel.find({})
+	try {
+		const magazines = await MagazineModel.find({})
 
-	res.json({
-		user: {
-			isLoggedIn: !!req.session.user,
-			isAuthorized: true,
-		},
-		data: {
-			magazines: magazines.map(m => m.toFormat('magazines'))
-		}
-	})
+		res.json({
+			user: {
+				isLoggedIn: !!req.session.user,
+				isAuthorized: true,
+			},
+			data: {
+				magazines: magazines.map(m => m.toFormat('magazines'))
+			}
+		})
+	} catch (e) {
+		console.error(e);
+		res.json({ error: e })
+	}
+
+
 })
 
 router.get('/magazines/:magazineName', async (req, res) => {

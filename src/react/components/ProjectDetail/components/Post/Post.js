@@ -1,15 +1,23 @@
 import React, { Component, PropTypes } from 'react';
-import {date2string} from '~/src/react/lib/utils'
+import { Viewer } from '~/src/react/components/DraftEditor/SevenEditor'
 import {
 	PostComments,
 } from './';
 
+import {date2string} from '~/src/react/lib/utils'
 const borderStyle = { border: '1px solid gray' }
 
 class Post extends Component {
 
 	render() {
-		const { post: { heading, creator, posts, comments, } } = this.props;
+		const {
+			post: {
+				heading: {iconSrc, description, intro},
+				posts
+			},
+		} = this.props;
+
+		console.log('Post', this);
 
 		const item = posts.map( ({
 			opened,
@@ -20,6 +28,7 @@ class Post extends Component {
 			likes,
 			post,
 			comments,
+			content
 		}, index) => (
 			<div className="project-detail-post-item" key={index} style={borderStyle}>
 				<div>
@@ -32,22 +41,22 @@ class Post extends Component {
 					<span>작성일: {date2string(created_at)}</span>
 				</div>
 				<div>
-					{ post.map( ({type, content}, index) => (
-						<div key={index}>
-							{type}
-							{content}
-						</div>
-					))}
+					{
+						opened
+							? <Viewer raw={content}/>
+							: <span>해당 소식을 열람할 권한이 없습니다.</span>
+					}
 				</div>
-				<PostComments comments={comments} likes={likes} />
+				{ opened ? <PostComments comments={comments} postLikes={likes} /> : null }
 			</div>
 		))
 
 		return (
 			<div className="project-detail-post">
 				<div className="project-detail-post-heading" style={borderStyle}>
-					<img src={heading.iconSrc} alt=""/>
-					<span>{heading.description}</span>
+					<img src={iconSrc} alt=""/>
+					<span>{description}</span>
+					<span>{intro}</span>
 					<button>열람 신청하기</button>
 				</div>
 				<div className="project-detail-post-container">

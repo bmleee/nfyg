@@ -74,12 +74,12 @@ const routes = (
 		<Route path="magazines" component={Magazines}>
 		</Route>
 
-		<Route path="magazines/detail" component={MagazineDetail}>
-			// Project Detail: Overview, Post, Ranking, QnA, ...
+		<Route path="magazines/:magazineName" component={MagazineDetail}>
+			{/* // Magazine Detail: Post, Artworks, QnA
 			<IndexRoute component={ExhibitionDetailOverview} />
 			<Route path="post" component={ ExhibitionDetailPost }></Route>
 			<Route path="artworks" component={ ExhibitionDetailArtworks }></Route>
-			<Route path="qna" component={ ExhibitionDetailQnA }></Route>
+			<Route path="qna" component={ ExhibitionDetailQnA }></Route> */}
 		</Route>
 
 		<Route path="project-editor" component={ProjectEditor}>

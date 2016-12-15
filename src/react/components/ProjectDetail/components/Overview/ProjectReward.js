@@ -5,7 +5,16 @@ const borderStyle = { border: '1px solid gray' }
 class ProjectReward extends Component {
 
 	render() {
-		const { rewards } = this.props;
+		let { rewards } = this.props;
+
+		if (rewards.length === 0) {
+			rewards = [{
+				title: 'No reward title',
+				description: 'No reward description'
+			}]
+		}
+		
+		console.log('ProjectReward.rewards', rewards);
 
 		const items = rewards.map( ({title, description}, index) => {
 			title = title.split('\n').map((t, index) => (<span key={index}>{t}<br/></span>));
