@@ -2,13 +2,14 @@
 
 ### model scheme vs react state
  - user.description
+ - ?.post.intro
  - project.descripions
  - project.directSupport
  - project.indirectSupport
  - exhibition.location: (주소)
  - magazine.categories: 여러 카테고리에 속한다?
  - exhibition.artworks: width, height 받아오기
- - 
+ - qna.text, qna.comments[i].text
 
 ### exhibitions
  1. ALL, 진행중인 전시, 끝난 전시 버튼 ==> 진행중인 전시, 날짜별 필터링(select-option)
