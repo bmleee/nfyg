@@ -44,15 +44,15 @@ import init from './initdb.helper'
 	await QnA()
 	console.log(`${((t2 = Date.now()) - t1) / 1000}sec`);
 
-	init()
-	// await Actions()
+	await Actions()
 	console.log(`${((t2 = Date.now()) - t1) / 1000}sec`);
 
 	console.log('init db finished');
 	console.log(`${((t2 = Date.now()) - t1) / 1000}sec`);
 
 	await test()
-	exit(0)
+
+	await exit(0)
 })()
 
 

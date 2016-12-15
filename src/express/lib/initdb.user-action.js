@@ -2,6 +2,7 @@ import UserModel from '../models/user'
 import ProjectModel from '../models/project'
 import SponsorModel from '../models/sponsor'
 import PostModel from '../models/post'
+import QnAModel from '../models/qna'
 
 import { range, rangeArray, asyncparallelfor } from '../../lib/utils'
 import { randomString } from './utils'
@@ -9,11 +10,12 @@ import init, {
 	getRandomIndex,
 	getRandomUser,
 	getRandomProject,
-	getRandomPost
+	getRandomPost,
+	getRandomQnA
 } from './initdb.helper'
 
-const Post = async () => {
-	let post = await getRandomPost()
+const Post = async (post) => {
+	console.log(`Post ${post._id} actioned`);
 	let user1 = await getRandomUser()
 	let user2 = await getRandomUser()
 	let user3 = await getRandomUser()
@@ -26,9 +28,8 @@ const Post = async () => {
 }
 
 
-const QnA = async () => {
-	let qna = await getRandomQnA()
-
+const QnA = async (qna) => {
+	console.log(`QnA ${qna._id} actioned`);
 	let user1 = await getRandomUser()
 	let user2 = await getRandomUser()
 	let user3 = await getRandomUser()
@@ -47,11 +48,20 @@ export default async function init() {
 
 	try {
 
-		await Promise.all([
-			await Post(),
-			await QnA(),
+		let returns = await Promise.all([
+			PostModel.find({"numComments": 0}),
+			QnAModel.find({"numComments": 0})
 		])
 
+		let posts = returns[0], qnas = returns[1]
+
+		await Promise.all(posts.map(
+			async (post) => await Post(post)
+		))
+
+		await Promise.all(qnas.map(
+			async (qna) => await QnA(qna)
+		))
 
 	} catch (e) {
 		console.error(e);

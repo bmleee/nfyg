@@ -24,6 +24,7 @@ const createMagazine = async (editor, category) => {
 			shortTitle: `${randomString('test_sample_short_title')}`,
 			imgSrc: 'https://7pictures.co.kr/wp-content/plugins/korea-sns/icons/facebook.png',
 			category,
+			description: randomString('magazine description ', 40),
 			magazineName: `${randomString('test_magazine_name')}`,
 		},
 
@@ -62,7 +63,7 @@ const createMagazine = async (editor, category) => {
 		]
 
 	}
-	
+
 	return await MagazineModel.create(body)
 }
 
