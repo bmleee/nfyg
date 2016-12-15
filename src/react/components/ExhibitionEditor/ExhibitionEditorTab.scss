@@ -1,0 +1,61 @@
+.exhibition-editor-title {
+	text-align : center;
+	margin-bottom : 30px;
+	h5 {
+		margin : 3px 0px;
+	}
+}
+.exhibition-editor-tab-container {
+		display : inline-block;
+		width : 33.33333%;
+	}
+.exhibition-editor-tab {
+	width : 800px;
+	margin : 40px auto 30px auto;
+	.share-button, .share-button:focus {
+		width : 800px;
+		@media (max-width: 991px) {
+			width : 100%;
+		}
+	}
+	.share-button:before {
+		font-family : Ionicons;
+		content : "\f2c3";
+		margin-right : 8px;
+	}
+}
+.exhibition-editor-tab-button {
+	background-color : transparent;
+	border : none;
+	width : 100%;
+	height : 40px;
+	border : 1px solid #eee;
+	color : #777;
+	font-size : 16px;
+}
+.exhibition-editor-tab-button:focus {
+	outline : none;
+}
+.exhibition-editor-tab-button-clicked {
+	outline : none;
+	border : 1px solid #000;
+	color : #000;
+}
+
+@media (max-width: 991px) {
+	.exhibition-editor-tab {
+	width : 95%;
+	margin : 30px auto;
+}
+@media (max-width: 500px) {
+	.exhibition-editor-tab-save-button {
+		display : block;
+		margin : 0px auto 20px auto;
+		float : none;
+	}
+	.exhibition-editor-tab-container {
+		width : 33.33333%;
+		text-align : center;
+	}
+}	
+}

@@ -26,7 +26,7 @@ class MagazineList extends Component {
 				</div>
 				<div className="home-magazine-list-item">
 				<Link to="magazines/detail"><h4>{title}</h4></Link>
-				<p><img className="magazine-writer-icon" width={24} height={24} src={iconSrc} alt=""/> { name } | { categories.join(' ') }</p>
+				<p><img className="magazine-writer-icon" width={24} height={24} src={iconSrc} alt=""/> { name }{/* categories.join(' ') */}</p>
 				{/* <ul>
 					{ descriptions.map((d, index) => <li key={index}>{d}</li>) }
 				</ul> */}
@@ -41,7 +41,7 @@ class MagazineList extends Component {
 					{ items }
 				</div>
 				<div className="magazine-list-button">
-					<Link to="/magazines"><button className="more-ex-button">Explore the Magazine</button></Link>
+					<Link to="/magazines"><button className="more-ex-button">매거진 더보기</button></Link>
 				</div>
 			</div>
 		)

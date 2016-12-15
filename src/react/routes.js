@@ -50,35 +50,35 @@ const App = ({ children }) => (
 		<div>
 			Test Links:
 			{' '}
-			<Link to="/">Home</Link>
+			<Link to="/"><button>Home</button></Link>
 			{' '}
-			<Link to="/">Projects</Link>
+			<Link to="/"><button>Project</button></Link>
 			{' '}
-			<Link to="/exhibitions">Exhibitions</Link>
+			<Link to="/exhibitions"><button>Exhibitions</button></Link>
 			{' '}
-			<Link to="/magazines">Magazines</Link>
+			<Link to="/magazines"><button>Magazines</button></Link>
 			{' '}
-			<Link to="/project-editor">Project Editor</Link>
+			<Link to="/project-editor"><button>Project Editor</button></Link>
 			{' '}
-			<Link to="/exhibition-editor">Exhibition Editor</Link>
+			<Link to="/exhibition-editor"><button>Exhibition Editor</button></Link>
 			{' '}
-			<Link to="/magazine-editor">Magazine Editor</Link>
+			<Link to="/magazine-editor"><button>Magazine Editor</button></Link>
 			{' '}
-			<Link to="/sponsor-editor">Sponsor Editor</Link>
+			<Link to="/sponsor-editor"><button>Sponsor Editor</button></Link>
 			{' '}
-			<Link to="/login">Login</Link>
+			<Link to="/login"><button>Login</button></Link>
 			{' '}
-			<Link to="/signup">Signup</Link>
+			<Link to="/signup"><button>Signup</button></Link>
 			{' '}
-			<Link to="/profile">Profile</Link>
+			<Link to="/profile"><button>Profile</button></Link>
 			{' '}
-			<Link to="/sponsors">Sponsors</Link>
+			<Link to="/sponsors"><button>Sponsors</button></Link>
 			{' '}
-			<Link to="/test1">Test1</Link>
+			<Link to="/test1"><button>Test1</button></Link>
 			{' '}
-			<Link to="/test2">Test2</Link>
+			<Link to="/test2"><button>Test2</button></Link>
 			{' '}
-			<Link to="/test3">Test3</Link>
+			<Link to="/test3"><button>Test3</button></Link>
 		</div>
 
 		<Nav></Nav>

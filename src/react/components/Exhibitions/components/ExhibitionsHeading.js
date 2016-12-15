@@ -8,7 +8,7 @@ import Slider from 'react-slick';
 const sliderSettings = {
 	dots: false,
 	infinite: true,
-	speed: 1000,
+	speed: 500,
 	slidesToShow: 2,
 	slidesToScroll: 2,
 	initialSlide: 0,
@@ -23,7 +23,8 @@ const sliderSettings = {
 		settings: {
 			slidesToShow: 1,
 			slidesToScroll: 1,
-			dots: true
+			dots: true,
+			speed: 250
 		}
 	}],
 	// variableWidth: true
@@ -63,7 +64,7 @@ class ExhibitionsHeading extends Component {
 		return (
 			<div className="exhibitions-heading">
 				<Slider {...sliderSettings} >
-					{ items }
+					{ items.slice(0, 4) }
 				</Slider>
 			</div>
 		)

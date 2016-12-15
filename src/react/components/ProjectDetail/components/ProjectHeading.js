@@ -64,9 +64,9 @@ class ProjectHeading extends Component {
 			<div className="project-detail-heading">
 				<div className="project-detail-info" style={infoBackground}>
 					<div className="project-info">
-						<div className="project-sponsor-logo">
-							<img src={sponsorLogoSrc} width={32} height={32} alt=""/>
-							<p>{sponsorDisplayName}</p>
+						<div className="project-sponsor-name">
+							{/* <img src={sponsorLogoSrc} width={32} height={32} alt=""/>  */}
+							{sponsorDisplayName}
 						</div>
 						<h1 className="project-title">{longTitle}</h1>
 						<div className="project-info-bottom">

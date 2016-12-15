@@ -15,9 +15,9 @@ const IntroForm = ({value, onChange}) =>
 	<input type="text" value={value} onChange={onChange} />
 
 
-const Part1Wrapper = ({value}) =>
-	<span>항상 보여지는 소개 문구를 입력하세요</span>
-
+const Part1Wrapper = ({value}) => (
+	<span></span>
+)
 const Part1Form = ({value, onChange}) => (
 	<div>
 		<Editor
@@ -55,29 +55,32 @@ const Overview = ({
 
 }) => {
 	return (
-		<div className="funding-container">
+		<div className="abstract-container">
 
-			<FormWrapper
-				title="Overview Intro"
+			{/* <FormWrapper
+				title="프로젝트 요야"
 				valueType={VALUE_TYPE.TEXT}
 				initialValue={intro}
 				submitCaption="입력하기"
 				onSubmit={_onIntroSubmit}
 				Wrapper={IntroWrapper}
 				Form={IntroForm}
-			/>
+			/> */}
 
 			<FormWrapper
-				title="Overview Part1"
+				title="프로젝트 내용"
 				valueType={VALUE_TYPE.RICH_TEXT}
 				initialValue={part1}
-				submitCaption="입력하기"
+				submitCaption="프로젝트 세부 내용을 입력하세요"
+				submitCaptionsub={'입력하기'}
 				onSubmit={_onPart1Submit}
 				Wrapper={Part1Wrapper}
 				Form={Part1Form}
+				className ="magazine-editor-detail"
+				classNameopen ="editor-open-container"
 			/>
 
-			<FormWrapper
+			{/* <FormWrapper
 				title="Overview Part2"
 				valueType={VALUE_TYPE.RICH_TEXT}
 				initialValue={part2}
@@ -85,7 +88,7 @@ const Overview = ({
 				onSubmit={_onPart2Submit}
 				Wrapper={Part2Wrapper}
 				Form={Part2Form}
-			/>
+			/> */}
 		</div>
 	)
 }

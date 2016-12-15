@@ -29,7 +29,7 @@ const ImgSrcWrapper = ({value}) => !!value
 		<img src={value} alt=""/>
 )
 : (
-	<span>프로젝트 이미지를 입력하세요</span>
+	<span></span>
 )
 const ImgSrcForm = ({value, onChange}) => (
 	<input type="file" value={value} onChange={onChange} />
@@ -50,7 +50,7 @@ const CategoryForm = ({value, onChange}) => (
 // ----
 const ProjectNameWrapper = ({value}) => !!value
 ?	<span>{value}</span>
-: <div>프로젝트 이름을 입력하세요</div>
+: <span></span>
 const ProjectNameForm = ({value, onChange}) => (
 	<input type="text" value={value} onChange={onChange} />
 )
@@ -58,7 +58,7 @@ const ProjectNameForm = ({value, onChange}) => (
 // ----
 const StateWrapper = ({value}) => !!value
 ?	<span>{value2label(SelectOptions.ProjectState, value)}</span>
-: <div>프로젝트 진행 상황을 입력하세요</div>
+: <span></span>
 const StateForm = ({value, onChange}) => (
 	<Select
 		value={value}
@@ -70,35 +70,35 @@ const StateForm = ({value, onChange}) => (
 // ----
 const PostIntroWrapper = ({value}) => !!value
 ?	<span>{value}</span>
-: <div>Post 탭에 보여질 인트로 문구를 입력하세요</div>
+: <span></span>
 const PostIntroForm = ({value, onChange}) =>
 	<input type="text" value={value} onChange={onChange}/>
 
 // ----
 const CreatorNameWrapper = ({value}) => !!value
 ? <span>{value}</span>
-: <div>작성자 이름을 입력하세요</div>
+: <span></span>
 const CreatorNameForm = ({value, onChange}) =>
 	<input type="text" value={value} onChange={onChange}/>
 
 // ----
 const CreatorImgSrcWrapper = ({value}) => !!value
 ? <img src={value} alt=""/>
-: <div>작성자 이미지를 입력하세요</div>
+: <span></span>
 const CreatorImgSrcForm = ({value, onChange}) =>
 	<input type="file" value={value} onChange={onChange}/>
 
 // ----
 const CreatorDescriptionWrapper = ({value}) => !!value
 ? <span>{value}</span>
-: <div>작성자에 대한 간략한 설명을 적어주세요</div>
+: <span></span>
 const CreatorDescriptionForm = ({value, onChange}) =>
 	<textarea rows="3" cols="45" value={value} onChange={onChange}/>
 
 // ----
 const SponsorNameWrapper = ({value}) => !!value
 ? <span>{value}</span>
-: <span>스폰서 이름을 입력해주세요</span>
+: <span></span>
 const SponsorNameForm = ({value, onChange}) =>
 	<input type="text" value={value} onChange={onChange}/>
 
@@ -142,129 +142,158 @@ const Abstract = ({
 
 	return (
 		<div className="abstract-container">
+			<span className="editor-small-title">프로젝트 개요</span>
+		
 			<FormWrapper
-				title="Abstract Long Title"
+				title="프로젝트 제목"
 				valueType={VALUE_TYPE.TEXT}
 				alt="제목을 입력하세요"
 				initialValue={longTitle}
-				submitCaption="입력하기"
+				submitCaption={'전시 제목을 입력하세요'}
+				submitCaptionsub={'입력하기'}
 				onSubmit={_onLongTitleSubmit}
 				Wrapper={LongTitleWrapper}
 				Form={LongTitleForm}
+				className ="exhibition-long-title"
+				classNameopen ="editor-open-container"
 			/>
 
 			<FormWrapper
-				title="Abstract Short Title"
+				title="프로젝트 짧은 제목"
 				valueType={VALUE_TYPE.TEXT}
 				alt="짧은 제목을 입력하세요"
 				initialValue={shortTitle}
-				submitCaption="입력하기"
+				submitCaption={'전시 짧은 제목을 입력하세요'}
+				submitCaptionsub={'입력하기'}
 				onSubmit={_onShortTitleSubmit}
 				Wrapper={ShortTitleWrapper}
 				Form={ShortTitleForm}
+				classNameopen ="editor-open-container"
 			/>
 
 			<FormWrapper
-				title="Abstract Image"
+				title="프로젝트 대표이미지"
 				valueType={VALUE_TYPE.IMAGE}
 				alt="프로젝트 이미지를 추가하세요"
 				initialValue={imgSrc}
-				submitCaption="입력하기"
+				submitCaption={'대표이미지를 등록하세요'}
+				submitCaptionsub={'등록하기'}
 				onSubmit={_onImgSrcSubmit}
 				Wrapper={ImgSrcWrapper}
 				Form={ImgSrcForm}
+				classNameopen ="editor-open-container"
 			/>
 
 			<FormWrapper
-				title="Abstract Category"
+				title="프로젝트 카테고리"
 				valueType={VALUE_TYPE.SELECT}
 				alt="프로젝트 카테고리를 선택하세요"
 				initialValue={category}
-				submitCaption="선택하기"
+				submitCaption={'카테고리를 선택하세요'}
+				submitCaptionsub={'선택하기'}
 				onSubmit={_onCategorySubmit}
 				Wrapper={CategoryWrapper}
 				Form={CategoryForm}
+				classNameopen ="editor-open-container"
 			/>
 
-			<FormWrapper
+			{/* <FormWrapper
 				title="Abstract Project Name"
 				valueType={VALUE_TYPE.TEXT}
 				alt="프로젝트 이름을 입력하세요"
 				initialValue={projectName}
-				submitCaption="입력하기"
+				submitCaption={'전시 제목을 입력하세요'}
+				submitCaptionsub={'입력하기'}
 				onSubmit={_onProjectNameSubmit}
 				Wrapper={ProjectNameWrapper}
 				Form={ProjectNameForm}
-			/>
+				classNameopen ="editor-open-container"
+			/> */}
 
 			<FormWrapper
-				title="Abstract State"
+				title="프로젝트 상태"
 				valueType={VALUE_TYPE.SELECT}
 				alt="프로젝트 진행 상황을 선택하세요"
 				initialValue={state}
-				submitCaption="선택하기"
+				submitCaption={'프로젝트 상태를 선택하세요'}
+				submitCaptionsub={'선택하기'}
 				onSubmit={_onStateSubmit}
 				Wrapper={StateWrapper}
 				Form={StateForm}
+				classNameopen ="editor-open-container"
 			/>
 
 			<FormWrapper
-				title="Abstract Category"
+				title="프로젝트 요약"
 				valueType={VALUE_TYPE.TEXT}
 				alt="포스트탭에서 보여줄 인트로 문구를 입력하세요"
 				initialValue={postIntro}
-				submitCaption="선택하기"
+				submitCaption={'요약 내용을 입력하세요'}
+				submitCaptionsub={'입력하기'}
 				onSubmit={_onPostIntroSubmit}
 				Wrapper={PostIntroWrapper}
 				Form={PostIntroForm}
+				className ="exhibition-eng-title"
+				classNameopen ="editor-open-container"
 			/>
 
-			<span>-----</span>
+			<span className="editor-small-title">프로젝트 진행자</span>
 
 			<FormWrapper
-				title="Creator Name"
+				title="진행자 이름"
 				valueType={VALUE_TYPE.TEXT}
 				alt="작성자 이름을 입력하세요"
 				initialValue={creatorName}
-				submitCaption="입력하기"
+				submitCaption={'진행자 이름을 입력하세요'}
+				submitCaptionsub={'입력하기'}
 				onSubmit={_onCreatorNameSubmit}
 				Wrapper={CreatorNameWrapper}
 				Form={CreatorNameForm}
+				className ="exhibition-creater-name"
+				classNameopen ="editor-open-container"
 			/>
 
 			<FormWrapper
-				title="Creator Image"
+				title="프로필 이미지"
 				valueType={VALUE_TYPE.IMAGE}
 				alt="작성자 이미지를 입력하세요"
 				initialValue={creatorImgSrc}
-				submitCaption="입력하기"
+				submitCaption={'프로필 이미지를 등록하세요'}
+				submitCaptionsub={'등록하기'}
 				onSubmit={_onCreatorImgSrcSubmit}
 				Wrapper={CreatorImgSrcWrapper}
 				Form={CreatorImgSrcForm}
+				classNameopen ="editor-open-container"
 			/>
 
 			<FormWrapper
-				title="Creator Description"
+				title="진행자 소개"
 				valueType={VALUE_TYPE.IMAGE}
 				alt="작성자에 대해 간략히 설명해주세요"
 				initialValue={creatorDescription}
-				submitCaption="입력하기"
+				submitCaption={'진행자를 간략히 소개해주세요'}
+				submitCaptionsub={'입력하기'}
 				onSubmit={_onCreatorDescriptionSubmit}
 				Wrapper={CreatorDescriptionWrapper}
 				Form={CreatorDescriptionForm}
+				className ="exhibition-eng-title"
+				classNameopen ="editor-open-container"
 			/>
 
-			<span>-----</span>
+			<span className="editor-small-title">스폰서 이름</span>
 
 			<FormWrapper
-				title="Sponsor Name"
+				title="스폰서 이름"
 				valueType={VALUE_TYPE.TEXT}
 				alt="스폰서 이름을 입력 해 주세요"
 				initialValue={sponsorName}
-				submitCaption="입력하기"
+				submitCaption={'스폰서 이름을 입력하세요'}
+				submitCaptionsub={'입력하기'}
 				onSubmit={_onSponsorNameSubmit}
 				Wrapper={SponsorNameWrapper}
 				Form={SponsorNameForm}
+				className ="magazine-editor-detail"
+				classNameopen ="editor-open-container"
 			/>
 
 		</div>

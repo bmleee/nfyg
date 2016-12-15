@@ -3,12 +3,10 @@
 	flex-flow: column;
 
 	.magazines-heading-nav {
-		display: flex;
-		flex-flow: row;
+		display: block;
 	}
 
 	.magazines-heading-category-container {
-		display: flex;
-		flex-flow: row;
+		display : block;
 	}
 }

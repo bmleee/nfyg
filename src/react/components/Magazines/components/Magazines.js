@@ -33,7 +33,7 @@ class Magazines extends Component {
 export default Magazines;
 
 
-const categories = ['전체', '문화공간', '전시 / 미술관', '예술 컨텐츠', '예술 정보', '구매 및 소장', '구매']
+const categories = ['문화공간', '전시 / 미술관', '예술 컨텐츠', '예술 정보', '구매 및 소장', '구매']
 const magazines = [
 	{
 		title: `'Across the Universe' 어지인 작가

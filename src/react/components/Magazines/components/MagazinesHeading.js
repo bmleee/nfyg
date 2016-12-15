@@ -21,11 +21,6 @@ const sliderSettings = {
 	centerMode: false,
 };
 
-const style = {
-	width: `${100 * 0.95 / 3}%`,
-	height: 'auto',
-}
-
 class MagazinesHeading extends Component {
 
 	render() {
@@ -34,18 +29,19 @@ class MagazinesHeading extends Component {
 		const categoryButtons = categories.map( (c, index) => (
 				<div className="magazines-heading-category-item">
 					<p>
-						<button className="magazine-category-button" onClick={ () => _onChangeCategory(c) }>{c}</button>
+					  <button className="magazine-category-button" onClick={ () => _onChangeCategory(c) }>{c}</button>
 					</p>
 				</div>
 			))
 
 		// wrap buttons with react-slick in mobile
-		const categoryNav = displayType(window.innerWidth) === Display.DESKTOP ? categoryButtons
+		{/* const categoryNav = displayType(window.innerWidth) === Display.DESKTOP ? categoryButtons
 			: [(
 					<Slider {...sliderSettings}>
 						{categoryButtons}
 					</Slider>
 				)]
+		*/}
 
 		return (
 			<div className="magazines-heading">
@@ -53,7 +49,7 @@ class MagazinesHeading extends Component {
 					<h2>Magazine</h2>
 				</div>
 				<div className="magazines-heading-category-container">
-					{ categoryNav }
+					{ categoryButtons }
 				</div>
 			</div>
 		)

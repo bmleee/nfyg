@@ -8,7 +8,13 @@
 .ex-icon {
 	margin-right : 3px;
 	margin-bottom : 2px;
-}	
+}
+.more-ex-button:before {
+	font-family : Ionicons;
+	font-weight : 600;
+	content : "\f2f5";
+	margin-right : 5px;
+}
 .recent-exhibition-list {
 	border-bottom : 1px solid #ddd;
 	padding-bottom : 20px;
@@ -22,7 +28,13 @@
 		}
 
 	}
-
+	@media (max-width: 500px) {
+        padding-bottom : 18px;
+        border-bottom : 1px solid #ccc;
+		-webkit-box-shadow: 0px 7px 0px 0px rgba(238,238,238,1);
+		-moz-box-shadow: 0px 7px 0px 0px rgba(238,238,238,1);
+		box-shadow: 0px 7px 0px 0px rgba(238,238,238,1);
+    }
 }
 
 .ex-thumbnail {
@@ -44,9 +56,10 @@
 img.home-exhibition-image {
 position: absolute;
     top: 0;
-    left: 0;   
-    max-width: 100%;
+    left: 0;
+    max-width : 100%;
     height: auto;
+    width : auto;
     -webkit-transform: translate(-50%,-50%);
     -ms-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);

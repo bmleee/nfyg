@@ -7,8 +7,8 @@ class MagazineDetailContents extends Component {
 		const { contents, } = this.props;
 
 		let items = contents.map( ({type, content}, index) => (
-			<div className="magazine-detail-contents-item" style={border}>
-				{ type } : { content }
+			<div className="magazine-detail-contents-item">
+			<p>	{ type } : { content }</p>
 			</div>
 		))
 

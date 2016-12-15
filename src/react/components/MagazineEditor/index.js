@@ -1,11 +1,16 @@
 import React, { Component, PropType } from 'react'
 import MagazineEditorTab from './MagazineEditorTab'
+import ScrollToTop from 'react-scroll-up';
 
 import update from 'immutability-helper'
 
 import axios from 'axios'
 
 import { canUseDOM } from '~/src/lib/utils'
+
+const scrollStyle = {
+  cursor: 'pointer',
+}
 
 const API_URL = '/api/test-api/magazine'
 
@@ -74,9 +79,12 @@ export default class ExhibitionEditor extends Component {
 			return (<div>Loading...</div>)
 		} else {
 			return (
-				<div className="magazine-editor">
+				<div className="exhibition-editor">
 					<MagazineEditorTab save={this.save} />
 					 {children}
+				<ScrollToTop showUnder={180} style={scrollStyle} duration={0} >
+				<button className="back-to-top" />
+				</ScrollToTop>	
 				</div>
 			)
 		}

@@ -27,7 +27,7 @@ class Home extends Component {
 			<div className="home">
 				<HomeHeader />
 				<div className ="home-body">
-					<HomeInfo title="공유로 후원한 금액" amount={10000} />
+					{/* <HomeInfo title="공유로 후원한 금액" amount={10000} /> */}
 	
 					<HomeHeading title="What's on?" />
 					<PresentProjectList projects={presentProjects} />

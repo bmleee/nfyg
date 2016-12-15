@@ -62,7 +62,9 @@ export default class FormWrapper extends Component {
 			valueType,
 			alt,
 			submitCaption,
+			submitCaptionsub,
 			className,
+			classNameopen,
 			Form,
 			Wrapper,
 			initialValue,
@@ -72,6 +74,7 @@ export default class FormWrapper extends Component {
 		console.log('FormWrapper.valueType', valueType);
 
 		className = cx('form-wrapper', className)
+		classNameopen = cx('form-wrapper', classNameopen)
 
 		let wrapper = (
 			<div className={className}>
@@ -79,14 +82,24 @@ export default class FormWrapper extends Component {
 				<div className="form-wrapper-value">
 					<Wrapper value={initialValue} handlers={this.handlers} />
 				</div>
-				<button onClick={this._onClose}>{submitCaption}</button>
+				<div className="editor-open-button1-container">
+				<button className="editor-open-button1" onClick={this._onClose}> {submitCaption}</button>
+				</div>
+				<div className="editor-open-button2-container">
+				<button className="editor-open-button2" onClick={this._onClose}> {submitCaptionsub}</button>
+				</div>
 			</div>
 		)
 		let content = (
-			<div className={className}>
+			<div className={classNameopen}>
 				<Form value={value} onChange={this._onChange} handlers={this.handlers} />
-				<button onClick={this._onClose}>취소하기</button>
-				<button onClick={this._onSubmit}>저장하기</button>
+				<div className="editor-open-cancel-container-sub">
+				<button className="editor-open-button3" onClick={this._onClose}> {submitCaption}</button>
+				</div>
+				<div className="editor-open-cancel-container">
+				<button className="editor-cancel-button" onClick={this._onClose}> 취소하기</button>
+				<button className="editor-save-button" onClick={this._onSubmit}> 저장하기</button>
+				</div>
 			</div>
 		)
 
