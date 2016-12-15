@@ -18,6 +18,8 @@ var SponsorSchema = new Schema({
 
 	money: {type: Number, required: true},
 
+	created_at: {type: Date, default: Date.now()},
+
 	contacts: {
 		facebook: {type: String},
 		blog: {type: String},

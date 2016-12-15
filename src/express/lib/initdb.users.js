@@ -1,4 +1,5 @@
 import UserModel, { access_levels } from '../models/user'
+import { rangeArray } from '../../lib/utils'
 import { randomString } from './utils'
 
 const defaultUsers = async () => {
@@ -51,26 +52,28 @@ const randomusers = async () => {
 	// populate all type of user except admin
 	for (let access_level of access_levels.slice(0, access_levels.length - 1)) {
 		const numUsers = await UserModel.count({ access_level })
-
+		console.log(`${20 - numUsers} user will be created`);
 		// 20 user for each role
-		for (var i = 0; i < 20 - numUsers; i++) {
-			let string = randomString()
-			try {
-				await UserModel.create({
-					user_name: string,
-					access_level,
-					email: `${string}@7pictures.co.kr`,
-					nick_name: string,
-					password: '123123123',
-					provider: 'local'
-				})
-			} catch (e) {console.error(e);}
-		}
+		await Promise.all(rangeArray(20 - numUsers).map(
+			async () => {
+				let string = randomString('sample_user_access_level_' + access_level)
+				try {
+					await UserModel.create({
+						user_name: string,
+						access_level,
+						email: `${string}@7pictures.co.kr`,
+						nick_name: string,
+						password: '123123123',
+						provider: 'local'
+					})
+				} catch (e) {console.error(e);}
+			}
+		))
 	}
 }
 
 export default async function initUsers() {
-	console.log('trying to init User collections');
+	console.log('trying to init user actions');
 	await defaultUsers()
 	await randomusers()
 }

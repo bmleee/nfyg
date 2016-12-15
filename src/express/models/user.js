@@ -69,7 +69,7 @@ const UserSchema = new Schema({
 	},
 	image: {
 		type: String,
-		default: 'assets/images/user_default.png'
+		default: '/assets/images/user_default.png'
 	}
 });
 

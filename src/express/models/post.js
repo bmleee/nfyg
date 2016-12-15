@@ -1,6 +1,8 @@
 // Load the module dependencies
 import mongoose from 'mongoose'
 import { autoIncrement } from '../lib/db'
+import UserModel from './user'
+import ProjectModel from './project'
 
 const Schema = mongoose.Schema;
 
@@ -12,6 +14,7 @@ let PostSchema = new Schema({
 		iconSrc: {type: String, required: true},
 		user: {type: Schema.Types.ObjectId, ref: 'User', required: true}, // used when check edit authority
 	},
+	project: { type: Schema.Types.ObjectId, ref: 'Project', required: true},
 	abstract: {
 		isDirectSupport: {type: Boolean, required: true},
 		thresholdMoney: {type: Number, required: true, default: 0},
@@ -34,11 +37,45 @@ let PostSchema = new Schema({
 	numComments: {type: Number, default: 0},
 });
 
+PostSchema.pre('save', function (next) {
+	ProjectModel.update(
+		{_id: this.project},
+		{$addToSet: { posts: this._id }},
+		function(err) {
+			if(err) next(err)
+			else next()
+		}
+	)
+})
+
 // Configure the 'PostSchema' to use getters and virtuals when transforming to JSON
 PostSchema.set('toJSON', {
 	getters: true,
 	virtuals: true
 });
+
+PostSchema.methods.toFormat = function (type, ...args) {
+	switch (type) {
+		case 'project_detail':
+			let user = args[0];
+			// get user's support money
+			return {
+				opened: true, // TODO: according to user's support money
+				author: this.author,
+				title: this.abstract.title,
+				created_at: this.abstract.created_at,
+				numSupporters: 10, // TODO: [Definition] what is support of this post?????
+				likes: this.abstract.numLikes,
+				content: this.content,
+				comments: this.comments,
+				numComments: this.numComments, // TODO: apply react.post
+			}
+		default:
+			console.error(`toFormat can't accept this ${JSON.stringify(type)}`);
+			return ''
+	}
+}
+
 
 PostSchema.methods.likedByUser = async function(user) {
 	try {

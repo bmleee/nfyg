@@ -1,13 +1,13 @@
 import UserModel from '../models/user'
 import ExhibitionModel from '../models/exhibition'
-import {
+import init, {
 	getRandomUser,
 	// getRandomMagazine,
 	// getRandomExhibiiton,
 	getRandomIndex,
 } from './initdb.helper'
 
-import { range, asyncparallelfor } from '../../lib/utils'
+import { rangeArray, asyncparallelfor } from '../../lib/utils'
 import { randomString } from './utils'
 
 const artworkImgWidthHeightDesc = [
@@ -88,7 +88,7 @@ const createExhibition = async (artist) => {
 			"imgSrc": "https://i0.wp.com/7pictures.co.kr/wp-content/uploads/edd/2016/10/KakaoTalk_20161008_150354358.jpg?resize=1024%2C590&ssl=1",
 			"dateFrom": dateFrom,
 			"dateTo": dateTo,
-			"exhibitionName": randomString(),
+			"exhibitionName": `test_${randomString()}`,
 		},
 		"creator": {
 				"creatorName": artist.nick_name,
@@ -154,11 +154,17 @@ export default async function initExhibition() {
 	try {
 		const numExhibitions = await ExhibitionModel.count({})
 
-		asyncparallelfor(range(numExhibitions, max_exhibitions), async (_) => {
-			let artist = await getRandomUser('artist')
-			await createExhibition(artist)
-		})
-		
+		for (var i = numExhibitions; i < max_exhibitions; i++) {
+
+		}
+
+		await Promise.all(rangeArray(numExhibitions, max_exhibitions).map(
+			async () => {
+				let artist = await getRandomUser('artist')
+				await createExhibition(artist)
+			}
+		))
+
 	} catch (e) {console.error(e);}
 
 

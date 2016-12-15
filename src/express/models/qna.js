@@ -1,6 +1,8 @@
 // Load the module dependencies
 import mongoose from 'mongoose'
 import { autoIncrement } from '../lib/db'
+import ProjectModel from './project'
+import ExhibitionModel from './exhibition'
 
 const Schema = mongoose.Schema;
 
@@ -12,6 +14,8 @@ let QnASchema = new Schema({
 		iconSrc: {type: String, required: true},
 		user: {type: Schema.Types.ObjectId, ref: 'User', required: true}, // used when check edit authority
 	},
+	project: { type: Schema.Types.ObjectId, ref: 'Project'},
+	exhibition: { type: Schema.Types.ObjectId, ref: 'Exhibition'},
 	abstract: {
 		title: {type: String, required: true},
 		created_at: {type: Date, default: Date.now()},
@@ -32,11 +36,59 @@ let QnASchema = new Schema({
 	numComments: {type: Number, default: 0},
 });
 
+QnASchema.pre('validate', function (next) {
+	if (this.project || this.exhibition) next()
+	else next(Error('One of project, exhibition field is reuqired!'))
+})
+
+QnASchema.pre('save', function (next) {
+	if (this.project) {
+		ProjectModel.update(
+			{_id: this.project},
+			{$addToSet: { qnas: this._id }},
+			function(err) {
+				if(err) next(err)
+				else next()
+			}
+		)
+	} else if (this.exhibition) {
+		ExhibitionModel.update(
+			{_id: this.project},
+			{$addToSet: { qnas: this._id }},
+			function(err) {
+				if(err) next(err)
+				else next()
+			}
+		)
+	}
+
+})
+
 // Configure the 'QnASchema' to use getters and virtuals when transforming to JSON
 QnASchema.set('toJSON', {
 	getters: true,
 	virtuals: true
 });
+
+QnASchema.methods.toFormat = function (type, ...args) {
+	switch (type) {
+		case 'project_detail':
+
+			return {
+				opened: true, // always true!
+				author: this.author,
+				title: this.abstract.title,
+				created_at: this.abstract.created_at,
+				numSupporters: 10, // TODO: [Definition]
+				likes: this.abstract.numLikes,
+				text: this.text,
+				comments: this.comments
+			}
+		default:
+			console.error(`toFormat can't accept this ${JSON.stringify(type)}`);
+			return ''
+	}
+}
 
 QnASchema.methods.likedByUser = async function(user) {
 	try {

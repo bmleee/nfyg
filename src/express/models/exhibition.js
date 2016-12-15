@@ -3,6 +3,8 @@ import mongoose from 'mongoose'
 import { autoIncrement } from '../lib/db'
 
 import { restrictedNames } from './project'
+import QnAModel from './qna'
+
 export {
 	restrictedNames
 }
@@ -27,6 +29,7 @@ const ExhibitionSchema = new Schema({
 		"dateFrom": {type: String, required: true},
 		"dateTo": {type: String, required: true},
 		"exhibitionName": {type: String, required: true, unique: true},
+		"created_at": {type: Date, default: Date.now()},
 	},
 	"creator": {
 			"creatorName": {type: String, required: true},
@@ -55,8 +58,14 @@ const ExhibitionSchema = new Schema({
 	qnas: [{
 		type: Schema.Types.ObjectId,
 		ref: 'QnA',
-	}]
+	}],
+	numQnAs: {type: Number, default: 0},
 });
+
+ExhibitionSchema.pre('update', function (next) {
+	// this.numQnAs = this.qnas.length
+	next()
+})
 
 // Configure the 'ExhibitionSchema' to use getters and virtuals when transforming to JSON
 ExhibitionSchema.set('toJSON', {
@@ -76,7 +85,7 @@ ExhibitionSchema.methods.toFormat = function (type) {
 				},
 				schedule: `${this.abstract.dateFrom} ~ ${this.abstract.dateTo}`,
 				location: this.abstract.location,
-				linkToExhibition: `/exhibitions/${this.abstract.exhibitionName}`, // TODO: change linkToExhibition to link
+				link: `/exhibitions/${this.abstract.exhibitionName}`, // TODO: change linkToExhibition to link
 			}
 		default:
 			return ''
@@ -89,6 +98,7 @@ ExhibitionSchema.methods.pushQnA = async function (_id) {
 		let qnas = this.qnas || []
 		qnas.push(_id)
 		this.qnas = Array.from(new Set(qnas))
+		this.numQnAs = Array.from(new Set(qnas)).length
 		return await this.save()
 	} catch (e) {
 		console.error(e);

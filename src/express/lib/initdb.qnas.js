@@ -1,10 +1,11 @@
 import UserModel from '../models/user'
 import ProjectModel from '../models/project'
+import ExhibitionModel from '../models/exhibition'
 import SponsorModel from '../models/sponsor'
 import PostModel from '../models/post'
 import QnAModel from '../models/qna'
 
-import { range, asyncparallelfor } from '../../lib/utils'
+import { rangeArray, asyncparallelfor } from '../../lib/utils'
 import { randomString } from './utils'
 
 import init, {
@@ -16,60 +17,88 @@ import init, {
 } from './initdb.helper'
 
 const getRandomTarget = async () => Math.random() > 0.500
-	? await getRandomProject()
-	: await getRandomExhibiiton()
+	? [await getRandomProject(), 'project']
+	: [await getRandomExhibiiton(), 'exhibition']
 
-const createQnA = async (author, target) => {
+const createQnA = async (author, target, type) => {
 	const numPosts = target.qnas.length
 
 	for (var i = 0; i < 15 - numPosts; i++) {
-		const qna = await QnAModel.create({
-			author: {
-				name: author.nick_name,
-				iconSrc: author.image,
-				user: author._id,
-			},
-			abstract: {
-				title: randomString(),
-				likes: [],
-			},
-			text: `${randomString()} ${randomString()} ${randomString()} ${randomString()} ${randomString()}`,
-			comments: [],
-		})
 
-		await target.pushQnA(qna._id)
 	}
+
+	let arr = rangeArray(numPosts, 15).map(() => ({author, target}))
+
+	console.log(`${type} ${target._id} ${arr.length} qnas will be added`);
+
+	await Promise.all(arr.map(
+		async ({ author, target }) => {
+			let body = {
+				author: {
+					name: author.nick_name,
+					iconSrc: author.image,
+					user: author._id,
+				},
+				abstract: {
+					title: randomString('sample qna title'),
+					likes: [],
+				},
+				text: `${randomString('sample qna text')} ${randomString()} ${randomString()} ${randomString()} ${randomString()}`,
+				comments: [],
+			}
+
+			body[type] = target._id // target is document or string(_id)
+
+			// console.log('QnA body', body);
+			return await QnAModel.create(body)
+		}
+	))
+
+	// const qnas_ids = qnas.map(x => x._id)
+	// console.log(`qna created ${qnas_ids.join(', ')}`);
+	//
+	// await target.pushQnA(qnas_ids)
+
 }
 
 export default async function initQnA() {
 	console.log('trying to init QnA collections');
 
 	try {
-		await init()
-
 		// create post for 10 qnas
-		asyncparallelfor(range(10), async (_) => {
-			let target = await getRandomTarget()
-			let author = await getRandomUser()
+		let projects = await ProjectModel.find({})
+		let exhibitions = await ExhibitionModel.find({})
 
-			let qna = await createQnA(author, target)
-		})
+		await Promise.all([
+			Promise.all[
+				projects
+					.filter(p => p.qnas.length === 0)
+					.map(
+						async (p) => {
+							let author = await getRandomUser()
+							await createQnA(author, p, 'project')
+						})
+				],
+			Promise.all[
+				exhibitions
+					.filter(e => e.qnas.length === 0)
+					.map(
+						async (e) => {
+							let author = await getRandomUser()
+							await createQnA(author, e, 'exhibitions')
+						})
+				],
+		])
+		//
+		// for(let i = 0; i < 10; i ++) {
+		// 	let [target, type] = await getRandomTarget()
+		// 	let author = await getRandomUser()
+		//
+		// 	let qna = await createQnA(author, target, type)
+		// }
 
 
-		asyncparallelfor(range(10), async (_) => {
-			let qna = await getRandomQnA()
 
-			let user1 = await getRandomUser()
-			let user2 = await getRandomUser()
-			let user3 = await getRandomUser()
-
-			await qna.likedByUser(user1)
-			await qna.commentedByUser(user2, `${randomString()} ${randomString()}`)
-
-			let index = getRandomIndex(qna.comments)
-
-			await qna.userLikesComment(user3, index)
-		})
 	} catch (e) {
 		console.error(e);
 	}

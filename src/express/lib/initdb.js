@@ -1,3 +1,4 @@
+'use strict'
 import UserModel from '../models/user'
 import ProjectModel from '../models/project'
 import SponsorModel from '../models/sponsor'
@@ -12,20 +13,46 @@ import Posts from './initdb.posts'
 import Magazines from './initdb.magazines'
 import Exhibitions from './initdb.exhibitions'
 import QnA from './initdb.qnas'
+import Actions from './initdb.user-action'
+
+import init from './initdb.helper'
 
 
 (async function main() {
 	console.log('init db start');
-	await Users()
-	await Sponsors()
-	await Projects()
-	await Posts()
-	await Magazines()
-	await Exhibitions()
-	await QnA()
-	console.log('init db finished');
+	let t1 = Date.now(), t2 = Date.now();
 
-	test()
+	await Promise.all([
+		Users(),
+		Sponsors()
+	])
+	console.log(`${((t2 = Date.now()) - t1) / 1000}sec`);
+
+	await init()
+	await Promise.all([
+		Magazines(),
+		Exhibitions(),
+		Projects(),
+	])
+	console.log(`${((t2 = Date.now()) - t1) / 1000}sec`);
+
+	await init()
+	await Promise.all([
+		Posts(),
+	])
+
+	await QnA()
+	console.log(`${((t2 = Date.now()) - t1) / 1000}sec`);
+
+	init()
+	// await Actions()
+	console.log(`${((t2 = Date.now()) - t1) / 1000}sec`);
+
+	console.log('init db finished');
+	console.log(`${((t2 = Date.now()) - t1) / 1000}sec`);
+
+	await test()
+	exit(0)
 })()
 
 
