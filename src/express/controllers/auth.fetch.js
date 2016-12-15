@@ -11,6 +11,8 @@
 
 import express from 'express';
 
+// import cache from '../lib/cache'
+
 import UserModel from '../models/user'
 import ProjectModel, {restrictedNames} from '../models/project'
 import ExhibitionModel from '../models/magazine'
@@ -32,31 +34,41 @@ router.get('/', async (req, res) => {
 
 	let data = {
 		presentProjects: null,
-		futureProjects: null,
-		pastProjects: null,
+		// futureProjects: null,
+		// pastProjects: null,
 		recentExhibitions: null,
 		artMagazines: null,
 	}
-	let args = {
-		presentProjects: [ProjectModel, {'abstract.state': 'in_progress'}],
-		futureProjects: [ProjectModel, {'abstract.state': 'preparing'}],
-		pastProjects: [ProjectModel, {'abstract.state': 'completed'}],
-		recentExhibitions: [ExhibitionModel, {}],
-		artMagazines: [MagazineModel, {}],
+
+	// TODO: refactor 3 select query from Project Collection
+	let fetcher = {
+		presentProjects: async () => await ProjectModel.find({'abstract.state': 'in_progress'}),
+		// futureProjects: async () => ProjectModel.find({'abstract.state': 'preparing'}),
+		// pastProjects: async () => ProjectModel.find({'abstract.state': 'completed'}),
+		recentExhibitions: async () => await ExhibitionModel.find({}).limit(6),
+		artMagazines: async () => await MagazineModel.find({}).limit(7),
 	}
 
 	try {
 
 		await Promise.all(Object.keys(data).map(async (k) => {
-			data[k] = await args[k][0].find(args[k][1])
+			data[k] = await fetcher[k]()
 		}))
 
 		res.json({
-			presentProjects: data.presentProjects.map(x => x.toFormat('home')),
-			futureProjects: data.futureProjects.map(x => x.toFormat('home')),
-			pastProjects: data.pastProjects.map(x => x.toFormat('home')),
-			recentExhibitions: data.recentExhibitions.map(x => x.toFormat('home')),
-			artMagazines: data.artMagazines.map(x => x.toFormat('home')),
+			user: {
+				isLoggedIn: !!req.session.user,
+				isAuthorized: true // always true
+			},
+			data: {
+				home: {
+					presentProjects: data.presentProjects.map((x) => x.toFormat('home')),
+					// futureProjects: data.futureProjects.map(x => x.toFormat('home')),
+					// pastProjects: data.pastProjects.map(x => x.toFormat('home')),
+					recentExhibitions: data.recentExhibitions.map((x) => x.toFormat('home')),
+					artMagazines: data.artMagazines.map((x) => x.toFormat('home')),
+				}
+			}
 		})
 	} catch (e) {
 		console.error(e);
@@ -66,7 +78,10 @@ router.get('/', async (req, res) => {
 })
 
 /**
- * auth level : anyone
+ * auth level
+ * 	- overview: anyone
+ * 	- post: according to thresholdMoney
+ * 	- qna: anyone
  * fetch project detail info
  * @type {[type]}
  */
@@ -86,13 +101,21 @@ router.get('/projects/:projectName/:option?', async (req, res, next) => {
 
 	try {
 		const project = await ProjectModel.findOne({"abstract.projectName": projectName})
-		console.log('project', project);
+			.populate('sponsor posts qnas')
+
 		if (!project) throw new Error(`no such project in name of ${projectName}`)
-		console.log('returns', project.toJSON());
-		res.json({
-			user: req.session.user,
+
+		const projectToRender = project.toFormat('project_detail', req.session.user)
+
+		console.log('projectToRender', JSON.stringify(projectToRender, undefined, 4));
+
+		res.status(200).json({
+			user: {
+				isLoggedIn: !!req.session.user,
+				isAuthorized: true // always true
+			},
 			data: {
-				project: project.toJSON()
+				project: projectToRender
 			}
 		})
 	} catch (e) {
@@ -106,10 +129,53 @@ router.get('/projects/:projectName/edit', async (req, res) => {
 	res.json({})
 })
 
+// TODO: add res.json to user auth info
+// TODO: magazine paginaiton
+// TODO: magazine category select
+router.get('/magazines', async (req, res) => {
+	console.log('/magazines/', );
+
+	const magazines = await MagazineModel.find({})
+
+	res.json({
+		user: {
+			isLoggedIn: !!req.session.user,
+			isAuthorized: true,
+		},
+		data: {
+			magazines: magazines.map(m => m.toFormat('magazines'))
+		}
+	})
+})
+
+router.get('/magazines/:magazineName', async (req, res) => {
+	console.log('/magazines/' + req.params.magazineName);
+
+	try {
+		const magazine = await MagazineModel.findOne({"abstract.magazineName": req.params.magazineName})
+
+		res.json({
+			user: {
+				isLoggedIn: !!req.session.user,
+				isAuthorized: true,
+			},
+			data: magazine.toFormat('magazine_detail')
+		})
+	} catch (e) {
+		console.error(e);
+		res.json({error: e})
+	}
+
+})
+
+router.get('/magazines/:magazineName/edit', async (req, res) => {
+	console.log('/magazines/:magazineName/edit');
+	res.json({})
+})
+
 router.get('/*', async (req, res) => {
 	console.log('auth.fetch.url /*', req.url)
 	res.json({})
-
 })
 
 export default router;
