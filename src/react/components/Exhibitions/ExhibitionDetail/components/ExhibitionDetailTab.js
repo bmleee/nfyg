@@ -21,7 +21,7 @@ class ExhibitionDetailTab extends Component {
 		// TODO: Apply :project_name
 		return (
 			<div className="project-detail-tab">
-				<Link to="/exhibitions/detail/"><button className={overviewClassName}>개 요</button></Link>
+				<Link to="/exhibitions/detail/"><button className={overviewClassName}>소 개</button></Link>
 				<Link to="/exhibitions/detail/artworks"><button className={artwokrsClassName}>작 품</button></Link>
 				{/* <Link to="/exhibitions/detail/post"><button className="project-tab">Post</button></Link> */}
 				<Link to="/exhibitions/detail/qna"><button className={qnaClassName}>문 의</button></Link>

@@ -11,6 +11,13 @@
 		position: relative;
 		text-align : center;
 		margin : 50px auto;
+		width: 800px;
+		@media (max-width: 991px) {
+			width: 90%;
+		@media (max-width: 500px) {
+			width: 80%;
+		}	
+		}
 	}
 }
 

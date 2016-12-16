@@ -1,3 +1,12 @@
+.magazine-description {
+	margin-top : 7px !important;
+}
+.magazines-heading-category-item {
+	display : inline-block;
+	p {
+		font-size : 16px;
+	}
+}
 .magazine-writer-icon {
 	border-radius : 50px;
 	margin-bottom : 3px;
@@ -27,11 +36,17 @@
             padding : 40px 40px 20px 40px;
         }
 }
-.magazine-category-button, .magazine-category-button:focus {
+.magazine-category-button {
 	background:none;
 	border : none;
 	outline : none;
-	color : #000;
+	color : #333;
+}
+.magazine-category-button:focus {
+	background:none;
+	border : none;
+	outline : none;
+	color : #4b709a;
 }
 .magazine-category-button:hover {
 	color : #4b709a;
@@ -79,6 +94,30 @@
 }
 
 @media (max-width: 500px) {
+	.magazines-heading-category-item {
+		width : 33.3333333%;
+		text-align : center;
+		p {
+		font-size : 15px;
+	}
+	}
+	.magazine-category-button {
+		color : #555;
+	}
+	.magazine-category-button:focus {
+		color : #4b709a;
+	}
+	.magazines-heading-category-item:nth-child(1), .magazines-heading-category-item:nth-child(2), .magazines-heading-category-item:nth-child(3) {
+		margin-bottom : 12px;
+	}
+	.magazines-heading-category-item:nth-child(2) {
+		border-left : 1px dashed #ccc;
+		border-right : 1px dashed #ccc;
+	}
+	.magazines-heading-category-item:nth-child(5) {
+		border-left : 1px dashed #ccc;
+		border-right : 1px dashed #ccc;
+	}
 	.magazine-writer-icon {
 		width : 18px !important;
 		height : 18px !important;
@@ -92,18 +131,30 @@
 }
     .magazines-heading-nav {
     padding : 10px 10px 15px 10px;
+    text-align : center;
 }
 .magazines-heading-category-container {
 	margin: 0px 10px 0px 10px;
-    padding: 14px 0px 14px 0px;
-    border-top: 1px solid #eee;
-    border-bottom : 1px solid #eee;
+    padding: 10px 0px 14px 0px;
+    border: none;
 }
 .magazine-description {
 	display : none !important;
 }
 .magazine-list-item-info {
 	padding : 0px 6px 6px 6px;
+	h4 {
+        font-weight : 400;
+        font-size : 15px;
+        min-height : 34px;
+    }
+    img {
+        margin-right : 2px;
+    }
+    p {
+        color : #555;
+        font-weight : 600;
+    }
 }
 }   
 }

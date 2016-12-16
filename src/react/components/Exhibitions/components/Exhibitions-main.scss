@@ -1,4 +1,8 @@
 // desktop&all ↓↓↓↓
+.ex-location-schedule {
+	font-weight : 600 !important;
+	color : #777;
+}
 .slick-dots li {
 	margin : 0px !important;
 }
@@ -98,11 +102,8 @@ button.ex-buttons, button.ex-buttons:active   {
 	display : inline-block;
 }
 .exhibitions-list-item {
-	width : 49.9999% !important;
-	padding : 3px 3px 10px 3px !important;
+	padding : 3px !important;
 }
-
-
 }
 }
 

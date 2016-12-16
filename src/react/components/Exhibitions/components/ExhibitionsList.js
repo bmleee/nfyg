@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 
 const style = {
-	width: `${100 * 0.95 / 3}%`,
 	height: 'auto',
 }
 
@@ -12,7 +11,7 @@ class ExhibitionsList extends Component {
 		const { exhibitions, } = this.props;
 
 		let items = exhibitions.map( ({
-			imgSrc, title, state, creator: {name, iconSrc,}, schedule, location,
+			imgSrc, title, state, genre, city, creator: {name, iconSrc,}, schedule, location,
 		}, index) => (
 			<div className="exhibitions-list-item" style={style}>
 				<Link to="/exhibitions/detail">
@@ -22,8 +21,11 @@ class ExhibitionsList extends Component {
 						</div>
 					</div>
 				</Link>
-				<Link to="/exhibitions/detail"><h4>{title}{' '}{state}</h4></Link>
-				<p className="ex-location-schedule">{schedule} @ {location}</p>
+				<div className="ex-list-info">
+				<Link to="/exhibitions/detail"><h4>{title} : {genre}</h4></Link>
+				<p className="ex-location-schedule">{location}, {schedule}</p>
+				{/* closing '00' days 로 표시 */}
+				</div>
 			</div>
 		))
 

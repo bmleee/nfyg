@@ -1,0 +1,30 @@
+.magazine-detail-contents {
+    width : 800px;
+    margin : 0px auto 60px auto;
+}
+
+.magazine-detail-related-contents-list {
+    width : 800px;
+    margin : 0px auto;
+}
+
+@media (max-width: 991px) {
+    .magazine-detail-contents {
+    padding : 0px 40px !important;
+	width : 100% !important;
+}
+.magazine-detail-related-contents-list {
+    padding : 0px 40px !important;
+	width : 100% !important;
+}
+@media (max-width: 500px) {
+    .magazine-detail-related-contents-list {
+    padding : 0px 10px !important;
+	width : 100% !important;
+}
+.magazine-detail-contents {
+    padding : 0px 10px !important;
+	width : 100% !important;
+}
+}    
+}

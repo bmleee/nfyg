@@ -45,8 +45,6 @@ import SponsorEditor from './components/SponsorEditor'
 import { Login, Profile, Signup } from './components/User'
 import { Sponsors } from './components/Sponsors'
 
-
-
 // <Route path="projects/:project_name" component={ProjectDetail}> // TODO: activate
 const routes = (
 	<Route path="/" component={App}>

@@ -1,5 +1,6 @@
 import React, { Component, PropType } from 'react'
 import ProjectEditorTab from './ProjectEditorTab'
+import ScrollToTop from 'react-scroll-up';
 
 import update from 'immutability-helper'
 
@@ -18,6 +19,10 @@ const API_URL = '/api/test-api/sponsor'
 import _ from 'lodash' // use throttle or debounce
 import 'whatwg-fetch'
 import 'babel-polyfill'
+
+const scrollStyle = {
+  cursor: 'pointer',
+}
 
 export default class ProjectEditor extends Component {
 
@@ -93,11 +98,14 @@ export default class ProjectEditor extends Component {
 			return (<div>Loading...</div>)
 		} else {
 			return (
-				<div className="project-editor">
+				<div className="exhibition-editor">
 					<ProjectEditorTab
 						save={this.save}
 					/>
 					 { children }
+				<ScrollToTop showUnder={180} style={scrollStyle} duration={0} >
+				<button className="back-to-top" />
+				</ScrollToTop>	
 				</div>
 			)
 		}

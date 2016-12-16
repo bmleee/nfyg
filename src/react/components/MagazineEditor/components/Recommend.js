@@ -20,12 +20,12 @@ const ExhibitionWrapper = ({value, handlers}) => {
 			imgSrc,
 			link
 		}, index) => (
-			<div className="recommends-wrapper-item">
-				<span>제목: {title}</span>
-				<span>설명: {description}</span>
-				<span>링크: {link}</span>
+			<div className="editor-item-detail-wrapper">
+				<span className="item-deatail-small-title-saved">제 목 : {title}</span>
+				<span className="item-deatail-small-title-saved">설 명 : {description}</span>
+				<span className="item-deatail-small-title-saved">링 크 : {link}</span>
 				<img src={imgSrc} alt=""/>
-				<button onClick={() => deleteExhibition(index)}>삭제하기</button>
+				<button className="item-deatail-delete" onClick={() => deleteExhibition(index)}>삭제하기</button>
 			</div>
 		) )
 		: '관련된 전시를 추가하세요.'
@@ -54,19 +54,19 @@ const ExhibitionForm = ({value, handlers}) => {
 	return (
 		<div className="recommends-form-container">
 			<div>
-				<span>제목</span>
+				<span className="item-deatail-small-title">제목</span>
 				<input type="text" value={title} onChange={_onTitle}/>
 			</div>
 			<div>
-				<span>설명</span>
+				<span className="item-deatail-small-title">설명</span>
 				<input type="text" value={description} onChange={_onDescription}/>
 			</div>
 			<div>
-				<span>링크</span>
+				<span className="item-deatail-small-title">링크</span>
 				<input type="text" value={link} onChange={_onLink}/>
 			</div>
 			<div>
-				<span>이미지</span>
+				<span className="item-deatail-small-title">이미지</span>
 				<input type="file" value={imgSrc} onChange={_onImgSrc} accept="image/*" />
 			</div>
 		</div>
@@ -87,15 +87,15 @@ const MagazineWrapper = ({value, handlers}) => {
 			imgSrc,
 			link
 		}, index) => (
-			<div className="recommends-wrapper-item">
-				<span>제목: {title}</span>
-				<span>설명: {description}</span>
-				<span>링크: {link}</span>
+			<div className="editor-item-detail-wrapper">
+				<span className="item-deatail-small-title-saved">제 목 : {title}</span>
+				<span className="item-deatail-small-title-saved">설 명 : {description}</span>
+				<span className="item-deatail-small-title-saved">링 크 : {link}</span>
 				<img src={imgSrc} alt=""/>
-				<button onClick={() => deleteMagazine(index)}>삭제하기</button>
+				<button className="item-deatail-delete" onClick={() => deleteMagazine(index)}>삭제하기</button>
 			</div>
 		) )
-		: '관련된 매거진을 추가하세요.'
+		: <span></span>
 
 	return (
 		<div className="recommends-wrapper-container">
@@ -123,19 +123,19 @@ const MagazineForm = ({value, handlers}) => {
 	return (
 		<div className="recommends-form-container">
 			<div>
-				<span>제목</span>
+				<span className="item-deatail-small-title">제목</span>
 				<input type="text" value={title} onChange={_onTitle}/>
 			</div>
-			<div>
-				<span>설명</span>
+			{/* <div>
+				<span className="item-deatail-small-title">설명</span>
 				<input type="text" value={description} onChange={_onDescription}/>
-			</div>
+			</div> */}
 			<div>
-				<span>링크</span>
+				<span className="item-deatail-small-title">링크</span>
 				<input type="text" value={link} onChange={_onLink}/>
 			</div>
 			<div>
-				<span>이미지</span>
+				<span className="item-deatail-small-title">이미지</span>
 				<input type="file" value={imgSrc} onChange={_onImgSrc} accept="image/*" />
 			</div>
 		</div>
@@ -153,8 +153,8 @@ const Recommend = ({
 	magazineHandlers,
 }) => {
 	return (
-		<div className="recommend-container">
-			<FormWrapper
+		<div className="abstract-container">
+			{/* <FormWrapper
 				title="Recommended Exhibitions"
 				valueType={VALUE_TYPE.RECOMMEND}
 				alt="관련 전시를 추가하세요"
@@ -164,18 +164,21 @@ const Recommend = ({
 				handlers={exhibitionHandlers}
 				Wrapper={ExhibitionWrapper}
 				Form={ExhibitionForm}
-			/>
+			/> */}
 
 			<FormWrapper
-				title="Recommended Magazines"
+				title="관련 콘텐츠"
 				valueType={VALUE_TYPE.RECOMMEND}
-				alt="관련 매거진을 추가하세요"
+				alt="관련 콘텐츠를 추가하세요"
 				initialValue={recommendedMagazines}
-				submitCaption="추가하기"
+				submitCaption="관련 콘텐츠를 추가하세요"
+				submitCaptionsub={'추가하기'}
 				onSubmit={_onMagazineSubmit}
 				handlers={magazineHandlers}
 				Wrapper={MagazineWrapper}
 				Form={MagazineForm}
+				className ="magazine-editor-detail"
+				classNameopen ="editor-open-container"
 			/>
 		</div>
 	)

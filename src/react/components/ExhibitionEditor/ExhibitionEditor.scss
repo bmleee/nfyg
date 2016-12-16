@@ -1,0 +1,304 @@
+.editor-item-detail-wrapper {
+	padding : 3px 5px 10px 5px;
+	margin : 10px 6px;
+	border : 1px solid #ddd;
+	border-radius : 2px;
+	@media (max-width: 500px) {
+			margin : 10px 0px;
+		}
+}
+.item-deatail-delete, .item-deatail-delete:focus {
+	padding : 5px 15px;
+	background-color : #ddd;
+	border : none;
+	border-radius : 5px;
+	outline : none;
+	margin : 8px 0px 0px 8px;
+	color : #777;
+	font-weight : 700;
+}
+.item-deatail-small-title {
+	padding : 0px !important;
+	margin-bottom : 5px;
+	font-weight : 600 !important;
+	color : #666;
+}
+.item-deatail-small-title-saved {
+	font-weight : 600 !important;
+	color : #666;
+}
+.item-deatail-delete:hover {
+	background-color : #ccc;
+}
+.editor-small-title {
+	margin : 10px 0px 10px 5px;
+}
+.editor-open-button1-container {
+	width : 70%;
+	display : inline-block;
+	text-align : left;
+}
+.editor-open-button2-container {
+	width : 30%;
+	display : inline-block;
+	text-align : right;
+}
+.editor-open-cancel-container {
+	width : 30%;
+	display : inline-block;
+	text-align : right;
+}
+.editor-open-cancel-container-sub {
+	width : 70%;
+	display : inline-block;
+	text-align : left;
+}
+.editor-cancel-button, .editor-cancel-button:focus {
+	padding : 6px 20px;
+	background-color : #ddd;
+	border : none;
+	border-radius : 5px 0px 0px 5px;
+	outline : none;
+	margin-right : 1px;
+	color : #777;
+	font-weight : 700;
+}
+.editor-cancel-button:hover {
+	background-color : #ccc;
+}
+.editor-cancel-button:before {
+	font-family : Ionicons;
+	content : "\f129";
+	margin-right : 5px;
+	font-size : 10px;
+	vertical-align : text-bottom;
+}
+.editor-save-button, .editor-save-button:focus {
+	padding : 6px 20px;
+	background-color : #4b709a;
+	border : none;
+	border-radius : 0px 5px 5px 0px;
+	outline : none;
+	color : #fff;
+	font-weight : 700;
+}
+.editor-save-button:hover {
+	background-color : #354c67;
+}
+.editor-save-button:before {
+	font-family : Ionicons;
+	content : "\f121";
+	margin-right : 5px;
+	font-size : 10px;
+	vertical-align : text-bottom;
+}
+.editor-open-button1, .editor-open-button1:focus{
+	background : transparent;
+	border : none;
+	outline : none;
+	margin: 6px 0px 0px 0px;
+	text-align : left;
+	color : #4b709a;
+	width : 100%;
+}
+.editor-open-button1:hover {
+	color : #354c67;
+}
+.editor-open-button1:before {
+	font-family : Ionicons;
+	content : "\f355";
+}
+.editor-open-button2 {
+	text-align : right !important;
+	background : transparent;
+	border : none;
+	outline : none;
+	margin: 6px 0px 0px 0px;
+	color : #4b709a;
+	width : 100%;
+}
+.editor-open-button2:hover {
+	color : #354c67;
+}
+.editor-open-button2:before {
+	font-family : Ionicons;
+	content : "\f12c";
+}
+.editor-open-button3, .editor-open-button3:focus{
+	background : transparent;
+	border : none;
+	outline : none;
+	margin: 6px 0px 0px 0px;
+	text-align : left;
+	color : #4b709a;
+	width : 100%;
+}
+.editor-open-button3:hover {
+	color : #354c67;
+}
+.editor-open-button3:before {
+	font-family : Ionicons;
+	content : "\f354";
+}
+.exhibition-long-title, .exhibition-creater-name, .exhibition-overview1 {
+	border : 1px solid #eee !important;
+	border-radius : 5px 5px 0px 0px;
+}
+.exhibition-eng-title, .exhibition-creater-info, .exhibition-overview2 {
+	border-radius : 0px 0px 5px 5px;
+	margin-bottom : 25px;
+}
+.exhibition-editor-artwork {
+	border : 1px solid #eee !important;
+	border-radius : 5px;
+	margin-bottom : 25px;
+}
+
+.artwork-container, .abstract-container {
+	width : 800px;
+	margin : 0px auto 90px auto;
+	background : transparent !important;
+	min-height : 500px;
+}
+.form-wrapper {
+	padding : 10px 10px;
+	min-height : 82px;
+	border : 1px solid #eee;
+	border-top : none;
+	span, .artworks-wrapper-container {
+		padding : 1px 6px;
+		margin-top : 6px;
+	}
+}
+.form-wrapper:hover {
+	background-color : #effaff;
+	transition : opacity, 260ms;
+}
+.editor-open-container {
+	background-color : #effaff;
+	padding : 10px 10px;
+	min-height : 82px;
+	border : 1px solid #eee;
+	.Select-menu-outer {
+			display : block !important;
+			position : initial !important;
+			width : 49.9% !important;
+			z-index : 9999px !important;
+			margin-top : -2px;
+			@media (max-width: 500px) {
+			width : 99.9% !important;
+		}
+		}
+	input {
+		display : block;
+		border : 2px solid #ccc;
+		border-radius : 3px;
+		outline : none;
+		height : 30px;
+		padding : 3px 5px;
+		margin-bottom : 9px;
+		width : 49.9999%;
+		@media (max-width: 500px) {
+			width : 100% !important;
+		}
+	}
+	textarea {
+		display : block;
+		border : 2px solid #ccc;
+		border-radius : 3px;
+		outline : none;
+		height : 60px;
+		padding : 3px 5px;
+		margin-bottom : 8px;
+		width : 100%;
+		max-width : 100%;
+	}
+	input:focus, textarea:focus, .Select-control:focus {
+		border : 2px solid #4b709a;
+	}
+	input[type=date] {
+		width : 160px;
+	}
+	input[type=file] {
+		width : 49.9999%;
+		height : 270px;
+		padding : 120px 80px;
+		@media (max-width: 500px) {
+			width : 100% !important;
+			height : 200px;
+			padding : 80px 70px;
+		}
+	}
+	div.Select.Select--single.is-searchable.has-value {
+		padding-bottom: none;
+   		border-bottom: none;
+	}
+	.Select-control {
+		display : table;
+		border : 2px solid #ccc;
+		border-radius : 3px !important;
+		outline : none;
+		height : 30px;
+		padding : 3px 5px;
+		float : none;
+		width : 49.9999%;
+		input {
+				display : block;
+				border : none;
+				border-radius : 3px;
+				outline : none;
+				height : 30px;
+				padding : 0px;
+				margin-bottom : 0px;
+				width : 100%;
+		}
+		@media (max-width: 500px) {
+			width : 100% !important;
+		}
+		.form-wrapper span {
+			padding : 0px;
+		}
+		.Select-multi-value-wrapper {
+			border-right : none;
+			height : 30px;
+			margin-top : 0px !important;
+			padding : 0px !important;
+		}
+		.Select-value-label {
+			height : 30px;
+			line-height : 34px;
+			padding : 0px !important;
+		}
+		.Select-arrow {
+			padding : 0px;
+		}
+		.Select-input {
+			padding : 0px !important;
+		}
+		.Select-value {
+			padding : 1px 6px !important;
+			line-height : 34px !important;
+		}
+	}
+}
+.form-wrapper-title {
+	font-size : 16px;
+	font-weight : 600;
+	color : #777;
+	padding : 1px 6px;
+	height : 24px;
+}
+@media (max-width: 991px) {
+.artwork-container, .abstract-container {
+	width : 95%;
+}
+.editor-open-cancel-container, .editor-open-cancel-container-sub {
+	display : block;
+	width : 100%;
+}
+.editor-open-cancel-container-sub {
+	margin-bottom : 13px;
+}
+@media (max-width: 500px) {
+}
+}

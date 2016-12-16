@@ -24,6 +24,9 @@
 	height : 135px;
 	width : auto;
 	overflow : hidden;
+	@media (max-width: 500px) {
+	    	height : 115px;
+	}
 }
 .ma-centered {
 	 position: absolute;
@@ -59,10 +62,5 @@ position: absolute;
     -webkit-transform: translate(-50%,-50%);
     -ms-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);
-}
-
-div.magazine-list-button {
-	border-bottom : 1px solid #ddd;
-	padding-bottom : 40px;
 }
 

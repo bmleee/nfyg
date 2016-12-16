@@ -1,6 +1,12 @@
 .present-project-list {
 	border-bottom : 1px solid #ddd;
-	padding-bottom : 20px;
+	padding-bottom : 18px;
+	@media (max-width: 500px) {
+		border-bottom : 1px solid #ccc;
+		-webkit-box-shadow: 0px 7px 0px 0px rgba(238,238,238,1);
+		-moz-box-shadow: 0px 7px 0px 0px rgba(238,238,238,1);
+		box-shadow: 0px 7px 0px 0px rgba(238,238,238,1);
+	}
 }
 .present-project-list-container {
 	display: flex;
@@ -42,14 +48,12 @@
 	font-size : 18px;
 }
 .project-remain-days {
-	display : inline-block;
 	float : left;
 	color : #444;
 	font-weight : 500;
 	font-size : 16px;
 }
 .project-summary-current-money {
-	display : inline-block;
 	float : right;
 	color : #444;
 	font-weight : 500;

@@ -1,11 +1,16 @@
 import React, { Component, PropType } from 'react'
 import ExhibitionEditorTab from './ExhibitionEditorTab'
+import ScrollToTop from 'react-scroll-up';
 
 import update from 'immutability-helper'
 
 import axios from 'axios'
 
 import { canUseDOM } from '~/src/lib/utils'
+
+const scrollStyle = {
+  cursor: 'pointer',
+}
 
 const API_URL = '/api/test-api/exhibition'
 
@@ -83,6 +88,9 @@ export default class ExhibitionEditor extends Component {
 				<div className="exhibition-editor">
 					<ExhibitionEditorTab save={this.save} />
 					 {children}
+				<ScrollToTop showUnder={180} style={scrollStyle} duration={0} >
+				<button className="back-to-top" />
+				</ScrollToTop>	 
 				</div>
 			)
 		}

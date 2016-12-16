@@ -1,8 +1,11 @@
 import { Link } from 'react-router'
 
 const Tab = ({save}) => (
-	<div className="project-editor-tab">
-		<button onClick={save}>저장하기</button>
+	<div className="exhibition-editor-tab">
+		<div className="exhibition-editor-title">
+		<h3>스폰서 등록(*관리자 권한)</h3>
+		</div>
+		<button className="share-button" onClick={save}>발행하기</button>
 	</div>
 )
 

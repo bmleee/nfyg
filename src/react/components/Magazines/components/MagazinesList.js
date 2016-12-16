@@ -5,11 +5,28 @@ import { SelectOptions } from '~/src/react/constants'
 
 const selectOptions = SelectOptions.MagazineCategory
 
+import 'babel-polyfill';
+
 const style = {
 	height: 'auto',
 }
 
 class MagazinesList extends Component {
+	constructor() {
+		super(...arguments);
+
+		this.state = {
+			numProjects: 0,
+			count: 6,
+			windowSize: 6,
+		}
+	}
+
+	expandList() {
+		this.setState({
+			count: this.state.count + this.state.windowSize,
+		})
+	}
 
 	render() {
 		const { magazines, } = this.props;
@@ -35,8 +52,8 @@ class MagazinesList extends Component {
 					</div>
 					<div className="magazine-list-item-info">
 					<div>
-					     <Link to={link}><h4>{ title }</h4></Link>
-						 <p><img className="magazine-writer-icon" src={iconSrc} width={24} height={24} alt=""/> {name} | {value2label(selectOptions, category)}</p>
+						<Link to={link}><h4>{ title }</h4></Link>
+						<p><img className="magazine-writer-icon" src={iconSrc} width={24} height={24} alt=""/> {name} | {value2label(selectOptions, category)}</p>
 					</div>
 					<p className="magazine-description">{description}</p>
 					</div>
@@ -47,7 +64,14 @@ class MagazinesList extends Component {
 
 		return (
 			<div className="magazines-list">
-				{ items }
+				{ items.slice(0, this.state.count) }
+				<div className="present-more-project">
+					{
+						this.state.numProjects < this.state.count
+							? <button className="present-more-button" onClick={this.expandList.bind(this)}> 매거진 더보기</button>
+							: null
+					}
+				</div>
 			</div>
 		)
 	}

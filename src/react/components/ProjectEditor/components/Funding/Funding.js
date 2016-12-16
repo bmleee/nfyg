@@ -13,7 +13,7 @@ const TargetMoneyWrapper = ({value}) => !!value
 	<span>{value.toLocaleString()}원</span>
 )
 : (
-	<span>목표 금액을 입력하세요</span>
+	<span></span>
 )
 const TargetMoneyForm = ({value, onChange}) => (
 	<input type="number" value={Number(value)} onChange={onChange} />
@@ -37,15 +37,15 @@ const RewardWrapper = ({value, handlers}) => {
 			isDirectSupport,
 			thresholdMoney
 		}, index) => (
-			<div className="reward-wrapper-item">
-				<span>{title}</span>
-				<span>{description}</span>
-				{value2label(SelectOptions.Reward, isDirectSupport)}
-				<span>{thresholdMoney.toLocaleString()}원</span>
-				<button onClick={() => deleteReward(index)}>삭제하기</button>
+			<div className="editor-item-detail-wrapper">
+				<span className="item-deatail-small-title-saved">제 목 : {title}</span>
+				<span className="item-deatail-small-title-saved">설 명 : {description}</span>
+				<span className="item-deatail-small-title-saved">구 분 : {value2label(SelectOptions.Reward, isDirectSupport)}</span>
+				<span className="item-deatail-small-title-saved">가 격 : {thresholdMoney.toLocaleString()}원</span>
+				<button className="item-deatail-delete" onClick={() => deleteReward(index)}>삭제하기</button>
 			</div>
 		))
-		: '리워드를 추가하세요'
+		: <span></span>
 
 	return (
 		<div className="reward-wrapper-container">
@@ -73,17 +73,17 @@ const RewardForm = ({value, handlers, ...otherProps}) => {
 	return (
 		<div className="fuding-reward-form-container">
 			<div>
-				<span>리워드 제목</span>
+				<span className="item-deatail-small-title">리워드 제목</span>
 				<input type="text" value={title} onChange={_onTitle} />
 			</div>
 
 			<div>
-				<span>리워드 설명</span>
+				<span className="item-deatail-small-title">리워드 설명</span>
 				<input type="text" value={description} onChange={_onDescription} />
 			</div>
 
 			<div>
-				<span>직 / 간접 후원 여부</span>
+				<span className="item-deatail-small-title">직/간접 후원 여부</span>
 				<Select
 					value={isDirectSupport} onChange={_onIsDirectSupport}
 					options={SelectOptions.Reward}
@@ -91,7 +91,7 @@ const RewardForm = ({value, handlers, ...otherProps}) => {
 			</div>
 
 			<div>
-				<span>{isDirectSupport ? '직접' : '간접'} 후원 최소 금액</span>
+				<span className="item-deatail-small-title">{isDirectSupport ? '직접' : '간접'} 후원 최소 금액</span>
 				<input type="number" value={thresholdMoney} onChange={_onThresholdMoney} step="1000" />
 			</div>
 
@@ -118,40 +118,48 @@ const Funding = ({
 }) => {
 
 	return (
-		<div className="funding-container">
+		<div className="abstract-container">
 
 			<FormWrapper
-				title="Funding Target Money"
+				title="목표 금액"
 				valueType={VALUE_TYPE.MONEY}
 				alt="목표 금액을 입력하세요"
 				initialValue={targetMoney}
-				submitCaption="입력하기"
+				submitCaption={'목표 금액을 입력하세요'}
+				submitCaptionsub={'입력하기'}
 				onSubmit={_onTargetMoneySubmit}
 				Wrapper={TargetMoneyWrapper}
 				Form={TargetMoneyForm}
+				className ="exhibition-long-title"
+				classNameopen ="editor-open-container"
 			/>
 
 			<FormWrapper
-				title="Funding Date to"
+				title="프로젝트 종료일"
 				valueType={VALUE_TYPE.DATE}
 				alt="프로젝트 종료일을 입력하세요"
 				initialValue={dateTo}
-				submitCaption="입력하기"
+				submitCaption={'프로젝트 종료일을 입력하세요'}
+				submitCaptionsub={'입력하기'}
 				onSubmit={_onDateToSubmit}
 				Wrapper={DateToWrapper}
 				Form={DateToForm}
+				classNameopen ="editor-open-container"
 			/>
 
 			<FormWrapper
-				title="Funding Reward"
+				title="프로젝트 리워드"
 				valueType={VALUE_TYPE.REWARD}
 				alt="리워드으"
 				initialValue={reward}
-				submitCaption="입력하기"
+				submitCaption={'리워드를 추가하세요'}
+				submitCaptionsub={'추가하기'}
 				onSubmit={_onRewardSubmit}
 				handlers={rewardHandlers}
 				Wrapper={RewardWrapper}
 				Form={RewardForm}
+				className ="exhibition-eng-title"
+				classNameopen ="editor-open-container"
 			/>
 		</div>
 	)

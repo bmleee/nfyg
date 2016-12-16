@@ -18,6 +18,9 @@
 		}
 
 	}
+	.share-button {
+		background : transparent;
+	}
 }
 .exhibition-info {
 	padding-top : 180px;
@@ -34,7 +37,7 @@
 	display : none;
 }
 .share-button-facebook, .share-button-twitter, .share-button-url {
-	width : 33.3333333333%;
+	width : 33.33333333333333333333333%;
 	display : inline-block;
 	height: 50px;
     font-size: 18px;

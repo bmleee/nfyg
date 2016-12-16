@@ -20,26 +20,26 @@ const ArtworksWrapper = ({value, handlers}) => {
 			imgSrc,
 			soldOut,
 		}, index) => (
-			<div className="artworks-wrapper-item">
+			<div className="editor-item-detail-wrapper">
 				<div>
-					<span>제목: {title}</span>
+					<span className="item-deatail-small-title-saved">작품명 : {title}</span>
 				</div>
 				<div>
-					<span>설명: {description}</span>
+					<span className="item-deatail-small-title-saved">캡 션 : {description}</span>
 				</div>
 				<div>
-					<span>가격: {price.toLocaleString()}원</span>
+					<span className="item-deatail-small-title-saved">가 격 : {price.toLocaleString()}원</span>
 				</div>
 				<div>
 					<img src={imgSrc} alt=""/>
 				</div>
 				<div>
-					<span>{value2label(SelectOptions.Artwork, soldOut)}</span>
+					<span className="item-deatail-small-title-saved">상 태 : {value2label(SelectOptions.Artwork, soldOut)}</span>
 				</div>
-				<button onClick={() => deleteArtwork(index)}>삭제하기</button>
+				<button className="item-deatail-delete" onClick={() => deleteArtwork(index)}>삭제하기</button>
 			</div>
 		))
-		: '전시하실 작품을 추가하세요'
+		: ''
 
 	return (
 		<div className="artworks-wrapper-container">
@@ -68,29 +68,29 @@ const ArtworksForm = ({value, handlers}) => {
 	return (
 		<div className="artworks-form-container">
 			<div>
-				<span>작품 제목</span>
+				<span className="item-deatail-small-title">작품명</span>
 				<input type="text" value={title} onChange={_onTitle}/>
 			</div>
 			<div>
-				<span>작품 설명</span>
+				<span className="item-deatail-small-title">캡션(사이즈/재료/제작년도 순)</span>
 				<input type="text" value={description} onChange={_onDescription}/>
 			</div>
 			<div>
-				<span>작품 가격</span>
+				<span className="item-deatail-small-title">작품 가격(선택)</span>
 				<input type="number" value={price} onChange={_onPrice}/>
 			</div>
 			<div>
-				<span>작품 이미지</span>
+				<span className="item-deatail-small-title">작품 이미지(최대 00MB)</span>
 				<input type="file" value={imgSrc} onChange={_onImgSrc} accept="image/*" />
 			</div>
-			<div>
+			{/* <div>
 				<span>판매 가능 여부</span>
 				<Select
 					value={soldOut}
 					onChange={_onSoldOut}
 					options={SelectOptions.Artwork}
 				/>
-			</div>
+			</div> */}
 		</div>
 	)
 }
@@ -106,15 +106,18 @@ const Artworks = ({
 	return (
 		<div className="artwork-container">
 			<FormWrapper
-				title="Artworks"
+				title="작품 등록"
 				valueType={VALUE_TYPE.ARTWORK}
 				alt="제목을 입력하세요"
 				initialValue={artwork}
-				submitCaption="입력하기"
+				submitCaption="전시작을 등록해주세요"
+				submitCaptionsub="입력하기"
 				onSubmit={_onArtworkSubmit}
 				handlers={artworkHandlers}
 				Wrapper={ArtworksWrapper}
 				Form={ArtworksForm}
+				className ="exhibition-editor-artwork"
+				classNameopen ="editor-open-container"
 			/>
 		</div>
 	)
