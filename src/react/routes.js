@@ -73,12 +73,6 @@ const App = ({ children }) => (
 			<Link to="/profile"><button>Profile</button></Link>
 			{' '}
 			<Link to="/sponsors"><button>Sponsors</button></Link>
-			{' '}
-			<Link to="/test1"><button>Test1</button></Link>
-			{' '}
-			<Link to="/test2"><button>Test2</button></Link>
-			{' '}
-			<Link to="/test3"><button>Test3</button></Link>
 		</div>
 
 		<Nav></Nav>

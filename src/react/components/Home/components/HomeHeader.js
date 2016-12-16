@@ -23,6 +23,7 @@ const images = [
 		originalAlt: 'original-alt',
 		thumbnailAlt: 'thumbnail-alt',
 		thumbnailLabel: '7pictures main',
+		description: 'About 7Pictures About 7Pictures About 7Pictures v About 7Pictures About 7Pictures',
 		// srcSet: 'Optional srcset (responsive images src)',
 		// sizes: 'Optional sizes (image sizes relative to the breakpoint)'
 	},
@@ -34,6 +35,7 @@ const images = [
 		originalAlt: 'original-alt',
 		thumbnailAlt: 'thumbnail-alt',
 		thumbnailLabel: '7pictures main',
+		description: 'About 7Pictures About 7Pictures About 7Pictures About 7Pictures About 7Pictures',
 		// srcSet: 'Optional srcset (responsive images src)',
 		// sizes: 'Optional sizes (image sizes relative to the breakpoint)'
 	}

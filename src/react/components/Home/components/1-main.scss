@@ -6,6 +6,55 @@ div, span, h1, h2, h3, h4, button {
     font-family : FontAwesome, "Noto Sans DemiLight", "Malgun Gothic";
 }
 // desktop&all ↓↓↓↓
+.image-gallery-slide {
+    position: absolute;
+    overflow: hidden;
+    height : 546px;
+}
+
+.image-gallery-image {
+position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    -webkit-transform: translate(0%,0%);
+    -ms-transform: translate(0%,0%);
+    transform: translate(0%,0%);
+}
+
+.image-gallery-slide img {
+	width : auto;
+	height : auto;
+	position: absolute;
+    top: 0;
+   	left: 0;
+   	-webkit-transform: translate(0%,0%);
+    -ms-transform: translate(0%,0%);
+    transform: translate(0%,0%);
+    @media (min-width: 1280px) {
+        width : 100%;
+        height : auto;
+    }
+}
+.image-gallery-description {
+    right : 0;
+    text-align : center;
+    font-size : 38px;
+    font-weight : 800;
+    top : 0;
+    bottom : 0 !important;
+    height : 20%;
+    width : 80%;
+    background : transparent !important;
+    margin : auto;
+}
+.image-gallery-slide:first-child {
+    .image-gallery-description {
+        color : #000;
+    }
+}
+
 .Select-control {
     border-radius: 0px !important;
     border : 3px solid #eee;
@@ -253,6 +302,33 @@ div.recent-exhibition-list-item {
     border : 1px solid #eee;
 	padding : 0px 8px 8px 8px;
 }
+.image-gallery-slide {
+    position: absolute;
+    overflow: hidden;
+    height : 420px;
+}
+
+.image-gallery-image {
+position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    -webkit-transform: translate(0%, 0%);
+    -ms-transform: translate(0%, 0%);
+    transform: translate(0%, 0%);
+}
+
+.image-gallery-slide img {
+	width : auto;
+	height : 100%;
+	position: absolute;
+    top: 0;
+   	left: 0;
+   	-webkit-transform: translate(0%,0%);
+    -ms-transform: translate(0%,0%);
+    transform: translate(0%,0%);
+}
  
 // mobile ↓↓↓↓ 
 @media (max-width: 500px) {
@@ -272,7 +348,7 @@ div.home-heading {
     }
 }
 .image-gallery-slide {
- position: absolute;
+    position: absolute;
     padding-top: 100%;
     overflow: hidden;
 }
@@ -283,20 +359,20 @@ position: absolute;
     left: 0;
     right: 0;
     bottom: 0;
-    -webkit-transform: translate(50%,50%);
-    -ms-transform: translate(50%,50%);
-    transform: translate(50%,50%);
+    -webkit-transform: translate(0%, 0%);
+    -ms-transform: translate(0%, 0%);
+    transform: translate(0%, 0%);
 }
 
 .image-gallery-slide img {
 	width : auto;
 	height : 100%;
 	position: absolute;
-    	top: 0;
-   	left: 0;   
-   	-webkit-transform: translate(-50%,-50%);
-    	-ms-transform: translate(-50%,-50%);
-    	transform: translate(-50%,-50%);
+    top: 0;
+   	left: 0;
+   	-webkit-transform: translate(0%,0%);
+    -ms-transform: translate(0%,0%);
+    transform: translate(0%,0%);
 }
     .share-button {
 	position: fixed;
