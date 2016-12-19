@@ -74,7 +74,7 @@ const getRandomArtwork = () => {
 const getRandomDay = () => Math.floor(Math.random() * 25 + 1)
 const getRandomMonth = () => Math.floor(Math.random() * 12 + 1)
 const getRandomDate = (from = '2015-1-1') => {
-	let to = `2016-${getRandomMonth}-${getRandomDay}`
+	let to = `2016-${getRandomMonth()}-${getRandomDay()}`
 	if (from > to) return getRandomDate(from)
 	return to
 }
@@ -92,7 +92,7 @@ const createExhibition = async (artist) => {
 			"genre": getRandomGenre(),
 			"city": getRandomCity(),
 			"address": randomString(getRandomCity(), 20),
-			"imgSrc": "https://i0.wp.com/7pictures.co.kr/wp-content/uploads/edd/2016/10/KakaoTalk_20161008_150354358.jpg?resize=1024%2C590&ssl=1",
+			"imgSrc": "/assets/images/recent-exhibition-thumbnail.jpg",
 			"dateFrom": dateFrom,
 			"dateTo": dateTo,
 			"exhibitionName": `test_${randomString()}`,

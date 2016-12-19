@@ -15,7 +15,7 @@ import express from 'express';
 
 import UserModel from '../models/user'
 import ProjectModel, {restrictedNames} from '../models/project'
-import ExhibitionModel from '../models/magazine'
+import ExhibitionModel from '../models/exhibition'
 import MagazineModel from '../models/magazine'
 import SponsorModel from '../models/sponsor'
 
@@ -34,17 +34,15 @@ router.get('/', async (req, res) => {
 
 	let data = {
 		presentProjects: null,
-		// futureProjects: null,
-		// pastProjects: null,
 		recentExhibitions: null,
 		artMagazines: null,
 	}
 
+	let presentProjects, recentExhibitions, artMagazines;
+
 	// TODO: refactor 3 select query from Project Collection
 	let fetcher = {
 		presentProjects: async () => await ProjectModel.find({'abstract.state': 'in_progress'}),
-		// futureProjects: async () => ProjectModel.find({'abstract.state': 'preparing'}),
-		// pastProjects: async () => ProjectModel.find({'abstract.state': 'completed'}),
 		recentExhibitions: async () => await ExhibitionModel.find({}).limit(6),
 		artMagazines: async () => await MagazineModel.find({}).limit(7),
 	}
@@ -54,6 +52,8 @@ router.get('/', async (req, res) => {
 		await Promise.all(Object.keys(data).map(async (k) => {
 			data[k] = await fetcher[k]()
 		}))
+
+		console.log('recentExhibitions', JSON.stringify(recentExhibitions, undefined, 4));
 
 		res.json({
 			user: {

@@ -10,7 +10,7 @@ const createProject = async ({sponsor, state = 'preparing'}) => {
 		abstract: {
 			longTitle: `${randomString('sample long title', 50)}`,
 			shortTitle: `${randomString('sample short title', 20)}`,
-			imgSrc: "https://i0.wp.com/7pictures.co.kr/wp-content/uploads/edd/2016/10/KakaoTalk_20161008_150354358.jpg?resize=1024%2C590&ssl=1",
+			imgSrc: "/assets/images/present-project-list-thumbnail.jpg",
 			category: "health",
 			projectName: `${randomString('test project name')}`,
 			state: state,
