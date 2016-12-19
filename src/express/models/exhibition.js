@@ -23,9 +23,11 @@ export const categories = [
 const ExhibitionSchema = new Schema({
 	"abstract": {
 		"longTitle": {type: String, required: true},
-		"shortTitle": {type: String, required: true},
+		"shortTitle": {type: String, required: false},
 		"imgSrc": {type: String, required: true},
-		"location": {type: String, required: true, default: '서울'},
+		"address": {type: String, required: true},
+		"city": {type: String, required: true},
+		"genre": {type: String, required: true},
 		"dateFrom": {type: String, required: true},
 		"dateTo": {type: String, required: true},
 		"exhibitionName": {type: String, required: true, unique: true},
@@ -84,7 +86,13 @@ ExhibitionSchema.methods.toFormat = function (type) {
 					iconSrc: this.creator.creatorImgSrc,
 				},
 				schedule: `${this.abstract.dateFrom} ~ ${this.abstract.dateTo}`,
-				location: this.abstract.location,
+				dateFrom: this.abstract.dateFrom,
+				dateTo: this.abstract.dateTo,
+
+				address: this.abstract.address,
+				city: this.abstract.city,
+				genre: this.abstract.genre,
+
 				link: `/exhibitions/${this.abstract.exhibitionName}`, // TODO: change linkToExhibition to link
 			}
 		default:

@@ -7,6 +7,8 @@ import init, {
 	getRandomIndex,
 } from './initdb.helper'
 
+import { SelectOptions } from '~/src/react/constants'
+
 import { rangeArray, asyncparallelfor } from '../../lib/utils'
 import { randomString } from './utils'
 
@@ -77,6 +79,9 @@ const getRandomDate = (from = '2015-1-1') => {
 	return to
 }
 
+const getRandomGenre = () => SelectOptions.ExhibitionGenre[getRandomIndex(SelectOptions.ExhibitionGenre)].value
+const getRandomCity = () => SelectOptions.City[getRandomIndex(SelectOptions.City)].value
+
 const createExhibition = async (artist) => {
 	let dateFrom = getRandomDate()
 	let dateTo = getRandomDate()
@@ -84,7 +89,9 @@ const createExhibition = async (artist) => {
 	return await ExhibitionModel.create({
 		"abstract": {
 			"longTitle": randomString(),
-			"shortTitle": randomString(),
+			"genre": getRandomGenre(),
+			"city": getRandomCity(),
+			"address": randomString(getRandomCity(), 20),
 			"imgSrc": "https://i0.wp.com/7pictures.co.kr/wp-content/uploads/edd/2016/10/KakaoTalk_20161008_150354358.jpg?resize=1024%2C590&ssl=1",
 			"dateFrom": dateFrom,
 			"dateTo": dateTo,

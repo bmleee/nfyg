@@ -91,7 +91,7 @@ ProjectSchema.set('toJSON', {
 
 ProjectSchema.methods.toFormat = function (type, ...args) {
 
-	console.log(`Project.toFormat(type: ${type}, args: ${args})`, this);
+	// console.log(`Project.toFormat(type: ${type}, args: ${args})`, this);
 
 	try {
 

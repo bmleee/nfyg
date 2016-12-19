@@ -107,7 +107,7 @@ router.get('/projects/:projectName/:option?', async (req, res, next) => {
 
 		const projectToRender = project.toFormat('project_detail', req.session.user)
 
-		console.log('projectToRender', JSON.stringify(projectToRender, undefined, 4));
+		// console.log('projectToRender', JSON.stringify(projectToRender, undefined, 4));
 
 		res.status(200).json({
 			user: {
