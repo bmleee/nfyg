@@ -22,7 +22,7 @@ class MagazineDetail extends Component {
 			<div className="magazine-detail">
 				<MagazineDetailHeading {...magazine} />
 
-				<MegazineDetailContents contents={contents} />
+				<MegazineDetailContents content={content} />
 
 				<div className="magazine-prev-next-button">
 				<button className="magazine-prev-button">PREV</button>
