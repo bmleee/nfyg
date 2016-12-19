@@ -21,7 +21,9 @@ export default class ExhibitionEditor extends Component {
 			longTitle: '',
 			shortTitle: '',
 			imgSrc: '',
-			location: '',
+			address: '',
+      city: '',
+      genre: '',
 			dateFrom: '',
 			dateTo: '',
 			exhibitionName: '',
@@ -30,7 +32,7 @@ export default class ExhibitionEditor extends Component {
 		creator: {
 			creatorName: '',
 			creatorImgSrc: '',
-			creatorLocation: '',
+			creatoraddress: '',
 			creatorDescription: '',
 		},
 
@@ -90,7 +92,7 @@ export default class ExhibitionEditor extends Component {
 					 {children}
 				<ScrollToTop showUnder={180} style={scrollStyle} duration={0} >
 				<button className="back-to-top" />
-				</ScrollToTop>	 
+				</ScrollToTop>
 				</div>
 			)
 		}
@@ -114,9 +116,19 @@ export default class ExhibitionEditor extends Component {
 				imgSrc: { $set: imgSrc }
 			}
 		})),
-		_onLocationSubmit:(location) => this.setState(update(this.state, {
+		_onAddressSubmit:(address) => this.setState(update(this.state, {
 			abstract: {
-				location: { $set: location }
+				address: { $set: address }
+			}
+		})),
+		_onCitySubmit:(city) => this.setState(update(this.state, {
+			abstract: {
+				city: { $set: city }
+			}
+		})),
+		_onGenreSubmit:(genre) => this.setState(update(this.state, {
+			abstract: {
+				genre: { $set: genre }
 			}
 		})),
 		_onDateFromSubmit:(dateFrom) => this.setState(update(this.state, {

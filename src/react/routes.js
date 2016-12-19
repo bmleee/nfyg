@@ -62,7 +62,7 @@ const routes = (
 		<Route path="exhibitions" component={Exhibitions}>
 		</Route>
 
-		<Route path="exhibitions/detail" component={ExhibitionDetail}>
+		<Route path="exhibitions/:exhibitionName" component={ExhibitionDetail}>
 			<IndexRoute component={ExhibitionDetailOverview} />
 			<Route path="post" component={ ExhibitionDetailPost }></Route>
 			<Route path="artworks" component={ ExhibitionDetailArtworks }></Route>
