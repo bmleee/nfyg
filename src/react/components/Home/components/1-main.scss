@@ -6,6 +6,33 @@ div, span, h1, h2, h3, h4, button {
     font-family : FontAwesome, "Noto Sans DemiLight", "Malgun Gothic";
 }
 // desktop&all ↓↓↓↓
+.image-gallery-more-button, .image-gallery-more-button:focus {
+    border : 1px solid #333;
+    border-radius : 2px;
+    outline : none;
+    right : 0;
+    left : 0;
+    bottom : 0;
+    top : 0;
+    margin : 430px auto 50px auto;
+    width : 125px;
+    height : 40px;
+    position : absolute;
+    background : transparent;
+    @media (max-width: 991px) {
+        margin : 330px auto 50px auto;
+        width : 125px;
+    @media (max-width: 500px) {
+        width : 100px;
+        height : 30px;
+        margin : 345px auto 50px auto;
+        font-size : 12px;
+    }
+    }
+}
+.image-gallery-bullets .image-gallery-bullet.active {
+    background : #444;
+}
 .image-gallery-slide {
     position: absolute;
     overflow: hidden;
@@ -18,22 +45,24 @@ position: absolute;
     left: 0;
     right: 0;
     bottom: 0;
-    -webkit-transform: translate(0%,0%);
-    -ms-transform: translate(0%,0%);
-    transform: translate(0%,0%);
+    -webkit-transform: translate(50%,50%);
+    -ms-transform: translate(50%,50%);
+    transform: translate(50%,50%);
 }
 
 .image-gallery-slide img {
-	width : auto;
-	height : auto;
+	width : auto !important;
+	height : 100%;
 	position: absolute;
     top: 0;
    	left: 0;
-   	-webkit-transform: translate(0%,0%);
-    -ms-transform: translate(0%,0%);
-    transform: translate(0%,0%);
+   	right: 0;
+    bottom: 0;
+   	-webkit-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
     @media (min-width: 1280px) {
-        width : 100%;
+        width : 100% !important;
         height : auto;
     }
 }
@@ -44,16 +73,64 @@ position: absolute;
     font-weight : 800;
     top : 0;
     bottom : 0 !important;
-    height : 20%;
+    height : 15%;
     width : 80%;
     background : transparent !important;
     margin : auto;
+    text-shadow: 0 0 50px rgba(40,40,40,0.3), 0 2px 5px rgba(40,40,40,0.2);
+    h4 {
+        margin-top : 30px !important;
+    }
+    @media (max-width: 991px) {
+        font-size : 32px !important;
+        width : 85%;
+    @media (max-width: 500px) {
+        font-size : 28px !important;
+    }
+    }
 }
+//메인 슬라이더 폰트/더보기 버튼 스타일
 .image-gallery-slide:first-child {
     .image-gallery-description {
         color : #000;
     }
+    .image-gallery-more-button, .image-gallery-more-button:focus {
+
 }
+}
+.image-gallery-slide:nth-child(2) {
+    .image-gallery-description {
+        color : #000;
+    }
+    .image-gallery-more-button, .image-gallery-more-button:focus {
+    
+}
+}
+.image-gallery-slide:nth-child(3) {
+    .image-gallery-description {
+        color : #4b709a;
+    }
+    .image-gallery-more-button, .image-gallery-more-button:focus {
+    
+}
+}
+.image-gallery-slide:nth-child(4) {
+    .image-gallery-description {
+        color : #4b709a;
+    }
+    .image-gallery-more-button, .image-gallery-more-button:focus {
+    
+}
+}
+.image-gallery-slide:nth-child(5) {
+    .image-gallery-description {
+        color : #4b709a;
+    }
+    .image-gallery-more-button, .image-gallery-more-button:focus {
+   
+}
+}
+//메인 슬라이더 폰트/더보기 버튼 스타일
 
 .Select-control {
     border-radius: 0px !important;
@@ -87,7 +164,7 @@ button:hover, button:focus {
     border-radius: 0px;
     z-index: 55;
     margin: 0 auto;
-    width: 700px;
+    width: 800px;
     background : #4b709a;
     border : none;
     outline : none;
@@ -309,25 +386,27 @@ div.recent-exhibition-list-item {
 }
 
 .image-gallery-image {
-position: absolute;
+    position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    -webkit-transform: translate(0%, 0%);
-    -ms-transform: translate(0%, 0%);
-    transform: translate(0%, 0%);
+    -webkit-transform: translate(50%, 50%);
+    -ms-transform: translate(50%, 50%);
+    transform: translate(50%, 50%);
 }
 
 .image-gallery-slide img {
-	width : auto;
+	width : auto !important;
 	height : 100%;
 	position: absolute;
     top: 0;
    	left: 0;
-   	-webkit-transform: translate(0%,0%);
-    -ms-transform: translate(0%,0%);
-    transform: translate(0%,0%);
+   	right: 0;
+    bottom: 0;
+   	-webkit-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
 }
  
 // mobile ↓↓↓↓ 
@@ -349,8 +428,8 @@ div.home-heading {
 }
 .image-gallery-slide {
     position: absolute;
-    padding-top: 100%;
     overflow: hidden;
+    height : 420px;
 }
 
 .image-gallery-image {
@@ -359,20 +438,22 @@ position: absolute;
     left: 0;
     right: 0;
     bottom: 0;
-    -webkit-transform: translate(0%, 0%);
-    -ms-transform: translate(0%, 0%);
-    transform: translate(0%, 0%);
+    -webkit-transform: translate(50%, 50%);
+    -ms-transform: translate(50%, 50%);
+    transform: translate(50%, 50%);
 }
 
 .image-gallery-slide img {
-	width : auto;
+	width : auto !important;
 	height : 100%;
 	position: absolute;
     top: 0;
    	left: 0;
-   	-webkit-transform: translate(0%,0%);
-    -ms-transform: translate(0%,0%);
-    transform: translate(0%,0%);
+   	right: 0;
+    bottom: 0;
+   	-webkit-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
 }
     .share-button {
 	position: fixed;

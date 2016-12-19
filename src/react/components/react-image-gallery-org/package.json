@@ -1,0 +1,126 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "react-image-gallery@^0.7.2",
+        "scope": null,
+        "escapedName": "react-image-gallery",
+        "name": "react-image-gallery",
+        "rawSpec": "^0.7.2",
+        "spec": ">=0.7.2 <0.8.0",
+        "type": "range"
+      },
+      "/home/ubuntu/playgorund_th"
+    ]
+  ],
+  "_from": "react-image-gallery@>=0.7.2 <0.8.0",
+  "_id": "react-image-gallery@0.7.3",
+  "_inCache": true,
+  "_location": "/react-image-gallery",
+  "_nodeVersion": "5.0.0",
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/react-image-gallery-0.7.3.tgz_1477164971137_0.3768978505395353"
+  },
+  "_npmUser": {
+    "name": "linxtion",
+    "email": "xiao@linxtion.com"
+  },
+  "_npmVersion": "3.3.6",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "react-image-gallery@^0.7.2",
+    "scope": null,
+    "escapedName": "react-image-gallery",
+    "name": "react-image-gallery",
+    "rawSpec": "^0.7.2",
+    "spec": ">=0.7.2 <0.8.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#DEV:/"
+  ],
+  "_resolved": "https://registry.npmjs.org/react-image-gallery/-/react-image-gallery-0.7.3.tgz",
+  "_shasum": "e848ed7c75af593adab9633240fcd9795e5af364",
+  "_shrinkwrap": null,
+  "_spec": "react-image-gallery@^0.7.2",
+  "_where": "/home/ubuntu/playgorund_th",
+  "author": {
+    "name": "Xiao Lin"
+  },
+  "bugs": {
+    "url": "https://github.com/xiaolin/react-image-gallery/issues"
+  },
+  "dependencies": {
+    "react-swipeable": "^3.5.1"
+  },
+  "description": "React Carousel, React Image gallery, React Slide Show component",
+  "devDependencies": {
+    "babel-eslint": "^6.0.4",
+    "babel-plugin-transform-object-assign": "^6.8.0",
+    "babel-preset-es2015": "^6.6.0",
+    "babel-preset-react": "^6.5.0",
+    "babelify": "^7.2.0",
+    "browserify": "^13.0.0",
+    "eslint": "^2.10.2",
+    "eslint-plugin-react": "^5.1.1",
+    "gulp": "^3.8.11",
+    "gulp-babel": "^6.1.2",
+    "gulp-clean-css": "^2.0.12",
+    "gulp-concat": "^2.6.0",
+    "gulp-connect": "^2.2.0",
+    "gulp-livereload": "^3.8.0",
+    "gulp-rename": "^1.2.0",
+    "gulp-sass": "^2.1.1",
+    "gulp-uglify": "^1.5.3",
+    "react": "^15.3.0",
+    "react-dom": "^15.2.1",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.0.0",
+    "watchify": "^2.4.0"
+  },
+  "directories": {},
+  "dist": {
+    "shasum": "e848ed7c75af593adab9633240fcd9795e5af364",
+    "tarball": "https://registry.npmjs.org/react-image-gallery/-/react-image-gallery-0.7.3.tgz"
+  },
+  "email": "xiao@linxtion.com",
+  "gitHead": "6af2e0d1c9b396c1e664f8687b06e3664d12a95e",
+  "homepage": "https://github.com/xiaolin/react-image-gallery",
+  "keywords": [
+    "react",
+    "carousel",
+    "react-component",
+    "react-carousel",
+    "react-slideshow",
+    "react-gallery",
+    "react carousel",
+    "react slideshow",
+    "react gallery",
+    "image gallery",
+    "image slider",
+    "slideshow",
+    "gallery",
+    "slider"
+  ],
+  "license": "MIT",
+  "main": "./build/image-gallery",
+  "maintainers": [
+    {
+      "name": "linxtion",
+      "email": "xiao@linxtion.com"
+    }
+  ],
+  "name": "react-image-gallery",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xiaolin/react-image-gallery.git"
+  },
+  "scripts": {
+    "build": "gulp build",
+    "start": "gulp dev"
+  },
+  "version": "0.7.3"
+}

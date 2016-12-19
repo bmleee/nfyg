@@ -63,8 +63,8 @@ class PresentProjectList extends Component {
 							</div>
 						</Link>
 						<div className="present-project-list-item-caption">
-							<Link to="/projects"><h3 className="project-list-title">{title}</h3></Link>
-							<h5>{creator}의 프로젝트</h5>
+							<Link to="/projects"><h3 className="project-list-title">{title}</h3>
+							<h5>{creator}의 프로젝트</h5></Link>
 							<Progress completed={Math.round(currentMoney / targetMoney * 100)} />
 							<div className="project-summary-detail">
 							<div className="project-remain-days">{Math.round(currentMoney / targetMoney * 100)}%</div>

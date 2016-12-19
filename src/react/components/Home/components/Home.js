@@ -80,7 +80,7 @@ class Home extends Component {
                     </div>
                 	</Modal>
                 	
-                	프로젝트 제안 MODAL */}
+                	*/}
     	
 					<PresentProjectList projects={presentProjects} />
 					
