@@ -17,7 +17,7 @@
 			width: 24px; height: 24px; margin-bottom:3px !important; vertical-align:middle;
 		}
 		.progressbar-container {
-			width : 700px;
+			width : 800px;
 			margin : 8px auto;
 			height : 8px;
 			background-color: #ddd;
@@ -35,7 +35,7 @@
 		.progressbar-progress {
 			height : 8.2px !important;
 			background : -webkit-linear-gradient(left, #4b709a 0%, #DB96DB 100%);
-			border-radius : 4px !important;
+			border-radius : 3px !important;
 			@media (max-width: 500px) {
 				height : 5.6px !important;
 			}
@@ -76,7 +76,7 @@
 .project-heading-summary-money {
 	display : inline-block;
 	text-align : center;
-	width : 700px;
+	width : 800px;
 	font-size: 20px;
 	@media (max-width: 991px) {
 				width : 85%;

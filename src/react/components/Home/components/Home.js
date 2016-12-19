@@ -12,7 +12,28 @@ import {
 
 } from './';
 
+import Modal from 'react-awesome-modal';
+
 class Home extends Component {
+
+	constructor(props) {
+    super(props);
+    this.state = {
+        visible : false
+    }
+  }
+
+  openModal() {
+    this.setState({
+        visible : true
+    });
+  }
+
+  closeModal() {
+    this.setState({
+        visible : false
+    });
+  }
 
 	render() {
 		console.log('LocalStorage', localStorage);
@@ -31,8 +52,38 @@ class Home extends Component {
 				<div className ="home-body">
 					{/* <HomeInfo title="공유로 후원한 금액" amount={10000} /> */}
 					<HomeHeading title="What's on?" />
-					<PresentProjectList projects={presentProjects} />
 
+					{/* 프로젝트 제안 MODAL
+
+					<input type="button" value="Open" onClick={() => this.openModal()} />
+					<Modal className="project-suggest-modal" visible={this.state.visible} width="480" height="560px" effect="fadeInDown" onClickAway={() => this.closeModal()}>
+                    <div className="project-modal-header">
+                    <h3 className="project-modal-header-title">프로젝트 제안하기
+                    </h3>
+                    <a className="project-modal-header-close-container"><button className="project-modal-header-close" onClick={() => this.closeModal()}/></a>
+                    </div>
+                    <div className="project-modal-body">
+                    <p className="project-modal-body-small-title">연락처(필 수)
+                    <input className="project-modal-body-input-text" type="text" /></p>
+                    <p className="project-modal-body-small-title">이메일
+                    <input className="project-modal-body-input-text" type="text" /></p>
+                    <p className="project-modal-body-small-title">프로젝트 내용(필 수)
+                    <textarea className="project-modal-body-input-textarea" type="textarea"/></p>
+                    <p className="project-modal-body-small-title">필요한 후원금(원)
+                    <input className="project-modal-body-input-text" type="number" /></p>
+                    <p className="project-modal-body-small-title">후원금 용도
+                    <textarea className="project-modal-body-input-textarea" type="textarea"/></p>
+                    <p className="project-modal-body-small-title">관련 링크
+                    <input className="project-modal-body-input-text" type="text"/></p>
+                    </div>
+                    <div className="project-modal-footer">
+                    <a className="project-modal-header-save-container" onClick={() => this.closeModal()}><button type="submit" className="project-modal-header-save">제안하기</button></a>
+                    </div>
+                	</Modal>
+
+                	*/}
+
+					<PresentProjectList projects={presentProjects} />
 
 					<HomeHeading title="Featured Exhibitions" />
 					<ExhibitionList exhibitions={recentExhibitions} />

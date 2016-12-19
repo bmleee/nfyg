@@ -10,24 +10,68 @@
 	& > h2 {
 		position: relative;
 		text-align : center;
-		margin : 50px auto;
+		margin : 50px auto 18px auto;
 		width: 800px;
 		@media (max-width: 991px) {
 			width: 90%;
 		@media (max-width: 500px) {
 			width: 80%;
+			margin-bottom : 12px;
 		}	
 		}
 	}
 }
+.magazine-share-button-container {
+	width : 280px;
+	margin : 0px auto 30px auto;
+	padding-bottom : 20px;
+	border-bottom : 1px solid #eee;
+}
+.ma-share-button-facebook, .ma-share-button-twitter, .ma-share-button-url {
+	width : 45px;
+	height : 45px;
+	background : transparent;
+	border: none;
+	outline : none;
+	color : #333;
+}
+.ma-share-button-facebook:hover, .ma-share-button-twitter:hover, .ma-share-button-url:hover {
+	color : #4b709a;
+}
+.ma-share-button-facebook:focus, .ma-share-button-twitter:focus, .ma-share-button-url:focus, .ma-share-button-kakao:focus {
+	outline : none;
+	border : none;
+}
+.ma-share-button-kakao  {
+	width : 45px;
+	height : 45px;
+	background : transparent;
+	border: none;
+	outline : none;
+	display : none;
+	fill : #333;
+	@media (max-width: 991px) {
+		display : inline-block;
+	}
+}
+.ma-share-button-kakao:hover {
+	fill : #4b709a;
 
-.magazine-detail {
-	
+}
+.ma-kakao-icon {
+	vertical-align: -32%;
 }
 
 @media (max-width: 991px) {
-	
-	
+	.ma-share-button-facebook, .ma-share-button-twitter, .ma-share-button-url, .ma-share-button-kakao {
+		fill : #333;
+		color : #333;
+		background : transparent;
+	}
+	.ma-share-button-facebook:hover, .ma-share-button-twitter:hover, .ma-share-button-url:hover, .ma-share-button-kakao:hover {
+	color : #333;
+	fill : #333;
+	}
 @media (max-width: 500px) {
 	
 }	

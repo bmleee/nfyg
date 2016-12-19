@@ -16,7 +16,7 @@
 			margin-bottom: 20px;
 			
 			.slick-dots {
-				bottom: -37px;
+				bottom: -27px;
 			}
 			}
 			@media (max-width: 500px) {
@@ -98,4 +98,17 @@
 
 .exhibition-heading-item-info {
 	padding: 8px 10px 8px 10px;
+}
+
+.slick-dots li.slick-active button:before {
+	font-size : 9px;
+}
+
+.slick-dots li button:before {
+	font-size : 9px;
+	border : 1px solid #ddd;
+	border-radius : 50px;
+	line-height : 11px;
+	width : 11px;
+	height : 11px;
 }

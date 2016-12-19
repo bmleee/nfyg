@@ -1,14 +1,57 @@
+.magazine-prev-next-button {
+    width : 784px;
+    margin : 20px auto;
+}
+.magazine-prev-button {
+    background : transparent;
+    border : 1px solid #eee;
+    outline : none;
+    width : 90px;
+    height : 40px;
+    color : #666;
+    font-weight : 600;
+}
+.magazine-prev-button:before {
+    font-family : Ionicons;
+    content : "\f3d2";
+    margin-right : 7px;
+    font-size : 13px;
+}
+.magazine-next-button {
+    float : right;
+    background : transparent;
+    border : 1px solid #eee;
+    outline : none;
+    width : 90px;
+    height : 40px;
+    color : #666;
+    font-weight : 600;
+}
+.magazine-next-button:after {
+    font-family : Ionicons;
+    content : "\f3d3";
+    margin-left : 7px;
+    font-size : 13px;
+}
+.magazine-prev-button:hover, .magazine-next-button:hover {
+    border : 1px solid #4b709a;
+    color : #4b709a;
+}
 .magazine-detail-contents {
     width : 800px;
     margin : 0px auto 60px auto;
+    min-height : 500px;
 }
-
 .magazine-detail-related-contents-list {
     width : 800px;
     margin : 0px auto;
 }
 
 @media (max-width: 991px) {
+    .magazine-prev-next-button {
+    padding : 0px 48px !important;
+	width : 100% !important;
+}
     .magazine-detail-contents {
     padding : 0px 40px !important;
 	width : 100% !important;
@@ -18,6 +61,10 @@
 	width : 100% !important;
 }
 @media (max-width: 500px) {
+    .magazine-prev-next-button {
+    padding : 0px 15px !important;
+	width : 100% !important;
+}
     .magazine-detail-related-contents-list {
     padding : 0px 10px !important;
 	width : 100% !important;

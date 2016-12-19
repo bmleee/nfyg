@@ -22,8 +22,8 @@ class ExhibitionsList extends Component {
 					</div>
 				</Link>
 				<div className="ex-list-info">
-				<Link to="/exhibitions/detail"><h4>{title} : {genre}</h4></Link>
-				<p className="ex-location-schedule">{location}, {schedule}</p>
+				<Link to="/exhibitions/detail"><h4>{title} : {genre}</h4>
+				<p className="ex-location-schedule">{location}, {schedule}</p></Link>
 				{/* closing '00' days 로 표시 */}
 				</div>
 			</div>

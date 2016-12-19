@@ -46,16 +46,20 @@ class MagazinesList extends Component {
 			return (
 				<div className="magazine-menu-list-item" style={style}>
 					<div className="ma-menu-thumbnail">
-					<div className="ma-centered">
-					<Link to={link}><img className="home-magazine-image" src={imgSrc} alt=""/></Link>
-					</div>
+						<div className="ma-centered">
+							<Link to={link}><img className="home-magazine-image" src={imgSrc} alt=""/></Link>
+						</div>
 					</div>
 					<div className="magazine-list-item-info">
-					<div>
-						<Link to={link}><h4>{ title }</h4></Link>
-						<p><img className="magazine-writer-icon" src={iconSrc} width={24} height={24} alt=""/> {name} | {value2label(selectOptions, category)}</p>
-					</div>
-					<p className="magazine-description">{description}</p>
+						<Link to={link}>
+							<div>
+								<Link to={link}><h4>{ title }</h4></Link>
+								<p>
+									<img className="magazine-writer-icon" src={iconSrc} width={24} height={24} alt=""/> {name} | {value2label(selectOptions, category)}
+								</p>
+							</div>
+							<p className="magazine-description">{description}</p>
+						</Link>
 					</div>
 				</div>
 			)
