@@ -152,8 +152,11 @@ router.get('/magazines', async (req, res) => {
 
 })
 
-router.get('/magazines/:magazineName', async (req, res) => {
+router.get('/magazines/:magazineName/:option?', async (req, res, next) => {
 	console.log('/magazines/' + req.params.magazineName);
+	if(['edit'].includes(req.params.option)) {
+		return next()
+	}
 
 	try {
 		const magazine = await MagazineModel.findOne({"abstract.magazineName": req.params.magazineName})
@@ -203,8 +206,11 @@ router.get('/exhibitions', async (req, res) => {
 
 })
 
-router.get('/exhibitions/:exhibitionName', async (req, res) => {
+router.get('/exhibitions/:exhibitionName/:option', async (req, res, next) => {
 	console.log('/exhibitions/' + req.params.exhibitionName);
+	if (['edit'].includes(req.params.option)) {
+		return next()
+	}
 
 	try {
 		let exhibition = await ExhibitionModel.findOne({"abstract.exhibitionName": req.params.exhibitionName})

@@ -2,8 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import cx from 'classnames'
 
-import 'babel-polyfill'
-
 const buttonClassName = 'project-tab-button';
 const appliedClassName = 'project-tab-button-clicked';
 
@@ -14,8 +12,8 @@ class ExhibitionDetailTab extends Component {
 			exhibitionName
 		} = this.props
 
-		const isArtworks = !!document.URL.match(/exhibitions\/\w+\/artworks/)
-		const isQnA = !!document.URL.match(/exhibitions\/\w+\/qna/)
+		const isArtworks = !!document.URL.match(/exhibitions\/.+\/artworks/)
+		const isQnA = !!document.URL.match(/exhibitions\/.+\/qna/)
 		const isOverview = !(isArtworks || isQnA)
 
 		const overviewClassName = cx({ 'project-tab-button': true, 'project-tab-button-clicked': isOverview })
