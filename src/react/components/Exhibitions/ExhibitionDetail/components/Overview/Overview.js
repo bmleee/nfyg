@@ -39,22 +39,4 @@ class Overview extends Component {
 
 }
 
-Overview.contextTypes = {
-	overview: PropTypes.shape({
-		part1: PropTypes.arrayOf(PropTypes.shape({
-			type: PropTypes.string.isRequired,
-			content: PropTypes.string.isRequired,
-		})).isRequired,
-		part2: PropTypes.arrayOf(PropTypes.shape({
-			type: PropTypes.string.isRequired,
-			content: PropTypes.string.isRequired,
-		})).isRequired,
-	}).isRequired,
-	recommendedExhibitions: PropTypes.arrayOf(PropTypes.shape({
-		imgSrc: PropTypes.string.isRequired,
-		title: PropTypes.string.isRequired,
-		description: PropTypes.string.isRequired,
-	}).isRequired).isRequired,
-}
-
 export default Overview;

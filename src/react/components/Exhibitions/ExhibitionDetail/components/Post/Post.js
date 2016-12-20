@@ -8,7 +8,7 @@ const borderStyle = { border: '1px solid gray' }
 class Post extends Component {
 
 	render() {
-		const { post: { heading, creator, posts, comments, } } = this.context;
+		const { post: { heading, creator, posts, comments, } } = this.props;
 
 		const item = posts.map( ({
 			opened,
@@ -57,43 +57,6 @@ class Post extends Component {
 			)
 	}
 
-}
-
-Post.contextTypes = {
-	post: PropTypes.shape({
-		heading: PropTypes.shape({
-			iconSrc: PropTypes.string.isRequired,
-			description: PropTypes.string.isRequired,
-		}).isRequired,
-		creator: PropTypes.shape({
-			name: PropTypes.string.isRequired,
-			iconSrc: PropTypes.string.isRequired,
-			description: PropTypes.string.isRequired,
-		}).isRequired,
-		posts: PropTypes.arrayOf(PropTypes.shape({
-			opened: PropTypes.bool.isRequired,
-			author: PropTypes.shape({
-				name: PropTypes.string.isRequired,
-				iconSrc: PropTypes.string.isRequired,
-			}).isRequired,
-			title: PropTypes.string.isRequired,
-			created_at: PropTypes.string.isRequired, // TODO: date type!
-			numSupporters: PropTypes.number.isRequired,
-			likes: PropTypes.number.isRequired,
-			post: PropTypes.arrayOf(PropTypes.shape({
-				type: PropTypes.string.isRequired,
-				content: PropTypes.string.isRequired,
-			})).isRequired,
-			comments: PropTypes.arrayOf(PropTypes.shape({
-				author: PropTypes.shape({
-					name: PropTypes.string.isRequired,
-					iconSrc: PropTypes.string.isRequired,
-				}).isRequired,
-				content: PropTypes.string.isRequired,
-			})).isRequired,
-		})).isRequired,
-
-	}).isRequired,
 }
 
 export default Post;

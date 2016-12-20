@@ -6,7 +6,6 @@ class RecommendedExhibitions extends Component {
 
 	render() {
 		console.log('props', this.props);
-		console.log('context', this.context);
 		const { recommendedExhibitions } = this.props;
 
 		const items = recommendedExhibitions.map( ({imgSrc, title, description}, index) => {

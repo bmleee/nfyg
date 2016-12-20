@@ -33,21 +33,13 @@ class ExhibitionDetailContainer extends Component {
 		const children = this.props.children &&
 			this.state.exhibition &&
 			React.cloneElement(this.props.children, {
-				heading: this.state.exhibition.heading,
-				overview: this.state.exhibition.overview,
-				recommendedExhibitions: this.state.exhibition.recommendedExhibitions,
-				artworks: this.state.exhibition.artworks,
-				post: this.state.exhibition.post,
-				qna: this.state.exhibition.qna,
-				getChildContext: this.getChildContext,
+				...this.state.exhibition
 			})
 
 		return loaded
-			// ? <ExhibitionDetail {...exhibition} />
 			?
 				<ExhibitionDetail
-					exhibition={exhibition}
-					getChildContext={this.getChildContext} >
+					exhibition={exhibition}>
 					{children}
 				</ExhibitionDetail>
 			:
