@@ -18,9 +18,9 @@ class ExhibitionDetail extends Component {
 
 		console.log('ExhibitionDetail.constructor : this.props', this.props);
 	}
-	
+
 	componentDidMount() {
-		
+
 		console.log("$(document).on( 'scroll', '#project-detail', function(){ ... }")
 
 		$(document).on( 'scroll', '#project-detail', function(){
@@ -33,13 +33,15 @@ class ExhibitionDetail extends Component {
 
 
 	render() {
+		console.log('ExhibitionDetail', this);
+
 		const { heading } = this.props.exhibition
 
 		return (
 			<div className="project-detail" id="project-detail">
 				<ExhibitionDetailHeading { ...heading } />
 
-				<ExhibitionDetailTab />
+				<ExhibitionDetailTab exhibitionName={heading.exhibitionName} />
 
 				{ this.props.children /* Overview, Post, Ranking, QnA */ }
 				{/* { children /* Overview, Post, Ranking, QnA */ } */}

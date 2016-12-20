@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { Viewer } from '~/src/react/components/DraftEditor/SevenEditor';
 
 import {
 	RecommendedExhibitions,
@@ -8,17 +9,11 @@ import 'babel-polyfill';
 
 class Overview extends Component {
 
-	constructor() {
-		super(...arguments);
-
-		this.state = {
-			seeMore: false,
-		}
-
-		this._onClick = this._onClick.bind(this)
+	state = {
+		seeMore: false,
 	}
 
-	_onClick() {
+	_onClick = () => {
 		this.setState({
 			seeMore: true,
 		})
@@ -28,26 +23,12 @@ class Overview extends Component {
 		// const { overview: { part1, part2 }, rewards } = this.props;
 		const { overview: { part1, part2 }, recommendedExhibitions, } = this.props;
 
-		let item1 = part1.map( ({type, content}, index) => (
-			<div key={index}>
-				<span>{type}</span>
-				<span>{content}</span>
-			</div>
-		))
-
-		let item2 = part2.map( ({type, content}, index) => (
-			<div key={index}>
-				<span>{type}</span>
-				<span>{content}</span>
-			</div>
-		))
-
 		// TODO: part1, part2: 에디터로 작성한 부분. 글, 동영상, 사진, ... 등 이쁘게 보여주기
 		return (
 			<div className="project-detail-overview">
 				<div className="project-detail-overview-info">
-					{item1}
-					{ this.state.seeMore ? item2 : <button onClick={this._onClick}>더보기</button> }
+					<Viewer raw={part1} />
+					{ this.state.seeMore ? <Viewer raw={part2} /> : <button onClick={this._onClick}>더보기</button> }
 
 					{/* <button>공유로 예술 후원</button> */}
 				</div>

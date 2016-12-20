@@ -1,46 +1,31 @@
 import React, { Component, PropTypes } from 'react'
-import { fetchJSONFile } from '../../../../api/AppAPI'
+import { fetchJSONFile, fetchUserAndData } from '../../../../api/AppAPI'
 
 import { ExhibitionDetail } from '../components'
 
 import 'babel-polyfill'
 
 class ExhibitionDetailContainer extends Component {
-	constructor(props) {
-		super(props)
 
-		this.state = {
-			exhibition: {},
-			loaded: false
-		}
-
-		this.getChildContext = this.getChildContext.bind(this)
+	state = {
+		exhibition: {},
+		loaded: false
 	}
 
-	getChildContext() {
-		let {
-			heading,
-			overview,
-			recommendedExhibitions,
-			artworks,
-			post,
-			qna,
-		} = this.state.exhibition;
-
-		return {
-			heading,
-			overview,
-			recommendedExhibitions,
-			artworks,
-			post,
-			qna,
-		};
+	getChildContext = () => {
+		return {...this.state.exhibition}
 	}
 
 	async componentDidMount() {
-		const newExhibition = await fetchJSONFile('exhibition')
+		const {
+			user,
+			data: {
+				exhibition
+			}
+		} = await fetchUserAndData()
 
-		this.setState({ exhibition: newExhibition, loaded: true })
+		this.props.setUser(user)
+		this.setState({ exhibition, loaded: true })
 	}
 
 	render() {
@@ -66,7 +51,7 @@ class ExhibitionDetailContainer extends Component {
 					{children}
 				</ExhibitionDetail>
 			:
-				<div>ExhibitionDetail is loading</div>
+				<div>loading...</div>
 	}
 }
 

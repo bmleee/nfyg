@@ -1,4 +1,4 @@
-chr// Load the module dependencies
+// Load the module dependencies
 import mongoose from 'mongoose'
 import { autoIncrement } from '../lib/db'
 
