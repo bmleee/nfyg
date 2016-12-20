@@ -47,16 +47,22 @@ QnASchema.pre('save', function (next) {
 			{_id: this.project},
 			{$addToSet: { qnas: this._id }},
 			function(err) {
-				if(err) next(err)
+				if(err) {
+					console.error(err);
+					next(err)
+				}
 				else next()
 			}
 		)
 	} else if (this.exhibition) {
 		ExhibitionModel.update(
-			{_id: this.project},
+			{_id: this.exhibition},
 			{$addToSet: { qnas: this._id }},
 			function(err) {
-				if(err) next(err)
+				if(err) {
+					console.error(err);
+					next(err)
+				}
 				else next()
 			}
 		)
@@ -73,7 +79,7 @@ QnASchema.set('toJSON', {
 QnASchema.methods.toFormat = function (type, ...args) {
 	switch (type) {
 		case 'project_detail':
-
+		case 'exhibition_detail':
 			return {
 				opened: true, // always true!
 				author: this.author,

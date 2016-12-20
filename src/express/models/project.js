@@ -89,7 +89,7 @@ ProjectSchema.set('toJSON', {
 	virtuals: true
 });
 
-ProjectSchema.methods.toFormat = function (type, ...args) {
+ProjectSchema.methods.toFormat = async function (type, ...args) {
 
 	// console.log(`Project.toFormat(type: ${type}, args: ${args})`, this);
 

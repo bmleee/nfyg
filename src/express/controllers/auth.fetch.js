@@ -38,6 +38,8 @@ router.get('/', async (req, res) => {
 		artMagazines: null,
 	}
 
+	let home = {}
+
 	let presentProjects, recentExhibitions, artMagazines;
 
 	// TODO: refactor 3 select query from Project Collection
@@ -51,9 +53,10 @@ router.get('/', async (req, res) => {
 
 		await Promise.all(Object.keys(data).map(async (k) => {
 			data[k] = await fetcher[k]()
+			home[k] = await Promise.all(data[k].map(async (x) => await x.toFormat('home')))
 		}))
 
-		console.log('recentExhibitions', JSON.stringify(recentExhibitions, undefined, 4));
+		console.log('recentExhibitions', JSON.stringify(home.recentExhibitions, undefined, 4));
 
 		res.json({
 			user: {
@@ -61,13 +64,7 @@ router.get('/', async (req, res) => {
 				isAuthorized: true // always true
 			},
 			data: {
-				home: {
-					presentProjects: data.presentProjects.map((x) => x.toFormat('home')),
-					// futureProjects: data.futureProjects.map(x => x.toFormat('home')),
-					// pastProjects: data.pastProjects.map(x => x.toFormat('home')),
-					recentExhibitions: data.recentExhibitions.map((x) => x.toFormat('home')),
-					artMagazines: data.artMagazines.map((x) => x.toFormat('home')),
-				}
+				home
 			}
 		})
 	} catch (e) {
@@ -105,7 +102,7 @@ router.get('/projects/:projectName/:option?', async (req, res, next) => {
 
 		if (!project) throw new Error(`no such project in name of ${projectName}`)
 
-		const projectToRender = project.toFormat('project_detail', req.session.user)
+		const projectToRender = await project.toFormat('project_detail', req.session.user)
 
 		// console.log('projectToRender', JSON.stringify(projectToRender, undefined, 4));
 
@@ -136,7 +133,7 @@ router.get('/magazines', async (req, res) => {
 	console.log('/magazines/', );
 
 	try {
-		const magazines = await MagazineModel.find({})
+		const magazines = await MagazineModel.find({}).sort({"abstract.created_at": -1})
 
 		res.json({
 			user: {
@@ -144,7 +141,7 @@ router.get('/magazines', async (req, res) => {
 				isAuthorized: true,
 			},
 			data: {
-				magazines: magazines.map(m => m.toFormat('magazines'))
+				magazines: await Promise.all(magazines.map(async (m) => await m.toFormat('magazines')))
 			}
 		})
 	} catch (e) {
@@ -166,7 +163,7 @@ router.get('/magazines/:magazineName', async (req, res) => {
 				isLoggedIn: !!req.session.user,
 				isAuthorized: true,
 			},
-			data: magazine.toFormat('magazine_detail')
+			data: await magazine.toFormat('magazine_detail')
 		})
 	} catch (e) {
 		console.error(e);
@@ -179,6 +176,62 @@ router.get('/magazines/:magazineName/edit', async (req, res) => {
 	console.log('/magazines/:magazineName/edit');
 	res.json({})
 })
+
+// TODO: add res.json to user auth info
+// TODO: exhibition paginaiton
+// TODO: magazine genre select
+router.get('/exhibitions', async (req, res) => {
+	console.log('/exhibitions/', );
+
+	try {
+		const exhibitions = await ExhibitionModel.find({}).sort({"abstract.created_at": -1})
+
+		res.json({
+			user: {
+				isLoggedIn: !!req.session.user,
+				isAuthorized: true,
+			},
+			data: {
+				exhibitions: await Promise.all(exhibitions.map(async (e) => await e.toFormat('exhibitions')))
+			}
+		})
+	} catch (e) {
+		console.error(e);
+		res.json({ error: e })
+	}
+
+
+})
+
+router.get('/exhibitions/:exhibitionName', async (req, res) => {
+	console.log('/exhibitions/' + req.params.exhibitionName);
+
+	try {
+		let exhibition = await ExhibitionModel.findOne({"abstract.exhibitionName": req.params.exhibitionName})
+			.populate('qnas')
+		exhibition = await exhibition.toFormat('exhibition_detail')
+
+		res.json({
+			user: {
+				isLoggedIn: !!req.session.user,
+				isAuthorized: true,
+			},
+			data: {
+				exhibition
+			}
+		})
+	} catch (e) {
+		console.error(e);
+		res.json({error: e})
+	}
+
+})
+
+router.get('/exhibitions/:exhibitionName/edit', async (req, res) => {
+	console.log('/exhibitions/:exhibitionName/edit');
+	res.json({})
+})
+
 
 router.get('/*', async (req, res) => {
 	console.log('auth.fetch.url /*', req.url)

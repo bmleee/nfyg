@@ -3,7 +3,7 @@ import ProjectModel from '../models/project'
 import SponsorModel from '../models/sponsor'
 
 import { rangeArray, asyncparallelfor } from '../../lib/utils'
-import { randomString } from './utils'
+import { randomString, randomNumber } from './utils'
 
 const createProject = async ({sponsor, state = 'preparing'}) => {
 	return await ProjectModel.create({
@@ -24,8 +24,8 @@ const createProject = async ({sponsor, state = 'preparing'}) => {
 		},
 		sponsor: sponsor,
 		funding: {
-				currentMoney: 0,
-				targetMoney: 1000000,
+				currentMoney: randomNumber(100000),
+				targetMoney: randomNumber(100000),
 				dateFrom: "2016-12-08",
 				dateTo: "2020-12-09",
 				rewards: [

@@ -48,3 +48,8 @@ export function randomString(len, pre) {
 	//document.randform.randomfield.value = randomstring;
 	return randomstring;
 }
+
+export function randomNumber(min, max = 0) {
+	if (min > max) [min, max] = [max, min]
+	return Math.floor(Math.random() * (max - min) + min)
+}

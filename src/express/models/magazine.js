@@ -21,6 +21,8 @@ export const categories = [
 
 // Define a new 'MagazineSchema'
 const MagazineSchema = new Schema({
+	no: {type: Number, required: true, unique: true},
+
 	abstract: {
 		longTitle: {type: String, required: true},
 		shortTitle: {type: String, required: true},
@@ -70,7 +72,7 @@ MagazineSchema.set('toJSON', {
 	virtuals: true
 });
 
-MagazineSchema.methods.toFormat = function (type) {
+MagazineSchema.methods.toFormat = async function (type) {
 	switch (type) {
 		case 'home':
 			return {
@@ -97,6 +99,13 @@ MagazineSchema.methods.toFormat = function (type) {
 				link: `/magazines/${this.abstract.magazineName}`
 			}
 		case 'magazine_detail':
+			let next = await this.getNextMagazineName()
+			let pre = await this.getPreviousMagazineName()
+
+			console.log('next', next.no);
+			console.log('this', this.no);
+			console.log('pre', pre.no);
+
 			return {
 				magazine: {
 					title: this.abstract.longTitle,
@@ -123,6 +132,17 @@ MagazineSchema.methods.toFormat = function (type) {
 
 }
 
+MagazineSchema.methods.getNextMagazineName = async function() {
+	let docs = await MagazineModel.find({ no: { $gt: this.no } }).sort({ no: 1 }).limit(1)
+	return docs[0]
+}
+
+MagazineSchema.methods.getPreviousMagazineName = async function() {
+	let docs = await MagazineModel.find({ no: { $lt: this.no } }).sort({ no: -1 }).limit(1)
+	return docs[0]
+}
+
+MagazineSchema.plugin(autoIncrement.plugin, { model: 'Magazine', field: 'no' });
 
 // Create the 'User' model out of the 'MagazineSchema'
 const MagazineModel = mongoose.model('Magazine', MagazineSchema);
