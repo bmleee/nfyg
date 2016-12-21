@@ -5,7 +5,7 @@ import {date2string} from '~/src/react/lib/utils';
 
 import _ from 'lodash';
 
-import 'babel-polyfill';
+ 
 
 const borderStyle = {
 	border: '1px solid gray'

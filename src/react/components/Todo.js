@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
-import 'babel-polyfill';
+ 
 
 class Todo extends Component {
 

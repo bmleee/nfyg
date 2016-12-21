@@ -5,7 +5,7 @@ import {
 	ProductReward,
 } from './';
 
-import 'babel-polyfill';
+ 
 
 class Overview extends Component {
 

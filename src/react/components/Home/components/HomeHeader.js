@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ImageGallery from '../../react-image-gallery'; // https://www.npmjs.com/package/react-image-gallery
 
-import 'babel-polyfill';
+ 
 
 // TODO: activate lazy loading
 const options = {

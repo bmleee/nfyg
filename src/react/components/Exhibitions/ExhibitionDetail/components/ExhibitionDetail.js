@@ -6,7 +6,7 @@ import {
 import $ from 'jquery';
 import ScrollToTop from 'react-scroll-up';
 
-import 'babel-polyfill';
+ 
 
 const scrollStyle = {
   cursor: 'pointer',

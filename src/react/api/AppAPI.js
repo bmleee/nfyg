@@ -1,8 +1,6 @@
 import fetch from 'isomorphic-fetch'
 import axios from 'axios'
 
-import 'babel-polyfill'
-
 import { EXPRESS_PORT } from '../../../env'
 
 const API_URL = `/api/test-api`

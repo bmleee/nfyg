@@ -4,7 +4,7 @@ import {
 
 import update from 'react-addons-update';
 
-import 'babel-polyfill';
+ 
 
 const defaultNewState = () => ({
   project: {

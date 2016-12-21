@@ -5,7 +5,7 @@ import { SelectOptions } from '~/src/react/constants'
 
 const selectOptions = SelectOptions.MagazineCategory
 
-import 'babel-polyfill';
+ 
 
 const style = {
 	height: 'auto',

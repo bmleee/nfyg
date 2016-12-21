@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 
-import 'babel-polyfill';
+ 
 
 class PastProjectList extends Component {
 

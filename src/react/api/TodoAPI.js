@@ -1,5 +1,5 @@
 import 'whatwg-fetch';
-import 'babel-polyfill';
+ 
 
 const API_URL = `/api/todos`
 const API_HEADERS = {

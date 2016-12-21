@@ -9,8 +9,6 @@ import {
 
 import update from 'react-addons-update';
 
-import 'babel-polyfill';
-
 const defaultDraftTodo = () => {
 	return {
 		_id: Date.now(),

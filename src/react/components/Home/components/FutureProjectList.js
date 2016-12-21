@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Slider from 'react-slick';
 
-import 'babel-polyfill';
+ 
 
 const sliderSettings = {
 	dots: true,

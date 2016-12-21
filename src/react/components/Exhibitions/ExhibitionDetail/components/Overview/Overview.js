@@ -5,7 +5,7 @@ import {
 	RecommendedExhibitions,
 } from './';
 
-import 'babel-polyfill';
+ 
 
 class Overview extends Component {
 

@@ -67,10 +67,6 @@ router.get('/', async (req, res) => {
 
 		await Promise.all(Object.keys(data).map(async (k) => {
 			data[k] = await fetcher[k]()
-		}))
-
-		console.log('recentExhibitions', JSON.stringify(recentExhibitions, undefined, 4));
-
 			home[k] = await Promise.all(data[k].map(async (x) => await x.toFormat('home')))
 		}))
 
