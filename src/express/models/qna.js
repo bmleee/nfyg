@@ -2,6 +2,7 @@
 import mongoose from 'mongoose'
 import { autoIncrement } from '../lib/db'
 import ProjectModel from './project'
+import ProductModel from './product'
 import ExhibitionModel from './exhibition'
 
 const Schema = mongoose.Schema;
@@ -15,6 +16,7 @@ let QnASchema = new Schema({
 		user: {type: Schema.Types.ObjectId, ref: 'User', required: true}, // used when check edit authority
 	},
 	project: { type: Schema.Types.ObjectId, ref: 'Project'},
+	product: { type: Schema.Types.ObjectId, ref: 'Product'},
 	exhibition: { type: Schema.Types.ObjectId, ref: 'Exhibition'},
 	abstract: {
 		title: {type: String, required: true},
@@ -37,14 +39,26 @@ let QnASchema = new Schema({
 });
 
 QnASchema.pre('validate', function (next) {
-	if (this.project || this.exhibition) next()
-	else next(Error('One of project, exhibition field is reuqired!'))
+	if (this.project || this.exhibition || this.product) next()
+	else next(Error('One of project, exhibition, product field is reuqired!'))
 })
 
 QnASchema.pre('save', function (next) {
 	if (this.project) {
 		ProjectModel.update(
 			{_id: this.project},
+			{$addToSet: { qnas: this._id }},
+			function(err) {
+				if(err) {
+					console.error(err);
+					next(err)
+				}
+				else next()
+			}
+		)
+	} else if (this.product) {
+		ProductModel.update(
+			{_id: this.product},
 			{$addToSet: { qnas: this._id }},
 			function(err) {
 				if(err) {
@@ -79,6 +93,7 @@ QnASchema.set('toJSON', {
 QnASchema.methods.toFormat = function (type, ...args) {
 	switch (type) {
 		case 'project_detail':
+		case 'product_detail':
 		case 'exhibition_detail':
 			return {
 				opened: true, // always true!

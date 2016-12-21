@@ -1,6 +1,7 @@
 'use strict'
 import UserModel from '../models/user'
 import ProjectModel from '../models/project'
+import ProductModel from '../models/product'
 import SponsorModel from '../models/sponsor'
 import PostModel from '../models/post'
 import MagazineModel from '../models/magazine'
@@ -10,6 +11,7 @@ import QnAModel from '../models/qna'
 import Users from './initdb.users'
 import Sponsors from './initdb.sponsors'
 import Projects from './initdb.projects'
+import Products from './initdb.products'
 import Posts from './initdb.posts'
 import Magazines from './initdb.magazines'
 import Exhibitions from './initdb.exhibitions'
@@ -41,6 +43,7 @@ const clear = async () => {
 		await Promise.all([
 			action(UserModel, 'removing user...'),
 			action(ProjectModel, 'removing project...'),
+			action(ProductModel, 'removing product...'),
 			action(SponsorModel, 'removing sponsor...'),
 			action(PostModel, 'removing post...'),
 			action(ExhibitionModel, 'removing exhibition...'),
@@ -75,6 +78,7 @@ const clear = async () => {
 		Magazines(),
 		Exhibitions(),
 		Projects(),
+		Products(),
 	])
 	console.log(`${((t2 = Date.now()) - t1) / 1000}sec`);
 

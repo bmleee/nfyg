@@ -1,5 +1,6 @@
 import UserModel from '../models/user'
 import ProjectModel from '../models/project'
+import ProductModel from '../models/product'
 import SponsorModel from '../models/sponsor'
 import PostModel from '../models/post'
 
@@ -13,19 +14,18 @@ import init, {
 } from './initdb.helper'
 
 
-const createPost = async (artist, project) => {
-	const numPosts = project.posts.length
+const createPost = async (artist, target, type) => {
+	const numPosts = target.posts.length
 
-	console.log(`Project ${project._id} ${15 - numPosts} qnas will be added`);
+	console.log(`${type} ${target._id} ${15 - numPosts} qnas will be added`);
 
 	await Promise.all(rangeArray(numPosts, 15).map(async (_) => {
-		await PostModel.create({
+		let body = {
 			author: {
 				name: artist.nick_name,
 				iconSrc: artist.image,
 				user: artist._id
 			},
-			project: project._id, // project is document or string(_id)
 			abstract: {
 				isDirectSupport: Math.random() > 0.5,
 				thresholdMoney: Math.floor(Math.random() * 10000),
@@ -45,7 +45,9 @@ const createPost = async (artist, project) => {
 							}
 					]
 			}),
-		})
+		}
+		body[type] = target._id
+		await PostModel.create(body)
 	}))
 }
 
@@ -57,7 +59,14 @@ export default async function initPost() {
 
 		// create post for projects
 		let projects = await ProjectModel.find({})
+		let products = await ProductModel.find({})
+
 		projects = projects.filter(p => {
+			// console.log(`${Object.keys(p).join(', ')}`);
+			// console.log(p);
+			return p.posts.length === 0
+		})
+		products = products.filter(p => {
 			// console.log(`${Object.keys(p).join(', ')}`);
 			// console.log(p);
 			return p.posts.length === 0
@@ -66,7 +75,14 @@ export default async function initPost() {
 		await Promise.all(projects.map(
 			async (project) => {
 				let artist = await getRandomUser('artist')
-				await createPost(artist, project)
+				await createPost(artist, project, 'project')
+			}
+		))
+
+		await Promise.all(products.map(
+			async (product) => {
+				let artist = await getRandomUser('artist')
+				await createPost(artist, product, 'product')
 			}
 		))
 
