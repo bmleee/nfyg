@@ -5,7 +5,7 @@ import {
 	MagazinesList,
 } from './'
 
-import 'babel-polyfill'
+ 
 
 
 class Magazines extends Component {

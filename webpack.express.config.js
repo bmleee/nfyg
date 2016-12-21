@@ -50,6 +50,7 @@ module.exports = {
 	},
 
 	entry: [
+		'babel-polyfill',
 		'./src/express/app.js',
 	],
 	output: {

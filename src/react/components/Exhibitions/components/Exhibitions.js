@@ -6,7 +6,7 @@ import {
 	ExhibitionsList,
 } from './'
 
-import 'babel-polyfill'
+ 
 
 class Exhibitions extends Component {
 
@@ -36,7 +36,7 @@ class Exhibitions extends Component {
 					<button className="ex-buttons" onClick={ () => this._onChangeFilter('지난 전시') }>끝난 전시</button>
 				</div>  Select filter 추가 : state, genre, city + search button */}
 
-				
+
 				<ExhibitionsList exhibitions={filteredExhibitions} />
 			</div>
 		)

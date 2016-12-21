@@ -3,7 +3,7 @@ import { fetchJSONFile, fetchUserAndData } from '../../../api/AppAPI'
 
 import { Home } from '../components'
 
-import 'babel-polyfill'
+ 
 
 class HomeContainer extends Component {
 	constructor(props) {

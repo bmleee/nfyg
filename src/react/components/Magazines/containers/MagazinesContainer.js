@@ -7,7 +7,7 @@ import { label2value } from '~/src/react/lib/utils'
 import { SelectOptions } from '../../../constants'
 
 
-import 'babel-polyfill'
+ 
 
 const selectOptions = SelectOptions.MagazineCategory
 const categories = selectOptions.map(v => v.label)

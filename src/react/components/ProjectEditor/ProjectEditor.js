@@ -18,7 +18,7 @@ const API_URL = '/api/test-api/sponsor'
 
 import _ from 'lodash' // use throttle or debounce
 import 'whatwg-fetch'
-import 'babel-polyfill'
+ 
 
 const scrollStyle = {
   cursor: 'pointer',

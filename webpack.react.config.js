@@ -34,6 +34,7 @@ var plugins = environments.production() ?
 module.exports = {
 	// configure for react.app
 	entry: [
+		'babel-polyfill',
 		'./src/react/index.js',
 	],
 

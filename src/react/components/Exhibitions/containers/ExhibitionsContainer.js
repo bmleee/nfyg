@@ -3,7 +3,7 @@ import { fetchJSONFile, fetchUserAndData } from '../../../api/AppAPI'
 
 import { Exhibitions } from '../components'
 
-import 'babel-polyfill'
+ 
 
 class ExhibitionsContainer extends Component {
 	state = {
