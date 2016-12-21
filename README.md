@@ -1,13 +1,26 @@
 ## Todos
 
+### model scheme vs react state
+ - user.description
+ - ?.post.intro
+ - project.descripions
+ - project.directSupport
+ - project.indirectSupport
+ - exhibition.location: (주소)
+ - magazine.categories: 여러 카테고리에 속한다?
+ - exhibition.artworks: width, height 받아오기
+ - qna.text, qna.comments[i].text
+
 ### exhibitions
- 1. ALL, 진행중인 전시, 끝난 전시 버튼 ==> 진행중인 전시, 날짜별 필터링(select-option) :: DB 구조 모두 결정 된 후에 하는게 좋을듯!
+ 1. ALL, 진행중인 전시, 끝난 전시 버튼 ==> 진행중인 전시, 날짜별 필터링(select-option)
  2. artworks 클릭하면 크게 보여주기
 
 ### magazines
  1. 카테고리에 속하는 매거진이 없을 경우 :: No such magazines!
+ 2. content viewer : SevenEditor.Viewer
 
 ### User/Profile
+ 1. model: add field artist.description!
 
 ### Sponsors / Sponsor Detail
  - 멤버
@@ -29,6 +42,7 @@ http://sharencare.me/sponsors/23 참조
  1. 서버와 연동
   - ProjectEditor.new ..
   - ProjectEditor.edit ..
+ 2. project.descriptions
 
 
 ### PostEditor
@@ -38,9 +52,8 @@ http://sharencare.me/sponsors/23 참조
 ### QnAEditor
  1. 그냥 input[type='text'] 로 글 작성하기
 
-### ExhibitioinEditor
-
-
+### Header
+ - Flash / Popup 를 Common/Header 에 넣기
 
 ### Draft-js
  - 사용할 플러그인

@@ -122,6 +122,7 @@ export class Viewer extends Component {
 				<div className={editorStyles.viewer}>
 					<Editor
 						editorState={editorState}
+						onChange={() => {}}
 						readOnly={true}
 						plugins={plugins}
 					/>

@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { fetchJSONFile } from '../../../api/AppAPI'
+import { fetchJSONFile, fetchUserAndData } from '../../../api/AppAPI'
 
 import { Home } from '../components'
 
@@ -16,9 +16,24 @@ class HomeContainer extends Component {
 	}
 
 	async componentDidMount() {
-		const newHome = await fetchJSONFile('home')
 
-		this.setState({ home: newHome, loaded: true })
+		try {
+			const {
+				user,
+				data: {
+					home
+				}
+			} = await fetchUserAndData()
+
+			console.log('fetchUserAndData.user', user);
+			console.log('fetchUserAndData.data.home', home);
+
+			this.props.setUser(user)
+			this.setState({ home, loaded: true })
+		} catch (e) {
+			console.error(e);
+		}
+
 	}
 
 	render() {

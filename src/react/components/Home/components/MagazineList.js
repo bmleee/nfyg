@@ -17,16 +17,17 @@ class MagazineList extends Component {
 				iconSrc,
 			},
 			categories,
+			link,
 		}, index) => (
 			<div key={index} className="magazine-list-item">
 				<div className="ma-thumbnail">
 					<div className="ma-centered">
-					<Link to="magazines/detail"><img className="home-magazine-image" src={imgSrc} alt=""/></Link>
+					<Link to={link}><img className="home-magazine-image" src={imgSrc} alt=""/></Link>
 					</div>
 				</div>
 				<div className="home-magazine-list-item">
-				<Link to="magazines/detail"><h4>{title}</h4>
-				<p><img className="magazine-writer-icon" width={24} height={24} src={iconSrc} alt=""/> { name }{/* categories.join(' ') */}</p></Link>
+					<Link to={link}><h4>{title}</h4></Link>
+					<p><img className="magazine-writer-icon" width={24} height={24} src={iconSrc} alt=""/> { name }{/* categories.join(' ') */}</p>
 				{/* <ul>
 					{ descriptions.map((d, index) => <li key={index}>{d}</li>) }
 				</ul> */}

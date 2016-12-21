@@ -68,6 +68,22 @@ export function value2label (options, targetValue) {
 }
 
 /**
+ * react-select option value to label
+ * @param  {[type]} options     [description]
+ * @param  {[type]} targetValue [description]
+ * @return {[type]}             [description]
+ */
+export function label2value (options, targetLabel) {
+  for(let {value, label} of options) {
+    if (label === targetLabel) {
+      console.log('returned: ', value)
+      return value;
+    }
+  }
+  return '';
+}
+
+/**
  * [date2string description]
  * @param  {Date}   date [description]
  * @return {string}      YYYY-MM-DD
@@ -77,5 +93,5 @@ export function date2string (date) {
     date = new Date(date)
   }
   return date.toISOString().slice(0,10).replace(/-/g,".")
-    .split('.').map(x => Number(x)).join('.');
+    .split('.').map(Number).join('.');
 }

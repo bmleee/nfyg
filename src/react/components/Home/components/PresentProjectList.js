@@ -52,10 +52,11 @@ class PresentProjectList extends Component {
 				numDirectSupports,
 				numIndirectSupports,
 				remainingDays,
+				link
 			}, index) => (
 				<div className="present-project-list-item-container">
 					<div className="present-project-list-item" key={index}>
-						<Link to="/projects"> {/* TODO: include :project_name */}
+						<Link to={link}> {/* TODO: include :project_name */}
 							<div className="pr-thumbnail">
 								<div className="ex-centered">
 									<img className="home-exhibition-image" src={imgSrc} />
@@ -63,8 +64,8 @@ class PresentProjectList extends Component {
 							</div>
 						</Link>
 						<div className="present-project-list-item-caption">
-							<Link to="/projects"><h3 className="project-list-title">{title}</h3>
-							<h5>{creator}의 프로젝트</h5></Link>
+							<Link to={link}><h3 className="project-list-title">{title}</h3></Link>
+							<h5>{creator}의 프로젝트</h5>
 							<Progress completed={Math.round(currentMoney / targetMoney * 100)} />
 							<div className="project-summary-detail">
 							<div className="project-remain-days">{Math.round(currentMoney / targetMoney * 100)}%</div>

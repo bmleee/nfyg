@@ -45,7 +45,7 @@ class ProjectHeading extends Component {
 
 		let remainingDays = ( new Date(dateTo).getTime() - new Date(dateFrom).getTime() ) / 1000 / 60 / 60 / 24
 
-		const sharingInfo = recent3Users.map( (fbId, index) => (
+		const sharingInfo = (recent3Users || []).map( (fbId, index) => (
 			<img className="sharing-fb-icon" key={index} width={32} height={32} src={`https://graph.facebook.com/${fbId}/picture`} scale="0"/>
 		) )
 

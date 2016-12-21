@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { fetchJSONFile } from '../../api/AppAPI'
+import { fetchJSONFile, fetchUserAndData } from '../../api/AppAPI'
 
 import { ProjectDetail } from './components'
 
@@ -41,28 +41,32 @@ export default class ProjectDetailContainer extends Component {
 
 			selectValue: selectOptions[0].value,
 			selectOptions: selectOptions,
-
-			// heading: {},
-			// rewards: [],
-			// overview: {},
-			// post: {},
-			// ranking: {},
-			// indirectSupporters: {},
-			// directSupporters: {},
-			// selectValue: '',
-			// qna: {},
 			loaded: false,
 		}
 	}
 
 	async componentDidMount() {
-		const res = await fetchJSONFile('project')
+		const res = await fetchUserAndData()
+		console.log('fetchUserAndData', res);
 
-		console.log('loaded project', res);
+		const {
+			user,
+			data: {
+				project
+			}
+		} = res
 
+		const {
+			selectValue,
+			selectOptions,
+		} = this.state
+
+		this.props.setUser(user)
 		this.setState({
-			...res,
+			...project,
 			loaded: true,
+			selectValue,
+			selectOptions
 		})
 	}
 

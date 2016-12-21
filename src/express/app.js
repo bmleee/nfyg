@@ -3,13 +3,12 @@ import session from 'express-session';
 import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
 // import flash from 'connect-flash'
-import passport from "passport"
 
 import logger from 'morgan'
 import serialize from 'serialize-javascript'
 import Q from 'q'
 import path from 'path'
-
+import passport from 'passport'
 // db connect
 import connection from './lib/db'
 
@@ -34,25 +33,28 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
 	saveUninitialized: true,
 	resave: true,
-	secret: 'sessionSecret'
+	secret: 'complecated@#@$secret#$@#$string##!)@``'
 }));
-
-// app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
-var passport_1 = require("./middlewares/passport");
-var passport_1 = passport_1();
+// use passport middlewares
+import applyPassport from './middlewares/passport'
+applyPassport(passport)
 
 app.use(express.static(publicPath));
-
 app.use('/api', router);
-
 app.use(renderReact);
+
 
 const server = app.listen(EXPRESS_PORT, () => {
 	console.log(`Express listening on port ${EXPRESS_PORT}`);
 });
+
+process.on('exit', (code) => {
+	console.log(`process exit on code ${code}`);
+	server.close();
+})
 
 // for gulp-hot-reload to catch
 module.exports = app

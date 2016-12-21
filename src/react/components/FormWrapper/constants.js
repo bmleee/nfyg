@@ -2,6 +2,7 @@ const VALUE_TYPE = {
 	IMAGE:					'form wrapper value type image',
 	TEXT: 					'form wrapper value type text',
 	DATE: 					'form wrapper value type date',
+	SELECT: 				'form wrapper value type select',
 	NUMBER: 				'form wrapper value type number',
 	MONEY: 					'form wrapper value type money',
 	RICH_TEXT: 			'form wrapper value type rich text',

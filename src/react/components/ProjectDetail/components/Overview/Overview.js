@@ -33,9 +33,7 @@ class Overview extends Component {
 				part2
 			},
 			funding: {
-				reward: {
-					rewards
-				}
+				rewards
 			}
 		} = this.props;
 

@@ -1,7 +1,10 @@
 import React from 'react'
+import Select from 'react-select'
 
 import FormWrapper from '~/src/react/components/FormWrapper/FormWrapper'
 import { VALUE_TYPE } from '~/src/react/components/FormWrapper/constants'
+
+import { SelectOptions } from '~/src/react/constants'
 
 import { value2label, date2string } from '~/src/react/lib/utils'
 
@@ -27,11 +30,25 @@ const ImgSrcForm = ({value, onChange}) =>
 	<input type="file" value={value} onChange={onChange} accept="Image/*" />
 
 // ----
-const LocationWrapper = ({value}) => value
+const AddressWrapper = ({value}) => value
 	? <span>{value}</span>
 	: <span></span>
-const LocationForm = ({value, onChange}) =>
+const AddressForm = ({value, onChange}) =>
 	<input type="text" value={value} onChange={onChange} />
+
+// ----
+const CityWrapper = ({value}) => value
+	? <span>{value}</span>
+	: <span></span>
+const CityForm = ({value, onChange}) =>
+	<Select options={SelectOptions.City} value={value} onChange={onChange} />
+
+// ----
+const GenreWrapper = ({value}) => value
+	? <span>{value}</span>
+	: <span></span>
+const GenreForm = ({value, onChange}) =>
+	<Select options={SelectOptions.ExhibitionGenre} value={value} onChange={onChange} />
 
 // ----
 const DateFromWrapper = ({value}) => value
@@ -89,7 +106,9 @@ const Abstract = ({
 		longTitle,
 		shortTitle,
 		imgSrc,
-		location,
+		address,
+		city,
+		genre,
 		dateFrom,
 		dateTo,
 		exhibitionName,
@@ -105,7 +124,9 @@ const Abstract = ({
 	_onLongTitleSubmit,
 	_onShortTitleSubmit,
 	_onImgSrcSubmit,
-	_onLocationSubmit,
+	_onAddressSubmit,
+	_onCitySubmit,
+	_onGenreSubmit,
 	_onDateFromSubmit,
 	_onDateToSubmit,
 	_onExhibitionNameSubmit,
@@ -119,7 +140,7 @@ const Abstract = ({
 	return (
 		<div className="abstract-container">
 			<span className="editor-small-title">전시 개요</span>
-			
+
 			<FormWrapper
 				title="전시 제목"
 				valueType={VALUE_TYPE.TEXT}
@@ -136,14 +157,28 @@ const Abstract = ({
 
 			<FormWrapper
 				title="전시 장르"
-				valueType={VALUE_TYPE.TEXT}
+				valueType={VALUE_TYPE.SELECT}
 				alt="전시 장르를 입력하세요"
-				initialValue={shortTitle}
+				initialValue={genre}
 				submitCaption="전시 장르를 입력하세요"
 				submitCaptionsub={'입력하기'}
-				onSubmit={_onShortTitleSubmit}
-				Wrapper={ShortTitleWrapper}
-				Form={ShortTitleForm}
+				onSubmit={_onGenreSubmit}
+				Wrapper={GenreWrapper}
+				Form={GenreForm}
+				className ="exhibition-short-title"
+				classNameopen ="editor-open-container"
+			/>
+
+			<FormWrapper
+				title="전시 도시"
+				valueType={VALUE_TYPE.SELECT}
+				alt="전시할 도시를 입력하세요"
+				initialValue={city}
+				submitCaption="전시할 도시를 입력하세요"
+				submitCaptionsub={'입력하기'}
+				onSubmit={_onCitySubmit}
+				Wrapper={CityWrapper}
+				Form={CityForm}
 				className ="exhibition-short-title"
 				classNameopen ="editor-open-container"
 			/>
@@ -163,15 +198,15 @@ const Abstract = ({
 			/>
 
 			<FormWrapper
-				title="전시 장소"
+				title="전시 주소"
 				valueType={VALUE_TYPE.TEXT}
 				alt=""
-				initialValue={location}
-				submitCaption="전시 장소를 입력하세요"
+				initialValue={address}
+				submitCaption="전시 주소를 입력하세요"
 				submitCaptionsub={'입력하기'}
-				onSubmit={_onLocationSubmit}
-				Wrapper={LocationWrapper}
-				Form={LocationForm}
+				onSubmit={_onAddressSubmit}
+				Wrapper={AddressWrapper}
+				Form={AddressForm}
 				className ="exhibition-abstract-location"
 				classNameopen ="editor-open-container"
 			/>
@@ -245,7 +280,7 @@ const Abstract = ({
 				Wrapper={CreatorImgSrcWrapper}
 				Form={CreatorImgSrcForm}
 				classNameopen ="editor-open-container"
-			/> 
+			/>
 
 
 			<FormWrapper
@@ -259,7 +294,7 @@ const Abstract = ({
 				Wrapper={CreatorLocationWrapper}
 				Form={CreatorLocationForm}
 				classNameopen ="editor-open-container"
-			/> 
+			/>
 
 			<FormWrapper
 				title="작가 소개"

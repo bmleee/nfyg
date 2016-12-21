@@ -8,7 +8,8 @@ import DockMonitor from 'redux-devtools-dock-monitor';
 import { routerReducer, routerMiddleware } from 'react-router-redux';
 
 // middlewares
-import thunk from 'react-thunk';
+import thunk from 'redux-thunk';
+
 import { remoteActionMiddleware } from './middlewares'
 
 import { todos } from './reducers';
@@ -31,16 +32,10 @@ const makeReducer = () => combineReducers({
  * TODO: add reducers
  */
 export function configureStore(history, initialState) {
-	//const reducer = combineReducers({
-	//	routing: routerReducer,
-	//	todos,
-	//	ProjectEditor,
-	//});
-
 	const reducer = makeReducer()
 
 	const logger = (store) => (next) => (action) => {
-	  if(typeof action !== "function"){
+	  if(typeof action !== "function" && !action.type.includes('@@router/LOCATION_CHANGE')){
 	    console.log('dispatching:', action);
 	  }
 	  return next(action);
@@ -48,22 +43,23 @@ export function configureStore(history, initialState) {
 
 	let devTools = [];
 
-	if (typeof document !== 'undefined') {
+	if (typeof document !== 'undefined' && process.env.NODE_ENV !== 'production') {
 		devTools = [ DevTools.instrument() ];
 	}
 
 	const store = createStore(
 		reducer,
 		initialState,
-		compose(
-			applyMiddleware(
-				logger,
-				// remoteActionMiddleware(socket), // TODO: activate to send action to server
-				routerMiddleware(history)
-			)
-		),
-		applyMiddleware(thunk),
-		...devTools
+		applyMiddleware(
+			logger,
+			thunk,
+			routerMiddleware(history),
+			// ...devTools,
+			// remoteActionMiddleware(socket), // TODO: activate to send action to server
+		)
+		// compose(
+		//
+		// ),
 	);
 
 	return store;

@@ -82,7 +82,7 @@ const DEST = {
 
 const ENTRY = {
   EXPRESS: 'src/express/app.js',
-  REACT: 'src/react/App.js',
+  REACT: 'src/react/index.js',
   BROWSER: 'src/assets/js/main.js'
 }
 
@@ -234,7 +234,8 @@ gulp.task('start', () => {
     script: DEST.EXPRESS + '/express-server.js',
     watch: DEST.EXPRESS,
     verbose: true,
-    env: { 'DEBUG': 'express:*' }
+    env: { 'DEBUG': 'seven-main' }
+    // env: { 'DEBUG': 'express:*' }
   })
 });
 

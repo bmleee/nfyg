@@ -7,12 +7,40 @@ const borderStyle = {
 
 class PostComments extends Component {
 
-	constructor() {
-		super(...arguments);
+	state = {
+		commentsOpend: false,
+	}
 
-		this.state = {
-			commentsOpend: false,
-		};
+	render() {
+		const {
+			comments,
+			postLikes,
+		} = this.props;
+
+		const item = comments.map( ({
+			author: { name, iconSrc },
+			numLikes,
+			text
+		}, index) => (
+			<div className="project-detail-post-item-comments-item" key={index}>
+				<div>
+					<img src={iconSrc} alt=""/>
+					{name}
+				</div>
+				<span>{text}</span>
+			</div>
+		))
+
+
+		return (
+			<div className="project-detail-post-item-comments-container" style={borderStyle}>
+				<div>
+				 	<button onClick={this._onClick.bind(this)}>댓글 {comments.length}개</button>
+					<span>좋아요 {postLikes}개</span>
+				</div>
+				{ this.state.commentsOpend ? item : null }
+			</div>
+		)
 	}
 
 	_onClick() {
@@ -20,42 +48,6 @@ class PostComments extends Component {
 			commentsOpend: !this.state.commentsOpend,
 		});
 	}
-
-	render() {
-		const { comments, likes } = this.props;
-		const item = comments.map( ( {author: {name, iconSrc}, content}, index) => (
-			<div className="project-detail-post-item-comments-item" key={index}>
-				<div>
-					<img src={iconSrc} alt=""/>
-					{name}
-				</div>
-				{content}
-			</div>
-		))
-
-		return (
-			<div className="project-detail-post-item-comments-container" style={borderStyle}>
-				<div>
-				 	<button onClick={this._onClick.bind(this)}>댓글 {comments.length}개</button>
-					<span>좋아요 {likes}개</span>
-				</div>
-				{ this.state.commentsOpend ? item : null }
-			</div>
-		)
-	}
-}
-
-PostComments.propTypes = {
-	comments: PropTypes.arrayOf(
-		PropTypes.shape({
-			author: PropTypes.shape({
-				name: PropTypes.string.isRequired,
-				iconSrc: PropTypes.string.isRequired,
-			}).isRequired,
-			content: PropTypes.string.isRequired,
-		})
-	).isRequired,
-	likes: PropTypes.number.isRequired,
 }
 
 export default PostComments;

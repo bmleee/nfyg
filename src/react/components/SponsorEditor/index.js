@@ -120,6 +120,7 @@ export default class ProjectEditor extends Component {
 
 	// 서버로 전송
 	save = async () => {
+		console.log('state', this.state);
 		try {
 			const res = await axios.post(API_URL, {...this.state})
 			console.log('save response', res);

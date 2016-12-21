@@ -34,7 +34,7 @@ var plugins = environments.production() ?
 module.exports = {
 	// configure for react.app
 	entry: [
-		'./src/react/App.js',
+		'./src/react/index.js',
 	],
 
 	output: {
@@ -80,7 +80,10 @@ module.exports = {
 				],
 
 			},
-			{ test: /\.svg$/, loader: 'babel!react-svg' }
+			{ test: /\.svg$/, loader: 'babel!react-svg' },
+			// react-notifications
+			{ test: /\.(png|woff(2)?|eot|ttf)(\?[a-z0-9=.]+)?$/, loader: 'url-loader?limit=100000' },
+			{ test: /\.svg\?[a-z0-9=.]+$/, loader: 'url-loader?limit=100000' },
 		]
 	},
 	resolveLoader: { fallback: __dirname + "/node_modules" },

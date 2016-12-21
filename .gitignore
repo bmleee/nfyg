@@ -5,8 +5,8 @@ node_modules
 bower_components
 public
 bin
-.gulp-cache
+env.js
 npm-debug.*
+.gulp-cache
 .tern-project
 .c9
-env.js

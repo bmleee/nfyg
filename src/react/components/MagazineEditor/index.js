@@ -14,14 +14,16 @@ const scrollStyle = {
 
 const API_URL = '/api/test-api/magazine'
 
-export default class ExhibitionEditor extends Component {
+export default class MagazineEditor extends Component {
 
 	state = {
 		abstract: {
 			longTitle: '',
 			shortTitle: '',
 			imgSrc: '',
+			// TODO: add category
 			magazineName: '',
+			description: '',
 		},
 
 		creator: {
@@ -133,6 +135,11 @@ export default class ExhibitionEditor extends Component {
 				creatorDescription: { $set: creatorDescription }
 			}
 		})),
+		_onDescriptionSubmit: (description)  => this.setState(update(this.state, {
+			abstract: {
+				description: { $set: description }
+			}
+		}))
 	}
 
 	// Content
@@ -257,6 +264,7 @@ export default class ExhibitionEditor extends Component {
 	}
 
 	save = async () => {
+		console.log('state', this.state);
 		try {
 			const res = await axios.post(API_URL, {...this.state})
 			console.log('save response', res);

@@ -1,34 +1,26 @@
 import React, { Component, PropTypes } from 'react';
 import Select from 'react-select';
 
-// import {
-// 	,
-// 	} from './';
-
 import { PostComments } from '../Post/';
 
+import { SelectOptions } from '../../../../constants'
 import {date2string} from '~/src/react/lib/utils'
 
+const selectOptions = SelectOptions.QnA
 const borderStyle = { border: '1px solid gray' }
 
 
 // TODO: 입력 폼. 글만 올릴거 아닌데...
 class QnA extends Component {
 
-	constructor() {
-		super(...arguments);
-
-		this.state = {
-			form: {
-				text: '', // value from textarea
-				target: '', // to-all 모두에게, to-creator 창작자에게만
-			}
+	state = {
+		form: {
+			text: '', // value from textarea
+			target: '', // to-all 모두에게, to-creator 창작자에게만
 		}
-		this.handleTextChange			= this.handleTextChange.bind(this);
-		this.handleSelectChange		= this.handleSelectChange.bind(this);
 	}
 
-	handleTextChange(e) {
+	handleTextChange = (e) => {
 		this.setState({
 			form: {
 				text: e.target.value,
@@ -36,7 +28,7 @@ class QnA extends Component {
 		})
 	}
 
-	handleSelectChange( {value, label} ) {
+	handleSelectChange = ({value, label}) => {
 		this.setState({
 			form: {
 				target: value,
@@ -45,18 +37,19 @@ class QnA extends Component {
 	}
 
 	render() {
-		let { qna: { selectOptions, posts } } = this.props;
+		let { qna: { posts } } = this.props;
 
 
-		const items = posts.map( ({
+		const item = posts.map( ({
 			opened,
 			author,
 			title,
 			created_at,
 			numSupporters,
 			likes,
-			post,
+			text,
 			comments,
+			content
 		}, index) => (
 			<div className="project-detail-qna-item" key={index} style={borderStyle}>
 				<div>
@@ -69,14 +62,13 @@ class QnA extends Component {
 					<span>작성일: {date2string(created_at)}</span>
 				</div>
 				<div>
-					{ post.map( ({type, content}, index) => (
-						<div key={index}>
-							{type}
-							{content}
-						</div>
-					))}
+					{
+						opened
+							? <span>{text}</span>
+							: <span>해당 글을 열람할 권한이 없습니다.</span>
+					}
 				</div>
-				<PostComments comments={comments} likes={likes} />
+				{ opened ? <PostComments comments={comments} postLikes={likes} /> : null }
 			</div>
 		))
 
@@ -92,7 +84,7 @@ class QnA extends Component {
 
 				</div>
 
-				{ items}
+				{ item }
 
 				<button>공유로 예술후원(열람하기)</button>
 			</div>

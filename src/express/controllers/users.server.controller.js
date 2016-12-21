@@ -1,15 +1,16 @@
-// Invoke 'strict' JavaScript mode
 'use strict';
 
 // Load the module dependencies
 // var User = require('mongoose').model('User'),
 const User = require('../models/user'),
 	passport = require('passport');
-	
+
 // Create a new error handling controller method
 const getErrorMessage = function(err) {
 	// Define the error message variable
 	var message = '';
+
+	console.error('getErrorMessage', err);
 
 	// If an internal MongoDB error occurs get the error message
 	if (err.code) {
@@ -73,7 +74,7 @@ exports.renderSignup = function(req, res, next) {
 // Create a new controller method that creates new 'regular' users
 exports.signup = function(req, res, next) {
 	console.log('req.body', req.body)
-	
+
 	// If user is not connected, create and login a new user, otherwise redirect the user back to the main application page
 	if (!req.user) {
 		// Create a new 'User' model instance
@@ -96,8 +97,8 @@ exports.signup = function(req, res, next) {
 				// Redirect the user back to the signup page
 				return res.redirect('/signup');
 			}
-			
-			
+
+
 
 			// If the user was created successfully use the Passport 'login' method to login
 			req.login(user, function(err) {

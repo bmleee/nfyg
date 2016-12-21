@@ -31,7 +31,15 @@ const MagazineNameWrapper = ({value}) => value
 	? <span>{value}</span>
 	: <span></span>
 const MagazineNameForm = ({value, onChange}) =>
-	<input type="textarea" value={value} onChange={onChange} />
+	<input type="text" value={value} onChange={onChange} />
+
+// ----
+const MagazineDescriptionWrapper = ({value}) => value
+	? <span>{value}</span>
+	: <span>전시를 10자 이내 3줄 이내로 설명해 주세요</span>
+const MagazineDescriptionForm = ({value, onChange}) =>
+	// <input type="textarea" value={value} onChange={onChange} />
+	<textarea value={value} onChange={onChange} cols="30" rows="3"/>
 
 
 // ----
@@ -69,6 +77,7 @@ const Abstract = ({
 		shortTitle,
 		imgSrc,
 		magazineName,
+		description
 	},
 
 	creator: {
@@ -87,6 +96,8 @@ const Abstract = ({
 	_onCreatorImgSrcSubmit,
 	_onCreatorLocationSubmit,
 	_onCreatorDescriptionSubmit,
+
+	_onDescriptionSubmit
 
 }) => {
 	return (
@@ -145,8 +156,19 @@ const Abstract = ({
 				classNameopen ="editor-open-container"
 			/>
 
-			<span className="editor-small-title">작성자 정보</span>
+			<FormWrapper
+				title="Abstract Magazine Description"
+				valueType={VALUE_TYPE.TEXT}
+				alt=""
+				initialValue={description}
+				submitCaption="입력하기"
+				onSubmit={_onDescriptionSubmit}
+				Wrapper={MagazineDescriptionWrapper}
+				Form={MagazineDescriptionForm}
+			/>
 
+			<span className="editor-small-title">작성자 정보</span>
+			
 			<FormWrapper
 				title="이 름"
 				valueType={VALUE_TYPE.TEXT}

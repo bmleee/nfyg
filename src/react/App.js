@@ -1,24 +1,131 @@
-import React, { Component } from 'react';
-import { render } from 'react-dom';
+import React, { Component } from 'react'
+import { Link } from 'react-router';
+import { Nav, Footer, NotFound, Header } from './components/Common';
+import update from 'immutability-helper'
 
-import { createStore, combineReducers } from 'redux';
+import axios from 'axios'
 
-import { Provider } from 'react-redux';
-import { Router, Route, IndexRoute, browserHistory} from 'react-router';
-import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
+import { fetchUserAndData } from './api/AppAPI'
+import { canUseDOM } from '~/src/lib/utils'
 
-import { configureStore, DevTools } from './store';
-import routes from './routes';
+let previousLocation = ''
 
-const store = configureStore(browserHistory, window.__initialState__);
-const history = syncHistoryWithStore(browserHistory, store);
+export default class App extends Component {
 
-/**
- * Wrap top-level App component inside a react-reduc Provider
- * 	to connect component tree to React store
- */
-render((
-	<Provider store={store}>
-		<Router history={history} routes={routes} />
-	</Provider>
-), document.getElementById('root'));
+	state = {
+		modal: {}, // { type, message, }
+		flashs: [], // { type?, message, level, ... }
+		user: {
+			isLoggedIn: false,
+			isAuthorized: true, // can see this page?
+		}
+	}
+
+	constructor(props) {
+		super(props)
+
+		if(canUseDOM){
+			console.log('constructor.previousLocation', document.URL);
+			previousLocation = document.URL
+		}
+
+	}
+
+	render() {
+		const children = this.props.children && React.cloneElement(this.props.children, {
+			...this.modalHandlers,
+			...this.flashHandlers,
+			setUser: this.setUser,
+		})
+
+
+		if(typeof window !== 'undefined') window.setFlash = this.flashHandlers.setFlash
+
+		return (
+			<div>
+				{
+					process.env.NODE_ENV !== 'production'
+						? <div>
+							Test Links:
+							{' '}
+							<Link to="/"><button>Home</button></Link>
+							{' '}
+							<Link to="/"><button>Project</button></Link>
+							{' '}
+							<Link to="/exhibitions"><button>Exhibitions</button></Link>
+							{' '}
+							<Link to="/magazines"><button>Magazines</button></Link>
+							{' '}
+							<Link to="/project-editor"><button>Project Editor</button></Link>
+							{' '}
+							<Link to="/exhibition-editor"><button>Exhibition Editor</button></Link>
+							{' '}
+							<Link to="/magazine-editor"><button>Magazine Editor</button></Link>
+							{' '}
+							<Link to="/sponsor-editor"><button>Sponsor Editor</button></Link>
+							{' '}
+							<Link to="/login"><button>Login</button></Link>
+							{' '}
+							<Link to="/signup"><button>Signup</button></Link>
+							{' '}
+							<Link to="/profile"><button>Profile</button></Link>
+							{' '}
+							<Link to="/sponsors"><button>Sponsors</button></Link>
+							{' '}
+							<Link to="/test1"><button>Test1</button></Link>
+							{' '}
+							<Link to="/test2"><button>Test2</button></Link>
+							{' '}
+							<Link to="/test3"><button>Test3</button></Link>
+						</div>
+						: null
+				}
+
+				<Header
+					{...this.state}
+					{...this.modalHandlers}
+					{...this.flashHandlers}
+				/>
+
+				<Nav></Nav>
+
+				{ children }
+
+				<Footer></Footer>
+			</div>
+		)
+	}
+
+	setUser = (user) => {
+		console.log('setUser.user', user);
+		this.setState(update(this.state, {
+			user: {
+				isLoggedIn: { $set: user.isLoggedIn },
+				isAuthorized: { $set: user.isAuthorized },
+			}
+		}))
+	}
+
+	modalHandlers = {
+		setModal: (modal) => { this.setState({ modal }) },
+		unsetModal: () => { this.setState({ modal: { isOpen: false } }) }
+	}
+
+	flashHandlers = {
+		// https://www.npmjs.com/package/react-notification-system
+		setFlash: (flash) => {
+			this.setState(update(this.state, {
+				flashs: {
+					$push: [{...flash}]
+				}
+			}))
+		},
+
+		clearFlash: () => {
+			this.setState(update(this.state, {
+				flashs: { $set: [] }
+			}))
+		}
+	}
+
+}

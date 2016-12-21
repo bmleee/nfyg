@@ -15,15 +15,21 @@ export default class ProjectDetail extends Component {
 
 	render() {
 		let {
-			loaded
+			loaded,
+			abstract: {
+				projectName
+			}
 		} = this.props; // TODO: project should be fetch in async way
+
+
+		console.log('ProjectDetail', this);
 
 		if(loaded) {
 			return (
 				<div className="project-detail">
 				<ProjectHeading  {...this.props} />
 
-				<ProjectTab />
+				<ProjectTab projectName={projectName} />
 
 				{ this.props.children /* Overview, Post, Ranking, QnA */ }
 				<ScrollToTop showUnder={180} style={scrollStyle} duration={0} >

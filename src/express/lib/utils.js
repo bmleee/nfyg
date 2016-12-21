@@ -31,3 +31,20 @@ export function checkMimeType(mimeType) {
 	const supportedTypes = ['png', 'jpg', 'jpeg', 'mpeg3']
   return supportedTypes.includes(mimeType) // require polyfill?
 }
+
+export function randomString(len, pre) {
+	if (typeof len === 'string') {
+		var tmp = len;
+		len = pre;
+		pre = tmp;
+	}
+	var chars = "0123456789AB CDEF GHIJ KLMN OPQ RSTUVWXTZabcdefghiklmnopqrstuvwxyz".split('');
+	var randomstring = pre || '';
+	len = len || 15;
+	for (var i=0; i<len; i++) {
+		var idx = Math.floor(Math.random() * chars.length);
+		randomstring += chars[idx];
+	}
+	//document.randform.randomfield.value = randomstring;
+	return randomstring;
+}

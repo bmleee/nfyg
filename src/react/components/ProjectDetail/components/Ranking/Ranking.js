@@ -18,11 +18,11 @@ class Ranking extends Component {
 			ranking : {
 				recent3DirectSupporters,
 				recent3IndirectSupporters,
-				selectOptions,
 			},
 			directSupporters,
 			indirectSupporters,
 			selectValue,
+			selectOptions,
 			_onSelectOptionChange,
 	 	} = this.props;
 

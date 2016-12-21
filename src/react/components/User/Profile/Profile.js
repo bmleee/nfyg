@@ -20,25 +20,30 @@ class Profile extends Component {
 		const info = profile && (
 			<div className="profile-info-container">
 				<div className="profile-thumbnail-container">
-				<img className="profile-user-thumbnail" src={photoURL} alt=""/>
-				<h4>{display_name}의 후원 현황</h4>
-				<p>{role}</p>
+					<img className="profile-user-thumbnail" src={photoURL} alt=""/>
+					<h4>{display_name}의 후원 현황</h4>
+					<p>{role}</p>
 				</div>
+
 				<div className="indirect-support">
-				<h4>공유로 후원한 내역</h4>
-				<div className="indirect-support-detail-likes">
-				<p className="indirect-support-detail-text">프로젝트 공유</p>
-				<h4 className="indirect-support-h4">{ likes }</h4>회
+					<h4>공유로 후원한 내역</h4>
+
+					<div className="indirect-support-detail-likes">
+						<p className="indirect-support-detail-text">프로젝트 공유</p>
+						<h4 className="indirect-support-h4">{ likes }</h4>회
+					</div>
+
+					<div className="indirect-support-detail-comments">
+						<p className="indirect-support-detail-text">좋아요</p>
+						<h4 className="indirect-support-h4">{ comments.toLocaleString() }</h4>개
+					</div>
+
+					<div className="indirect-support-detail-shares">
+						<p className="indirect-support-detail-text">누적후원금</p>
+						<h4 className="indirect-support-h4">{ shares.toLocaleString() }</h4>원
+					</div>
 				</div>
-				<div className="indirect-support-detail-comments">
-				<p className="indirect-support-detail-text">좋아요</p>
-				<h4 className="indirect-support-h4">{ comments.toLocaleString() }</h4>개
-				</div>
-				<div className="indirect-support-detail-shares">
-				<p className="indirect-support-detail-text">누적후원금</p>
-				<h4 className="indirect-support-h4">{ shares.toLocaleString() }</h4>원
-				</div>
-				</div>
+				
 			</div>
 		)
 
