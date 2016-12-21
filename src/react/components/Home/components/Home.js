@@ -40,10 +40,11 @@ class Home extends Component {
 
 		const {
 			presentProjects,
-			futureProjects,
+			// futureProjects,
 			recentExhibitions,
 			artMagazines,
-			pastProjects
+			// pastProjects
+			products
 		} = this.props;
 
 		return (
@@ -51,7 +52,6 @@ class Home extends Component {
 				<HomeHeader />
 				<div className ="home-body">
 					{/* <HomeInfo title="공유로 후원한 금액" amount={10000} /> */}
-					<HomeHeading title="What's on?" />
 
 					{/* 프로젝트 제안 MODAL
 
@@ -87,8 +87,11 @@ class Home extends Component {
 						</Modal>
 
       		*/}
-      	
+					<HomeHeading title="What's on?" />
 					<PresentProjectList projects={presentProjects} />
+
+					<HomeHeading title="Products" />
+					<PresentProjectList projects={products} />
 
 					<HomeHeading title="Featured Exhibitions" />
 					<ExhibitionList exhibitions={recentExhibitions} />

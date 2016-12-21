@@ -14,6 +14,12 @@ import { Post as ProjectDetailPost } 							from './components/ProjectDetail/com
 import { Ranking as ProjectDetailRanking } 				from './components/ProjectDetail/components/Ranking';
 import { QnA as ProjectDetailQnA } 								from './components/ProjectDetail/components/QnA';
 
+import ProductDetail 															from './components/ProductDetail';
+import { Overview as ProductDetailOverview } 			from './components/ProductDetail/components/Overview';
+import { Post as ProductDetailPost } 							from './components/ProductDetail/components/Post';
+import { Ranking as ProductDetailRanking } 				from './components/ProductDetail/components/Ranking';
+import { QnA as ProductDetailQnA } 								from './components/ProductDetail/components/QnA';
+
 import Exhibitions  from './components/Exhibitions/containers/ExhibitionsContainer';
 
 import ExhibitionDetail 													from './components/Exhibitions/ExhibitionDetail/containers/ExhibitionDetailContainer';
@@ -29,6 +35,11 @@ import ProjectEditor 			from './components/ProjectEditor/ProjectEditor'
 import ProjectEditorAbstract 	from './components/ProjectEditor/components/Abstract/Abstract'
 import ProjectEditorFunding 	from './components/ProjectEditor/components/Funding/Funding'
 import ProjectEditorOverview 	from './components/ProjectEditor/components/Overview/Overview'
+
+import ProductEditor 			from './components/ProductEditor/ProductEditor'
+import ProductEditorAbstract 	from './components/ProductEditor/components/Abstract/Abstract'
+import ProductEditorFunding 	from './components/ProductEditor/components/Funding/Funding'
+import ProductEditorOverview 	from './components/ProductEditor/components/Overview/Overview'
 
 import ExhibitionEditor from './components/ExhibitionEditor'
 import ExhibitionEditorAbstract from './components/ExhibitionEditor/components/Abstract'
@@ -59,6 +70,15 @@ const routes = (
 			<Route path="new" component={ ProjectEditor }></Route>
 		</Route>
 
+		<Route path="products/:producttName" component={ProductDetail}>
+			// Project Detail: Overview, Post, Ranking, QnA, ...
+			<IndexRoute component={ProductDetailOverview} />
+			<Route path="post" component={ ProductDetailPost }></Route>
+			<Route path="ranking" component={ ProductDetailRanking }></Route>
+			<Route path="qna" component={ ProductDetailQnA }></Route>
+			{/* <Route path="new" component={ ProductEditor }></Route> */}
+		</Route>
+
 		<Route path="exhibitions" component={Exhibitions}>
 		</Route>
 
@@ -85,6 +105,13 @@ const routes = (
 			<Route path="abstract" component={ ProjectEditorAbstract }></Route>
 			<Route path="funding" component={ ProjectEditorFunding }></Route>
 			<Route path="overview" component={ ProjectEditorOverview }></Route>
+		</Route>
+
+		<Route path="product-editor" component={ProductEditor}>
+			<IndexRoute component={ProductEditorAbstract} />
+			<Route path="abstract" component={ ProductEditorAbstract }></Route>
+			<Route path="funding" component={ ProductEditorFunding }></Route>
+			<Route path="overview" component={ ProductEditorOverview }></Route>
 		</Route>
 
 		<Route path="exhibition-editor" component={ExhibitionEditor}>
