@@ -1,9 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 
-const borderStyle = {
-	border: '1px solid gray'
-}
-
 
 class PostComments extends Component {
 
@@ -33,10 +29,9 @@ class PostComments extends Component {
 
 
 		return (
-			<div className="project-detail-post-item-comments-container" style={borderStyle}>
+			<div className="project-detail-post-item-comments-container">
 				<div>
 				 	<button onClick={this._onClick.bind(this)}>댓글 {comments.length}개</button>
-					<span>좋아요 {postLikes}개</span>
 				</div>
 				{ this.state.commentsOpend ? item : null }
 			</div>

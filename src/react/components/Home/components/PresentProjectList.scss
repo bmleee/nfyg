@@ -52,12 +52,22 @@
 	color : #444;
 	font-weight : 500;
 	font-size : 16px;
+	width : 100px;
+	text-align : left;
+	@media (max-width : 500px) {
+		width : 80px;
+	}
 }
 .project-summary-current-money {
 	float : right;
 	color : #444;
 	font-weight : 500;
 	font-size : 16px;
+	width : 100px;
+	text-align : right;
+	@media (max-width : 500px) {
+		width : 80px;
+	}
 }
 .present-more-button:before {
 	font-family : Ionicons;

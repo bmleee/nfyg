@@ -72,7 +72,7 @@ const PostIntroWrapper = ({value}) => !!value
 ?	<span>{value}</span>
 : <span></span>
 const PostIntroForm = ({value, onChange}) =>
-	<input type="text" value={value} onChange={onChange}/>
+	<textarea rows="3" cols="45" value={value} onChange={onChange}/>
 
 // ----
 const CreatorNameWrapper = ({value}) => !!value
@@ -170,6 +170,19 @@ const Abstract = ({
 				Form={ShortTitleForm}
 				classNameopen ="editor-open-container"
 			/>
+			
+			<FormWrapper
+				title="프로젝트 요약"
+				valueType={VALUE_TYPE.TEXT}
+				alt="포스트탭에서 보여줄 인트로 문구를 입력하세요"
+				initialValue={postIntro}
+				submitCaption={'요약 내용을 입력하세요'}
+				submitCaptionsub={'입력하기'}
+				onSubmit={_onPostIntroSubmit}
+				Wrapper={PostIntroWrapper}
+				Form={PostIntroForm}
+				classNameopen ="editor-open-container"
+			/>
 
 			<FormWrapper
 				title="프로젝트 대표이미지"
@@ -220,19 +233,6 @@ const Abstract = ({
 				onSubmit={_onStateSubmit}
 				Wrapper={StateWrapper}
 				Form={StateForm}
-				classNameopen ="editor-open-container"
-			/>
-
-			<FormWrapper
-				title="프로젝트 요약"
-				valueType={VALUE_TYPE.TEXT}
-				alt="포스트탭에서 보여줄 인트로 문구를 입력하세요"
-				initialValue={postIntro}
-				submitCaption={'요약 내용을 입력하세요'}
-				submitCaptionsub={'입력하기'}
-				onSubmit={_onPostIntroSubmit}
-				Wrapper={PostIntroWrapper}
-				Form={PostIntroForm}
 				className ="exhibition-eng-title"
 				classNameopen ="editor-open-container"
 			/>

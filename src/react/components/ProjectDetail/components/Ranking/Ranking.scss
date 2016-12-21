@@ -1,10 +1,11 @@
 .sharing-name {
-	font-size : 18px;
-	font-weight : 800;
+	font-size : 18px !important;
+	font-weight : 800 !important;
 	display : inline-block;
 }
 .sharing-money {
 	color : #4b709a;
+	font-weight : 600 !important;
 	display : inline-block;
 }
 
@@ -42,9 +43,7 @@
 
 .ranking-fb-icon-list {
 	border-radius : 50px;
-	-webkit-box-shadow: 1px 1px 2px 0px rgba(0,0,0,0.75);
--moz-box-shadow: 1px 1px 2px 0px rgba(0,0,0,0.75);
-box-shadow: 1px 1px 2px 0px rgba(0,0,0,0.75);
+	border : 2px solid #ddd;
 }
 
 .project-detail-ranking-info:first-child {

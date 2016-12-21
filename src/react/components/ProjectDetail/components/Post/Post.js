@@ -5,7 +5,6 @@ import {
 } from './';
 
 import {date2string} from '~/src/react/lib/utils'
-const borderStyle = { border: '1px solid gray' }
 
 class Post extends Component {
 
@@ -30,7 +29,7 @@ class Post extends Component {
 			comments,
 			content
 		}, index) => (
-			<div className="project-detail-post-item" key={index} style={borderStyle}>
+			<div className="project-detail-post-item" key={index}>
 				<div>
 					<img src={author.iconSrc} alt=""/>
 					<span>{author.name}</span>
@@ -53,16 +52,17 @@ class Post extends Component {
 
 		return (
 			<div className="project-detail-post">
+				{/*
 				<div className="project-detail-post-heading" style={borderStyle}>
 					<img src={iconSrc} alt=""/>
 					<span>{description}</span>
 					<span>{intro}</span>
 					<button>열람 신청하기</button>
 				</div>
+				*/}
 				<div className="project-detail-post-container">
 					{ item }
 				</div>
-				<button>공유로 예술후원 (열람하기)​</button>
 			</div>
 			)
 	}
