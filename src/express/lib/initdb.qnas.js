@@ -1,5 +1,6 @@
 import UserModel from '../models/user'
 import ProjectModel from '../models/project'
+import ProductModel from '../models/product'
 import ExhibitionModel from '../models/exhibition'
 import SponsorModel from '../models/sponsor'
 import PostModel from '../models/post'
@@ -68,6 +69,7 @@ export default async function initQnA() {
 		// create post for 10 qnas
 		let projects = await ProjectModel.find({})
 		let exhibitions = await ExhibitionModel.find({})
+		let products = await ProductModel.find({})
 
 		await Promise.all([
 			Promise.all[
@@ -85,7 +87,16 @@ export default async function initQnA() {
 					.map(
 						async (e) => {
 							let author = await getRandomUser()
-							await createQnA(author, e, 'exhibitions')
+							await createQnA(author, e, 'exhibition')
+						})
+				],
+			Promise.all[
+				products
+					.filter(e => e.qnas.length === 0)
+					.map(
+						async (e) => {
+							let author = await getRandomUser()
+							await createQnA(author, e, 'product')
 						})
 				],
 		])

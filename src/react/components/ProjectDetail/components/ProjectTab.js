@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
+import cx from 'classnames'
 
 const buttonClassName = 'project-tab-button';
 const appliedClassName = 'project-tab-button-clicked';
@@ -13,20 +14,15 @@ class ProjectTab extends Component {
 
 		const url = document.URL;
 
-		const isPost = document.URL.includes('projects/post')
-		const isRanking = document.URL.includes('projects/ranking')
-		const isQnA = document.URL.includes('projects/qna')
+		const isPost = !!document.URL.match(/projects\/.+\/post/)
+		const isRanking = !!document.URL.match(/projects\/.+\/ranking/)
+		const isQnA = !!document.URL.match(/projects\/.+\/qna/)
 		const isOverview = !(isPost || isRanking || isQnA)
 
-		const overviewClassName = isOverview ? `${buttonClassName} ${appliedClassName}` : buttonClassName
-		const postClassName = isPost ? `${buttonClassName} ${appliedClassName}` : buttonClassName
-		const rankClassName = isRanking ? `${buttonClassName} ${appliedClassName}` : buttonClassName
-		const qnaClassName = isQnA ? `${buttonClassName} ${appliedClassName}` : buttonClassName
-
-		console.log('qnaClassName', qnaClassName);
-
-		console.log('ProjectTab', this);
-
+		const overviewClassName = cx({'project-tab-button': true, 'project-tab-button-clicked': isOverview})
+		const postClassName = cx({'project-tab-button': true, 'project-tab-button-clicked': isPost})
+		const rankClassName = cx({'project-tab-button': true, 'project-tab-button-clicked': isRanking})
+		const qnaClassName = cx({'project-tab-button': true, 'project-tab-button-clicked': isQnA})
 
 		// TODO: Apply :project_name
 		return (

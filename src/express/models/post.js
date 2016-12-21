@@ -3,6 +3,7 @@ import mongoose from 'mongoose'
 import { autoIncrement } from '../lib/db'
 import UserModel from './user'
 import ProjectModel from './project'
+import ProductModel from './product'
 
 const Schema = mongoose.Schema;
 
@@ -14,7 +15,8 @@ let PostSchema = new Schema({
 		iconSrc: {type: String, required: true},
 		user: {type: Schema.Types.ObjectId, ref: 'User', required: true}, // used when check edit authority
 	},
-	project: { type: Schema.Types.ObjectId, ref: 'Project', required: true},
+	project: { type: Schema.Types.ObjectId, ref: 'Project'},
+	product: { type: Schema.Types.ObjectId, ref: 'Product'},
 	abstract: {
 		isDirectSupport: {type: Boolean, required: true},
 		thresholdMoney: {type: Number, required: true, default: 0},
@@ -37,15 +39,36 @@ let PostSchema = new Schema({
 	numComments: {type: Number, default: 0},
 });
 
+
+PostSchema.pre('validate', function (next) {
+	if (this.project || this.product) next()
+	else {
+		console.log('this.project', this.project);
+		console.log('this.product', this.product);
+		next(Error('One of project, product field is reuqired!'))
+	}
+})
+
 PostSchema.pre('save', function (next) {
-	ProjectModel.update(
-		{_id: this.project},
-		{$addToSet: { posts: this._id }},
-		function(err) {
-			if(err) next(err)
-			else next()
-		}
-	)
+	if (this.project) {
+		ProjectModel.update(
+			{_id: this.project},
+			{$addToSet: { posts: this._id }},
+			function(err) {
+				if(err) next(err)
+				else next()
+			}
+		)
+	} else if (this.product) {
+		ProductModel.update(
+			{_id: this.product},
+			{$addToSet: { posts: this._id }},
+			function(err) {
+				if(err) next(err)
+				else next()
+			}
+		)
+	}
 })
 
 // Configure the 'PostSchema' to use getters and virtuals when transforming to JSON
@@ -57,6 +80,7 @@ PostSchema.set('toJSON', {
 PostSchema.methods.toFormat = function (type, ...args) {
 	switch (type) {
 		case 'project_detail':
+		case 'product_detail':
 			let user = args[0];
 			// get user's support money
 			return {

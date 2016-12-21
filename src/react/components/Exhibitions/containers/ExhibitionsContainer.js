@@ -1,44 +1,38 @@
 import React, { Component, PropTypes } from 'react'
-import { fetchJSONFile } from '../../../api/AppAPI'
+import { fetchJSONFile, fetchUserAndData } from '../../../api/AppAPI'
 
 import { Exhibitions } from '../components'
 
 import 'babel-polyfill'
 
 class ExhibitionsContainer extends Component {
-	constructor(props) {
-		super(props)
+	state = {
+		exhibitions: [],
+		filteredExhibitions: [],
+		listFilter: '',
 
-		this.state = {
-			exhibitions: [],
-			filteredExhibitions: [],
-			listFilter: '',
-
-			loaded: false,
-		}
-
-		this._onChangeFilter = this._onChangeFilter.bind(this)
+		loaded: false,
 	}
 
 	async componentDidMount() {
-		const newExhibitions = await fetchJSONFile('exhibitions')
+
+		const {
+			user,
+			data: {
+				exhibitions
+			}
+		} = await fetchUserAndData()
+
+		console.log('fetchUserAndData.exhibitions', exhibitions);
+
+		// const newExhibitions = await fetchJSONFile('exhibitions')
+
+		this.props.setUser(user)
 
 		this.setState({
-			exhibitions: newExhibitions,
-			filteredExhibitions: newExhibitions,
+			exhibitions,
+			filteredExhibitions: exhibitions,
 			loaded: true
-		})
-	}
-
-	_onChangeFilter(filter) {
-		let newList = [];
-
-		if (filter.length > 0) newList = this.state.exhibitions.filter( s => s.state === filter)
-		else newList = Object.assign([], this.state.exhibitions)
-
-		this.setState({
-			filteredExhibitions: newList,
-			listFilter: filter
 		})
 	}
 
@@ -54,6 +48,18 @@ class ExhibitionsContainer extends Component {
 				listFilter={listFilter} />
 		:
 			<div></div>
+	}
+
+	_onChangeFilter = (filter) => {
+		let newList = [];
+
+		if (filter.length > 0) newList = this.state.exhibitions.filter( s => s.state === filter)
+		else newList = Object.assign([], this.state.exhibitions)
+
+		this.setState({
+			filteredExhibitions: newList,
+			listFilter: filter
+		})
 	}
 }
 

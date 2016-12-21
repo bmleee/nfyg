@@ -12,7 +12,20 @@ export const SelectOptions = {
 		{ value: 'culture', label: '문화' },
 	],
 
+	ProductCategory: [
+		{ value: 'life-style', label: '라이프 스타일' },
+		{ value: 'beauty', label: '뷰티' },
+		{ value: 'health', label: '건강' },
+		{ value: 'culture', label: '문화' },
+	],
+
 	ProjectState:  [
+		{ "value": "in-progress", "label": "진행중" },
+		{ "value": "preparing", "label": "준비중" },
+		{ "value": "completed", "label": "완료" },
+	],
+
+	ProductState:  [
 		{ "value": "in-progress", "label": "진행중" },
 		{ "value": "preparing", "label": "준비중" },
 		{ "value": "completed", "label": "완료" },

@@ -11,10 +11,10 @@ class ExhibitionsList extends Component {
 		const { exhibitions, } = this.props;
 
 		let items = exhibitions.map( ({
-			imgSrc, title, state, genre, city, creator: {name, iconSrc,}, schedule, location,
+			imgSrc, title, state, genre, city, creator: {name, iconSrc,}, schedule, location, link
 		}, index) => (
 			<div className="exhibitions-list-item" style={style}>
-				<Link to="/exhibitions/detail">
+				<Link to={link}>
 					<div className="ex-thumbnail">
 						<div className="ex-centered">
 							<img className="home-exhibition-image" src={imgSrc} alt=""/>
@@ -22,7 +22,7 @@ class ExhibitionsList extends Component {
 					</div>
 				</Link>
 				<div className="ex-list-info">
-				<Link to="/exhibitions/detail"><h4>{title} : {genre}</h4>
+				<Link to={link}><h4>{title} : {genre}</h4>
 				<p className="ex-location-schedule">{location}, {schedule}</p></Link>
 				{/* closing '00' days 로 표시 */}
 				</div>

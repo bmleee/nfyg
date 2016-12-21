@@ -1,46 +1,31 @@
 import React, { Component, PropTypes } from 'react'
-import { fetchJSONFile } from '../../../../api/AppAPI'
+import { fetchJSONFile, fetchUserAndData } from '../../../../api/AppAPI'
 
 import { ExhibitionDetail } from '../components'
 
 import 'babel-polyfill'
 
 class ExhibitionDetailContainer extends Component {
-	constructor(props) {
-		super(props)
 
-		this.state = {
-			exhibition: {},
-			loaded: false
-		}
-
-		this.getChildContext = this.getChildContext.bind(this)
+	state = {
+		exhibition: {},
+		loaded: false
 	}
 
-	getChildContext() {
-		let {
-			heading,
-			overview,
-			recommendedExhibitions,
-			artworks,
-			post,
-			qna,
-		} = this.state.exhibition;
-
-		return {
-			heading,
-			overview,
-			recommendedExhibitions,
-			artworks,
-			post,
-			qna,
-		};
+	getChildContext = () => {
+		return {...this.state.exhibition}
 	}
 
 	async componentDidMount() {
-		const newExhibition = await fetchJSONFile('exhibition')
+		const {
+			user,
+			data: {
+				exhibition
+			}
+		} = await fetchUserAndData()
 
-		this.setState({ exhibition: newExhibition, loaded: true })
+		this.props.setUser(user)
+		this.setState({ exhibition, loaded: true })
 	}
 
 	render() {
@@ -48,25 +33,17 @@ class ExhibitionDetailContainer extends Component {
 		const children = this.props.children &&
 			this.state.exhibition &&
 			React.cloneElement(this.props.children, {
-				heading: this.state.exhibition.heading,
-				overview: this.state.exhibition.overview,
-				recommendedExhibitions: this.state.exhibition.recommendedExhibitions,
-				artworks: this.state.exhibition.artworks,
-				post: this.state.exhibition.post,
-				qna: this.state.exhibition.qna,
-				getChildContext: this.getChildContext,
+				...this.state.exhibition
 			})
 
 		return loaded
-			// ? <ExhibitionDetail {...exhibition} />
 			?
 				<ExhibitionDetail
-					exhibition={exhibition}
-					getChildContext={this.getChildContext} >
+					exhibition={exhibition}>
 					{children}
 				</ExhibitionDetail>
 			:
-				<div>ExhibitionDetail is loading</div>
+				<div>loading...</div>
 	}
 }
 
