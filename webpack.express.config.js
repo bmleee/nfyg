@@ -67,7 +67,7 @@ module.exports = {
 				],
 				exclude: /node_modules/,
 			},
-			{ test:  /\.json$/, loader: 'json-loader' },
+			{ test:  /\.json$/, loader: 'json-loader', exclude: /nodemailer/ },
 			// from react-rte/webpack.config.js
 			{
 				test: /\.css$/,
