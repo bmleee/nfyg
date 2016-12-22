@@ -1,10 +1,26 @@
 .project-detail-qna {
 	display: flex;
 	flex-flow: column;
+	
+	.project-detail-qna-item {
+		padding : 25px 0px 30px 0px;
+		border-bottom : 1px solid #eee;
+	}
+	.project-detail-qna-item:last-child {
+		border-bottom : none;
+	}
+	.sharing-fb-icon-list {
+		margin-right : 0px !important;
+	}
+	.sharing-name {
+		margin-right : 6px;
+	}
 
 	.project-detail-qna-form {
 		display: flex;
 		flex-flow: column;
+		padding-bottom : 30px;
+		border-bottom : 2px solid #eee;
 
 		& > div {
 			display: flex;
@@ -15,5 +31,54 @@
 			}
 		}
 	}
-
+	
+	.qna-form-user-icon {
+		border-radius : 100px;
+		border : 2px solid #ddd;
+		margin-right : 20px;
+	}
+	.qna-form-textarea {
+		width : 700px;
+		border : 2px solid #ddd;
+		border-radius : 3px;
+		padding : 8px;
+		font-size : 16px;
+		@media (max-width : 991px) {
+				width : 100%;
+			@media (max-width : 500px) {
+				width : 100%;
+			}	
+			}
+	}
+	.qna-form-textarea:focus {
+		border : 2px solid #4b709a;
+		outline : none;
+	}
+	.qna-form-submit-container {
+		display : block !important;
+		text-align : right;
+		.qna-form-submit {
+			margin-top : 8px;
+			width : 700px;
+			height : 40px;
+			border : none;
+			outline : none;
+			border-radius : 3px;
+			background : #4b709a;
+			color : #fff;
+			font-size : 16px;
+			font-weight : 600;
+			@media (max-width : 991px) {
+				width : 100%;
+				height : 38px;
+				font-size : 15px;
+			@media (max-width : 500px) {
+				width : 100%;
+			}	
+			}
+		}
+		.qna-form-submit:hover {
+			background : #354c67;
+		}
+	}
 }

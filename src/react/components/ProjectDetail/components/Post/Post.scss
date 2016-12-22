@@ -9,9 +9,13 @@
 		.project-detail-post-item {
 			display: flex;
 			flex-flow: column nowrap;
-
+			margin-bottom : 40px;
 		}
-
+		.editorStyles__viewer {
+			border : none;
+			padding : 0px;
+			margin : 2em 0px;
+		}
 	}
 
 }
@@ -21,11 +25,14 @@
 	height : 15px;
 	line-height : 0.9;
 	font-weight : 600 !important;
-	color : #666;
+	color : #888;
 	padding-right : 10px;
 	margin-right : 10px;
-	border-right : 1px solid #666;
+	border-right : 1px solid #888;
 }
-.post-item-title-detail:nth-child(3) {
+.post-item-title-detail:nth-child(4) {
 	border-right : none;
+}
+.post-item-title {
+	margin : 15px 0px !important;
 }

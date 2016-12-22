@@ -86,7 +86,7 @@ class Ranking extends Component {
 		}, index) => (
 			<div key={index} className="project-detail-ranking-item">
 				<div className="project-ranking-th">
-			    <p className="sharing-fb-icon-list">
+			    	<p className="sharing-fb-icon-list">
 						<img className="ranking-fb-icon-list" key={index} width={50} height={50}
 							src={`https://graph.facebook.com/${fbId}/picture`} />
 					</p>
@@ -98,16 +98,16 @@ class Ranking extends Component {
 	        		</p>
 	        		<div className="sharing-icon-summary">
 		        	<p className="likes-num">
+			        	{ likes.toLocaleString() }
 						<img className="sharing-icon" src="https://7pictures.co.kr/wp-content/uploads/2016/08/likes.png" scale="0" />
-						{ likes.toLocaleString() }
 					</p>
 					<p className="likes-num">
-						<img className="sharing-icon" src="https://7pictures.co.kr/wp-content/uploads/2016/08/likes.png" scale="0" />
-						{ likes.toLocaleString() }
+						{ comments.toLocaleString() }
+						<img className="sharing-icon" src="https://7pictures.co.kr/wp-content/uploads/2016/08/comment.png" scale="0" />
 					</p>
 					<p className="likes-num">
-						<img className="sharing-icon" src="https://7pictures.co.kr/wp-content/uploads/2016/08/likes.png" scale="0" />
-						{ likes.toLocaleString() }
+						{ shares.toLocaleString() }
+						<img className="sharing-icon" src="https://7pictures.co.kr/wp-content/uploads/2016/08/share.png" scale="0" />
 					</p>
 					</div>
 				</div>
@@ -135,8 +135,6 @@ class Ranking extends Component {
 				<div className="project-detail-ranking-container">
 					{ rankingDetail }
 				</div>
-
-				<button>공유로 예술 후원하기(열람하기)</button>
 			</div>
 		)
 	}

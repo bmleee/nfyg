@@ -38,6 +38,12 @@ class PresentProjectList extends Component {
 			count: this.state.count + this.state.windowSize,
 		})
 	}
+	
+	componentDidMount() {
+		this.setState({
+			numProjects: this.props.projects.length
+		})
+	}
 
 	render() {
 		let { projects, } = this.props;
@@ -86,7 +92,7 @@ class PresentProjectList extends Component {
 				</div>
 				<div className="present-more-project">
 					{
-						this.state.numProjects < this.state.count
+						this.state.numProjects > 4 && this.state.numProjects > this.state.count
 							? <button className="present-more-button" onClick={this.expandList.bind(this)}> 프로젝트 더보기</button>
 							: null
 					}

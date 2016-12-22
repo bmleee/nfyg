@@ -40,7 +40,7 @@ class Post extends Component {
 					<span className="post-item-title-detail">{date2string(created_at)}</span>
 					<span className="post-item-title-detail">{condition}</span>
 				</div>
-				<div>
+				<div className="post-item-content-summary">
 					{
 						opened
 							? <Viewer raw={content}/>

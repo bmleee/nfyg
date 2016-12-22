@@ -8,6 +8,19 @@
 	font-weight : 600 !important;
 	display : inline-block;
 }
+.sharing-icon-summary {
+	width : 50px;
+	text-align : right;
+	display : inline-block;
+	float : right;
+	.likes-num {
+		width : 50px;
+		text-align : right;
+		margin-bottom : 3px;
+		font-weight : 600;
+		color : #4b709a;
+	}
+}
 
 .project-detail-ranking {
 	display: flex;
@@ -27,11 +40,21 @@
 				width: 16px;
 				height: 16px;
 				margin-bottom : 2px;
-				margin-left: 0px !important;
+				margin-left: 5px !important;
 			}
 
 		}
 
+	}
+	.Select-control {
+		border : 2px solid #eee;
+		border-radius : 3px !important;
+	}
+	.Select-clear-zone {
+		width : 6px;
+	}
+	.Select-menu-outer {
+		margin-top : -2px;
 	}
 }
 
