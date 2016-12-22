@@ -15,6 +15,10 @@ class Post extends Component {
 				posts
 			},
 		} = this.props;
+		
+		let title = "포스트 제목 예시";
+		let condition = "전체공개";
+		let postnum = 4;
 
 		console.log('Post', this);
 
@@ -30,14 +34,11 @@ class Post extends Component {
 			content
 		}, index) => (
 			<div className="project-detail-post-item" key={index}>
-				<div>
-					<img src={author.iconSrc} alt=""/>
-					<span>{author.name}</span>
-					<button>후원자 접근</button>
-				</div>
-				<div>
-					<span>함께하고 있는 후원자: {numSupporters}명</span>
-					<span>작성일: {date2string(created_at)}</span>
+				<div className="post-item-title-summary">
+					<h3 className="post-item-title">{title}</h3>
+					<span className="post-item-title-detail">{postnum}번째 업데이트</span>
+					<span className="post-item-title-detail">{date2string(created_at)}</span>
+					<span className="post-item-title-detail">{condition}</span>
 				</div>
 				<div>
 					{
