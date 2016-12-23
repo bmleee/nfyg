@@ -33,6 +33,18 @@
 .post-item-title-detail:nth-child(4) {
 	border-right : none;
 }
+.post-item-title-detail:nth-child(4):before {
+	font-family : Ionicons;
+	content : "\f276";
+	margin-right : 5px;
+	font-size : 13px;
+}
 .post-item-title {
 	margin : 15px 0px !important;
+}
+.post-item-title:before {
+	font-family : Ionicons;
+	content : "\f209";
+	display : block;
+	color : #777;
 }

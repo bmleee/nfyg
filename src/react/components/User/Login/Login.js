@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import FontAwesome from 'react-fontawesome'
+import { Link } from 'react-router';
 
 import axios from 'axios'
 
@@ -19,15 +20,17 @@ class Login extends Component {
 				</button>
 				<p className="login-more">또는</p>
 
-				<form ref="form" method="post" action="/api/users/login" encType="multipart/form-data">
+				<form className="user-login-form" ref="form" method="post" action="/api/users/login" encType="multipart/form-data">
 					<div>
 						<input type="email" className="user-login-id" name="email" placeholder="이메일" ref="email"/>
 					</div>
 					<div>
 						<input type="password" className="user-login-password" name="password" placeholder="비밀번호" ref="password" autoComplete="off" />
 					</div>
+					<button className="password-find">비밀번호 찾기</button>
 					<input type="submit" className="login-btn" value="LOG IN" onClick={this._onLocalClick} />
 				</form>
+				<p className="create-id-text">계정이 없으신가요?<Link to="/signup"><button className="create-id">새 계정 만들기</button></Link></p>
 			</div>
 		</div>
 		)
