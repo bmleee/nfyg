@@ -36,6 +36,10 @@
 		border-radius : 100px;
 		border : 2px solid #ddd;
 		margin-right : 20px;
+		@media (max-width : 500px) {
+				width : 50px !important;
+				height : 50px !important;
+			}	
 	}
 	.qna-form-textarea {
 		width : 700px;
