@@ -56,22 +56,29 @@
     .Select-control {
 	width : 100%;
 	float : right;
-}
-.Select-menu-outer {
+    }
+    .Select-menu-outer {
 	width : 100%;
 	position : absolute;
 	left : 0%;
-}
+    }
     .project-detail-tab {
     margin : 0px auto 30px auto;
+    box-shadow: none;
 }
-.project-tab-button {
-    padding : 16px 23px 15px 23px;
+    .project-tab-button {
+    padding : 13px 23px 13px 23px;
     font-size : 16px;
+    width : 25%;
+    background : #f6f6f6;
+    -webkit-box-shadow: inset 0px -1px 0px 0px #ddd;
+    -moz-box-shadow: inset 0px -1px 0px 0px #ddd;
+    box-shadow: inset 0px -1px 0px 0px #ddd;
 }
 .project-tab-button-clicked {
-    box-shadow : 0px 1px 0px 0px #4b709a;
+    box-shadow : inset 0px -2px 0px 0px #4b709a;
     color : #4b709a;
+    background : #fff;
 }
 }   
 }

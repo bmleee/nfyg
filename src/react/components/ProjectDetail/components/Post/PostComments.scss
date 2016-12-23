@@ -5,6 +5,28 @@
 	.project-detail-post-item-comments-item {
 		display: flex;
 		flex-flow: column;
-
+		padding : 20px 0px;
+		border-top : 1px solid #ddd;
+	}
+	.project-detail-post-item-comments-item:first-child {
+		border-top : 2px solid #ddd;
+	}
+	
+	.ranking-fb-icon-list {
+		margin-top : 4px;
 	}
 }
+
+.post-more-button {
+		height : 40px;
+		width : 100%;
+		background : transparent;
+		border : none;
+		outline : none;
+		border-top : 1px solid #ddd;
+		border-bottom : 1px solid #ddd;
+		margin-top : 10px;
+	}
+	.post-more-button:hover {
+		color : #4b709a;
+	}
