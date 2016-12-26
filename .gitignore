@@ -10,3 +10,4 @@ npm-debug.*
 .gulp-cache
 .tern-project
 .c9
+backup
