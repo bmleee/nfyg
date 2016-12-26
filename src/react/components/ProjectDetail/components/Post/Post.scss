@@ -9,9 +9,42 @@
 		.project-detail-post-item {
 			display: flex;
 			flex-flow: column nowrap;
-
+			margin-bottom : 40px;
 		}
-
+		.editorStyles__viewer {
+			border : none;
+			padding : 0px;
+			margin : 2em 0px;
+		}
 	}
 
+}
+.post-item-title-detail {
+	display : inline-block;
+	font-size : 15px !important;
+	height : 15px;
+	line-height : 0.9;
+	font-weight : 600 !important;
+	color : #888;
+	padding-right : 10px;
+	margin-right : 10px;
+	border-right : 1px solid #888;
+}
+.post-item-title-detail:nth-child(4) {
+	border-right : none;
+}
+.post-item-title-detail:nth-child(4):before {
+	font-family : Ionicons;
+	content : "\f276";
+	margin-right : 5px;
+	font-size : 13px;
+}
+.post-item-title {
+	margin : 15px 0px !important;
+}
+.post-item-title:before {
+	font-family : Ionicons;
+	content : "\f209";
+	display : block;
+	color : #777;
 }

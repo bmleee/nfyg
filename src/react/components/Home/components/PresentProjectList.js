@@ -38,6 +38,12 @@ class PresentProjectList extends Component {
 			count: this.state.count + this.state.windowSize,
 		})
 	}
+	
+	componentDidMount() {
+		this.setState({
+			numProjects: this.props.projects.length
+		})
+	}
 
 	render() {
 		let { projects, } = this.props;
@@ -70,7 +76,7 @@ class PresentProjectList extends Component {
 							<div className="project-summary-detail">
 							<div className="project-remain-days">{Math.round(currentMoney / targetMoney * 100)}%</div>
 							<div className="project-summary-current-money">D-{remainingDays}</div>
-							{currentMoney}원
+							{currentMoney.toLocaleString()}원
 							</div>
 						    {/* 직접후원 {numDirectSupports}명 | 간접후원 {numIndirectSupports}명 */}
 						</div>
@@ -86,7 +92,7 @@ class PresentProjectList extends Component {
 				</div>
 				<div className="present-more-project">
 					{
-						this.state.numProjects < this.state.count
+						this.state.numProjects > 4 && this.state.numProjects > this.state.count
 							? <button className="present-more-button" onClick={this.expandList.bind(this)}> 프로젝트 더보기</button>
 							: null
 					}

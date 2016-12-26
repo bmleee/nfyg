@@ -2,7 +2,7 @@
 
 // Load the module dependencies
 // var User = require('mongoose').model('User'),
-const User = require('../models/user'),
+const User = require('../../models/user'),
 	passport = require('passport');
 
 // Create a new error handling controller method

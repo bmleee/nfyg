@@ -7,14 +7,15 @@
 .login-page {
     background : #eee;
     width: 100%;
-    padding : 100px 0px 100px 0px;
+    padding : 70px 0px 70px 0px;
+    min-height : 750px;
 }
 .user-login {
     width : 345px;
     margin : 0px auto;
     text-align : center;
     border : 1px solid #ddd;
-    padding : 50px 30px;
+    padding : 50px 30px 25px 30px;
     background : #fff;
 }
 
@@ -48,6 +49,7 @@
 
 .login-btn {
     margin-top : 10px;
+    margin-bottom : 20px;
 }
 
 .user-login-id {
@@ -75,4 +77,37 @@
     outline : none;
     border : 2px solid #4b709a;
     transition : opacity, 250ms;
+}
+
+.password-find {
+    background : transparent;
+    border : none;
+    outline : none;
+    font-size : 16px;
+    font-weight : 600;
+    text-align : right;
+    float : right;
+    margin-top : 5px;
+    padding: 0px !important;
+}
+.create-id {
+    background : transparent;
+    border : none;
+    outline : none;
+    font-size : 16px;
+    font-weight : 600;
+    padding: 0px !important;
+    margin-left : 5px;
+}
+.password-find:hover, .create-id:hover {
+    color : #4b709a;
+}
+.create-id-text {
+    text-align : left;
+    margin-top : 15px !important;
+    font-size : 16px !important;
+}
+
+.user-login-form {
+    border-bottom : 2px solid #eee;
 }

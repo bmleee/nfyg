@@ -11,14 +11,14 @@
 
 import express from 'express';
 
-// import cache from '../lib/cache'
+// import cache from '../../lib/cache'
 
-import UserModel from '../models/user'
-import ProjectModel, {restrictedNames} from '../models/project'
-import ProductModel from '../models/product'
-import ExhibitionModel from '../models/exhibition'
-import MagazineModel from '../models/magazine'
-import SponsorModel from '../models/sponsor'
+import UserModel from '../../models/user'
+import ProjectModel, {restrictedNames} from '../../models/project'
+import ProductModel from '../../models/product'
+import ExhibitionModel from '../../models/exhibition'
+import MagazineModel from '../../models/magazine'
+import SponsorModel from '../../models/sponsor'
 
 const router = express.Router();
 

@@ -5,7 +5,6 @@ import {
 } from './';
 
 import {date2string} from '~/src/react/lib/utils'
-const borderStyle = { border: '1px solid gray' }
 
 class Post extends Component {
 
@@ -16,6 +15,10 @@ class Post extends Component {
 				posts
 			},
 		} = this.props;
+		
+		let title = "포스트 제목 예시";
+		let condition = "전체공개";
+		let postnum = 4;
 
 		console.log('Post', this);
 
@@ -30,17 +33,14 @@ class Post extends Component {
 			comments,
 			content
 		}, index) => (
-			<div className="project-detail-post-item" key={index} style={borderStyle}>
-				<div>
-					<img src={author.iconSrc} alt=""/>
-					<span>{author.name}</span>
-					<button>후원자 접근</button>
+			<div className="project-detail-post-item" key={index}>
+				<div className="post-item-title-summary">
+					<h3 className="post-item-title">{title}</h3>
+					<span className="post-item-title-detail">{postnum}번째 업데이트</span>
+					<span className="post-item-title-detail">{date2string(created_at)}</span>
+					<span className="post-item-title-detail">{condition}</span>
 				</div>
-				<div>
-					<span>함께하고 있는 후원자: {numSupporters}명</span>
-					<span>작성일: {date2string(created_at)}</span>
-				</div>
-				<div>
+				<div className="post-item-content-summary">
 					{
 						opened
 							? <Viewer raw={content}/>
@@ -53,16 +53,17 @@ class Post extends Component {
 
 		return (
 			<div className="project-detail-post">
+				{/*
 				<div className="project-detail-post-heading" style={borderStyle}>
 					<img src={iconSrc} alt=""/>
 					<span>{description}</span>
 					<span>{intro}</span>
 					<button>열람 신청하기</button>
 				</div>
+				*/}
 				<div className="project-detail-post-container">
 					{ item }
 				</div>
-				<button>공유로 예술후원 (열람하기)​</button>
 			</div>
 			)
 	}

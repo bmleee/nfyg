@@ -40,11 +40,12 @@
 }
 
 .magazine-list-item:first-child img.home-magazine-image {
-position: absolute;
+    position: absolute;
     top: 0;
     left: 0;   
     width: auto;
     height: 100%;
+    max-width : 200%;
     -webkit-transform: translate(-50%,-50%);
     -ms-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);

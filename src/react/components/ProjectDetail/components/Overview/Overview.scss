@@ -6,6 +6,9 @@
 	.project-detail-overview-info {
 		display: flex;
 		flex-flow: column;
+		.editorStyles__viewerWrapper {
+			width : 100%;
+		}
 
 	}
 }
