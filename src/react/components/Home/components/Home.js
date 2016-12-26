@@ -53,7 +53,7 @@ class Home extends Component {
 				<div className ="home-body">
 					{/* <HomeInfo title="공유로 후원한 금액" amount={10000} /> */}
 
-					{/* 프로젝트 제안 MODAL
+					{/* 프로젝트 제안 MODAL */}
 
 						<input type="button" value="Open" onClick={() => this.openModal()} />
 						<Modal className="project-suggest-modal" visible={this.state.visible} width="480" height="560px" effect="fadeInDown" onClickAway={() => this.closeModal()}>
@@ -86,7 +86,7 @@ class Home extends Component {
 						</div>
 						</Modal>
 
-      		*/}
+      		
 					<HomeHeading title="What's on?" />
 					<PresentProjectList projects={presentProjects} />
 
