@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import Select from 'react-select';
 
 import {date2string} from '~/src/react/lib/utils';
+import LinesEllipsis from 'react-lines-ellipsis'
 
 import _ from 'lodash';
 
@@ -88,7 +89,7 @@ class Ranking extends Component {
 				<div className="project-ranking-th">
 			    	<p className="sharing-fb-icon-list">
 						<img className="ranking-fb-icon-list" key={index} width={50} height={50}
-							src={`https://graph.facebook.com/${fbId}/picture`} />
+							src={`https://graph.facebook.com/${fbId}/picture`}  />
 					</p>
 
 					<p className="sharing-summary">
