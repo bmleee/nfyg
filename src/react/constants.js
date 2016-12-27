@@ -71,8 +71,7 @@ export const SelectOptions = {
 
 	Ranking: [
 		{ "value": "support_at", "label": "최신순" },
-		{ "value": "likes", "label": "좋아요순" },
-		{ "value": "money", "label": "금액순" }
+		{ "value": "likes", "label": "좋아요순" }
 	],
 
 	Reward: [

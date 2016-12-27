@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import Select from 'react-select';
 
 import {date2string} from '~/src/react/lib/utils';
-import LinesEllipsis from 'react-lines-ellipsis'
+import {ReadMore} from 'react-read-more';
 
 import _ from 'lodash';
 
@@ -94,8 +94,10 @@ class Ranking extends Component {
 
 					<p className="sharing-summary">
 				    <span><p className="sharing-name">{name}</p>{' '}{date2string(support_at) /* TODO: Date to string... */}</span>
-				    <span>{message}</span>
-				    <span><p className="sharing-money">{money.toLocaleString()}</p>원을 후원함</span>
+				    <ReadMore lines={1} onShowMore={this.props.onChange} text="더보기">
+                		{message}
+            		</ReadMore>
+				    <span><p className="sharing-money">{money.toLocaleString()}원</p>을 후원함</span>
 	        		</p>
 	        		<div className="sharing-icon-summary">
 		        	<p className="likes-num">
