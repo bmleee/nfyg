@@ -85,6 +85,22 @@
 }
 .sharing-summary {
 	width : 80%;
+	br {
+		display : none;
+	}
+	a {
+		color : #4b709a !important;
+		font-weight : 600;
+	}
+	a:before {
+		font-family : Ionicons;
+		content : "\f20b";
+		font-size : 13px;
+		margin-right : 2px;
+		@media (max-width: 991px) {
+			margin-bottom : 1px;
+		}
+	}
 }
 
 .project-ranking-th {
