@@ -28,7 +28,7 @@
 	flex-flow: column;
 
 	.project-detail-ranking-info {
-
+			font-size : 17px;
 	}
 
 	.project-detail-ranking-container {
@@ -74,7 +74,7 @@
 }
 
 .project-detail-ranking-info:first-child {
-	margin-bottom : 10px;
+	margin-bottom : 20px;
 }
 .project-detail-ranking-info {
 	text-align : center;
@@ -141,4 +141,11 @@
 	width : 57%;
 }
 }
+}
+
+.sharing-number {
+	color : #4b709a;
+	display : inline-block;
+	font-size : 17px !important;
+	font-weight : 600 !important;
 }

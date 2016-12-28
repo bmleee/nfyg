@@ -55,7 +55,7 @@ class Home extends Component {
 
 					{/* 프로젝트 제안 MODAL */}
 
-						<input type="button" value="Open" onClick={() => this.openModal()} />
+						<input type="button" value="프로젝트 제안하기" onClick={() => this.openModal()} />
 						<Modal className="project-suggest-modal" visible={this.state.visible} width="480" height="560px" effect="fadeInDown" onClickAway={() => this.closeModal()}>
 						<div className="project-modal-header">
 							<h3 className="project-modal-header-title">프로젝트 제안하기</h3>

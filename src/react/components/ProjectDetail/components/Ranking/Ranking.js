@@ -49,7 +49,7 @@ class Ranking extends Component {
 							src={`https://graph.facebook.com/${fbId}/picture`} />
 					)
 				}
-				외 { indirectSupporters.length - recent3IndirectSupporters.length }명이 공유로 후원함
+				외 <p className="sharing-number">{ indirectSupporters.length - recent3IndirectSupporters.length }명</p>이 공유로 후원함
 			</div>
 		)
 
