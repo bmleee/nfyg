@@ -30,7 +30,7 @@ class ProjectTab extends Component {
 				<Link to={`/projects/${projectName}`}><button className={overviewClassName}>소 개</button></Link>
 				<Link to={`/projects/${projectName}/post`}><button className={postClassName}>소 식<img className="tab-red-dot" src="/assets/images/red-dot.png" width={4} height={4} /></button></Link>
 				<Link to={`/projects/${projectName}/ranking`}><button className={rankClassName}>응 원</button></Link>
-				<Link to={`/projects/${projectName}/qna`}><button className={qnaClassName}>문 의</button></Link>
+				<Link to={`/projects/${projectName}/qna`}><button className={qnaClassName}>댓 글</button></Link>
 				{/* <button className="project-support-button">후원하기</button> */}
 			</div>
 			)
