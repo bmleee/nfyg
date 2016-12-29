@@ -1,0 +1,45 @@
+.product-tab-button {
+    padding : 18px 30px 15px 30px;
+    background : none;
+    border : none;
+    outline : none;
+    font-size : 18px;
+    font-weight : 500;
+    color : #777;
+}
+
+.product-tab-button-clicked {
+    box-shadow : 0px 1px 0px 0px #4b709a;
+    color : #4b709a;
+}
+
+@media (max-width: 991px) {
+    
+.product-tab-button {
+    padding : 15px 36px;
+    color : #777;
+}
+
+.product-tab-button-clicked {
+    box-shadow : 0px 1px 0px 0px #4b709a;
+    color : #4b709a;
+}
+
+@media (max-width: 500px) {
+.product-tab-button {
+    padding : 13px 23px 13px 23px;
+    font-size : 16px;
+    width : 33.3333333333%;
+    background : #f6f6f6;
+    -webkit-box-shadow: inset 0px -1px 0px 0px #ddd;
+    -moz-box-shadow: inset 0px -1px 0px 0px #ddd;
+    box-shadow: inset 0px -1px 0px 0px #ddd;
+}
+.product-tab-button-clicked {
+    box-shadow : inset 0px -2px 0px 0px #4b709a;
+    color : #4b709a;
+    background : #fff;
+}
+    
+}
+}
