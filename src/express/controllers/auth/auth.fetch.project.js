@@ -16,9 +16,13 @@ import express from 'express';
 import UserModel from '../../models/user'
 import ProjectModel, {restrictedNames} from '../../models/project'
 import ProductModel from '../../models/product'
-import ExhibitionModel from '../../models/exhibition'
-import MagazineModel from '../../models/magazine'
+import PostModel from '../../models/post'
+import QnAModel from '../../models/qna'
 import SponsorModel from '../../models/sponsor'
+
+import * as ac from '../../lib/auth-check'
+import * as renderHelper from '../../lib/renderHelper'
+import * as renderUser from '../../lib/renderUser'
 
 const router = express.Router();
 
@@ -45,7 +49,7 @@ router.get('/:projectName/:option?', async (req, res, next) => {
 	}
 
 	try {
-		const project = await ProjectModel.findOne({"abstract.projectName": projectName})
+		const project = await ProjectModel.findByName(projectName)
 			.populate('sponsor posts qnas')
 
 		if (!project) throw new Error(`no such project in name of ${projectName}`)
@@ -55,10 +59,7 @@ router.get('/:projectName/:option?', async (req, res, next) => {
 		// console.log('projectToRender', JSON.stringify(projectToRender, undefined, 4));
 
 		res.status(200).json({
-			user: {
-				isLoggedIn: !!req.session.user,
-				isAuthorized: true // always true
-			},
+			user: renderUser.authorizedUser(req.session.user),
 			data: {
 				project: projectToRender
 			}
@@ -71,7 +72,52 @@ router.get('/:projectName/:option?', async (req, res, next) => {
 
 router.get('/:projectName/edit', async (req, res) => {
 	console.log('/projects/:projectName/edit');
-	res.json({})
+
+	const { projectName } = req.params
+	const { user } = req.session
+	const project = await ProjectModel.findByName(projectName)
+		.populate('sponsor')
+	console.log('/projects/:projectName/edit.project', project);
+
+	// TODO: activate this
+	// if (!ac.canEdit(user, project)) {
+	// 	return res.status(401).json(renderHelper.unauthorizedUser(user))
+	// }
+
+	res.json({
+		user: renderUser.authorizedUser(user),
+		data: {
+			project: await project.toFormat('edit')
+		}
+	})
+})
+
+// update project
+router.post('/', async (req, res) => {
+	console.log('POST /auth/fetch/projects');
+	// console.log('body', req.body);
+
+	const body = req.body
+	const projectName = body.abstract.projectName
+	const sponsor = await SponsorModel.findOne({sponsorName: body.sponsor.sponsorName})
+	body.sponsor = sponsor
+
+	// console.log("{ 'abstract.project_name': projectName }", 			{ 'abstract.project_name': projectName });
+	try {
+		const r = await ProjectModel.update(
+			{ 'abstract.projectName': projectName },
+			body,
+		)
+
+		console.log('upsert result', r);
+
+		res.status(200).json({response: !!r.ok})
+	} catch (e) {
+		console.error(e);
+		res.state(400).json({ error: e })
+	} finally {
+
+	}
 })
 
 export default router;
