@@ -33,6 +33,8 @@ const ProductSchema = new Schema({
 		creatorDescription: {type: String, required: true},
 	},
 
+	authorizedUsers: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+
 	// sponsor: {
 	// 	type: Schema.Types.ObjectId,
 	// 	ref: 'Sponsor'
@@ -76,12 +78,12 @@ const ProductSchema = new Schema({
 
 });
 
-ProductSchema.pre('update', function (next) {
-	// console.log(this);
-	// this.numPosts = this.posts.length
-	// this.numQnAs = this.qnas.length
-	next()
-})
+// ProductSchema.post('update', function (next) {
+// 	// console.log(this);
+// 	// this.numPosts = this.posts.length
+// 	// this.numQnAs = this.qnas.length
+// 	next()
+// })
 
 // Configure the 'ProductSchema' to use getters and virtuals when transforming to JSON
 ProductSchema.set('toJSON', {
@@ -129,7 +131,7 @@ ProductSchema.methods.toFormat = async function (type, ...args) {
 							link: `/products/${this.abstract.productName}`,
 						}
 
-					case 'in_progress':
+					case 'in-progress':
 					default:
 						return {
 							imgSrc: this.abstract.imgSrc,
@@ -249,6 +251,11 @@ ProductSchema.methods.pushQnA = async function (_id) {
 		throw e
 	}
 }
+
+ProductSchema.methods.authorizedTo = function (user) {
+	return !!this.authorizedUsers.filter( _id => user.equals(user))
+}
+
 
 
 const ProductModel = mongoose.model('Product', ProductSchema);

@@ -18,12 +18,14 @@ let PostSchema = new Schema({
 	project: { type: Schema.Types.ObjectId, ref: 'Project'},
 	product: { type: Schema.Types.ObjectId, ref: 'Product'},
 	abstract: {
+		openType: {type: String, enum: ['to-all', 'to-supporter', 'to-buyer', 'to-sharer', 'to-creator']}, // to-supporter = to-buyer || to-sharer
+		// no: {type: Number, unique: true, required: true}, // n-th post
 		isDirectSupport: {type: Boolean, required: true},
 		thresholdMoney: {type: Number, required: true, default: 0},
 		title: {type: String, required: true},
 		created_at: {type: Date, default: Date.now()},
 		likes: [{type: Schema.Types.ObjectId, ref: 'User'}],
-		numLikes: {type: Number, default: 0},
+		// numLikes: {type: Number, default: 0}, // TODO: be virtual field
 	},
 	content: {type: String, required: true},
 	comments: [{ // TODO: use can write comment
@@ -34,9 +36,9 @@ let PostSchema = new Schema({
 		},
 		text: {type: String, required: true},
 		likes: [{type: Schema.Types.ObjectId, ref: 'User'}],
-		numLikes: {type: Number, default: 0},
+		// numLikes: {type: Number, default: 0}, // TODO: be virtual field
 	}],
-	numComments: {type: Number, default: 0},
+	numComments: {type: Number, default: 0}, // not to be virtual field. can be virtual...
 });
 
 
@@ -156,6 +158,8 @@ PostSchema.methods.userLikesComment = async function(user, commentIndex) {
 		throw new Error(`User ${user.id} can't like comment ${this.comments[commentIndex]}`)
 	}
 }
+
+// PostSchema.plugin(autoIncrement.plugin, { model: 'Post', field: 'abstract.no' });
 
 // Create the 'User' model out of the 'PostSchema'
 const PostModel = mongoose.model('Post', PostSchema);

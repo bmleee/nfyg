@@ -63,17 +63,14 @@ const UserSchema = new Schema({
 		required: 'Provider is required'
 	},
 	providerId: String,
-	payment: {
-		type: Schema.Types.ObjectId,
-		ref: 'Payment'
-	},
 	image: {
 		type: String,
 		default: '/assets/images/user_default.png'
-	}
+	},
+	payments: [{ type: Schema.Types.ObjectId, ref: 'Payment' }],
+	projects: [{ type: Schema.Types.ObjectId, ref: 'Project' }],
+	products: [{ type: Schema.Types.ObjectId, ref: 'Project' }],
 });
-
-UserSchema.plugin(autoIncrement.plugin, { model: 'User', field: 'id' });
 
 // Use a pre-save middleware to hash the password
 UserSchema.pre('save', function(next) {
@@ -150,6 +147,42 @@ UserSchema.set('toJSON', {
 	virtuals: true
 });
 
+UserSchema.methods.toFormat = async function(type, ...args) {
+	switch (type) {
+		case 'profile':
+			return await _renderProfile(this)
+		default:
+			return {}
+	}
+}
+
+UserSchema.plugin(autoIncrement.plugin, { model: 'User', field: 'id' });
+
 // Create the 'User' model out of the 'UserSchema'
 const UserModel = mongoose.model('User', UserSchema);
 export default UserModel
+
+// Helperfunctions
+
+const _renderProfile = async (_this) => {
+	switch (this.access_level) {
+		case 0: // normal user
+			return {
+
+			}
+		case 1: // artist
+			return {
+
+			}
+		case 10: // editor
+			return {
+
+			}
+		case 100: // admin
+			return {
+
+			}
+		default:
+			throw new Error(`[User ${this.id}] No such access level ${this.access_level}`)
+	}
+}

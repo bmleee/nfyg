@@ -19,10 +19,12 @@ let QnASchema = new Schema({
 	product: { type: Schema.Types.ObjectId, ref: 'Product'},
 	exhibition: { type: Schema.Types.ObjectId, ref: 'Exhibition'},
 	abstract: {
+		openType: {type: String, enum: ['to-all', 'to-supporter', 'to-buyer', 'to-sharer', 'to-creator']}, // to-supporter = to-buyer || to-sharer
+		// no: {type: Number, unique: true, required: true}, // n-th qna
 		title: {type: String, required: true},
 		created_at: {type: Date, default: Date.now()},
 		likes: [{type: Schema.Types.ObjectId, ref: 'User'}],
-		numLikes: {type: Number, default: 0},
+		// numLikes: {type: Number, default: 0}, // TODO: be virtual field
 	},
 	text: {type: String, required: true},
 	comments: [{ // TODO: use can write comment
@@ -33,9 +35,9 @@ let QnASchema = new Schema({
 		},
 		text: {type: String, required: true},
 		likes: [{type: Schema.Types.ObjectId, ref: 'User'}],
-		numLikes: {type: Number, default: 0},
+		// numLikes: {type: Number, default: 0}, // TODO: be virtual field
 	}],
-	numComments: {type: Number, default: 0},
+	// numComments: {type: Number, default: 0}, // TODO: be virtual field
 });
 
 QnASchema.pre('validate', function (next) {
@@ -166,6 +168,8 @@ QnASchema.methods.userLikesComment = async function(user, commentIndex) {
 		throw new Error(`User ${user.id} can't like comment ${this.comments[commentIndex]}`)
 	}
 }
+
+// QnASchema.plugin(autoIncrement.plugin, { model: 'QnA', field: 'abstract.no' });
 
 // Create the 'User' model out of the 'QnASchema'
 const QnAModel = mongoose.model('QnA', QnASchema);

@@ -33,6 +33,8 @@ const ProjectSchema = new Schema({
 		creatorDescription: {type: String, required: true},
 	},
 
+	authorizedUsers: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+
 	sponsor: {
 		type: Schema.Types.ObjectId,
 		ref: 'Sponsor'
@@ -76,18 +78,23 @@ const ProjectSchema = new Schema({
 
 });
 
-ProjectSchema.pre('update', function (next) {
-	// console.log(this);
-	// this.numPosts = this.posts.length
-	// this.numQnAs = this.qnas.length
-	next()
-})
+// ProjectSchema.pre('update', function (next) {
+// 	// console.log(this);
+// 	// this.numPosts = this.posts.length
+// 	// this.numQnAs = this.qnas.length
+// 	next()
+// })
 
 // Configure the 'ProjectSchema' to use getters and virtuals when transforming to JSON
 ProjectSchema.set('toJSON', {
 	getters: true,
 	virtuals: true
 });
+
+// find helper
+ProjectSchema.statics.findByName = function (name) {
+	return this.findOne({'abstract.projectName': name})
+}
 
 ProjectSchema.methods.toFormat = async function (type, ...args) {
 
@@ -129,7 +136,7 @@ ProjectSchema.methods.toFormat = async function (type, ...args) {
 							link: `/projects/${this.abstract.projectName}`,
 						}
 
-					case 'in_progress':
+					case 'in-progress':
 					default:
 						return {
 							imgSrc: this.abstract.imgSrc,
@@ -208,6 +215,16 @@ ProjectSchema.methods.toFormat = async function (type, ...args) {
 					],
 				}
 
+
+			case 'edit':
+				return {
+						abstract: this.abstract,
+						creator: this.creator,
+						sponsor: this.sponsor.sponsorName,
+						funding: this.funding,
+						overview: this.overview,
+				}
+
 			default:
 				console.error(`toFormat can't accept this ${JSON.stringify(type)}`);
 				return ''
@@ -257,6 +274,10 @@ ProjectSchema.methods.pushQnA = async function (_id) {
 	}
 }
 
+
+ProjectSchema.methods.authorizedTo = function (user) {
+	return !!this.authorizedUsers.filter( _id => user.equals(user))
+}
 
 
 // Create the 'User' model out of the 'ProjectSchema'

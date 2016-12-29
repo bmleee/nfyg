@@ -35,5 +35,9 @@ SponsorSchema.set('toJSON', {
 	virtuals: true
 });
 
+SponsorSchema.statics.findByName = function (name) {
+	return this.findOne({'sponsorName': name})
+}
+
 // Create the 'User' model out of the 'SponsorSchema'
 module.exports = mongoose.model('Sponsor', SponsorSchema);
