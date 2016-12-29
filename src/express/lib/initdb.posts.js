@@ -8,12 +8,15 @@ import { range, rangeArray, asyncparallelfor } from '../../lib/utils'
 import { randomString } from './utils'
 import init, {
 	getRandomIndex,
+	getRandomElem,
 	getRandomUser,
 	getRandomProject,
 	getRandomPost
 } from './initdb.helper'
 
+let openTypes = ['to-all', 'to-supporter']
 
+const getRandomOpenType = () => getRandomElem(openTypes)
 
 const createPost = async (artist, target, type) => {
 	const numPosts = target.posts.length
@@ -28,6 +31,7 @@ const createPost = async (artist, target, type) => {
 				user: artist._id
 			},
 			abstract: {
+				openType: getRandomElem(openTypes),
 				isDirectSupport: Math.random() > 0.5,
 				thresholdMoney: Math.floor(Math.random() * 10000),
 				title: `${randomString('test_post_title')} ${randomString()} ${randomString()}`,
@@ -77,7 +81,6 @@ export default async function initPost() {
 		await Promise.all(projects.map(
 			async (project) => {
 				let artist = await getRandomUser('artist')
-				await createPost(artist, project)
 				await createPost(artist, project, 'project')
 			}
 		))

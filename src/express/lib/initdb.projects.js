@@ -5,14 +5,14 @@ import SponsorModel from '../models/sponsor'
 import { rangeArray, asyncparallelfor } from '../../lib/utils'
 import { randomString, randomNumber } from './utils'
 
-const createProject = async ({sponsor, state = 'preparing'}) => {
+const createProject = async ({sponsor, state = 'preparing', artist}) => {
 	return await ProjectModel.create({
 		abstract: {
 			longTitle: `${randomString('sample long title', 50)}`,
 			shortTitle: `${randomString('sample short title', 20)}`,
 			imgSrc: "/assets/images/present-project-list-thumbnail.jpg",
 			category: "health",
-			projectName: `${randomString('test project name')}`,
+			projectName: `${randomString()}`,
 			state: state,
 			postIntro: `${randomString('sample post intro')}`,
 		},
@@ -22,6 +22,7 @@ const createProject = async ({sponsor, state = 'preparing'}) => {
 				creatorLocation: "서울",
 				creatorDescription: "i'm creator"
 		},
+		authorizedUsers: [artist._id],
 		sponsor: sponsor,
 		funding: {
 				currentMoney: randomNumber(100000),
@@ -87,6 +88,8 @@ export default async function initProject() {
 
 	console.log('trying to init Project collections');
 
+	const artist = await UserModel.findOne({ user_name: 'artist' })
+
 	const in_progress = await ProjectModel.count({"abstract.state": "in_progress"})
 	const preparing = await ProjectModel.count({"abstract.state": "preparing"})
 	const completed = await ProjectModel.count({"abstract.state": "completed"})
@@ -100,7 +103,7 @@ export default async function initProject() {
 		await Promise.all(rangeArray(preparing, max_projects).map(
 			async () => {
 				try {
-					await createProject({sponsor: sponsor._id, state: 'preparing'})
+					await createProject({sponsor: sponsor._id, state: 'preparing', artist})
 				} catch (e) {console.error(e);}
 			}
 		))
@@ -112,7 +115,7 @@ export default async function initProject() {
 		await Promise.all(rangeArray(in_progress, max_projects).map(
 			async () => {
 				try {
-					await createProject({sponsor: sponsor._id, state: 'in_progress'})
+					await createProject({sponsor: sponsor._id, state: 'in-progress', artist})
 				} catch (e) {console.error(e);}
 			}
 		))
@@ -124,7 +127,7 @@ export default async function initProject() {
 		await Promise.all(rangeArray(completed, max_projects).map(
 			async () => {
 				try {
-					await createProject({sponsor: sponsor._id, state: 'completed'})
+					await createProject({sponsor: sponsor._id, state: 'completed', artist})
 				} catch (e) {console.error(e);}
 			}
 		))
@@ -140,7 +143,7 @@ export default async function initProject() {
         imgSrc: "https://i0.wp.com/7pictures.co.kr/wp-content/uploads/edd/2016/10/KakaoTalk_20161008_150354358.jpg?resize=1024%2C590&ssl=1",
         category: "health",
         projectName: "test_7pictures",
-        state: "in_progress",
+        state: "in-progress",
         postIntro: "test project intro"
 	    },
 	    creator: {
@@ -149,6 +152,7 @@ export default async function initProject() {
 	        creatorLocation: "서울",
 	        creatorDescription: "i'm creator"
 	    },
+			authorizedUsers: [artist._id],
 	    sponsor: sponsor._id,
 	    funding: {
 	        currentMoney: 0,

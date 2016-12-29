@@ -24,6 +24,7 @@ let user = {
 	sponsors, posts, qnas;
 
 export const getRandomIndex = (arr) => Math.floor(Math.random() * arr.length)
+export const getRandomElem = (arr) => arr[getRandomIndex(arr)]
 
 const init = async () => {
 	user.all = await UserModel.find({})

@@ -11,6 +11,7 @@ import { randomString } from './utils'
 
 import init, {
 	getRandomIndex,
+	getRandomElem,
 	getRandomUser,
 	getRandomProject,
 	getRandomExhibiiton,
@@ -68,7 +69,8 @@ export default async function initQnA() {
 	try {
 		// create post for 10 qnas
 		let projects = await ProjectModel.find({})
-		let exhibitions = await ExhibitionModel.find({})
+		// let exhibitions = await ExhibitionModel.find({})
+		let exhibitions = []
 		let products = await ProductModel.find({})
 
 		await Promise.all([

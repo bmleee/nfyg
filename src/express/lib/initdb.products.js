@@ -4,7 +4,7 @@ import ProductModel from '../models/product'
 import { rangeArray, asyncparallelfor } from '../../lib/utils'
 import { randomString, randomNumber } from './utils'
 
-const createProduct = async ({state = 'preparing'}) => {
+const createProduct = async ({state = 'preparing', artist}) => {
 	return await ProductModel.create({
 		abstract: {
 			longTitle: `${randomString('sample long title', 50)}`,
@@ -21,6 +21,7 @@ const createProduct = async ({state = 'preparing'}) => {
 				creatorLocation: "서울",
 				creatorDescription: "i'm creator"
 		},
+		authorizedUsers: [artist._id],
 		funding: {
 				currentMoney: randomNumber(100000),
 				targetMoney: randomNumber(100000),
@@ -85,6 +86,8 @@ export default async function initProduct() {
 
 	console.log('trying to init Product collections');
 
+	const artist = await UserModel.findOne({ user_name: 'artist' })
+
 	const in_progress = await ProductModel.count({"abstract.state": "in_progress"})
 	const preparing = await ProductModel.count({"abstract.state": "preparing"})
 	const completed = await ProductModel.count({"abstract.state": "completed"})
@@ -96,7 +99,7 @@ export default async function initProduct() {
 		await Promise.all(rangeArray(preparing, max_products).map(
 			async () => {
 				try {
-					await createProduct({state: 'preparing'})
+					await createProduct({state: 'preparing', artist})
 				} catch (e) {console.error(e);}
 			}
 		))
@@ -108,7 +111,7 @@ export default async function initProduct() {
 		await Promise.all(rangeArray(in_progress, max_products).map(
 			async () => {
 				try {
-					await createProduct({state: 'in_progress'})
+					await createProduct({state: 'in-progress', artist})
 				} catch (e) {console.error(e);}
 			}
 		))
@@ -120,7 +123,7 @@ export default async function initProduct() {
 		await Promise.all(rangeArray(completed, max_products).map(
 			async () => {
 				try {
-					await createProduct({state: 'completed'})
+					await createProduct({state: 'completed', artist})
 				} catch (e) {console.error(e);}
 			}
 		))
@@ -135,7 +138,7 @@ export default async function initProduct() {
         imgSrc: "https://i0.wp.com/7pictures.co.kr/wp-content/uploads/edd/2016/10/KakaoTalk_20161008_150354358.jpg?resize=1024%2C590&ssl=1",
         category: "health",
         productName: "test_7pictures",
-        state: "in_progress",
+        state: "in-progress",
         postIntro: "test product intro"
 	    },
 	    creator: {
@@ -144,6 +147,7 @@ export default async function initProduct() {
 	        creatorLocation: "서울",
 	        creatorDescription: "i'm creator"
 	    },
+			authorizedUsers: [artist._id],
 	    funding: {
 	        currentMoney: 0,
 	        targetMoney: 1000000,
