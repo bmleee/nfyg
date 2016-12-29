@@ -41,9 +41,7 @@ const { AlignmentTool } = alignmentPlugin;
 
 export default class SevenEditor extends Component {
 	state = {
-		editorState: this.props.raw ?
-			EditorState.createWithContent(convertFromRaw(this.props.raw)) :
-			EditorState.createEmpty(),
+		editorState: EditorState.createEmpty()
 	}
 
 	onChange = (editorState) => {
@@ -65,6 +63,22 @@ export default class SevenEditor extends Component {
 	focus = () => {
 		this.editor.focus();
 	};
+
+	componentDidMount() {
+		// console.log('SevenEditor.componentDidMount', this);
+		// console.log('typeof this.props.raw', typeof this.props.raw);
+		// console.log('this.props.raw', this.props.raw);
+
+		let raw = typeof this.props.raw === 'string' ? JSON.parse(this.props.raw) : this.props.raw
+		let editorState;
+
+		if (!this.props.raw) editorState = EditorState.createEmpty()
+		else editorState = EditorState.createWithContent(convertFromRaw(raw))
+
+		this.setState({
+			editorState
+		})
+	}
 
 	render() {
 		let editorState = this.state.editorState;
@@ -104,8 +118,18 @@ export class Viewer extends Component {
 			raw
 		} = this.props;
 
+		// console.log('SevenViewer', this);
+		//
+		// console.log('raw', raw);
+		// console.log('typeof raw', typeof raw);
+		// console.log('JSON.parse( raw)', JSON.parse(raw));
+
+
+
 		if (typeof raw === 'string') raw = JSON.parse(raw);
 
+		// console.log('parsed raw', raw);
+		// console.log('parsed typeof raw', typeof raw);
 		let editorState;
 
 		try {

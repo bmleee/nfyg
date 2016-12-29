@@ -1,4 +1,6 @@
 import React, { Component, PropType } from 'react'
+import { fetchUserAndData } from '../../api/AppAPI'
+
 import ProjectEditorTab from './ProjectEditorTab'
 import ScrollToTop from 'react-scroll-up';
 
@@ -14,11 +16,11 @@ import * as actionCreators from '../../actions/ProjectEditorActionCreators'
 
 import { canUseDOM } from '~/src/lib/utils'
 
-const API_URL = '/api/test-api/sponsor'
+const API_URL = '/api/auth/fetch/projects'
 
 import _ from 'lodash' // use throttle or debounce
 import 'whatwg-fetch'
- 
+
 
 const scrollStyle = {
   cursor: 'pointer',
@@ -74,8 +76,17 @@ export default class ProjectEditor extends Component {
 		}
 	}
 
-	componentWillMount() {
+	async componentDidMount() {
 		// 서버에서 State를 가져와 채워야 한다면 ...
+    const {
+      user,
+      data: { project }
+    } = await fetchUserAndData()
+
+    console.log('fetched project', project);
+
+    if (this.props.setUser) this.props.setUser(user)
+    this.setState(this.server2client(project))
 	}
 
   render() {
@@ -100,12 +111,13 @@ export default class ProjectEditor extends Component {
 			return (
 				<div className="exhibition-editor">
 					<ProjectEditorTab
+            projectName={this.state.abstract.projectName}
 						save={this.save}
 					/>
 					 { children }
 				<ScrollToTop showUnder={180} style={scrollStyle} duration={0} >
 				<button className="back-to-top" />
-				</ScrollToTop>	
+				</ScrollToTop>
 				</div>
 			)
 		}
@@ -283,18 +295,56 @@ export default class ProjectEditor extends Component {
 	// 서버로 전송
 	save = async () => {
 		console.log('state', this.state);
+
 		try {
-			const res = await axios.post(API_URL, {...this.state})
+			const res = await axios.post(API_URL, {...this.client2server()})
 			console.log('save response', res);
 		} catch (e) {
 			console.error('save error', e);
 		}
 	}
 
-	// 서버에서 받기
-	fetchProject = async () => {
+  client2server = () => {
+    return {
+      abstract: this.state.abstract,
+      creator: this.state.creator,
+      sponsor: this.state.sponsor,
+      funding: {
+        currentMoney: this.state.funding.currentMoney,
+        targetMoney: this.state.funding.targetMoney,
+        dateFrom: this.state.funding.dateFrom,
+        dateTo: this.state.funding.dateTo,
+        rewards: this.state.funding.reward.rewards,
+      },
+      overview: {
+        intro: this.state.overview.intro,
+        part1: JSON.stringify(this.state.overview.part1),
+        part2: JSON.stringify(this.state.overview.part2),
+      }
+    }
+  }
 
-	}
+  server2client = (project) => update(this.state, {
+    abstract: { $set: project.abstract },
+    creator: { $set: project.creator },
+    sponsor: {
+      sponsorName: { $set: project.sponsor }
+    },
+    funding: {
+      currentMoney: { $set: project.funding.currentMoney },
+      targetMoney: { $set: project.funding.targetMoney },
+      dateFrom: { $set: project.funding.dateFrom },
+      dateTo: { $set: project.funding.dateTo },
+      reward: {
+        rewards: { $set: project.funding.rewards }
+      },
+    },
+    overview: {
+      intro: { $set: project.overview.intro },
+      part1: { $set: JSON.parse(project.overview.part1) },
+      part2: { $set: JSON.parse(project.overview.part2) },
+    }
+  })
 }
 
 
