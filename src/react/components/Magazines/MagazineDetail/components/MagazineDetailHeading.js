@@ -18,7 +18,7 @@ class MagazineDetailHeading extends Component {
 					<button className="ma-share-button-twitter"><FontAwesome name='twitter' size='lg' /></button>
 					<button className="ma-share-button-kakao"><KakaoImage className="ma-kakao-icon" width={23} height={23} /></button>
 					<button className="ma-share-button-url"><FontAwesome name='link' size='lg' /></button>
-			</div>
+				</div>
 			</div>
 		)
 	}

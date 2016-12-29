@@ -1,7 +1,30 @@
 import React, { Component, PropTypes } from 'react';
 import Progress from 'react-progressbar';
 
+import Modal from 'react-awesome-modal';
+import FontAwesome from 'react-fontawesome'
+import KakaoImage from '~/src/assets/images/kakaotalk.svg'
+
 class ProductHeading extends Component {
+	
+	constructor(props) {
+    super(props);
+    this.state = {
+        visible : false
+    }
+  }
+
+  openModal() {
+    this.setState({
+        visible : true
+    });
+  }
+
+  closeModal() {
+    this.setState({
+        visible : false
+    });
+  }
 
 	render() {
 		console.log('ProductHeading', this);
@@ -63,13 +86,13 @@ class ProductHeading extends Component {
 		return (
 			<div className="project-detail-heading">
 				<div className="project-detail-info" style={infoBackground}>
-					<div className="project-info">
-						<div className="project-sponsor-name">
-							{/* <img src={sponsorLogoSrc} width={32} height={32} alt=""/>  */}
+					<div className="product-info">
+						{/* <div className="project-sponsor-name">
+							 <img src={sponsorLogoSrc} width={32} height={32} alt=""/>  
 							{sponsorDisplayName}
-						</div>
+						</div> */}
 						<h1 className="project-title">{longTitle}</h1>
-						<div className="project-info-bottom">
+						<div className="product-info-bottom">
 							{/* <div className="project-sharing-icon">
 								<img className="sharing-icon" src="https://7pictures.co.kr/wp-content/uploads/2016/08/likes.png" scale="0" />
 								{ likes }
@@ -94,7 +117,21 @@ class ProductHeading extends Component {
 						{currentMoney.toLocaleString()}<span className="heading-summary-status">원</span></div>
 					</div>
 				</div>
-				<button className="share-button">공유로 프로젝트 후원하기</button>
+				<div className="share-button">
+				<button className="product-purchase-button">주문하기</button>
+				<button className="product-share-modal" onClick={() => this.openModal()} />
+				<Modal className="share-modal" visible={this.state.visible} width="355" height="130px" effect="fadeInDown" onClickAway={() => this.closeModal()}>
+					<div className="share-modal-close-container">
+					<button className="share-modal-close" onClick={() => this.closeModal()}/>
+					</div>
+					<div className="share-modal-button-container">
+					<button className="ma-share-button-facebook"><FontAwesome name='facebook' size='lg' /></button>
+					<button className="ma-share-button-twitter"><FontAwesome name='twitter' size='lg' /></button>
+					<button className="ma-share-button-kakao"><KakaoImage className="ma-kakao-icon" width={36} height={36} /></button>
+					<button className="ma-share-button-url"><FontAwesome name='link' size='lg' /></button>
+					</div>
+				</Modal>
+				</div>
 			</div>
 
 			)

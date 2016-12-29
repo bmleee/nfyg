@@ -54,10 +54,9 @@ class Home extends Component {
 					{/* <HomeInfo title="공유로 후원한 금액" amount={10000} /> */}
 
 					
-
+						{/* 프로젝트 제안 MODAl */}
 						<input type="button" value="프로젝트 제안하기" onClick={() => this.openModal()} />
 						
-						{/* 프로젝트 제안 MODAl
 						<Modal className="project-suggest-modal" visible={this.state.visible} width="480" height="560px" effect="fadeInDown" onClickAway={() => this.closeModal()}>
 						<div className="project-modal-header">
 							<h3 className="project-modal-header-title">프로젝트 제안하기</h3>
@@ -87,7 +86,7 @@ class Home extends Component {
 							<a className="project-modal-header-save-container" onClick={() => this.closeModal()}><button type="submit" className="project-modal-header-save">제안하기</button></a>
 						</div>
 						</Modal>
-						*/}
+						
 
       		
 					<HomeHeading title="What's on?" />
@@ -95,15 +94,15 @@ class Home extends Component {
 
 					<HomeHeading title="Products" />
 					<PresentProjectList projects={products} />
-
+					
+					{/*
 					<HomeHeading title="Featured Exhibitions" />
 					<ExhibitionList exhibitions={recentExhibitions} />
-
 
 					<HomeHeading title="7Pictures Magazine" />
 					<MagazineList magazines={artMagazines} />
 
-					{/* <HomeHeading title="종료된 프로젝트" />
+					<HomeHeading title="종료된 프로젝트" />
 					<PastProjectList projects={pastProjects} /> */}
 				</div>
 
