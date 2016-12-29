@@ -51,42 +51,39 @@ class QnA extends Component {
 			comments,
 			content
 		}, index) => (
-			<div className="project-detail-qna-item" key={index} style={borderStyle}>
-				<div>
-					<img src={author.iconSrc} alt=""/>
-					<span>{author.name}</span>
-					<button>후원자 접근</button>
-				</div>
-				<div>
-					<span>함께하고 있는 후원자: {numSupporters}명</span>
-					<span>작성일: {date2string(created_at)}</span>
-				</div>
-				<div>
-					{
-						opened
-							? <span>{text}</span>
-							: <span>해당 글을 열람할 권한이 없습니다.</span>
-					}
-				</div>
-				{ opened ? <PostComments comments={comments} postLikes={likes} /> : null }
+			<div className="project-detail-qna-item" key={index}>
+					<p className="sharing-fb-icon-list">
+					<img className="qna-form-user-icon" src={author.iconSrc} alt="" width={80} height={80}/>
+					</p>
+					<p className="sharing-summary">
+					<span><p className="sharing-name">{author.name}</p>{date2string(created_at)}</span>
+					<span>{text}</span>
+					</p>
 			</div>
 		))
 
 		return (
 			<div className="project-detail-qna">
-
 				<div className="project-detail-qna-form">
-					<textarea name="" id="" cols="30" rows="4" placeholder="공유를 하거나 직접 후원하고 글을 작성할 수 있습니다."></textarea>
-					<div>
-						<Select options={selectOptions} value={this.state.form.target} onChange={this.handleSelectChange} />
-						<button>Post</button>
+					<div className="qna-form-textarea-container">
+					<img className="qna-form-user-icon" src="/assets/images/user_default.png" alt="" width={80} height={80} />
+					<textarea className="qna-form-textarea" name="" id="" cols="30" rows="4" placeholder="제품에 대해 궁금한 점을 댓글로 남겨주세요."></textarea>
 					</div>
-
+					<div className="qna-form-submit-container">
+					<p className="qna-form-submit-empty"/>
+					<button className="qna-form-submit">댓글 남기기</button>
+					</div>
 				</div>
-
-				{ item }
-
-				<button>공유로 예술후원(열람하기)</button>
+				<div>
+					{ item.slice(0, this.state.count) }
+				</div>
+				<div>
+					{
+						this.state.numProjects > 5 && this.state.numProjects > this.state.count
+							? <button className="post-more-button" onClick={this.expandList.bind(this)}>댓글 더보기(00개)</button>
+							: null
+					}	
+				 </div>
 			</div>
 		)
 	}
