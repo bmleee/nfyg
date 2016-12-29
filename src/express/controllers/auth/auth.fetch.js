@@ -57,10 +57,10 @@ router.get('/', async (req, res) => {
 
 	// TODO: refactor 3 select query from Project Collection
 	let fetcher = {
-		presentProjects: async () => await ProjectModel.find({'abstract.state': 'in_progress'}),
+		presentProjects: async () => await ProjectModel.find({'abstract.state': 'in-progress'}),
 		recentExhibitions: async () => await ExhibitionModel.find({}).limit(6),
 		artMagazines: async () => await MagazineModel.find({}).limit(7),
-		products: async () => await ProductModel.find({'abstract.state': 'in_progress'}),
+		products: async () => await ProductModel.find({'abstract.state': 'in-progress'}),
 	}
 
 	try {
