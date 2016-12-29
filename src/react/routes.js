@@ -46,14 +46,20 @@ import ExhibitionEditorAbstract from './components/ExhibitionEditor/components/A
 import ExhibitionEditorOverview from './components/ExhibitionEditor/components/Overview'
 import ExhibitionEditorArtworks from './components/ExhibitionEditor/components/Artworks'
 
-import MagazineEditor from './components/MagazineEditor'
+import MagazineEditor from './components/MagazineEditor';
 import MagazineEditorAbstract from './components/MagazineEditor/components/Abstract'
 import MagazineEditorContent from './components/MagazineEditor/components/Content'
 import MagazineEditorRecommend from './components/MagazineEditor/components/Recommend'
 
 import SponsorEditor from './components/SponsorEditor'
 
-import { Login, Profile, Signup } from './components/User'
+import { Login, Signup, SuperProfileContainer } from './components/User'
+
+import { AdminProfileContainer, AdminProfileMain, AdminProfileProject, AdminProfileProduct, AdminProfileUser, AdminProfileSponsor  } from './components/User/Profile/AdminProfile'
+import { ArtistProfileContainer, ArtistProfileMain, ArtistProfileProject, ArtistProfileProduct } from './components/User/Profile/ArtistProfile'
+import { EditorProfileContainer, EditorProfileMain, EditorProfileProject, EditorProfileProduct } from './components/User/Profile/EditorProfile'
+import { UserProfileContainer, UserProfileMain, UserProfileProject, UserProfileProduct } from './components/User/Profile/UserProfile'
+
 import { Sponsors } from './components/Sponsors'
 
 // <Route path="projects/:project_name" component={ProjectDetail}> // TODO: activate
@@ -70,7 +76,14 @@ const routes = (
 			<Route path="new" component={ ProjectEditor }></Route>
 		</Route>
 
-		<Route path="products/:producttName" component={ProductDetail}>
+		<Route path="projects/:projectName/edit" component={ProjectEditor}>
+			<IndexRoute component={ProjectEditorAbstract} />
+			<Route path="abstract" component={ ProjectEditorAbstract }></Route>
+			<Route path="funding" component={ ProjectEditorFunding }></Route>
+			<Route path="overview" component={ ProjectEditorOverview }></Route>
+		</Route>
+
+		<Route path="products/:productName" component={ProductDetail}>
 			// Project Detail: Overview, Post, Ranking, QnA, ...
 			<IndexRoute component={ProductDetailOverview} />
 			<Route path="post" component={ ProductDetailPost }></Route>
@@ -78,6 +91,8 @@ const routes = (
 			<Route path="qna" component={ ProductDetailQnA }></Route>
 			{/* <Route path="new" component={ ProductEditor }></Route> */}
 		</Route>
+
+		{/* <Route path="products/:productName/payment" component={ProductPayment}/> */}
 
 		<Route path="exhibitions" component={Exhibitions}>
 		</Route>
@@ -132,12 +147,46 @@ const routes = (
 
 		<Route path="login" component={Login}></Route>
 		<Route path="signup" component={Signup}></Route>
-		<Route path="profile" component={Profile}></Route>
+
+		<Route path="profile" component={SuperProfileContainer}>
+
+			<Route path="admin" component={AdminProfileContainer}>
+				<IndexRoute component={AdminProfileMain}></IndexRoute>
+				<Route path="main" component={AdminProfileMain}></Route>
+				<Route path="project" component={AdminProfileProject}></Route>
+				<Route path="product" component={AdminProfileProduct}></Route>
+				<Route path="user" component={AdminProfileUser}></Route>
+				<Route path="sponsor" component={AdminProfileSponsor}></Route>
+			</Route>
+
+			<Route path="editor" component={EditorProfileContainer}>
+				<IndexRoute component={EditorProfileMain}></IndexRoute>
+				<Route path="main" component={EditorProfileMain}></Route>
+				<Route path="project" component={EditorProfileProject}></Route>
+				<Route path="product" component={EditorProfileProduct}></Route>
+			</Route>
+
+			<Route path="artist" component={ArtistProfileContainer}>
+				<IndexRoute component={ArtistProfileMain}></IndexRoute>
+				<Route path="main" component={ArtistProfileMain}></Route>
+				<Route path="project" component={ArtistProfileProject}></Route>
+				<Route path="product" component={ArtistProfileProduct}></Route>
+			</Route>
+
+			<Route path="user" component={UserProfileContainer}>
+				<IndexRoute component={UserProfileMain}></IndexRoute>
+				<Route path="main" component={UserProfileMain}></Route>
+				<Route path="project" component={UserProfileProject}></Route>
+				<Route path="product" component={UserProfileProduct}></Route>
+			</Route>
+
+		</Route>
 		<Route path="sponsors" component={Sponsors}></Route>
 
 		<Route path="test1" component={Test1}></Route>
 		<Route path="test2" component={Test2}></Route>
 		<Route path="test3" component={Test3}></Route>
+
 	</Route>
 )
 

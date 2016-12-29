@@ -3,10 +3,14 @@ import express from 'express'
 
 import multer from 'multer'
 
-import users from './users.server.controller'
 import passport from 'passport'
+import users from './users.server.controller'
+import profile from './users.profile'
 
 const router = express.Router();
+
+router.use('/profile', profile)
+
 
 const signupMulter = multer()
 

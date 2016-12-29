@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { fetchJSONFile } from '../../../api/AppAPI'
+import { fetchJSONFile } from '../../../../api/AppAPI'
 
 class Profile extends Component {
 

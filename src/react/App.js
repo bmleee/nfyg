@@ -68,7 +68,13 @@ export default class App extends Component {
 							{' '}
 							<Link to="/signup"><button>Signup</button></Link>
 							{' '}
-							<Link to="/profile"><button>Profile</button></Link>
+							<Link to="/profile/admin"><button>Admin Profile</button></Link>
+							{' '}
+							<Link to="/profile/artist"><button>Artist Profile</button></Link>
+							{' '}
+							<Link to="/profile/editor"><button>Editor Profile</button></Link>
+							{' '}
+							<Link to="/profile/user"><button>User Profile</button></Link>
 							{' '}
 							<Link to="/sponsors"><button>Sponsors</button></Link>
 							{' '}
@@ -96,6 +102,7 @@ export default class App extends Component {
 		)
 	}
 
+	// propagate to children...!
 	setUser = (user) => {
 		console.log('setUser.user', user);
 		this.setState(update(this.state, {
