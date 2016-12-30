@@ -93,7 +93,7 @@ class PresentProjectList extends Component {
 				<div className="present-more-project">
 					{
 						this.state.numProjects > 4 && this.state.numProjects > this.state.count
-							? <button className="present-more-button" onClick={this.expandList.bind(this)}> 프로젝트 더보기</button>
+							? <button className="present-more-button" onClick={this.expandList.bind(this)}> VIEW MORE</button>
 							: null
 					}
 				</div>
