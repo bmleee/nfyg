@@ -7,6 +7,7 @@ export { default as HomeHeading } from './HomeHeading';
 export { default as PastProjectList } from './PastProjectList';
 
 export { default as PresentProjectList } from './PresentProjectList';
+export { default as PresentProductList } from './PresentProductList';
 
 export { default as FutureProjectList } from './FutureProjectList';
 

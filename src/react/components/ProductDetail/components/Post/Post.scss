@@ -1,0 +1,40 @@
+.product-faq-container {
+	border : 1px solid #ddd;
+	border-bottom : none;
+}
+.Collapsible__trigger.is-open {
+	height : 38px;
+	border-bottom : 1px solid #ddd;
+	padding : 5px 15px;
+	color : #555;
+	background : #eee;
+	font-size : 13px;
+	font-weight : 600;
+	line-height : 27px;
+}
+.Collapsible__trigger.is-open:after {
+	font-family : Ionicons;
+	content : "\f3d8";
+	float : right;
+	font-size : 18px;
+}
+.Collapsible__trigger.is-closed {
+	height : 38px;
+	border-bottom : 1px solid #ddd;
+	padding : 5px 15px;
+	color : #888;
+	background : #fff;
+	font-size : 13px;
+	font-weight : 600;
+	line-height : 27px;
+}
+.Collapsible__trigger.is-closed:after {
+	font-family : Ionicons;
+	content : "\f3d0";
+	float : right;
+	font-size : 18px;
+}
+.Collapsible__contentInner {
+	border-bottom : 1px solid #ddd;
+	padding : 22px 18px;
+}

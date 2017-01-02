@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import {
 	HomeHeader,
 	PresentProjectList,
+	PresentProductList,
+	
 	FutureProjectList,
 	ExhibitionList,
 	MagazineList,
@@ -102,7 +104,7 @@ class Home extends Component {
 					</TabPanel>
 					
 					<TabPanel>
-					<PresentProjectList projects={products} />
+					<PresentProductList products={products} />
 					</TabPanel>
 					</Tabs>
 					
