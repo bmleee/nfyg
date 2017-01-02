@@ -7,7 +7,6 @@ import { SelectOptions } from '../../../../constants'
 import {date2string} from '~/src/react/lib/utils'
 
 const selectOptions = SelectOptions.QnA
-const borderStyle = { border: '1px solid gray' }
 
 
 // TODO: 입력 폼. 글만 올릴거 아닌데...
@@ -33,6 +32,28 @@ class QnA extends Component {
 			form: {
 				target: value,
 			}
+		})
+	}
+	
+	constructor() {
+		super(...arguments);
+
+		this.state = {
+			numProjects: 0,
+			count: 5,
+			windowSize: 5,
+		}
+	}
+	
+	expandList() {
+		this.setState({
+			count: this.state.count + this.state.windowSize,
+		})
+	}
+	
+	componentDidMount() {
+		this.setState({
+			numProjects: this.props.qna.posts.length
 		})
 	}
 

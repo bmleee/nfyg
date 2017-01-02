@@ -65,6 +65,8 @@
     "react-scroll-up": "^1.1.5",
     "react-sticky": "^5.0.5",
     "react-swipeable": "^3.7.0",
+    "react-tab-panel": "^2.2.7",
+    "react-tabs": "^0.8.2",
     "whatwg-fetch": "^1.0.0"
   },
   "devDependencies": {

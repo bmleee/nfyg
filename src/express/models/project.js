@@ -22,7 +22,7 @@ const ProjectSchema = new Schema({
 			}, `project name can't be one of ${restrictedNames}`
 		]},
 		state: {type: String, required: true},     // refers to react/constants/selectOptions
-		postIntro: {type: String, required: true},
+		postIntro: {type: String, required: true}, // TODO: change name, postIntro -> projectDescription
 		created_at: {type: Date, default: Date.now()}
 	},
 
@@ -148,6 +148,7 @@ ProjectSchema.methods.toFormat = async function (type, ...args) {
 							numIndirectSupports: Math.floor(Math.random() * 300), // TODO: from IndirectSupport
 							remainingDays: ( new Date(this.funding.dateTo).getTime() - new Date(this.funding.dateFrom).getTime() ) / 1000 / 60 / 60 / 24,
 							link: `/projects/${this.abstract.projectName}`,
+							postIntro: this.abstract.postIntro,
 						}
 
 				}

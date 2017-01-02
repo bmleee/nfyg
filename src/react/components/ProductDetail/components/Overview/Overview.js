@@ -39,11 +39,11 @@ class Overview extends Component {
 
 		return (
 			<div className="project-detail-overview">
-				<ProductReward rewards={rewards} />
+				{/* <ProductReward rewards={rewards} /> */}
 
 				<div className="project-detail-overview-info">
 					<Viewer raw={part1} />
-					{ this.state.seeMore ? <Viewer raw={part2} /> : <button onClick={this._onClick}>더보기</button> }
+					{/* this.state.seeMore ? <Viewer raw={part2} /> : <button onClick={this._onClick}>더보기</button> */}
 				</div>
 			</div>
 		)
