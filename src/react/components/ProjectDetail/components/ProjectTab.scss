@@ -74,11 +74,14 @@
     -webkit-box-shadow: inset 0px -1px 0px 0px #ddd;
     -moz-box-shadow: inset 0px -1px 0px 0px #ddd;
     box-shadow: inset 0px -1px 0px 0px #ddd;
+    @media (max-width: 330px) {
+        font-size : 14px;
+    }
 }
 .project-tab-button-clicked {
     box-shadow : inset 0px -2px 0px 0px #4b709a;
     color : #4b709a;
     background : #fff;
 }
-}   
+}
 }

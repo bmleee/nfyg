@@ -5,6 +5,8 @@ import {
 } from './';
 
 import {date2string} from '~/src/react/lib/utils'
+import Collapse, { Panel } from 'rc-collapse';
+
 
 class Post extends Component {
 
@@ -52,17 +54,8 @@ class Post extends Component {
 
 		return (
 			<div className="project-detail-post">
-				
-				{/* 
-				<div className="project-detail-post-heading">
-					<img src={iconSrc} alt=""/>
-					<span>{description}</span>
-					<span>{intro}</span>
-					<button>열람 신청하기</button>
-				</div>
-				*/}
 				<div className="project-detail-post-container">
-					{ item }
+		
 				</div>
 			</div>
 			)
