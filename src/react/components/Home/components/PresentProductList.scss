@@ -1,0 +1,17 @@
+.product-purchase-num {
+	font-weight :600;
+	font-size : 14px;
+	p {
+		display : inline-block;
+		margin-right : 3px;
+		font-size : 14px !important;
+		font-weight : 600 !important;
+	}
+}
+.product-purchase-num:before {
+	font-family : FontAwesome;
+	content : "\f1d8";
+	color : #4b709a;
+	margin-right : 5px;
+	font-size : 13px;
+}
