@@ -23,7 +23,7 @@ import * as renderUser from '../../lib/renderUser'
 
 const router = express.Router();
 
-router.get('/project-editor', async (req, res) => {
+router.get('/project-editor/:tab?', async (req, res) => {
 	// TODO: let only editor, admin can access
 	res.json({
 		user: renderUser.authorizedUser(req.session.user),
@@ -31,7 +31,7 @@ router.get('/project-editor', async (req, res) => {
 	})
 })
 
-router.get('/product-editor', async (req, res) => {
+router.get('/product-editor/:tab?', async (req, res) => {
 	// TODO: let only editor, admin can access
 	res.json({
 		user: renderUser.authorizedUser(req.session.user),
