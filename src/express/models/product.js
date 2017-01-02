@@ -143,6 +143,7 @@ ProductSchema.methods.toFormat = async function (type, ...args) {
 							numIndirectSupports: Math.floor(Math.random() * 300), // TODO: from IndirectSupport
 							remainingDays: ( new Date(this.funding.dateTo).getTime() - new Date(this.funding.dateFrom).getTime() ) / 1000 / 60 / 60 / 24,
 							link: `/products/${this.abstract.productName}`,
+							postIntro: this.abstract.postIntro,
 						}
 
 				}

@@ -57,9 +57,9 @@ img.home-exhibition-image {
 position: absolute;
     top: 0;
     left: 0;
-    max-width : 100%;
-    height: auto;
-    width : auto;
+    max-width : 150%;
+    height: auto !important;
+    width : auto !important;
     -webkit-transform: translate(-50%,-50%);
     -ms-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);
