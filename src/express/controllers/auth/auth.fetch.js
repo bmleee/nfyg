@@ -24,6 +24,10 @@ import ProjectRouter from './auth.fetch.project'
 import ProductRouter from './auth.fetch.product'
 import ExhibitionRouter from './auth.fetch.exhibition'
 import MagazineRouter from './auth.fetch.magazine'
+import SponsorRouter from './auth.fetch.sponsor'
+
+import OptionRouter from './auth.fetch.option'
+import EditorRouter from './auth.fetch.editor'
 
 const router = express.Router();
 
@@ -36,6 +40,9 @@ router.use('/projects', ProjectRouter);
 router.use('/products', ProductRouter);
 router.use('/exhibitions', ExhibitionRouter);
 router.use('/magazines', MagazineRouter);
+router.use('/sponsors', SponsorRouter);
+router.use('/options', OptionRouter);
+router.use('/', EditorRouter);
 
 
 /**
