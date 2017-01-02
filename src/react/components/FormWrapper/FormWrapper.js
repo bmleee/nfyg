@@ -1,5 +1,8 @@
 import React, { Component, PropTypes, Children } from 'react'
 import Editor from '~/src/react/components/DraftEditor/SevenEditor'
+import Dropzone from 'react-dropzone'
+
+import {upload_file} from '~/src/react/api/AppAPI'
 
 import cx from 'classnames'
 
@@ -21,6 +24,11 @@ export default class FormWrapper extends Component {
 	}
 	static defaultProps = {
 		submitCaption: '제출하세요'
+	}
+
+	state = {
+		open: false,
+		value: null
 	}
 
 	constructor(props) {
@@ -70,6 +78,8 @@ export default class FormWrapper extends Component {
 			initialValue,
 		} = this.props
 
+		let imageDropzone = valueType === VALUE_TYPE.IMAGE ? this._renderDropzone() : null
+
 		console.log('FormWrapper.value', value);
 		console.log('FormWrapper.valueType', valueType);
 
@@ -92,7 +102,8 @@ export default class FormWrapper extends Component {
 		)
 		let content = (
 			<div className={classNameopen}>
-				<Form value={value} onChange={this._onChange} handlers={this.handlers} />
+				{imageDropzone}
+				<Form value={value} onChange={async (e) => await this._onChange(e)} handlers={this.handlers} />
 				<div className="editor-open-cancel-container-sub">
 				<button className="editor-open-button3" onClick={this._onClose}> {submitCaption}</button>
 				</div>
@@ -108,7 +119,7 @@ export default class FormWrapper extends Component {
 
 	// TODO: target value 에 따라 e.target...​
 	// value 가 object일 경우, this.handlers에서 처리한다!
-	_onChange = (e) => {
+	_onChange = async (e) => {
 		let value
 
 		switch(this.props.valueType) {
@@ -122,6 +133,9 @@ export default class FormWrapper extends Component {
 			case VALUE_TYPE.RICH_TEXT:
 				value = e;
 				break;
+			case VALUE_TYPE.IMAGE: // _renderDropzone.onDrop
+				break;
+
 			default : // input[type="text"] ...
 				value = e.target.value
 				break;
@@ -171,5 +185,14 @@ export default class FormWrapper extends Component {
 			_handlers[k] = handlers[k].bind(this)
 		}
 		return _handlers
+	}
+
+	_renderDropzone = () => {
+		const onDrop = async (acceptedFiles, rejectedFiles) => {
+			let {sourceURL} = await upload_file(acceptedFiles[0])
+			this.setState({value: sourceURL})
+		}
+
+		return <Dropzone onDrop={onDrop}/>
 	}
 }

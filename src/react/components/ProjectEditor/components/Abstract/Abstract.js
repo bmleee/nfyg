@@ -1,11 +1,24 @@
 import React, { Component, PropTypes } from 'react'
 import Select from 'react-select'
+
+import Dropzone from '~/src/react/components/Dropzone'
+
+import { upload_file } from '~/src/react/api/AppAPI'
+
 import FormWrapper from '~/src/react/components/FormWrapper/FormWrapper'
 import { VALUE_TYPE } from '~/src/react/components/FormWrapper/constants'
 
 import { value2label } from '~/src/react/lib/utils'
 
 import { SelectOptions } from '~/src/react/constants'
+
+const onDrop = async function (onChange, acceptedFiles, rejectedFiles) {
+	if (acceptedFiles.length == 0) return
+
+	let file = acceptedFiles[0]
+	let { sourceURL } = await upload_file(file)
+	return onChange(sourceURL)
+}
 
 // ----
 const LongTitleWrapper = ({value}) => (
@@ -31,10 +44,8 @@ const ImgSrcWrapper = ({value}) => !!value
 : (
 	<span></span>
 )
-const ImgSrcForm = ({value, onChange}) => (
-	<input type="file" value={value} onChange={onChange} />
-)
-
+const ImgSrcForm = ({value, onChange}) =>
+	<img src={value} alt=""/>
 // ----
 const CategoryWrapper = ({value}) => (
 	<span>{value2label(SelectOptions.ProjectCategory, value)}</span>
@@ -86,7 +97,7 @@ const CreatorImgSrcWrapper = ({value}) => !!value
 ? <img src={value} alt=""/>
 : <span></span>
 const CreatorImgSrcForm = ({value, onChange}) =>
-	<input type="file" value={value} onChange={onChange}/>
+	<img src={value} alt=""/>
 
 // ----
 const CreatorDescriptionWrapper = ({value}) => !!value
@@ -143,7 +154,7 @@ const Abstract = ({
 	return (
 		<div className="abstract-container">
 			<span className="editor-small-title">프로젝트 개요</span>
-		
+
 			<FormWrapper
 				title="프로젝트 제목"
 				valueType={VALUE_TYPE.TEXT}
@@ -170,7 +181,7 @@ const Abstract = ({
 				Form={ShortTitleForm}
 				classNameopen ="editor-open-container"
 			/>
-			
+
 			<FormWrapper
 				title="프로젝트 요약"
 				valueType={VALUE_TYPE.TEXT}

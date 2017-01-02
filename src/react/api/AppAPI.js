@@ -29,7 +29,7 @@ export async function upload_file(file) {
     body: data,
   })
 
-  return res.json()
+  return res.json() // {sourceURL}
 
   // let { signed_request, url, ...rest } = await sign_request(file)
   //
