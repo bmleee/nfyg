@@ -7,6 +7,8 @@ import { value2label } from '~/src/react/lib/utils'
 
 import { SelectOptions } from '~/src/react/constants'
 
+import { fetchOptions } from '~/src/react/api/AppAPI'
+
 // ----
 const LongTitleWrapper = ({value}) => (
 	<span>{value}</span>
@@ -100,7 +102,12 @@ const SponsorNameWrapper = ({value}) => !!value
 ? <span>{value}</span>
 : <span></span>
 const SponsorNameForm = ({value, onChange}) =>
-	<input type="text" value={value} onChange={onChange}/>
+	// <input type="text" value={value} onChange={onChange}/>
+	<Select.async
+		value={value}
+		onChange={onChange}
+		loadOptions={async () => await fetchOptions('sponsor')}
+	/>
 
 
 
@@ -143,7 +150,7 @@ const Abstract = ({
 	return (
 		<div className="abstract-container">
 			<span className="editor-small-title">프로젝트 개요</span>
-		
+
 			<FormWrapper
 				title="프로젝트 제목"
 				valueType={VALUE_TYPE.TEXT}
@@ -284,7 +291,7 @@ const Abstract = ({
 
 			<FormWrapper
 				title="스폰서 이름"
-				valueType={VALUE_TYPE.TEXT}
+				valueType={VALUE_TYPE.SELECT}
 				alt="스폰서 이름을 입력 해 주세요"
 				initialValue={sponsorName}
 				submitCaption={'스폰서 이름을 입력하세요'}

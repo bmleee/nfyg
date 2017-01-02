@@ -9,15 +9,13 @@ import axios from 'axios'
 // import { connect } from 'react-redux'
 // import { bindActionCreators } from 'redux'
 
-import { upload_file } from '~/src/react/api/AppAPI'
-
 import { canUseDOM } from '~/src/lib/utils'
 
 const API_URL = '/api/test-api/sponsor'
 
 import _ from 'lodash' // use throttle or debounce
 import 'whatwg-fetch'
- 
+
 
 const scrollStyle = {
   cursor: 'pointer',

@@ -64,6 +64,28 @@ export async function fetchUserAndData() {
 		return response.data
 	} catch (e) {
 		console.error(`error ${e}`);
+		return {error: e}
+	}
+}
+
+// react-select: Select.Async options
+export function fetchOptions(path) {
+	const config = {
+		method: 'get',
+		url: `/api/auth/fetch/options/${path}`,
+		withCredentials: true,
 	}
 
+	const ret = async () => {
+		try {
+			const response = await axios.request(config)
+			console.log('fetchOptions.response', response.data.data.options);
+			return response.data.data
+		} catch (e) {
+			console.error(`error ${e}`);
+			return {options: []}
+		}
+	}
+
+	return ret
 }

@@ -80,13 +80,19 @@ export default class ProjectEditor extends Component {
 		// 서버에서 State를 가져와 채워야 한다면 ...
     const {
       user,
-      data: { project }
+      data
     } = await fetchUserAndData()
 
-    console.log('fetched project', project);
+    console.log('fetched project', data);
 
     if (this.props.setUser) this.props.setUser(user)
-    this.setState(this.server2client(project))
+    try {
+      if(data.project) {
+        this.setState(this.server2client(data.project))
+      }
+    } catch (e) {
+      console.error(e);
+    }
 	}
 
   render() {
@@ -346,16 +352,3 @@ export default class ProjectEditor extends Component {
     }
   })
 }
-
-
-// const mapStateToProps = (state) => ({
-// 	ProjectEditor: state.ProjectEditor
-// })
-//
-// // attach dispatch to just simple actions (async actions cannot be detached). for optional bind refer https://github.com/reactjs/redux/issues/363
-// const mapDispatchToProps = (dispatch) => bindActionCreators(actionCreators, dispatch)
-//
-// export const ProjectEditorContainer = connect(
-// 	mapStateToProps,
-// 	mapDispatchToProps
-// )(ProjectEditor)

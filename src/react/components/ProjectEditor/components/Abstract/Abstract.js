@@ -1,10 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import Select from 'react-select'
 
-import Dropzone from '~/src/react/components/Dropzone'
-
-import { upload_file } from '~/src/react/api/AppAPI'
-
 import FormWrapper from '~/src/react/components/FormWrapper/FormWrapper'
 import { VALUE_TYPE } from '~/src/react/components/FormWrapper/constants'
 
@@ -12,13 +8,8 @@ import { value2label } from '~/src/react/lib/utils'
 
 import { SelectOptions } from '~/src/react/constants'
 
-const onDrop = async function (onChange, acceptedFiles, rejectedFiles) {
-	if (acceptedFiles.length == 0) return
+import { fetchOptions } from '~/src/react/api/AppAPI'
 
-	let file = acceptedFiles[0]
-	let { sourceURL } = await upload_file(file)
-	return onChange(sourceURL)
-}
 
 // ----
 const LongTitleWrapper = ({value}) => (
@@ -111,7 +102,11 @@ const SponsorNameWrapper = ({value}) => !!value
 ? <span>{value}</span>
 : <span></span>
 const SponsorNameForm = ({value, onChange}) =>
-	<input type="text" value={value} onChange={onChange}/>
+<Select.Async
+	value={value}
+	onChange={onChange}
+	loadOptions={fetchOptions('sponsor')}
+/>
 
 
 
@@ -279,7 +274,7 @@ const Abstract = ({
 
 			<FormWrapper
 				title="진행자 소개"
-				valueType={VALUE_TYPE.IMAGE}
+				valueType={VALUE_TYPE.TEXT}
 				alt="작성자에 대해 간략히 설명해주세요"
 				initialValue={creatorDescription}
 				submitCaption={'진행자를 간략히 소개해주세요'}
@@ -295,7 +290,7 @@ const Abstract = ({
 
 			<FormWrapper
 				title="스폰서 이름"
-				valueType={VALUE_TYPE.TEXT}
+				valueType={VALUE_TYPE.SELECT}
 				alt="스폰서 이름을 입력 해 주세요"
 				initialValue={sponsorName}
 				submitCaption={'스폰서 이름을 입력하세요'}
