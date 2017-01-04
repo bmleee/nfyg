@@ -29,6 +29,7 @@ const scrollStyle = {
 export default class ProjectEditor extends Component {
 
 	state = {
+    tabLinkBase: '',
 		// Abstract
 		abstract: {
 			longTitle: '',     //
@@ -85,10 +86,19 @@ export default class ProjectEditor extends Component {
 
     console.log('fetched project', data);
 
+    let tabLinkBase = `/${(document.URL.match(/projects\/.+|\/edit/) || ['project-editor'])[0]}`
+
     if (this.props.setUser) this.props.setUser(user)
     try {
       if(data.project) {
-        this.setState(this.server2client(data.project))
+        this.setState({
+          ...this.server2client(data.project),
+          tabLinkBase
+        })
+      } else {
+        this.setState({
+          tabLinkBase
+        })
       }
     } catch (e) {
       console.error(e);
@@ -117,7 +127,7 @@ export default class ProjectEditor extends Component {
 			return (
 				<div className="exhibition-editor">
 					<ProjectEditorTab
-            projectName={this.state.abstract.projectName}
+            tabLinkBase={this.state.tabLinkBase}
 						save={this.save}
 					/>
 					 { children }

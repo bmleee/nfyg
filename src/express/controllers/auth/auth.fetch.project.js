@@ -112,43 +112,13 @@ router.post('/', async (req, res) => {
 
 		console.log('upsert result', r);
 
-		res.json({response: r.nModified > 0})
+		res.json({response: r.n === 1})
 	} catch (e) {
 		console.error(e);
 		res.status(400).json({
 			response: e
 		})
 	}
-})
-
-router.put('/', async (req, res) => {
-
-	console.log('PUT /auth/fetch/projects');
-
-	try {
-		const body = req.body
-		const projectName = body.abstract.projectName || ''
-
-		const sponsor = await SponsorModel.findOne({sponsorName: body.sponsor.sponsorName})
-		body.sponsor = sponsor
-
-		// update Project
-		const r = await ProjectModel.update(
-			{ 'abstract.projectName': projectName },
-			body,
-			{ upsert: true }
-		)
-
-		console.log('upsert result', r);
-
-		res.status(200).json({response: r.n > 0}) // selected project
-	} catch (e) {
-		console.error(e);
-		res.status(400).json({
-			response: e
-		})
-	}
-
 })
 
 export default router;
