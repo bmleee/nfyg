@@ -25,7 +25,7 @@ import * as renderUser from '../../lib/renderUser'
 
 const router = express.Router();
 
-router.get('/sponsor', async (req, res) => {
+router.get('/sponsorName', async (req, res) => {
 	let docs = await SponsorModel.find({}, 'sponsorName displayName')
 
 	// if(ac.canEdit(req.session.user)) // TODO: activate auth check
@@ -45,6 +45,32 @@ router.get('/project', async (req, res) => {
 		user: renderUser.authorizedUser, // TODO: according to auth-check
 		data: {
 			options: docs.map( ({abstract: {projectName, longTitle}}) => ({label: longTitle, value: projectName}) )
+		}
+	})
+})
+
+// TODO: check project name on client-side
+router.get('/projectName', async (req, res) => {
+	let docs = await ProjectModel.find({}, 'abstract')
+
+	// TODO: activate auth-check
+	return res.json({
+		user: renderUser.authorizedUser, // TODO: according to auth-check
+		data: {
+			options: docs.map( ({abstract: {projectName, longTitle}}) => ({label: longTitle, value: projectName}) )
+		}
+	})
+})
+
+// TODO: check oridyct name on client-side
+router.get('/productName', async (req, res) => {
+	let docs = await ProductModel.find({}, 'abstract')
+
+	// TODO: activate auth-check
+	return res.json({
+		user: renderUser.authorizedUser, // TODO: according to auth-check
+		data: {
+			options: docs.map( ({abstract: {productName, longTitle}}) => ({label: longTitle, value: productName}) )
 		}
 	})
 })

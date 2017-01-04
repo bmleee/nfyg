@@ -34,7 +34,7 @@ const router = express.Router();
  * fetch project detail info
  * @type {[type]}
  */
-router.get('/:projectName/:option?', async (req, res, next) => {
+router.get('/:projectName/:option?/:tab?', async (req, res, next) => {
 	const {
 		projectName,
 		option,
@@ -70,7 +70,7 @@ router.get('/:projectName/:option?', async (req, res, next) => {
 	}
 })
 
-router.get('/:projectName/edit', async (req, res) => {
+router.get('/:projectName/edit/:tab?', async (req, res) => {
 	console.log('/projects/:projectName/edit');
 
 	const { projectName } = req.params
@@ -92,7 +92,7 @@ router.get('/:projectName/edit', async (req, res) => {
 	})
 })
 
-// create project
+// create or update project
 router.post('/', async (req, res) => {
 	console.log('POST /auth/fetch/projects');
 

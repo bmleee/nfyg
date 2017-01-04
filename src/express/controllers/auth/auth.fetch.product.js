@@ -20,6 +20,10 @@ import ExhibitionModel from '../../models/exhibition'
 import MagazineModel from '../../models/magazine'
 import SponsorModel from '../../models/sponsor'
 
+import * as ac from '../../lib/auth-check'
+import * as renderHelper from '../../lib/renderHelper'
+import * as renderUser from '../../lib/renderUser'
+
 const router = express.Router();
 
 /**
@@ -30,7 +34,7 @@ const router = express.Router();
  * fetch product detail info
  * @type {[type]}
  */
-router.get('/:productName/:option?', async (req, res, next) => {
+router.get('/:productName/:option?/:tab?', async (req, res, next) => {
 	const {
 		productName,
 		option,
@@ -46,7 +50,7 @@ router.get('/:productName/:option?', async (req, res, next) => {
 
 	try {
 		const product = await ProductModel.findOne({"abstract.productName": productName})
-			.populate('sponsor posts qnas')
+			.populate('posts qnas')
 
 		if (!product) throw new Error(`no such product in name of ${productName}`)
 
@@ -69,9 +73,64 @@ router.get('/:productName/:option?', async (req, res, next) => {
 	}
 })
 
-router.get('/:productName/edit', async (req, res) => {
+router.get('/:productName/edit/:tab?', async (req, res) => {
 	console.log('/products/:productName/edit');
-	res.json({})
+
+
+	try {
+		const { productName } = req.params
+		const { user } = req.session
+		const product = await ProductModel.findByName(productName)
+		console.log('/product/:productName/edit.product', product);
+
+		// TODO: activate this
+		// if (!ac.canEdit(user, project)) {
+		// 	return res.status(401).json(renderHelper.unauthorizedUser(user))
+		// }
+
+		res.json({
+			user: renderUser.authorizedUser(user),
+			data: {
+				product: await product.toFormat('edit')
+			}
+		})
+	} catch (e) {
+		console.error(e);
+		res.status(400).json({
+			user: renderUser.authorizedUser(user),
+			error: e
+		})
+	} finally {
+
+	}
+
+
+})
+
+// create or update product
+router.post('/', async (req, res) => {
+	console.log('POST /auth/fetch/products');
+
+	try {
+		const body = req.body
+		const productName = body.abstract.productName || ''
+
+		// upsert Project
+		const r = await ProductModel.update(
+			{ 'abstract.productName': productName },
+			body,
+			{ upsert: true }
+		)
+
+		console.log('upsert result', r);
+
+		res.json({response: r.n === 1})
+	} catch (e) {
+		console.error(e);
+		res.status(400).json({
+			response: e
+		})
+	}
 })
 
 export default router;
