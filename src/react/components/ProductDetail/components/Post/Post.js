@@ -65,7 +65,7 @@ class Post extends Component {
     			 <p>#This is the collapsible content. It can be any element or React component you like.</p>
     			 <p>#This is the collapsible content. It can be any element or React component you like.</p>
     			</Collapsible>
-    			<Collapsible trigger="언제 배송되나요?" transitionTime="0">
+    			<Collapsible trigger="제작과 배송이 언제 되나요?" transitionTime="0">
     			 <p>&This is the collapsible content. It can be any element or React component you like.</p>
     			 <p>&This is the collapsible content. It can be any element or React component you like.</p>
     			 <p>&This is the collapsible content. It can be any element or React component you like.</p>
@@ -84,6 +84,12 @@ class Post extends Component {
     			 <p>&This is the collapsible content. It can be any element or React component you like.</p>
     			</Collapsible>
     			<Collapsible trigger="교환이나 반품/환불이 가능한가요?" transitionTime="0">
+    			 <p>&This is the collapsible content. It can be any element or React component you like.</p>
+    			 <p>&This is the collapsible content. It can be any element or React component you like.</p>
+    			 <p>&This is the collapsible content. It can be any element or React component you like.</p>
+    			 <p>&This is the collapsible content. It can be any element or React component you like.</p>
+    			</Collapsible>
+    			<Collapsible trigger="기타사항" transitionTime="0">
     			 <p>&This is the collapsible content. It can be any element or React component you like.</p>
     			 <p>&This is the collapsible content. It can be any element or React component you like.</p>
     			 <p>&This is the collapsible content. It can be any element or React component you like.</p>

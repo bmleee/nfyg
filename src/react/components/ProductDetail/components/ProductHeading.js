@@ -87,34 +87,21 @@ class ProductHeading extends Component {
 			<div className="project-detail-heading">
 				<div className="project-detail-info" style={infoBackground}>
 					<div className="product-info">
-						{/* <div className="project-sponsor-name">
-							 <img src={sponsorLogoSrc} width={32} height={32} alt=""/>  
-							{sponsorDisplayName}
-						</div> */}
+						<div className="project-sponsor-name"><p>00일</p> 남음</div>
 						<h1 className="project-title">{longTitle}</h1>
 						<div className="product-info-bottom">
-							{/* <div className="project-sharing-icon">
-								<img className="sharing-icon" src="https://7pictures.co.kr/wp-content/uploads/2016/08/likes.png" scale="0" />
-								{ likes }
-								<img className="sharing-icon" src="https://7pictures.co.kr/wp-content/uploads/2016/08/comment.png" scale="0" />
-								{ comments }
-								<img className="sharing-icon" src="https://7pictures.co.kr/wp-content/uploads/2016/08/share.png" scale="0" />
-								{ shares }
-							</div>
-							<div className="project-sharing-info">
-								{sharingInfo} 외 {numIndirectSupports}명이 공유로 후원함
-							</div> */}
-							<p>
-								<div className="project-current-money">
-								</div>
-							</p>
 						</div>
-						<div className="project-supporters-num">공유후원 {indirectSupporters.length}명 | 리워드후원 {directSupporters.length}명</div>
+						<div className="project-heading-summary-money">
+						<div className="prduct-min-num">최소 수량</div>
+						<div className="prduct-max-num">최대 수량</div>
+						<div className="prduct-success">주문성공!</div>
+						</div>
 						<Progress completed={Math.round(currentMoney / targetMoney * 100)} />
 						<div className="project-heading-summary-money">
-						<div className="project-heading-summary-percent">{Math.round(currentMoney / targetMoney * 100)}<span className="heading-summary-status">%</span></div>
-						<div className="project-heading-summary-dday">D-{remainingDays}<span className="heading-summary-status"></span></div>
-						{currentMoney.toLocaleString()}<span className="heading-summary-status">원</span></div>
+						<div className="project-heading-summary-percent">00개</div>
+						<div className="project-heading-summary-dday">000개</div>
+						000명 주문중</div>
+						
 					</div>
 				</div>
 				<div className="share-button">

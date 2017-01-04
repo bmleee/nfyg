@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import Progress from 'react-progressbar';
 
- 
+import SuccessImage from '~/src/assets/images/success2.svg' 
 
 /**
  * required state
@@ -67,6 +67,7 @@ class PresentProductList extends Component {
 							<div className="pr-thumbnail">
 								<div className="ex-centered">
 									<img className="home-exhibition-image" src={imgSrc} />
+									<SuccessImage className="success-icon" width={76} height={76} />
 								</div>
 							</div>
 						</Link>
@@ -74,7 +75,6 @@ class PresentProductList extends Component {
 							<Link to={link}><h3 className="project-list-title">{title}</h3></Link>
 							<h5>{postIntro}</h5>
 							<div className="product-purchase-num"><p>000명</p>주문중</div>
-						    {/* 직접후원 {numDirectSupports}명 | 간접후원 {numIndirectSupports}명 */}
 						</div>
 					</div>
 				</div>
