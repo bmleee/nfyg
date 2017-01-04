@@ -149,7 +149,7 @@ const Abstract = ({
 				valueType={VALUE_TYPE.TEXT}
 				alt="제목을 입력하세요"
 				initialValue={longTitle}
-				submitCaption={'전시 제목을 입력하세요'}
+				submitCaption={'프로젝트 제목을 입력하세요'}
 				submitCaptionsub={'입력하기'}
 				onSubmit={_onLongTitleSubmit}
 				Wrapper={LongTitleWrapper}
@@ -163,7 +163,7 @@ const Abstract = ({
 				valueType={VALUE_TYPE.TEXT}
 				alt="짧은 제목을 입력하세요"
 				initialValue={shortTitle}
-				submitCaption={'전시 짧은 제목을 입력하세요'}
+				submitCaption={'프로젝트 짧은 제목을 입력하세요'}
 				submitCaptionsub={'입력하기'}
 				onSubmit={_onShortTitleSubmit}
 				Wrapper={ShortTitleWrapper}
@@ -210,18 +210,18 @@ const Abstract = ({
 				classNameopen ="editor-open-container"
 			/>
 
-			{/* <FormWrapper
-				title="Abstract Project Name"
+			<FormWrapper
+				title="프로젝트 주소"
 				valueType={VALUE_TYPE.TEXT}
-				alt="프로젝트 이름을 입력하세요"
+				alt="프로젝트 링크를 입력하세요"
 				initialValue={projectName}
-				submitCaption={'전시 제목을 입력하세요'}
+				submitCaption={'원하시는 링크를 입력하세요'}
 				submitCaptionsub={'입력하기'}
 				onSubmit={_onProjectNameSubmit}
 				Wrapper={ProjectNameWrapper}
 				Form={ProjectNameForm}
 				classNameopen ="editor-open-container"
-			/> */}
+			/>
 
 			<FormWrapper
 				title="프로젝트 상태"

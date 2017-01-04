@@ -15,3 +15,31 @@
 	margin-right : 5px;
 	font-size : 13px;
 }
+.success-icon {
+	z-index: 9999;
+    position: absolute;
+    top : 21%;
+    left : 33%;
+    @media (max-width : 1080px) {
+    	width : 70px;
+    	height : 70px;
+    }
+    @media (max-width : 991px) {
+    	width : 70px;
+    	height : 70px;
+    	top : 25%;
+    	left : 36%;
+    }
+    @media (max-width : 500px) {
+    	top : 22%;
+    	left : 30.5%;
+    	width : 65px;
+    	height : 65px;
+    }
+    @media (max-width : 370px) {
+    	top : 18%;
+    	left : 28%;
+    	width : 60px;
+    	height : 60px;
+    }
+}

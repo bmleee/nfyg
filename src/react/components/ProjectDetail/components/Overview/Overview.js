@@ -43,7 +43,6 @@ class Overview extends Component {
 
 				<div className="project-detail-overview-info">
 					<Viewer raw={part1} />
-					{ this.state.seeMore ? <Viewer raw={part2} /> : <button onClick={this._onClick}>더보기</button> }
 				</div>
 			</div>
 		)

@@ -14,7 +14,7 @@ div, span, h1, h2, h3, h4, button {
     color : #777;
     border-bottom : 1px solid #777;
     border : 1px solid #777;
-    border-right : 1px solid #fff;
+    border-right : none;
     border-radius : 3px 0px 0px 3px;
 }
 .react-tabs [role=tab]:nth-child(2) {
@@ -25,7 +25,7 @@ div, span, h1, h2, h3, h4, button {
     color : #777;
     border-bottom : 1px solid #777;
     border : 1px solid #777;
-    border-left : 1px solid #fff;
+    border-left : 1px solid #4b709a;
     border-radius : 0px 3px 3px 0px;
 }
 .react-tabs [role=tablist] {
@@ -135,23 +135,26 @@ position: absolute;
         color : #000;
     }
     .image-gallery-more-button, .image-gallery-more-button:focus {
-
+        border-color : #000;
+        color : #000;
 }
 }
 .image-gallery-slide:nth-child(2) {
     .image-gallery-description {
-        color : #000;
+        color : #fff;
     }
     .image-gallery-more-button, .image-gallery-more-button:focus {
-    
+        border-color : #fff;
+        color : #fff;
 }
 }
 .image-gallery-slide:nth-child(3) {
     .image-gallery-description {
-        color : #4b709a;
+        color : #fff;
     }
     .image-gallery-more-button, .image-gallery-more-button:focus {
-    
+        border-color : #fff;
+        color : #fff;
 }
 }
 .image-gallery-slide:nth-child(4) {
@@ -159,7 +162,8 @@ position: absolute;
         color : #4b709a;
     }
     .image-gallery-more-button, .image-gallery-more-button:focus {
-    
+        border-color : #fff;
+        color : #fff;
 }
 }
 .image-gallery-slide:nth-child(5) {
@@ -167,7 +171,8 @@ position: absolute;
         color : #4b709a;
     }
     .image-gallery-more-button, .image-gallery-more-button:focus {
-   
+        border-color : #fff;
+        color : #fff;
 }
 }
 //메인 슬라이더 폰트/더보기 버튼 스타일
@@ -283,7 +288,7 @@ div.magazine-list-button {
 }
     div.home-heading {
         text-align : center;
-        padding : 25px 10px;
+        padding : 23px 10px 25px 10px;
     }
     div.home-info {
     padding-top : 10px;
@@ -462,7 +467,7 @@ div.recent-exhibition-list-item {
         color : #777;
         border-bottom : 1px solid #777;
         border : 1px solid #777;
-        border-right : 1px solid #fff;
+        border-right : none;
         border-radius : 2px 0px 0px 2px
     }
     .react-tabs [role=tab]:nth-child(2) {
@@ -472,7 +477,7 @@ div.recent-exhibition-list-item {
         color : #777;
         border-bottom : 1px solid #777;
         border : 1px solid #777;
-        border-left : 1px solid #fff;
+        border-left : 1px solid #4b709a;
         border-radius : 0px 2px 2px 0px
     }
     .react-tabs [role=tab][aria-selected=true] {
@@ -487,7 +492,7 @@ div.recent-exhibition-list-item {
 }
 div.home-heading {
     text-align : center !important;
-    padding : 20px 0px 15px 0px;
+    padding : 18px 0px 15px 0px;
     h2 {
         margin : 5px 0px;
         font-size : 26px;

@@ -31,8 +31,8 @@ const images = [
 		// sizes: 'Optional sizes (image sizes relative to the breakpoint)'
 	},
 	{
-		original: './assets/images/header-image.jpg',
-		thumbnail: '/assets/images/header-image.jpg',
+		original: './assets/images/slider-tumb2.jpg',
+		thumbnail: '/assets/images/slider-tumb2.jpg',
 		originalClass: 'featured-slide',
 		thumbnailClass: 'featured-thumb',
 		originalAlt: 'original-alt',
@@ -46,8 +46,8 @@ const images = [
 		// sizes: 'Optional sizes (image sizes relative to the breakpoint)'
 	},
 	{
-		original: './assets/images/header-image.jpg',
-		thumbnail: '/assets/images/header-image.jpg',
+		original: './assets/images/slider-thumb3.JPG',
+		thumbnail: '/assets/images/slider-thumb3.JPG',
 		originalClass: 'featured-slide',
 		thumbnailClass: 'featured-thumb',
 		originalAlt: 'original-alt',

@@ -1,11 +1,39 @@
 .product-info {
-    padding-top : 160px;
+    padding-top : 140px;
 	text-align : center;
 	height : 500px;
 	background : rgba(0, 0, 0, 0.4);
+	.project-sponsor-name {
+	    p {
+	        display : inline-block;
+	        font-size : 14px !important;
+	        font-weight : 600 !important;
+	    }
+	}
+}
+.prduct-min-num {
+    display: inline-block;
+    float: left;
+    text-align: left;
+    width: 90px;
+    font-size : 14px;
+    color : #ddd;
+}
+.prduct-max-num {
+    display: inline-block;
+    float: right;
+    text-align: right;
+    width: 90px;
+    font-size : 14px;
+    color : #ddd;
+}
+.prduct-success {
+    font-size : 14px;
+    color : #ddd;
+    font-weight : 600;
 }
 .product-info-bottom {
-	margin-top : 150px;
+	margin-top : 140px;
 }
 .product-purchase-button {
     width : 75%;
@@ -78,15 +106,15 @@
 
 @media (max-width: 991px) {
     .product-info {
-	padding-top : 115px;
+	padding-top : 100px;
 	height : 400px;
 }
 .product-info-bottom {
-	margin-top : 115px;
+	margin-top : 95px;
 }
 @media (max-width: 500px) {
     .product-info {
-	padding-top : 125px;
+	padding-top : 110px;
 	height : 400px;
 }
 }
