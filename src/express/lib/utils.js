@@ -38,7 +38,7 @@ export function randomString(len, pre) {
 		len = pre;
 		pre = tmp;
 	}
-	var chars = "0123456789AB CDEF GHIJ KLMN OPQ RSTUVWXTZabcdefghiklmnopqrstuvwxyz".split('');
+	var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz".split('');
 	var randomstring = pre || '';
 	len = len || 15;
 	for (var i=0; i<len; i++) {

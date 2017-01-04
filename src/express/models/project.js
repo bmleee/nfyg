@@ -241,11 +241,11 @@ ProjectSchema.methods.toFormat = async function (type, ...args) {
 
 			case 'edit':
 				return {
-						abstract: this.abstract,
-						creator: this.creator,
-						sponsor: this.sponsor.sponsorName,
-						funding: this.funding,
-						overview: this.overview,
+					abstract: this.abstract,
+					creator: this.creator,
+					sponsor: this.sponsor.sponsorName,
+					funding: this.funding,
+					overview: this.overview,
 				}
 
 			default:

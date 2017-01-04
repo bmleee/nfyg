@@ -12,7 +12,7 @@ const createProject = async ({sponsor, state = 'preparing', artist}) => {
 			shortTitle: `${randomString('sample short title', 20)}`,
 			imgSrc: "/assets/images/present-project-list-thumbnail.jpg",
 			category: "health",
-			projectName: `${randomString()}`,
+			projectName: `${randomString('test-project-name')}`,
 			state: state,
 			postIntro: `${randomString('sample post intro')}`,
 		},

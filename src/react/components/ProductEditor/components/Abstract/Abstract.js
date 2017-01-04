@@ -149,7 +149,7 @@ const Abstract = ({
 
 	return (
 		<div className="abstract-container">
-			<span className="editor-small-title">프로젝트 개요</span>
+			<span className="editor-small-title">미술소품 개요</span>
 
 			<FormWrapper
 				title="프로젝트 제목"
@@ -204,18 +204,18 @@ const Abstract = ({
 				classNameopen ="editor-open-container"
 			/>
 
-			{/* <FormWrapper
-				title="Abstract Product Name"
+			<FormWrapper
+				title="미술소품 영문 이름"
 				valueType={VALUE_TYPE.TEXT}
-				alt="프로젝트 이름을 입력하세요"
+				alt="미술소품 영문 이름을 입력하세요"
 				initialValue={productName}
-				submitCaption={'전시 제목을 입력하세요'}
+				submitCaption={'미술소품 영문 이름을 입력하세요'}
 				submitCaptionsub={'입력하기'}
 				onSubmit={_onProductNameSubmit}
 				Wrapper={ProductNameWrapper}
 				Form={ProductNameForm}
 				classNameopen ="editor-open-container"
-			/> */}
+			/>
 
 			<FormWrapper
 				title="프로젝트 상태"

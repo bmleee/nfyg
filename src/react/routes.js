@@ -92,6 +92,13 @@ const routes = (
 			{/* <Route path="new" component={ ProductEditor }></Route> */}
 		</Route>
 
+		<Route path="products/:productName/edit" component={ProductEditor}>
+			<IndexRoute component={ProductEditorAbstract} />
+			<Route path="abstract" component={ ProductEditorAbstract }></Route>
+			<Route path="funding" component={ ProductEditorFunding }></Route>
+			<Route path="overview" component={ ProductEditorOverview }></Route>
+		</Route>
+
 		{/* <Route path="products/:productName/payment" component={ProductPayment}/> */}
 
 		<Route path="exhibitions" component={Exhibitions}>

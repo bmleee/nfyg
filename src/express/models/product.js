@@ -46,12 +46,20 @@ const ProductSchema = new Schema({
 		targetMoney: {type: Number, required: true},
 		dateFrom: {type: String, required: true}, // 작성 시작 일
 		dateTo: {type: String, required: true}, // 바로 다음날
+		minPurchaseVolume: {type: Number, required: true}, // 최소 주문 수량
+		maxPurchaseVolume: {type: Number, required: true}, // 최대 주문 수량
 		rewards: [
 			{
 				title: {type: String, required: true},
 				description: {type: String, required: true},
 				isDirectSupport: {type: Boolean, required: true},
 				thresholdMoney: {type: Number, required: true},
+			}
+		],
+		faqs: [
+			{
+				question: {type: String, required: true},
+				answer: {type: String, required: true},
 			}
 		]
 	},
@@ -90,6 +98,11 @@ ProductSchema.set('toJSON', {
 	getters: true,
 	virtuals: true
 });
+
+// find helper
+ProductSchema.statics.findByName = function (name) {
+	return this.findOne({'abstract.productName': name})
+}
 
 ProductSchema.methods.toFormat = async function (type, ...args) {
 
@@ -146,7 +159,7 @@ ProductSchema.methods.toFormat = async function (type, ...args) {
 							postIntro: this.abstract.postIntro,
 						}
 
-				}
+				} // end of switch abstract state
 
 			case 'product_detail':
 				let user = args[0];
@@ -202,6 +215,14 @@ ProductSchema.methods.toFormat = async function (type, ...args) {
 			        "rank": 2
 			      },
 					],
+				}
+
+			case 'edit':
+				return {
+					abstract: this.abstract,
+					creator: this.creator,
+					funding: this.funding,
+					overview: this.overview,
 				}
 
 			default:

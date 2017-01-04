@@ -8,7 +8,8 @@ const VALUE_TYPE = {
 	RICH_TEXT: 			'form wrapper value type rich text',
 	REWARD: 				'form wrapper value type reward',
 	ARTWORK: 				'form wrapper value type artwork',
-	RECOMMEND: 				'form wrapper value type recommend',
+	RECOMMEND: 			'form wrapper value type recommend',
+	FAQ: 						'form wrapper value type faq',
 }
 
 export { VALUE_TYPE }

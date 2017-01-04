@@ -4,14 +4,9 @@ import ScrollToTop from 'react-scroll-up';
 
 import update from 'immutability-helper'
 
-import axios from 'axios'
-
-// import { connect } from 'react-redux'
-// import { bindActionCreators } from 'redux'
+import { fetchUserAndData, upsertProduct } from '../../api/AppAPI'
 
 import { canUseDOM } from '~/src/lib/utils'
-
-const API_URL = '/api/test-api/sponsor'
 
 import _ from 'lodash' // use throttle or debounce
 import 'whatwg-fetch'
@@ -24,6 +19,8 @@ const scrollStyle = {
 export default class ProductEditor extends Component {
 
 	state = {
+    tabLinkBase: '',
+
 		// Abstract
 		abstract: {
 			longTitle: '',     //
@@ -50,9 +47,11 @@ export default class ProductEditor extends Component {
 		funding: {
 			currentMoney: 0,   // 직접 / 간접 후원에 의해 추가됨
 			targetMoney: 0,
+      minPurchaseVolume: 0, // add/fix product model, toFormat, wrapper, form, submit callback,
+      maxPurchaseVolume: 10000, // add/fix product model, toFormat, wrapper, form, submit callback,
 			dateFrom: new Date().toISOString().substring(0, 10),     							// 작성 시작 일
 			dateTo: new Date(Date.now() + 1000 * 60 * 60 * 24).toISOString().substring(0, 10),	// 바로 다음날
-			reward: {
+			reward: { // Depreciated
 				rewards: [],
 				newReward: { // temporary state to insert...
 					title: '',
@@ -60,7 +59,14 @@ export default class ProductEditor extends Component {
 					isDirectSupport: false,
 					thresholdMoney: 0
 				}
-			}         // { title, description, isDirectSupport: T/F, threshold: 직접 후원 금액 또는 좋아요, 리공유 수, 전달일 }
+			},         // { title, description, isDirectSupport: T/F, threshold: 직접 후원 금액 또는 좋아요, 리공유 수, 전달일 }
+      faq: { // add/fix product model, toFormat, wrapper, form, submit callback, handlers
+        faqs: [],
+        newFaq: {
+          question: '',
+          answer: '',
+        }
+      }
 		},
 
 		// Overview
@@ -68,11 +74,35 @@ export default class ProductEditor extends Component {
 			intro:'',
 			part1: '',
 			part2: ''
-		}
+		},
 	}
 
-	componentWillMount() {
-		// 서버에서 State를 가져와 채워야 한다면 ...
+  async componentDidMount() {
+    const {
+      user,
+      data
+    } = await fetchUserAndData()
+
+    console.log('fetched data', data);
+
+    if (this.props.setUser) this.props.setUser(user)
+
+    let tabLinkBase = `/${(document.URL.match(/products\/.+\/edit/) || ['product-editor'])[0]}`
+
+    try {
+      if(data.product) {
+        this.setState({
+          ...this.server2client(data.product),
+          tabLinkBase
+        })
+      } else {
+        this.setState({
+          tabLinkBase
+        })
+      }
+    } catch (e) {
+      console.error(e);
+    }
 	}
 
   render() {
@@ -87,6 +117,7 @@ export default class ProductEditor extends Component {
 			// Funding
 			...this.fundingSubmitCallbacks,
 			rewardHandlers: this.rewardHandlers,
+      faqHandlers: this.faqHandlers,
 			// Overview
 			...this.overviewSubmitCallbacks,
 		})
@@ -97,6 +128,7 @@ export default class ProductEditor extends Component {
 			return (
 				<div className="exhibition-editor">
 					<ProductEditorTab
+            tabLinkBase={this.state.tabLinkBase}
 						save={this.save}
 					/>
 					 { children }
@@ -132,11 +164,17 @@ export default class ProductEditor extends Component {
 				category: { $set: category }
 			}
 		})),
-		_onProductNameSubmit: (productName) => this.setState(update(this.state, {
-			abstract: {
-				productName: { $set: productName }
-			}
-		})),
+		_onProductNameSubmit: (productName) => {
+      if(!this.state.abstract.productName) {
+        this.setState(update(this.state, {
+    			abstract: {
+    				productName: { $set: productName }
+    			}
+    		}))
+      } else {
+        alert(`You can't modify ProductName!`)
+      }
+    },
 		_onStateSubmit: (state) => this.setState(update(this.state, {
 			abstract: {
 				state: { $set: state }
@@ -181,6 +219,16 @@ export default class ProductEditor extends Component {
 				dateTo: { $set: dateTo }
 			}
 		})),
+    _onMinBuyerSubmit: (minPurchaseVolume) => this.setState(update(this.state, {
+      funding: {
+        minPurchaseVolume: { $set: Number(minPurchaseVolume) }
+      }
+    })),
+    _onMaxBuyerSubmit: (maxPurchaseVolume) => this.setState(update(this.state, {
+      funding: {
+        maxPurchaseVolume: { $set: Number(maxPurchaseVolume) }
+      }
+    })),
 		_onRewardSubmit: ({newReward}) => this.setState(update(this.state, {
 			funding: {
 				reward: {
@@ -195,7 +243,20 @@ export default class ProductEditor extends Component {
 					}
 				}
 			}
-		}))
+		})),
+    _onFaqSubmit: ({newFaq}) => this.setState(update(this.state, {
+      funding: {
+        faq: {
+          faqs: {
+            $push: [{...newFaq}]
+          },
+          newFaq: {
+            question: { $set: '' },
+            answer: { $set: '' },
+          }
+        }
+      }
+    }))
 	}
 	rewardHandlers = {
 		_onTitle: (e) => {
@@ -256,6 +317,43 @@ export default class ProductEditor extends Component {
 			}))
 		}
 	}
+  faqHandlers = {
+		_onQuestion: (e) => {
+			this.setState(update(this.state, {
+				funding: {
+					faq: {
+						newFaq: {
+							question: { $set: e.target.value }
+						}
+					}
+				}
+			}))
+		},
+		_onAnswer: (e) => {
+			this.setState(update(this.state, {
+				funding: {
+					faq: {
+						newFaq: {
+							answer: { $set: e.target.value }
+						}
+					}
+				}
+			}))
+		},
+		deleteFAQ: (index) => {
+			this.setState(update(this.state, {
+				funding: {
+					faq: {
+						faqs: {
+							$splice: [
+								[index, 1]
+							]
+						}
+					}
+				}
+			}))
+		}
+	}
 	// Overview
 	overviewSubmitCallbacks = {
 		_onIntroSubmit: (intro) => {
@@ -277,20 +375,65 @@ export default class ProductEditor extends Component {
 		}))
 	}
 
+  client2server = () => {
+    return {
+      abstract: this.state.abstract,
+      creator: this.state.creator,
+      funding: {
+        currentMoney: this.state.funding.currentMoney,
+        targetMoney: this.state.funding.targetMoney,
+        dateFrom: this.state.funding.dateFrom,
+        dateTo: this.state.funding.dateTo,
+        minPurchaseVolume: this.state.funding.minPurchaseVolume,
+        maxPurchaseVolume: this.state.funding.maxPurchaseVolume,
+        rewards: this.state.funding.reward.rewards,
+        faqs: this.state.funding.reward.faqs,
+      },
+      overview: {
+        intro: this.state.overview.intro,
+        part1: JSON.stringify(this.state.overview.part1),
+        part2: JSON.stringify(this.state.overview.part2),
+      }
+    }
+  }
+
+  server2client = (p) => update(this.state, {
+    abstract: { $set: p.abstract },
+    creator: { $set: p.creator },
+    funding: {
+      currentMoney: { $set: p.funding.currentMoney },
+      targetMoney: { $set: p.funding.targetMoney },
+      dateFrom: { $set: p.funding.dateFrom },
+      dateTo: { $set: p.funding.dateTo },
+      minPurchaseVolume: { $set: p.funding.minPurchaseVolume },
+      maxPurchaseVolume: { $set: p.funding.maxPurchaseVolume },
+      reward: {
+        rewards: { $set: p.funding.rewards }
+      },
+      faq: {
+        faqs: { $set: p.funding.faqs }
+      }
+    },
+    overview: {
+      intro: { $set: p.overview.intro },
+      part1: { $set: JSON.parse(p.overview.part1) },
+      part2: { $set: JSON.parse(p.overview.part2) },
+    }
+  })
+
 	// 서버로 전송
 	save = async () => {
-		console.log('state', this.state);
-		try {
-			const res = await axios.post(API_URL, {...this.state})
-			console.log('save response', res);
-		} catch (e) {
-			console.error('save error', e);
-		}
-	}
+    console.log('state', this.state);
+    let body = this.client2server()
 
-	// 서버에서 받기
-	fetchProduct = async () => {
-
+    try {
+      let r = await upsertProduct(body)
+      console.log(r);
+      this.props.setFlash({title: 'product saved', message: JSON.stringify(r, undefined, 4), level: 'success'})
+    } catch (e) { // error from axios.request
+      console.log(e);
+      this.props.setFlash({title: 'product save error', message: JSON.stringify(e.response, undefined, 4), level: 'error', autoDismiss: 0, dismissible: true})
+    }
 	}
 }
 

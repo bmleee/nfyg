@@ -1,5 +1,4 @@
 import React, { Component, PropType } from 'react'
-import { fetchUserAndData } from '../../api/AppAPI'
 
 import ProjectEditorTab from './ProjectEditorTab'
 import ScrollToTop from 'react-scroll-up';
@@ -8,15 +7,9 @@ import update from 'immutability-helper'
 
 import axios from 'axios'
 
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-
-import { upsertProject } from '~/src/react/api/AppAPI'
-import * as actionCreators from '../../actions/ProjectEditorActionCreators'
+import { fetchUserAndData, upsertProject } from '../../api/AppAPI'
 
 import { canUseDOM } from '~/src/lib/utils'
-
-const API_URL = '/api/auth/fetch/projects'
 
 import _ from 'lodash' // use throttle or debounce
 import 'whatwg-fetch'
@@ -86,7 +79,7 @@ export default class ProjectEditor extends Component {
 
     console.log('fetched project', data);
 
-    let tabLinkBase = `/${(document.URL.match(/projects\/.+|\/edit/) || ['project-editor'])[0]}`
+    let tabLinkBase = `/${(document.URL.match(/projects\/.+\/edit/) || ['project-editor'])[0]}`
 
     if (this.props.setUser) this.props.setUser(user)
     try {
@@ -163,11 +156,17 @@ export default class ProjectEditor extends Component {
 				category: { $set: category }
 			}
 		})),
-		_onProjectNameSubmit: (projectName) => this.setState(update(this.state, {
-			abstract: {
-				projectName: { $set: projectName }
-			}
-		})),
+		_onProjectNameSubmit: (projectName) => {
+      if(!this.state.abstract.projectName) {
+        this.setState(update(this.state, {
+    			abstract: {
+    				projectName: { $set: projectName }
+    			}
+    		}))
+      } else {
+        alert(`You can't modify ProjectName!`)
+      }
+    },
 		_onStateSubmit: (state) => this.setState(update(this.state, {
 			abstract: {
 				state: { $set: state }
@@ -352,7 +351,7 @@ export default class ProjectEditor extends Component {
 
   // 서버로 전송
 	save = async () => {
-    let isNew = document.URL.includes('editor')
+    console.log('state', this.state);
     let body = this.client2server()
 
     try {
@@ -363,6 +362,5 @@ export default class ProjectEditor extends Component {
       console.log(e);
       this.props.setFlash({title: 'project save error', message: JSON.stringify(e.response, undefined, 4), level: 'error', autoDismiss: 0, dismissible: true})
     }
-
   }
 }

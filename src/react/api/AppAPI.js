@@ -106,3 +106,20 @@ export async function upsertProject(body) {
 		throw e
 	}
 }
+
+export async function upsertProduct(body) {
+	const config = {
+		method: 'post',
+		url: `/api/auth/fetch/products`,
+		withCredentials: true,
+		data: body,
+	}
+
+	try {
+		const response = await axios.request(config)
+		return response.data
+	} catch (e) {
+		console.error(e);
+		throw e
+	}
+}

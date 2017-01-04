@@ -11,7 +11,7 @@ const createProduct = async ({state = 'preparing', artist}) => {
 			shortTitle: `${randomString('sample short title', 20)}`,
 			imgSrc: "/assets/images/present-product-list-thumbnail.jpg",
 			category: "health",
-			productName: `${randomString('test product name')}`,
+			productName: `${randomString('test-product-name')}`,
 			state: state,
 			postIntro: `${randomString('sample post intro')}`,
 		},
@@ -27,6 +27,8 @@ const createProduct = async ({state = 'preparing', artist}) => {
 				targetMoney: randomNumber(100000),
 				dateFrom: "2016-12-08",
 				dateTo: "2020-12-09",
+				minPurchaseVolume: randomNumber(0, 10),
+				maxPurchaseVolume: randomNumber(100, 1000),
 				rewards: [
 						{
 								title: "sample reward",
@@ -46,7 +48,22 @@ const createProduct = async ({state = 'preparing', artist}) => {
 								isDirectSupport: true,
 								thresholdMoney: 1000000
 						}
-				],
+					],
+				faqs: [
+					{
+						question: 'sample question 1',
+						answer: 'sample answer 1'
+					},
+					{
+						question: 'sample question 2',
+						answer: 'sample answer 2'
+					},
+					{
+						question: 'sample question 3',
+						answer: 'sample answer 3'
+					},
+				]
+
 		},
 		overview: {
 				intro: "sample reward intro",
@@ -153,6 +170,8 @@ export default async function initProduct() {
 	        targetMoney: 1000000,
 	        dateFrom: "2016-12-08",
 	        dateTo: "2020-12-09",
+					minPurchaseVolume: randomNumber(0, 10),
+					maxPurchaseVolume: randomNumber(100, 1000),
 					rewards: [
 							{
 									title: randomString('sample reward title'),
@@ -172,7 +191,22 @@ export default async function initProduct() {
 									isDirectSupport: true,
 									thresholdMoney: 1000000
 							}
-					],
+						],
+					faqs: [
+						{
+							question: 'sample question 1',
+							answer: 'sample answer 1'
+						},
+						{
+							question: 'sample question 2',
+							answer: 'sample answer 2'
+						},
+						{
+							question: 'sample question 3',
+							answer: 'sample answer 3'
+						},
+					]
+
 	    },
 	    overview: {
 	        intro: "sample overview intro",

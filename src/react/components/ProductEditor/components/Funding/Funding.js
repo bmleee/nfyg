@@ -24,6 +24,18 @@ const DateToWrapper = ({value}) => (
 const DateToForm = ({value, onChange}) => (
 	<input type="date" value={value} onChange={onChange} />
 )
+const MinBuyerWrapper = ({value}) => (
+	<span>{value}</span>
+)
+const MinBuyerForm = ({value, onChange}) => (
+	<input type="number" value={value} onChange={onChange} />
+)
+const MaxBuyerWrapper = ({value}) => (
+	<span>{value}</span>
+)
+const MaxBuyerForm = ({value, onChange}) => (
+	<input type="number" value={value} onChange={onChange} />
+)
 
 const RewardWrapper = ({value, handlers}) => {
 	const {
@@ -99,22 +111,82 @@ const RewardForm = ({value, handlers, ...otherProps}) => {
 	)
 }
 
+const FaqWrapper = ({value, handlers}) => {
+	const {
+		deleteFAQ
+	} = handlers
+
+	const items = !!value && !!value.faqs && value.faqs.length > 0
+		? value.faqs.map(({
+			question,
+			answer
+		}, index) => (
+			<div className="editor-item-detail-wrapper">
+				<span className="item-deatail-small-title-saved">문 의 : {question}</span>
+				<span className="item-deatail-small-title-saved">답 변 : {answer}</span>
+				<button className="item-deatail-delete" onClick={() => deleteFAQ(index)}>삭제하기</button>
+			</div>
+		))
+		: <span></span>
+
+	return (
+		<div className="reward-wrapper-container">
+			{items}
+		</div>
+	)
+}
+const FaqForm = ({value, handlers}) => {
+	const {
+		question,
+		answer
+	} = value.newFaq
+	const {
+		_onQuestion,
+		_onAnswer
+	} = handlers
+
+	return (
+		<div className="funding-reward-form-container">
+			<div>
+				<span className="item-deatail-small-title">문의</span>
+				<input type="text" value={question} onChange={_onQuestion} />
+			</div>
+
+			<div>
+				<span className="item-deatail-small-title">답변</span>
+				<input type="text" value={answer} onChange={_onAnswer} />
+			</div>
+
+		</div>
+	)
+}
+
+
 const Funding = ({
 	funding: {
 		currentMoney,
 		targetMoney,
 		dateFrom,
 		dateTo,
+		minPurchaseVolume,
+		maxPurchaseVolume,
+
 		reward,
+		faq,
 	},
 
 	// onSubmit callbacks
 	_onTargetMoneySubmit,
 	_onDateToSubmit,
+	_onMinBuyerSubmit,
+	_onMaxBuyerSubmit,
+
 	_onRewardSubmit,
+	_onFaqSubmit,
 
 	// onChange callbacks
 	rewardHandlers,
+	faqHandlers,
 }) => {
 
 	return (
@@ -133,6 +205,50 @@ const Funding = ({
 				className ="exhibition-long-title"
 				classNameopen ="editor-open-container"
 			/>
+
+			<FormWrapper
+				title="최소 주문 수량"
+				valueType={VALUE_TYPE.NUMBER}
+				alt="최소 주문 수량을 입력하세요"
+				initialValue={minPurchaseVolume}
+				submitCaption={'최소 주문 수량을 입력하세요'}
+				submitCaptionsub={'입력하기'}
+				onSubmit={_onMinBuyerSubmit}
+				Wrapper={MinBuyerWrapper}
+				Form={MinBuyerForm}
+				className ="exhibition-long-title"
+				classNameopen ="editor-open-container"
+			/>
+
+			<FormWrapper
+				title="최대 주문 수량"
+				valueType={VALUE_TYPE.NUMBER}
+				alt="최대 주문 수량을 입력하세요"
+				initialValue={maxPurchaseVolume}
+				submitCaption={'최대 주문 수량을 입력하세요'}
+				submitCaptionsub={'입력하기'}
+				onSubmit={_onMaxBuyerSubmit}
+				Wrapper={MaxBuyerWrapper}
+				Form={MaxBuyerForm}
+				className ="exhibition-long-title"
+				classNameopen ="editor-open-container"
+			/>
+
+			<FormWrapper
+				title="목표 금액"
+				valueType={VALUE_TYPE.MONEY}
+				alt="목표 금액을 입력하세요"
+				initialValue={targetMoney}
+				submitCaption={'목표 금액을 입력하세요'}
+				submitCaptionsub={'입력하기'}
+				onSubmit={_onTargetMoneySubmit}
+				Wrapper={TargetMoneyWrapper}
+				Form={TargetMoneyForm}
+				className ="exhibition-long-title"
+				classNameopen ="editor-open-container"
+			/>
+
+
 
 			<FormWrapper
 				title="프로젝트 종료일"
@@ -161,6 +277,24 @@ const Funding = ({
 				className ="exhibition-eng-title"
 				classNameopen ="editor-open-container"
 			/>
+
+
+			<FormWrapper
+				title="문의사항"
+				valueType={VALUE_TYPE.FAQ}
+				alt="문의사항"
+				initialValue={faq}
+				submitCaption={'문의사항을 추가하세요'}
+				submitCaptionsub={'추가하기'}
+				onSubmit={_onFaqSubmit}
+				handlers={faqHandlers}
+				Wrapper={FaqWrapper}
+				Form={FaqForm}
+				className ="exhibition-eng-title"
+				classNameopen ="editor-open-container"
+			/>
+
+
 		</div>
 	)
 }

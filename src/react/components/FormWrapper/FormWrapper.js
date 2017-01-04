@@ -129,13 +129,17 @@ export default class FormWrapper extends Component {
 			case VALUE_TYPE.REWARD:
 			case VALUE_TYPE.ARTWORK:
 			case VALUE_TYPE.RECOMMEND:
+			case VALUE_TYPE.FAQ:
 				return;
 			case VALUE_TYPE.RICH_TEXT:
 				value = e;
 				break;
 			case VALUE_TYPE.IMAGE: // _renderDropzone.onDrop
 				break;
-
+			case VALUE_TYPE.MONEY:
+			case VALUE_TYPE.NUMBER:
+				value = Number(e.target.value)
+				break;
 			default : // input[type="text"] ...
 				value = e.target.value
 				break;
