@@ -35,12 +35,12 @@ class Profile extends Component {
 
 					<div className="indirect-support-detail-comments">
 						<p className="indirect-support-detail-text">좋아요</p>
-						<h4 className="indirect-support-h4">{ comments.toLocaleString() }</h4>개
+						<h4 className="indirect-support-h4">{ (comments+likes+shares).toLocaleString() }</h4>개
 					</div>
 
 					<div className="indirect-support-detail-shares">
 						<p className="indirect-support-detail-text">누적후원금</p>
-						<h4 className="indirect-support-h4">{ shares.toLocaleString() }</h4>원
+						<h4 className="indirect-support-h4">{ ((comments+likes+shares)*200).toLocaleString() }</h4>원
 					</div>
 				</div>
 
@@ -71,9 +71,14 @@ class Profile extends Component {
 				</div>
 				<div className="direct-display-name-container">
 				<p className="direct-display-name">{display_name}</p>
-				<p className="direct-display-name">{display_name}</p>
+				<p className="direct-display-money">{ money.toLocaleString() }원</p>
 				</div>
-				<div className="direct-display-money">{ money.toLocaleString() }원</div>
+				<div className="direct-display-cancel">
+				<button className="direct-cancel-button">결제취소</button>
+				{/* 일정 기간이 지나 취소가 불가능 할 시에 
+				<button className="direct-cancel-button2">기간만료</button> 
+				*/}
+				</div>
 			</div>
 		) )
 

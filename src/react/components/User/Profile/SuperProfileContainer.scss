@@ -37,17 +37,62 @@
 	vertical-align : top;
 }
 .direct-display-name {
-	font-weight : 700 !important;
-	float : left;
+	font-weight : 400 !important;
+	text-align : left;
+	width : 100%;
+	padding : 0px 0px 2px 12px;
+}
+.direct-display-money {
+	font-weight : 600 !important;
+	text-align : left;
 	width : 100%;
 	padding-left : 12px;
 }
-.direct-display-money {
-	width : 23%;
+.direct-display-cancel {
+	width : 24%;
 	text-align : right;
-	vertical-align : super;
+	vertical-align : bottom;
+	margin-bottom : 6px;
+	.direct-cancel-button, .direct-cancel-button:focus  {
+		padding : 6px 15px;
+		background-color : #4b709a;
+		border : none;
+		border-radius : 3px;
+		outline : none;
+		color : #fff;
+		font-size : 14px;
+		font-weight : 600;
+		width : 80%;
+		@media (max-width : 500px) {
+			font-size : 12px;
+			padding : 4px 8px;
+			width : 100%;
+		}
+	}
+	.direct-cancel-button:hover {
+		background-color : #354c67;
+	}
+	.direct-cancel-button2, .direct-cancel-button2:focus  {
+		padding : 6px 15px;
+		background-color : #ddd;
+		border : none;
+		border-radius : 3px;
+		outline : none;
+		color : #777;
+		font-size : 14px;
+		font-weight : 600;
+		width : 80%;
+		@media (max-width : 500px) {
+			font-size : 12px;
+			padding : 4px 8px;
+			width : 100%;
+		}
+	}
+	.direct-cancel-button2:hover {
+		cursor : default;
+	}
 }
-.direct-display-name, .direct-display-money {
+.direct-display-name, .direct-display-money, .direct-display-cancel {
 	display: inline-block;
 }
 .profile-direct-supports-item {

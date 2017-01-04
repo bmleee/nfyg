@@ -33,23 +33,20 @@ class Sponsors extends Component {
 					<div className="sponsor-centered">
 					<img className="sponsor-logo-image" src={imgSrc} alt=""/>
 					</div>
-					</div>
-					{/* <div>
-						<span>{sponsorName}</span>
-						<span>
+						<div className="sponsor-money-container">
+							<p className="sponsor-money">
 							{
 								!!money && money > 0
 									? `${money.toLocaleString()}원 후원`
 									: `후원 예정`
 							}
-						</span>
-					</div> */}
+							</p>
+						</div>
+					</div>
 					<div className="sponsor-description">
 					<p className="sponsor-description-text">
 						{description}
 					</p>
-					</div>
-					{/* https://www.npmjs.com/package/react-fontawesome 
 					<div className="sponsor-icons">
 						{
 							!!homepage
@@ -75,7 +72,8 @@ class Sponsors extends Component {
 									</a>
 								: null
 						}
-					</div>  */}
+					</div> 
+					</div>
 
 				</div>
 			))
