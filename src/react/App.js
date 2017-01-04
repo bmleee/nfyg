@@ -120,7 +120,7 @@ export default class App extends Component {
 
 	flashHandlers = {
 		// https://www.npmjs.com/package/react-notification-system
-		setFlash: (flash) => {
+		setFlash: (flash) => { // flash = { type?, message, level, ... }
 			this.setState(update(this.state, {
 				flashs: {
 					$push: [{...flash}]

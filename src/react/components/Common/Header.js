@@ -59,12 +59,13 @@ export default class Header extends Component {
 		} = props
 
 		for (let flash of flashs) {
-			switch (flash.type) {
-				case 'LoginFailure':
-					this.refs.notificationSystem.addNotification({
-						...flash
-					})
-			}
+			// switch (flash.type) {
+			// 	case 'LoginFailure':
+			//
+			// }
+			this.refs.notificationSystem.addNotification({
+				...flash
+			})
 		}
 
 		clearFlash()

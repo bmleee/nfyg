@@ -11,7 +11,7 @@ import axios from 'axios'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { upload_file } from '~/src/react/api/AppAPI'
+import { createProject, updateProject } from '~/src/react/api/AppAPI'
 import * as actionCreators from '../../actions/ProjectEditorActionCreators'
 
 import { canUseDOM } from '~/src/lib/utils'
@@ -29,8 +29,6 @@ const scrollStyle = {
 export default class ProjectEditor extends Component {
 
 	state = {
-    isNew: canUseDOM ? document.URL.includes('edit') : '',
-
 		// Abstract
 		abstract: {
 			longTitle: '',     //
@@ -300,22 +298,6 @@ export default class ProjectEditor extends Component {
 		}))
 	}
 
-	// 서버로 전송
-	save = async () => {
-		console.log('state', this.state);
-
-    let param =  this.state.isNew ? 'new' : ''
-    let url = `${API_URL}/${param}`
-    let body = this.client2server()
-
-		try {
-			const res = await axios.post(url, body)
-			console.log('save response', res);
-		} catch (e) {
-			console.error('save error', e);
-		}
-	}
-
   client2server = () => {
     return {
       abstract: this.state.abstract,
@@ -357,4 +339,23 @@ export default class ProjectEditor extends Component {
       part2: { $set: JSON.parse(project.overview.part2) },
     }
   })
+
+  // 서버로 전송
+	save = async () => {
+    let isNew = document.URL.includes('editor')
+    let body = this.client2server()
+
+    try {
+      let r;
+      if (isNew) {
+        r = await createProject(body)
+      } else {
+        r = await updateProject(body)
+      }
+      this.props.setFlash({title: 'project saved', level: 'success'})
+    } catch (e) { // error from axios.request
+      this.props.setFlash({title: 'project save error', message: JSON.stringify(e.response.data, undefined, 4), level: 'error', autoDismiss: 0, dismissible: true})
+    }
+
+  }
 }

@@ -89,3 +89,35 @@ export function fetchOptions(path) {
 
 	return ret
 }
+
+export async function createProject(body) {
+	const config = {
+		method: 'post',
+		url: `/api/auth/fetch/projects`,
+		withCredentials: true,
+		data: body,
+	}
+
+	try {
+		const response = await axios.request(config)
+	} catch (e) {
+		console.error(e);
+		throw e
+	}
+}
+
+export async function updateProject(body) {
+	const config = {
+		method: 'put',
+		url: `/api/auth/fetch/projects`,
+		withCredentials: true,
+		data: body,
+	}
+
+	try {
+		const response = await axios.request(config)
+	} catch (e) {
+		console.error(e);
+		throw e
+	}
+}
