@@ -12,4 +12,4 @@ backup
 .tern-project
 .c9
 backup
-log
+log/*.log

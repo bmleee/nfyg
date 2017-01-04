@@ -29,6 +29,8 @@ const scrollStyle = {
 export default class ProjectEditor extends Component {
 
 	state = {
+    isNew: canUseDOM ? document.URL.includes('edit') : '',
+
 		// Abstract
 		abstract: {
 			longTitle: '',     //
@@ -302,8 +304,12 @@ export default class ProjectEditor extends Component {
 	save = async () => {
 		console.log('state', this.state);
 
+    let param =  this.state.isNew ? 'new' : ''
+    let url = `${API_URL}/${param}`
+    let body = this.client2server()
+
 		try {
-			const res = await axios.post(API_URL, {...this.client2server()})
+			const res = await axios.post(url, body)
 			console.log('save response', res);
 		} catch (e) {
 			console.error('save error', e);

@@ -93,11 +93,11 @@ router.get('/:projectName/edit', async (req, res) => {
 })
 
 // update project
-router.post('/', async (req, res) => {
+router.post('/:new?', async (req, res) => {
 	console.log('POST /auth/fetch/projects');
-	// console.log('body', req.body);
 
 	const body = req.body
+	const isNew = !!req.param.new
 	const projectName = body.abstract.projectName
 	const sponsor = await SponsorModel.findOne({sponsorName: body.sponsor.sponsorName})
 	body.sponsor = sponsor

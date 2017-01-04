@@ -14,6 +14,7 @@ import connection from './lib/db'
 
 // middlewares
 import renderReact from './middlewares/reactUtils'
+import winstonLogger from './middlewares/logger'
 
 import router from './controllers'; // express router
 
@@ -25,7 +26,8 @@ const publicPath = path.join(__dirname, './../public');
 app.set('views', path.join(publicPath, '../src/express/'));
 app.set('view engine', 'ejs');
 
-app.use(logger('dev'));
+app.use(winstonLogger);
+// app.use(logger('dev'));
 app.use(cookieParser())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -44,7 +46,7 @@ applyPassport(passport)
 
 app.use(express.static(publicPath));
 app.use('/api', router);
-app.use(renderReact);
+app.use(renderReact); // should below router middleware
 
 
 const server = app.listen(EXPRESS_PORT, () => {

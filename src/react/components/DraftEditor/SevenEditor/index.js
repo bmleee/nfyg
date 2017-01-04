@@ -69,6 +69,7 @@ export default class SevenEditor extends Component {
 		// console.log('typeof this.props.raw', typeof this.props.raw);
 		// console.log('this.props.raw', this.props.raw);
 
+		// init empty raw content
 		let raw = typeof this.props.raw === 'string' ? JSON.parse(this.props.raw || `{"entityMap":{},"blocks":[]}`) : this.props.raw
 		let editorState;
 

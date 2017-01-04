@@ -31,11 +31,13 @@
     "compression": "^1.6.2",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.3",
+    "date-utils": "^1.2.21",
     "ejs": "^2.5.5",
     "email-templates": "^2.5.4",
     "express": "^4.14.0",
     "express-jwt": "^5.1.0",
     "express-session": "^1.14.2",
+    "express-winston": "^2.1.2",
     "firebase": "^3.5.2",
     "iamport": "^0.3.3",
     "immutable": "^3.8.1",
@@ -68,7 +70,9 @@
     "react-swipeable": "^3.7.0",
     "react-tab-panel": "^2.2.7",
     "react-tabs": "^0.8.2",
-    "whatwg-fetch": "^1.0.0"
+    "whatwg-fetch": "^1.0.0",
+    "winston": "^2.3.0",
+    "winston-daily-rotate-file": "^1.4.0"
   },
   "devDependencies": {
     "babel-cli": "^6.11.4",
