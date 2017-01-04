@@ -193,6 +193,6 @@ export default class FormWrapper extends Component {
 			this.setState({value: sourceURL})
 		}
 
-		return <Dropzone onDrop={onDrop}/>
+		return <Dropzone onDrop={onDrop} accept="image/*"/>
 	}
 }

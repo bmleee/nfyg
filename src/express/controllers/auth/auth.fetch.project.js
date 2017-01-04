@@ -98,25 +98,25 @@ router.post('/', async (req, res) => {
 
 	try {
 		const body = req.body
-
-		console.log('sponsor query', {sponsorName: body.sponsor.sponsorName});
+		const projectName = body.abstract.projectName || ''
 
 		const sponsor = await SponsorModel.findOne({sponsorName: body.sponsor.sponsorName})
 		body.sponsor = sponsor
-		console.log('body', body);
-		let project = await ProjectModel.create(body)
-		console.log('project', project);
-		res.json({
-			user: renderUser.authorizedUser(req.session.user), // catch unauthorized user exception
-			data: {
-				project
-			}
-		})
+
+		// upsert Project
+		const r = await ProjectModel.update(
+			{ 'abstract.projectName': projectName },
+			body,
+			{ upsert: true }
+		)
+
+		console.log('upsert result', r);
+
+		res.json({response: r.nModified > 0})
 	} catch (e) {
 		console.error(e);
 		res.status(400).json({
-			user: renderUser.authorizedUser(req.session.user), // catch unauthorized user exception
-			error: e
+			response: e
 		})
 	}
 })
@@ -127,7 +127,7 @@ router.put('/', async (req, res) => {
 
 	try {
 		const body = req.body
-		const projectName = body.abstract.projectName
+		const projectName = body.abstract.projectName || ''
 
 		const sponsor = await SponsorModel.findOne({sponsorName: body.sponsor.sponsorName})
 		body.sponsor = sponsor
@@ -136,11 +136,12 @@ router.put('/', async (req, res) => {
 		const r = await ProjectModel.update(
 			{ 'abstract.projectName': projectName },
 			body,
+			{ upsert: true }
 		)
 
 		console.log('upsert result', r);
 
-		res.json({response: r.nModified > 0})
+		res.status(200).json({response: r.n > 0}) // selected project
 	} catch (e) {
 		console.error(e);
 		res.status(400).json({

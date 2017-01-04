@@ -11,7 +11,7 @@ import axios from 'axios'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { createProject, updateProject } from '~/src/react/api/AppAPI'
+import { upsertProject } from '~/src/react/api/AppAPI'
 import * as actionCreators from '../../actions/ProjectEditorActionCreators'
 
 import { canUseDOM } from '~/src/lib/utils'
@@ -346,15 +346,12 @@ export default class ProjectEditor extends Component {
     let body = this.client2server()
 
     try {
-      let r;
-      if (isNew) {
-        r = await createProject(body)
-      } else {
-        r = await updateProject(body)
-      }
-      this.props.setFlash({title: 'project saved', level: 'success'})
+      let r = await upsertProject(body)
+      console.log(r);
+      this.props.setFlash({title: 'project saved', message: JSON.stringify(r, undefined, 4), level: 'success'})
     } catch (e) { // error from axios.request
-      this.props.setFlash({title: 'project save error', message: JSON.stringify(e.response.data, undefined, 4), level: 'error', autoDismiss: 0, dismissible: true})
+      console.log(e);
+      this.props.setFlash({title: 'project save error', message: JSON.stringify(e.response, undefined, 4), level: 'error', autoDismiss: 0, dismissible: true})
     }
 
   }
