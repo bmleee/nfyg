@@ -10,19 +10,19 @@ const timestampHelper = () => new Date().toFormat('YYYY-MM-DD HH24:MI:SS')
 const logger = expressWinston.logger({
 	transports: [
 		new winston.transports.Console({
-			level: process.env.NODE_ENV === 'development' ? 'error'
-				: process.env.NODE_ENV === 'test' ? 'debug'
-					: 'info',
+			// level: process.env.NODE_ENV === 'development' ? 'error'
+			// 	: process.env.NODE_ENV === 'test' ? 'debug'
+			// 		: 'info',
 			timestamp: timestampHelper,
-			json: true,
+			json: false,
 			colorize: true
 		}),
 
 		new winston.transports.File({
 			level: 'info',
 			name: 'info.log',
-			filename: path.join(__dirname, '../log/info.log'),
-			maxsize: 5242880, // 5MB
+			filename: path.join(__dirname, '../log/info'),
+			maxsize: 52428800, // 50MB
 			maxFiles: 5,
 			timestamp: timestampHelper,
 			json: true,
@@ -33,7 +33,7 @@ const logger = expressWinston.logger({
 			level: 'info',
 			name: 'daily.info.log',
 			filename: path.join(__dirname, '../log/info-'),
-			dateParrern: 'YYYY-MM-DD-HH-MM.log',
+			datePattern: 'yyyy-MM-dd-HH-mm',
 			maxsize: 524288000, // 500MB
 			maxFiles: 5,
 			timestamp: timestampHelper,
@@ -44,8 +44,8 @@ const logger = expressWinston.logger({
 		new winston.transports.File({
 			level: 'error',
 			name: 'error.log',
-			filename: path.join(__dirname, '../log/error.log'),
-			maxsize: 5242880, // 5MB
+			filename: path.join(__dirname, '../log/error'),
+			maxsize: 52428800, // 50MB
 			maxFiles: 5,
 			timestamp: timestampHelper,
 			json: true,
@@ -56,7 +56,7 @@ const logger = expressWinston.logger({
 			level: 'error',
 			name: 'daily.error.log',
 			filename: path.join(__dirname, '../log/error-'),
-			dateParrern: 'YYYY-MM-DD-HH-MM.log',
+			datePattern: 'yyyy-MM-dd-HH-mm',
 			maxsize: 524288000, // 500MB
 			maxFiles: 5,
 			timestamp: timestampHelper,
@@ -65,7 +65,7 @@ const logger = expressWinston.logger({
 		}),
 
 	],
-	meta: true, // optional: control whether you want to log the meta data about the request (default to true)
+	meta: false, // optional: control whether you want to log the meta data about the request (default to true)
 	msg: "HTTP {{req.method}} {{req.url}}", // optional: customize the default logging message. E.g. "{{res.statusCode}} {{req.method}} {{res.responseTime}}ms {{req.url}}"
 	expressFormat: true, // Use the default Express/morgan request formatting. Enabling this will override any msg if true. Will only output colors with colorize set to true
 	colorize: true, // Color the text and status code, using the Express/morgan color palette (text: gray, status: default green, 3XX cyan, 4XX yellow, 5XX red).
