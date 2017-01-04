@@ -1,12 +1,20 @@
+.sponsor-icon-homepage, .sponsor-icon-facebook, .sponsor-icon-blog {
+	margin : 12px 8px 0px 8px;
+	color : #555;
+	transition : opacity, 220ms;
+}
+.sponsor-icon-homepage:hover, .sponsor-icon-facebook:hover, .sponsor-icon-blog:hover {
+	color : #4b709a;
+	transition : opacity, 220ms;
+}
 .sponsor-description-text {
-	padding-top: 15px;
-    border-top: 1px solid #ddd;
+	font-size : 14px !important;
+	color : #555;
 }
 .sponsor-description {
 	border: 1px solid #ddd;
-	border-top : none;
 	background : #fff;
-	padding : 0px 15px 15px 15px;
+	padding : 15px;
 	text-align : center;
 }
 .sponsor-thumbnail {
@@ -15,6 +23,70 @@
 	overflow : hidden;
 	border: 1px solid #ddd;
 	border-bottom : none;
+	transition : opacity, 220ms;
+	.sponsor-money-container {
+	display : block;
+	position: absolute;
+    z-index: 999;
+    top: 0;
+    text-align: center;
+    height: 26px;
+    line-height: 2;
+    left: 50%;
+    margin-bottom: 10px;
+}
+	.sponsor-money {
+	position: relative;
+    left: -50%;
+    font-size: 20px!important;
+    color: transparent;
+    width: 500px;
+    height: 280px;
+    background: transparent;
+    border-radius: 3px;
+    transition : opacity, 220ms;
+}
+}
+.sponsor-thumbnail:hover {
+	transition : opacity, 220ms;
+	.sponsor-money-container {
+	display : block;
+	position: absolute;
+    z-index: 999;
+    top: 0;
+    text-align: center;
+    height: 26px;
+    line-height: 2;
+    left: 50%;
+    margin-bottom: 10px;
+}
+	.sponsor-money {
+	position: relative;
+    padding-top: 20%;
+    left: -50%;
+    font-size: 22px!important;
+    color: #fff;
+    width: 500px;
+    height: 280px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 3px;
+    transition : opacity, 220ms;
+    @media (max-width : 1025px) {
+    	padding-top : 15%;
+    @media (max-width : 991px) {
+    	padding-top : 19%;
+    @media (max-width : 500px) {
+    	padding-top : 22%;
+    @media (max-width : 400px) {
+    	padding-top : 20%;
+    @media (max-width : 330px) {
+    	padding-top : 17%;
+    }
+    }
+    }
+    }
+    }
+}
 }
 .sponsor-centered {
 	 position: absolute;
@@ -53,6 +125,7 @@ position: absolute;
 		width : 1172px;
         margin : 0px auto;
         padding : 15px 0px 20px 0px;
+        text-align : center;
         @media (max-width: 1192px) {
             width : 100%;
             padding : 15px 50px 20px 50px;
@@ -61,10 +134,10 @@ position: absolute;
 .sponsor-list-container {
 		width : 1192px;
         margin : 0px auto;
-        padding : 30px 0px 20px 0px;
+        padding : 20px 0px 20px 0px;
         @media (max-width: 1192px) {
             width : 100%;
-            padding : 30px 40px 20px 40px;
+            padding : 20px 40px 20px 40px;
         }
 	}
 .sponsor-list-item {
@@ -79,7 +152,7 @@ position: absolute;
       padding : 15px 30px 20px 30px;
 	}
 .sponsor-list-container {
-	padding : 30px 20px 20px 20px;
+	padding : 20px 20px 20px 20px;
 }
 .sponsor-list-item {
 	width : 49.99999%;
@@ -93,7 +166,7 @@ position: absolute;
 	padding : 10px 0px 20px 0px;
 }
 .sponsor-list-item {
-	width : 49.9999%;
+	width : 100%;
 	padding :3px;
 }
 }
