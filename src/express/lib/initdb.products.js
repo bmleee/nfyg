@@ -51,16 +51,24 @@ const createProduct = async ({state = 'preparing', artist}) => {
 					],
 				faqs: [
 					{
-						question: 'sample question 1',
-						answer: 'sample answer 1'
+						question: '제품 구매 이력은 어디서 확인할 수 있나요?',
+						answer: 'Check you profile!'
 					},
 					{
-						question: 'sample question 2',
-						answer: 'sample answer 2'
+						question: '배송지를 변경하고 싶습니다.',
+						answer: '배송이 시작되기 전에마 배송지를 변경하실 수 있습니다. 제품 구매 상세 정보 페이지에서 배송지를 변경하세요.'
 					},
 					{
-						question: 'sample question 3',
-						answer: 'sample answer 3'
+						question: '제작과 배송이 언제 되나요?',
+						answer: '최소 구매 수량을 넘은 경우에만 미술 제품을 제작할 수 있습니다.'
+					},
+					{
+						question: '결제 취소가 가능한가요?',
+						answer: '최소 구매 수량을 넘어 배송이 시작되기 전에는 언제든지 결제 취소를 하실 수 있습니다. 구매 상세 페이지에서 결제를 취소하세요'
+					},
+					{
+						question: '교환이나 반품, 환불이 가능한가요?',
+						answer: '네 가능합니다.'
 					},
 				]
 

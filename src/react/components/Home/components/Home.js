@@ -3,7 +3,7 @@ import {
 	HomeHeader,
 	PresentProjectList,
 	PresentProductList,
-	
+
 	FutureProjectList,
 	ExhibitionList,
 	MagazineList,
@@ -14,7 +14,7 @@ import {
 
 } from './';
 
-import Modal from 'react-awesome-modal';
+import Modal from '~/src/react/components/react-awesome-modal';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 class Home extends Component {
@@ -56,10 +56,10 @@ class Home extends Component {
 				<div className ="home-body">
 					{/* <HomeInfo title="공유로 후원한 금액" amount={10000} /> */}
 
-					
+
 						{/* 프로젝트 제안 MODAl
 						<input type="button" value="프로젝트 제안하기" onClick={() => this.openModal()} />
-						
+
 						<Modal className="project-suggest-modal" visible={this.state.visible} width="480" height="560px" effect="fadeInDown" onClickAway={() => this.closeModal()}>
 						<div className="project-modal-header">
 							<h3 className="project-modal-header-title">프로젝트 제안하기</h3>
@@ -91,23 +91,23 @@ class Home extends Component {
 						</Modal>
 						*/}
 
-      		
+
 					<HomeHeading title="What's on?" />
 					<Tabs onSelect={this.handleSelect} selectedIndex={0}>
 					<TabList>
 						<Tab>프로젝트</Tab>
 						<Tab>미술소품</Tab>
 					</TabList>
-					
+
 					<TabPanel>
 					<PresentProjectList projects={presentProjects} />
 					</TabPanel>
-					
+
 					<TabPanel>
 					<PresentProductList products={products} />
 					</TabPanel>
 					</Tabs>
-					
+
 					{/*
 					<HomeHeading title="Featured Exhibitions" />
 					<ExhibitionList exhibitions={recentExhibitions} />

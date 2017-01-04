@@ -1,12 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import Progress from 'react-progressbar';
 
-import Modal from 'react-awesome-modal';
+import Modal from '~/src/react/components/react-awesome-modal';
 import FontAwesome from 'react-fontawesome'
 import KakaoImage from '~/src/assets/images/kakaotalk.svg'
 
 class ProductHeading extends Component {
-	
+
 	constructor(props) {
     super(props);
     this.state = {
@@ -101,7 +101,7 @@ class ProductHeading extends Component {
 						<div className="project-heading-summary-percent">00개</div>
 						<div className="project-heading-summary-dday">000개</div>
 						000명 주문중</div>
-						
+
 					</div>
 				</div>
 				<div className="share-button">

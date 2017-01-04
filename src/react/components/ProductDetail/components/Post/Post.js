@@ -15,7 +15,11 @@ class Post extends Component {
 				heading: {iconSrc, description, intro},
 				posts
 			},
+			funding: {
+				faqs
+			}
 		} = this.props;
+
 
 		console.log('Post', this);
 
@@ -50,51 +54,21 @@ class Post extends Component {
 				{ opened ? <PostComments comments={comments} postLikes={likes} /> : null }
 			</div>
 		))
-		
-		
+
+		let item2 = faqs.map(({question, answer}, index) => {
+			answer = answer.split('\n').map(x => <p>{x}</p>)
+			return (
+				<Collapsible key={index} trigger={question} transitionTime="0">
+    			 {answer}
+  			</Collapsible>
+			)
+		})
+
 
 		return (
 			<div className="project-detail-post">
 				<div className="product-faq-container">
-				<Collapsible trigger="제품 구매 이력은 어디서 확인할 수 있나요?" transitionTime="0" open="true">
-    			 <p>-This is the collapsible content. It can be any element or React component you like.</p>
-    			 <p>-This is the collapsible content. It can be any element or React component you like.</p>
-    			</Collapsible>
-    			<Collapsible trigger="배송지를 변경하고 싶습니다." transitionTime="0">
-    			 <p>#This is the collapsible content. It can be any element or React component you like.</p>
-    			 <p>#This is the collapsible content. It can be any element or React component you like.</p>
-    			 <p>#This is the collapsible content. It can be any element or React component you like.</p>
-    			</Collapsible>
-    			<Collapsible trigger="제작과 배송이 언제 되나요?" transitionTime="0">
-    			 <p>&This is the collapsible content. It can be any element or React component you like.</p>
-    			 <p>&This is the collapsible content. It can be any element or React component you like.</p>
-    			 <p>&This is the collapsible content. It can be any element or React component you like.</p>
-    			 <p>&This is the collapsible content. It can be any element or React component you like.</p>
-    			</Collapsible>
-    			<Collapsible trigger="결제 취소가 가능한가요?" transitionTime="0">
-    			 <p>&This is the collapsible content. It can be any element or React component you like.</p>
-    			 <p>&This is the collapsible content. It can be any element or React component you like.</p>
-    			 <p>&This is the collapsible content. It can be any element or React component you like.</p>
-    			 <p>&This is the collapsible content. It can be any element or React component you like.</p>
-    			</Collapsible>
-    			<Collapsible trigger="옵션을 변경하고 싶습니다. 가능한가요?" transitionTime="0">
-    			 <p>&This is the collapsible content. It can be any element or React component you like.</p>
-    			 <p>&This is the collapsible content. It can be any element or React component you like.</p>
-    			 <p>&This is the collapsible content. It can be any element or React component you like.</p>
-    			 <p>&This is the collapsible content. It can be any element or React component you like.</p>
-    			</Collapsible>
-    			<Collapsible trigger="교환이나 반품/환불이 가능한가요?" transitionTime="0">
-    			 <p>&This is the collapsible content. It can be any element or React component you like.</p>
-    			 <p>&This is the collapsible content. It can be any element or React component you like.</p>
-    			 <p>&This is the collapsible content. It can be any element or React component you like.</p>
-    			 <p>&This is the collapsible content. It can be any element or React component you like.</p>
-    			</Collapsible>
-    			<Collapsible trigger="기타사항" transitionTime="0">
-    			 <p>&This is the collapsible content. It can be any element or React component you like.</p>
-    			 <p>&This is the collapsible content. It can be any element or React component you like.</p>
-    			 <p>&This is the collapsible content. It can be any element or React component you like.</p>
-    			 <p>&This is the collapsible content. It can be any element or React component you like.</p>
-    			</Collapsible>
+					{item2}
 				</div>
 			</div>
 			)
