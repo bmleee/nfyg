@@ -289,7 +289,7 @@ const Abstract = ({
 
 			<span className="editor-small-title">스폰서 이름</span>
 
-			<FormWrapper
+			{/* <FormWrapper
 				title="스폰서 이름"
 				valueType={VALUE_TYPE.SELECT}
 				alt="스폰서 이름을 입력 해 주세요"
@@ -301,7 +301,7 @@ const Abstract = ({
 				Form={SponsorNameForm}
 				className ="magazine-editor-detail"
 				classNameopen ="editor-open-container"
-			/>
+			/> */}
 
 		</div>
 	)
