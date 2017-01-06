@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import Progress from 'react-progressbar';
 
-import SuccessImage from '~/src/assets/images/success2.svg' 
+import SuccessImage from '~/src/assets/images/success2.svg'
 
 /**
  * required state
@@ -38,7 +38,7 @@ class PresentProductList extends Component {
 			count: this.state.count + this.state.windowSize,
 		})
 	}
-	
+
 	componentDidMount() {
 		this.setState({
 			numProducts: this.props.products.length
@@ -63,11 +63,11 @@ class PresentProductList extends Component {
 			}, index) => (
 				<div className="present-project-list-item-container">
 					<div className="present-project-list-item" key={index}>
-						<Link to={link}> {/* TODO: include :product_name */}
+						<Link to={link}>
 							<div className="pr-thumbnail">
 								<div className="ex-centered">
 									<img className="home-exhibition-image" src={imgSrc} />
-									<SuccessImage className="success-icon" width={76} height={76} />
+									<SuccessImage className="success-icon" width={76} height={76} /> // TODO: purchase success flag from server
 								</div>
 							</div>
 						</Link>

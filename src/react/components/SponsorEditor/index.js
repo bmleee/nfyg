@@ -6,6 +6,8 @@ import Tab from './Tab'
 
 import axios from 'axios'
 
+import { fetchUserAndData } from '../../api/AppAPI'
+
 import { canUseDOM } from '~/src/lib/utils'
 
 const API_URL = '/api/test-api/sponsor'
@@ -15,10 +17,11 @@ export default class ProjectEditor extends Component {
 	state = {
 		// Sponsor
 		sponsor: {
-			name: '',
+			sponsorName: '',
 			displayName: '',
 			description: '',
 			imgSrc: '',
+			logoSrc: '',
 			money: 0,
 			contacts: {
 				facebook: '',
@@ -29,8 +32,23 @@ export default class ProjectEditor extends Component {
 		},
 	}
 
-	componentWillMount() {
-		// 서버에서 State를 가져와 채워야 한다면 ...
+	async componentDidMount() {
+		try {
+
+			const {
+				user,
+				data: {
+					sponsor
+				}
+			} = await fetchUserAndData()
+
+			if(this.props.setUser) this.props.setUser(user)
+
+			this.setState({sponsor})
+
+		} catch (e) {
+			console.error(e);
+		}
 	}
 
   render() {
@@ -53,10 +71,10 @@ export default class ProjectEditor extends Component {
 
 	// Sponsor
 	sponsorSubmitCallbacks = {
-		_onName: (name) => {
+		_onSponsorName: (sponsorName) => {
 			this.setState(update(this.state, {
 				sponsor: {
-					name: { $set: name }
+					sponsorName: { $set: sponsorName }
 				}
 			}))
 		},
@@ -78,6 +96,13 @@ export default class ProjectEditor extends Component {
 			this.setState(update(this.state, {
 				sponsor: {
 					imgSrc: { $set: imgSrc }
+				}
+			}))
+		},
+		_onLogoSrc: (logoSrc) => {
+			this.setState(update(this.state, {
+				sponsor: {
+					logoSrc: { $set: logoSrc }
 				}
 			}))
 		},

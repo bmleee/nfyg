@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import Progress from 'react-progressbar';
 
- 
+
 
 /**
  * required state
@@ -38,7 +38,7 @@ class PresentProjectList extends Component {
 			count: this.state.count + this.state.windowSize,
 		})
 	}
-	
+
 	componentDidMount() {
 		this.setState({
 			numProjects: this.props.projects.length
@@ -73,7 +73,7 @@ class PresentProjectList extends Component {
 						<div className="present-project-list-item-caption">
 							<Link to={link}><h3 className="project-list-title">{title}</h3></Link>
 							<h5>{postIntro}</h5>
-							<Progress completed={Math.round(currentMoney / targetMoney * 100)} />
+							<Progress completed={Math.min(100, Math.round(currentMoney / targetMoney * 100))} />
 							<div className="project-summary-detail">
 							<div className="project-remain-days">{Math.round(currentMoney / targetMoney * 100)}%</div>
 							<div className="project-summary-current-money">D-{remainingDays}</div>

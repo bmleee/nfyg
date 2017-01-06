@@ -3,11 +3,11 @@ import FormWrapper from '~/src/react/components/FormWrapper/FormWrapper'
 
 import { VALUE_TYPE } from '~/src/react/components/FormWrapper/constants'
 
-const NameWrapper = ({value}) => value
+const SponsorNameWrapper = ({value}) => value
 	? <span>{value}</span>
 	: <span></span>
 
-const NameForm = ({value, onChange}) =>
+const SponsorNameForm = ({value, onChange}) =>
 	<input type="text" value={value} onChange={onChange}/>
 
 const DisplayNameWrapper = ({value}) => value
@@ -29,7 +29,14 @@ const ImgSrcWrapper = ({value}) => value
 	: <span></span>
 
 const ImgSrcForm = ({value, onChange}) =>
-	<input type="file" value={value} onChange={onChange} accept="image/*" />
+	<img src={value} alt="스폰서 이미지를 입력해 주세요"/>
+
+const LogoSrcWrapper = ({value}) => value
+	? <img src={value} alt=""/>
+	: <span></span>
+
+const LogoSrcForm = ({value, onChange}) =>
+	<img src={value} alt="스폰서 로고 이미지를 입력해 주세요"/>
 
 const MoneyWrapper = ({value}) => value
 	? <span>{value.toLocaleString()}원</span>
@@ -61,10 +68,11 @@ const BlogForm = ({value, onChange}) =>
 
 const Body = ({
 	sponsor: {
-		name,
+		sponsorName,
 		displayName,
 		description,
 		imgSrc,
+		logoSrc,
 		money,
 		contacts: {
 			facebook,
@@ -73,10 +81,11 @@ const Body = ({
 		}
 	},
 
-	_onName,
+	_onSponsorName,
 	_onDisplayName,
 	_onDescription,
 	_onImgSrc,
+	_onLogoSrc,
 	_onMoney,
 	_onFacebook,
 	_onHomepage,
@@ -97,15 +106,15 @@ const Body = ({
 				classNameopen ="editor-open-container"
 			/>
 
-			{/* <FormWrapper
-				title="Sponsor Name"
+			<FormWrapper
+				title="스폰서 영문 이름"
 				valueType={VALUE_TYPE.TEXT}
-				initialValue={name}
-				submitCaption="입력하기"
-				onSubmit={_onName}
-				Wrapper={NameWrapper}
-				Form={NameForm}
-			/> */}
+				initialValue={sponsorName}
+				submitCaption="주소로 사용할 영문 이름을 입력하세요"
+				onSubmit={_onSponsorName}
+				Wrapper={SponsorNameWrapper}
+				Form={SponsorNameForm}
+			/>
 
 			<FormWrapper
 				title="스폰서 설명"
@@ -120,14 +129,26 @@ const Body = ({
 			/>
 
 			<FormWrapper
-				title="스폰서 로고"
+				title="스폰서 이미지"
 				valueType={VALUE_TYPE.IMAGE}
 				initialValue={imgSrc}
-				submitCaption="스폰서 로고를 등록하세요"
+				submitCaption="스폰서 이미지를 등록하세요"
 				submitCaptionsub={'등록하기'}
 				onSubmit={_onImgSrc}
 				Wrapper={ImgSrcWrapper}
 				Form={ImgSrcForm}
+				classNameopen ="editor-open-container"
+			/>
+
+			<FormWrapper
+				title="스폰서 로고"
+				valueType={VALUE_TYPE.IMAGE}
+				initialValue={logoSrc}
+				submitCaption="스폰서 이미지를 등록하세요"
+				submitCaptionsub={'등록하기'}
+				onSubmit={_onLogoSrc}
+				Wrapper={LogoSrcWrapper}
+				Form={LogoSrcForm}
 				classNameopen ="editor-open-container"
 			/>
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import FontAwesome from 'react-fontawesome'
 
-import { fetchJSONFile } from '../../api/AppAPI'
+import { fetchJSONFile, fetchUserAndData } from '../../api/AppAPI'
 
 class Sponsors extends Component {
 
@@ -10,11 +10,15 @@ class Sponsors extends Component {
 	}
 
 	async componentDidMount() {
-		const sponsors = await fetchJSONFile('sponsors')
+		const {
+			user,
+			data: {
+				sponsors
+			}
+		} = await fetchUserAndData()
 
-		this.setState({
-			sponsors
-		})
+		if(this.props.setUser) this.props.setUser(user)
+		this.setState({ sponsors })
 	}
 
 	render() {
@@ -22,6 +26,7 @@ class Sponsors extends Component {
 
 		const sponsorList = sponsors.map(({
 				sponsorName,
+				displayName,
 				description,
 				imgSrc,
 				logoSrc,
@@ -72,7 +77,7 @@ class Sponsors extends Component {
 									</a>
 								: null
 						}
-					</div> 
+					</div>
 					</div>
 
 				</div>
