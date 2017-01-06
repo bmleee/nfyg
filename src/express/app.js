@@ -32,7 +32,9 @@ app.use(cookieParser())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+const FileStore = require('session-file-store')(session);
 app.use(session({
+	store: new FileStore,
 	saveUninitialized: true,
 	resave: true,
 	secret: 'complecated@#@$secret#$@#$string##!)@``'

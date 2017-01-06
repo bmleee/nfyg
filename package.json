@@ -71,6 +71,7 @@
     "react-swipeable": "^3.7.0",
     "react-tab-panel": "^2.2.7",
     "react-tabs": "^0.8.2",
+    "session-file-store": "^1.0.0",
     "whatwg-fetch": "^1.0.0",
     "winston": "^2.3.0",
     "winston-daily-rotate-file": "^1.4.0"
