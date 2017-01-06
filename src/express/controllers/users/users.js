@@ -6,10 +6,14 @@ import multer from 'multer'
 import passport from 'passport'
 import users from './users.server.controller'
 import profile from './users.profile'
+import address from './users.address'
+import payment from './users.payment'
 
 const router = express.Router();
 
 router.use('/profile', profile)
+router.use('/address', address)
+router.use('/payment', payment)
 
 
 const signupMulter = multer()
