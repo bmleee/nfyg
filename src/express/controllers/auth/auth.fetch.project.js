@@ -44,7 +44,7 @@ router.get('/:projectName/:option?/:tab?', async (req, res, next) => {
 		return res.redirect('/404')
 	};
 
-	if(['edit'].includes(option)) {
+	if(['edit', 'rewards', 'addresses', 'payments'].includes(option)) {
 		return next() // go to /:projectName/edit
 	}
 
@@ -88,6 +88,38 @@ router.get('/:projectName/edit/:tab?', async (req, res) => {
 		user: renderUser.authorizedUser(user),
 		data: {
 			project: await project.toFormat('edit')
+		}
+	})
+})
+
+router.get('/:projectName/rewards', async (req, res) => {
+	try {
+		let user = renderUser.authorizedUser(req.session.user)
+
+		let doc = await ProjectModel.findByName(req.params.projectName)
+			.select({ 'funding.rewards': 1})
+			.exec()
+		console.log('doc.funding.rewards', doc.funding.rewards);
+		return res.json({
+			user,
+			data: {
+				rewards: doc.funding.rewards
+			}
+		})
+	} catch (e) {
+		console.error(e);
+		res.status(400).json({
+			user,
+			error: e
+		})
+	}
+})
+
+router.get('/:projectName/payments', (req, res) => {
+	return res.json({
+		user,
+		data: {
+			payments: [{message: 'payment model is not extablished'}]
 		}
 	})
 })

@@ -44,7 +44,7 @@ router.get('/:productName/:option?/:tab?', async (req, res, next) => {
 		return res.redirect('/404')
 	};
 
-	if(['edit'].includes(option)) {
+	if(['edit', 'purchase'].includes(option)) {
 		return next() // go to /:productName/edit
 	}
 
@@ -59,10 +59,7 @@ router.get('/:productName/:option?/:tab?', async (req, res, next) => {
 		// console.log('productToRender', JSON.stringify(productToRender, undefined, 4));
 
 		res.status(200).json({
-			user: {
-				isLoggedIn: !!req.session.user,
-				isAuthorized: true // always true
-			},
+			user: renderUser.authorizedUser(req.session.user),
 			data: {
 				product: productToRender
 			}
@@ -100,12 +97,40 @@ router.get('/:productName/edit/:tab?', async (req, res) => {
 			user: renderUser.authorizedUser(user),
 			error: e
 		})
-	} finally {
-
 	}
-
-
 })
+
+router.get('/:productName/purchase/:param', async (req, res) => {
+	let user = renderUser.authorizedUser(user)
+
+	switch (req.params.param) {
+		case 'rewards':
+			let doc = await ProductModel.findByName(req.params.productName)
+				.select({ 'funding.rewards': 1})
+				.exec()
+			return res.json({
+				user,
+				data: {
+					rewards: doc.funding.rewards
+				}
+			})
+		case 'addresses':
+			return res.redirect('/api/users/address')
+		case 'payments' :
+			return res.json({
+				user,
+				data: {
+					payments: [{message: 'payment model is not extablished'}]
+				}
+			})
+		default:
+			return res.status(400).json({
+				user,
+				error: `invalid param ${req.params.param}`
+			})
+	}
+})
+
 
 // create or update product
 router.post('/', async (req, res) => {

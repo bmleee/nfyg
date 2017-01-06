@@ -11,8 +11,6 @@
 
 import express from 'express';
 
-// import cache from '../../lib/cache'
-
 import UserModel from '../../models/user'
 import ProjectModel, {restrictedNames} from '../../models/project'
 import ProductModel from '../../models/product'
@@ -20,10 +18,14 @@ import ExhibitionModel from '../../models/exhibition'
 import MagazineModel from '../../models/magazine'
 import SponsorModel from '../../models/sponsor'
 
+import * as ac from '../../lib/auth-check'
+import * as renderHelper from '../../lib/renderHelper'
+import * as renderUser from '../../lib/renderUser'
+
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-	console.log('/exhibitions/', );
+	console.log('api/auth/fetch/sponsors/', );
 
 	try {
 		const sponsors = await SponsorModel.find({}).sort({"abstract.created_at": -1})
@@ -43,38 +45,21 @@ router.get('/', async (req, res) => {
 	}
 })
 
-router.get('/:sponsorName/:option', async (req, res, next) => {
-	console.log('/sponsors/' + req.params.sponsorName);
-	if (['edit'].includes(req.params.option)) {
-		return next()
-	}
+router.get('/:sponsorName/:tab?', async (req, res) => {
+	console.log('api/auth/fetch/sponsors/:sponsorName');
 
 	try {
-		let sponsor = await SponsorModel.findOne({"sponsorName": req.params.sponsorName})
-		sponsor = await sponsor.toFormat('exhibition_detail')
-
+		const sponsor = await SponsorModel.findByName(req.params.sponsorName)
 		res.json({
-			user: {
-				isLoggedIn: !!req.session.user,
-				isAuthorized: true,
-			},
+			user: renderUser.authorizedUser(req.session.user),
 			data: {
-				exhibition
+				sponsor: sponsor.toJSON()
 			}
 		})
 	} catch (e) {
 		console.error(e);
-		res.json({error: e})
+		res.json({ error: e })
 	}
-
 })
-
-router.get('/:sponsorName/edit', async (req, res) => {
-	console.log('/sponsors/:sponsorName/edit');
-	res.json({})
-})
-
-
-router.get('/')
 
 export default router;
