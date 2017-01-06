@@ -39,5 +39,14 @@ SponsorSchema.statics.findByName = function (name) {
 	return this.findOne({'sponsorName': name})
 }
 
+SponsorSchema.methods.toFormat = async function (type, ...args) {
+	switch (type) {
+		case 'sponsors':
+			return this.toJSON()
+		default:
+			{}
+	}
+}
+
 // Create the 'User' model out of the 'SponsorSchema'
 module.exports = mongoose.model('Sponsor', SponsorSchema);

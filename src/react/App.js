@@ -66,6 +66,8 @@ export default class App extends Component {
 							{' '}
 							<Link to="/login"><button>Login</button></Link>
 							{' '}
+							<a href="/api/users/logout"><button>Logout</button></a>
+							{' '}
 							<Link to="/signup"><button>Signup</button></Link>
 							{' '}
 							<Link to="/profile/admin"><button>Admin Profile</button></Link>
@@ -98,6 +100,7 @@ export default class App extends Component {
 				{ children }
 
 				<Footer></Footer>
+
 			</div>
 		)
 	}

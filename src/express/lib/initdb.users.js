@@ -1,4 +1,5 @@
 import UserModel, { access_levels } from '../models/user'
+import AddressModel from '../models/address'
 import { rangeArray } from '../../lib/utils'
 import { randomString } from './utils'
 
@@ -72,8 +73,21 @@ const randomusers = async () => {
 	}
 }
 
+const initAddress = async () => {
+	let users = await UserModel.find({})
+	await Promise.all(users.map(async (user) => {
+		await AddressModel.create({
+			user,
+			zipcode: randomString(),
+			address1: randomString(),
+			address2: randomString(),
+		})
+	}))
+}
+
 export default async function initUsers() {
 	console.log('trying to init user actions');
 	await defaultUsers()
 	await randomusers()
+	await initAddress()
 }

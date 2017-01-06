@@ -13,6 +13,7 @@ import { Overview as ProjectDetailOverview } 			from './components/ProjectDetail
 import { Post as ProjectDetailPost } 							from './components/ProjectDetail/components/Post';
 import { Ranking as ProjectDetailRanking } 				from './components/ProjectDetail/components/Ranking';
 import { QnA as ProjectDetailQnA } 								from './components/ProjectDetail/components/QnA';
+import ProjectDetailPurchase 											from './components/ProjectDetail/components/Purchase';
 
 import ProductDetail 															from './components/ProductDetail';
 import { Overview as ProductDetailOverview } 			from './components/ProductDetail/components/Overview';
@@ -73,7 +74,6 @@ const routes = (
 			<Route path="post" component={ ProjectDetailPost }></Route>
 			<Route path="ranking" component={ ProjectDetailRanking }></Route>
 			<Route path="qna" component={ ProjectDetailQnA }></Route>
-			<Route path="new" component={ ProjectEditor }></Route>
 		</Route>
 
 		<Route path="projects/:projectName/edit" component={ProjectEditor}>
@@ -82,6 +82,8 @@ const routes = (
 			<Route path="funding" component={ ProjectEditorFunding }></Route>
 			<Route path="overview" component={ ProjectEditorOverview }></Route>
 		</Route>
+
+		<Route path="projects/:projectName/purchase" component={ ProjectDetailPurchase }></Route>
 
 		<Route path="products/:productName" component={ProductDetail}>
 			// Project Detail: Overview, Post, Ranking, QnA, ...
@@ -188,7 +190,9 @@ const routes = (
 			</Route>
 
 		</Route>
+
 		<Route path="sponsors" component={Sponsors}></Route>
+		<Route path="sponsors/:sponsorName/edit" component={SponsorEditor}></Route>
 
 		<Route path="test1" component={Test1}></Route>
 		<Route path="test2" component={Test2}></Route>
