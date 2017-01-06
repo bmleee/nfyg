@@ -26,6 +26,31 @@
 			}
 		}
 	}
+	.react-tabs [role=tablist] {
+		width : 800px;
+		margin : 0px auto 30px auto;
+		@media (max-width : 991px) {
+			width : 95%;
+		}
+	}
+	.react-tabs [role=tab] {
+		width : 136px;
+		height : 38px;
+		text-align : center;
+		line-height : 1.7;
+		font-size : 14px;
+		font-weight : 600;
+		color : #777;
+		@media (max-width : 500px) {
+			width : 33.3333333333%;
+			font-size : 12px;
+			height : 35px;
+			line-height : 1.8;
+		}
+	}
+	.react-tabs [role=tab][aria-selected=true] {
+		color : #333;
+	}
 }
 .direct-display-img-container {
 	width : 20%;
@@ -99,26 +124,28 @@
 	width : 100%;
 	padding : 5px;
 	margin-top : 10px;
-	border : 1px solid #999;
+	border : 1px solid #bbb;
 	border-radius : 2px;
 	padding-bottom : 0px;
 }
 .direct-supports-container {
 	width : 800px;
 	margin : 0px auto 60px auto;
+	h4 {
+		color : #555 !important;
+	}
 }
 .indirect-support {
 	width : 800px;
 	margin : 0px auto 20px auto;
-	padding-bottom : 50px;
-	border-bottom : 1px solid #999;
+	padding-bottom : 40px;
+	border-bottom : 1px solid #bbb;
 }
 .profile-thumbnail-container {
 	text-align : center;
 	width : 800px;
 	margin : 50px auto 20px auto;
 	padding-bottom : 50px;
-	border-bottom : 1px solid #999;
 }
 .profile-user-thumbnail {
 	border-radius : 100px;
@@ -137,8 +164,8 @@
 	padding-top : 5px;
 }
 .indirect-support-detail-comments {
-	border-left : 1px solid #999;
-	border-right : 1px solid #999;
+	border-left : 1px solid #bbb;
+	border-right : 1px solid #bbb;
 }
 .indirect-support-h4 {
 	display : inline-block;
@@ -154,8 +181,8 @@
 		padding-bottom : 25px;
 	}
 	.indirect-support {
-	width : 95%;
-	margin : 0px auto 15px auto;
+	width : 100%;
+	margin-bottom : 15px;
 	padding-bottom : 25px;
 }
 .profile-thumbnail-container {
@@ -163,7 +190,6 @@
 	width : 95%;
 	margin : 50px auto 15px auto;
 	padding-bottom : 35px;
-	border-bottom : 1px solid #999;
 }
 @media (max-width: 500px) {
 	.profile .profile-direct-supports-container .profile-direct-supports-item img:first-child {

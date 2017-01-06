@@ -19,3 +19,11 @@ button, button:focus, html input[type="button"], input[type="reset"], input[type
 	-webkit-border-radius: 0px;
 	-webkit-outline : none;
 }
+
+input[type="checkbox"] {
+    -webkit-appearance: checkbox;
+    vertical-align : bottom;
+    width : 18px;
+    height : 18px;
+    margin-right : 5px;
+}

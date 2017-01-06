@@ -123,3 +123,72 @@ export async function upsertProduct(body) {
 		throw e
 	}
 }
+
+export async function fetchPurchaseInfo(param) {
+
+	if (!['rewards', 'address', 'payment'].includes(param)) {
+		alert(`purchase param ${param} is not valid!`)
+		window.location = '/'
+	}
+
+	let base = param === 'rewards' ? `auth/fetch/${document.URL.match(/(projects|products)\/.+\//)[0]}` : `users/`
+
+	console.log('base', base);
+	const config = {
+		method: 'get',
+		url: `/api/${base}${param}`,
+		withCredentials: true,
+	}
+
+	try {
+		const response = await axios.request(config)
+		console.log('fetchPurchaseInfo', param, response.data);
+		return response.data
+	} catch (e) {
+		console.error(e);
+		throw e
+	}
+}
+
+export async function purchaseReward({paymentIndex, rewardIndex, addressIndex}) {
+	const config = {
+		method: 'post',
+		url: `/api/auth/fetch/projects`,
+		withCredentials: true,
+		data: body,
+	}
+}
+
+export async function createAddress(address) {
+	const config = {
+		method: 'post',
+		url: `/api/users/address`,
+		withCredentials: true,
+		data: address,
+	}
+
+	try {
+		const response = await axios.request(config)
+		return response.data
+	} catch (e) {
+		console.error(e);
+		throw e
+	}
+}
+
+export async function createPayment(payment) {
+	const config = {
+		method: 'post',
+		url: `/api/users/payment`,
+		withCredentials: true,
+		data: payment,
+	}
+
+	try {
+		const response = await axios.request(config)
+		return response.data
+	} catch (e) {
+		console.error(e);
+		throw e
+	}
+}

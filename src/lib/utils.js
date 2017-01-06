@@ -47,3 +47,5 @@ export const asyncparallelfor = async function (iterator, fun) {
     async (e) => await fun(e)
   ))
 }
+
+export const isNumber = (n) => Number(n) == 0 || !!Number(n)
