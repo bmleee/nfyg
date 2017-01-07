@@ -270,7 +270,8 @@ const Abstract = ({
 				onSubmit={_onCreatorImgSrcSubmit}
 				Wrapper={CreatorImgSrcWrapper}
 				Form={CreatorImgSrcForm}
-				classNameopen ="editor-open-container"
+				className ="creater-profile-img"
+				classNameopen ="creater-profile-img-open"
 			/>
 
 			<FormWrapper

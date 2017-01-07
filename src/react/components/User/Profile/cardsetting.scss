@@ -1,0 +1,227 @@
+.purchase-reward-container {
+	width : 800px;
+	margin : 20px auto 50px auto;
+	min-height : 800px;
+	@media (max-width : 991px) {
+		width : 95%;
+	}
+}
+.card-list-container {
+	padding : 25px;
+	background : #f8f8f8;
+	border-radius : 4px;
+	@media (max-width : 500px) {
+		padding : 15px;
+	}
+}
+.card-list-title {
+	text-align : center;
+	color : #555 !important;
+	padding-bottom : 16px;
+	@media (max-width : 500px) {
+		padding-bottom : 12px;
+	}
+}
+.card-container {
+	display : inline-block;
+	padding : 8px;
+	width : 50%;
+	@media (max-width : 500px) {
+		width : 100%;
+		padding : 5px;
+	}
+}
+.card-reveal {
+	display : none;
+}
+.card-select-button {
+	height : 100px;
+	width : 100%;
+	padding : 0px !important;
+	background : #fff;
+	border-radius : 5px;
+	border : 1px solid #eee;
+	outline : none;
+}
+.card-select-button:focus {
+	border-radius : 5px;
+	border : 2px solid #4b709a;
+}
+.card-expiry {
+	font-size : 12px !important;
+	font-weight : 600 !important;
+	color : #999;
+}
+
+.card-delete {
+	width : 60px;
+	height : 26px;
+	background : #eee;
+	border : none;
+	outline : none;
+	color : #555;
+	font-size : 12px;
+	font-weight : 600;
+	border-radius : 3px;
+	margin-top : 4px;
+}
+.card-delete:focus {
+	border-radius : 3px;
+}
+.card-delete:hover {
+	background : #ddd;
+}
+
+.card-add-container {
+	text-align : center;
+	margin : 20px 0px 10px 0px;
+	padding : 5px;
+}
+.card-add {
+	width : 50%;
+	height : 36px;
+	border : none;
+	outline : none;
+	border-radius : 3px !important;
+	background : #4b709a;
+	color : #fff;
+	font-weight : 600;
+	@media (max-width : 500px) {
+		width : 100%;
+	}
+}
+.card-add:hover {
+	background : #354c67;
+}
+
+.card-add-modal-container {
+	padding : 25px;
+	.share-modal-close {
+		position: absolute;
+    	right: 4%;
+    	top : 2%;
+	}
+}
+.card-modal-close-container {
+    height: 30px;
+    text-align: right;
+    margin: 0px
+}
+.card-num-text {
+	width : 70px;
+	margin-right : 6px;
+	border : 1px solid #bbb;
+	border-radius : 3px;
+	outline : none;
+	height : 33px;
+	padding : 0px 8px;
+	font-weight : 600 !important;
+	color : #333;
+	@media (max-width : 350px) {
+		width : 60px;
+	}
+}
+.expiry-year-text {
+	width : 70px;
+	margin-right : 6px;
+	border : 1px solid #bbb;
+	border-radius : 3px;
+	outline : none;
+	height : 33px;
+	padding : 0px 8px;
+	font-weight : 600 !important;
+	color : #333;
+	@media (max-width : 350px) {
+		width : 60px;
+	}
+}
+.expiry-month-text {
+	width : 55px;
+	border : 1px solid #bbb;
+	border-radius : 3px;
+	outline : none;
+	height : 33px;
+	padding : 0px 8px;
+	font-weight : 600 !important;
+	color : #333;
+	@media (max-width : 350px) {
+		width : 50px;
+	}
+}
+.card-birth-text {
+	width : 131px;
+	border : 1px solid #bbb;
+	border-radius : 3px;
+	outline : none;
+	height : 33px;
+	padding : 0px 8px;
+	font-weight : 600 !important;
+	color : #333;
+	@media (max-width : 350px) {
+		width : 116px;
+	}
+}
+.card-password-text {
+	width : 55px;
+	border : 1px solid #bbb;
+	border-radius : 3px;
+	outline : none;
+	height : 33px;
+	padding : 0px 8px;
+	font-weight : 600 !important;
+	color : #333;
+	margin-right : 6px;
+	@media (max-width : 350px) {
+		width : 50px;
+	}
+}
+.card-password-none {
+	display : inline-block;
+}
+.card-password-none:before {
+	font-family : Ionicons;
+	content : "\f45c";
+	font-size : 15px;
+	margin-right : 4px;
+}
+.card-num-text:focus, .expiry-month-text:focus, .expiry-year-text:focus, .card-birth-text:focus, .card-password-text:focus {
+	border-color : #4b709a;
+}
+
+.card-add-ssl-info {
+	padding : 10px;
+	font-size : 13px;
+	font-weight : 600;
+	color : #666;
+	background : #f8f8f8;
+	border-radius : 3px;
+	margin-top : 10px;
+	@media (max-width : 500px) {
+		font-size : 12px;
+	}
+}
+
+.modal-card-add-container {
+	text-align : center;
+	margin-top : 20px;
+	@media (max-width : 500px) {
+		margin-top : 17px;
+	}
+}
+.modal-card-add {
+	width : 160px;
+	height : 30px;
+	border : none;
+	outline : none;
+	border-radius : 3px !important;
+	background : #4b709a;
+	color : #fff;
+	font-weight : 600;
+	font-size : 14px;
+	@media (max-width : 500px) {
+		width : 140px;
+	}
+}
+.modal-card-add:hover {
+	background : #354c67;
+}

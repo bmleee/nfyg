@@ -102,8 +102,8 @@ export default class FormWrapper extends Component {
 		)
 		let content = (
 			<div className={classNameopen}>
-				{imageDropzone}
 				<Form value={value} onChange={async (e) => await this._onChange(e)} handlers={this.handlers} />
+				{imageDropzone}
 				<div className="editor-open-cancel-container-sub">
 				<button className="editor-open-button3" onClick={this._onClose}> {submitCaption}</button>
 				</div>
@@ -197,6 +197,10 @@ export default class FormWrapper extends Component {
 			this.setState({value: sourceURL})
 		}
 
-		return <Dropzone onDrop={onDrop} accept="image/*"/>
+		return <Dropzone onDrop={onDrop} accept="image/*" >
+		<div className="dropzone-container">
+			<div className="dropzone-text">이미지 등록</div>
+		</div>
+		</Dropzone>
 	}
 }

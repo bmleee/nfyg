@@ -31,6 +31,43 @@
 			}
 		}
 	}
+	.qna-item-container {
+		display: flex;
+    	flex-flow: row;
+    	.sharing-summary {
+    		width : 700px;
+    		@media (max-width : 991px) {
+    			width : 100%;
+    		}
+    	}
+    	.Collapsible__contentInner {
+    		padding : 0px;
+    		border-bottom : 0px;
+    	}
+    	.Collapsible__trigger.is-closed, .Collapsible__trigger.is-open {
+    		border : none;
+    		color : #4b709a;
+    		padding : 0px;
+    		margin-top : 5px;
+    		background : transparent;
+    		display : inline-block;
+    	}
+    	.Collapsible__trigger.is-closed:after, .Collapsible__trigger.is-open:after {
+    		margin-left : 5px;
+    		font-size : 12px;
+    	}
+    	.qna-form-submit {
+    		width : 600px !important;
+    	}
+    	.qna-form-textarea {
+    		width : 600px !important;
+    		height : 80px;
+    	}
+    	.project-detail-qna-form {
+    		border : none;
+    		padding-bottom : 0px;
+    	}
+	}
 	
 	.qna-form-user-icon {
 		border-radius : 100px;

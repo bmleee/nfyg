@@ -5,6 +5,7 @@ import { PostComments } from '../Post/';
 
 import { SelectOptions } from '../../../../constants'
 import {date2string} from '~/src/react/lib/utils'
+import Collapsible from 'react-collapsible';
 
 const selectOptions = SelectOptions.QnA
 
@@ -73,13 +74,27 @@ class QnA extends Component {
 			content
 		}, index) => (
 			<div className="project-detail-qna-item" key={index}>
+					<div className="qna-item-container">
 					<p className="sharing-fb-icon-list">
 					<img className="qna-form-user-icon" src={author.iconSrc} alt="" width={80} height={80}/>
 					</p>
 					<p className="sharing-summary">
 					<span><p className="sharing-name">{author.name}</p>{date2string(created_at)}</span>
 					<span>{text}</span>
+					<Collapsible trigger="댓글 남기기" transitionTime="0">
+					<div className="project-detail-qna-form">
+					<div className="qna-form-textarea-container">
+					<img className="qna-form-user-icon" src="/assets/images/user_default.png" alt="" width={80} height={80} />
+					<textarea className="qna-form-textarea" name="" id="" cols="30" rows="4" placeholder=""></textarea>
+					</div>
+					<div className="qna-form-submit-container">
+					<p className="qna-form-submit-empty"></p>
+					<button className="qna-form-submit">댓글 남기기</button>
+					</div>
+					</div>
+					</Collapsible>
 					</p>
+					</div>
 			</div>
 		))
 

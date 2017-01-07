@@ -4,9 +4,10 @@ import nodemailer from 'nodemailer';
 import { EmailTemplate } from 'email-templates';
 import path from 'path';
 
-const transporter = nodemailer.createTransport('smtps://dkdkajej%40gmail.com:Iw2hGF,wcum&slm.@smtp.gmail.com')
+// const transporter = nodemailer.createTransport('smtps://dkdkajej%40gmail.com:Iw2hGF,wcum&slm.@smtp.gmail.com')
+const transporter = nodemailer.createTransport('smtp://bmlee%407pictures.co.kr:Thflatk4601#@smtp.worksmobile.com')
 const getOptions = ({text, html}) => ({
-	from: '"7Pictures" <pjh@7pictures.co.kr>', // sender address
+	from: '"7Pictures" <bmlee@7pictures.co.kr>', // sender address
 	to: 'dkdkajej@gmail.com, pjh@7pictures.co.kr', // list of receivers
 	subject: 'Test Email', // Subject line
 	text,

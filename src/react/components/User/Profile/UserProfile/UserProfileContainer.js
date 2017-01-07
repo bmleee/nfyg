@@ -200,7 +200,7 @@ class Profile extends Component {
 					</TabPanel>
 					
 					<TabPanel>
-						<UserProfilecardsetting />
+					 <UserProfilecardsetting />
 					</TabPanel>
 					</Tabs>
 					

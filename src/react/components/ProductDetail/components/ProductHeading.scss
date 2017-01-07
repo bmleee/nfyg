@@ -87,7 +87,8 @@
      height : 30px;
      text-align : right;
      margin : 10px auto 0px auto;
-    .share-modal-close {
+}
+.share-modal-close {
     width : 30px;
     height : 30px;
     border : none;
@@ -102,7 +103,6 @@
         font-size : 26px;
         font-weight : 300;
     }
-}
 
 @media (max-width: 991px) {
     .product-info {

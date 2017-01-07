@@ -60,7 +60,7 @@ class Post extends Component {
 			return (
 				<Collapsible key={index} trigger={question} transitionTime="0">
     			 {answer}
-  			</Collapsible>
+  				</Collapsible>
 			)
 		})
 
