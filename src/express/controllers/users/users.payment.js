@@ -11,8 +11,8 @@ import  * as renderUser from '../../lib/renderUser'
 
 const router = express.Router();
 
+// TODO: filter payment keys: card_number, ...
 router.get('/', isLoggedIn, async (req, res) => {
-	console.log('users.payment : /users/payment');
 	try {
 		let payments = await PaymentModel.findByUser(req.session.user)
 		return res.json({
@@ -29,6 +29,7 @@ router.get('/', isLoggedIn, async (req, res) => {
 	}
 })
 
+// TODO: notify error!
 router.post('/', isLoggedIn, async (req, res) => {
 	const {
 		user

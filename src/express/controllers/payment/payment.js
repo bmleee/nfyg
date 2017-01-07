@@ -1,11 +1,5 @@
 import express from 'express';
-import Iamport from 'iamport'
-import config from '~/iamport.config.js'
-
-const IMP = new Iamport({
-	impKey: config.REST.key,
-	impSecret: config.REST.secret,
-})
+import IMP from '../../lib/iamport'
 
 const router = express.Router();
 
@@ -36,10 +30,12 @@ let expiry = '2018-08'
 let birth = '921011'
 let pwd_2digit = '16'
 
-
 router.get('/get-billing-key', async (req, res) => {
 	try {
-		let r = await IMP.subscribe_customer.create({
+		let {
+			updated,
+			card_name,
+		} = await IMP.subscribe_customer.create({
 			customer_uid,
 			card_number,
 			expiry,
@@ -47,12 +43,12 @@ router.get('/get-billing-key', async (req, res) => {
 			pwd_2digit
 		})
 
-		console.log(r);
+		console.log({updated, card_name});
 
 		// let billing_key[customer_uid] = r.updated
 
 		res.json({
-			response: r
+			response: {updated, card_name}
 		})
 	} catch (error) {
 		console.error(error);

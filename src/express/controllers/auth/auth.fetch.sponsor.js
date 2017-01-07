@@ -47,6 +47,9 @@ router.get('/', async (req, res) => {
 
 router.get('/:sponsorName/:tab?', async (req, res) => {
 	console.log('api/auth/fetch/sponsors/:sponsorName');
+	// if (['edit'].includes(req.params.tab)) {
+	// 	return next()
+	// }
 
 	try {
 		const sponsor = await SponsorModel.findByName(req.params.sponsorName)
@@ -61,5 +64,32 @@ router.get('/:sponsorName/:tab?', async (req, res) => {
 		res.json({ error: e })
 	}
 })
+
+// create or update project
+router.post('/', async (req, res) => {
+	console.log('POST /auth/fetch/sponsors');
+
+	try {
+		const body = req.body
+		const sponsorName = body.sponsorName || ''
+
+		// upsert Project
+		const r = await SponsorModel.update(
+			{ 'sponsorName': sponsorName },
+			body,
+			{ upsert: true }
+		)
+
+		console.log('upsert result', r);
+
+		res.json({response: r.n === 1})
+	} catch (e) {
+		console.error(e);
+		res.status(400).json({
+			response: e
+		})
+	}
+})
+
 
 export default router;
