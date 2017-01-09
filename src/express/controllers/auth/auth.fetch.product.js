@@ -133,6 +133,7 @@ router.get('/:productName/purchase/:param', async (req, res) => {
 
 
 // create or update product
+// TODO: check user authority
 router.post('/', async (req, res) => {
 	console.log('POST /auth/fetch/products');
 

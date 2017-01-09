@@ -125,6 +125,7 @@ router.get('/:projectName/payments', (req, res) => {
 })
 
 // create or update project
+// TODO: check authority
 router.post('/', async (req, res) => {
 	console.log('POST /auth/fetch/projects');
 
