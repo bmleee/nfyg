@@ -81,6 +81,18 @@ class QnA extends Component {
 					<p className="sharing-summary">
 					<span><p className="sharing-name">{author.name}</p>{date2string(created_at)}</span>
 					<span>{text}</span>
+						
+					{/* 대댓글 */}
+						<div className="qna-item-container">
+						<p className="sharing-fb-icon-list">
+						<img className="qna-form-user-icon" src={author.iconSrc} alt="" width={80} height={80}/>
+						</p>
+						<p className="sharing-summary">
+						<span><p className="sharing-name">{author.name}</p>{date2string(created_at)}</span>
+						<span>{text}</span>
+						</p>
+						</div>
+						
 					<Collapsible trigger="댓글 남기기" transitionTime="0">
 					<div className="project-detail-qna-form">
 					<div className="qna-form-textarea-container">
@@ -93,6 +105,8 @@ class QnA extends Component {
 					</div>
 					</div>
 					</Collapsible>
+					{/* 대댓글 */}
+					
 					</p>
 					</div>
 			</div>
