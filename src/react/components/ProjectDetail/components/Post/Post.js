@@ -17,7 +17,8 @@ class Post extends Component {
 		} = this.props;
 		
 		let title = "포스트 제목 예시";
-		let condition = "전체공개";
+		let condition1 = "전체공개";
+		let condition2 = "후원자공개";
 		let postnum = 4;
 
 		console.log('Post', this);
@@ -36,15 +37,20 @@ class Post extends Component {
 			<div className="project-detail-post-item" key={index}>
 				<div className="post-item-title-summary">
 					<h3 className="post-item-title">{title}</h3>
-					<span className="post-item-title-detail">{postnum}번째 업데이트</span>
+					<span className="post-item-title-detail">{postnum}번째 소식</span>
 					<span className="post-item-title-detail">{date2string(created_at)}</span>
-					<span className="post-item-title-detail">{condition}</span>
+					<span className="post-item-title-condition1">{condition1}</span> 
+					{/* <span className="post-item-title-condition2">{condition2}</span> */}
 				</div>
 				<div className="post-item-content-summary">
 					{
 						opened
 							? <Viewer raw={content}/>
-							: <span>해당 소식을 열람할 권한이 없습니다.</span>
+							: <div className="post-block">
+								<div className="post-block-icon"></div>
+								<p>프로젝트 공유 또는 리워드 구매를 통해</p>
+								<p>후원해주신 분들만 열람 가능합니다.</p>
+							  </div>
 					}
 				</div>
 				{ opened ? <PostComments comments={comments} postLikes={likes} /> : null }

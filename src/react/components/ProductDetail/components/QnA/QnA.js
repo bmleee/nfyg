@@ -80,19 +80,32 @@ class QnA extends Component {
 					</p>
 					<p className="sharing-summary">
 					<span><p className="sharing-name">{author.name}</p>{date2string(created_at)}</span>
-					<span>{text}</span>
+					<span className="qna-detail-text">{text}</span>
+						
+					{/* 대댓글 */}
+						<div className="qna-item-container">
+						<p className="sharing-fb-icon-list">
+						<img className="qna-form-user-icon" src={author.iconSrc} alt="" width={80} height={80}/>
+						</p>
+						<p className="sharing-summary">
+						<span><p className="sharing-name">{author.name}</p>{date2string(created_at)}</span>
+						<span>{text}</span>
+						</p>
+						</div>
+						
 					<Collapsible trigger="댓글 남기기" transitionTime="0">
 					<div className="project-detail-qna-form">
 					<div className="qna-form-textarea-container">
-					<img className="qna-form-user-icon" src="/assets/images/user_default.png" alt="" width={80} height={80} />
+					{/* <img className="qna-form-user-icon" src="/assets/images/user_default.png" alt="" width={80} height={80} /> */}
 					<textarea className="qna-form-textarea" name="" id="" cols="30" rows="4" placeholder=""></textarea>
 					</div>
 					<div className="qna-form-submit-container">
-					<p className="qna-form-submit-empty"></p>
 					<button className="qna-form-submit">댓글 남기기</button>
 					</div>
 					</div>
 					</Collapsible>
+					{/* 대댓글 */}
+					
 					</p>
 					</div>
 			</div>

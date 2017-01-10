@@ -26,7 +26,6 @@ const plugins = [
 	sideToolbarPlugin,
 	inlineToolbarPlugin,
 	undoPlugin,
-
 	imagePlugin,
 	focusPlugin,
 	resizeablePlugin,
@@ -86,8 +85,8 @@ export default class SevenEditor extends Component {
 
 		return (
 			<div className={editorStyles.wrapper}>
-
 				<div className={editorStyles.editor} onClick={this.focus}>
+				
 					<Editor
 						editorState={editorState}
 						onChange={this.onChange}
@@ -95,11 +94,10 @@ export default class SevenEditor extends Component {
 						ref={(node) => this.editor = node}
 					/>
 				</div>
-
 				<div className={editorStyles.options}>
 					<SideToolbar />
 					<InlineToolbar />
-					<AlignmentTool />
+					{/* <AlignmentTool /> */}
 					<ImageAdd
 						editorState={this.state.editorState}
 						onChange={this.onChange}

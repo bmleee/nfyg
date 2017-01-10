@@ -1,16 +1,16 @@
-.project-detail-qna {
+.project-detail-qna, .project-detail-post-item-comments-container {
 	display: flex;
 	flex-flow: column;
-	
+	.sharing-fb-icon-list {
+		margin-right : 0px !important;
+	}
+}
 	.project-detail-qna-item {
 		padding : 25px 0px 30px 0px;
 		border-bottom : 1px solid #eee;
 	}
 	.project-detail-qna-item:last-child {
 		border-bottom : none;
-	}
-	.sharing-fb-icon-list {
-		margin-right : 0px !important;
 	}
 	.sharing-name {
 		margin-right : 6px;
@@ -34,6 +34,13 @@
 	.qna-item-container {
 		display: flex;
     	flex-flow: row;
+    	margin-bottom : 8px;
+    	.qna-detail-text {
+    		margin-bottom : 20px;
+    		@media (max-width : 500px) {
+				margin-bottom : 15px;
+			}
+    	}
     	.sharing-summary {
     		width : 700px;
     		@media (max-width : 991px) {
@@ -48,7 +55,6 @@
     		border : none;
     		color : #4b709a;
     		padding : 0px;
-    		margin-top : 5px;
     		background : transparent;
     		display : inline-block;
     	}
@@ -57,10 +63,10 @@
     		font-size : 12px;
     	}
     	.qna-form-submit {
-    		width : 600px !important;
+    		width : 100% !important
     	}
     	.qna-form-textarea {
-    		width : 600px !important;
+    		width : 100% !important;
     		height : 80px;
     	}
     	.project-detail-qna-form {
@@ -125,7 +131,7 @@
 			background : #354c67;
 		}
 	}
-}
+
 
 .qna-form-submit-empty {
 			@media (max-width : 991px) {

@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-
+import {date2string} from '~/src/react/lib/utils'
 
 class PostComments extends Component {
 
@@ -43,7 +43,7 @@ class PostComments extends Component {
 			<div className="project-detail-post-item-comments-item" key={index}>
 				<div className="project-ranking-th">
 					<p className="sharing-fb-icon-list">
-					<img className="ranking-fb-icon-list" src={iconSrc} alt="" width={42} height={42}/>
+					<img className="qna-form-user-icon" src={iconSrc} alt="" width={80} height={80}/>
 					</p>
 					<p className="sharing-summary">
 					<span><p className="sharing-name">{name}</p></span>
@@ -56,6 +56,16 @@ class PostComments extends Component {
 
 		return (
 			<div className="project-detail-post-item-comments-container">
+				<div className="project-detail-qna-form">
+					<div className="qna-form-textarea-container">
+					<img className="qna-form-user-icon" src="/assets/images/user_default.png" alt="" width={80} height={80} />
+					<textarea className="qna-form-textarea" name="" id="" cols="30" rows="4" placeholder=""></textarea>
+					</div>
+					<div className="qna-form-submit-container">
+					<p className="qna-form-submit-empty"/>
+					<button className="qna-form-submit">댓글 남기기</button>
+					</div>
+				</div>
 				<div>
 					{ item.slice(0, this.state.count) }
 				</div>

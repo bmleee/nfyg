@@ -6,10 +6,140 @@ div, span, h1, h2, h3, h4, button {
     font-family : FontAwesome, "Noto Sans DemiLight", "Malgun Gothic";
 }
 // desktop&all ↓↓↓↓
-
+.editorStyles__wrapper {
+    width : 100% !important;
+}
+.editorStyles__editor {
+    padding : 20px 40px !important;
+    span {
+        padding : 0px;
+        margin-top : 0px;
+    }
+    .public-DraftStyleDefault-div {
+        font-size : 18px;
+        line-height : 1.5;
+        color : #333;
+        margin : 10px 0px;
+        @media (max-width : 500px) {
+             font-size : 16px;
+        }
+    }
+    h1 {
+        font-size : 36px !important;
+        color : #333;
+        margin : 10px 0px;
+        @media (max-width : 500px) {
+             font-size : 33px !important;
+        }
+    }
+    h2 {
+        font-size : 28px !important;
+        line-height : 1.4;
+        color : #777;
+        font-weight : 600;
+        margin : 10px 0px;
+        @media (max-width : 500px) {
+             font-size : 26px !important;
+        }
+    }
+    blockquote {
+        margin : 15px 0px;
+        font-size : 20px;
+        font-weight : 600;
+        font-style : italic;
+        color : #333;
+        border-left : none;
+        text-align : center;
+        @media (max-width : 500px) {
+             padding : 8px;
+             font-size : 18px;
+        }
+    }
+    blockquote:before {
+        font-family : FontAwesome;
+        content : "\f10d";
+        font-size : 22px;
+        display : block;
+        margin-bottom : 8px;
+        @media (max-width : 500px) {
+             margin-bottom : 4px;
+        }
+    }
+    blockquote:after {
+        font-family : FontAwesome;
+        content : "\f10e";
+        font-size : 22px;
+        display : block;
+        margin-top : 10px;
+        @media (max-width : 500px) {
+             margin-top : 6px;
+        }
+    }
+}
 .editorStyles__viewer {
     border : none !important;
     padding : 0px !important;
+    margin : 2em auto;
+    .public-DraftStyleDefault-div {
+        font-size : 18px;
+        line-height : 1.5;
+        color : #333;
+        margin : 20px 0px;
+        @media (max-width : 500px) {
+             font-size : 16px;
+        }
+    }
+    h1 {
+        font-size : 36px !important;
+        color : #333;
+        margin : 25px 0px;
+        @media (max-width : 500px) {
+             font-size : 33px !important;
+        }
+    }
+    h2 {
+        font-size : 28px !important;
+        line-height : 1.4;
+        color : #777;
+        font-weight : 600;
+        margin : 23px 0px;
+        @media (max-width : 500px) {
+             font-size : 26px !important;
+        }
+    }
+    blockquote {
+        margin : 20px 0px;
+        font-size : 20px;
+        font-weight : 600;
+        font-style : italic;
+        color : #333;
+        border-left : none;
+        text-align : center;
+        @media (max-width : 500px) {
+             padding : 8px;
+             font-size : 18px;
+        }
+    }
+    blockquote:before {
+        font-family : FontAwesome;
+        content : "\f10d";
+        font-size : 22px;
+        display : block;
+        margin-bottom : 8px;
+        @media (max-width : 500px) {
+             margin-bottom : 4px;
+        }
+    }
+    blockquote:after {
+        font-family : FontAwesome;
+        content : "\f10e";
+        font-size : 22px;
+        display : block;
+        margin-top : 10px;
+        @media (max-width : 500px) {
+             margin-top : 6px;
+        }
+    }
 }
 .image-gallery-more-button, .image-gallery-more-button:focus {
     border : 1px solid #333;
