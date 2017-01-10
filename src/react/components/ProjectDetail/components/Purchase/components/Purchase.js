@@ -7,8 +7,12 @@ export default class C extends Component {
 
 		console.log('Purcase/components/Purchase', this);
 		const {
-			goToPreviousStage,
+			reward,
+			payment,
+			address,
 			
+			goToPreviousStage,
+
 			purchase
 		} = this.props
 

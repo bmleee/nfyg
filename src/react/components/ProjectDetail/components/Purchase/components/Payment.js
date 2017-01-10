@@ -46,6 +46,7 @@ export default class C extends Component {
 		const {
 			goToNextStage,
 			goToPreviousStage,
+			selectedPaymentIndex,
 		} = this.props
 
 		return !payments ? <div>Payment Loading...</div>
@@ -66,14 +67,14 @@ export default class C extends Component {
 									card_number,
 									expiry,
 								}, index) => (
-									<div className="card-container">
-									<button className="card-select-button" onClick={this._onClickPayment(index)}>
-										<Card title={card_number}>
-											<p>{card_name}</p>
-											<p className="card-expiry">유효기간 {expiry}</p>
-										</Card>
-										<button className="card-delete">삭 제</button>
-									</button>
+									<div className={"card-container" + (selectedPaymentIndex === index ? "selected": "" )}>
+										<button className="card-select-button" onClick={this._onClickPayment(index)}>
+											<Card title={card_number}>
+												<p>{card_name}</p>
+												<p className="card-expiry">유효기간 {expiry}</p>
+											</Card>
+											<button className="card-delete">삭 제</button>
+										</button>
 									</div>
 								))
 							}

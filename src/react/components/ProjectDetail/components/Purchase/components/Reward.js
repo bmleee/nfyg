@@ -33,6 +33,7 @@ export default class C extends Component {
 			goToNextStage,
 			goToPreviousStage,
 			setReward,
+			selectedRewardIndex,
 		} = this.props
 
 
@@ -54,7 +55,7 @@ export default class C extends Component {
 							description,
 							thresholdMoney,
 						}, index) => (
-							<div className="purchase-reward-select-container">
+							<div className={"purchase-reward-select-container" + (selectedRewardIndex === index ? "selected": "" )}>
 								<button className="purchase-reward-select" onClick={this._onClickReward(index)}>
 									<p className="purchase-reward-title">{title}</p>
 									<p className="purchase-reward-description">{description}</p>
@@ -65,8 +66,8 @@ export default class C extends Component {
 					}
 					</div>
 					<div className="purchase-stage-move-container">
-						<button className="purchase-stage-prev-button" onClick="goToPreviousStage">이전 단계</button>
-						<button className="purchase-stage-next-button" onClick="goToNextStage">배송지 입력</button>
+						<button className="purchase-stage-prev-button" onClick={goToPreviousStage}>이전 단계</button>
+						<button className="purchase-stage-next-button" onClick={goToNextStage}>배송지 입력</button>
 					</div>
 				</div>
 			)

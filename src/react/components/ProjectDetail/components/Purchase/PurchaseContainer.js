@@ -126,6 +126,10 @@ export default class PurchaseContainer extends Component {
 			setAddress: this.setAddress,
 			setPayment: this.setPayment,
 
+			selectedRewardIndex: this.state.selectedRewardIndex,
+			selectedAddressIndex: this.state.selectedAddressIndex,
+			selectedPaymentIndex: this.state.selectedPaymentIndex,
+
 			reward: this.state.reward,
 			address: this.state.address,
 			payment: this.state.payment,
@@ -177,7 +181,6 @@ export default class PurchaseContainer extends Component {
 		this.setState(update(this.state, {
 			selectedAddressIndex: { $set: index },
 			address: { $set: address },
-			stage: { $set : this.state.stage + 1 },
 		}))
 	}
 
@@ -186,7 +189,6 @@ export default class PurchaseContainer extends Component {
 		this.setState(update(this.state, {
 			selectedPaymentIndex: { $set: index },
 			payment: { $set: payment },
-			stage: { $set : this.state.stage + 1 },
 		}))
 	}
 

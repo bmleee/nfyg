@@ -144,7 +144,7 @@ router.post('/:projectName/purchase', isLoggedIn, async (req, res) => {
 
 		let purchase = await PurchaseModel.create({
 			user,
-			user_info: user.toJSON(),
+			user_info: user,
 			project,
 			address: address.toJSON(),
 			payment: payment.toJSON(),

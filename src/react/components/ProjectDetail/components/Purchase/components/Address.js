@@ -19,6 +19,7 @@ export default class C extends Component {
 		} = this.state
 
 		const {
+			selectedAddressIndex,
 			goToNextStage,
 			goToPreviousStage,
 			setReward,
@@ -38,6 +39,9 @@ export default class C extends Component {
 						</div>
 						<div className="purchase-stage-content-container">
 						<p className="profile-small-title">배송지 추가</p>
+						<div className="profile-setting-postcode-container">
+							<input className="profile-setting-postcode" type="text" id="addressee_name" placeholder="수취인 성명" />
+						</div>
 						<div className="profile-setting-search-address-container">
 							<input className="profile-setting-search-address" type="button" onClick={this._onClickFindAddress} value="주소찾기" />
 						</div>
@@ -64,7 +68,7 @@ export default class C extends Component {
 								address1,
 								address2,
 							}, index) => (
-							<div className="purchase-reward-select-container">
+							<div className={"purchase-reward-select-container" + (selectedAddressIndex === index ? "selected": "" )}>
 								<p>{addressee_name}</p>
 								<button className="purchase-reward-select" onClick={this._onClickAddress(index)}>
 									<p className="purchase-reward-money">{zipcode}</p>
@@ -137,7 +141,7 @@ export default class C extends Component {
 
 	_onClickAddAddress = async () => {
 		let address = {
-			addressee_name: '', // TODO: getElementById!
+			addressee_name: document.getElementById('addressee_name').value,
 			zipcode: document.getElementById('postcode').value,
 			address1: document.getElementById('address1').value,
 			address2: document.getElementById('address2').value,

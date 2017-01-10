@@ -33,7 +33,7 @@ router.post('/', isLoggedIn, async (req, res) => {
 	const {
 		user
 	} = req.session
-	const body = _.pick(req.body, ['zipcode', 'address1', 'address2'])
+	const body = _.pick(req.body, ['addressee_name', 'zipcode', 'address1', 'address2'])
 
 	try {
 		body.user = user
