@@ -67,6 +67,10 @@ const UserSchema = new Schema({
 		type: String,
 		default: '/assets/images/user_default.png'
 	},
+	fb_id: { // facebook user id
+		type: String,
+		default:'',
+	},
 	payments: [{ type: Schema.Types.ObjectId, ref: 'Payment' }],
 	projects: [{ type: Schema.Types.ObjectId, ref: 'Project' }],
 	products: [{ type: Schema.Types.ObjectId, ref: 'Project' }],

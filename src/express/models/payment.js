@@ -40,7 +40,6 @@ PaymentSchema.pre('save', async function (next) {
     console.error(e);
     throw e
   }
-
 })
 
 PaymentSchema.pre('update', function (next) {

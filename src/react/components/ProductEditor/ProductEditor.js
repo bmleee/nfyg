@@ -47,6 +47,7 @@ export default class ProductEditor extends Component {
 		funding: {
 			currentMoney: 0,   // 직접 / 간접 후원에 의해 추가됨
 			targetMoney: 0,
+      shippingFee: 0,
       minPurchaseVolume: 0, // add/fix product model, toFormat, wrapper, form, submit callback,
       maxPurchaseVolume: 10000, // add/fix product model, toFormat, wrapper, form, submit callback,
 			dateFrom: new Date().toISOString().substring(0, 10),     							// 작성 시작 일
@@ -219,6 +220,11 @@ export default class ProductEditor extends Component {
 				dateTo: { $set: dateTo }
 			}
 		})),
+    _onShippingFeeSubmit: (shippingFee) => this.setState(update(this.state, {
+			funding: {
+				shippingFee: { $set: Number(shippingFee) }
+			}
+		})),
     _onMinBuyerSubmit: (minPurchaseVolume) => this.setState(update(this.state, {
       funding: {
         minPurchaseVolume: { $set: Number(minPurchaseVolume) }
@@ -384,6 +390,7 @@ export default class ProductEditor extends Component {
         targetMoney: this.state.funding.targetMoney,
         dateFrom: this.state.funding.dateFrom,
         dateTo: this.state.funding.dateTo,
+        shippingFee: this.state.funding.shippingFee,
         minPurchaseVolume: this.state.funding.minPurchaseVolume,
         maxPurchaseVolume: this.state.funding.maxPurchaseVolume,
         rewards: this.state.funding.reward.rewards,
@@ -405,6 +412,7 @@ export default class ProductEditor extends Component {
       targetMoney: { $set: p.funding.targetMoney },
       dateFrom: { $set: p.funding.dateFrom },
       dateTo: { $set: p.funding.dateTo },
+      shippingFee: { $set: project.funding.shippingFee },
       minPurchaseVolume: { $set: p.funding.minPurchaseVolume },
       maxPurchaseVolume: { $set: p.funding.maxPurchaseVolume },
       reward: {

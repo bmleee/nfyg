@@ -51,6 +51,7 @@ export default class ProjectEditor extends Component {
 			targetMoney: 0,
 			dateFrom: new Date().toISOString().substring(0, 10),     							// 작성 시작 일
 			dateTo: new Date(Date.now() + 1000 * 60 * 60 * 24).toISOString().substring(0, 10),	// 바로 다음날
+      shippingFee: 0,
 			reward: {
 				rewards: [],
 				newReward: { // temporary state to insert...
@@ -211,6 +212,11 @@ export default class ProjectEditor extends Component {
 				dateTo: { $set: dateTo }
 			}
 		})),
+		_onShippingFeeSubmit: (shippingFee) => this.setState(update(this.state, {
+			funding: {
+				shippingFee: { $set: Number(shippingFee) }
+			}
+		})),
 		_onRewardSubmit: ({newReward}) => this.setState(update(this.state, {
 			funding: {
 				reward: {
@@ -317,6 +323,7 @@ export default class ProjectEditor extends Component {
         targetMoney: this.state.funding.targetMoney,
         dateFrom: this.state.funding.dateFrom,
         dateTo: this.state.funding.dateTo,
+        shippingFee: this.state.funding.shippingFee,
         rewards: this.state.funding.reward.rewards,
       },
       overview: {
@@ -338,6 +345,7 @@ export default class ProjectEditor extends Component {
       targetMoney: { $set: project.funding.targetMoney },
       dateFrom: { $set: project.funding.dateFrom },
       dateTo: { $set: project.funding.dateTo },
+      shippingFee: { $set: project.funding.shippingFee },
       reward: {
         rewards: { $set: project.funding.rewards }
       },

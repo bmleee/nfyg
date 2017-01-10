@@ -5,17 +5,17 @@ const router = express.Router();
 
 // subscribe/payments/schedules
 let customer_uid = 'customer1234'
-let merchant_uids = ['your_merchant_uid3', 'your_merchant_uid4']
+let merchant_uids = () => (['your_merchant_uid3_' + Date.now(), 'your_merchant_uid4_' + Date.now()])
 
 let checking_amount = 1004
 let schedules = [
 	{
-		"merchant_uid": merchant_uids[0],
+		"merchant_uid": merchant_uids()[0],
 		"schedule_at": new Date().getTime() + 1000 * 60 * 2,
 		"amount": 1004
 	},
 	{
-		"merchant_uid": merchant_uids[1],
+		"merchant_uid": merchant_uids()[1],
 		"schedule_at": new Date().getTime() + 1000 * 60 * 60 * 24 * 3,
 		"amount": 1004
 	}

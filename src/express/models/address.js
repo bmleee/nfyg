@@ -9,6 +9,7 @@ const Schema = mongoose.Schema;
 const AddressSchema = new Schema({
 	user: { type: Schema.Types.ObjectId, ref: 'User', required: true},
 	title: { type: String, default: '배송지' },
+	addressee_name: { type: String, required: true, }, // 수취인 이름
 	zipcode: { type: String, required: true },
 	address1: { type: String, required: true },
 	address2: { type: String, required: true },

@@ -24,6 +24,12 @@ const DateToWrapper = ({value}) => (
 const DateToForm = ({value, onChange}) => (
 	<input type="date" value={value} onChange={onChange} />
 )
+const ShippingFeeWrapper = ({value}) => (
+	<span>{value}</span>
+)
+const ShippingFeeForm = ({value, onChange}) => (
+	<input type="number" value={Number(value)} onChange={onChange} />
+)
 const MinBuyerWrapper = ({value}) => (
 	<span>{value}</span>
 )
@@ -168,6 +174,7 @@ const Funding = ({
 		targetMoney,
 		dateFrom,
 		dateTo,
+		shippingFee,
 		minPurchaseVolume,
 		maxPurchaseVolume,
 
@@ -178,6 +185,7 @@ const Funding = ({
 	// onSubmit callbacks
 	_onTargetMoneySubmit,
 	_onDateToSubmit,
+	_onShippingFeeSubmit,
 	_onMinBuyerSubmit,
 	_onMaxBuyerSubmit,
 
@@ -202,6 +210,20 @@ const Funding = ({
 				onSubmit={_onTargetMoneySubmit}
 				Wrapper={TargetMoneyWrapper}
 				Form={TargetMoneyForm}
+				className ="exhibition-long-title"
+				classNameopen ="editor-open-container"
+			/>
+
+			<FormWrapper
+				title="배송료"
+				valueType={VALUE_TYPE.MONEY}
+				alt="배송료를 입력하세요"
+				initialValue={shippingFee}
+				submitCaption={'배송료를 입력하세요'}
+				submitCaptionsub={'입력하기'}
+				onSubmit={_onShippingFeeSubmit}
+				Wrapper={ShippingFeeWrapper}
+				Form={ShippingFeeForm}
 				className ="exhibition-long-title"
 				classNameopen ="editor-open-container"
 			/>

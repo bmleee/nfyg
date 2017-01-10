@@ -145,7 +145,7 @@ router.post('/', async (req, res) => {
 		const r = await ProductModel.update(
 			{ 'abstract.productName': productName },
 			body,
-			{ upsert: true }
+			{ upsert: true, select: { 'abstract.productName': -1} }
 		)
 
 		console.log('upsert result', r);
