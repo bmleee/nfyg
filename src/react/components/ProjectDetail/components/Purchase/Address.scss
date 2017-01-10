@@ -1,0 +1,21 @@
+.add-address-container {
+	margin: 25px auto 20px auto;
+	width : 20%;
+	@media (max-width : 500px) {
+	    width : 100%;
+	}
+	.add-address-button {
+		border : none;
+		outline : none;
+		background : #4b709a;
+		color : #fff;
+		height : 32px;
+		width : 100%;
+		font-weight : 600;
+	}
+	.add-address-button:before {
+	    font-family : Ionicons;
+	    content : "\f218";
+	    margin-right : 8px;
+	}
+}

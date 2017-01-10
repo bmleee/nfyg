@@ -29,9 +29,15 @@ export default class C extends Component {
 		return !addresses ? <div>Address Loading...</div>
 			: (
 				<div className="purchase-reward-container">
-					<div className="profile-setting-detail">
-						<p>새로운 배송지 추가</p>
-						<p className="profile-small-title">배송주소</p>
+						<div className="purchase-stage-text-container">
+							<div className="purchase-stage-text">옵션 및 수량 선택</div>
+							<div className="purchase-stage-text-highlight">배송지 입력</div>
+							<div className="purchase-stage-text">결제 카드 선택</div>
+							<div className="purchase-stage-text">결제 정보 확인</div>
+							<div className="purchase-stage-text-last">결제 완료</div>
+						</div>
+						<div className="purchase-stage-content-container">
+						<p className="profile-small-title">배송지 추가</p>
 						<div className="profile-setting-search-address-container">
 							<input className="profile-setting-search-address" type="button" onClick={this._onClickFindAddress} value="주소찾기" />
 						</div>
@@ -46,10 +52,10 @@ export default class C extends Component {
 								<input className="profile-setting-address2" type="text" id="address2" placeholder="상세주소" />
 							</div>
 						</div>
-						<div>
-							<button onClick={this._onClickAddAddress}>추가하기</button>
+						<div className="add-address-container">
+							<button className="add-address-button" onClick={this._onClickAddAddress}>추가하기</button>
 						</div>
-					</div>
+						<p className="profile-small-title">기존 배송지</p>
 						{
 							addresses.map(({
 								title,
@@ -57,14 +63,16 @@ export default class C extends Component {
 								address1,
 								address2,
 							}, index) => (
-								<Card title={title} actions={[<button onClick={this._onClickAddress(index)}>선택하기</button>]}>
-									<p>{zipcode}</p>
-									<p>{address1}</p>
-									<p>{address2}</p>
-								</Card>
+							<div className="purchase-reward-select-container">
+								<button className="purchase-reward-select" onClick={this._onClickAddress(index)}>
+									<p className="purchase-reward-money">{zipcode}</p>
+									<p className="purchase-reward-description">{address1}, {address2}</p>
+								</button>
+							</div>
 							))
 						}
-
+					</div>
+				
 						<script
 						      dangerouslySetInnerHTML={{ __html:
 						        `
@@ -72,6 +80,10 @@ export default class C extends Component {
 						        `
 						      }}
 						    />
+						<div className="purchase-stage-move-container">
+							<button className="purchase-stage-prev-button" onClick="">이전 단계</button>
+							<button className="purchase-stage-next-button" onClick="">결제 카드 선택</button>
+						</div>
 				</div>
 			)
 

@@ -1,0 +1,102 @@
+.purchase-heading {
+    height : 210px;
+    text-align : center;
+    @media (max-width : 500px) {
+        height : 160px;
+    }
+    h1 {
+        color : #fff;
+        line-height : 210px;
+        background : rgba(0, 0, 0, 0.3);
+        @media (max-width : 500px) {
+            line-height : 155px;
+        }
+    }
+}
+.purchase-stage-text-container {
+    margin-bottom : 20px;
+    
+.purchase-stage-text-highlight {
+	display : inline-block;
+	font-size : 13px;
+	font-weight : 600;
+	color : #4b709a;
+	margin-right : 8px;
+	@media (max-width : 500px) {
+            display : none;
+    }
+}
+.purchase-stage-text, .purchase-stage-text-last {
+	display : inline-block;
+	font-size : 13px;
+	margin-right : 8px;
+	@media (max-width : 500px) {
+            display : none;
+    }
+}
+.purchase-stage-text-last-highlight {
+    display : inline-block;
+	font-size : 13px;
+	font-weight : 600;
+	color : #4b709a;
+	margin-right : 8px;
+	@media (max-width : 500px) {
+            display : none;
+    }
+}
+.purchase-stage-text-highlight:after, .purchase-stage-text:after {
+	font-family : Ionicons;
+	content : "\f3d3";
+	font-size : 12px;
+	margin-left : 5px;
+	@media (max-width : 500px) {
+            display : none;
+    }
+}
+}
+.purchase-stage-move-container {
+    text-align : center;
+    margin : 40px 0px;
+}
+.purchase-stage-prev-button, .purchase-stage-prev-button:focus {
+    width : 100px;
+    height : 40px;
+	background-color : #ddd;
+	border : none;
+	outline : none;
+	margin-right : 2px;
+	color : #777;
+	font-weight : 700;
+}
+.purchase-stage-prev-button:hover {
+    background-color : #ccc;
+}
+.purchase-stage-prev-button:before {
+    font-family : Ionicons;
+	content : "\f3d2";
+	margin-right : 5px;
+	font-size : 10px;
+	vertical-align : text-bottom;
+}
+.purchase-stage-next-button, .purchase-stage-next-button:focus {
+    padding : 0px 20px;
+    height : 40px;
+	background-color : #4b709a;
+	border : none;
+	outline : none;
+	margin-right : 2px;
+	color : #fff;
+	font-weight : 700;
+}
+.purchase-stage-next-button:hover {
+    background-color : #354c67;
+}
+.purchase-stage-next-button:after {
+    font-family : Ionicons;
+	content : "\f3d3";
+	margin-left : 5px;
+	font-size : 10px;
+	vertical-align : text-bottom;
+}
+
+

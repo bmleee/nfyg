@@ -34,6 +34,8 @@ export default class PurchaseContainer extends Component {
 		selectedRewardIndex: -1,
 		selectedAddressIndex: -1,
 		selectedPaymentIndex: -1,
+		
+		imgSrc: '',
 	}
 
 	componentDidMount() {
@@ -43,10 +45,42 @@ export default class PurchaseContainer extends Component {
 	}
 
 	render() {
+		const {
+			stage
+		} = this.state;
+		
+		let imgSrc= '/assets/images/slider-tumb2.jpg';
+		
+		let infoBackground = {
+			backgroundImage: `url("${imgSrc}")`,
+			backgroundSize: 'cover',
+			backgroundPosition: 'center center',
+			backgroundRepeat: 'no-repeat'
+		}
+
+				// 0 : loading...
+				// 1 : let user choose reward
+				// 2 : select choose payment
+				// 3 : select address
+				// 4 : progress purchase (use iamport API)
+				// 5 : show the result of the payment. success / fails
+		
+		let title = [
+			'',
+			'옵션 및 수량 선택',
+			'배송지 입력',
+			'결제 수단 선택',
+			'결제 정보 확인',
+			'결제 완료',
+		];
+		
 		console.log('Purchase', this);
 		return (
 			<div>
 				<button onClick={() => console.log(this.state)}>Log State</button>
+				<div className="purchase-heading" style={infoBackground}>
+					<h1 className="purchase-title">{title[stage]}</h1>
+				</div>
 				{this._renderStage()}
 			</div>
 		)
@@ -91,8 +125,8 @@ export default class PurchaseContainer extends Component {
 		console.log('set reward ', index);
 		this.setState(update(this.state, {
 			selectedRewardIndex: { $set: index },
-			stage: { $set : this.state.stage + 1 },
 			reward: { $set: reward },
+			stage: { $set : this.state.stage + 1 },
 		}))
 	}
 
@@ -100,8 +134,8 @@ export default class PurchaseContainer extends Component {
 		console.log('set address ', index);
 		this.setState(update(this.state, {
 			selectedAddressIndex: { $set: index },
-			stage: { $set : this.state.stage + 1 },
 			address: { $set: address },
+			stage: { $set : this.state.stage + 1 },
 		}))
 	}
 
@@ -109,8 +143,8 @@ export default class PurchaseContainer extends Component {
 		console.log('set payment ', index);
 		this.setState(update(this.state, {
 			selectedPaymentIndex: { $set: index },
-			stage: { $set : this.state.stage + 1 },
 			payment: { $set: payment },
+			stage: { $set : this.state.stage + 1 },
 		}))
 	}
 

@@ -81,7 +81,7 @@ export default class C extends Component {
 							</div>
 
 							<div>
-								<p className="profile-small-title">유효기간 (년/월)</p>
+								<p className="profile-small-title">유효기간 (YYYY/MM)</p>
 								<div>
 									<input className="expiry-year-text" type="text" value={expiry[0]} onChange={this._onChangeExpiry(0)} maxLength="4"/>
 									<input className="expiry-month-text" type="text" value={expiry[1]} onChange={this._onChangeExpiry(1)} maxLength="2"/>
@@ -95,7 +95,7 @@ export default class C extends Component {
 
 							<div>
 								<p className="profile-small-title">비밀번호 앞 2자리</p>
-								<input className="card-password-text" type="text" value={pwd_2digit} onChange={this._onChangePwd} maxLength="2"/>
+								<input className="card-password-text" type="password" value={pwd_2digit} onChange={this._onChangePwd} maxLength="2"/>
 								<div className="card-password-none"></div><div className="card-password-none"></div>
 							</div>
 							<div className="card-add-ssl-info">
