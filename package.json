@@ -47,6 +47,7 @@
     "jsonwebtoken": "^7.2.0",
     "lodash": "^4.16.4",
     "lru-cache": "^4.0.2",
+    "md5": "^2.2.1",
     "method-override": "^2.3.7",
     "mongoose": "^4.6.2",
     "mongoose-auto-increment": "^5.0.1",
