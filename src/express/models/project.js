@@ -4,6 +4,10 @@ import { autoIncrement } from '../lib/db'
 
 import QnAModel from './qna'
 import PostModel from './post'
+import PurchaseModel from './purchase'
+
+import FacebookTracker from '../../lib/FacebookTracker'
+console.log('FacebookTracker', FacebookTracker);
 
 const Schema = mongoose.Schema;
 
@@ -44,6 +48,7 @@ const ProjectSchema = new Schema({
 	funding: {
 		currentMoney: {type: Number, required: true},   // 직접 / 간접 후원에 의해 추가됨
 		targetMoney: {type: Number, required: true},
+		shippingFee: {type: Number, default: 0},
 		dateFrom: {type: String, required: true}, // 작성 시작 일
 		dateTo: {type: String, required: true}, // 바로 다음날
 		rewards: [
@@ -131,7 +136,7 @@ ProjectSchema.methods.toFormat = async function (type, ...args) {
 							},
 							targetMoney: this.funding.targetMoney,
 							currentMoney: this.funding.currentMoney,
-							numDirectSupports: Math.floor(Math.random() * 30), // TODO: from DirectSupport
+							numDirectSupports: await PurchaseModel.count({project: this}),
 							numIndirectSupports: Math.floor(Math.random() * 300), // TODO: from IndirectSupport
 							link: `/projects/${this.abstract.projectName}`,
 						}
@@ -144,19 +149,35 @@ ProjectSchema.methods.toFormat = async function (type, ...args) {
 							title: this.abstract.shortTitle,
 							targetMoney: this.funding.targetMoney,
 							currentMoney: this.funding.currentMoney,
-							numDirectSupports: Math.floor(Math.random() * 30), // TODO: from DirectSupport
+							numDirectSupports: await PurchaseModel.count({project: this}),
 							numIndirectSupports: Math.floor(Math.random() * 300), // TODO: from IndirectSupport
 							remainingDays: ( new Date(this.funding.dateTo).getTime() - new Date(this.funding.dateFrom).getTime() ) / 1000 / 60 / 60 / 24,
 							link: `/projects/${this.abstract.projectName}`,
 							postIntro: this.abstract.postIntro,
 						}
 
-				}
+				} // end of switch this.abstract.state
 
 			case 'project_detail':
 				let user = args[0];
 				let posts = this.posts.map(p => p.toFormat('project_detail', user))
 				let qnas = this.qnas.map(q => q.toFormat('project_detail'))
+				let {
+					likes, shares, comments, num_useres, num_posts,
+					money_by_sharing, recent_3_user_ids,
+					post_messages
+				} = await FacebookTracker.getProjectSummary(this.abstract.projectName)
+				let indirectSupporters = post_messages.map(pm => ({
+					fbId: pm.user_app_scope_id,
+					name: pm.name,
+					message: pm.post_message,
+					support_at: new Date(pm.created_at).getTime(), // TOOD: correct support_at from FacebookTracker
+					likes: pm.likes,
+					shares: pm.shares,
+					comments: pm.shares,
+					money: (pm.likes + pm.comments + pm.shares) * 200,
+				}))
+
 				return {
 					abstract: {...this.abstract},
 					creator: {...this.creator},
@@ -187,55 +208,10 @@ ProjectSchema.methods.toFormat = async function (type, ...args) {
 							"10153932539601313",
 							"10153932539601313"
 						],
-						recent3IndirectSupporters: [
-							"10153932539601313",
-							"10153932539601313",
-							"10153932539601313"
-						]
+						recent3IndirectSupporters: recent_3_user_ids
 					},
-					directSupporters: [
-						{
-							"fbId": "10153932539601313",
-							"name": "전희재",
-							"money": 34000,
-							"support_at": 1476254937264
-						},
-					],
-					indirectSupporters: [
-						{
-			        "fbId": "10153932539601313",
-			        "name": "전희재",
-			        "money": 3400,
-			        "support_at": 1476254937224,
-			        "message": "본격 '목욕'문화 잡지라 안에 내용부터, 공연까지 심상치 않은 프로젝트입니다- 본격 '목욕'문화 잡지라 안에 내용부터, 공연까지 심상치 않은 프로젝트입니다- 본격 '목욕'문화 잡 안에 내용부터, 공연까지 심상치 않은 프로젝트입니다- 본격 '목욕'문안에 내용부터, 공연까지 심상치 않은 프로젝트입니다-",
-			        "likes": 1,
-			        "comments": 20,
-			        "shares": 3,
-			        "rank": 2
-			      },
-			      {
-			        "fbId": "10153932539601313",
-			        "name": "전희재",
-			        "money": 3400,
-			        "support_at": 1476254937224,
-			        "message": "본격 '목욕'문화 잡지라 안에 내용부터, 공연까지 심상치 않은 프로젝트입니다- 본격 '목욕'문화 잡지라 안에 내용부터, 공연까지 심상치 않은 프로젝트입니다- 본격 '목욕'문화 잡 안에 내용부터, 공연까지 심상치 않은 프로젝트입니다- 본격 '목욕'문안에 내용부터, 공연까지 심상치 않은 프로젝트입니다-",
-			        "likes": 1,
-			        "comments": 20,
-			        "shares": 3,
-			        "rank": 2
-			      },
-			      {
-			        "fbId": "10153932539601313",
-			        "name": "전희재",
-			        "money": 500000,
-			        "support_at": 1476254937224,
-			        "message": "본격 '목욕'문화 잡지라 안에 내용부터, 공연까지 심상치 않은 프로젝트입니다- 본격 '목욕'문화 잡지라 안에 내용부터, 공연까지 심상치 않은 프로젝트입니다- 본격 '목욕'문화 잡 안에 내용부터, 공연까지 심상치 않은 프로젝트입니다- 본격 '목욕'문안에 내용부터, 공연까지 심상치 않은 프로젝트입니다-",
-			        "likes": 1,
-			        "comments": 20,
-			        "shares": 3,
-			        "rank": 2
-			      },
-					],
+					directSupporters: (await PurchaseModel.findByProject(this)).map(async (_) => await _.toFormat('project_detail')),
+					indirectSupporters: indirectSupporters,
 				}
 
 
@@ -254,7 +230,7 @@ ProjectSchema.methods.toFormat = async function (type, ...args) {
 		}
 
 	} catch (e) {
-
+		console.error(e);
 	} finally {
 
 	}
