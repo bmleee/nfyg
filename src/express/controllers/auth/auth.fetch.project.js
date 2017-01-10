@@ -19,8 +19,12 @@ import ProductModel from '../../models/product'
 import PostModel from '../../models/post'
 import QnAModel from '../../models/qna'
 import SponsorModel from '../../models/sponsor'
+import AddressModel from '../../models/address'
+import PurchaseModel from '../../models/purchase'
+import PaymentModel from '../../models/payment'
 
 import * as ac from '../../lib/auth-check'
+import isLoggedIn from '../../lib/login-check'
 import * as renderHelper from '../../lib/renderHelper'
 import * as renderUser from '../../lib/renderUser'
 
@@ -97,13 +101,14 @@ router.get('/:projectName/rewards', async (req, res) => {
 		let user = renderUser.authorizedUser(req.session.user)
 
 		let doc = await ProjectModel.findByName(req.params.projectName)
-			.select({ 'funding.rewards': 1})
+			.select({ 'funding.rewards': 1, 'funding.shippingFee': 1})
 			.exec()
-		console.log('doc.funding.rewards', doc.funding.rewards);
+
 		return res.json({
 			user,
 			data: {
-				rewards: doc.funding.rewards
+				rewards: doc.funding.rewards,
+				shippingFee: doc.funding.shippingFee,
 			}
 		})
 	} catch (e) {
@@ -115,13 +120,47 @@ router.get('/:projectName/rewards', async (req, res) => {
 	}
 })
 
-router.get('/:projectName/payments', (req, res) => {
-	return res.json({
-		user,
-		data: {
-			payments: [{message: 'payment model is not extablished'}]
-		}
-	})
+router.post('/:projectName/purchase', isLoggedIn, async (req, res) => {
+	let user = req.session.user
+	let projectName = req.params.projectName
+	let {
+		addressIndex,
+		rewardIndex,
+		paymentIndex,
+		purchaseAmount,
+		shippingFee,
+	}  = req.body
+
+	try {
+		let project = await ProjectModel.findOne({'abstract.projectName': projectName})
+		let address = (await AddressModel.findByUser(user))[addressIndex]
+		let payment = (await PaymentModel.findByUser(user))[paymentIndex]
+		let reward = project.funding.rewards[rewardIndex]
+
+		console.log('project', project);
+		console.log('address', address);
+		console.log('payment', payment);
+		console.log('reward', reward);
+
+		let purchase = await PurchaseModel.create({
+			user,
+			user_info: user.toJSON(),
+			project,
+			address: address.toJSON(),
+			payment: payment.toJSON(),
+			reward
+		})
+
+		res.json({
+			response: purchase
+		})
+
+	} catch (error) {
+		console.error(error);
+		res.state(400).json({
+			error
+		})
+	}
 })
 
 // create or update project
@@ -140,7 +179,7 @@ router.post('/', async (req, res) => {
 		const r = await ProjectModel.update(
 			{ 'abstract.projectName': projectName },
 			body,
-			{ upsert: true }
+			{ upsert: true, }
 		)
 
 		console.log('upsert result', r);

@@ -58,12 +58,14 @@ export default class C extends Component {
 						<p className="profile-small-title">기존 배송지</p>
 						{
 							addresses.map(({
+								addressee_name,
 								title,
 								zipcode,
 								address1,
 								address2,
 							}, index) => (
 							<div className="purchase-reward-select-container">
+								<p>{addressee_name}</p>
 								<button className="purchase-reward-select" onClick={this._onClickAddress(index)}>
 									<p className="purchase-reward-money">{zipcode}</p>
 									<p className="purchase-reward-description">{address1}, {address2}</p>
@@ -72,7 +74,10 @@ export default class C extends Component {
 							))
 						}
 					</div>
-				
+						<div>
+							<button onClick={goToPreviousStage}>이전</button>
+							<button onClick={goToNextStage}>다음</button>
+						</div>
 						<script
 						      dangerouslySetInnerHTML={{ __html:
 						        `
@@ -81,8 +86,8 @@ export default class C extends Component {
 						      }}
 						    />
 						<div className="purchase-stage-move-container">
-							<button className="purchase-stage-prev-button" onClick="">이전 단계</button>
-							<button className="purchase-stage-next-button" onClick="">결제 카드 선택</button>
+							<button className="purchase-stage-prev-button" onClick={goToPreviousStage}>이전 단계</button>
+							<button className="purchase-stage-next-button" onClick={goToNextStage}>결제 카드 선택</button>
 						</div>
 				</div>
 			)
@@ -132,6 +137,7 @@ export default class C extends Component {
 
 	_onClickAddAddress = async () => {
 		let address = {
+			addressee_name: '', // TODO: getElementById!
 			zipcode: document.getElementById('postcode').value,
 			address1: document.getElementById('address1').value,
 			address2: document.getElementById('address2').value,

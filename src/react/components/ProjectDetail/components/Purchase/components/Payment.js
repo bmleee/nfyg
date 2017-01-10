@@ -17,13 +17,13 @@ export default class C extends Component {
 		pwd_2digit: '',
 		visible : false,
 	}
-	
+
 	openModal = () => {
 		this.setState(update(this.state, {
 			visible: { $set: true },
 		}))
 	}
-	
+
 	closeModal = () => {
 		this.setState(update(this.state, {
 			visible: { $set: false },
@@ -43,6 +43,11 @@ export default class C extends Component {
 			pwd_2digit,
 		} = this.state
 
+		const {
+			goToNextStage,
+			goToPreviousStage,
+		} = this.props
+
 		return !payments ? <div>Payment Loading...</div>
 			: (
 				<div className="purchase-reward-container">
@@ -55,67 +60,69 @@ export default class C extends Component {
 					</div>
 					<div className="card-list-container">
 						<h4 className="card-list-title">결제카드를 선택해주세요.</h4>
-						{
-							payments.map(({
-								card_number,
-								expiry,
-							}, index) => (
-								<div className="card-container">
-								<button className="card-select-button" onClick={this._onClickPayment(index)}>
-									<Card title={card_number}>
-									<p className="card-expiry">유효기간 {expiry}</p>
-									</Card>
-									<button className="card-delete">삭 제</button>
-								</button>
-								</div>
-							))
-						}
-					<div className="card-add-container">
-					<input className="card-add" type="button" value="새로운 카드 추가하기" onClick={() => this.openModal()} />
-					</div>
-					</div>
-					<Modal className="card-add-modal" visible={this.state.visible} width="420" height="460px" effect="fadeInDown" onClickAway={() => this.closeModal()}>
-					<div className="card-add-modal-container">
-				
-					<button className="share-modal-close" onClick={() => this.closeModal()}/>
-			
-							<div>
-								<p className="profile-small-title">카드번호 16자리</p>
-								{
-									card_number.map((c, index) => <input className="card-num-text" type="text" value={c} onChange={this._onChangeCardNumber(index)} maxLength="4"/>)
-								}
-							</div>
-
-							<div>
-								<p className="profile-small-title">유효기간 (YYYY/MM)</p>
-								<div>
-									<input className="expiry-year-text" type="text" value={expiry[0]} onChange={this._onChangeExpiry(0)} maxLength="4"/>
-									<input className="expiry-month-text" type="text" value={expiry[1]} onChange={this._onChangeExpiry(1)} maxLength="2"/>
-								</div>
-							</div>
-
-							<div>
-								<p className="profile-small-title">생년월일 6자리</p>
-								<input className="card-birth-text" type="text" value={birth} onChange={this._onChangeBirth} maxLength="6"/>
-							</div>
-
-							<div>
-								<p className="profile-small-title">비밀번호 앞 2자리</p>
-								<input className="card-password-text" type="text" value={pwd_2digit} onChange={this._onChangePwd} maxLength="2"/>
-								<div className="card-password-none"></div><div className="card-password-none"></div>
-							</div>
-							<div className="card-add-ssl-info">
-							7Pictures는 업계 표준인 SSL 보안을 사용합니다. 이는 000님이 웹브라우저에서 입력하시는 정보가 7Pictures 서버로 전송되는데 있어 철저하게 암호화되고 있음을 뜻합니다.
-							</div>
-						<div className="modal-card-add-container">
-							<button className="modal-card-add" onClick={this._onClickAddPayment}>카드등록</button>
+							{
+								payments.map(({
+									card_name,
+									card_number,
+									expiry,
+								}, index) => (
+									<div className="card-container">
+									<button className="card-select-button" onClick={this._onClickPayment(index)}>
+										<Card title={card_number}>
+											<p>{card_name}</p>
+											<p className="card-expiry">유효기간 {expiry}</p>
+										</Card>
+										<button className="card-delete">삭 제</button>
+									</button>
+									</div>
+								))
+							}
+						<div className="card-add-container">
+							<input className="card-add" type="button" value="새로운 카드 추가하기" onClick={() => this.openModal()} />
 						</div>
 					</div>
+					<Modal className="card-add-modal" visible={this.state.visible} width="420" height="460px" effect="fadeInDown" onClickAway={() => this.closeModal()}>
+						<div className="card-add-modal-container">
+
+						<button className="share-modal-close" onClick={() => this.closeModal()}/>
+
+								<div>
+									<p className="profile-small-title">카드번호 16자리</p>
+									{
+										card_number.map((c, index) => <input className="card-num-text" type="text" value={c} onChange={this._onChangeCardNumber(index)} maxLength="4"/>)
+									}
+								</div>
+
+								<div>
+									<p className="profile-small-title">유효기간 (YYYY/MM)</p>
+									<div>
+										<input className="expiry-year-text" type="text" value={expiry[0]} onChange={this._onChangeExpiry(0)} maxLength="4"/>
+										<input className="expiry-month-text" type="text" value={expiry[1]} onChange={this._onChangeExpiry(1)} maxLength="2"/>
+									</div>
+								</div>
+
+								<div>
+									<p className="profile-small-title">생년월일 6자리</p>
+									<input className="card-birth-text" type="text" value={birth} onChange={this._onChangeBirth} maxLength="6"/>
+								</div>
+
+								<div>
+									<p className="profile-small-title">비밀번호 앞 2자리</p>
+									<input className="card-password-text" type="text" value={pwd_2digit} onChange={this._onChangePwd} maxLength="2"/>
+									<div className="card-password-none"></div><div className="card-password-none"></div>
+								</div>
+								<div className="card-add-ssl-info">
+								7Pictures는 업계 표준인 SSL 보안을 사용합니다. 이는 000님이 웹브라우저에서 입력하시는 정보가 7Pictures 서버로 전송되는데 있어 철저하게 암호화되고 있음을 뜻합니다.
+								</div>
+							<div className="modal-card-add-container">
+								<button className="modal-card-add" onClick={this._onClickAddPayment}>카드등록</button>
+							</div>
+						</div>
 					</Modal>
-					<div className="purchase-stage-move-container">
-							<button className="purchase-stage-prev-button" onClick="">이전 단계</button>
-							<button className="purchase-stage-next-button" onClick="">결제 정보 확인</button>
-					</div>
+						<div className="purchase-stage-move-container">
+							<button className="purchase-stage-prev-button" onClick={goToPreviousStage}>이전 단계</button>
+							<button className="purchase-stage-next-button" onClick={goToNextStage}>결제 정보 확인</button>
+						</div>
 				</div>
 			)
 
@@ -144,7 +151,7 @@ export default class C extends Component {
 		} finally {
 			await this._reflashPayments()
 		}
-		
+
 		this.setState(update(this.state, {
 			visible: { $set: false },
 		}))

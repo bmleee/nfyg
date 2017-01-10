@@ -10,6 +10,7 @@ import {
 } from './components'
 
 import { canUseDOM } from  '~/src/lib/utils'
+import { purchaseReward } from '../../../../api/AppAPI'
 
 export default class PurchaseContainer extends Component {
 
@@ -30,15 +31,19 @@ export default class PurchaseContainer extends Component {
 		address: {}, // address 참조
 		payment: {}, // 일부분만 보여주기
 
+		purchaseAmount: 0,
+		shippingFee: 0,
+
 		// 서버로 전송
 		selectedRewardIndex: -1,
 		selectedAddressIndex: -1,
 		selectedPaymentIndex: -1,
-		
+
 		imgSrc: '',
 	}
 
-	componentDidMount() {
+	async componentDidMount() {
+
 		this.setState({
 			stage: 1
 		})
@@ -48,9 +53,9 @@ export default class PurchaseContainer extends Component {
 		const {
 			stage
 		} = this.state;
-		
+
 		let imgSrc= '/assets/images/slider-tumb2.jpg';
-		
+
 		let infoBackground = {
 			backgroundImage: `url("${imgSrc}")`,
 			backgroundSize: 'cover',
@@ -64,7 +69,7 @@ export default class PurchaseContainer extends Component {
 				// 3 : select address
 				// 4 : progress purchase (use iamport API)
 				// 5 : show the result of the payment. success / fails
-		
+
 		let title = [
 			'',
 			'옵션 및 수량 선택',
@@ -73,7 +78,7 @@ export default class PurchaseContainer extends Component {
 			'결제 정보 확인',
 			'결제 완료',
 		];
-		
+
 		console.log('Purchase', this);
 		return (
 			<div>
@@ -86,6 +91,31 @@ export default class PurchaseContainer extends Component {
 		)
 	}
 
+	purchase = async () => {
+		let {
+			selectedRewardIndex,
+			selectedAddressIndex,
+			selectedPaymentIndex,
+		} = this.state
+
+		if (selectedRewardIndex < 0 | selectedRewardIndex < 0 | selectedPaymentIndex < 0) {
+			alert('결제 정보 오류. 처음부터 다시 진행 해 주세요')
+			this.goToFirstStage()
+		}
+
+		try {
+			let r = await purchaseReward({
+				addressIndex: selectedAddressIndex,
+				rewardIndex: selectedRewardIndex,
+				paymentIndex: selectedPaymentIndex
+			})
+
+			console.log('purchaseReward api response', r);
+		} catch (e) {
+			console.error(e);
+		}
+	}
+
 	_renderStage = () => {
 		const props = {
 			isProject: canUseDOM && !!document.URL.match(/projects\/.+$/),
@@ -95,6 +125,12 @@ export default class PurchaseContainer extends Component {
 			setReward: this.setReward,
 			setAddress: this.setAddress,
 			setPayment: this.setPayment,
+
+			reward: this.state.reward,
+			address: this.state.address,
+			payment: this.state.payment,
+
+			purchase: this.purchase,
 		}
 
 		const stages = [
@@ -109,6 +145,12 @@ export default class PurchaseContainer extends Component {
 		return stages[this.state.stage]
 	}
 
+	goToFirstStage = () => {
+		this.setState(update(this.state, {
+			stage: { $set : 1 }
+		}))
+	}
+
 	goToNextStage = () => {
 		this.setState(update(this.state, {
 			stage: { $set : this.state.stage + 1 }
@@ -121,12 +163,12 @@ export default class PurchaseContainer extends Component {
 		}))
 	}
 
-	setReward = (index, reward) => {
+	setReward = (index, reward, shippingFee) => {
 		console.log('set reward ', index);
 		this.setState(update(this.state, {
 			selectedRewardIndex: { $set: index },
 			reward: { $set: reward },
-			stage: { $set : this.state.stage + 1 },
+			shippingFee: { $set: shippingFee }
 		}))
 	}
 

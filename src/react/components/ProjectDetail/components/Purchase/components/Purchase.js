@@ -3,37 +3,34 @@ import { fetchPurchaseInfo } from '~/src/react/api/AppAPI'
 
 
 export default class C extends Component {
-	state = {
-		payments: []
-	}
-
-	async componentDidMount() {
-		try {
-			const {
-				user,
-				data: { payments }
-			} = await fetchPurchaseInfo('payments')
-
-			this.setState({ payments })
-		} catch (e) {
-			console.error(e);
-		}
-
-	}
-
 	render() {
-		const {
-			payments
-		} = this.state
 
+		console.log('Purcase/components/Purchase', this);
 		const {
-			goToNextStage,
 			goToPreviousStage,
-			setReward,
-			setAddress,
-			setPayment,
+			
+			purchase
 		} = this.props
 
-		return (<div>{JSON.stringify(payments, undefined, 4)}</div>)
+		return (
+			<div>
+				결제 정보를 확인 해 주세요
+
+				<div>
+					Reward: { JSON.stringify(reward, undefined, 4) }
+				</div>
+				<div>
+					payment: { JSON.stringify(payment, undefined, 4) }
+				</div>
+				<div>
+					Address: { JSON.stringify(address, undefined, 4) }
+				</div>
+
+				<div className="purchase-stage-move-container">
+					<button className="purchase-stage-prev-button" onClick={goToPreviousStage}>이전 단계</button>
+					<button className="purchase-stage-next-button" onClick={purchase}>결제 하기</button>
+				</div>
+			</div>
+		)
 	}
 }

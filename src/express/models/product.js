@@ -4,6 +4,7 @@ import { autoIncrement } from '../lib/db'
 
 import QnAModel from './qna'
 import PostModel from './post'
+import PurchaseModel from './purchase'
 
 const Schema = mongoose.Schema;
 
@@ -46,6 +47,7 @@ const ProductSchema = new Schema({
 		targetMoney: {type: Number, required: true},
 		dateFrom: {type: String, required: true}, // 작성 시작 일
 		dateTo: {type: String, required: true}, // 바로 다음날
+		shippingFee: {type: Number, default: 0},
 		minPurchaseVolume: {type: Number, required: true}, // 최소 주문 수량
 		maxPurchaseVolume: {type: Number, required: true}, // 최대 주문 수량
 		rewards: [
@@ -139,7 +141,7 @@ ProductSchema.methods.toFormat = async function (type, ...args) {
 							},
 							targetMoney: this.funding.targetMoney,
 							currentMoney: this.funding.currentMoney,
-							numDirectSupports: Math.floor(Math.random() * 30), // TODO: from DirectSupport
+							numDirectSupports: await PurchaseModel.count({product: this}),
 							numIndirectSupports: Math.floor(Math.random() * 300), // TODO: from IndirectSupport
 							link: `/products/${this.abstract.productName}`,
 						}
@@ -152,7 +154,7 @@ ProductSchema.methods.toFormat = async function (type, ...args) {
 							title: this.abstract.shortTitle,
 							targetMoney: this.funding.targetMoney,
 							currentMoney: this.funding.currentMoney,
-							numDirectSupports: Math.floor(Math.random() * 30), // TODO: from DirectSupport
+							numDirectSupports: await PurchaseModel.count({product: this}),
 							numIndirectSupports: Math.floor(Math.random() * 300), // TODO: from IndirectSupport
 							remainingDays: ( new Date(this.funding.dateTo).getTime() - new Date(this.funding.dateFrom).getTime() ) / 1000 / 60 / 60 / 24,
 							link: `/products/${this.abstract.productName}`,
@@ -194,14 +196,7 @@ ProductSchema.methods.toFormat = async function (type, ...args) {
 							"10153932539601313"
 						]
 					},
-					directSupporters: [
-						{
-							"fbId": "10153932539601313",
-							"name": "전희재",
-							"money": 34000,
-							"support_at": 1476254937264
-						},
-					],
+					directSupporters: await Promise.all((await PurchaseModel.findByProject(this)).map(async (_) => await _.toFormat('product_detail'))),
 					indirectSupporters: [
 						{
 			        "fbId": "10153932539601313",
@@ -231,7 +226,7 @@ ProductSchema.methods.toFormat = async function (type, ...args) {
 		}
 
 	} catch (e) {
-
+		console.error(e);
 	} finally {
 
 	}

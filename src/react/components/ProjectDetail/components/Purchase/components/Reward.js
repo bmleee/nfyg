@@ -5,17 +5,18 @@ import { fetchPurchaseInfo } from '~/src/react/api/AppAPI'
 
 export default class C extends Component {
 	state = {
-		rewards: []
+		rewards: [],
+		shippingFee: 0,
 	}
 
 	async componentDidMount() {
 		try {
 			const {
 				user,
-				data: { rewards }
+				data: { rewards, shippingFee }
 			} = await fetchPurchaseInfo('rewards')
 
-			this.setState({ rewards })
+			this.setState({ rewards, shippingFee })
 		} catch (e) {
 			console.error(e);
 		}
@@ -24,17 +25,16 @@ export default class C extends Component {
 
 	render() {
 		const {
-			rewards
+			rewards,
+			shippingFee
 		} = this.state
 
 		const {
 			goToNextStage,
 			goToPreviousStage,
 			setReward,
-			setAddress,
-			setPayment,
 		} = this.props
-	
+
 
 		return !rewards ? <div>Reward Loading...</div>
 			: (
@@ -47,6 +47,7 @@ export default class C extends Component {
 						<div className="purchase-stage-text-last">결제 완료</div>
 					</div>
 					<div className="purchase-stage-content-container">
+					<div>배송료: {shippingFee.toLocaleString()}원</div>
 					{
 						rewards.filter(r => r.isDirectSupport).map(({
 							title,
@@ -64,14 +65,14 @@ export default class C extends Component {
 					}
 					</div>
 					<div className="purchase-stage-move-container">
-						{/* <button className="purchase-stage-prev-button" onClick="">이전 단계</button> */}
-						<button className="purchase-stage-next-button" onClick="">배송지 입력</button>
+						<button className="purchase-stage-prev-button" onClick="goToPreviousStage">이전 단계</button>
+						<button className="purchase-stage-next-button" onClick="goToNextStage">배송지 입력</button>
 					</div>
 				</div>
 			)
 	}
 
 	_onClickReward = (index) => {
-		return () => this.props.setReward(index, this.state.rewards[index])
+		return () => this.props.setReward(index, this.state.rewards[index], this.state.shippingFee)
 	}
 }

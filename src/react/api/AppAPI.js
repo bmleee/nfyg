@@ -150,12 +150,27 @@ export async function fetchPurchaseInfo(param) {
 	}
 }
 
+// called /p/:pName/purchase
 export async function purchaseReward({paymentIndex, rewardIndex, addressIndex}) {
+	const base = window.location.pathname // /pro.../:pro...Name/purchase
+
 	const config = {
 		method: 'post',
-		url: `/api/auth/fetch/projects`,
+		url: `/api/auth/fetch${base}`,
 		withCredentials: true,
-		data: body,
+		data: {
+			addressIndex,
+			rewardIndex,
+			paymentIndex,
+		}
+	}
+
+	try {
+		const response = await axios.request(config)
+		return response.data
+	} catch (e) {
+		console.error(e);
+		throw e
 	}
 }
 
