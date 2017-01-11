@@ -13,7 +13,29 @@ const borderStyle = {
 }
 
 class Ranking extends Component {
+	
+	constructor() {
+		super(...arguments);
 
+		this.state = {
+			numProjects: 0,
+			count: 10,
+			windowSize: 20,
+		}
+	}
+	
+	expandList() {
+		this.setState({
+			count: this.state.count + this.state.windowSize,
+		})
+	}
+	
+	componentDidMount() {
+		this.setState({
+			numProjects: this.props.indirectSupporters.length
+		})
+	}
+	
 	render() {
 		const {
 			ranking : {
@@ -136,8 +158,15 @@ class Ranking extends Component {
 					onChange={_onSelectOptionChange} />
 
 				<div className="project-detail-ranking-container">
-					{ rankingDetail }
+					{ rankingDetail.slice(0, this.state.count) }
 				</div>
+				<div>
+					{
+						this.state.numProjects > 1 && this.state.numProjects > this.state.count
+							? <button className="post-more-button" onClick={this.expandList.bind(this)}>더보기</button>
+							: null
+					}	
+				 </div>
 			</div>
 		)
 	}

@@ -39,8 +39,8 @@ export default class C extends Component {
 						</div>
 						<div className="purchase-stage-content-container">
 						<p className="profile-small-title">배송지 추가</p>
-						<div className="profile-setting-postcode-container">
-							<input className="profile-setting-postcode" type="text" id="addressee_name" placeholder="수취인 성명" />
+						<div className="profile-setting-address1-container">
+							<input className="profile-setting-address1" type="text" id="addressee_name" placeholder="받는 분 성함" />
 						</div>
 						<div className="profile-setting-search-address-container">
 							<input className="profile-setting-search-address" type="button" onClick={this._onClickFindAddress} value="주소찾기" />
@@ -59,7 +59,7 @@ export default class C extends Component {
 						<div className="add-address-container">
 							<button className="add-address-button" onClick={this._onClickAddAddress}>추가하기</button>
 						</div>
-						<p className="profile-small-title">기존 배송지</p>
+						<p className="profile-small-title">배송지 선택</p>
 						{
 							addresses.map(({
 								addressee_name,
@@ -68,20 +68,15 @@ export default class C extends Component {
 								address1,
 								address2,
 							}, index) => (
-							<div className={"purchase-reward-select-container" + (selectedAddressIndex === index ? "selected": "" )}>
-								<p>{addressee_name}</p>
-								<button className="purchase-reward-select" onClick={this._onClickAddress(index)}>
-									<p className="purchase-reward-money">{zipcode}</p>
-									<p className="purchase-reward-description">{address1}, {address2}</p>
+							<div className="purchase-reward-select-container">
+								<button className={"purchase-reward-select" + (selectedAddressIndex === index ? "selected": "" )} onClick={this._onClickAddress(index)}>
+									<p className="purchase-reward-money">{zipcode}, {address1}, {address2}</p>
+									<p className="purchase-reward-description">받는 분 : {addressee_name} 님</p>
 								</button>
 							</div>
 							))
 						}
 					</div>
-						<div>
-							<button onClick={goToPreviousStage}>이전</button>
-							<button onClick={goToNextStage}>다음</button>
-						</div>
 						<script
 						      dangerouslySetInnerHTML={{ __html:
 						        `

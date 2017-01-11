@@ -74,7 +74,7 @@ export default class PurchaseContainer extends Component {
 			'',
 			'옵션 및 수량 선택',
 			'배송지 입력',
-			'결제 수단 선택',
+			'결제 카드 선택',
 			'결제 정보 확인',
 			'결제 완료',
 		];

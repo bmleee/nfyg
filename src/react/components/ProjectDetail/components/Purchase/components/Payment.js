@@ -67,19 +67,17 @@ export default class C extends Component {
 									card_number,
 									expiry,
 								}, index) => (
-									<div className={"card-container" + (selectedPaymentIndex === index ? "selected": "" )}>
-										<button className="card-select-button" onClick={this._onClickPayment(index)}>
-											<Card title={card_number}>
-												<p>{card_name}</p>
-												<p className="card-expiry">유효기간 {expiry}</p>
-											</Card>
+									<div className="card-container">
+										<button className={"card-select-button" + (selectedPaymentIndex === index ? "selected": "" )} onClick={this._onClickPayment(index)}>
+												<p className="card-title">[{card_name}] {card_number}</p>
+												<p className="card-expiry">유효기간 : {expiry}</p>
 											<button className="card-delete">삭 제</button>
 										</button>
 									</div>
 								))
 							}
 						<div className="card-add-container">
-							<input className="card-add" type="button" value="새로운 카드 추가하기" onClick={() => this.openModal()} />
+							<button className="card-add" onClick={() => this.openModal()}>새로운 카드 추가하기</button>
 						</div>
 					</div>
 					<Modal className="card-add-modal" visible={this.state.visible} width="420" height="460px" effect="fadeInDown" onClickAway={() => this.closeModal()}>

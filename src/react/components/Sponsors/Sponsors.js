@@ -35,9 +35,9 @@ class Sponsors extends Component {
 			}) => (
 				<div className="sponsor-list-item">
 					<div className="sponsor-thumbnail">
-					<div className="sponsor-centered">
-					<img className="sponsor-logo-image" src={imgSrc} alt=""/>
-					</div>
+						<div className="sponsor-centered">
+							<img className="sponsor-logo-image" src={imgSrc} alt=""/>
+						</div>
 						<div className="sponsor-money-container">
 							<p className="sponsor-money">
 							{

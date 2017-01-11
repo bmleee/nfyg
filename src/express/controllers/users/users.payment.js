@@ -18,7 +18,11 @@ router.get('/', isLoggedIn, async (req, res) => {
 		return res.json({
 			user: renderUser.authorizedUser(req.session.user),
 			data: {
-				payments: await Promise.all(payments.map(x => x.toJSON()))
+				payments: await Promise.all(payments.map(x => ({
+					card_name: x.card_name,
+					card_number: x.card_number.split('-')[3],
+					expiry: x.expiry,
+				})))
 			}
 		})
 	} catch (e) {

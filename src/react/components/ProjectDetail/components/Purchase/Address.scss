@@ -1,21 +1,26 @@
 .add-address-container {
-	margin: 25px auto 20px auto;
-	width : 20%;
-	@media (max-width : 500px) {
-	    width : 100%;
-	}
-	.add-address-button {
+	text-align: center;
+    margin: 25px 0 20px;
+	.add-address-button, .add-address-button:focus {
+		width : 50%;
+		height : 36px;
 		border : none;
 		outline : none;
+		border-radius : 3px !important;
 		background : #4b709a;
 		color : #fff;
-		height : 32px;
-		width : 100%;
 		font-weight : 600;
+		@media (max-width : 500px) {
+		width : 100%;
+		}
+	}
+	.add-address-button:hover {
+		background : #354c67;
 	}
 	.add-address-button:before {
 	    font-family : Ionicons;
 	    content : "\f218";
-	    margin-right : 8px;
+	    margin-right : 6px;
+	    font-size : 13px;
 	}
 }

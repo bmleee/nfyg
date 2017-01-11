@@ -5,6 +5,9 @@
 	@media (max-width : 500px) {
             padding : 4px 8px;
     }
+    .profile-setting-postcode-container {
+    	padding : 6px 0px 0px 0px;
+    }
 }
 .purchase-reward-select-container {
 	padding : 8px 0px;
@@ -12,17 +15,21 @@
             padding : 4px 0px;
     }
 }
-.purchase-reward-select {
+.purchase-reward-select, .purchase-reward-select:focus {
 	width : 100%;
-	height : 120px;
 	background : #fff;
 	border-radius : 3px;
 	border : 1px solid #eee;
 	outline : none;
+	padding : 35px 10px;
 }
-.purchase-reward-select:focus {
-	border : 2px solid #4b709a;
+.purchase-reward-selectselected, .purchase-reward-selectselected:focus {
+	width : 100%;
+	background : #fff;
 	border-radius : 3px;
+	border : 2px solid #4b709a;
+	outline : none;
+	padding : 35px 10px;
 }
 .purchase-reward-title {
 	font-size : 18px !important;
@@ -38,4 +45,37 @@
 	font-size : 16px !important;
 	font-weight : 600 !important;
 	color : #333;
+}
+.purchase-reward-num-container {
+	display :inline-block;
+	width : 50%;
+	@media (max-width : 500px) {
+            width : 100%;
+			margin-bottom : 20px;
+    }
+	.purchase-reward-num {
+		border : 1px solid #bbb;
+		border-radius : 3px;
+		outline : none;
+		width : 50%;
+		height : 32px;
+		padding : 0px 8px;
+		font-weight : 600 !important;
+		color : #333;
+	}
+	.purchase-reward-num:focus {
+		border-color : #4b709a;
+	}
+}
+.purchase-reward-summoney-container {
+	display :inline-block;
+	width : 50%;
+	margin-bottom : 10px;
+	@media (max-width : 500px) {
+            width : 100%;
+    }
+	.purchase-reward-money {
+		width : 100%;
+		line-height : 32px;
+	}
 }

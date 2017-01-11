@@ -48,15 +48,16 @@ export default class C extends Component {
 						<div className="purchase-stage-text-last">결제 완료</div>
 					</div>
 					<div className="purchase-stage-content-container">
-					<div>배송료: {shippingFee.toLocaleString()}원</div>
+					<p className="profile-small-title">옵션 선택</p>
+					{/* <div>배송료: {shippingFee.toLocaleString()}원</div> */}
 					{
 						rewards.filter(r => r.isDirectSupport).map(({
 							title,
 							description,
 							thresholdMoney,
 						}, index) => (
-							<div className={"purchase-reward-select-container" + (selectedRewardIndex === index ? "selected": "" )}>
-								<button className="purchase-reward-select" onClick={this._onClickReward(index)}>
+							<div className="purchase-reward-select-container">
+								<button className={"purchase-reward-select" + (selectedRewardIndex === index ? "selected": "" )} onClick={this._onClickReward(index)}>
 									<p className="purchase-reward-title">{title}</p>
 									<p className="purchase-reward-description">{description}</p>
 									<p className="purchase-reward-money">{thresholdMoney.toLocaleString()}원</p>
@@ -64,6 +65,14 @@ export default class C extends Component {
 							</div>
 						))
 					}
+					<div className="purchase-reward-num-container">
+						<p className="profile-small-title">수량 선택</p>
+						<input className="purchase-reward-num" type="number" defaultValue="1" min="1" max="100"/>
+					</div>
+					<div className="purchase-reward-summoney-container">
+						<p className="profile-small-title">금 액</p>
+						<p className="purchase-reward-money">1,000,000원</p>
+					</div>
 					</div>
 					<div className="purchase-stage-move-container">
 						<button className="purchase-stage-prev-button" onClick={goToPreviousStage}>이전 단계</button>

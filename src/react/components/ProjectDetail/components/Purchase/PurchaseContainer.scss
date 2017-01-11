@@ -15,6 +15,9 @@
 }
 .purchase-stage-text-container {
     margin-bottom : 20px;
+    @media (max-width : 500px) {
+            text-align : center;
+    }
     
 .purchase-stage-text-highlight {
 	display : inline-block;
@@ -23,7 +26,8 @@
 	color : #4b709a;
 	margin-right : 8px;
 	@media (max-width : 500px) {
-            display : none;
+            font-size : 8px;
+            margin-right : 5px;
     }
 }
 .purchase-stage-text, .purchase-stage-text-last {
@@ -31,7 +35,8 @@
 	font-size : 13px;
 	margin-right : 8px;
 	@media (max-width : 500px) {
-            display : none;
+            font-size : 8px;
+            margin-right : 5px;
     }
 }
 .purchase-stage-text-last-highlight {
@@ -41,7 +46,8 @@
 	color : #4b709a;
 	margin-right : 8px;
 	@media (max-width : 500px) {
-            display : none;
+            font-size : 8px;
+            margin-right : 5px;
     }
 }
 .purchase-stage-text-highlight:after, .purchase-stage-text:after {
@@ -50,7 +56,8 @@
 	font-size : 12px;
 	margin-left : 5px;
 	@media (max-width : 500px) {
-            display : none;
+            font-size : 7px;
+            margin-left : 4px;
     }
 }
 }
@@ -75,7 +82,7 @@
     font-family : Ionicons;
 	content : "\f3d2";
 	margin-right : 5px;
-	font-size : 10px;
+	font-size : 11px;
 	vertical-align : text-bottom;
 }
 .purchase-stage-next-button, .purchase-stage-next-button:focus {
@@ -95,7 +102,7 @@
     font-family : Ionicons;
 	content : "\f3d3";
 	margin-left : 5px;
-	font-size : 10px;
+	font-size : 11px;
 	vertical-align : text-bottom;
 }
 

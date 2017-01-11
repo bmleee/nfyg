@@ -43,9 +43,32 @@
 	border : 1px solid #eee;
 	outline : none;
 }
-.card-select-button:focus {
+.card-select-buttonselected, .card-select-buttonselected:focus {
+	height : 100px;
+	width : 100%;
+	padding : 0px !important;
+	background : #fff;
 	border-radius : 5px;
 	border : 2px solid #4b709a;
+	outline : none;
+}
+.card-title {
+	font-size : 15px !important;
+	font-weight : 600 !important;
+	color : #333;
+	display : inline-block;
+}
+.card-name {
+		font-size : 11px !important;
+		font-weight : 600 !important;
+		color : #fff;
+		width : auto;
+		padding : 0px 4px;
+		height : 22px;
+		line-height : 20px;
+		background : #4b709a;
+		border-radius : 2px;
+		display : inline-block;
 }
 .card-expiry {
 	font-size : 12px !important;
@@ -92,6 +115,12 @@
 }
 .card-add:hover {
 	background : #354c67;
+}
+.card-add:before {
+	font-family : Ionicons;
+	content : "\f218";
+	margin-right : 6px;
+	font-size : 13px;
 }
 
 .card-add-modal-container {
