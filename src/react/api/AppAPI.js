@@ -8,6 +8,16 @@ const API_HEADERS = {
 	'Content-Type': 'application/json',
 }
 
+const _request = async (config) => {
+	try {
+		const response = await axios.request(config)
+		return response.data
+	} catch (e) {
+		console.error(e, config);
+		return {error: e}
+	}
+}
+
 export async function fetchJSONFile(fileName) {
 	try {
 		const res = await fetch(`${API_URL}/read/${fileName}`, { headers: API_HEADERS })
@@ -98,13 +108,7 @@ export async function upsertProject(body) {
 		data: body,
 	}
 
-	try {
-		const response = await axios.request(config)
-		return response.data
-	} catch (e) {
-		console.error(e);
-		throw e
-	}
+	return await _request(config)
 }
 
 export async function upsertProduct(body) {
@@ -115,13 +119,7 @@ export async function upsertProduct(body) {
 		data: body,
 	}
 
-	try {
-		const response = await axios.request(config)
-		return response.data
-	} catch (e) {
-		console.error(e);
-		throw e
-	}
+	return await _request(config)
 }
 
 export async function fetchPurchaseInfo(param) {
@@ -140,14 +138,7 @@ export async function fetchPurchaseInfo(param) {
 		withCredentials: true,
 	}
 
-	try {
-		const response = await axios.request(config)
-		console.log('fetchPurchaseInfo', param, response.data);
-		return response.data
-	} catch (e) {
-		console.error(e);
-		throw e
-	}
+	return await _request(config)
 }
 
 // called /p/:pName/purchase
@@ -165,13 +156,7 @@ export async function purchaseReward({paymentIndex, rewardIndex, addressIndex}) 
 		}
 	}
 
-	try {
-		const response = await axios.request(config)
-		return response.data
-	} catch (e) {
-		console.error(e);
-		throw e
-	}
+	return await _request(config)
 }
 
 export async function createAddress(address) {
@@ -182,13 +167,7 @@ export async function createAddress(address) {
 		data: address,
 	}
 
-	try {
-		const response = await axios.request(config)
-		return response.data
-	} catch (e) {
-		console.error(e);
-		throw e
-	}
+	return await _request(config)
 }
 
 export async function createPayment(payment) {
@@ -199,11 +178,32 @@ export async function createPayment(payment) {
 		data: payment,
 	}
 
-	try {
-		const response = await axios.request(config)
-		return response.data
-	} catch (e) {
-		console.error(e);
-		throw e
+	return await _request(config)
+}
+
+export async function createQnA({title = 'empty-title', text, projectName, productName}) {
+	let base;
+
+	if (projectName) base = `projects/${projectName}`
+	else if (productName) base = `products/${productName}`
+
+	const config = {
+		method: 'post',
+		url: `/api/auth/fetch/${base}/qna`,
+		withCredentials: true,
+		data: { title, text },
 	}
+
+	return await _request(config)
+}
+
+export async function createCommentOnQnA({text, qna_id}) {
+	const config = {
+		method: 'post',
+		url: `/api/auth/fetch/qna/${qna_id}/comment`,
+		withCredentials: true,
+		data: { text, qna_id },
+	}
+
+	return await _request(config)
 }

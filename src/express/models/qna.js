@@ -33,6 +33,7 @@ let QnASchema = new Schema({
 			iconSrc: {type: String, required: true},
 			user: {type: Schema.Types.ObjectId, ref: 'User', required: true}, // used when check edit authority
 		},
+		created_at: {type: Date, default: Date.now()},
 		text: {type: String, required: true},
 		likes: [{type: Schema.Types.ObjectId, ref: 'User'}],
 		// numLikes: {type: Number, default: 0}, // TODO: be virtual field
@@ -99,6 +100,7 @@ QnASchema.methods.toFormat = function (type, ...args) {
 		case 'exhibition_detail':
 			return {
 				opened: true, // always true!
+				_id: this._id,
 				author: this.author,
 				title: this.abstract.title,
 				created_at: this.abstract.created_at,

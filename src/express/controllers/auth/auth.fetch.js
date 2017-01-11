@@ -26,6 +26,8 @@ import ExhibitionRouter from './auth.fetch.exhibition'
 import MagazineRouter from './auth.fetch.magazine'
 import SponsorRouter from './auth.fetch.sponsor'
 
+import QnARouter from './auth.fetch.qna'
+
 import OptionRouter from './auth.fetch.option'
 import EditorRouter from './auth.fetch.editor'
 
@@ -43,6 +45,8 @@ router.use('/magazines', MagazineRouter);
 router.use('/sponsors', SponsorRouter);
 router.use('/options', OptionRouter);
 router.use('/', EditorRouter);
+
+router.use('/qna', QnARouter);
 
 
 /**
