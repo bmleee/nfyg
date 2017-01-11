@@ -65,51 +65,50 @@ class QnA extends Component {
 		}, index) => (
 			<div className="project-detail-qna-item" key={index}>
 					<div className="qna-item-container">
-					<p className="sharing-fb-icon-list">
-					<img className="qna-form-user-icon" src={author.iconSrc} alt="" width={80} height={80}/>
-					</p>
-					<p className="sharing-summary">
-					<span><p className="sharing-name">{author.name}</p>{date2string(created_at)}</span>
-					<span className="qna-detail-text">{text}</span>
+						<p className="sharing-fb-icon-list">
+							<img className="qna-form-user-icon" src={author.iconSrc} alt="" width={80} height={80}/>
+						</p>
+						<p className="sharing-summary">
+							<span><p className="sharing-name">{author.name}</p>{date2string(created_at)}</span>
+							<span className="qna-detail-text">{text}</span>
 
-					{/* 대댓글 */}
-						<div className="qna-item-container">
-							{
-								comments.map(({
-									author,
-									title,
-									text,
-									created_at,
-								}, index) => (
-									// div 로 한번 더 감쌌어요!
-									<div>
-										<p className="sharing-fb-icon-list">
-											<img className="qna-form-user-icon" src={author.iconSrc} alt="" width={80} height={80}/>
-										</p>
-										<p className="sharing-summary">
-											<span><p className="sharing-name">{author.name}</p>{date2string(created_at)}</span>
-											<span>{text}</span>
-										</p>
-									</div>
-								))
-							}
+							{/* 대댓글 */}
+							<div className="qna-item-container">
+								{
+									comments.map(({
+										author,
+										title,
+										text,
+										created_at,
+									}, index) => (
+										// div 로 한번 더 감쌌어요!
+										<div>
+											<p className="sharing-fb-icon-list">
+												<img className="qna-form-user-icon" src={author.iconSrc} alt="" width={80} height={80}/>
+											</p>
+											<p className="sharing-summary">
+												<span><p className="sharing-name">{author.name}</p>{date2string(created_at)}</span>
+												<span>{text}</span>
+											</p>
+										</div>
+									))
+								}
+							</div>
 
-						</div>
+							<Collapsible trigger="댓글 남기기" transitionTime="0">
+							<div className="project-detail-qna-form">
+								<div className="qna-form-textarea-container">
+								{/* <img className="qna-form-user-icon" src="/assets/images/user_default.png" alt="" width={80} height={80} /> */}
+									<textarea className="qna-form-textarea" cols="30" rows="4" id={`qna_${index}_comment`} placeholder=""></textarea>
+								</div>
+								<div className="qna-form-submit-container">
+									<button className="qna-form-submit" onClick={this._onClickAddQnAComment(index, _id)}>댓글 남기기</button>
+								</div>
+							</div>
+							</Collapsible>
+							{/* 대댓글 */}
 
-					<Collapsible trigger="댓글 남기기" transitionTime="0">
-					<div className="project-detail-qna-form">
-						<div className="qna-form-textarea-container">
-						{/* <img className="qna-form-user-icon" src="/assets/images/user_default.png" alt="" width={80} height={80} /> */}
-							<textarea className="qna-form-textarea" cols="30" rows="4" id={`qna_${index}_comment`} placeholder=""></textarea>
-						</div>
-						<div className="qna-form-submit-container">
-							<button className="qna-form-submit" onClick={this._onClickAddQnAComment(index, _id)}>댓글 남기기</button>
-						</div>
-					</div>
-					</Collapsible>
-					{/* 대댓글 */}
-
-					</p>
+						</p>
 					</div>
 			</div>
 		))
