@@ -2,6 +2,9 @@
 import mongoose from 'mongoose'
 import crypto from 'crypto'
 import { autoIncrement } from '../lib/db'
+import PurchaseModel from './purchase'
+
+import FacebookTracker from '../../lib/FacebookTracker'
 
 export const access_levels = [0, 1, 10, 100]
 
@@ -159,6 +162,21 @@ UserSchema.methods.toFormat = async function(type, ...args) {
 			return {}
 	}
 }
+
+UserSchema.methods.supportedMoney = async function({projectName, productName}) {
+	let [
+		purchases,
+		shares
+	] = await Promise.all([
+		PurchaseModel.findByUser(user),
+		FacebookTracker.getUserSummaryOnProject(user.id, projectName || productName),
+	])
+
+	const sum = (a, b) => a + b
+
+	return purchases.map(p => p.purchase_info.amount).reduce(sum) +
+		shares.map(s => 1000 + 200 * (s.comments + s.shares + s.likes)).reduce(sum)
+};
 
 UserSchema.plugin(autoIncrement.plugin, { model: 'User', field: 'id' });
 

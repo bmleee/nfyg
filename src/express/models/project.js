@@ -161,8 +161,8 @@ ProjectSchema.methods.toFormat = async function (type, ...args) {
 			case 'project_detail':
 				let user = args[0];
 				let canEdit = args[1];
-				let money = canEdit ? 0 : this.getMoneyByUser(user);
-				let posts = this.posts.map(async (p) => await p.toFormat('project_detail', ac.canEdit(user, this), money))
+				let money = canEdit ? 0 : await user.supportedMoney({projectName: this.abstract.projectName});
+				let posts = this.posts.map(p => p.toFormat('project_detail', ac.canEdit(user, this), money))
 				let qnas = this.qnas.map(q => q.toFormat('project_detail'))
 				let {
 					likes, shares, comments, num_useres, num_posts,
@@ -238,20 +238,6 @@ ProjectSchema.methods.toFormat = async function (type, ...args) {
 	}
 }
 
-ProjectSchema.methods.getMoneyByUser = async function (user) {
-	let [
-		purchases,
-		shares
-	] = await Promise.all([
-		PurchaseModel.findByUser(user),
-		FacebookTracker.getUserSummaryOnProject(user.id),
-	])
-
-	const sum = (a, b) => a + b
-
-	return purchases.map(p => p.purchase_info.amount).reduce(sum) +
-		shares.map(s => 1000 + 200 * (s.comments + s.shares + s.likes)).reduce(sum)
-}
 
 ProjectSchema.methods.pushPost = async function (post_id) {
 	try {

@@ -91,7 +91,7 @@ PostSchema.set('toJSON', {
 	virtuals: true
 });
 
-PostSchema.methods.toFormat = async function (type, ...args) {
+PostSchema.methods.toFormat = function (type, ...args) {
 	switch (type) {
 		case 'project_detail':
 		case 'product_detail':
