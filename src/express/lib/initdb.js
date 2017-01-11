@@ -63,7 +63,7 @@ async function main() {
 		console.log(`${((t2 = Date.now()) - t1) / 1000}sec`);
 
 		await test()
-		process.exit(-1)
+		process.exit(0)
 
 		// await process.exit(0)
 	} catch (e) {

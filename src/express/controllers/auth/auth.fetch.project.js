@@ -23,6 +23,8 @@ import AddressModel from '../../models/address'
 import PurchaseModel from '../../models/purchase'
 import PaymentModel from '../../models/payment'
 
+import * as mh from '../../lib/modelHelper'
+
 import * as ac from '../../lib/auth-check'
 import isLoggedIn from '../../lib/login-check'
 import * as renderHelper from '../../lib/renderHelper'
@@ -54,7 +56,11 @@ router.get('/:projectName/:option?/:tab?', async (req, res, next) => {
 
 	try {
 		const project = await ProjectModel.findByName(projectName)
-			.populate('sponsor posts qnas')
+			.populate('sponsor')
+			.populate({path: 'posts', options: { sort: {  'abstract.created_at': -1 } }})
+			.populate({path: 'qnas', options: { sort: {  'abstract.created_at': -1 } }})
+
+
 
 		if (!project) throw new Error(`no such project in name of ${projectName}`)
 
@@ -189,6 +195,31 @@ router.post('/', async (req, res) => {
 		console.error(e);
 		res.status(400).json({
 			response: e
+		})
+	}
+})
+
+router.post('/:projectName/qna', isLoggedIn, async (req, res) => {
+	console.log('POST /proj/qna');
+	try {
+		let user = req.session.user
+		let projectName = req.params.projectName
+
+		let {
+			title = 'empty-title',
+			text,
+		} = req.body
+
+		let project = await ProjectModel.findOne({'abstract.projectName': projectName})
+		let qna = await mh.createQnA({title, text, project, user})
+		console.log('qna!', qna);
+		res.json({
+			response: qna
+		})
+	} catch (e) {
+		console.error(e);
+		res.status(400).json({
+			error: e
 		})
 	}
 })
