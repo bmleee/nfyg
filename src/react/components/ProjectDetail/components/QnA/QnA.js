@@ -117,12 +117,12 @@ class QnA extends Component {
 			<div className="project-detail-qna">
 				<div className="project-detail-qna-form">
 					<div className="qna-form-textarea-container">
-					<img className="qna-form-user-icon" src="/assets/images/user_default.png" alt="" width={80} height={80} />
-					<textarea className="qna-form-textarea" name="" id="qna_text" cols="30" rows="4" placeholder="후원자 분들만 댓글을 남길 수 있습니다."></textarea>
+						<img className="qna-form-user-icon" src="/assets/images/user_default.png" alt="" width={80} height={80} />
+						<textarea className="qna-form-textarea" name="" id="qna_text" cols="30" rows="4" placeholder="후원자 분들만 댓글을 남길 수 있습니다."></textarea>
 					</div>
 					<div className="qna-form-submit-container">
-					<p className="qna-form-submit-empty"/>
-					<button className="qna-form-submit" onClick={this._onClickAddQnA}>댓글 남기기</button>
+						<p className="qna-form-submit-empty"/>
+						<button className="qna-form-submit" onClick={this._onClickAddQnA}>댓글 남기기</button>
 					</div>
 				</div>
 				<div>
