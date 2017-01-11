@@ -76,7 +76,7 @@ export default class C extends Component {
 							</div>
 							))
 						}
-					</div>
+						</div>
 						<script
 						      dangerouslySetInnerHTML={{ __html:
 						        `

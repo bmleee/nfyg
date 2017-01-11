@@ -51,11 +51,12 @@ export default class C extends Component {
 					<p className="profile-small-title">옵션 선택</p>
 					{/* <div>배송료: {shippingFee.toLocaleString()}원</div> */}
 					{
-						rewards.filter(r => r.isDirectSupport).map(({
+						rewards.map(({
+							isDirectSupport,
 							title,
 							description,
 							thresholdMoney,
-						}, index) => (
+						}, index) => !isDirectSupport ? null : (
 							<div className="purchase-reward-select-container">
 								<button className={"purchase-reward-select" + (selectedRewardIndex === index ? "selected": "" )} onClick={this._onClickReward(index)}>
 									<p className="purchase-reward-title">{title}</p>

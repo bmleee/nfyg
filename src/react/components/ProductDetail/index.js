@@ -10,7 +10,7 @@ const selectOptions = [
     },
     {
       value: "likes",
-      label: "좋아요순"
+      label: "금액순"
     }
 ]
 
