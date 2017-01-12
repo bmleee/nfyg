@@ -82,6 +82,7 @@ export default class SevenEditor extends Component {
 						// toolbarClassName="home-toolbar"
 						// wrapperClassName="home-wrapper"
 						// editorClassName="home-editor"
+						ref={i => this.editor = i}
 						uploadCallback={uploadImageCallBack}
 						editorState={this.state.editorState}
 						onEditorStateChange={this.onChange}
