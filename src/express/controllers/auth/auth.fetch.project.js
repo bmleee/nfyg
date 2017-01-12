@@ -41,6 +41,9 @@ const router = express.Router();
  * @type {[type]}
  */
 router.get('/:projectName/:option?/:tab?', async (req, res, next) => {
+	const user_id = req.session.user && req.session.user._id
+	const user = await UserModel.findOne({_id: user_id});
+
 	const {
 		projectName,
 		option,
@@ -57,19 +60,16 @@ router.get('/:projectName/:option?/:tab?', async (req, res, next) => {
 	try {
 		const project = await ProjectModel.findByName(projectName)
 			.populate('sponsor')
-			.populate({path: 'posts', options: { sort: {  'abstract.created_at': -1 } }})
-			.populate({path: 'qnas', options: { sort: {  'abstract.created_at': -1 } }})
-
-
+			.populate({ path: 'posts', options: { sort: {  'abstract.created_at': -1 } } })
+			.populate({ path: 'qnas', options: { sort: {  'abstract.created_at': -1 } } })
 
 		if (!project) throw new Error(`no such project in name of ${projectName}`)
 
-		const projectToRender = await project.toFormat('project_detail', req.session.user)
-
-		// console.log('projectToRender', JSON.stringify(projectToRender, undefined, 4));
+		const canEdit = ac.canEdit(user, project)
+		const projectToRender = await project.toFormat('project_detail', user, canEdit)
 
 		res.status(200).json({
-			user: renderUser.authorizedUser(req.session.user),
+			user: renderUser.authorizedUser(user, canEdit),
 			data: {
 				project: projectToRender
 			}

@@ -37,17 +37,45 @@ class FacebookTracker {
   }
 
   // TODO: correct response on tracker side
-  getUserSummary = async (user_app_scope_id) => {
+  // returns { shares, comments, likes, project_names: [ String ], }
+  getUserSummary = async (user_no) => {
+    user_no = 160 // TODO: deactivate this!
     return await this._request({
-      url: `/users/${user_name}/summary`
+      url: `/users/${user_no}/summary`
     })
   }
 
+  // returns { shares, comments, likes, posts: [...]}
+  getUserSummaryOnProject = async (user_no, projectName) => {
+    user_no = 160 // TODO: deactivate this!
+    return await this._request({
+      url: `/users/${user_no}/summary/${projectName}`
+    })
+  }
+
+  // first draft
   postUserLogin = async ({user_id, access_token, expired_in}) => {
     return await this._request({
-      user_id,
-      access_token,
-      expired_in
+      method: 'post',
+      url: `/users/login`,
+      data: {
+        user_id,
+        access_token,
+        expired_in
+      }
+    })
+  }
+
+  // first draft
+  postUserShareProject = async ({}) => {
+    return await this._request({
+      method: 'post',
+      url: `/users/share`,
+      data: {
+        user_id,
+        access_token,
+        expired_in
+      }
     })
   }
 }

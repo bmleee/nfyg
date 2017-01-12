@@ -5,6 +5,8 @@ import UserModel from './user'
 import ProjectModel from './project'
 import ProductModel from './product'
 
+import * as ac from '../lib/auth-check'
+
 const Schema = mongoose.Schema;
 
 
@@ -38,8 +40,18 @@ let PostSchema = new Schema({
 		likes: [{type: Schema.Types.ObjectId, ref: 'User'}],
 		// numLikes: {type: Number, default: 0}, // TODO: be virtual field
 	}],
-	numComments: {type: Number, default: 0}, // not to be virtual field. can be virtual...
+	// numComments: {type: Number, default: 0}, // not to be virtual field. can be virtual...
 });
+
+PostSchema.virtual('abstract.numLikes').get(function () {
+	return this.abstract.likes.length
+})
+PostSchema.virtual('comments.numLikes').get(function () {
+	return this.comments.likes.length
+})
+PostSchema.virtual('numComments').get(function () {
+	return this.comments.length
+})
 
 
 PostSchema.pre('validate', function (next) {
@@ -79,21 +91,23 @@ PostSchema.set('toJSON', {
 	virtuals: true
 });
 
-PostSchema.methods.toFormat = function (type, ...args) {
+PostSchema.methods.toFormat = async function (type, ...args) {
 	switch (type) {
 		case 'project_detail':
 		case 'product_detail':
-			let user = args[0];
+			let canEdit = args[0];
+			let money = args[1];
+
 			// get user's support money
 			return {
-				opened: true, // TODO: according to user's support money
+				opened: canEdit || this.thresholdMoney < money, // TODO: according to user's support money
 				author: this.author,
 				title: this.abstract.title,
 				created_at: this.abstract.created_at,
 				numSupporters: 10, // TODO: [Definition] what is support of this post?????
 				likes: this.abstract.numLikes,
-				content: this.content,
-				comments: this.comments,
+				content: canEdit && this.content,
+				comments: canEdit && this.comments,
 				numComments: this.numComments, // TODO: apply react.post
 			}
 		default:

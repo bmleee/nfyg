@@ -1,14 +1,16 @@
 
-export function unauthorizedUser(user) {
+export function unauthorizedUser(user, canEdit = false) {
 	return {
 		isLoggedIn: !!user,
-		isAuthorized: false
+		isAuthorized: false,
+		canEdit: canEdit,
 	}
 }
 
-export function authorizedUser(user) {
+export function authorizedUser(user, canEdit = false) {
 	return {
 		isLoggedIn: !!user,
-		isAuthorized: true
+		isAuthorized: true,
+		canEdit: canEdit,
 	}
 }

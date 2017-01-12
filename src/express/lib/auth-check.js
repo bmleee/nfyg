@@ -45,17 +45,18 @@ export function canEdit (user, target) {
 
 	return false
 }
+
 // Define the Passport configuration method
 export default function(passport) {
 	// Use Passport's 'serializeUser' method to serialize the user id
 	passport.serializeUser(function(user, done) {
-		console.log('serializeUser.user', user);
+		// console.log('serializeUser.user', user);
 		done(null, user.id);
 	});
 
 	// Use Passport's 'deserializeUser' method to load the user document
 	passport.deserializeUser(function(id, done) {
-		console.log('deserializeUser.id', id);
+		// console.log('deserializeUser.id', id);
 		User.findOne({
 			id: id
 		}, '-password -salt', function(err, user) {
@@ -70,9 +71,9 @@ export default function(passport) {
 
 export function localAuthenticate(req, res) {
 	return passport.authenticate('local', function (err, user, info) {
-		console.log('err', err);
-		console.log('user', user);
-		console.log('info', info);
+		// console.log('err', err);
+		// console.log('user', user);
+		// console.log('info', info);
 
 		if (err || !user) {
 			console.error('localAuthenticate fails', err, info)
