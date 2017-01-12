@@ -71,14 +71,14 @@ module.exports = {
 			// from react-rte/webpack.config.js
 			{
 				test: /\.css$/,
-				exclude: /(\.global|plugin)\.css$/,
+				exclude: /(\.global|plugin)|(react-draft-wysiwyg)\.css$/,
 				loaders: [
 					'isomorphic-style-loader?sourceMap',
 					// 'style-loader?sourceMap',
 					'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
 				],
 			},
-			{ test: /\.global\.css$/, loader: 'isomorphic-style-loader!raw' },
+			{ test: /(\.global)|(react-draft-wysiwyg)\.css$/, loader: 'isomorphic-style-loader!raw' },
 			// from draft-js plugins
 			{
 				test: /plugin\.css$/,
@@ -93,7 +93,7 @@ module.exports = {
 			},
 			{ test: /\.svg$/, loader: 'babel!react-svg' },
 			// react-notifications
-			{ test: /\.(png|woff(2)?|eot|ttf)(\?[a-z0-9=.]+)?$/, loader: 'url-loader?limit=100000' },
+			{ test: /\.(png|woff(2)?|eot|ttf|gif|jpg|jpeg)(\?[a-z0-9=.]+)?$/, loader: 'url-loader?limit=100000' },
 			{ test: /\.svg\?[a-z0-9=.]+$/, loader: 'url-loader?limit=100000' },
 		]
 	},
