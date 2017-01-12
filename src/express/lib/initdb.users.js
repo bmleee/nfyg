@@ -78,7 +78,7 @@ const initAddress = async () => {
 	await Promise.all(users.map(async (user) => {
 		await AddressModel.create({
 			user,
-			addressee_name: '!@#',
+			addressee_name: randomString(),
 			zipcode: randomString(),
 			address1: randomString(),
 			address2: randomString(),
