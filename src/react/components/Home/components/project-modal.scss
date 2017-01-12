@@ -95,10 +95,12 @@
 .project-modal-body-small-title {
     font-weight : 600 !important;
     color : #666;
+    text-align : left;
 }
 .project-modal-body-small-title:first-child {
     width : 38%;
     display : inline-block;
+    text-align : left;
     .project-modal-body-input-text {
         width : 98%;
     }
@@ -106,6 +108,7 @@
 .project-modal-body-small-title:nth-child(2) {
     width : 62%;
     display : inline-block;
+    text-align : left;
 }
 .project-modal-body-input-text {
     width : 100%;
