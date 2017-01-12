@@ -118,19 +118,17 @@ export class Viewer extends Component {
 			editorState = EditorState.createWithContent(convertFromRaw(raw));
 		} catch (e) {
 			console.error(e)
-			editorState = createEditorStateWithText('');
+			editorState = EditorState.createEmpty()
 		}
-
-
 
 		return (
 			<div className={editorStyles.viewerWrapper}>
 				<div className={editorStyles.viewer}>
 					<Editor
+						toolbarClassName={editorStyles.viwerToolbar}
 						editorState={editorState}
 						onChange={() => {}}
 						readOnly={true}
-						plugins={plugins}
 					/>
 				</div>
 			</div>

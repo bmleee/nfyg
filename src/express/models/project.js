@@ -161,7 +161,7 @@ ProjectSchema.methods.toFormat = async function (type, ...args) {
 			case 'project_detail':
 				let user = args[0];
 				let canEdit = args[1];
-				let money = canEdit ? 0 : await user.supportedMoney({projectName: this.abstract.projectName});
+				let money = canEdit || !user ? 0 :  await user.supportedMoney({projectName: this.abstract.projectName});
 				let posts = this.posts.map(p => p.toFormat('project_detail', ac.canEdit(user, this), money))
 				let qnas = this.qnas.map(q => q.toFormat('project_detail'))
 				let {
