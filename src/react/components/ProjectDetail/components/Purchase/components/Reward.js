@@ -76,7 +76,7 @@ export default class C extends Component {
 					</div>
 					</div>
 					<div className="purchase-stage-move-container">
-						<button className="purchase-stage-prev-button" onClick={goToPreviousStage}>이전 단계</button>
+						{/* <button className="purchase-stage-prev-button" onClick={goToPreviousStage}>이전 단계</button> */}
 						<button className="purchase-stage-next-button" onClick={goToNextStage}>배송지 입력</button>
 					</div>
 				</div>

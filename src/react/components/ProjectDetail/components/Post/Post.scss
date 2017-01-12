@@ -94,3 +94,26 @@
 		}
 	}
 }
+
+.upate-post-textarea {
+	width : 100%;
+	max-width : 100%;
+	min-width : 100%;
+	border-radius : 3px;
+	height : 300px;
+}
+.update-post-modal-button, .update-post-modal-button:focus {
+	padding : 7px 15px;
+	background : #4b709a;
+	border-radius : 3px;
+	border : none;
+	outline : none;
+	color : #fff;
+	font-weight : 600;
+	float : right;
+}
+.update-post-modal-button:before {
+	font-family : Ionicons;
+	content : "\f12c";
+	margin-right : 5px;
+}

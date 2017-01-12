@@ -152,7 +152,6 @@ const Funding = ({
 				onSubmit={_onShippingFeeSubmit}
 				Wrapper={ShippingFeeWrapper}
 				Form={ShippingFeeForm}
-				className ="exhibition-long-title"
 				classNameopen ="editor-open-container"
 			/>
 

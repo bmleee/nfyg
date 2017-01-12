@@ -27,7 +27,7 @@ const Part1Form = ({value, onChange}) => (
 	</div>
 )
 const Part2Wrapper = ({value}) => (
-	<span>리워드 다음에 보여질 문구를 입력하세요</span>
+	<span></span>
 )
 const Part2Form = ({value, onChange}) => (
 	<div>
@@ -76,19 +76,22 @@ const Overview = ({
 				onSubmit={_onPart1Submit}
 				Wrapper={Part1Wrapper}
 				Form={Part1Form}
-				className ="magazine-editor-detail"
+				className ="exhibition-long-title"
 				classNameopen ="editor-open-container"
 			/>
 
-			{/* <FormWrapper
-				title="Overview Part2"
+			<FormWrapper
+				title="프로젝트 내용(Part.2)"
 				valueType={VALUE_TYPE.RICH_TEXT}
 				initialValue={part2}
-				submitCaption="입력하기"
+				submitCaption="리워드 다음에 보여질 내용을 입력하세요"
+				submitCaptionsub={'입력하기'}
 				onSubmit={_onPart2Submit}
 				Wrapper={Part2Wrapper}
 				Form={Part2Form}
-			/> */}
+				className ="exhibition-eng-title"
+				classNameopen ="editor-open-container"
+			/>
 		</div>
 	)
 }

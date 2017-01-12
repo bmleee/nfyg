@@ -119,7 +119,7 @@ class Ranking extends Component {
 				    <ReadMore lines={1} onShowMore={this.props.onChange} text="더보기">
                 		{message}
             		</ReadMore>
-				    <span><p className="sharing-money">{money.toLocaleString()}원</p>을 후원함</span>
+				    <span><p className="sharing-money">{(money+1000).toLocaleString()}원</p>을 후원함</span>
 	        		</p>
 	        		<div className="sharing-icon-summary">
 		        	<p className="likes-num">

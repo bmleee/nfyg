@@ -117,7 +117,7 @@ export class Viewer extends Component {
 			raw
 		} = this.props;
 
-		// console.log('SevenViewer', this);
+		console.log('SevenViewer', this);
 		//
 		// console.log('raw', raw);
 		// console.log('typeof raw', typeof raw);

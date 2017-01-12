@@ -27,6 +27,9 @@ class Overview extends Component {
 
 	render() {
 		let {
+			abstract: {
+				projectName
+			},
 			overview: {
 				intro,
 				part1,
@@ -39,10 +42,14 @@ class Overview extends Component {
 
 		return (
 			<div className="project-detail-overview">
-				<ProjectReward rewards={rewards} />
-
 				<div className="project-detail-overview-info">
 					<Viewer raw={part1} />
+				</div>
+				
+				<ProjectReward projectName={projectName} rewards={rewards} />
+				
+				<div className="project-detail-overview-info">
+					<Viewer raw={part2} />
 				</div>
 			</div>
 		)

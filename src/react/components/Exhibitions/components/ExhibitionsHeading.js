@@ -27,7 +27,6 @@ const sliderSettings = {
 			speed: 250
 		}
 	}],
-	// variableWidth: true
 };
 
 

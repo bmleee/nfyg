@@ -6,8 +6,29 @@ import {
 
 import {date2string} from '~/src/react/lib/utils'
 
-class Post extends Component {
+import Modal from '~/src/react/components/react-awesome-modal';
 
+class Post extends Component {
+	
+	constructor(props) {
+    super(props);
+    this.state = {
+        visible : false
+    	}
+    }
+
+    openModal() {
+    this.setState({
+        visible : true
+    	});
+    }
+
+    closeModal() {
+     this.setState({
+        visible : false
+    	});
+    }
+	
 	render() {
 		const {
 			post: {
@@ -59,6 +80,26 @@ class Post extends Component {
 
 		return (
 			<div className="project-detail-post">
+				
+				{/* 권한이 있는 유저만 보이는 소식 작성 버튼/모달
+				
+				<button className="update-post-modal-button" onClick={() => this.openModal()}>소식 작성하기</button>
+				
+				<Modal className="card-add-modal" visible={this.state.visible} width="420" height="460px" effect="fadeInDown" onClickAway={() => this.closeModal()}>
+					<div className="card-add-modal-container">
+						<button className="share-modal-close" onClick={() => this.closeModal()}/>
+						<div>
+							<p className="profile-small-title">소식 작성하기</p>
+							<textarea className="upate-post-textarea"/>
+						</div>
+						<div className="modal-card-add-container">
+							<button className="modal-card-add" onClick={() => this.closeModal()}>새소식 등록</button>
+						</div>
+					</div>
+				</Modal>
+				
+				권한이 있는 유저만 보이는 소식 작성 버튼/모달 */}
+			
 				{/*
 				<div className="project-detail-post-heading" style={borderStyle}>
 					<img src={iconSrc} alt=""/>

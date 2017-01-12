@@ -1,7 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import ImageGallery from '../../react-image-gallery'; // https://www.npmjs.com/package/react-image-gallery
 
- 
+import { Link } from 'react-router'; 
+import { Headermenufixed } from './';
+
+import Modal from '~/src/react/components/react-awesome-modal';
 
 // TODO: activate lazy loading
 const options = {
@@ -63,11 +66,31 @@ const images = [
 ]
 
 class HomeHeader extends Component {
+	
+	constructor(props) {
+    super(props);
+    this.state = {
+        visible : false
+    }
+  }
 
+  openModal() {
+    this.setState({
+        visible : true
+    });
+  }
+
+  closeModal() {
+    this.setState({
+        visible : false
+    });
+  }
+	
 	render() {
 
 		return (
 			<div className='home-header'>
+				<Headermenufixed />
 				<ImageGallery
 					items={images}
 					{...options} />

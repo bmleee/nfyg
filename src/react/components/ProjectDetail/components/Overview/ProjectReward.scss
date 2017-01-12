@@ -1,3 +1,38 @@
 .project-detail-reward {
-	
+	.slick-dots {
+	    bottom: -30px;
+	}
+}
+
+.reward-list-item {
+    display: flex;
+	flex-flow: column;
+	padding: 0 0.2vw;
+}
+.reward-thumbnail {
+    position: relative;
+	padding-top : 65%;
+	overflow : hidden;
+}
+.project-detail-reward-title {
+    text-align : center;
+    padding : 15px;
+    border : 1px solid #eee;
+    border-top : none;
+    background : #fff;
+}
+.move-purchase-page, .move-purchase-page:focus {
+    width : 100%;
+    height : 45px;
+    font-size : 18px;
+    font-weight : 600;
+    border-radius : 3px;
+    margin : 20px auto;
+    background : #4b709a;
+    border : none;
+    outline : none;
+    color : #fff;
+    @media (max-width : 991px) {
+        margin : 40px auto 20px auto;
+    }
 }

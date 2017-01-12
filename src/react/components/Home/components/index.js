@@ -13,4 +13,6 @@ export { default as FutureProjectList } from './FutureProjectList';
 
 export { default as ExhibitionList } from './ExhibitionList';
 
-export { default as MagazineList } from './MagazineList';
+export { default as Headermenufixed } from './Headermenufixed';
+
+export { default as Headermenuabsolute } from './Headermenuabsolute';

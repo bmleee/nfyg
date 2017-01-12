@@ -94,7 +94,7 @@ class ProjectHeading extends Component {
 						{currentMoney.toLocaleString()}<span className="heading-summary-status">원</span></div>
 					</div>
 				</div>
-				<button className="share-button">공유로 프로젝트 후원하기</button>
+				<button className="share-button">페이스북 공유로 후원하기</button>
 			</div>
 
 			)
