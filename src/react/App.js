@@ -43,7 +43,7 @@ export default class App extends Component {
 
 		return (
 			<div>
-				{
+				{/*
 					process.env.NODE_ENV !== 'production'
 						? <div>
 							Test Links:
@@ -87,7 +87,7 @@ export default class App extends Component {
 							<Link to="/test3"><button>Test3</button></Link>
 						</div>
 						: null
-				}
+				*/}
 
 				<Header
 					{...this.state}

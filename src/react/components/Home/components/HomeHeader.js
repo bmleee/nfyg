@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import ImageGallery from '../../react-image-gallery'; // https://www.npmjs.com/package/react-image-gallery
 
 import { Link } from 'react-router'; 
-import { Headermenufixed } from './';
 
 import Modal from '~/src/react/components/react-awesome-modal';
 
@@ -105,7 +104,6 @@ class HomeHeader extends Component {
 
 		return (
 			<div className='home-header'>
-				<Headermenufixed />
 				<ImageGallery
 					items={images}
 					{...options} />

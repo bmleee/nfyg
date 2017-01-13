@@ -3,6 +3,9 @@ div, span, h1, h2, h3, h4, button {
     font-family : FontAwesome, "Noto Sans DemiLight", "Malgun Gothic";
 }
 // desktop&all ↓↓↓↓
+.home-is-loading {
+    min-height : 800px;
+}
 .editorStyles__wrapper {
     width : 100% !important;
 }
@@ -172,7 +175,7 @@ div, span, h1, h2, h3, h4, button {
 }
 
 .image-gallery-image {
-position: absolute;
+    position: absolute;
     top: 0;
     left: 0;
     right: 0;
@@ -183,8 +186,8 @@ position: absolute;
 }
 
 .image-gallery-slide img {
-	width : auto !important;
-	height : 100%;
+	width : 100% !important;
+	height : auto;
 	position: absolute;
     top: 0;
    	left: 0;
@@ -571,7 +574,7 @@ div.recent-exhibition-list-item {
 
 .image-gallery-slide img {
 	width : auto !important;
-	height : 100%;
+	height : auto !important;
 	position: absolute;
     top: 0;
    	left: 0;

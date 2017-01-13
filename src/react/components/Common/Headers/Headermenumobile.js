@@ -5,7 +5,11 @@ import { Link } from 'react-router';
 
 import Modal from '~/src/react/components/react-awesome-modal';
 
-class Headermenufixed extends Component {
+import BurgerMenu from 'react-burger-menu';
+const Menu = BurgerMenu.slide;
+
+
+class Headermenumobile extends Component {
 	
 	constructor(props) {
     super(props);
@@ -29,36 +33,68 @@ class Headermenufixed extends Component {
 	render() {
 
 		return (
-			<div className="header-menu-fixed">
-					<div className="header-menu-fixed-left">
-					<Link to={`/`}>
-						<img className="header-menu-logo" src='/assets/images/7pictures_favicon_white.svg'/>
-					</Link>
+			<div>
+			<div className="header-menu-mobile">
+					<div className="header-menu-mobile-search">
 					<form className="header-search-form">
-					<input className="header-search" type="search" placeholder="Search..." />
-					<button className="header-search-submit" type="submit" />
+						<button className="header-search-open" />
+						{/* 
+						<button className="header-search-submit" type="submit" />
+						<input className="header-search" type="search" placeholder="Search..." /> 
+						*/}
 					</form>
+					</div>
+					
+					<div className="header-menu-mobile-logo">
 					<Link to={`/`}>
-						<p className="header-menu-text-left">What's on?</p>
-					</Link>
-					<Link to={`/magazines`}>
-						<p className="header-menu-text-left">Magazine</p>
-					</Link>
-					<Link to={`/sponsors`}>
-						<p className="header-menu-text-left">Sponsor</p>
+						<img className="header-menu-logo" src='/assets/images/7pictures_logo_black.svg'/>
 					</Link>
 					</div>
-					<div className="header-menu-fixed-right">
+					
+					<div className="header-menu-mobile-burger">
+						<Menu right width={200} customBurgerIcon={ <button className="customBurgerIcon" /> }>
+							<img className="mobile-burger-user-icon" src='./assets/images/slider-thumb3.JPG' width={75} height={75} />
+							<p className="mobile-burger-user-name">Lee Byeong-Man</p>
+							
+							
+							<Link to={`/profile/user`}>
+							<div className="mobile-burger-profile-container">
+								<p className="mobile-burger-profile">프로필 설정</p>
+							</div>
+							</Link>
+							
+							<Link to={`/profile/user`}>
+							<div className="mobile-burger-profile-container">
+								<p className="mobile-burger-profile">내 페이지</p>
+							</div>
+							</Link>
+							
+							{/* when user logged out 
+							<Link to={`/login`}>
+								<p className="mobile-burger-login">LOG IN</p>
+							</Link>
+							<Link to={`/signup`}>
+								<p className="mobile-burger-signup">SIGN UP</p>
+							</Link>
+							*/}
+							
+							<Link to={`/`}>
+								<p className="mobile-burger-whatson">What's on?</p>
+							</Link>
+							
+							<Link to={`/magazines`}>
+								<p className="mobile-burger-magazine">Magazine</p>
+							</Link>
+							
+							<Link to={`/sponsors`}>
+								<p className="mobile-burger-sponsor">Sponsor</p>
+							</Link>
+							
+							
+							
+					    </Menu>
+						{/* when user logged in
 						
-						{/* when user logged out
-						<Link to={`/login`}>
-							<p className="header-menu-text-right">LOG IN</p>
-						</Link>
-						<Link to={`/signup`}>
-							<p className="header-menu-text-right">SIGN UP</p>
-						</Link> */}
-						
-						{/* when user logged in */}
 						<input className="suggest-modal-button" type="button" value="제안하기" onClick={() => this.openModal()} />
 
 						<Modal className="project-suggest-modal" visible={this.state.visible} width="480" height="560px" effect="fadeInDown" onClickAway={() => this.closeModal()}>
@@ -87,27 +123,21 @@ class Headermenufixed extends Component {
 							</p>
 							</div>
 							<div className="project-modal-footer">
-							<a className="project-modal-header-save-container" onClick={() => this.closeModal()}><button type="submit" className="project-modal-header-save">제안하기</button></a>
+							<a className="project-modal-header-save-container" onClick={() => this.closeModal()}><button type="submit" className="project-modal-header-save">보내기</button></a>
 							</div>
 						</Modal>
-						<div className="user-hover-menu">
-							<img className="menu-user-icon" src='./assets/images/slider-thumb3.JPG' width={33} height={33} />
-							<div className="user-hover-menu-container">
-								<Link to={`/profile/user`}>
-									<p className="header-menu-hover-text">프로필</p>
-								</Link>
-								<Link to={`/profile/user`}>
-									<p className="header-menu-hover-text">내 페이지</p>
-								</Link>
 								<Link to={`/api/users/logout`}>
 									<p className="header-menu-hover-text">로그아웃</p>
 								</Link>
-							</div>
-						</div>
+						*/}
+						
 					</div>
 				</div>
+				<div className="header-menu-mobile-empty-space">
+				</div>
+			</div>
 		)
 	}
 
 }
-export default Headermenufixed;
+export default Headermenumobile;

@@ -15,7 +15,7 @@
         display : inline-block;
     }
     .header-search {
-        width : 250px;
+        width : 270px;
         height : 33px;
         border : 1px solid #fff;
         background : transparent;
@@ -61,11 +61,11 @@
         display : inline-block;
         color : #fff;
         font-size : 17px !important;
-        font-weight : 600 !important;
+        font-weight : 400 !important;
         margin-left : 20px !important;
         vertical-align : middle;
         letter-spacing : -.3px;
-        font-family : 'ITC Avant Garde Gothic W04','AvantGardeGothicITCW01D 731075','AvantGardeGothicITCW01Dm','Helvetica','sans-serif';
+        font-family : 'Lato','sans-serif';
     }
 }
 .header-menu-fixed-right {
@@ -75,15 +75,18 @@
     div {
         display : inline-block;
     }
+    .project-modal-header {
+        display : block !important;
+    }
     .header-menu-text-right {
         display : inline-block;
         color : #fff;
         font-size : 17px !important;
-        font-weight : 600 !important;
+        font-weight : 400 !important;
         margin-right : 20px !important;
         vertical-align : middle;
         letter-spacing : -.3px;
-        font-family : 'ITC Avant Garde Gothic W04','AvantGardeGothicITCW01D 731075','AvantGardeGothicITCW01Dm','Helvetica','sans-serif';
+        font-family : 'Lato','sans-serif';
     }
     .suggest-modal-button, .suggest-modal-button:focus {
         height : 33px;
@@ -95,7 +98,7 @@
         color : #fff;
         vertical-align : middle;
         font-weight : 600;
-        margin-right : 25px;
+        margin-right : 20px;
         transition : opacity, 220ms;
     }
     .suggest-modal-button:hover {
@@ -117,30 +120,48 @@
         .user-hover-menu-container {
             display : none;
         }
+        .user-hover-menu-arrow {
+            display : none;
+        }
     }
     .user-hover-menu:hover {
         .user-hover-menu-container {
             position : absolute;
-            right : 20px;
-            top : 40px;
+            right : 25px;
+            top : 64px;
             display : inline-block;
             background : #000;
             z-index : 101;
             text-align : center;
-            width : 220px;
-            padding : 0px 30px;
+            width : 141px;
+            padding : 10px 0px;
+            border-radius : 1px;
             .header-menu-hover-text {
                 color : #fff;
-                font-size : 16px !important;
+                font-size : 15px !important;
                 font-weight : 600 !important;
-                margin : 10px 0px !important;
+                margin : 0px !important;
+                padding : 10px 0px !important;
+            }
+            .header-menu-hover-text:hover {
+                background : #555;
             }
         }
-        .user-hover-menu-container:before {
+        .user-hover-menu-arrow {
+            position : absolute;
+            right : 25px;
+            top : 31px;
+            display : inline-block;
+            background : #transparent;
+            color : #000;
+            z-index : 101;
+            text-align : right;
+            width : 141px;
+        }
+        .user-hover-menu-arrow:before {
             font-family : Ionicons;
             content : "\f365";
-            display : block;
-            text-align : right;
+            font-size : 40px;
         }
     }
 }
