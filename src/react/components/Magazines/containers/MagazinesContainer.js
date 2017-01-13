@@ -7,7 +7,7 @@ import { label2value } from '~/src/react/lib/utils'
 import { SelectOptions } from '../../../constants'
 
 
- 
+
 
 const selectOptions = SelectOptions.MagazineCategory
 const categories = selectOptions.map(v => v.label)
@@ -34,7 +34,7 @@ class MagazinesContainer extends Component {
 
 		const res = await fetchJSONFile('magazines')
 
-		this.props.setUser(user)
+		this.props.appUtils.setUser(user)
 		this.setState({
 			magazines: magazines,
 			filteredMagazines: magazines,

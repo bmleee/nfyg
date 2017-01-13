@@ -3,7 +3,7 @@ import { fetchJSONFile, fetchUserAndData } from '../../../api/AppAPI'
 
 import { Exhibitions } from '../components'
 
- 
+
 
 class ExhibitionsContainer extends Component {
 	state = {
@@ -27,7 +27,7 @@ class ExhibitionsContainer extends Component {
 
 		// const newExhibitions = await fetchJSONFile('exhibitions')
 
-		this.props.setUser(user)
+		this.props.appUtils.setUser(user)
 
 		this.setState({
 			exhibitions,

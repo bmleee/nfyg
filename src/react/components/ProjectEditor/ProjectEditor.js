@@ -81,7 +81,7 @@ export default class ProjectEditor extends Component {
 
     let tabLinkBase = `/${(document.URL.match(/projects\/.+\/edit/) || ['project-editor'])[0]}`
 
-    if (this.props.setUser) this.props.setUser(user)
+    if (this.props.appUtils.setUser) this.props.appUtils.setUser(user)
     try {
       if(data.project) {
         this.setState({
@@ -364,10 +364,10 @@ export default class ProjectEditor extends Component {
     try {
       let r = await upsertProject(body)
       console.log(r);
-      this.props.setFlash({title: 'project saved', message: JSON.stringify(r, undefined, 4), level: 'success'})
+      this.props.appUtils.setFlash({title: 'project saved', message: JSON.stringify(r, undefined, 4), level: 'success'})
     } catch (e) { // error from axios.request
       console.log(e);
-      this.props.setFlash({title: 'project save error', message: JSON.stringify(e.response, undefined, 4), level: 'error', autoDismiss: 0, dismissible: true})
+      this.props.appUtils.setFlash({title: 'project save error', message: JSON.stringify(e.response, undefined, 4), level: 'error', autoDismiss: 0, dismissible: true})
     }
   }
 }

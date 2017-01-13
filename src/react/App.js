@@ -18,6 +18,9 @@ export default class App extends Component {
 		user: {
 			isLoggedIn: false,
 			isAuthorized: true, // can see this page?
+			canEdit: false,
+			displayName: '',
+			image: '',
 		}
 	}
 
@@ -33,13 +36,15 @@ export default class App extends Component {
 
 	render() {
 		const children = this.props.children && React.cloneElement(this.props.children, {
-			...this.modalHandlers,
-			...this.flashHandlers,
-			setUser: this.setUser,
+			appUtils: this.appUtils, // propagate util funtions as property
 		})
 
-
-		if(typeof window !== 'undefined') window.setFlash = this.flashHandlers.setFlash
+		// propagate util funtions as global function
+		if(canUseDOM) {
+			window.appUtils = this.appUtils
+		} else {
+			global.appUtils = this.appUtils
+		}
 
 		return (
 			<div>
@@ -91,11 +96,10 @@ export default class App extends Component {
 
 				<Header
 					{...this.state}
-					{...this.modalHandlers}
-					{...this.flashHandlers}
+					appUtils={this.appUtils}
 				/>
 
-				<Nav></Nav>
+				<Nav user={this.state.userz} />
 
 				{ children }
 
@@ -106,22 +110,19 @@ export default class App extends Component {
 	}
 
 	// propagate to children...!
-	setUser = (user) => {
-		console.log('setUser.user', user);
-		this.setState(update(this.state, {
-			user: {
-				isLoggedIn: { $set: user.isLoggedIn },
-				isAuthorized: { $set: user.isAuthorized },
-			}
-		}))
-	}
+	appUtils = {
+		setUser: (user) => {
+			console.log('setUser.user', user);
+			this.setState(update(this.state, {
+				user: { $set : user }
+			}))
+		}
 
-	modalHandlers = {
-		setModal: (modal) => { this.setState({ modal }) },
-		unsetModal: () => { this.setState({ modal: { isOpen: false } }) }
-	}
+		getUser: () => this.state.user
 
-	flashHandlers = {
+		setModal: (modal) => { this.setState({ modal }) }
+		unsetModal: () => { this.setState({ modal: { isOpen: false } })
+
 		// https://www.npmjs.com/package/react-notification-system
 		setFlash: (flash) => { // flash = { type?, message, level, ... }
 			this.setState(update(this.state, {
@@ -129,7 +130,7 @@ export default class App extends Component {
 					$push: [{...flash}]
 				}
 			}))
-		},
+		}
 
 		clearFlash: () => {
 			this.setState(update(this.state, {

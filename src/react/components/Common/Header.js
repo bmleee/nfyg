@@ -25,8 +25,10 @@ export default class Header extends Component {
 			modal,
 			user,
 
-			setModal,
-			unsetModal,
+			appUtils: {
+				etModal,
+				unsetModal,
+			}
 		} = this.props
 
 

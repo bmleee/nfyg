@@ -86,7 +86,7 @@ export default class ProductEditor extends Component {
 
     console.log('fetched data', data);
 
-    if (this.props.setUser) this.props.setUser(user)
+    if (this.props.appUtils.setUser) this.props.appUtils.setUser(user)
 
     let tabLinkBase = `/${(document.URL.match(/products\/.+\/edit/) || ['product-editor'])[0]}`
 
@@ -437,10 +437,10 @@ export default class ProductEditor extends Component {
     try {
       let r = await upsertProduct(body)
       console.log(r);
-      this.props.setFlash({title: 'product saved', message: JSON.stringify(r, undefined, 4), level: 'success'})
+      this.props.appUtils.etFlash({title: 'product saved', message: JSON.stringify(r, undefined, 4), level: 'success'})
     } catch (e) { // error from axios.request
       console.log(e);
-      this.props.setFlash({title: 'product save error', message: JSON.stringify(e.response, undefined, 4), level: 'error', autoDismiss: 0, dismissible: true})
+      this.props.appUtils.setFlash({title: 'product save error', message: JSON.stringify(e.response, undefined, 4), level: 'error', autoDismiss: 0, dismissible: true})
     }
 	}
 }

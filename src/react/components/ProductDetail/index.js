@@ -57,7 +57,7 @@ export default class ProductDetailContainer extends Component {
 			selectOptions,
 		} = this.state
 
-		this.props.setUser(user)
+		this.props.appUtils.setUser(user)
 		this.setState({
 			...product,
 			loaded: true,

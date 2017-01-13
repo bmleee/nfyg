@@ -3,7 +3,7 @@ import { fetchJSONFile, fetchUserAndData } from '../../../api/AppAPI'
 
 import { Home } from '../components'
 
- 
+
 
 class HomeContainer extends Component {
 	constructor(props) {
@@ -28,7 +28,7 @@ class HomeContainer extends Component {
 			console.log('fetchUserAndData.user', user);
 			console.log('fetchUserAndData.data.home', home);
 
-			this.props.setUser(user)
+			this.props.appUtils.setUser(user)
 			this.setState({ home, loaded: true })
 		} catch (e) {
 			console.error(e);

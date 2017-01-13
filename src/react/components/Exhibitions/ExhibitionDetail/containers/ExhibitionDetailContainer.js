@@ -3,7 +3,7 @@ import { fetchJSONFile, fetchUserAndData } from '../../../../api/AppAPI'
 
 import { ExhibitionDetail } from '../components'
 
- 
+
 
 class ExhibitionDetailContainer extends Component {
 
@@ -24,7 +24,7 @@ class ExhibitionDetailContainer extends Component {
 			}
 		} = await fetchUserAndData()
 
-		this.props.setUser(user)
+		this.props.appUtils.setUser(user)
 		this.setState({ exhibition, loaded: true })
 	}
 

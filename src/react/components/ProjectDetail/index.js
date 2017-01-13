@@ -57,7 +57,7 @@ export default class ProjectDetailContainer extends Component {
 			selectOptions,
 		} = this.state
 
-		this.props.setUser(user)
+		this.props.appUtils.setUser(user)
 		this.setState({
 			...project,
 			loaded: true,

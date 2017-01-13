@@ -42,7 +42,7 @@ export default class ProjectEditor extends Component {
 				}
 			} = await fetchUserAndData()
 
-			if(this.props.setUser) this.props.setUser(user)
+			if(this.props.appUtils.setUser) this.props.appUtils.setUser(user)
 
 			this.setState({sponsor})
 

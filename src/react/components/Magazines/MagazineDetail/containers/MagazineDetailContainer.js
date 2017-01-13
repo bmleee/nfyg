@@ -29,7 +29,7 @@ class MagazineDetailContainer extends Component {
 
 		// console.log('fetchUserAndData.r', r);
 
-		this.props.setUser(user)
+		this.props.appUtils.setUser(user)
 		this.setState({
 			relatedMagazines: relatedMagazines,
 			relatedExhibitions: relatedExhibitions,
