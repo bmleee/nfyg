@@ -57,7 +57,9 @@ export default class Header extends Component {
 		let {
 			flashs,
 
-			clearFlash,
+			appUtils: {
+				clearFlash
+			},
 		} = props
 
 		for (let flash of flashs) {
