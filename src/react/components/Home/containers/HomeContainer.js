@@ -41,7 +41,7 @@ class HomeContainer extends Component {
 
 		return loaded
 			? <Home {...home} />
-			: <div>Home is loading</div>
+			: <div className="home-is-loading"></div>
 	}
 }
 

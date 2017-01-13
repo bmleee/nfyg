@@ -1,0 +1,169 @@
+.header-menu-fixed {
+    background : transparent;
+    position: absolute;
+    z-index: 100;
+    width: 100%;
+    border-bottom : 1px solid #fff;
+    @media (max-width : 991px) {
+        display : none;
+    }
+
+.header-menu-fixed-left {
+    display : inline-block;
+    width : 70%;
+    .header-search-form {
+        display : inline-block;
+    }
+    .header-search {
+        width : 270px;
+        height : 33px;
+        border : 1px solid #fff;
+        background : transparent;
+        outline : none;
+        color : #fff;
+        vertical-align : middle;
+        margin-left : 10px;
+        padding : 0px 10px;
+    }
+    .header-search::-webkit-input-placeholder {
+        color : #fff;
+    }
+    .header-search::-moz-placeholder {
+        color : #fff;
+    }
+    .header-search:-ms-input-placeholder {
+        color : #fff;
+    }
+    .header-search:-moz-placeholder {
+        color : #fff;
+    }
+    .header-search-submit {
+        background : transparent;
+        width: 33px;
+        height: 33px;
+        border :1px solid #fff;
+        border-left : none;
+        outline : none;
+        color : #fff;
+        vertical-align : middle;
+        margin-right : 5px;
+    }
+    .header-search-submit:before {
+        font-family : Ionicons;
+        content : "\f2f5";
+        font-size : 19px;
+    }
+    .header-menu-logo {
+        width : 33px;
+        margin : 10px 0px 10px 10px;
+    }
+    .header-menu-text-left {
+        display : inline-block;
+        color : #fff;
+        font-size : 17px !important;
+        font-weight : 400 !important;
+        margin-left : 20px !important;
+        vertical-align : middle;
+        letter-spacing : -.3px;
+        font-family : 'Lato','sans-serif';
+    }
+}
+.header-menu-fixed-right {
+    text-align : right;
+    display : inline-block;
+    width : 30%;
+    div {
+        display : inline-block;
+    }
+    .project-modal-header {
+        display : block !important;
+    }
+    .header-menu-text-right {
+        display : inline-block;
+        color : #fff;
+        font-size : 17px !important;
+        font-weight : 400 !important;
+        margin-right : 20px !important;
+        vertical-align : middle;
+        letter-spacing : -.3px;
+        font-family : 'Lato','sans-serif';
+    }
+    .suggest-modal-button, .suggest-modal-button:focus {
+        height : 33px;
+        padding : 0px 18px;
+        background : transparent;
+        outline : none;
+        border : 1px solid #fff;
+        border-radius : 2px;
+        color : #fff;
+        vertical-align : middle;
+        font-weight : 600;
+        margin-right : 20px;
+        transition : opacity, 220ms;
+    }
+    .suggest-modal-button:hover {
+        border : 1px solid #4b709a;
+        background : #4b709a;
+        color : #fff;
+        transition : opacity, 220ms;
+    }
+    .user-hover-menu {
+        display : inline-block;
+        cursor : pointer;
+        .menu-user-icon {
+            border-radius : 50px;
+            margin-right : 20px;
+            -webkit-box-shadow: 1px 1px 1px 0px rgba(85,85,85,1);
+            -moz-box-shadow: 1px 1px 1px 0px rgba(85,85,85,1);
+            box-shadow: 1px 1px 1px 0px rgba(85,85,85,1);
+        }
+        .user-hover-menu-container {
+            display : none;
+        }
+        .user-hover-menu-arrow {
+            display : none;
+        }
+    }
+    .user-hover-menu:hover {
+        .user-hover-menu-container {
+            position : absolute;
+            right : 25px;
+            top : 64px;
+            display : inline-block;
+            background : #000;
+            z-index : 101;
+            text-align : center;
+            width : 141px;
+            padding : 10px 0px;
+            border-radius : 1px;
+            .header-menu-hover-text {
+                color : #fff;
+                font-size : 15px !important;
+                font-weight : 600 !important;
+                margin : 0px !important;
+                padding : 10px 0px !important;
+            }
+            .header-menu-hover-text:hover {
+                background : #555;
+            }
+        }
+        .user-hover-menu-arrow {
+            position : absolute;
+            right : 25px;
+            top : 31px;
+            display : inline-block;
+            background : #transparent;
+            color : #000;
+            z-index : 101;
+            text-align : right;
+            width : 141px;
+        }
+        .user-hover-menu-arrow:before {
+            font-family : Ionicons;
+            content : "\f365";
+            font-size : 40px;
+        }
+    }
+}
+
+}

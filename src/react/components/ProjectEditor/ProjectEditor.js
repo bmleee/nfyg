@@ -14,7 +14,6 @@ import { canUseDOM } from '~/src/lib/utils'
 import _ from 'lodash' // use throttle or debounce
 import 'whatwg-fetch'
 
-
 const scrollStyle = {
   cursor: 'pointer',
 }
@@ -125,9 +124,9 @@ export default class ProjectEditor extends Component {
 						save={this.save}
 					/>
 					 { children }
-				<ScrollToTop showUnder={180} style={scrollStyle} duration={0} >
-				<button className="back-to-top" />
-				</ScrollToTop>
+					<ScrollToTop showUnder={180} style={scrollStyle} duration={0} >
+					<button className="back-to-top" />
+					</ScrollToTop>
 				</div>
 			)
 		}
