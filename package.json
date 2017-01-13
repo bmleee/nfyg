@@ -64,6 +64,7 @@
     "query-string": "^4.2.3",
     "react-awesome-modal": "^2.0.1",
     "react-bootstrap-table": "^2.8.0",
+    "react-burger-menu": "^1.10.10",
     "react-collapsible": "^1.2.0",
     "react-draft-wysiwyg": "^1.5.7",
     "react-lines-ellipsis": "^0.5.8",

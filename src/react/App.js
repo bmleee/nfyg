@@ -116,12 +116,12 @@ export default class App extends Component {
 			this.setState(update(this.state, {
 				user: { $set : user }
 			}))
-		}
+		},
 
-		getUser: () => this.state.user
+		getUser: () => this.state.user,
 
-		setModal: (modal) => { this.setState({ modal }) }
-		unsetModal: () => { this.setState({ modal: { isOpen: false } })
+		setModal: (modal) => { this.setState({ modal }) },
+		unsetModal: () => { this.setState({ modal: { isOpen: false } }) },
 
 		// https://www.npmjs.com/package/react-notification-system
 		setFlash: (flash) => { // flash = { type?, message, level, ... }
@@ -130,13 +130,13 @@ export default class App extends Component {
 					$push: [{...flash}]
 				}
 			}))
-		}
+		},
 
 		clearFlash: () => {
 			this.setState(update(this.state, {
 				flashs: { $set: [] }
 			}))
-		}
+		},
 	}
 
 }
