@@ -52,7 +52,7 @@ class Headermenumobile extends Component {
 					</div>
 					
 					<div className="header-menu-mobile-burger">
-						<Menu right width={200} customBurgerIcon={ <button className="customBurgerIcon" /> }>
+						<Menu right width={200} isOpen={ false } customBurgerIcon={ <button className="customBurgerIcon" /> }>
 							<img className="mobile-burger-user-icon" src='./assets/images/slider-thumb3.JPG' width={75} height={75} />
 							<p className="mobile-burger-user-name">Lee Byeong-Man</p>
 							
@@ -90,42 +90,10 @@ class Headermenumobile extends Component {
 								<p className="mobile-burger-sponsor">Sponsor</p>
 							</Link>
 							
-							
+							<input className="mobile-burger-suggest-modal-button" type="button" value="제안하기" onClick={() => this.openModal()} />
 							
 					    </Menu>
 						{/* when user logged in
-						
-						<input className="suggest-modal-button" type="button" value="제안하기" onClick={() => this.openModal()} />
-
-						<Modal className="project-suggest-modal" visible={this.state.visible} width="480" height="560px" effect="fadeInDown" onClickAway={() => this.closeModal()}>
-							<div className="project-modal-header">
-							<h3 className="project-modal-header-title">제안하기</h3>
-							<a className="project-modal-header-close-container"><button className="project-modal-header-close" onClick={() => this.closeModal()}/></a>
-							</div>
-							<div className="project-modal-body">
-							<p className="project-modal-body-small-title">연락처(필 수)
-								<input className="project-modal-body-input-text" type="text" />
-							</p>
-							<p className="project-modal-body-small-title">이메일
-								<input className="project-modal-body-input-text" type="text" />
-							</p>
-							<p className="project-modal-body-small-title">제안 내용(필 수)
-								<textarea className="project-modal-body-input-textarea" type="textarea"/>
-							</p>
-							<p className="project-modal-body-small-title">필요한 후원금(원)
-								<input className="project-modal-body-input-text" type="number" />
-							</p>
-							<p className="project-modal-body-small-title">후원금 용도
-								<textarea className="project-modal-body-input-textarea" type="textarea"/>
-							</p>
-							<p className="project-modal-body-small-title">관련 링크
-								<input className="project-modal-body-input-text" type="text"/>
-							</p>
-							</div>
-							<div className="project-modal-footer">
-							<a className="project-modal-header-save-container" onClick={() => this.closeModal()}><button type="submit" className="project-modal-header-save">보내기</button></a>
-							</div>
-						</Modal>
 								<Link to={`/api/users/logout`}>
 									<p className="header-menu-hover-text">로그아웃</p>
 								</Link>
@@ -135,6 +103,36 @@ class Headermenumobile extends Component {
 				</div>
 				<div className="header-menu-mobile-empty-space">
 				</div>
+				
+							<Modal className="project-suggest-modal" visible={this.state.visible} width="480" height="560px" effect="fadeInDown" onClickAway={() => this.closeModal()}>
+								<div className="project-modal-header">
+								<h3 className="project-modal-header-title">제안하기</h3>
+								<a className="project-modal-header-close-container"><button className="project-modal-header-close" onClick={() => this.closeModal()}/></a>
+								</div>
+								<div className="project-modal-body">
+								<p className="project-modal-body-small-title">연락처(필 수)
+									<input className="project-modal-body-input-text" type="text" />
+								</p>
+								<p className="project-modal-body-small-title">이메일
+									<input className="project-modal-body-input-text" type="text" />
+								</p>
+								<p className="project-modal-body-small-title">제안 내용(필 수)
+									<textarea className="project-modal-body-input-textarea" type="textarea"/>
+								</p>
+								<p className="project-modal-body-small-title">필요한 후원금(원)
+									<input className="project-modal-body-input-text" type="number" />
+								</p>
+								<p className="project-modal-body-small-title">후원금 용도
+									<textarea className="project-modal-body-input-textarea" type="textarea"/>
+								</p>
+								<p className="project-modal-body-small-title">관련 링크
+									<input className="project-modal-body-input-text" type="text"/>
+								</p>
+								</div>
+								<div className="project-modal-footer">
+								<a className="project-modal-header-save-container" onClick={() => this.closeModal()}><button type="submit" className="project-modal-header-save">보내기</button></a>
+								</div>
+							</Modal>
 			</div>
 		)
 	}

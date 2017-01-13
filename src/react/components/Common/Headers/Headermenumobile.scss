@@ -87,7 +87,7 @@
     .bm-menu {
         width : 100%;
         text-align : center;
-        padding : 20px 9px;
+        padding : 15px 9px;
     }
     .bm-menu-wrap {
         background : #000;
@@ -143,7 +143,7 @@
             border : 1px solid #fff;
             border-radius : 2px;
             height : 25px;
-            line-height : 24px;
+            line-height : 23px;
         }
     }
     .mobile-burger-login, .mobile-burger-signup {
@@ -182,26 +182,23 @@
         border-top : 1px solid #fff;
         border-bottom : 1px solid #fff;
     }
+    .mobile-burger-suggest-modal-button {
+        margin-top : 20px;
+        font-size : 20px !important;
+        font-weight : 600 !important;
+        color : #fff;
+        width : 100%;
+        height: 40px;
+        line-height: 36px;
+        border: 1px solid #fff;
+        border-radius : 3px;
+        background : transparent;
+    }
     div {
         display : inline-block;
     }
     .project-modal-header {
         display : block !important;
-    }
-    .header-menu-text-right {
-        display : inline-block;
-        color : #333;
-        font-size : 17px !important;
-        font-weight : 400 !important;
-        margin-right : 20px !important;
-        vertical-align : middle;
-        letter-spacing : -.3px;
-        transition : opacity, 220ms;
-        font-family : 'ITC Avant Garde Gothic W04','AvantGardeGothicITCW01D 731075','AvantGardeGothicITCW01Dm','Helvetica','sans-serif';
-    }
-    .header-menu-text-right:hover {
-        color : #4b709a;
-        transition : opacity, 220ms;
     }
     .suggest-modal-button, .suggest-modal-button:focus {
         height : 33px;
