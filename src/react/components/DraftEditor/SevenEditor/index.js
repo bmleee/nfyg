@@ -6,7 +6,8 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import draftToHtml from 'draftjs-to-html';
 import draftToMarkdown from 'draftjs-to-markdown';
 
-import uploadImageCallBack from '~/src/react/components/react-draft-wysiwyg/docs/src/util/uploadImageCallBack';
+// import uploadImageCallBack from '~/src/react/components/react-draft-wysiwyg/docs/src/util/uploadImageCallBack';
+import { upload_file } from '~/src/react/api/AppAPI';
 import bold from '~/src/react/components/react-draft-wysiwyg/docs/images/demo/bold.gif';
 import italic from '~/src/react/components/react-draft-wysiwyg/docs/images/demo/italic.gif';
 import underline from '~/src/react/components/react-draft-wysiwyg/docs/images/demo/underline.gif';
@@ -29,6 +30,18 @@ import undo from '~/src/react/components/react-draft-wysiwyg/docs/images/demo/un
 import redo from '~/src/react/components/react-draft-wysiwyg/docs/images/demo/redo.gif';
 
 import editorStyles from './editorStyles.css'
+
+const uploadCallback = async (file) => {
+	const {
+		sourceURL
+	} = await upload_file(file)
+
+	return {
+		data: {
+			link: sourceURL
+		}
+	}
+}
 
 export default class SevenEditor extends Component {
 	state = {
@@ -83,7 +96,7 @@ export default class SevenEditor extends Component {
 						// wrapperClassName="home-wrapper"
 						// editorClassName="home-editor"
 						ref={i => this.editor = i}
-						uploadCallback={uploadImageCallBack}
+						uploadCallback={uploadCallback}
 						editorState={this.state.editorState}
 						onEditorStateChange={this.onChange}
 						placeholder="입력하세요."
