@@ -1,8 +1,7 @@
 .product-faq-container {
 	border : 1px solid #ddd;
 	border-bottom : none;
-}
-.Collapsible__trigger.is-open {
+	.Collapsible__trigger.is-open {
 	height : 38px;
 	border-bottom : 1px solid #ddd;
 	padding : 5px 15px;
@@ -39,4 +38,5 @@
 .Collapsible__contentInner {
 	border-bottom : 1px solid #ddd;
 	padding : 22px 18px;
+}
 }

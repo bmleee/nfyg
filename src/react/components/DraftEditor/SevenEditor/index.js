@@ -99,7 +99,7 @@ export default class SevenEditor extends Component {
 						uploadCallback={uploadCallback}
 						editorState={this.state.editorState}
 						onEditorStateChange={this.onChange}
-						placeholder="입력하세요."
+						placeholder="내용을 입력해주세요."
 						ref={(node) => this.editor = node}
 					/>
 				</div>

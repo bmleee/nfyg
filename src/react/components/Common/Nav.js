@@ -12,7 +12,7 @@ const Nav = () => {
 	 return (
 	 	<div className="nav">
 			{
-				document.URL.match(/(sponsor)|(purchase)|(editor)|(magazine)|(exhibition)|(login)|(signup)|(profile)/) 
+				document.URL.match(/(sponsor)|(purchase)|(editor)|(magazine)|(exhibition)|(login)|(signup)|(profile)|(edit)/) 
 					? <Headermenuabsolute/>
 					: <Headermenufixed/>
 			}

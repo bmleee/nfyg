@@ -8,22 +8,79 @@
         width: 100%;
         border-bottom : 1px solid #bbb;
     }
+    .Collapsible {
+        display : inline-block;
+        float : left;
+        position : fixed;
+        width : 100%;
+    }
+    .Collapsible__contentOuter {
+        margin-top : 1px;
+        width : 100%;
+        background : #fff;
+    }
+    .Collapsible__trigger.is-open {
+	    width: 60px;
+        height: 54px;
+        background : transparent;
+        border : none;
+        outline : none;
+        border-right : 1px solid #bbb;
+        color : #333;
+        vertical-align : middle;
+        padding: 10px;
+        cursor : pointer;
+        text-align : center;
+    }
+    .Collapsible__trigger.is-open:before {
+    	font-family : Ionicons;
+        content : "\f3d8";
+        font-size : 28px;
+        line-height : 1.2;
+        width : 54px;
+        height : 54px;
+    }
+    .Collapsible__trigger.is-closed {
+    	width: 60px;
+        height: 54px;
+        background : transparent;
+        border : none;
+        outline : none;
+        border-right : 1px solid #bbb;
+        color : #333;
+        vertical-align : middle;
+        padding: 10px;
+        cursor : pointer;
+        text-align : center;
+    }
+    .Collapsible__trigger.is-closed:before {
+    	font-family : Ionicons;
+    	content : "\f2f5";
+    	font-size : 28px;
+        line-height : 1.3;
+        width : 54px;
+        height : 54px;
+    }
+    .Collapsible__contentInner {
 
-.header-menu-mobile-search {
-    display : inline-block;
-    float : left;
-    position : fixed;
+    }
+
+.header-search-form-opened {
+    border-bottom : 1px solid #bbb;
     .header-search-form {
         display : inline-block;
     }
     .header-search {
-        width : 270px;
         height : 54px;
         background : transparent;
+        border : none;
         outline : none;
         color : #333;
         vertical-align : middle;
         padding : 0px 10px;
+        width : 240px;
+        background : #fff;
+        
     }
     .header-search::-webkit-input-placeholder {
         color : #333;
@@ -37,10 +94,10 @@
     .header-search:-moz-placeholder {
         color : #333;
     }
-    .header-search-submit, .header-search-open {
+    .header-search-submit {
         width: 60px;
         height: 54px;
-        background : transparent;
+        background : #fff;
         border : none;
         outline : none;
         border-right : 1px solid #bbb;
@@ -55,6 +112,24 @@
         line-height : 1.3;
         width : 54px;
         height : 54px;
+    }
+    
+}
+
+.header-menu-mobile-search {
+    display : inline-block;
+    float : left;
+    position : fixed;
+    .header-search-open {
+        width: 60px;
+        height: 54px;
+        background : transparent;
+        border : none;
+        outline : none;
+        border-right : 1px solid #bbb;
+        color : #333;
+        vertical-align : middle;
+        padding: 10px;
     }
     .header-search-open:before {
         font-family : Ionicons;
@@ -87,10 +162,10 @@
     .bm-menu {
         width : 100%;
         text-align : center;
-        padding : 15px 9px;
+        padding : 10px 9px 20px 9px;
     }
     .bm-menu-wrap {
-        background : #000;
+        background : #333;
     }
     .bm-icon {
         width: 60px !important;
@@ -128,7 +203,7 @@
         margin : 20px auto 10px auto;
     }
     .mobile-burger-user-name {
-        font-size : 17px !important;
+        font-size : 14px !important;
         font-weight : 600 !important;
         color : #fff;
     }
@@ -163,7 +238,7 @@
         height: 50px;
         line-height: 47px;
         border-top : 1px solid #fff;
-        margin-top : 20px;
+        margin-top : 30px;
     }
     .mobile-burger-magazine {
         font-size : 20px !important;
@@ -183,16 +258,21 @@
         border-bottom : 1px solid #fff;
     }
     .mobile-burger-suggest-modal-button {
-        margin-top : 20px;
-        font-size : 20px !important;
+        margin-top : 30px;
+        font-size : 18px !important;
         font-weight : 600 !important;
         color : #fff;
         width : 100%;
-        height: 40px;
-        line-height: 36px;
+        height: 38px;
+        line-height: 34px;
         border: 1px solid #fff;
         border-radius : 3px;
         background : transparent;
+    }
+    .mobile-burger-suggest-modal-button:hover, .mobile-burger-suggest-modal-button:focus {
+        border: 1px solid #4b709a;
+        border-radius : 3px;
+        background : #4b709a;
     }
     div {
         display : inline-block;
@@ -218,66 +298,66 @@
         background : #4b709a;
         color : #fff;
         transition : opacity, 220ms;
-    }
-    .user-hover-menu {
-        display : inline-block;
-        cursor : pointer;
-        .menu-user-icon {
-            border-radius : 50px;
-            margin-right : 20px;
-            -webkit-box-shadow: 1px 1px 1px 0px rgba(85,85,85,1);
-            -moz-box-shadow: 1px 1px 1px 0px rgba(85,85,85,1);
-            box-shadow: 1px 1px 1px 0px rgba(85,85,85,1);
         }
-        .user-hover-menu-container {
-            display : none;
-        }
-        .user-hover-menu-arrow {
-            display : none;
-        }
-    }
-    .user-hover-menu:hover {
-        .user-hover-menu-container {
-            position : absolute;
-            right : 25px;
-            top : 64px;
+    .mobile-burger-sns-container {
+        display : block;
+        width : 100%;
+        .mobile-burger-sns {
             display : inline-block;
-            background : #000;
-            z-index : 101;
-            text-align : center;
-            width : 141px;
-            padding : 10px 0px;
-            border-radius : 1px;
-            .header-menu-hover-text {
-                color : #fff;
-                font-size : 15px !important;
-                font-weight : 600 !important;
-                margin : 0px !important;
-                padding : 10px 0px !important;
+            width : 25%;
+            height : 43.5px;
+            vertical-align : middle;
+            .mobile-burger-sns-facebook, .mobile-burger-sns-instagram, .mobile-burger-sns-kakaotalk, .mobile-burger-sns-blog {
+                border : none;
+                border-radius : 100px;
+                color : #777;
+                background : transparent;
+                outline : none;
+                width : 100%;
+                height : 100%;
             }
-            .header-menu-hover-text:hover {
-                background : #555;
+            .mobile-burger-sns-facebook:before {
+                font-family : Ionicons;
+                font-size : 28px;
+                content : "\f231";
+                
+            }
+            .mobile-burger-sns-instagram:before {
+                font-family : Ionicons;
+                font-size : 28px;
+                content : "\f350";
+            }
+            .kakao-icon {
+                fill : #777;
+                line-height : 0.9;
+            }
+            .mobile-burger-sns-blog:before {
+                font-family : Ionicons;
+                font-size : 28px;
+                content : "\f23d";
             }
         }
-        .user-hover-menu-arrow {
-            position : absolute;
-            right : 25px;
-            top : 31px;
-            display : inline-block;
-            background : #transparent;
-            color : #000;
-            z-index : 101;
-            text-align : right;
-            width : 141px;
-        }
-        .user-hover-menu-arrow:before {
-            font-family : Ionicons;
-            content : "\f365";
-            font-size : 40px;
-        }
     }
-}
-
+    .mobile-burger-logout-container {
+        display : block;
+        text-align : right;
+    }
+    .mobile-burger-logout {
+        border : none;
+        outline : none;
+        font-size : 13px;
+        font-weight : 600;
+        color : #fff;
+        background : transparent;
+        margin : 10px 0px 30px 0px;
+    }
+    .mobile-burger-logout:after {
+        font-family : Ionicons;
+        content : "\f29f";
+        margin-left : 3px;
+    }
+    
+    }
 }
 
 .header-menu-mobile-empty-space {

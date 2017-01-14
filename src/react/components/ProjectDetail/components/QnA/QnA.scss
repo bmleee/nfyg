@@ -57,11 +57,23 @@
     		padding : 0px;
     		background : transparent;
     		display : inline-block;
+			font-weight : 600;
+			line-height : 27px;
+			height : 38px;
+			cursor : pointer;
     	}
-    	.Collapsible__trigger.is-closed:after, .Collapsible__trigger.is-open:after {
+    	.Collapsible__trigger.is-open:after {
     		margin-left : 5px;
     		font-size : 12px;
-    	}
+			font-family : Ionicons;
+			content : "\f3d8";
+		}
+		.Collapsible__trigger.is-closed:after {
+			margin-left : 5px;
+    		font-size : 12px;
+			font-family : Ionicons;
+			content : "\f3d0";
+		}
     	.qna-form-submit {
     		width : 100% !important
     	}

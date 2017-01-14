@@ -4,6 +4,9 @@ import ImageGallery from '../../react-image-gallery'; // https://www.npmjs.com/p
 import { Link } from 'react-router'; 
 
 import Modal from '~/src/react/components/react-awesome-modal';
+import KakaoImage from '~/src/assets/images/kakaotalk.svg'
+
+import Collapsible from 'react-collapsible';
 
 import BurgerMenu from 'react-burger-menu';
 const Menu = BurgerMenu.slide;
@@ -35,25 +38,31 @@ class Headermenumobile extends Component {
 		return (
 			<div>
 			<div className="header-menu-mobile">
-					<div className="header-menu-mobile-search">
-					<form className="header-search-form">
-						<button className="header-search-open" />
-						{/* 
-						<button className="header-search-submit" type="submit" />
-						<input className="header-search" type="search" placeholder="Search..." /> 
-						*/}
-					</form>
-					</div>
 					
-					<div className="header-menu-mobile-logo">
-					<Link to={`/`}>
-						<img className="header-menu-logo" src='/assets/images/7pictures_logo_black.svg'/>
-					</Link>
+					{/* 
+					<div className="header-menu-mobile-search">
+						<button className="header-search-open"/>
 					</div>
+					*/}
+					
+					<Collapsible trigger="" transitionTime="100">
+						<div className="header-search-form-opened">
+						<form className="header-search-form">
+							<button className="header-search-submit" type="submit" />
+							<input className="header-search" type="search" placeholder="Search..." />
+						</form>
+						</div>
+					</Collapsible>
+					
+					<Link to={`/`}>
+					<div className="header-menu-mobile-logo">
+							<img className="header-menu-logo" src='/assets/images/7pictures_logo_black.svg'/>
+					</div>
+					</Link>
 					
 					<div className="header-menu-mobile-burger">
 						<Menu right width={200} isOpen={ false } customBurgerIcon={ <button className="customBurgerIcon" /> }>
-							<img className="mobile-burger-user-icon" src='./assets/images/slider-thumb3.JPG' width={75} height={75} />
+							<img className="mobile-burger-user-icon" src='./assets/images/slider-thumb3.JPG' width={70} height={70} />
 							<p className="mobile-burger-user-name">Lee Byeong-Man</p>
 							
 							
@@ -92,12 +101,37 @@ class Headermenumobile extends Component {
 							
 							<input className="mobile-burger-suggest-modal-button" type="button" value="제안하기" onClick={() => this.openModal()} />
 							
+							<div className="mobile-burger-logout-container">
+							<Link to={`/api/users/logout`}>
+								<button className="mobile-burger-logout">로그아웃</button>
+							</Link>
+							</div>
+							
+							<div className="mobile-burger-sns-container">
+								<a href="https://www.facebook.com/7pictures" target="_blank">
+								<div className="mobile-burger-sns">
+									<button className="mobile-burger-sns-facebook" />
+								</div>
+								</a>
+								<a href="https://www.instagram.com/seven__pictures/" target="_blank">
+								<div className="mobile-burger-sns">
+									<button className="mobile-burger-sns-instagram" />
+								</div>
+								</a>
+								<a href="http://plus.kakao.com/home/@7pictures" target="_blank">
+								<div className="mobile-burger-sns">
+									<button className="mobile-burger-sns-kakaotalk"><KakaoImage className="kakao-icon" width={28} height={28} /></button>
+								</div>
+								</a>
+								<a href="http://blog.naver.com/7pictures" target="_blank">
+								<div className="mobile-burger-sns">
+									<button className="mobile-burger-sns-blog" />
+								</div>
+								</a>
+							</div>
+							
+			
 					    </Menu>
-						{/* when user logged in
-								<Link to={`/api/users/logout`}>
-									<p className="header-menu-hover-text">로그아웃</p>
-								</Link>
-						*/}
 						
 					</div>
 				</div>
@@ -133,6 +167,7 @@ class Headermenumobile extends Component {
 								<a className="project-modal-header-save-container" onClick={() => this.closeModal()}><button type="submit" className="project-modal-header-save">보내기</button></a>
 								</div>
 							</Modal>
+							
 			</div>
 		)
 	}

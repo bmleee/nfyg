@@ -21,7 +21,7 @@ const ProjectEditorTab = ({save, tabLinkBase}) => {
 	return (
 	<div className="exhibition-editor-tab">
 		<div className="exhibition-editor-title">
-		<h3>프로젝트 등록(*관리자 권한)</h3>
+		<h3>프로젝트 등록</h3>
 		</div>
 		<button className="share-button" onClick={save}>발행하기</button>
 		<div className="exhibition-editor-tab-container"><Link to={`${tabLinkBase}/abstract`}><button className={abstartClassName}>개 요</button></Link></div>
