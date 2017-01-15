@@ -19,7 +19,7 @@ export default class Signup extends Component {
 		let email = this.refs.email.value;
 		let pw = this.refs.pw.value; // TODO: encrypt password
 		let display_name = this.refs.display_name.value;
-		let nick_name = this.refs.nick_name.value;
+		let display_name = this.refs.display_name.value;
 		let photoURL = '/assets/images/user_default.png';
 
 		let form = new FormData(this.refs.form);
@@ -71,7 +71,7 @@ export default class Signup extends Component {
 						<input type="text" className="user-login-username" name="user_name" placeholder="이름" />
 					</div>
 					{/* <div>
-						<input type="text" className="user-login-id" name="nick_name" placeholder="닉네임" />
+						<input type="text" className="user-login-id" name="display_name" placeholder="닉네임" />
 					</div> */}
 					<div>
 						<input type="submit" className="login-btn" value="JOIN 7Pictures" />

@@ -26,7 +26,7 @@ const createPost = async (artist, target, type) => {
 	await Promise.all(rangeArray(numPosts, 15).map(async (_) => {
 		let body = {
 			author: {
-				name: artist.nick_name,
+				name: artist.display_name,
 				iconSrc: artist.image,
 				user: artist._id
 			},

@@ -10,7 +10,7 @@ const PurchaseSchema = new Schema({
   project: { type: Schema.Types.ObjectId, ref: 'Project' },
   product: { type: Schema.Types.ObjectId, ref: 'Product' },
   user_info: {
-    nick_name: { type: String, required: true },
+    display_name: { type: String, required: true },
     fb_id: { type: String, required: true },
     image: { type: String, required: true },
   },
@@ -125,7 +125,7 @@ PurchaseSchema.methods.toFormat = async function (type, ...args) {
         return {
           fbId: this.user_info.fb_id,
           image: this.user_info.image,
-          name: this.user_info.nick_name,
+          name: this.user_info.display_name,
           money: this.purchase_info.amount,
           support_at: this.purchase_info.schedule_at * 1000,
         }

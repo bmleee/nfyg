@@ -14,10 +14,13 @@ class Login extends Component {
 			<div className="login-page">
 			<div className="user-login">
 			<img className="login-7pictures-logo" src="//52.78.180.103:8080/assets/images/7pictures_logo.png" />
-				<button className="fb-login-btn" onClick={this._onFacebookClick}>
-					<FontAwesome className="fb-login-icon" name='facebook' size='lg' />
-					페이스북으로 로그인
-				</button>
+				<a href="/api/users/login-facebook">
+					<button className="fb-login-btn">
+						<FontAwesome className="fb-login-icon" name='facebook' size='lg' />
+						페이스북으로 로그인
+					</button>
+				</a>
+
 				<p className="login-more">또는</p>
 
 				<form className="user-login-form" ref="form" method="post" action="/api/users/login" encType="multipart/form-data">

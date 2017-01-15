@@ -1,50 +1,65 @@
+import bkfd2Password from 'pbkdf2-password'
+
 import UserModel, { access_levels } from '../models/user'
 import AddressModel from '../models/address'
 import { rangeArray } from '../../lib/utils'
 import { randomString } from './utils'
 
+const hasher = bkfd2Password();
+
+const createUser = async ({name, displayName, access_level, local_email, password}) => {
+	hasher({password}, async function (err, pwd, salt, hash) {
+		return await UserModel.create({
+			name,
+			displayName,
+			access_level,
+			local_email,
+			password: hash,
+			salt: salt,
+		})
+	})
+}
+
 const defaultUsers = async () => {
+	let password = '123123123'
+
 	try {
-		await UserModel.create({
-			user_name: 'admin',
-			access_level: 1000,
-			email: 'admin@7pictures.co.kr',
-			nick_name: '관리자',
-			password: '123123123',
-			provider: 'local'
+		await createUser({
+			name: '관리자',
+			display_name: '관리자',
+			access_level: 100,
+			local_email: 'admin@7pictures.co.kr',
+			password
 		})
 	} catch (e) {}
 
 	try {
-		await UserModel.create({
-			user_name: 'user',
+		await createUser({
+			name: '일반유저',
+			display_name: '일반유저',
 			access_level: 0,
-			email: 'user@7pictures.co.kr',
-			nick_name: '일반유저',
-			password: '123123123',
-			provider: 'local'
+			local_email: 'user@7pictures.co.kr',
+			password
 		})
 	} catch (e) {}
 
 	try {
-		await UserModel.create({
-			user_name: 'artist',
+		await createUser({
+			name: '작가',
+			display_name: '작가',
 			access_level: 1,
-			email: 'artist@7pictures.co.kr',
-			nick_name: '작가',
-			password: '123123123',
-			provider: 'local'
+			local_email: 'artist@7pictures.co.kr',
+			password
 		})
 	} catch (e) {}
 
 	try {
-		await UserModel.create({
-			user_name: 'editor',
+		await createUser({
+			name: '편집자',
+			display_name: '편집자',
 			access_level: 10,
-			email: 'editor@7pictures.co.kr',
-			nick_name: '편집자',
-			password: '123123123',
-			provider: 'local'
+			local_email: 'artist@7pictures.co.kr',
+			password
 		})
 	} catch (e) {}
 }
@@ -59,13 +74,12 @@ const randomusers = async () => {
 			async () => {
 				let string = randomString('sample_user_access_level_' + access_level)
 				try {
-					await UserModel.create({
-						user_name: string,
+					await createUser({
+						name: string,
+						display_name: string,
 						access_level,
-						email: `${string}@7pictures.co.kr`,
-						nick_name: string,
-						password: '123123123',
-						provider: 'local'
+						local_email: `${string}@7pictures.co.kr`,
+						password: '123123123'
 					})
 				} catch (e) {console.error(e);}
 			}

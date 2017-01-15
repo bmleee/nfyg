@@ -98,7 +98,7 @@ const createExhibition = async (artist) => {
 			"exhibitionName": `test_${randomString()}`,
 		},
 		"creator": {
-				"creatorName": artist.nick_name,
+				"creatorName": artist.display_name,
 				"creatorImgSrc": artist.image,
 				"creatorDescription": randomString(),
 		},

@@ -37,7 +37,7 @@ const createQnA = async (author, target, type) => {
 		async ({ author, target }) => {
 			let body = {
 				author: {
-					name: author.nick_name,
+					name: author.display_name,
 					iconSrc: author.image,
 					user: author._id,
 				},

@@ -32,8 +32,8 @@ const logger = expressWinston.logger({
 		new winston.transports.DailyRotateFile({
 			level: 'info',
 			name: 'daily.info.log',
-			filename: path.join(__dirname, '../log/info-'),
-			datePattern: 'yyyy-MM-dd-HH-mm',
+			filename: path.join(__dirname, '../log/info '),
+			datePattern: 'yyyy-MM-dd HH:mm:ss',
 			maxsize: 524288000, // 500MB
 			maxFiles: 5,
 			timestamp: timestampHelper,
@@ -55,8 +55,8 @@ const logger = expressWinston.logger({
 		new winston.transports.DailyRotateFile({
 			level: 'error',
 			name: 'daily.error.log',
-			filename: path.join(__dirname, '../log/error-'),
-			datePattern: 'yyyy-MM-dd-HH-mm',
+			filename: path.join(__dirname, '../log/error '),
+			datePattern: 'yyyy-MM-dd HH:mm:ss',
 			maxsize: 524288000, // 500MB
 			maxFiles: 5,
 			timestamp: timestampHelper,

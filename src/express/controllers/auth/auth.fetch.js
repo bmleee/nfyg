@@ -31,6 +31,8 @@ import QnARouter from './auth.fetch.qna'
 import OptionRouter from './auth.fetch.option'
 import EditorRouter from './auth.fetch.editor'
 
+import { authorizedUser } from '../../lib/renderUser'
+
 const router = express.Router();
 
 router.use('/', (req, res, next) => {
@@ -82,10 +84,7 @@ router.get('/', async (req, res) => {
 		}))
 
 		res.json({
-			user: {
-				isLoggedIn: !!req.session.user,
-				isAuthorized: true // always true
-			},
+			user: authorizedUser(req.session.user),
 			data: {
 				home
 			}
@@ -95,11 +94,6 @@ router.get('/', async (req, res) => {
 		res.json({error: e})
 	}
 
-})
-
-router.get('/*', async (req, res) => {
-	console.log('auth.fetch.url /*', req.url)
-	res.json({})
 })
 
 export default router;

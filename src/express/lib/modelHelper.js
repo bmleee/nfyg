@@ -3,7 +3,7 @@ import QnAModel from '../models/qna'
 export async function createQnA({project, product, title, text, user}) {
   let body = {
     author: {
-      name: user.nick_name,
+      name: user.display_name,
       iconSrc: user.image,
       user: user._id,
     },
@@ -25,7 +25,7 @@ export async function createQnA({project, product, title, text, user}) {
 export async function createCommentOnQnA({_id, text, user}) {
   let body = {
     author: {
-      name: user.nick_name,
+      name: user.display_name,
       iconSrc: user.image,
       user: user._id,
     },

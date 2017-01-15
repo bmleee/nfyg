@@ -155,8 +155,10 @@ exports.saveOAuthUserProfile = function(req, profile, done) {
 // Create a new controller method for signing out
 exports.logout = function(req, res) {
 	// Use the Passport 'logout' method to logout
+	delete req.session.user
 	req.logout();
 
+	console.log('/users/logout', 'req.session.user', req.session.user);
 	// Redirect the user back to the main application page
 	res.redirect('/');
 };
