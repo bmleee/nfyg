@@ -4,8 +4,9 @@ import bkfd2Password from 'pbkdf2-password'
 
 import multer from 'multer'
 
+import UserModel from '../../models/user'
+
 import passport from 'passport'
-import users from './users.server.controller'
 import profile from './users.profile'
 import address from './users.address'
 import payment from './users.payment'
@@ -24,7 +25,7 @@ const signupMulter = multer()
 // Set up the 'signup' routes
 router.post('/signup', signupMulter.array(), (req, res) => {
   hasher({password: req.body.password}, function(err, pass, salt, hash) {
-    User.create({
+    UserModel.create({
       ...req.body,
       access_level: 0,
       local_email: req.body.email,

@@ -4,6 +4,8 @@ export function unauthorizedUser(user, canEdit = false) {
 		isLoggedIn: !!user,
 		isAuthorized: false,
 		canEdit: canEdit,
+		displayName: user && user.display_name,
+		image: user && user.image
 	}
 }
 
@@ -12,5 +14,7 @@ export function authorizedUser(user, canEdit = false) {
 		isLoggedIn: !!user,
 		isAuthorized: true,
 		canEdit: canEdit,
+		displayName: user && user.display_name,
+		image: user && user.image
 	}
 }

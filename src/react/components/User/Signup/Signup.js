@@ -19,7 +19,6 @@ export default class Signup extends Component {
 		let email = this.refs.email.value;
 		let pw = this.refs.pw.value; // TODO: encrypt password
 		let display_name = this.refs.display_name.value;
-		let display_name = this.refs.display_name.value;
 		let photoURL = '/assets/images/user_default.png';
 
 		let form = new FormData(this.refs.form);
@@ -43,7 +42,7 @@ export default class Signup extends Component {
 
 		}
 	}
-	
+
 	_onFacebookClick = () => {
 		facebook_login()
 	}
@@ -59,7 +58,7 @@ export default class Signup extends Component {
 					페이스북으로 회원가입
 				</button>
 				<p className="login-more">또는</p>
-				
+
 				<form ref="form" method="post" action="/api/users/signup" encType="multipart/form-data" onSubmit={this._submit}>
 					<div>
 						<input type="email" className="user-login-id" name="email" placeholder="이메일" />
@@ -68,7 +67,7 @@ export default class Signup extends Component {
 						<input type="password" className="user-login-password" name="password" placeholder="비밀번호" />
 					</div>
 					<div>
-						<input type="text" className="user-login-username" name="user_name" placeholder="이름" />
+						<input type="text" className="user-login-username" name="display_name" placeholder="이름" />
 					</div>
 					{/* <div>
 						<input type="text" className="user-login-id" name="display_name" placeholder="닉네임" />

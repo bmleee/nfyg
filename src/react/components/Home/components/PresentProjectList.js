@@ -77,7 +77,7 @@ class PresentProjectList extends Component {
 							<div className="project-summary-detail">
 							<div className="project-remain-days">{Math.round(currentMoney / targetMoney * 100)}%</div>
 							<div className="project-summary-current-money">D-{remainingDays}</div>
-							{currentMoney.toLocaleString()}원
+							{(currentMoney || 0).toLocaleString()}원
 							</div>
 						    {/* 직접후원 {numDirectSupports}명 | 간접후원 {numIndirectSupports}명 */}
 						</div>

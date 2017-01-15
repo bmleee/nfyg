@@ -111,7 +111,7 @@ export default async function initProduct() {
 
 	console.log('trying to init Product collections');
 
-	const artist = await UserModel.findOne({ user_name: 'artist' })
+	const artist = await UserModel.findOne({ name: '작가' })
 
 	const in_progress = await ProductModel.count({"abstract.state": "in_progress"})
 	const preparing = await ProductModel.count({"abstract.state": "preparing"})

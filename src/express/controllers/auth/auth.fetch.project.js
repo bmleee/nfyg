@@ -41,21 +41,26 @@ const router = express.Router();
  * @type {[type]}
  */
 router.get('/:projectName/:option?/:tab?', async (req, res, next) => {
-	const user_id = req.session.user && req.session.user._id
-	const user = await UserModel.findOne({_id: user_id});
-
 	const {
 		projectName,
 		option,
 	} = req.params;
 
+	if(['edit', 'rewards', 'addresses', 'payments'].includes(option)) {
+		return next() // go to /:projectName/edit
+	}
+
 	if (restrictedNames.includes(projectName)) {
 		return res.redirect('/404')
 	};
 
-	if(['edit', 'rewards', 'addresses', 'payments'].includes(option)) {
-		return next() // go to /:projectName/edit
-	}
+
+	let user = req.session.user
+	user = await UserModel.findOne({_id: user._id})
+
+	console.log('user', user);
+	console.log('user instanceof UserModel', user instanceof UserModel);
+	console.log('req.user instanceof UserModel', req.user instanceof UserModel);
 
 	try {
 		const project = await ProjectModel.findByName(projectName)

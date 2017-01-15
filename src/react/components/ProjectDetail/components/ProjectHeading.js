@@ -91,7 +91,7 @@ class ProjectHeading extends Component {
 						<div className="project-heading-summary-money">
 						<div className="project-heading-summary-percent">{Math.round(currentMoney / targetMoney * 100)}<span className="heading-summary-status">%</span></div>
 						<div className="project-heading-summary-dday">D-{remainingDays}<span className="heading-summary-status"></span></div>
-						{currentMoney.toLocaleString()}<span className="heading-summary-status">원</span></div>
+						{(currentMoney || 0).toLocaleString()}<span className="heading-summary-status">원</span></div>
 					</div>
 				</div>
 				<button className="share-button">페이스북 공유로 후원하기</button>

@@ -31,7 +31,7 @@ const init = async () => {
 	user.user = await UserModel.find({access_level: 0})
 	user.artist = await UserModel.find({access_level: 1})
 	user.editor = await UserModel.find({access_level: 10})
-	user.admin = await UserModel.find({user_name: 'admin'})
+	user.admin = await UserModel.find({name: '관리자'})
 
 	project.all = await ProjectModel.find({})
 	project.preparing = await ProjectModel.find({"abstract.state": "preparing"})

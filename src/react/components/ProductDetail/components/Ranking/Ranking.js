@@ -5,7 +5,7 @@ import {date2string} from '~/src/react/lib/utils';
 
 import _ from 'lodash';
 
- 
+
 
 const borderStyle = {
 	border: '1px solid gray'
@@ -94,7 +94,7 @@ class Ranking extends Component {
 					<p className="sharing-summary">
 				    <span><p className="sharing-name">{name}</p>{' '}{date2string(support_at) /* TODO: Date to string... */}</span>
 				    <span>{message}</span>
-				    <span><p className="sharing-money">{money.toLocaleString()}</p>원을 후원함</span>
+				    <span><p className="sharing-money">{(money || 0).toLocaleString()}</p>원을 후원함</span>
 	        		</p>
 		        	<p className="likes-num">
 						<h4 className="likes-text">{ likes.toLocaleString() }</h4>

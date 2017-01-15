@@ -7,61 +7,62 @@ import { randomString } from './utils'
 
 const hasher = bkfd2Password();
 
-const createUser = async ({name, displayName, access_level, local_email, password}) => {
-	hasher({password}, async function (err, pwd, salt, hash) {
-		return await UserModel.create({
+const createUser = ({name, display_name, access_level, local_email, password}, cb) => {
+	hasher({password}, function (err, pwd, salt, hash) {
+		UserModel.create({
 			name,
-			displayName,
+			display_name,
 			access_level,
 			local_email,
 			password: hash,
 			salt: salt,
-		})
+		}, cb)
 	})
 }
 
 const defaultUsers = async () => {
 	let password = '123123123'
 
-	try {
-		await createUser({
-			name: '관리자',
-			display_name: '관리자',
-			access_level: 100,
-			local_email: 'admin@7pictures.co.kr',
-			password
-		})
-	} catch (e) {}
+	createUser({
+		name: '관리자',
+		display_name: '관리자',
+		access_level: 100,
+		local_email: 'admin@7pictures.co.kr',
+		password
+	}, function (err, user) {
+		if(err) console.error(err);
+	})
 
-	try {
-		await createUser({
-			name: '일반유저',
-			display_name: '일반유저',
-			access_level: 0,
-			local_email: 'user@7pictures.co.kr',
-			password
-		})
-	} catch (e) {}
+	createUser({
+		name: '일반유저',
+		display_name: '일반유저',
+		access_level: 0,
+		local_email: 'user@7pictures.co.kr',
+		password
+	}, function (err, user) {
+		if(err) console.error(err);
+	})
 
-	try {
-		await createUser({
-			name: '작가',
-			display_name: '작가',
-			access_level: 1,
-			local_email: 'artist@7pictures.co.kr',
-			password
-		})
-	} catch (e) {}
+	createUser({
+		name: '작가',
+		display_name: '작가',
+		access_level: 1,
+		local_email: 'artist@7pictures.co.kr',
+		password
+	}, function (err, user) {
+		if(err) console.error(err);
+	})
 
-	try {
-		await createUser({
-			name: '편집자',
-			display_name: '편집자',
-			access_level: 10,
-			local_email: 'artist@7pictures.co.kr',
-			password
-		})
-	} catch (e) {}
+	createUser({
+		name: '편집자',
+		display_name: '편집자',
+		access_level: 10,
+		local_email: 'editor@7pictures.co.kr',
+		password
+	}, function (err, user) {
+		if(err) console.error(err);
+	})
+
 }
 
 const randomusers = async () => {

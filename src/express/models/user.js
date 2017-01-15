@@ -52,16 +52,6 @@ const UserSchema = new Schema({
 	products: [{ type: Schema.Types.ObjectId, ref: 'Project' }],
 });
 
-// Use a pre-save middleware to hash the password
-UserSchema.pre('save', function(next) {
-	if (this.password) {
-		this.salt = new Buffer(crypto.randomBytes(16).toString('base64'), 'base64');
-		this.password = this.hashPassword(this.password);
-	}
-
-	next();
-});
-
 // Configure the 'UserSchema' to use getters and virtuals when transforming to JSON
 UserSchema.set('toJSON', {
 	getters: true,
@@ -87,18 +77,23 @@ UserSchema.methods.toFormat = async function(type, ...args) {
 }
 
 UserSchema.methods.supportedMoney = async function({projectName, productName}) {
-	let [
-		purchases,
-		shares
-	] = await Promise.all([
-		PurchaseModel.findByUser(user),
-		FacebookTracker.getUserSummaryOnProject(user.id, projectName || productName),
-	])
+	try {
+		let [
+			purchases,
+			shares
+		] = await Promise.all([
+			PurchaseModel.findByUser(this),
+			FacebookTracker.getUserSummaryOnProject(this.id, projectName || productName),
+		])
 
-	const sum = (a, b) => a + b
+		const sum = (a, b) => a + b
 
-	return purchases.map(p => p.purchase_info.amount).reduce(sum) +
-		shares.map(s => 1000 + 200 * (s.comments + s.shares + s.likes)).reduce(sum)
+		return purchases.map(p => p.purchase_info.amount).reduce(sum) +
+			shares.map(s => 1000 + 200 * (s.comments + s.shares + s.likes)).reduce(sum)
+	} catch (e) {
+		console.error(e);
+		return 0;
+	}
 };
 
 UserSchema.plugin(autoIncrement.plugin, { model: 'User', field: 'id' });

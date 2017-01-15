@@ -42,6 +42,7 @@ export default class App extends Component {
 		// propagate util funtions as global function
 		if(canUseDOM) {
 			window.appUtils = this.appUtils
+			window.App = this
 		} else {
 			global.appUtils = this.appUtils
 		}

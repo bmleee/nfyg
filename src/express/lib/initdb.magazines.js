@@ -29,7 +29,7 @@ const createMagazine = async (editor, category) => {
 		},
 
 		creator: {
-			creatorName: editor.displayName,
+			creatorName: editor.display_name,
 			creatorImgSrc: editor.image,
 			creatorLocation: randomString('test_creator_location'),
 			creatorDescription: randomString('test_creatorDescription'),

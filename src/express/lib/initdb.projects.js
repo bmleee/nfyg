@@ -88,7 +88,7 @@ export default async function initProject() {
 
 	console.log('trying to init Project collections');
 
-	const artist = await UserModel.findOne({ user_name: 'artist' })
+	const artist = await UserModel.findOne({ name: '작가' })
 
 	const in_progress = await ProjectModel.count({"abstract.state": "in_progress"})
 	const preparing = await ProjectModel.count({"abstract.state": "preparing"})
