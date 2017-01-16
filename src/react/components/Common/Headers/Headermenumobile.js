@@ -34,6 +34,11 @@ class Headermenumobile extends Component {
   }
 
 	render() {
+		let {
+			isLoggedIn,
+			displayName,
+			image,
+		} = appUtils.getUser()
 
 		return (
 			<div>
@@ -54,38 +59,53 @@ class Headermenumobile extends Component {
 						</div>
 					</Collapsible>
 
-					<Link to={`/`}>
 					<div className="header-menu-mobile-logo">
+							<Link to={`/`}>
 							<img className="header-menu-logo" src='/assets/images/7pictures_logo_black.svg'/>
+							</Link>
 					</div>
-					</Link>
 
 					<div className="header-menu-mobile-burger">
 						<Menu right width={200} isOpen={ false } customBurgerIcon={ <button className="customBurgerIcon" /> }>
-							<img className="mobile-burger-user-icon" src='./assets/images/slider-thumb3.JPG' width={70} height={70} />
-							<p className="mobile-burger-user-name">Lee Byeong-Man</p>
-
-
+							
+							{
+							isLoggedIn && 
+							<img className="mobile-burger-user-icon" src={image} width={70} height={70} />
+							}
+							{
+							isLoggedIn && 
+							<p className="mobile-burger-user-name">{displayName}</p>
+							}
+							{
+							isLoggedIn && (
 							<Link to={`/profile/user`}>
 							<div className="mobile-burger-profile-container">
 								<p className="mobile-burger-profile">프로필 설정</p>
 							</div>
-							</Link>
-
+							</Link> )
+							}
+							{
+							isLoggedIn && (
 							<Link to={`/profile/user`}>
 							<div className="mobile-burger-profile-container">
 								<p className="mobile-burger-profile">내 페이지</p>
 							</div>
-							</Link>
-
-							{/* when user logged out
+							</Link>	)
+							}
+								
+						
+							{
+							!isLoggedIn && (
 							<Link to={`/login`}>
 								<p className="mobile-burger-login">LOG IN</p>
-							</Link>
+							</Link> )
+							}
+							{
+							!isLoggedIn && (
 							<Link to={`/signup`}>
 								<p className="mobile-burger-signup">SIGN UP</p>
-							</Link>
-							*/}
+							</Link> )
+							}
 
 							<Link to={`/`}>
 								<p className="mobile-burger-whatson">What's on?</p>
@@ -98,14 +118,18 @@ class Headermenumobile extends Component {
 							<Link to={`/sponsors`}>
 								<p className="mobile-burger-sponsor">Sponsor</p>
 							</Link>
-
+							{
+							isLoggedIn &&
 							<input className="mobile-burger-suggest-modal-button" type="button" value="제안하기" onClick={() => this.openModal()} />
-
+							}
+							{
+							isLoggedIn && (
 							<div className="mobile-burger-logout-container">
 							<Link to={`/api/users/logout`}>
 								<button className="mobile-burger-logout">로그아웃</button>
 							</Link>
-							</div>
+							</div> )
+							}
 
 							<div className="mobile-burger-sns-container">
 								<a href="https://www.facebook.com/7pictures" target="_blank">
@@ -137,7 +161,8 @@ class Headermenumobile extends Component {
 				</div>
 				<div className="header-menu-mobile-empty-space">
 				</div>
-
+							{
+							isLoggedIn && (
 							<Modal className="project-suggest-modal" visible={this.state.visible} width="480" height="560px" effect="fadeInDown" onClickAway={() => this.closeModal()}>
 								<div className="project-modal-header">
 								<h3 className="project-modal-header-title">제안하기</h3>
@@ -166,7 +191,8 @@ class Headermenumobile extends Component {
 								<div className="project-modal-footer">
 								<a className="project-modal-header-save-container" onClick={() => this.closeModal()}><button type="submit" className="project-modal-header-save">보내기</button></a>
 								</div>
-							</Modal>
+							</Modal> )
+						}
 
 			</div>
 		)

@@ -28,6 +28,12 @@ class Headermenuabsolute extends Component {
   }
 
 	render() {
+		
+		let {
+			isLoggedIn,
+			displayName,
+			image,
+		} = appUtils.getUser()
 
 		return (
 			<div className="header-menu-white">
@@ -51,17 +57,29 @@ class Headermenuabsolute extends Component {
 					</div>
 					<div className="header-menu-white-right">
 						
-						{/* when user logged out
+						{
+							!isLoggedIn && (
 						<Link to={`/login`}>
 							<p className="header-menu-text-right">LOG IN</p>
 						</Link>
+							)
+						}
+						{
+							!isLoggedIn && (
 						<Link to={`/signup`}>
 							<p className="header-menu-text-right">SIGN UP</p>
-						</Link> */}
-						
-						{/* when user logged in */}
-						<input className="suggest-modal-button" type="button" value="제안하기" onClick={() => this.openModal()} />
+						</Link>
+						)
+						}
 
+						{
+						
+						
+						
+							isLoggedIn && <input className="suggest-modal-button" type="button" value="제안하기" onClick={() => this.openModal()} />
+						}
+						{
+							isLoggedIn && (
 						<Modal className="project-suggest-modal" visible={this.state.visible} width="480" height="560px" effect="fadeInDown" onClickAway={() => this.closeModal()}>
 							<div className="project-modal-header">
 							<h3 className="project-modal-header-title">제안하기</h3>
@@ -91,8 +109,13 @@ class Headermenuabsolute extends Component {
 							<a className="project-modal-header-save-container" onClick={() => this.closeModal()}><button type="submit" className="project-modal-header-save">보내기</button></a>
 							</div>
 						</Modal>
+						)
+						}
+
+						{
+							isLoggedIn && (
 						<div className="user-hover-menu">
-							<img className="menu-user-icon" src='./assets/images/slider-thumb3.JPG' width={32} height={32} />
+							<img className="menu-user-icon" src={image} width={32} height={32} />
 							<div className="user-hover-menu-arrow"></div>
 							<div className="user-hover-menu-container">
 								<Link to={`/profile/user`}>
@@ -106,7 +129,8 @@ class Headermenuabsolute extends Component {
 								</Link>
 							</div>
 						</div>
-						
+						)
+						}
 						
 					</div>
 				</div>

@@ -302,6 +302,7 @@
     .mobile-burger-sns-container {
         display : block;
         width : 100%;
+        margin-top : 30px;
         .mobile-burger-sns {
             display : inline-block;
             width : 25%;
@@ -349,7 +350,7 @@
         font-weight : 600;
         color : #fff;
         background : transparent;
-        margin : 10px 0px 30px 0px;
+        margin-top : 10px;
     }
     .mobile-burger-logout:after {
         font-family : Ionicons;

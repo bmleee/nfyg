@@ -10,19 +10,18 @@ div, span, h1, h2, h3, h4, button {
     width : 100% !important;
 }
 .editorStyles__editor {
-    padding : 20px 40px !important;
+    p {
+       font-size : 18px !important;
+        line-height : 1.5;
+        color : #333;
+        margin : 10px 0px !important;
+        @media (max-width : 500px) {
+             font-size : 16px !important;
+        } 
+    }
     span {
         padding : 0px;
         margin-top : 0px;
-    }
-    .public-DraftStyleDefault-div {
-        font-size : 18px;
-        line-height : 1.5;
-        color : #333;
-        margin : 10px 0px;
-        @media (max-width : 500px) {
-             font-size : 16px;
-        }
     }
     h1 {
         font-size : 36px !important;
@@ -78,13 +77,13 @@ div, span, h1, h2, h3, h4, button {
     border : none !important;
     padding : 0px !important;
     margin : 2em auto;
-    .public-DraftStyleDefault-div {
-        font-size : 18px;
+    p {
+        font-size : 18px !important;
         line-height : 1.5;
         color : #333;
-        margin : 20px 0px;
+        margin : 20px 0px !important;
         @media (max-width : 500px) {
-             font-size : 16px;
+             font-size : 16px !important;
         }
     }
     h1 {
