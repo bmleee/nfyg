@@ -65,7 +65,7 @@ export default class SevenEditor extends Component {
 	};
 
 	focus = () => {
-		this.editor.focus();
+		// this.editor.focus();
 	};
 
 	componentDidMount() {
@@ -109,6 +109,14 @@ export default class SevenEditor extends Component {
 }
 
 export class Viewer extends Component {
+	shouldComponentUpdate(nextProps, nextState) {
+		let preRaw = this.props.raw
+		let nextRaw = nextProps.raw
+
+		return JSON.stringify(preRaw) !== JSON.stringify(nextRaw)
+	}
+
+
 	render() {
 		let {
 			raw
@@ -148,4 +156,7 @@ export class Viewer extends Component {
 			</div>
 		);
 	}
+
+	getState = () => this.state.editorState
+	getRaw = () => convertToRaw(this.state.editorState.getCurrentContent())
 }
