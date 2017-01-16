@@ -191,9 +191,25 @@ export async function createQnA({title = 'empty-title', text, projectName, produ
 
 	const config = {
 		method: 'post',
-		url: `/api/auth/fetch/${base}/qna`,
+		url: `/api/auth/fetch/${base}/qnas`,
 		withCredentials: true,
 		data: { title, text },
+	}
+
+	return await _request(config)
+}
+
+export async function createPost({projectName, productName, title, content, thresholdMoney, isDirectSupport}) {
+	let base;
+
+	if (projectName) base = `projects/${projectName}`
+	else if (productName) base = `products/${productName}`
+
+	const config = {
+		method: 'post',
+		url: `/api/auth/fetch/${base}/posts`,
+		withCredentials: true,
+		data: { title, content, thresholdMoney, isDirectSupport },
 	}
 
 	return await _request(config)
@@ -202,9 +218,22 @@ export async function createQnA({title = 'empty-title', text, projectName, produ
 export async function createCommentOnQnA({text, qna_id}) {
 	const config = {
 		method: 'post',
-		url: `/api/auth/fetch/qna/${qna_id}/comment`,
+		url: `/api/auth/fetch/qnas/${qna_id}/comment`,
 		withCredentials: true,
 		data: { text, qna_id },
+	}
+
+	return await _request(config)
+}
+
+
+
+export async function createCommentOnPost({text, post_id}) {
+	const config = {
+		method: 'post',
+		url: `/api/auth/fetch/posts/${post_id}/comment`,
+		withCredentials: true,
+		data: { text },
 	}
 
 	return await _request(config)

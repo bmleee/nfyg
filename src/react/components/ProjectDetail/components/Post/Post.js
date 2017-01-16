@@ -1,42 +1,79 @@
 import React, { Component, PropTypes } from 'react';
-import { Viewer } from '~/src/react/components/DraftEditor/SevenEditor'
+import update from 'immutability-helper'
+
+import Modal from '~/src/react/components/react-awesome-modal';
+
+import { EditorState, convertToRaw } from 'draft-js'
+import Editor, { Viewer } from '~/src/react/components/DraftEditor/SevenEditor'
+
 import {
 	PostComments,
 } from './';
 
 import {date2string} from '~/src/react/lib/utils'
+import { createPost } from '~/src/react/api/AppAPI'
 
-import Modal from '~/src/react/components/react-awesome-modal';
 
 class Post extends Component {
-	
+
+	state = {
+		visible : false,
+		postEditorRaw: convertToRaw(EditorState.createEmpty().getCurrentContent()),
+	}
+
 	constructor(props) {
     super(props);
-    this.state = {
-        visible : false
-    	}
-    }
+  }
 
-    openModal() {
-    this.setState({
-        visible : true
-    	});
-    }
+  openModal = () => {
+	  this.setState({
+			visible : true
+		});
+  }
 
-    closeModal() {
-     this.setState({
-        visible : false
-    	});
-    }
-	
+  closeModal = () => {
+		this.setState({
+			visible : false,
+			postEditorRaw: convertToRaw(EditorState.createEmpty().getCurrentContent()),
+		});
+  }
+
+	_onClickAddPost = async () => {
+		// await add new post
+		try {
+			let { abstract: { projectName } } = this.props
+			let title = document.querySelector("#post-title").value
+			let thresholdMoney = document.querySelector("#post-threshold-money").value
+			let isDirectSupport = false // document.querySelector("#post-is-direct-support").checked
+			let content = JSON.stringify(convertToRaw(this.refs.editor.state.editorState.getCurrentContent()))
+
+			console.log(content);
+
+			if (!title) {
+				alert('소식 제목을 입력하세요.')
+				return
+			} else if (content.length < 150) { // empty content...
+				alert('소식 내용을 더 채워주세요.')
+				return
+			}
+
+			let { response } = await createPost({projectName, title, content, thresholdMoney, isDirectSupport})
+			this.props._newPost(response)
+			this.closeModal()
+		} catch (e) {
+			console.error(e);
+		}
+	}
+
 	render() {
 		const {
 			post: {
 				heading: {iconSrc, description, intro},
 				posts
 			},
+			user,
 		} = this.props;
-		
+
 		let title = "포스트 제목 예시";
 		let condition1 = "전체공개";
 		let condition2 = "후원자공개";
@@ -45,6 +82,7 @@ class Post extends Component {
 		console.log('Post', this);
 
 		const item = posts.map( ({
+			_id,
 			opened,
 			author,
 			title,
@@ -53,53 +91,66 @@ class Post extends Component {
 			likes,
 			post,
 			comments,
-			content
+			content,
+			thresholdMoney
 		}, index) => (
 			<div className="project-detail-post-item" key={index}>
 				<div className="post-item-title-summary">
 					<h3 className="post-item-title">{title}</h3>
 					<span className="post-item-title-detail">{postnum}번째 소식</span>
 					<span className="post-item-title-detail">{date2string(created_at)}</span>
-					<span className="post-item-title-condition1">{condition1}</span> 
-					{/* <span className="post-item-title-condition2">{condition2}</span> */}
+					{
+						thresholdMoney === 0
+							? <span className="post-item-title-condition1">{condition1}</span>
+							: <span className="post-item-title-condition2">{condition2}</span>
+					}
 				</div>
 				<div className="post-item-content-summary">
 					{
 						opened
 							? <Viewer raw={content}/>
 							: <div className="post-block">
-								<div className="post-block-icon"></div>
-								<p>프로젝트 공유 또는 리워드 구매를 통해</p>
-								<p>후원해주신 분들만 열람 가능합니다.</p>
+									<div className="post-block-icon"></div>
+									<p>프로젝트 공유 또는 리워드 구매를 통해</p>
+									<p>후원해주신 분들만 열람 가능합니다.</p>
 							  </div>
 					}
 				</div>
-				{ opened ? <PostComments comments={comments} postLikes={likes} /> : null }
+				{ opened ? <PostComments comments={comments} postLikes={likes} user={user} post_id={_id} _newCommentOnPost={this.props._newCommentOnPost} /> : null }
 			</div>
 		))
 
 		return (
 			<div className="project-detail-post">
-				
-				{/* 권한이 있는 유저만 보이는 소식 작성 버튼/모달
-				
+
+				{/* 권한이 있는 유저만 보이는 소식 작성 버튼/모달 */}
 				<button className="update-post-modal-button" onClick={() => this.openModal()}>소식 작성하기</button>
-				
+
 				<Modal className="card-add-modal" visible={this.state.visible} width="420" height="460px" effect="fadeInDown" onClickAway={() => this.closeModal()}>
 					<div className="card-add-modal-container">
 						<button className="share-modal-close" onClick={() => this.closeModal()}/>
 						<div>
 							<p className="profile-small-title">소식 작성하기</p>
-							<textarea className="upate-post-textarea"/>
+							<div>
+								<span>제목</span><input type="text" name="post-title" id="post-title" placeholder="제목"/>
+								<span>열람 가능 최소 금액</span><input type="number" name="post-threshold-money" id="post-threshold-money" placeholder="열람 가능 최소 금액"/>
+								{/* 직접 후원자에게만 보여주는 Post...? */}
+								{/* <span>직접 후원 전용</span><input type="checkbox" name="post-is-direct-support" id="post-is-direct-support" placeholder="직접 후원 전용"/> */}
+							</div>
+							<div className="modal-card-add-container">
+								<button className="modal-card-add" onClick={() => this._onClickAddPost()}>새소식 등록</button>
+								<button className="modal-card-add" onClick={() => this.closeModal()}>닫기</button>
+							</div>
+							<Editor
+								onChangeToRaw={this._onEditorChange}
+								raw={this.state.postEditorRaw}
+								ref="editor"
+							/>
 						</div>
-						<div className="modal-card-add-container">
-							<button className="modal-card-add" onClick={() => this.closeModal()}>새소식 등록</button>
-						</div>
+
 					</div>
 				</Modal>
-				
-				권한이 있는 유저만 보이는 소식 작성 버튼/모달 */}
-			
+
 				{/*
 				<div className="project-detail-post-heading" style={borderStyle}>
 					<img src={iconSrc} alt=""/>

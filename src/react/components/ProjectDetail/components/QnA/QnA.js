@@ -6,7 +6,7 @@ import { createQnA, createCommentOnQnA } from '~/src/react/api/AppAPI'
 import { PostComments } from '../Post/';
 
 import { SelectOptions } from '../../../../constants'
-import {date2string} from '~/src/react/lib/utils'
+import { date2string, newLinedString } from '~/src/react/lib/utils'
 import Collapsible from 'react-collapsible';
 
 const selectOptions = SelectOptions.QnA
@@ -28,15 +28,29 @@ class QnA extends Component {
 	}
 
 	_onClickAddQnA = async () => {
-		let text = document.getElementById("qna_text").value
-		let projectName = this.props.abstract.projectName
-		await createQnA({text, projectName})
+		try {
+			let text = document.getElementById("qna_text").value
+			let projectName = this.props.abstract.projectName
+			let { response } = await createQnA({text, projectName})
+			this.props._newQnA(response)
+			document.getElementById("qna_text").value = ''
+		} catch (e) {
+			console.error(e);
+		}
 	}
+
+
 
 	_onClickAddQnAComment = (index, _id) => {
 		return async () => {
-			let text = document.getElementById(`qna_${index}_comment`).value
-			await createCommentOnQnA({text, qna_id: _id})
+			try {
+				let text = document.getElementById(`qna_${index}_comment`).value
+				let { response } = await createCommentOnQnA({text, qna_id: _id})
+				this.props._newCommentOnQnA(_id, response)
+				document.getElementById(`qna_${index}_comment`).value = ''
+			} catch (e) {
+				console.error(e);
+			}
 		}
 	}
 
@@ -70,7 +84,7 @@ class QnA extends Component {
 						</p>
 						<p className="sharing-summary">
 							<span><p className="sharing-name">{author.name}</p>{date2string(created_at)}</span>
-							<span className="qna-detail-text">{text}</span>
+							<span className="qna-detail-text">{newLinedString(text)}</span>
 
 							{/* 대댓글 */}
 							<div className="qna-item-container">
@@ -88,7 +102,7 @@ class QnA extends Component {
 											</p>
 											<p className="sharing-summary">
 												<span><p className="sharing-name">{author.name}</p>{date2string(created_at)}</span>
-												<span>{text}</span>
+												<span>{newLinedString(text)}</span>
 											</p>
 										</div>
 									))

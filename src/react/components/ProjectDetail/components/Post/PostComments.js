@@ -1,38 +1,69 @@
 import React, { Component, PropTypes } from 'react';
-import {date2string} from '~/src/react/lib/utils'
+import update from 'immutability-helper'
+
+import { createCommentOnPost } from '~/src/react/api/AppAPI'
+import { date2string, newLinedString, } from '~/src/react/lib/utils'
 
 class PostComments extends Component {
 
 	state = {
 		commentsOpend: false,
+		numProjects: 0,
+		count: 4,
+		windowSize: 4,
 	}
-	
-	constructor() {
-		super(...arguments);
 
-		this.state = {
-			numProjects: 0,
-			count: 4,
-			windowSize: 4,
+	expandList = () => {
+		this.setState(update(this.state, {
+			count: { $set: this.state.count + this.state.windowSize },
+		}))
+	}
+
+	_onClickAddComment = async () => {
+		try {
+			const post_id = this.props.post_id
+			const text = document.querySelector(`#post-${post_id}-text`).value
+
+			if (!text) {
+				alert('댓글을 입력해 주세요')
+				return
+			}
+
+			const { response } = await createCommentOnPost({text, post_id})
+			this.props._newCommentOnPost(post_id, response)
+			document.querySelector(`#post-${post_id}-text`).value = ''
+		} catch (e) {
+			console.error(e);
 		}
 	}
-	
-	expandList() {
-		this.setState({
-			count: this.state.count + this.state.windowSize,
-		})
+
+
+	shouldComponentUpdate(nextProps, nextState) {
+		let preComments = this.props.comments
+		let nextComments = nextProps.comments
+
+		return JSON.stringify(preComments) !== JSON.stringify(nextComments)
 	}
-	
+
+
 	componentDidMount() {
-		this.setState({
-			numProjects: this.props.comments.length
-		})
+		this.setState(update(this.state, {
+			numProjects: { $set: this.props.comments.length },
+		}))
 	}
 
 	render() {
 		const {
+			post_id,
 			comments,
 			postLikes,
+			user: {
+				isLoggedIn,
+				isAuthorized,
+				canEdit,
+				displayName,
+				image
+			}
 		} = this.props;
 
 		const item = comments.map( ({
@@ -47,7 +78,7 @@ class PostComments extends Component {
 					</p>
 					<p className="sharing-summary">
 					<span><p className="sharing-name">{name}</p></span>
-					<span>{text}</span>
+					<span>{newLinedString(text)}</span>
 					</p>
 				</div>
 			</div>
@@ -58,12 +89,12 @@ class PostComments extends Component {
 			<div className="project-detail-post-item-comments-container">
 				<div className="project-detail-qna-form">
 					<div className="qna-form-textarea-container">
-					<img className="qna-form-user-icon" src="/assets/images/user_default.png" alt="" width={80} height={80} />
-					<textarea className="qna-form-textarea" name="" id="" cols="30" rows="4" placeholder=""></textarea>
+						<img className="qna-form-user-icon" src={image || '/assets/images/user_default.png'} alt="" width={80} height={80} />
+						<textarea className="qna-form-textarea" name="" id={`post-${post_id}-text`} cols="30" rows="4" placeholder={isLoggedIn ? '댓글을 남겨주세요.' : '로그인 하시면 댓글을 남기실 수 있습니다.'} readonly={isLoggedIn} />
 					</div>
 					<div className="qna-form-submit-container">
 					<p className="qna-form-submit-empty"/>
-					<button className="qna-form-submit">댓글 남기기</button>
+						<button className="qna-form-submit" disabled={!isLoggedIn} onClick={this._onClickAddComment}>댓글 남기기</button>
 					</div>
 				</div>
 				<div>
@@ -74,17 +105,18 @@ class PostComments extends Component {
 						this.state.numProjects > 4 && this.state.numProjects > this.state.count
 							? <button className="post-more-button" onClick={this.expandList.bind(this)}>댓글 더보기(00개)</button>
 							: null
-					}	
+					}
 				 </div>
 			</div>
 		)
 	}
 
-	_onClick() {
+	_showComments = () => {
 		this.setState({
 			commentsOpend: !this.state.commentsOpend,
 		});
 	}
+
 }
 
 export default PostComments;
