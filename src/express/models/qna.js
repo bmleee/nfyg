@@ -131,7 +131,7 @@ QnASchema.methods.likedByUser = async function(user) {
 
 QnASchema.methods.commentedByUser = async function(user, text) {
 	try {
-		let name = user.user_name
+		let name = user.display_name
 		let iconSrc = user.image
 		let comments = this.comments || []
 		comments.push({
@@ -146,7 +146,7 @@ QnASchema.methods.commentedByUser = async function(user, text) {
 		this.comments = comments
 		this.numComments = comments.length
 		await this.save()
-		return this
+		return this.comments[this.comments.length - 1] // return last comment
 	} catch (e) {
 		console.error(e);
 		return false

@@ -22,7 +22,7 @@ let PostSchema = new Schema({
 	abstract: {
 		openType: {type: String, enum: ['to-all', 'to-supporter', 'to-buyer', 'to-sharer', 'to-creator']}, // to-supporter = to-buyer || to-sharer
 		// no: {type: Number, unique: true, required: true}, // n-th post
-		isDirectSupport: {type: Boolean, required: true},
+		isDirectSupport: {type: Boolean, required: true, default: false},
 		thresholdMoney: {type: Number, required: true, default: 0},
 		title: {type: String, required: true},
 		created_at: {type: Date, default: Date.now()},
@@ -38,16 +38,13 @@ let PostSchema = new Schema({
 		},
 		text: {type: String, required: true},
 		likes: [{type: Schema.Types.ObjectId, ref: 'User'}],
-		// numLikes: {type: Number, default: 0}, // TODO: be virtual field
+		// numLikes: {type: Number, default: 0}, // TODO: can't be virtual field
 	}],
 	// numComments: {type: Number, default: 0}, // not to be virtual field. can be virtual...
 });
 
 PostSchema.virtual('abstract.numLikes').get(function () {
 	return this.abstract.likes.length
-})
-PostSchema.virtual('comments.numLikes').get(function () {
-	return this.comments.likes.length
 })
 PostSchema.virtual('numComments').get(function () {
 	return this.comments.length
@@ -57,8 +54,6 @@ PostSchema.virtual('numComments').get(function () {
 PostSchema.pre('validate', function (next) {
 	if (this.project || this.product) next()
 	else {
-		console.log('this.project', this.project);
-		console.log('this.product', this.product);
 		next(Error('One of project, product field is reuqired!'))
 	}
 })
@@ -98,17 +93,22 @@ PostSchema.methods.toFormat = function (type, ...args) {
 			let canEdit = args[0];
 			let money = args[1];
 
+			// console.log('money: ', money);
+			// console.log(this);
+
 			// get user's support money
 			return {
-				opened: canEdit || this.thresholdMoney < money, // TODO: according to user's support money
+				_id: this._id,
+				opened: canEdit || this.abstract.thresholdMoney <= money, // TODO: according to user's support money
 				author: this.author,
 				title: this.abstract.title,
 				created_at: this.abstract.created_at,
 				numSupporters: 10, // TODO: [Definition] what is support of this post?????
 				likes: this.abstract.numLikes,
-				content: canEdit && this.content,
-				comments: canEdit && this.comments,
+				content: this.content,
+				comments: this.comments,
 				numComments: this.numComments, // TODO: apply react.post
+				thresholdMoney: this.abstract.thresholdMoney,
 			}
 		default:
 			console.error(`toFormat can't accept this ${JSON.stringify(type)}`);
@@ -127,13 +127,13 @@ PostSchema.methods.likedByUser = async function(user) {
 		return this
 	} catch (e) {
 		console.error(e);
-		throw new Error(`User ${user.id} can't like this post ${this.abstract.title} written by ${this.author.name}`)
+		throw new Error(`User ${user.id} can't like on post ${this._id}`)
 	}
 }
 
 PostSchema.methods.commentedByUser = async function(user, text) {
 	try {
-		let name = user.user_name
+		let name = user.display_name
 		let iconSrc = user.image
 		let comments = this.comments || []
 		comments.push({
@@ -148,10 +148,10 @@ PostSchema.methods.commentedByUser = async function(user, text) {
 		this.comments = comments
 		this.numComments = comments.length
 		await this.save()
-		return this
+		return this.comments[this.comments.length - 1] // return last comment
 	} catch (e) {
 		console.error(e);
-		return false
+		throw new Error(`User ${user.id} can't comment on post ${this._id}`)
 	}
 }
 

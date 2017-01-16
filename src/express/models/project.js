@@ -97,7 +97,7 @@ ProjectSchema.set('toJSON', {
 });
 
 // find helper
-ProjectSchema.statics.findByName = function (name) {
+ProjectSchema.statics.findOneByName = function (name) {
 	return this.findOne({'abstract.projectName': name})
 }
 
@@ -161,9 +161,10 @@ ProjectSchema.methods.toFormat = async function (type, ...args) {
 			case 'project_detail':
 				let user = args[0];
 				let canEdit = args[1];
-				let money = canEdit || !user ? 0 :  await user.supportedMoney({projectName: this.abstract.projectName});
+				let money = (canEdit || !user) ? 0 :  await user.supportedMoney({projectName: this.abstract.projectName});
 				let posts = this.posts.map(p => p.toFormat('project_detail', ac.canEdit(user, this), money))
 				let qnas = this.qnas.map(q => q.toFormat('project_detail'))
+
 				let {
 					likes, shares, comments, num_useres, num_posts,
 					money_by_sharing, recent_3_user_ids,
