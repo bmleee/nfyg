@@ -28,7 +28,7 @@ router.get('/', isLoggedIn, async (req, res) => {
 	} catch (e) {
 		return res.status(400).json({
 			user: renderUser.authorizedUser(req.session.user),
-			error: e
+			error: e.message
 		})
 	}
 })
@@ -51,7 +51,7 @@ router.post('/', isLoggedIn, async (req, res) => {
 	} catch (e) {
 		console.error(e);
 		res.status(400).json({
-			error: e
+			error: e.message
 		})
 	}
 })

@@ -27,11 +27,11 @@ const router = express.Router();
 router.get('/', async (req, res) => {
 	let user = {name: 'PJH', content: 'Hello Mail! - nodemailer, email-templates'}
 	testEmail.render(user, 'ejs', function (err, result) {
-		if (err) {
+		if (e) {
 			console.error('error while rendering template');
-			console.error(err);
+			console.error(e);
 			return res.json({
-				error: err
+				error: e.message
 			})
 		}
 
@@ -43,10 +43,10 @@ router.get('/', async (req, res) => {
 		console.log('result.text', text);
 
 		transporter.sendMail(getOptions({html, text}), function (err, info) {
-			if (err) {
-				console.error(err);
+			if (e) {
+				console.error(e);
 				return res.json({
-					error: err
+					error: e.message
 				})
 			}
 
