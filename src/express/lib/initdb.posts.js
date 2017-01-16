@@ -33,7 +33,7 @@ const createPost = async (artist, target, type) => {
 			abstract: {
 				openType: getRandomElem(openTypes),
 				isDirectSupport: Math.random() > 0.5,
-				thresholdMoney: Math.floor(Math.random() * 10000),
+				thresholdMoney: Math.random() > 0.5 ? 0 : Math.floor(Math.random() * 10000),
 				title: `${randomString('test_post_title')} ${randomString()} ${randomString()}`,
 			},
 			content: JSON.stringify({
