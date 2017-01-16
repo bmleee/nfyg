@@ -95,3 +95,7 @@ export function date2string (date) {
   return date.toISOString().slice(0,10).replace(/-/g,".")
     .split('.').map(Number).join('.');
 }
+
+export function newLinedString(string) {
+  return string.split('\n').map(i => <span>{i}<br/></span>)
+}
