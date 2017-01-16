@@ -20,10 +20,29 @@ import PostModel from '../../models/post'
 import QnAModel from '../../models/qna'
 
 import isLoggedIn from '../../lib/login-check'
+import {canEdit} from '../../lib/auth-check'
+
 import * as renderHelper from '../../lib/renderHelper'
 import * as renderUser from '../../lib/renderUser'
 
 const router = express.Router();
+
+router.post('/:_id/comment', isLoggedIn, async (req, res) => {
+  // create comment on post
+  try {
+    let user = req.session.user
+    let text = req.body.text
+
+    let post = await PostModel.findById(req.params._id)
+    let comment = await post.commentedByUser(user, text)
+
+    console.log('new comment', comment);
+    res.json({ response: comment })
+  } catch (e) {
+    console.error(e);
+    res.status(400).json({ error: e.message })
+  }
+})
 
 
 export default router;

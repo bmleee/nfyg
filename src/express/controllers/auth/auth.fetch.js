@@ -26,6 +26,7 @@ import ExhibitionRouter from './auth.fetch.exhibition'
 import MagazineRouter from './auth.fetch.magazine'
 import SponsorRouter from './auth.fetch.sponsor'
 
+import PostRouter from './auth.fetch.post'
 import QnARouter from './auth.fetch.qna'
 
 import OptionRouter from './auth.fetch.option'
@@ -48,7 +49,8 @@ router.use('/sponsors', SponsorRouter);
 router.use('/options', OptionRouter);
 router.use('/', EditorRouter);
 
-router.use('/qna', QnARouter);
+router.use('/qnas', QnARouter);
+router.use('/posts', PostRouter);
 
 
 /**
@@ -91,7 +93,7 @@ router.get('/', async (req, res) => {
 		})
 	} catch (e) {
 		console.error(e);
-		res.json({error: e})
+		res.json({error: e.message})
 	}
 
 })

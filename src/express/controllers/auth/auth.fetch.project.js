@@ -56,14 +56,16 @@ router.get('/:projectName/:option?/:tab?', async (req, res, next) => {
 
 
 	let user = req.session.user
-	user = await UserModel.findOne({_id: user._id})
+	if (user) {
+		user = await UserModel.findOne({_id: user._id})
+	}
 
 	console.log('user', user);
 	console.log('user instanceof UserModel', user instanceof UserModel);
 	console.log('req.user instanceof UserModel', req.user instanceof UserModel);
 
 	try {
-		const project = await ProjectModel.findByName(projectName)
+		const project = await ProjectModel.findOneByName(projectName)
 			.populate('sponsor')
 			.populate({ path: 'posts', options: { sort: {  'abstract.created_at': -1 } } })
 			.populate({ path: 'qnas', options: { sort: {  'abstract.created_at': -1 } } })
@@ -81,7 +83,7 @@ router.get('/:projectName/:option?/:tab?', async (req, res, next) => {
 		})
 	} catch (e) {
 		console.error(e);
-		res.json({error: e})
+		res.json({error: e.message})
 	}
 })
 
@@ -126,7 +128,7 @@ router.get('/:projectName/rewards', async (req, res) => {
 		console.error(e);
 		res.status(400).json({
 			user,
-			error: e
+			error: e.message
 		})
 	}
 })
@@ -204,8 +206,31 @@ router.post('/:projectName?', async (req, res) => {
 	}
 })
 
-router.post('/:projectName/qna', isLoggedIn, async (req, res) => {
-	console.log('POST /proj/qna');
+router.post('/:projectName/posts', isLoggedIn, async (req, res) => {
+	try {
+		let user = req.session.user
+		let projectName = req.params.projectName
+
+		let {
+			title,
+			content,
+			thresholdMoney = 0,
+			isDirectSupport = false,
+		} = req.body
+
+		let project = await ProjectModel.findOne({'abstract.projectName': projectName})
+		let post = await mh.createPost({project, user, title, content, thresholdMoney, isDirectSupport})
+
+		res.json({ response: await post.toFormat('project_detail', true, 0) })
+
+	} catch (e) {
+		console.error(e);
+		res.status(400).json({ error: e.message })
+	}
+})
+
+router.post('/:projectName/qnas', isLoggedIn, async (req, res) => {
+	console.log('POST /proj/qnas');
 	try {
 		let user = req.session.user
 		let projectName = req.params.projectName
@@ -217,14 +242,12 @@ router.post('/:projectName/qna', isLoggedIn, async (req, res) => {
 
 		let project = await ProjectModel.findOne({'abstract.projectName': projectName})
 		let qna = await mh.createQnA({title, text, project, user})
-		console.log('qna!', qna);
-		res.json({
-			response: qna
-		})
+
+		res.json({ response: qna.toFormat('project_detail')})
 	} catch (e) {
 		console.error(e);
 		res.status(400).json({
-			error: e
+			error: e.message
 		})
 	}
 })

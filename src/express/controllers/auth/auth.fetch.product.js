@@ -66,7 +66,7 @@ router.get('/:productName/:option?/:tab?', async (req, res, next) => {
 		})
 	} catch (e) {
 		console.error(e);
-		res.json({error: e})
+		res.json({error: e.message})
 	}
 })
 
@@ -95,7 +95,7 @@ router.get('/:productName/edit/:tab?', async (req, res) => {
 		console.error(e);
 		res.status(400).json({
 			user: renderUser.authorizedUser(user),
-			error: e
+			error: e.message
 		})
 	}
 })

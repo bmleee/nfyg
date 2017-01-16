@@ -42,7 +42,7 @@ router.get('/', async (req, res) => {
 		})
 	} catch (e) {
 		console.error(e);
-		res.json({ error: e })
+		res.json({ error: e.message })
 	}
 
 
@@ -70,7 +70,7 @@ router.get('/:exhibitionName/:option', async (req, res, next) => {
 		})
 	} catch (e) {
 		console.error(e);
-		res.json({error: e})
+		res.json({error: e.message})
 	}
 
 })

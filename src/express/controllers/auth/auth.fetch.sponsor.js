@@ -41,7 +41,7 @@ router.get('/', async (req, res) => {
 		})
 	} catch (e) {
 		console.error(e);
-		res.json({ error: e })
+		res.json({ error: e.message })
 	}
 })
 
@@ -61,7 +61,7 @@ router.get('/:sponsorName/:tab?', async (req, res) => {
 		})
 	} catch (e) {
 		console.error(e);
-		res.json({ error: e })
+		res.json({ error: e.message })
 	}
 })
 

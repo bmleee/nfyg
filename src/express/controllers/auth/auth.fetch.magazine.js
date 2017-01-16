@@ -42,7 +42,7 @@ router.get('/magazines', async (req, res) => {
 		})
 	} catch (e) {
 		console.error(e);
-		res.json({ error: e })
+		res.json({ error: e.message })
 	}
 
 
@@ -66,7 +66,7 @@ router.get('/magazines/:magazineName/:option?', async (req, res, next) => {
 		})
 	} catch (e) {
 		console.error(e);
-		res.json({error: e})
+		res.json({error: e.message})
 	}
 
 })
@@ -96,7 +96,7 @@ router.get('/exhibitions', async (req, res) => {
 		})
 	} catch (e) {
 		console.error(e);
-		res.json({ error: e })
+		res.json({ error: e.message })
 	}
 
 

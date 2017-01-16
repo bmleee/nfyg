@@ -27,21 +27,19 @@ import * as renderUser from '../../lib/renderUser'
 
 const router = express.Router();
 
-router.post('/:qna_id/comment', isLoggedIn, async (req, res) => {
-  let user = req.session.user
-  let {
-    qna_id
-  } = req.params
-  let {
-    text
-  } = req.body
-
+router.post('/:_id/comment', isLoggedIn, async (req, res) => {
   try {
-    let comment = await mh.createCommentOnQnA({_id: qna_id, text, user})
+    let user = req.session.user
+    let _id = req.params._id
+    let text = req.body.text
+
+    let qna = await QnAModel.findById(_id)
+    let comment = await qna.commentedByUser(user, text)
     res.json({ response: comment })
+
   } catch (e) {
     console.error(e);
-    res.status(400).json({ error: e })
+    res.status(400).json({ error: e.message })
   }
 })
 
