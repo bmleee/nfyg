@@ -31,7 +31,9 @@ export function isArtist (user) {
  * @return {Boolean}        [description]
  */
 export function canEdit (user, target) {
-	if (isAdmin(user)) return true;
+	if (!user) return false
+
+	if (isAdmin(user)) return true
 
 	if (target instanceof PostModel ||
 		target instanceof QnAModel) {
@@ -46,6 +48,7 @@ export function canEdit (user, target) {
 	return false
 }
 
+// SEE middlewares/passport
 // Define the Passport configuration method
 export default function(passport) {
 	// Use Passport's 'serializeUser' method to serialize the user id
