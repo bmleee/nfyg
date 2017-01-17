@@ -1,13 +1,13 @@
-import UserModel from '../models/user'
-import ProjectModel from '../models/project'
-import ProductModel from '../models/product'
-import ExhibitionModel from '../models/exhibition'
-import SponsorModel from '../models/sponsor'
-import PostModel from '../models/post'
-import QnAModel from '../models/qna'
+import UserModel from '../../models/user'
+import ProjectModel from '../../models/project'
+import ProductModel from '../../models/product'
+import ExhibitionModel from '../../models/exhibition'
+import SponsorModel from '../../models/sponsor'
+import PostModel from '../../models/post'
+import QnAModel from '../../models/qna'
 
-import { rangeArray, asyncparallelfor } from '../../lib/utils'
-import { randomString } from './utils'
+import { rangeArray, asyncparallelfor } from '~/src/lib/utils'
+import { randomString } from '../utils'
 
 import init, {
 	getRandomIndex,

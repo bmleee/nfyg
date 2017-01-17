@@ -52,8 +52,7 @@ router.get('/:projectName/:option?/:tab?', async (req, res, next) => {
 
 	if (restrictedNames.includes(projectName)) {
 		return res.redirect('/404')
-	};
-
+	}
 
 	let user = req.session.user
 	if (user) {

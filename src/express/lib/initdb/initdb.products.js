@@ -1,18 +1,17 @@
-import UserModel from '../models/user'
-import ProjectModel from '../models/project'
-import SponsorModel from '../models/sponsor'
+import UserModel from '../../models/user'
+import ProductModel from '../../models/product'
 
-import { rangeArray, asyncparallelfor } from '../../lib/utils'
-import { randomString, randomNumber } from './utils'
+import { rangeArray, asyncparallelfor } from '~/src/lib/utils'
+import { randomString, randomNumber } from '../utils'
 
-const createProject = async ({sponsor, state = 'preparing', artist}) => {
-	return await ProjectModel.create({
+const createProduct = async ({state = 'preparing', artist}) => {
+	return await ProductModel.create({
 		abstract: {
 			longTitle: `${randomString('sample long title', 50)}`,
 			shortTitle: `${randomString('sample short title', 20)}`,
-			imgSrc: "/assets/images/present-project-list-thumbnail.jpg",
+			imgSrc: "/assets/images/present-product-list-thumbnail.jpg",
 			category: "health",
-			projectName: `${randomString('test-project-name')}`,
+			productName: `${randomString('test-product-name')}`,
 			state: state,
 			postIntro: `${randomString('sample post intro')}`,
 		},
@@ -23,12 +22,13 @@ const createProject = async ({sponsor, state = 'preparing', artist}) => {
 				creatorDescription: "i'm creator"
 		},
 		authorizedUsers: [artist._id],
-		sponsor: sponsor,
 		funding: {
 				currentMoney: randomNumber(100000),
 				targetMoney: randomNumber(100000),
 				dateFrom: "2016-12-08",
 				dateTo: "2020-12-09",
+				minPurchaseVolume: randomNumber(0, 10),
+				maxPurchaseVolume: randomNumber(100, 1000),
 				rewards: [
 						{
 								title: "sample reward",
@@ -48,7 +48,30 @@ const createProject = async ({sponsor, state = 'preparing', artist}) => {
 								isDirectSupport: true,
 								thresholdMoney: 1000000
 						}
-				],
+					],
+				faqs: [
+					{
+						question: '제품 구매 이력은 어디서 확인할 수 있나요?',
+						answer: 'Check you profile!'
+					},
+					{
+						question: '배송지를 변경하고 싶습니다.',
+						answer: '배송이 시작되기 전에마 배송지를 변경하실 수 있습니다. 제품 구매 상세 정보 페이지에서 배송지를 변경하세요.'
+					},
+					{
+						question: '제작과 배송이 언제 되나요?',
+						answer: '최소 구매 수량을 넘은 경우에만 미술 제품을 제작할 수 있습니다.'
+					},
+					{
+						question: '결제 취소가 가능한가요?',
+						answer: '최소 구매 수량을 넘어 배송이 시작되기 전에는 언제든지 결제 취소를 하실 수 있습니다. 구매 상세 페이지에서 결제를 취소하세요'
+					},
+					{
+						question: '교환이나 반품, 환불이 가능한가요?',
+						answer: '네 가능합니다.'
+					},
+				]
+
 		},
 		overview: {
 				intro: "sample reward intro",
@@ -84,67 +107,64 @@ const createProject = async ({sponsor, state = 'preparing', artist}) => {
 	})
 }
 
-export default async function initProject() {
+export default async function initProduct() {
 
-	console.log('trying to init Project collections');
+	console.log('trying to init Product collections');
 
 	const artist = await UserModel.findOne({ name: '작가' })
 
-	const in_progress = await ProjectModel.count({"abstract.state": "in_progress"})
-	const preparing = await ProjectModel.count({"abstract.state": "preparing"})
-	const completed = await ProjectModel.count({"abstract.state": "completed"})
+	const in_progress = await ProductModel.count({"abstract.state": "in_progress"})
+	const preparing = await ProductModel.count({"abstract.state": "preparing"})
+	const completed = await ProductModel.count({"abstract.state": "completed"})
 
-	const max_projects = 18
+	const max_products = 18
 
-	let sponsor = await SponsorModel.findOne({sponsorName: '7pictures'})
-
-	console.log(`${max_projects - preparing} preparing project will created`);
-	if(max_projects - preparing > 0) {
-		await Promise.all(rangeArray(preparing, max_projects).map(
+	console.log(`${max_products - preparing} preparing product will created`);
+	if(max_products - preparing > 0) {
+		await Promise.all(rangeArray(preparing, max_products).map(
 			async () => {
 				try {
-					await createProject({sponsor: sponsor._id, state: 'preparing', artist})
+					await createProduct({state: 'preparing', artist})
 				} catch (e) {console.error(e);}
 			}
 		))
 	}
 
 
-	console.log(`${max_projects - in_progress} in_progress project will created`);
-	if(max_projects - in_progress) {
-		await Promise.all(rangeArray(in_progress, max_projects).map(
+	console.log(`${max_products - in_progress} in_progress product will created`);
+	if(max_products - in_progress) {
+		await Promise.all(rangeArray(in_progress, max_products).map(
 			async () => {
 				try {
-					await createProject({sponsor: sponsor._id, state: 'in-progress', artist})
+					await createProduct({state: 'in-progress', artist})
 				} catch (e) {console.error(e);}
 			}
 		))
 	}
 
 
-	console.log(`${max_projects - completed} completed project will created`);
-	if(max_projects - completed) {
-		await Promise.all(rangeArray(completed, max_projects).map(
+	console.log(`${max_products - completed} completed product will created`);
+	if(max_products - completed) {
+		await Promise.all(rangeArray(completed, max_products).map(
 			async () => {
 				try {
-					await createProject({sponsor: sponsor._id, state: 'completed', artist})
+					await createProduct({state: 'completed', artist})
 				} catch (e) {console.error(e);}
 			}
 		))
 	}
 
-	// default project
+	// default product
 	try {
-		let sponsor = await SponsorModel.findOne({sponsorName: '7pictures'})
-		await ProjectModel.create({
+		await ProductModel.create({
 			abstract: {
-        longTitle: "sample project long title",
-        shortTitle: "sample project short title",
+        longTitle: "sample product long title",
+        shortTitle: "sample product short title",
         imgSrc: "https://i0.wp.com/7pictures.co.kr/wp-content/uploads/edd/2016/10/KakaoTalk_20161008_150354358.jpg?resize=1024%2C590&ssl=1",
         category: "health",
-        projectName: "test_7pictures",
+        productName: "test_7pictures",
         state: "in-progress",
-        postIntro: "test project intro"
+        postIntro: "test product intro"
 	    },
 	    creator: {
 	        creatorName: "creator",
@@ -153,12 +173,13 @@ export default async function initProject() {
 	        creatorDescription: "i'm creator"
 	    },
 			authorizedUsers: [artist._id],
-	    sponsor: sponsor._id,
 	    funding: {
 	        currentMoney: 0,
 	        targetMoney: 1000000,
 	        dateFrom: "2016-12-08",
 	        dateTo: "2020-12-09",
+					minPurchaseVolume: randomNumber(0, 10),
+					maxPurchaseVolume: randomNumber(100, 1000),
 					rewards: [
 							{
 									title: randomString('sample reward title'),
@@ -178,7 +199,22 @@ export default async function initProject() {
 									isDirectSupport: true,
 									thresholdMoney: 1000000
 							}
-					],
+						],
+					faqs: [
+						{
+							question: 'sample question 1',
+							answer: 'sample answer 1'
+						},
+						{
+							question: 'sample question 2',
+							answer: 'sample answer 2'
+						},
+						{
+							question: 'sample question 3',
+							answer: 'sample answer 3'
+						},
+					]
+
 	    },
 	    overview: {
 	        intro: "sample overview intro",

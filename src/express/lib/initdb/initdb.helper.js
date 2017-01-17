@@ -1,10 +1,10 @@
-import UserModel from '../models/user'
-import ProjectModel from '../models/project'
-import SponsorModel from '../models/sponsor'
-import PostModel from '../models/post'
-import MagazineModel from '../models/magazine'
-import ExhibitionModel from '../models/exhibition'
-import QnAModel from '../models/qna'
+import UserModel from '../../models/user'
+import ProjectModel from '../../models/project'
+import SponsorModel from '../../models/sponsor'
+import PostModel from '../../models/post'
+import MagazineModel from '../../models/magazine'
+import ExhibitionModel from '../../models/exhibition'
+import QnAModel from '../../models/qna'
 
 let user = {
 	all: [],

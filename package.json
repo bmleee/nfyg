@@ -4,7 +4,7 @@
   "description": "https://7pictures.co.kr",
   "main": "index.js",
   "scripts": {
-    "initdb": "node_modules/.bin/babel-node src/express/lib/initdb",
+    "initdb": "node_modules/.bin/babel-node src/express/lib/initdb/initdb",
     "test": "mocha --compilers js:babel-core/register --require ./test/index.js --recursive",
     "test:watch": "npm run test -- --watch",
     "start": "nodemon bin/express-app.js",

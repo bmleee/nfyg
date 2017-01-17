@@ -1,6 +1,6 @@
 'use strict'
 import mongoose from 'mongoose'
-import db from './db'
+import db from '../db'
 
 const test = async () => {
 	try {

@@ -1,11 +1,11 @@
-import UserModel from '../models/user'
-import ProjectModel from '../models/project'
-import ProductModel from '../models/product'
-import SponsorModel from '../models/sponsor'
-import PostModel from '../models/post'
+import UserModel from '../../models/user'
+import ProjectModel from '../../models/project'
+import ProductModel from '../../models/product'
+import SponsorModel from '../../models/sponsor'
+import PostModel from '../../models/post'
 
-import { range, rangeArray, asyncparallelfor } from '../../lib/utils'
-import { randomString } from './utils'
+import { range, rangeArray, asyncparallelfor } from '~/src/lib/utils'
+import { randomString } from '../utils'
 import init, {
 	getRandomIndex,
 	getRandomElem,

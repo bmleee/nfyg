@@ -1,5 +1,5 @@
-import UserModel from '../models/user'
-import MagazineModel, { categories } from '../models/magazine'
+import UserModel from '../../models/user'
+import MagazineModel, { categories } from '../../models/magazine'
 import init, {
 	getRandomMagazine,
 	getRandomExhibiiton,
@@ -7,8 +7,8 @@ import init, {
 	getRandomIndex,
 } from './initdb.helper'
 
-import { rangeArray, asyncparallelfor } from '../../lib/utils'
-import { randomString } from './utils'
+import { rangeArray, asyncparallelfor } from '~/src/lib/utils'
+import { randomString } from '../utils'
 
 const getRandomRecommend = () => ({
 	imgSrc: 'https://i0.wp.com/7pictures.co.kr/wp-content/uploads/2016/10/진영.jpg?resize=945%2C430&ssl=1',

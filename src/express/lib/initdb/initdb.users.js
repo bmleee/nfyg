@@ -1,9 +1,9 @@
 import bkfd2Password from 'pbkdf2-password'
 
-import UserModel, { access_levels } from '../models/user'
-import AddressModel from '../models/address'
-import { rangeArray } from '../../lib/utils'
-import { randomString } from './utils'
+import UserModel, { access_levels } from '../../models/user'
+import AddressModel from '../../models/address'
+import { rangeArray } from '~/src/lib/utils'
+import { randomString } from '../utils'
 
 const hasher = bkfd2Password();
 

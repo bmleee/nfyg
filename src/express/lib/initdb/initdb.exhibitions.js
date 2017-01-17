@@ -1,5 +1,5 @@
-import UserModel from '../models/user'
-import ExhibitionModel from '../models/exhibition'
+import UserModel from '../../models/user'
+import ExhibitionModel from '../../models/exhibition'
 import init, {
 	getRandomUser,
 	// getRandomMagazine,
@@ -9,8 +9,8 @@ import init, {
 
 import { SelectOptions } from '~/src/react/constants'
 
-import { rangeArray, asyncparallelfor } from '../../lib/utils'
-import { randomString } from './utils'
+import { rangeArray, asyncparallelfor } from '~/src/lib/utils'
+import { randomString } from '../utils'
 
 const artworkImgWidthHeightDesc = [
   {

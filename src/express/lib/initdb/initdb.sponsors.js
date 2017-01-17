@@ -1,6 +1,6 @@
-import UserModel from '../models/user'
-import ProjectModel from '../models/project'
-import SponsorModel from '../models/sponsor'
+import UserModel from '../../models/user'
+import ProjectModel from '../../models/project'
+import SponsorModel from '../../models/sponsor'
 
 export default async function initSponsors() {
 	console.log('trying to init Sponsor collections');
