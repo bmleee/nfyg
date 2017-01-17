@@ -1,20 +1,24 @@
 .footer {
+	background : #fbfbfb;
+	border-top : 1px solid #eee;
+}
+.footer-desktop {
 	width : 1140px;
 	padding : 20px 0px;
 	margin : 0px auto;
-	background : #fbfbfb;
-	border-top : 1px solid #eee;
 }
 .footer-mobile {
 	display : none;
 }
 .footer-text-first {
-	font-size : 13px !important;
+	font-size : 14px !important;
 	font-weight : 600 !important;
-	color : #666;
+	color : #888;
 	display : inline-block;
-	height : 25px;
-	line-height : 25px;
+	height : 14px;
+	line-height : 14px;
+	padding : 0px 8px;
+	border-right : 1px solid #888;
 }
 .footer-sns {
 	display : inline-block;
@@ -23,7 +27,7 @@
 	width : 25px;
 	.footer-sns-facebook, .footer-sns-instagram, .footer-sns-kakaotalk, .footer-sns-blog {
 		border : none;
-		color : #666;
+		color : #888;
         background : transparent;
         outline : none;
         width : 100%;
@@ -40,14 +44,24 @@
         content : "\f350";
     }
     .footer-kakao-icon {
-        fill : #666;
-        line-height : 0.9;
+        fill : #888;
+        line-height : 1.1;
     }
     .footer-sns-blog:before {
         font-family : Ionicons;
         font-size : 18px;
         content : "\f23d";
     }
+}
+.footer-text-second {
+	font-size : 13px !important;
+	font-weight : 600 !important;
+	color : #bbb;
+	display : inline-block;
+	height : 13px;
+	line-height : 13px;
+	padding : 0px 8px;
+	border-right : 1px solid #bbb;
 }
 
 @media (max-width: 1140px) {
