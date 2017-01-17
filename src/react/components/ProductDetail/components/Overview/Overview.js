@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react';
-import { Viewer } from '~/src/react/components/DraftEditor/SevenEditor';
+// import { Viewer } from '~/src/react/components/DraftEditor/SevenEditor';
 
 import {
 	ProductReward,
 } from './';
 
- 
+
 
 class Overview extends Component {
 
@@ -42,7 +42,8 @@ class Overview extends Component {
 				{/* <ProductReward rewards={rewards} /> */}
 
 				<div className="project-detail-overview-info">
-					<Viewer raw={part1} />
+					{/* <Viewer raw={part1} /> */}
+					<div dangerouslySetInnerHTML={{ __html: part1}} />
 					{/* this.state.seeMore ? <Viewer raw={part2} /> : <button onClick={this._onClick}>더보기</button> */}
 				</div>
 			</div>

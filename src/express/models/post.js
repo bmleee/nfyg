@@ -29,7 +29,10 @@ let PostSchema = new Schema({
 		likes: [{type: Schema.Types.ObjectId, ref: 'User'}],
 		// numLikes: {type: Number, default: 0}, // TODO: be virtual field
 	},
-	content: {type: String, required: true},
+	content: {
+		raw: {type: String, required: true},
+		html: {type: String, required: true},
+	},
 	comments: [{ // TODO: use can write comment
 		author: {
 			name: {type: String, required: true},
@@ -105,7 +108,7 @@ PostSchema.methods.toFormat = function (type, ...args) {
 				created_at: this.abstract.created_at,
 				numSupporters: 10, // TODO: [Definition] what is support of this post?????
 				likes: this.abstract.numLikes,
-				content: this.content,
+				content: this.content.html,
 				comments: this.comments,
 				numComments: this.numComments, // TODO: apply react.post
 				thresholdMoney: this.abstract.thresholdMoney,

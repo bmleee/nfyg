@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react';
-import { Viewer } from '~/src/react/components/DraftEditor/SevenEditor';
+// import { Viewer } from '~/src/react/components/DraftEditor/SevenEditor';
 
 import {
 	ProjectReward,
 } from './';
 
- 
+
 
 class Overview extends Component {
 
@@ -43,13 +43,15 @@ class Overview extends Component {
 		return (
 			<div className="project-detail-overview">
 				<div className="project-detail-overview-info">
-					<Viewer raw={part1} />
+					{/* <Viewer raw={part1} /> */}
+					<div dangerouslySetInnerHTML={{ __html: part1}} />
 				</div>
-				
+
 				<ProjectReward projectName={projectName} rewards={rewards} />
-				
+
 				<div className="project-detail-overview-info">
-					<Viewer raw={part2} />
+					{/* <Viewer raw={part2} /> */}
+					<div dangerouslySetInnerHTML={{ __html: part2}} />
 				</div>
 			</div>
 		)

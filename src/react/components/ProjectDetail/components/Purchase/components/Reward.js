@@ -32,8 +32,13 @@ export default class C extends Component {
 		const {
 			goToNextStage,
 			goToPreviousStage,
+
 			setReward,
+			setPurchaseAmount,
 			selectedRewardIndex,
+
+			reward,
+			purchaseAmount,
 		} = this.props
 
 
@@ -68,11 +73,11 @@ export default class C extends Component {
 					}
 					<div className="purchase-reward-num-container">
 						<p className="profile-small-title">수량 선택</p>
-						<input className="purchase-reward-num" type="number" defaultValue="1" min="1" max="100"/>
+						<input className="purchase-reward-num" id="purchase-amount" type="number" defaultValue="1" min="1" max="100" onChange={(e) => setPurchaseAmount(e.target.value)}/>
 					</div>
 					<div className="purchase-reward-summoney-container">
 						<p className="profile-small-title">금 액</p>
-						<p className="purchase-reward-money">1,000,000원</p>
+						<p className="purchase-reward-money">{((reward && reward.thresholdMoney || 0) * purchaseAmount).toLocaleString()}원</p>
 					</div>
 					</div>
 					<div className="purchase-stage-move-container">

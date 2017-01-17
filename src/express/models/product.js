@@ -68,9 +68,15 @@ const ProductSchema = new Schema({
 
 	// Overview
 	overview: {
-		intro: {type: String, required: true},
-		part1: {type: String, required: true},
-		part2: {type: String, required: true},
+		intro: {type: String},
+		part1: {
+			raw: {type: String, required: true},
+			html: {type: String, required: true},
+		},
+		part2: {
+			raw: {type: String, required: true},
+			html: {type: String, required: true},
+		},
 	},
 
 	// addede wehen
@@ -168,10 +174,14 @@ ProductSchema.methods.toFormat = async function (type, ...args) {
 				let posts = this.posts.map(p => p.toFormat('product_detail', user))
 				let qnas = this.qnas.map(q => q.toFormat('product_detail'))
 				return {
-					abstract: {...this.abstract},
-					creator: {...this.creator},
-					funding: {...this.funding},
-					overview: {...this.overview},
+					abstract: this.abstract,
+					creator: this.creator,
+					funding: this.funding,
+					overview: {
+						intro: this.overview.intro,
+						part1: this.overview.part1.html,
+						part2: this.overview.part2.html,
+					},
 					post: {
 						heading: {
 							iconSrc: this.creator.creatorImgSrc,

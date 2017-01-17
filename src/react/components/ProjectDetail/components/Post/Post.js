@@ -4,6 +4,7 @@ import update from 'immutability-helper'
 import Modal from '~/src/react/components/react-awesome-modal';
 
 import { EditorState, convertToRaw } from 'draft-js'
+import draftToHtml from 'draftjs-to-html'
 import Editor, { Viewer } from '~/src/react/components/DraftEditor/SevenEditor'
 
 import {
@@ -45,9 +46,11 @@ class Post extends Component {
 			let title = document.querySelector("#post-title").value
 			let thresholdMoney = document.querySelector("#post-threshold-money").value
 			let isDirectSupport = false // document.querySelector("#post-is-direct-support").checked
-			let content = JSON.stringify(convertToRaw(this.refs.editor.state.editorState.getCurrentContent()))
-
-			console.log(content);
+			let raw = convertToRaw(this.refs.editor.state.editorState.getCurrentContent())
+			let content = {
+				raw: JSON.stringify(raw),
+				html: draftToHtml(raw),
+			}
 
 			if (!title) {
 				alert('소식 제목을 입력하세요.')
@@ -108,7 +111,8 @@ class Post extends Component {
 				<div className="post-item-content-summary">
 					{
 						opened
-							? <Viewer raw={content}/>
+							// ? <Viewer raw={content}/>
+							? <div dangerouslySetInnerHTML={{ __html: content }} />
 							: <div className="post-block">
 									<div className="post-block-icon"></div>
 									<p>프로젝트 공유 또는 리워드 구매를 통해</p>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { EditorState, convertToRaw, convertFromRaw } from '~/src/react/components/draft-js';
+import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
 import { Editor } from '~/src/react/components/react-draft-wysiwyg';
 import '~/src/react/components/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
@@ -53,14 +53,25 @@ export default class SevenEditor extends Component {
 			editorState,
 		});
 
-		// prop to FormWrapper, ...
-		// avoid editorState === null
-		if(editorState && this.props.onChangeToRaw) {
-			this.props.onChangeToRaw(convertToRaw(editorState.getCurrentContent()))
+		const {
+			onChangeToRaw,
+			onChangeToHtml
+		} = this.props
+
+
+		let raw
+		if (onChangeToRaw || onChangeToHtml) {
+			raw = convertToRaw(editorState.getCurrentContent())
 		}
 
-		if(editorState && this.props.onChangeToHtml) {
-			this.props.onChangeToHtml(draftToHtml(editorState.getCurrentContent()))
+		// prop to FormWrapper, ...
+		// avoid editorState === null
+		if(editorState && onChangeToRaw) {
+			onChangeToRaw(raw)
+		}
+
+		if(editorState && onChangeToHtml) {
+			onChangeToHtml(draftToHtml(raw))
 		}
 	};
 

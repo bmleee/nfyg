@@ -8,8 +8,9 @@ import { fetchUserAndData, upsertProduct } from '../../api/AppAPI'
 
 import { canUseDOM } from '~/src/lib/utils'
 
+import draftToHtml from 'draftjs-to-html'
+
 import _ from 'lodash' // use throttle or debounce
-import 'whatwg-fetch'
 
 
 const scrollStyle = {
@@ -397,9 +398,13 @@ export default class ProductEditor extends Component {
         faqs: this.state.funding.reward.faqs,
       },
       overview: {
-        intro: this.state.overview.intro,
-        part1: JSON.stringify(this.state.overview.part1),
-        part2: JSON.stringify(this.state.overview.part2),
+        intro: { $set: project.overview.intro },
+        part1: {
+          raw: { $set: JSON.parse(project.overview.part1.raw) }
+        },
+        part2: {
+          raw: { $set: JSON.parse(project.overview.part2.raw) }
+        },
       }
     }
   }

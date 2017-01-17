@@ -4,6 +4,7 @@ import SevenEditor from './DraftEditor/SevenEditor'
 
 
 
+
 export default class test3 extends Component {
 	// state = {
 	// 	editorContent: EditorState.createEmpty(),
@@ -15,11 +16,27 @@ export default class test3 extends Component {
 	// 	html: draftToHtml(convertToRaw(this.state.editorContent.getCurrentContent()))
 	// })
 
+	state = {
+		html: '',
+	}
+
+	onChangeToHtml = (html) => {
+		console.log(this);
+		this.setState({ html })
+	}
+
+
 	render() {
 		// console.log(this.state.html);
 		return (
-			<div className="demo-root">
-				<SevenEditor />
+			<div className="demo-root" style={{ marginTop: '100px' }}>
+				<SevenEditor
+					onChangeToHtml={this.onChangeToHtml}
+				/>
+				<div>
+					{this.state.html}
+				</div>
+				<div dangerouslySetInnerHTML={{ __html: this.state.html }} />
 			</div>
 		)
 	}

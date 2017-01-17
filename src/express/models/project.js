@@ -64,8 +64,14 @@ const ProjectSchema = new Schema({
 	// Overview
 	overview: {
 		intro: {type: String, },
-		part1: {type: String, required: true},
-		part2: {type: String, required: true},
+		part1: {
+			raw: {type: String, required: true},
+			html: {type: String, required: true},
+		},
+		part2: {
+			raw: {type: String, required: true},
+			html: {type: String, required: true},
+		},
 	},
 
 	// addede wehen
@@ -182,8 +188,8 @@ ProjectSchema.methods.toFormat = async function (type, ...args) {
 				}))
 
 				return {
-					abstract: {...this.abstract},
-					creator: {...this.creator},
+					abstract: this.abstract,
+					creator: this.creator,
 					sponsor: {
 						sponsorName: this.sponsor.sponsorName,
 						sponsorDisplayName: this.sponsor.displayName,
@@ -191,8 +197,12 @@ ProjectSchema.methods.toFormat = async function (type, ...args) {
 						sponsorImgSrc: this.sponsor.imgSrc,
 						sponsorDescription: this.sponsor.description,
 					},
-					funding: {...this.funding},
-					overview: {...this.overview},
+					funding: this.funding,
+					overview: {
+						intro: this.overview.intro,
+						part1: this.overview.part1.html,
+						part2: this.overview.part2.html,
+					},
 					post: {
 						heading: {
 							iconSrc: this.creator.creatorImgSrc,

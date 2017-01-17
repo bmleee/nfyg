@@ -11,8 +11,9 @@ import { fetchUserAndData, upsertProject } from '../../api/AppAPI'
 
 import { canUseDOM } from '~/src/lib/utils'
 
+import draftToHtml from 'draftjs-to-html'
+
 import _ from 'lodash' // use throttle or debounce
-import 'whatwg-fetch'
 
 const scrollStyle = {
   cursor: 'pointer',
@@ -327,8 +328,14 @@ export default class ProjectEditor extends Component {
       },
       overview: {
         intro: this.state.overview.intro,
-        part1: JSON.stringify(this.state.overview.part1),
-        part2: JSON.stringify(this.state.overview.part2),
+        part1: {
+          raw: JSON.stringify(this.state.overview.part1),
+          html: draftToHtml(this.state.overview.part1),
+        },
+        part2: {
+          raw: JSON.stringify(this.state.overview.part2),
+          html: draftToHtml(this.state.overview.part2),
+        },
       },
       isNew: this.state.tabLinkBase.includes('editor'),
     }
@@ -352,8 +359,12 @@ export default class ProjectEditor extends Component {
     },
     overview: {
       intro: { $set: project.overview.intro },
-      part1: { $set: JSON.parse(project.overview.part1) },
-      part2: { $set: JSON.parse(project.overview.part2) },
+      part1: {
+        raw: { $set: JSON.parse(project.overview.part1.raw) }
+      },
+      part2: {
+        raw: { $set: JSON.parse(project.overview.part2.raw) }
+      },
     }
   })
 

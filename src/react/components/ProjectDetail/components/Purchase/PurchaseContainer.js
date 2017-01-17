@@ -31,7 +31,7 @@ export default class PurchaseContainer extends Component {
 		address: {}, // address 참조
 		payment: {}, // 일부분만 보여주기
 
-		purchaseAmount: 0,
+		purchaseAmount: 1,
 		shippingFee: 0,
 
 		// 서버로 전송
@@ -125,12 +125,14 @@ export default class PurchaseContainer extends Component {
 			setReward: this.setReward,
 			setAddress: this.setAddress,
 			setPayment: this.setPayment,
+			setPurchaseAmount: this.setPurchaseAmount,
 
 			selectedRewardIndex: this.state.selectedRewardIndex,
 			selectedAddressIndex: this.state.selectedAddressIndex,
 			selectedPaymentIndex: this.state.selectedPaymentIndex,
 
 			reward: this.state.reward,
+			purchaseAmount: this.state.purchaseAmount,
 			address: this.state.address,
 			payment: this.state.payment,
 
@@ -172,7 +174,13 @@ export default class PurchaseContainer extends Component {
 		this.setState(update(this.state, {
 			selectedRewardIndex: { $set: index },
 			reward: { $set: reward },
-			shippingFee: { $set: shippingFee }
+			shippingFee: { $set: shippingFee },
+		}))
+	}
+
+	setPurchaseAmount = (purchaseAmount) => {
+		this.setState(update(this.state, {
+			purchaseAmount: { $set: Number(purchaseAmount) },
 		}))
 	}
 

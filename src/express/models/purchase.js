@@ -37,6 +37,10 @@ const PurchaseSchema = new Schema({
   shippingFee: {type: Number, required: true},
 
   purchase_info: { // TODO: add additional purchase information here. eg, shipping, ...
+    purchase_state: {
+      type: String,
+      enum: ['preparing', 'scheduled', 'cancel-by-user', 'cancel-by-api', 'cancel-by-system', 'purchased', 'refunded-by-user', 'refunded-by-system']
+    },
     merchant_uid: { type: String, }, // TODO: unique - true
     customer_uid: { type: String, },
     amount: { type: Number,  },
