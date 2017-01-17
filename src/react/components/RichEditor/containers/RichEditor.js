@@ -7,7 +7,7 @@ import {
   ContentState,
   CompositeDecorator,
   AtomicBlockUtils
-} from 'draft-js';
+} from '~/src/react/components/draft-js';
 import {
   getSelectionRange,
   getSelectedBlockElement,

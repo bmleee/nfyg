@@ -329,7 +329,8 @@ export default class ProjectEditor extends Component {
         intro: this.state.overview.intro,
         part1: JSON.stringify(this.state.overview.part1),
         part2: JSON.stringify(this.state.overview.part2),
-      }
+      },
+      isNew: this.state.tabLinkBase.includes('editor'),
     }
   }
 

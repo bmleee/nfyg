@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {
   convertFromRaw,
   EditorState,
-} from 'draft-js';
+} from '~/src/react/components/draft-js';
 // eslint-disable-next-line import/no-unresolved
 import Editor from 'draft-js-plugins-editor';
 // eslint-disable-next-line import/no-unresolved
