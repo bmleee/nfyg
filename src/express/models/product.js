@@ -102,7 +102,7 @@ ProductSchema.set('toJSON', {
 });
 
 // find helper
-ProductSchema.statics.findByName = function (name) {
+ProductSchema.statics.findOneByName = function (name) {
 	return this.findOne({'abstract.productName': name})
 }
 

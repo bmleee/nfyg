@@ -77,7 +77,7 @@ router.get('/:productName/edit/:tab?', async (req, res) => {
 	try {
 		const { productName } = req.params
 		const { user } = req.session
-		const product = await ProductModel.findByName(productName)
+		const product = await ProductModel.findOneByName(productName)
 		console.log('/product/:productName/edit.product', product);
 
 		// TODO: activate this
@@ -105,7 +105,7 @@ router.get('/:productName/purchase/:param', async (req, res) => {
 
 	switch (req.params.param) {
 		case 'rewards':
-			let doc = await ProductModel.findByName(req.params.productName)
+			let doc = await ProductModel.findOneByName(req.params.productName)
 				.select({ 'funding.rewards': 1})
 				.exec()
 			return res.json({

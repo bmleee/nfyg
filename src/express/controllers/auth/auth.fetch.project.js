@@ -91,7 +91,7 @@ router.get('/:projectName/edit/:tab?', async (req, res) => {
 
 	const { projectName } = req.params
 	const { user } = req.session
-	const project = await ProjectModel.findByName(projectName)
+	const project = await ProjectModel.findOneByName(projectName)
 		.populate('sponsor')
 	console.log('/projects/:projectName/edit.project', project);
 
@@ -112,7 +112,7 @@ router.get('/:projectName/rewards', async (req, res) => {
 	try {
 		let user = renderUser.authorizedUser(req.session.user)
 
-		let doc = await ProjectModel.findByName(req.params.projectName)
+		let doc = await ProjectModel.findOneByName(req.params.projectName)
 			.select({ 'funding.rewards': 1, 'funding.shippingFee': 1})
 			.exec()
 
