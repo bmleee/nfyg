@@ -41,7 +41,6 @@ export async function createCommentOnQnA({_id, text, user}) {
   )
 }
 
-// DEPRECIATED. refer PostModel.methods.commentedByUser
 export async function createPost({project, product, user, title, content, thresholdMoney, isDirectSupport}) {
   let body = {
     author: {
@@ -64,6 +63,7 @@ export async function createPost({project, product, user, title, content, thresh
   return await PostModel.create(body)
 }
 
+// DEPRECIATED. refer PostModel.methods.commentedByUser
 export async function createCommentOnPost({_id, text, user}) {
   let body = {
     author: {
