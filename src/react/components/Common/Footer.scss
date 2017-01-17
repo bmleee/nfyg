@@ -1,0 +1,73 @@
+.footer {
+	width : 1140px;
+	padding : 20px 0px;
+	margin : 0px auto;
+	background : #fbfbfb;
+	border-top : 1px solid #eee;
+}
+.footer-mobile {
+	display : none;
+}
+.footer-text-first {
+	font-size : 13px !important;
+	font-weight : 600 !important;
+	color : #666;
+	display : inline-block;
+	height : 25px;
+	line-height : 25px;
+}
+.footer-sns {
+	display : inline-block;
+	vertical-align : middle;
+	height : 25px;
+	width : 25px;
+	.footer-sns-facebook, .footer-sns-instagram, .footer-sns-kakaotalk, .footer-sns-blog {
+		border : none;
+		color : #666;
+        background : transparent;
+        outline : none;
+        width : 100%;
+        height : 100%;
+	}
+	.footer-sns-facebook:before {
+        font-family : Ionicons;
+        font-size : 18px;
+        content : "\f231";
+    }
+    .footer-sns-instagram:before {
+        font-family : Ionicons;
+        font-size : 18px;
+        content : "\f350";
+    }
+    .footer-kakao-icon {
+        fill : #666;
+        line-height : 0.9;
+    }
+    .footer-sns-blog:before {
+        font-family : Ionicons;
+        font-size : 18px;
+        content : "\f23d";
+    }
+}
+
+@media (max-width: 1140px) {
+.footer {
+	width : 100%;
+	padding : 20px 40px;
+}
+@media (max-width: 991px) {
+.footer-desktop {
+	display : none;
+}
+.footer-mobile {
+	display : block;
+}
+@media (max-width: 500px) {
+.footer {
+	width : 100%;
+	padding : 20px 20px;
+	
+}	
+}
+}
+}
