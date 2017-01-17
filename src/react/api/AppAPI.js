@@ -101,9 +101,11 @@ export function fetchOptions(path) {
 }
 
 export async function upsertProject(body) {
+	const param = document.URL.match(/projects\/.+\/edit/) ? document.URL.match(/projects\/.+\/edit/)[0].split('/')[1] : '' // get project name from url
+
 	const config = {
 		method: 'post',
-		url: `/api/auth/fetch/projects`,
+		url: `/api/auth/fetch/projects/${param}`,
 		withCredentials: true,
 		data: body,
 	}

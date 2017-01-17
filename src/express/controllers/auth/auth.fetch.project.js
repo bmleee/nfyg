@@ -176,31 +176,31 @@ router.post('/:projectName/purchase', isLoggedIn, async (req, res) => {
 
 // create or update project
 // TODO: check authority
-router.post('/', async (req, res) => {
+router.post('/:projectName?', async (req, res) => {
 	console.log('POST /auth/fetch/projects');
 
 	try {
 		const body = req.body
-		const projectName = body.abstract.projectName || ''
+		const isNew = body.isNew
 
 		const sponsor = await SponsorModel.findOne({sponsorName: body.sponsor.sponsorName})
 		body.sponsor = sponsor
 
-		// upsert Project
-		const r = await ProjectModel.update(
-			{ 'abstract.projectName': projectName },
-			body,
-			{ upsert: true, }
-		)
-
-		console.log('upsert result', r);
-
-		res.json({response: r.n === 1})
+		if (isNew) {
+			const project = await ProjectModel.create(body)
+			res.json({ response: project })
+		} else {
+			const projectName = req.params.projectName
+			const r = await ProjectModel.update(
+				{ 'abstract.projectName': projectName },
+				body,
+				{ upsert: false, }
+			)
+			res.json({response: r.n === 1})
+		}
 	} catch (e) {
 		console.error(e);
-		res.status(400).json({
-			response: e
-		})
+		res.status(400).json({ response: e })
 	}
 })
 

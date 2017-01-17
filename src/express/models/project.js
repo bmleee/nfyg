@@ -33,8 +33,8 @@ const ProjectSchema = new Schema({
 	creator: {
 		creatorName: {type: String, required: true},
 		creatorImgSrc: {type: String, required: true},
-		creatorLocation: {type: String, required: true},
-		creatorDescription: {type: String, required: true},
+		creatorLocation: {type: String, },
+		creatorDescription: {type: String,},
 	},
 
 	authorizedUsers: [{ type: Schema.Types.ObjectId, ref: 'User' }],
@@ -63,7 +63,7 @@ const ProjectSchema = new Schema({
 
 	// Overview
 	overview: {
-		intro: {type: String, required: true},
+		intro: {type: String, },
 		part1: {type: String, required: true},
 		part2: {type: String, required: true},
 	},
