@@ -28,7 +28,7 @@ export default class test3 extends Component {
 
 // import SevenEditor, { Viewer } from './DraftEditor/SevenEditor'
 //
-// import { EditorState, convertToRaw, convertFromRaw } from '~/src/react/components/draft-js';
+// import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
 // import {stateToHTML} from 'draft-js-export-html';
 
 // export default class T extends Component {

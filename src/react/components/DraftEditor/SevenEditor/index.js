@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { EditorState, convertToRaw, convertFromRaw } from '~/src/react/components/draft-js';
-import { Editor } from 'react-draft-wysiwyg';
-import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import { Editor } from '~/src/react/components/react-draft-wysiwyg';
+import '~/src/react/components/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 import draftToHtml from 'draftjs-to-html';
 import draftToMarkdown from 'draftjs-to-markdown';
