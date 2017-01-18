@@ -67,13 +67,13 @@ class Headermenumobile extends Component {
 
 					<div className="header-menu-mobile-burger">
 						<Menu right width={200} isOpen={ false } customBurgerIcon={ <button className="customBurgerIcon" /> }>
-							
+
 							{
-							isLoggedIn && 
+							isLoggedIn &&
 							<img className="mobile-burger-user-icon" src={image} width={70} height={70} />
 							}
 							{
-							isLoggedIn && 
+							isLoggedIn &&
 							<p className="mobile-burger-user-name">{displayName}</p>
 							}
 							{
@@ -92,8 +92,8 @@ class Headermenumobile extends Component {
 							</div>
 							</Link>	)
 							}
-								
-						
+
+
 							{
 							!isLoggedIn && (
 							<Link to={`/login`}>
@@ -125,9 +125,9 @@ class Headermenumobile extends Component {
 							{
 							isLoggedIn && (
 							<div className="mobile-burger-logout-container">
-							<Link to={`/api/users/logout`}>
+							<a href="/api/users/logout">
 								<button className="mobile-burger-logout">로그아웃</button>
-							</Link>
+							</a>
 							</div> )
 							}
 

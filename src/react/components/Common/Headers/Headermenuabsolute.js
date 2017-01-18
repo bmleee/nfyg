@@ -1,13 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import ImageGallery from '../../react-image-gallery'; // https://www.npmjs.com/package/react-image-gallery
 
-import { Link } from 'react-router'; 
+import { Link } from 'react-router';
 
 import Modal from '~/src/react/components/react-awesome-modal';
 
 
 class Headermenuabsolute extends Component {
-	
+
 	constructor(props) {
     super(props);
     this.state = {
@@ -28,7 +28,7 @@ class Headermenuabsolute extends Component {
   }
 
 	render() {
-		
+
 		let {
 			isLoggedIn,
 			displayName,
@@ -56,7 +56,7 @@ class Headermenuabsolute extends Component {
 					</Link>
 					</div>
 					<div className="header-menu-white-right">
-						
+
 						{
 							!isLoggedIn && (
 						<Link to={`/login`}>
@@ -73,9 +73,9 @@ class Headermenuabsolute extends Component {
 						}
 
 						{
-						
-						
-						
+
+
+
 							isLoggedIn && <input className="suggest-modal-button" type="button" value="제안하기" onClick={() => this.openModal()} />
 						}
 						{
@@ -124,14 +124,14 @@ class Headermenuabsolute extends Component {
 								<Link to={`/profile/user`}>
 									<p className="header-menu-hover-text">내 페이지</p>
 								</Link>
-								<Link to={`/api/users/logout`}>
+								<a href="/api/users/logout">
 									<p className="header-menu-hover-text">로그아웃</p>
-								</Link>
+								</a>
 							</div>
 						</div>
 						)
 						}
-						
+
 					</div>
 				</div>
 		)
