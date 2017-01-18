@@ -21,14 +21,38 @@ const raw = {
 }
 
 
-const createProject = async ({sponsor, state = 'preparing', artist}) => {
+const projectNames = [
+	"how_we_art",
+	"medicikhs",
+	"myeonghwa2",
+	"gallerymei",
+	"khjproject",
+	"magazine2",
+	"yungyeom",
+	"kimhjproject",
+	"hopp",
+	"yshproject",
+	"unionartfair",
+	"r3028",
+	"flowerwall",
+	"flowerwall2",
+	"thegreatgraffiti",
+	"flowerbrooch",
+]
+
+const ramdomProjectName = (state) => {
+	if (state === 'in-progress') return projectNames.pop()
+	else return `${randomString('test-project-name')}`
+}
+
+const createProject = async ({sponsor, state = 'in-progress', artist, projectName = `${randomString('test-project-name')}`}) => {
 	return await ProjectModel.create({
 		abstract: {
 			longTitle: `${randomString('sample long title', 50)}`,
 			shortTitle: `${randomString('sample short title', 20)}`,
 			imgSrc: "/assets/images/present-project-list-thumbnail.jpg",
 			category: "health",
-			projectName: `${randomString('test-project-name')}`,
+			projectName: projectName,
 			state: state,
 			postIntro: `${randomString('sample post intro')}`,
 		},
@@ -38,33 +62,33 @@ const createProject = async ({sponsor, state = 'preparing', artist}) => {
 				creatorLocation: "서울",
 				creatorDescription: "i'm creator"
 		},
-		authorizedUsers: [artist._id],
+		authorizedUsers: projectName.includes('test') ? [] : [artist._id],
 		sponsor: sponsor,
 		funding: {
-				currentMoney: randomNumber(100000),
-				targetMoney: randomNumber(100000),
-				dateFrom: "2016-12-08",
-				dateTo: "2020-12-09",
-				rewards: [
-						{
-								title: "sample reward",
-								description: "sample reward",
-								isDirectSupport: false,
-								thresholdMoney: 0
-						},
-						{
-								title: "sample reward2",
-								description: "sample reward2",
-								isDirectSupport: true,
-								thresholdMoney: 10000
-						},
-						{
-								title: "sample reward3",
-								description: "sample reward3",
-								isDirectSupport: true,
-								thresholdMoney: 1000000
-						}
-				],
+			currentMoney: randomNumber(100000),
+			targetMoney: randomNumber(100000),
+			dateFrom: "2016-12-08",
+			dateTo: "2020-12-09",
+			rewards: [
+				{
+					title: "sample reward",
+					description: "sample reward",
+					isDirectSupport: false,
+					thresholdMoney: 0
+				},
+				{
+					title: "sample reward2",
+					description: "sample reward2",
+					isDirectSupport: true,
+					thresholdMoney: 10
+				},
+				{
+					title: "sample reward3",
+					description: "sample reward3",
+					isDirectSupport: true,
+					thresholdMoney: 200
+				}
+			],
 		},
 		overview: {
 				intro: "sample reward intro",
@@ -99,7 +123,7 @@ export default async function initProject() {
 		await Promise.all(rangeArray(preparing, max_projects).map(
 			async () => {
 				try {
-					await createProject({sponsor: sponsor._id, state: 'preparing', artist})
+					await createProject({sponsor: sponsor._id, state: 'preparing', artist, projectName: ramdomProjectName('preparing')})
 				} catch (e) {console.error(e);}
 			}
 		))
@@ -111,7 +135,7 @@ export default async function initProject() {
 		await Promise.all(rangeArray(in_progress, max_projects).map(
 			async () => {
 				try {
-					await createProject({sponsor: sponsor._id, state: 'in-progress', artist})
+					await createProject({sponsor: sponsor._id, state: 'in-progress', artist, projectName: ramdomProjectName('in-progress')})
 				} catch (e) {console.error(e);}
 			}
 		))
@@ -122,7 +146,7 @@ export default async function initProject() {
 	if(max_projects - completed) {
 		await Promise.all(rangeArray(completed, max_projects).map(
 			async () => {
-				await createProject({sponsor: sponsor._id, state: 'completed', artist})
+				await createProject({sponsor: sponsor._id, state: 'completed', artist, projectName: ramdomProjectName('completed')})
 			}
 		))
 	}
@@ -136,7 +160,7 @@ export default async function initProject() {
         shortTitle: "sample project short title",
         imgSrc: "https://i0.wp.com/7pictures.co.kr/wp-content/uploads/edd/2016/10/KakaoTalk_20161008_150354358.jpg?resize=1024%2C590&ssl=1",
         category: "health",
-        projectName: "test_7pictures",
+        projectName: "how_we_art",
         state: "in-progress",
         postIntro: "test project intro"
 	    },
@@ -164,13 +188,13 @@ export default async function initProject() {
 								title: randomString('sample reward title'),
 								description: randomString('sample reward description'),
 									isDirectSupport: true,
-									thresholdMoney: 10000
+									thresholdMoney: 10
 							},
 							{
 								title: randomString('sample reward title'),
 								description: randomString('sample reward description'),
 									isDirectSupport: true,
-									thresholdMoney: 1000000
+									thresholdMoney: 200
 							}
 					],
 	    },

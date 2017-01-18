@@ -59,6 +59,9 @@ async function main() {
 		await require('./initdb.user-action').default()
 		console.log(`${((t2 = Date.now()) - t1) / 1000}sec`);
 
+		await require('./initdb.purchases').default()
+		console.log(`${((t2 = Date.now()) - t1) / 1000}sec`);
+
 		console.log('init db finished');
 		console.log(`${((t2 = Date.now()) - t1) / 1000}sec`);
 

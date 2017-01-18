@@ -2,6 +2,7 @@ import bkfd2Password from 'pbkdf2-password'
 
 import UserModel, { access_levels } from '../../models/user'
 import AddressModel from '../../models/address'
+import PaymentModel from '../../models/payment'
 import { rangeArray } from '~/src/lib/utils'
 import { randomString } from '../utils'
 
@@ -88,9 +89,8 @@ const randomusers = async () => {
 	}
 }
 
-const initAddress = async () => {
-	let users = await UserModel.find({})
-	await Promise.all(users.map(async (user) => {
+const initAddress = async (user) => {
+	try {
 		await AddressModel.create({
 			user,
 			addressee_name: randomString(),
@@ -98,12 +98,28 @@ const initAddress = async () => {
 			address1: randomString(),
 			address2: randomString(),
 		})
-	}))
+	} catch (e) { console.error(e); }
+}
+
+const initPayment = async (user) => {
+	let card_number = '4214-2000-1125-7680'
+	let expiry = '2018-08'
+	let birth = '921011'
+	let pwd_2digit = '16'
+
+	let payment = await PaymentModel.create({ card_number, expiry, birth, pwd_2digit, user: user._id })
 }
 
 export default async function initUsers() {
-	console.log('trying to init user actions');
+	console.log('trying to init users');
 	await defaultUsers()
 	await randomusers()
-	await initAddress()
+
+	let user = await UserModel.findOne({name: "일반유저"})
+
+	console.log('trying to init user address & payment');
+	await initAddress(user)
+	await initPayment(user)
+
+	return
 }

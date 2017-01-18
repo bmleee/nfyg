@@ -56,13 +56,13 @@ const createProduct = async ({state = 'preparing', artist}) => {
 								title: "sample reward2",
 								description: "sample reward2",
 								isDirectSupport: true,
-								thresholdMoney: 10000
+								thresholdMoney: 10
 						},
 						{
 								title: "sample reward3",
 								description: "sample reward3",
 								isDirectSupport: true,
-								thresholdMoney: 1000000
+								thresholdMoney: 20
 						}
 					],
 				faqs: [
@@ -185,13 +185,13 @@ export default async function initProduct() {
 								title: randomString('sample reward title'),
 								description: randomString('sample reward description'),
 									isDirectSupport: true,
-									thresholdMoney: 10000
+									thresholdMoney: 10
 							},
 							{
 								title: randomString('sample reward title'),
 								description: randomString('sample reward description'),
 									isDirectSupport: true,
-									thresholdMoney: 1000000
+									thresholdMoney: 20
 							}
 						],
 					faqs: [
