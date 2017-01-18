@@ -2,9 +2,14 @@
 import mongoose from 'mongoose'
 import crypto from 'crypto'
 import { autoIncrement } from '../lib/db'
+
+import ProjectModel from './project'
+import ProductModel from './product'
+import SponsorModel from './sponsor'
 import PurchaseModel from './purchase'
 
 import FacebookTracker from '../../lib/FacebookTracker'
+import pick from 'lodash.pick'
 
 export const access_levels = [0, 1, 10, 100]
 
@@ -67,12 +72,23 @@ UserSchema.statics.findOneByEmail = function (email, cb) {
 	}, cb)
 }
 
+UserSchema.methods.getUserType = function () {
+	switch (this.access_level) {
+		case 0: return 'user'
+		case 1: return 'artist'
+		case 10: return 'editor'
+		case 100: return 'admin'
+		default: throw new Error(`unknown user access level ${this.access_level}`)
+	}
+}
+
 UserSchema.methods.toFormat = async function(type, ...args) {
 	switch (type) {
 		case 'profile':
-			return await _renderProfile(this)
+			const other = args[0] || false // show other user's profile
+			return await _renderMyProfile(this, other)
 		default:
-			return {}
+			throw new Error(`user to format can't accept type ${type}`)
 	}
 }
 
@@ -103,26 +119,134 @@ const UserModel = mongoose.model('User', UserSchema);
 export default UserModel
 
 // Helperfunctions
+/*
+	admin.profile: {
+		projects,
+		products,
+		users,
+		sponsors,
+	},
 
-const _renderProfile = async (_this) => {
-	switch (this.access_level) {
-		case 0: // normal user
-			return {
-
-			}
-		case 1: // artist
-			return {
-
-			}
-		case 10: // editor
-			return {
-
-			}
-		case 100: // admin
-			return {
-
-			}
-		default:
-			throw new Error(`[User ${this.id}] No such access level ${this.access_level}`)
+	artist.profile: {
+		project: {
+			sharedProjects: [],
+			purchasedProjects: [],
+			authorizedProjects: [],
+		},
+		project: {
+			purchasedProducts: []
+		}
 	}
+
+	user.profile: {
+		project: {
+			sharedProjects: [],
+			purchasedProjects: [],
+		},
+		product: {
+			purchasedProducts: []
+		}
+	}
+*/
+const _renderMyProfile = async (_this, other = false) => {
+	try {
+		const [
+			{project_names},
+			purchases,
+		] = await Promise.all([
+			FacebookTracker.getUserSummary(_this.id),
+			PurchaseModel.findDetailByUser(_this)
+		])
+
+		const _data = {
+			sharedProjects: null,
+			purchasedProjects: null,
+			purchasedProducts: null,
+			authorizedProjects: null,
+			users: null,
+			projects: null,
+			products: null,
+			sponsors: null,
+		}
+		const _fetcher = {
+			sharedProjects: async () => await Promise.all(
+				(await ProjectModel.findByNames(project_names))
+					.map(async (p) => await p.toFormat('profile'))),
+			purchasedProjects: async () => await Promise.all(
+				purchases
+					.filter(p => !!p.project)
+					.map(async (p) => await p.toFormat('profile'))),
+			purchasedProducts: async () => await Promise.all(
+				purchases
+					.filter(p => !!p.product)
+					.map(async (p) => await p.toFormat('profile'))),
+			authorizedProjects: async () => await Promise.all(
+				(await ProjectModel.findAuthorizedOnesToUser(_this))
+					.map(async (p) => await p.toFormat('profile'))),
+			users: async () => await UserModel.find({}),
+			projects: async () => await ProjectModel.find({}),
+			products: async () => await ProductModel.find({}),
+			sponsors: async () => await SponsorModel.find({}),
+		}
+
+		if (other) {
+			// otehr profile!
+			let keys = ['sharedProjects',]
+
+			let [
+				sharedProjects,
+			] = await Promise.all(keys.map(
+				async (k) => await _fetcher[k]()
+			))
+
+			return {
+				project: {
+					sharedProjects,
+				},
+			}
+		}
+
+		let keys = []
+		let ret = {}
+
+		if (_this.access_level === 0) { // normal user
+			keys = ['sharedProjects', 'purchasedProjects', 'purchasedProducts']
+		} else if (_this.access_level === 1) { // artist
+			keys = ['sharedProjects', 'purchasedProjects', 'purchasedProducts', 'authorizedProjects']
+		} else if (_this.access_level === 100) { // admin
+			keys = ['sharedProjects', 'purchasedProjects', 'purchasedProducts', 'projects', 'products',]
+		} else if (_this.access_level === 100) { // admin
+			keys = ['projects', 'products', 'users', 'sponsors']
+		} else {
+			throw new Error(`[User ${_this.id}] has unknown access level ${_this.access_level}`)
+		}
+
+		await Promise.all(keys.map(
+			async (k) => ret[k] = await _fetcher[k]()
+		))
+
+		return {
+			project: {
+				sharedProjects: ret.sharedProjects,
+				purchasedProjects: ret.purchasedProjects,
+				authorizedProjects: ret.authorizedProjects,
+			},
+			product: {
+				purchasedProducts: ret.purchasedProducts,
+			},
+			projects: ret.projects,
+			products: ret.products,
+			users: ret.users,
+			sponsors: ret.sponsors,
+		}
+	} catch (e) {
+		console.error(e);
+	}
+	throw new Error(`[User ${_this.id}] No such access level ${_this.access_level}`)
+}
+
+// helper
+const _getSharedProjects = async (_this) => {
+	const { project_names } = await FacebookTracker.getUserSummary(_this.id)
+	return await ProjectModel.findByNames(project_names)
 }

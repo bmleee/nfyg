@@ -106,6 +106,14 @@ ProjectSchema.set('toJSON', {
 ProjectSchema.statics.findOneByName = function (name) {
 	return this.findOne({'abstract.projectName': name})
 }
+ProjectSchema.statics.findAuthorizedOnesToUser = function (user) {
+	return this.find({ authorizedUsers: { $in: [user._id] } })
+}
+ProjectSchema.statics.findByNames = function (names) {
+	let re = new RegExp(names.join('|'), "i")
+	return this.find({'abstract.projectName': re})
+}
+
 
 ProjectSchema.methods.toFormat = async function (type, ...args) {
 
@@ -237,8 +245,11 @@ ProjectSchema.methods.toFormat = async function (type, ...args) {
 					overview: this.overview,
 				}
 
+			case 'profile':
+				return this.abstract
+
 			default:
-				console.error(`toFormat can't accept this ${JSON.stringify(type)}`);
+				console.error(`ProjectModel.toFormat can't accept this ${JSON.stringify(type)}`);
 				return ''
 		}
 

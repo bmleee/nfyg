@@ -160,7 +160,9 @@ router.post('/:projectName/purchase', isLoggedIn, async (req, res) => {
 			project,
 			address: address.toJSON(),
 			payment: payment.toJSON(),
-			reward
+			reward,
+			purchaseAmount,
+			shippingFee
 		})
 
 		res.json({

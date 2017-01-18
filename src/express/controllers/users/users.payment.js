@@ -33,7 +33,7 @@ router.get('/', isLoggedIn, async (req, res) => {
 	}
 })
 
-// TODO: notify error!
+// TODO: should notify error!
 router.post('/', isLoggedIn, async (req, res) => {
 	const {
 		user

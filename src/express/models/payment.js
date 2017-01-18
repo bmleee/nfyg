@@ -35,8 +35,9 @@ PaymentSchema.pre('save', async function (next) {
     })
 
     this.card_name = card_name
-    await next()
+    next()
   } catch (e) {
+    console.error(`faild to create payment User${this.user}`);
     console.error(e);
     throw e
   }

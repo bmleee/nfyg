@@ -4,6 +4,11 @@ import md5 from 'md5'
 
 import IMP from '../lib/iamport'
 
+import Iamport from 'iamport'
+import config from '~/iamport.config.js'
+
+import { randomNumber } from '../lib/utils'
+
 const Schema = mongoose.Schema;
 const PurchaseSchema = new Schema({
   user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
@@ -11,7 +16,8 @@ const PurchaseSchema = new Schema({
   product: { type: Schema.Types.ObjectId, ref: 'Product' },
   user_info: {
     display_name: { type: String, required: true },
-    fb_id: { type: String, required: true },
+    id: { type: String, required: true },
+    fb_id: { type: String,},
     image: { type: String, required: true },
   },
   address: {
@@ -65,8 +71,10 @@ PurchaseSchema.set('toJSON', {
 });
 
 PurchaseSchema.pre('save', async function (next) {
-  console.log('purchase pre save hoocker!');
+  // console.log('purchase pre save hoocker!');
   try {
+    let user_id = this.user._id || this.user
+
     // assign purchase info
     let p = this.project || this.product
     let pName = p.abstract.projectName || p.abstract.productName
@@ -74,21 +82,25 @@ PurchaseSchema.pre('save', async function (next) {
     let schedule_at = this.project ? new Date(this.project.funding.dateTo ).getTime() / 1000 // msec to sec
       : Date.now() / 1000 + 30 // after 30 sec
 
-    this.purchase_info.merchant_uid = `${pName}_${md5(`${this.user}_${Date.now()}`)}`
-    this.purchase_info.customer_uid = this.user
+    this.purchase_info.merchant_uid = `${pName}_${md5(`${user_id}_${randomNumber(10000)}_${Date.now()}`)}`
+    this.purchase_info.customer_uid = user_id
     this.purchase_info.amount = this.reward.thresholdMoney * this.purchaseAmount + this.shippingFee
     this.purchase_info.schedule_at = schedule_at
 
+
+    console.log('this.purchase_info', this.purchase_info);
+
+    // SKIP THIS PROCESS!
     // validate card info
-    let {
-      card_name,
-    } = await IMP.subscribe_customer.create({
-      customer_uid: this.purchase_info.customer_uid,
-      card_number: this.payment.card_number,
-      expiry: this.payment.expiry,
-      birth: this.payment.birth,
-      pwd_2digit: this.payment.pwd_2digit,
-    })
+    // let {
+    //   card_name,
+    // } = await IMP.subscribe_customer.create({
+    //   customer_uid: this.purchase_info.customer_uid,
+    //   card_number: this.payment.card_number,
+    //   expiry: this.payment.expiry,
+    //   birth: this.payment.birth,
+    //   pwd_2digit: this.payment.pwd_2digit,
+    // })
 
     let {
       code,
@@ -133,6 +145,16 @@ PurchaseSchema.methods.toFormat = async function (type, ...args) {
           money: this.purchase_info.amount,
           support_at: this.purchase_info.schedule_at * 1000,
         }
+      case 'profile':
+        return {
+          project: this.project && this.project.abstract,
+          product: this.product && this.product.abstract,
+          address: this.address,
+          purchase_info: this.purchase_info,
+          reward: this.reward,
+          purchaseAmount: this.purchaseAmount,
+          shippingFee: this.shippingFee
+        }
     default:
       console.error(`toFormat can't accept this ${JSON.stringify(type)}`);
       return ''
@@ -141,6 +163,9 @@ PurchaseSchema.methods.toFormat = async function (type, ...args) {
 
 PurchaseSchema.statics.findByUser = function (user) {
 	return this.find({ user }).sort({ updated_at: -1})
+}
+PurchaseSchema.statics.findDetailByUser = function (user) {
+	return this.find({ user }).populate('project product').sort({ updated_at: -1})
 }
 PurchaseSchema.statics.findByProject = function (project) {
 	return this.find({ project }).sort({ updated_at: -1})

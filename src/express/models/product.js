@@ -230,8 +230,11 @@ ProductSchema.methods.toFormat = async function (type, ...args) {
 					overview: this.overview,
 				}
 
+			case 'profile':
+				return this.abstract
+
 			default:
-				console.error(`toFormat can't accept this ${JSON.stringify(type)}`);
+				console.error(`Product toFormat can't accept this ${JSON.stringify(type)}`);
 				return ''
 		}
 
