@@ -86,7 +86,8 @@ router.get('/', async (req, res) => {
 		}))
 
 		res.json({
-			user: authorizedUser(req.session.user),
+			// user: authorizedUser(req.session.user),
+			user: authorizedUser(req.user),
 			data: {
 				home
 			}

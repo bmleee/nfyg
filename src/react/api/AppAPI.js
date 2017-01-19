@@ -199,6 +199,7 @@ export async function createPost({projectName, productName, title, content, thre
 	const config = {
 		method: 'post',
 		url: `/api/auth/fetch/${base}/posts`,
+		withCredentials: true,
 		data: { title, content, thresholdMoney, isDirectSupport },
 	}
 
@@ -231,6 +232,8 @@ export async function fetchProfile(user_id = '') {
 	const config = {
 		url: `/api/users/profile/${user_id}`,
 	}
+
+	console.log('config', config);
 	return await _request(config)
 }
 

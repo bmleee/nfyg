@@ -35,7 +35,8 @@ const router = express.Router()
 //   	profile
 //   }
 // }
-router.get('/', isLoggedIn, async (req, res) => { // return user-type, appropreate data (proj, prod, user, ...)
+router.get('/', async (req, res) => { // return user-type, appropreate data (proj, prod, user, ...)
+	console.log('/users/profile/');
 	try {
 		if (!req.session.user) {
 			console.log('session.user is not defined');
@@ -61,6 +62,7 @@ router.get('/', isLoggedIn, async (req, res) => { // return user-type, approprea
 })
 
 router.get('/:user_id', async (req, res) => {
+	console.log('/users/profile/:user_Id');
 	try {
 		let user = await UserModel.findOne({ id: req.params.user_id })
 		res.json({

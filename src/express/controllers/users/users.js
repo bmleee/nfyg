@@ -49,11 +49,16 @@ router.post('/login', signupMulter.array(), (req, res) => {
     if (err || !user) return res.redirect('/login')
     req.session.user = user;
 
-    req.session.save(function (err) {
-      console.log('saved session', req.session);
-      if (err) console.error(err);
+    req.logIn(user, function(err) {
+      if (err) { return res.redirect('/login') }
       res.redirect(req.params.referrer || '/') // TODO: redirect to referrer
-    })
+    });
+
+    // req.session.save(function (err) {
+    //   console.log('saved session', req.session);
+    //   if (err) console.error(err);
+    //   res.redirect(req.params.referrer || '/') // TODO: redirect to referrer
+    // })
 
    })(req, res)
  })
