@@ -9,6 +9,7 @@ import SponsorModel from './sponsor'
 import PurchaseModel from './purchase'
 
 import FacebookTracker from '../../lib/FacebookTracker'
+import fetchDataByKey, { KEYS } from '../lib/fetchDataByKey'
 import pick from 'lodash.pick'
 
 export const access_levels = [0, 1, 10, 100]
@@ -98,6 +99,15 @@ UserSchema.methods.toFormat = async function(type, ...args) {
 			return await _renderMyProfile(this, other)
 		case 'profile_admin':
 			return pick(this.toJSON(), ['id', 'fb_id', 'name', 'display_name', 'local_email', 'fb_email'])
+		case 'summary':
+			let {
+				project_names, likes, shares, comments
+			} = await FacebookTracker.getUserSummary(this.id)
+			let projects = await ProjectModel.findByNames(project_names)
+			return {
+				...pick(this.toJSON(), ['id', 'fb_id', 'name', 'display_name', 'local_email', 'fb_email']),
+				projects: projects.map(p => p.abstract)
+			}
 		default:
 			throw new Error(`user to format can't accept type ${type}`)
 	}
@@ -161,65 +171,10 @@ export default UserModel
 */
 const _renderMyProfile = async (_this, other = false) => {
 	try {
-		const [
-			{project_names},
-			purchases,
-		] = await Promise.all([
-			FacebookTracker.getUserSummary(_this.id),
-			PurchaseModel.findDetailByUser(_this)
-		])
-
-		const _data = {
-			sharedProjects: null,
-			purchasedProjects: null,
-			purchasedProducts: null,
-			authorizedProjects: null,
-			users: null,
-			projects: null,
-			products: null,
-			sponsors: null,
-		}
-		const _fetcher = {
-			sharedProjects: async () => await Promise.all(
-				(await ProjectModel.findByNames(project_names))
-					.map(async (p) => await p.toFormat('shared_project'))),
-			purchasedProjects: async () => await Promise.all(
-				purchases
-					.filter(p => !!p.project)
-					.map(async (p) => await p.toFormat('profile'))),
-			purchasedProducts: async () => await Promise.all(
-				purchases
-					.filter(p => !!p.product)
-					.map(async (p) => await p.toFormat('profile'))),
-			authorizedProjects: async () => await Promise.all(
-				(await ProjectModel.findAuthorizedOnesToUser(_this))
-					.map(async (p) => await p.toFormat('profile_admin'))),
-			users: async () => await Promise.all(
-				(await UserModel.find({}))
-					.map(async (u) => await u.toFormat('profile_admin'))
-			),
-			projects: async () => await Promise.all(
-				(await ProjectModel.find({}))
-					.map(async (p) => await p.toFormat('profile_admin'))
-			),
-			products: async () => await Promise.all(
-				(await ProductModel.find({}))
-					.map(async (p) => await p.toFormat('profile_admin'))
-			),
-			sponsors: async () => await Promise.all(
-				(await SponsorModel.find({}))
-					.map(async (p) => await p.toFormat('profile_admin'))
-			),
-		}
+		let sharedProjects, purchasedProjects, authorizedProjects, purchasedProducts, projects, products, users, sponsors;
 
 		if (other) { // otehr user's profile!
-			let keys = ['sharedProjects',]
-
-			let [
-				sharedProjects,
-			] = await Promise.all(keys.map(
-				async (k) => await _fetcher[k]()
-			))
+			[ sharedProjects ] = await fetchDataByKey({user: _this}, KEYS.sharedProjects)
 
 			return {
 				project: {
@@ -228,38 +183,32 @@ const _renderMyProfile = async (_this, other = false) => {
 			}
 		}
 
-		let keys = []
-		let ret = {}
 
 		if (_this.access_level === 0) { // normal user
-			keys = ['sharedProjects', 'purchasedProjects', 'purchasedProducts']
+			[ sharedProjects, purchasedProjects, purchasedProducts ] = await fetchDataByKey({user: _this}, KEYS.sharedProjects, KEYS.purchasedProjects, KEYS.purchasedProducts)
 		} else if (_this.access_level === 1) { // artist
-			keys = ['sharedProjects', 'purchasedProjects', 'purchasedProducts', 'authorizedProjects']
+			[ sharedProjects, purchasedProjects, purchasedProducts, authorizedProjects ] = await fetchDataByKey({user: _this}, KEYS.sharedProjects, KEYS.purchasedProjects, KEYS.purchasedProducts, KEYS.authorizedProjects)
 		} else if (_this.access_level === 10) { // editor
-			keys = ['sharedProjects', 'purchasedProjects', 'purchasedProducts', 'projects', 'products',]
+			[ sharedProjects, purchasedProjects, purchasedProducts, projects, products, ] = await fetchDataByKey({user: _this}, KEYS.sharedProjects, KEYS.purchasedProjects, KEYS.purchasedProducts, KEYS.projects, KEYS.products,)
 		} else if (_this.access_level === 100) { // admin
-			keys = ['projects', 'products', 'users', 'sponsors']
+			[ projects, products, users, sponsors ] = await fetchDataByKey({user: _this}, KEYS.projects, KEYS.products, KEYS.users, KEYS.sponsors)
 		} else {
 			throw new Error(`[User ${_this.id}] has unknown access level ${_this.access_level}`)
 		}
 
-		await Promise.all(keys.map(
-			async (k) => ret[k] = await _fetcher[k]()
-		))
-
 		return {
 			project: {
-				sharedProjects: ret.sharedProjects,
-				purchasedProjects: ret.purchasedProjects,
-				authorizedProjects: ret.authorizedProjects,
+				sharedProjects: sharedProjects,
+				purchasedProjects: purchasedProjects,
+				authorizedProjects: authorizedProjects,
 			},
 			product: {
-				purchasedProducts: ret.purchasedProducts,
+				purchasedProducts: purchasedProducts,
 			},
-			projects: ret.projects,
-			products: ret.products,
-			users: ret.users,
-			sponsors: ret.sponsors,
+			projects: projects,
+			products: products,
+			users: users,
+			sponsors: sponsors,
 		}
 	} catch (e) {
 		console.error(e);

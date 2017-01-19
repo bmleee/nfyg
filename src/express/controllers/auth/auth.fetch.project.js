@@ -86,6 +86,7 @@ router.get('/:projectName/:option?/:tab?', async (req, res, next) => {
 	}
 })
 
+// TODO: check user authority
 router.get('/:projectName/edit/:tab?', async (req, res) => {
 	console.log('/projects/:projectName/edit');
 
@@ -129,6 +130,25 @@ router.get('/:projectName/rewards', async (req, res) => {
 			user,
 			error: e.message
 		})
+	}
+})
+
+// TODO: check user authority
+router.get('/:projectName/summary', isLoggedIn, async (req, res) => {
+	try {
+		let user = req.session.user
+		let project = await ProjectModel.findOne({ 'abstract.projectName': req.params.projectName })
+			.populate('authorizedUsers sponsor')
+
+		res.json({
+			user: renderUser.authorizedUser(user),
+			data: {
+				summary: await project.toFormat('summary')
+			}
+		})
+	} catch (e) {
+		console.error(e);
+		res.status(400).json({ error: e })
 	}
 })
 

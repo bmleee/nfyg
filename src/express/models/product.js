@@ -237,6 +237,16 @@ ProductSchema.methods.toFormat = async function (type, ...args) {
 					..._json.abstract,
 				}
 
+			case 'summary':
+				return {
+					abstract: this.abstract,
+					creator: this.creator,
+					funding: this.funding,
+					// posts: this.posts,
+					qnasa: this.qnasa,
+					authorizedUsers: this.authorizedUsers,
+				}
+
 			default:
 				console.error(`Product toFormat can't accept this ${JSON.stringify(type)}`);
 				return ''

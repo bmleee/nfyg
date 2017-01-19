@@ -65,7 +65,7 @@ router.get(':user_id', async (req, res) => {
 		res.json({
 			user: renderUser.authorizedUser(req.session.user),
 			data: {
-				profile: await user.toFormat("other_profile")
+				profile: await user.toFormat("profile", true)
 			}
 		})
 	} catch (error) {
@@ -74,4 +74,19 @@ router.get(':user_id', async (req, res) => {
 	}
 })
 
+router.get('/summary', isLoggedIn, async (req, res) => {
+	try {
+		let user = await UserModel.findById(req.session.user._id)
+
+		res.json({
+			user: renderUser.authorizedUser(user),
+			data: {
+				summary: await user.toFormat('summary')
+			}
+		})
+	} catch (e) {
+		console.error(e);
+		res.status(400).json({ error: e })
+	}
+})
 export default router

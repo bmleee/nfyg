@@ -264,6 +264,20 @@ ProjectSchema.methods.toFormat = async function (type, ...args) {
 					..._json.abstract,
 				}
 
+			case 'summary':
+				let sharing_info = await this.getSharingInfo() // likes, shares, comments, num_users, num_posts, money_by_sharing,
+
+				return {
+					abstract: this.abstract,
+					creator: this.creator,
+					funding: this.funding,
+					posts: this.posts,
+					qnasa: this.qnasa,
+					sponsor: this.sponsor,
+					authorizedUsers: this.authorizedUsers,
+					sharing_info,
+				}
+				
 			default:
 				console.error(`ProjectModel.toFormat can't accept this ${JSON.stringify(type)}`);
 				return ''

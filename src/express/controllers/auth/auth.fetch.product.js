@@ -20,7 +20,10 @@ import ExhibitionModel from '../../models/exhibition'
 import MagazineModel from '../../models/magazine'
 import SponsorModel from '../../models/sponsor'
 
+import * as mh from '../../lib/modelHelper'
+
 import * as ac from '../../lib/auth-check'
+import isLoggedIn from '../../lib/login-check'
 import * as renderHelper from '../../lib/renderHelper'
 import * as renderUser from '../../lib/renderUser'
 
@@ -128,6 +131,25 @@ router.get('/:productName/purchase/:param', async (req, res) => {
 				user,
 				error: `invalid param ${req.params.param}`
 			})
+	}
+})
+
+// TODO: check user authority
+router.get('/:productName/summary', isLoggedIn, async (req, res) => {
+	try {
+		let user = req.session.user
+		let product = await ProductModel.findOne({ 'abstract.productName': req.params.productName })
+			.populate('authorizedUsers')
+
+		res.json({
+			user: renderUser.authorizedUser(user),
+			data: {
+				summary: await product.toFormat('summary')
+			}
+		})
+	} catch (e) {
+		console.error(e);
+		res.status(400).json({ error: e })
 	}
 })
 
