@@ -62,11 +62,13 @@ export default class PurchaseList extends Component {
                       <span>{title} {purchaseAmount}개 : {amount}원</span>
                       { !other && <button className="purchase-cancel-button" >결제 취소</button> }
                     </div>
-                      {/* <span>받는이: {addressee_name}</span> 
-                       <span>결제 상태: {purchase_state}</span>
-                       <span>주소: {zipcode} {address1} {address2}</span>
-                       <span>상품 금액: {thresholdMoney}</span>
-                       <span>배송비: {shippingFee}</span> */}
+                      {/*
+                        <span>받는이: {addressee_name}</span>
+                        <span>결제 상태: {purchase_state}</span>
+                        <span>주소: {zipcode} {address1} {address2}</span>
+                        <span>상품 금액: {thresholdMoney}</span>
+                        <span>배송비: {shippingFee}</span>
+                      */}
                   </div>
                 </div>
               )

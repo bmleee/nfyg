@@ -255,36 +255,14 @@ export default class MyProfile extends Component {
 
     return (
       <div className="profile-wrapper">
-<<<<<<< 46fea2b9b218cdc017da6c86601cef5f03ed6d46:src/react/components/User/Profile/MyProfile/index.js
+        <h4>공유 후원 프로젝트</h4>
+        { sharedProjects && <SharedProjects sharedProjects={sharedProjects} other={other}/>}
 
-            <h4>공유 후원 프로젝트</h4>
-            { sharedProjects && <SharedProjects sharedProjects={sharedProjects}/>}
+        <h4>리워드 후원 프로젝트</h4>
+        { purchasedProjects && <PurchaseList purchases={purchasedProjects} other={other}/>}
 
-            <h4>리워드 후원 프로젝트</h4>
-            { purchasedProjects && <PurchaseList purchases={purchasedProjects}/>}
-
-            <h4>구매한 미술소품</h4>
-            { purchasedProducts && <PurchaseList purchases={purchasedProducts}/>}
-
-=======
-        <Tabs>
-          <TabList>
-            <Tab>Shared Projects</Tab>
-            <Tab>Purchased Projects</Tab>
-            <Tab>Purchased Products</Tab>
-          </TabList>
-
-          <TabPanel>
-            { sharedProjects && <SharedProjects sharedProjects={sharedProjects} other={other}/>}
-          </TabPanel>
-          <TabPanel>
-            { purchasedProjects && <PurchaseList purchases={purchasedProjects} other={other}/>}
-          </TabPanel>
-          <TabPanel>
-            { purchasedProducts && <PurchaseList purchases={purchasedProducts} other={other}/>}
-          </TabPanel>
-        </Tabs>
->>>>>>> sup:src/react/components/User/MyPage/index.js
+        <h4>구매한 미술소품</h4>
+        { purchasedProducts && <PurchaseList purchases={purchasedProducts} other={other}/>}
       </div>
     )
   }
