@@ -49,7 +49,11 @@ router.post('/login', signupMulter.array(), (req, res) => {
     if (err || !user) return res.redirect('/login')
     req.session.user = user;
 
-    return res.redirect(req.params.referrer || '/') // TODO: redirect to referrer
+    req.session.save(function (err) {
+      if (err) console.error(err);
+      res.redirect(req.params.referrer || '/') // TODO: redirect to referrer
+    })
+
    })(req, res)
  })
 
@@ -59,15 +63,23 @@ router.get('/login-facebook/callback', (req, res) => {
     if (err || !user) return res.redirect('/login')
     req.session.user = user;
 
-    // TODO: redirect to referrer
-    return res.redirect('/')
+    req.session.save(function (err) {
+      // TODO: redirect to referrer
+      res.redirect('/')
+    })
+
    })(req, res)
 })
 
 router.get('/logout', (req, res) => {
-  delete req.session.user
 	req.logout();
-	res.redirect('/');
+  req.session.user = null;
+
+  req.session.save(function (err) {
+    if (err) console.error(err);
+    // TODO: redirect to referrer
+    res.redirect('/')
+  })
 })
 
 export default router

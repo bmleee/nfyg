@@ -18,7 +18,7 @@ import winstonLogger from './middlewares/logger'
 
 import router from './controllers'; // express router
 
-import { EXPRESS_PORT } from '../../env';
+import { EXPRESS_PORT, MONGODB_URL } from '../../env';
 
 const app = express();
 const publicPath = path.join(__dirname, './../public');
@@ -32,12 +32,16 @@ app.use(cookieParser())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const FileStore = require('session-file-store')(session);
+const MongoStore = require('connect-mongo')(session);
 app.use(session({
-	store: new FileStore,
+	store: new MongoStore({
+		mongooseConnection: connection,
+		ttl: 14 * 24 * 60 * 60, // = 14 days. Default
+	}),
 	saveUninitialized: true,
 	resave: true,
-	secret: 'complecated@#@$secret#$@#$string##!)@``'
+	secret: `2xtReam.py-H@rd-2-R2ad`,
+
 }));
 app.use(passport.initialize());
 app.use(passport.session());
