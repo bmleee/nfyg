@@ -4,20 +4,14 @@ import { Link } from 'react-router'
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table'
 
 const editFormatter = (cell, row) => {
-	return <Link to={`/projects/${row.projectName}/edit`}><button className='btn btn-info'>Edit</button></Link>;
+	return <Link to={`/projects/${row.productName}/edit`}><button className='btn btn-info'>Edit</button></Link>;
 }
 const linkFormatter = (cell, row) => {
 	return <Link to={`/products/${row.productName}`}>{cell}</Link>;
 }
-
-// TODO: correct link url
 const detailFormatter = (cell, row) => {
-	return <Link to={`/project-editor?id=${row.id}`}><button className='btn btn-info'>Detail</button></Link>;
+	return <Link to={`/products/${row.productName}/summary`}><button className='btn btn-info'>Detail</button></Link>;
 }
-
-
-
-
 
 export default class Products extends Component {
   render() {

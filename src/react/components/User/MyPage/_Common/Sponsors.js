@@ -7,7 +7,6 @@ const editFormatter = (cell, row) => {
 	return <Link to={`/sponsors/${row.sponsorName}/edit`}><button className='btn btn-info'>Edit</button></Link>;
 }
 
-// TODO: correct detail link
 const linkFormatter = (cell, row) => {
 	return <Link to={`/sponsors/${row.sponsorName}`}>{cell}</Link>;
 }
@@ -36,8 +35,8 @@ export default class Sponsors extends Component {
                 <TableHeaderColumn width='150' dataSort={true} dataFormat={linkFormatter} dataField="displayName" >Display Name</TableHeaderColumn>
                 <TableHeaderColumn width='150' dataSort={true} dataFormat={linkFormatter} dataField="money" dataAlign="center">후원액</TableHeaderColumn>
                 <TableHeaderColumn width='150' dataSort={true} dataFormat={linkFormatter} dataField="created_at" >생성일</TableHeaderColumn>
-                <TableHeaderColumn width='100' dataField="detail" dataFormat={detailFormatter} export={false} >Detail</TableHeaderColumn>
-                {/* <TableHeaderColumn width='100' dataField="edit" dataFormat={editFormatter} export={false} >Edit</TableHeaderColumn> */}
+                {/* <TableHeaderColumn width='100' dataField="detail" dataFormat={detailFormatter} export={false} >Detail</TableHeaderColumn> */}
+                <TableHeaderColumn width='100' dataField="edit" dataFormat={editFormatter} export={false} >Edit</TableHeaderColumn>
               </BootstrapTable>
             : 'Loading...'
         }
