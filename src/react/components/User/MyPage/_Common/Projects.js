@@ -9,15 +9,9 @@ const editFormatter = (cell, row) => {
 const linkFormatter = (cell, row) => {
 	return <Link to={`/projects/${row.projectName}`}>{cell}</Link>;
 }
-
-// TODO: correct link url
 const detailFormatter = (cell, row) => {
-	return <Link to={`/project-editor?id=${row.id}`}><button className='btn btn-info'>Detail</button></Link>;
+	return <Link to={`/projects?id=${row.projectName}/summary`}><button className='btn btn-info'>Detail</button></Link>;
 }
-
-
-
-
 
 export default class Projects extends Component {
   render() {

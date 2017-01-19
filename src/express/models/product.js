@@ -256,7 +256,7 @@ ProductSchema.methods.toFormat = async function (type, ...args) {
 					creator: this.creator,
 					funding: this.funding,
 					// posts: this.posts,
-					qnasa: this.qnasa,
+					qnas: this.qnas,
 					authorizedUsers,
 					purchase_info,
 				}

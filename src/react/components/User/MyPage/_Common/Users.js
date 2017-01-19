@@ -5,17 +5,17 @@ import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table'
 
 // TODO: correct editor url
 const editFormatter = (cell, row) => {
-	return <Link to={`/projects/${row.projectName}/edit`}><button className='btn btn-info'>Edit</button></Link>;
+	return <Link to={`/user/${row.id}/edit`}><button className='btn btn-info'>Edit</button></Link>;
 }
 
 // TODO: correct detail link
 const linkFormatter = (cell, row) => {
-	return <Link to={`/products/${row.productName}`}>{cell}</Link>;
+	return <Link to={`/users/${row.productName}`}>{cell}</Link>;
 }
 
 // TODO: correct link url
 const detailFormatter = (cell, row) => {
-	return <Link to={`/project-editor?id=${row.id}`}><button className='btn btn-info'>Detail</button></Link>;
+	return <Link to={`/users/${row.id}`}><button className='btn btn-info'>Detail</button></Link>;
 }
 
 export default class Users extends Component {
