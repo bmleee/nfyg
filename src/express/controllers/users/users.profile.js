@@ -59,12 +59,13 @@ router.get('/', async (req, res) => { // return user-type, appropreate data (pro
 	}
 })
 
-router.get(':user_id', async (req, res) => {
+router.get('/:user_id', async (req, res) => {
 	try {
 		let user = await UserModel.findOne({ id: req.params.user_id })
 		res.json({
 			user: renderUser.authorizedUser(req.session.user),
 			data: {
+				userType: 'other',
 				profile: await user.toFormat("profile", true)
 			}
 		})

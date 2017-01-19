@@ -60,9 +60,13 @@ import { AdminProfileContainer, AdminProfileMain, AdminProfileProject, AdminProf
 import { ArtistProfileContainer, ArtistProfileMain, ArtistProfileProject, ArtistProfileProduct } from './components/User/Profile/ArtistProfile'
 import { EditorProfileContainer, EditorProfileMain, EditorProfileProject, EditorProfileProduct } from './components/User/Profile/EditorProfile'
 import { UserProfileContainer, UserProfileMain, UserProfileProject, UserProfileProduct } from './components/User/Profile/UserProfile'
-import MyProfile from './components/User/Profile/MyProfile'
-import OtherProfile from './components/User/Profile/OtherProfile'
+import MyPage from './components/User/MyPage'
 
+import {
+	User as UserSummary,
+	Project as ProjectSummary,
+	Product as ProductSummary,
+} from './components/Summary'
 
 import { Sponsors } from './components/Sponsors'
 
@@ -193,11 +197,16 @@ const routes = (
 			</Route>
 		</Route>
 
-		<Route path="user/me" component={MyProfile}></Route>
-		<Route path="user/:user_id" component={OtherProfile}></Route>
+		<Route path="user/me" component={MyPage}></Route>
+		<Route path="user/:user_id" component={MyPage}></Route>
 
 		<Route path="sponsors" component={Sponsors}></Route>
 		<Route path="sponsors/:sponsorName/edit" component={SponsorEditor}></Route>
+
+		{/* Summary */}
+		<Route path="projects/:projectName/summary" component={ProjectSummary}></Route>
+		<Route path="products/:productName/summary" component={ProductSummary}></Route>
+		<Route path="users/:user_id/summary" component={UserSummary}></Route>
 
 		<Route path="test1" component={Test1}></Route>
 		<Route path="test2" component={Test2}></Route>

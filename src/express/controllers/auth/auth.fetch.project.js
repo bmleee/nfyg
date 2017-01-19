@@ -46,7 +46,7 @@ router.get('/:projectName/:option?/:tab?', async (req, res, next) => {
 		option,
 	} = req.params;
 
-	if(['edit', 'rewards', 'addresses', 'payments'].includes(option)) {
+	if(['edit', 'rewards', 'addresses', 'payments', 'summary'].includes(option)) {
 		return next() // go to /:projectName/edit
 	}
 
@@ -136,14 +136,20 @@ router.get('/:projectName/rewards', async (req, res) => {
 // TODO: check user authority
 router.get('/:projectName/summary', isLoggedIn, async (req, res) => {
 	try {
-		let user = req.session.user
-		let project = await ProjectModel.findOne({ 'abstract.projectName': req.params.projectName })
-			.populate('authorizedUsers sponsor')
+		let [
+			user,
+			project
+		] = await Promise.all([
+			UserModel.findById(req.session.user._id),
+			ProjectModel.findOne({ 'abstract.projectName': req.params.projectName })
+				.populate('authorizedUsers sponsor posts qnas')
+		])
 
 		res.json({
-			user: renderUser.authorizedUser(user),
+			user: renderUser.authorizedUser(req.session.user),
 			data: {
-				summary: await project.toFormat('summary')
+				userType: user.getUserType(),
+				project_summary: await project.toFormat('summary')
 			}
 		})
 	} catch (e) {

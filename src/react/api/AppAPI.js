@@ -233,3 +233,14 @@ export async function fetchProfile(user_id = '') {
 	}
 	return await _request(config)
 }
+
+export async function fetchSummary({ projectName, productName, user_id }) {
+	const base = projectName ? `auth/fetch/projects/${projectName}`
+		: productName ? `auth/fetch/products/${productName}`
+		: user_id ? `users/${user_id}`
+		: `unknown parameter`
+	const config = {
+		url: `/api/${base}/summary`,
+	}
+	return await _request(config)
+}

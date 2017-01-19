@@ -5,9 +5,12 @@ import { autoIncrement } from '../lib/db'
 import QnAModel from './qna'
 import PostModel from './post'
 import PurchaseModel from './purchase'
+import UserModel from './user'
 
 import FacebookTracker from '../../lib/FacebookTracker'
 import * as ac from '../lib/auth-check'
+
+import { sortBy, countBy } from 'lodash'
 
 const Schema = mongoose.Schema;
 
@@ -98,7 +101,7 @@ const ProjectSchema = new Schema({
 // })
 
 ProjectSchema.pre('update', function (next) {
-	this.abstract.updated_at = Date.now()
+	// this.abstract.updated_at = Date.now()
 	next()
 })
 ProjectSchema.pre('save', function (next) {
@@ -265,19 +268,28 @@ ProjectSchema.methods.toFormat = async function (type, ...args) {
 				}
 
 			case 'summary':
-				let sharing_info = await this.getSharingInfo() // likes, shares, comments, num_users, num_posts, money_by_sharing,
+				let [
+					sharing_info,
+					purchase_info,
+					authorizedUsers
+				] = await Promise.all([
+						this.getSharingInfo(), // likes, shares, comments, num_users, num_posts, money_by_sharing,
+						this.getPurchaseInfo(),
+						Promise.all(this.authorizedUsers.map(async (u) => await u.toFormat('profile_admin')))
+				])
 
 				return {
 					abstract: this.abstract,
 					creator: this.creator,
 					funding: this.funding,
-					posts: this.posts,
-					qnasa: this.qnasa,
+					posts: sortBy(this.posts, (p) => -new Date(p.abstract.created_at).getTime()),
+					qnas: sortBy( this.qnas, (p) => -new Date(p.abstract.created_at).getTime()),
 					sponsor: this.sponsor,
-					authorizedUsers: this.authorizedUsers,
+					authorizedUsers,
 					sharing_info,
+					purchase_info
 				}
-				
+
 			default:
 				console.error(`ProjectModel.toFormat can't accept this ${JSON.stringify(type)}`);
 				return ''
@@ -335,11 +347,44 @@ ProjectSchema.methods.authorizedTo = function (user) {
 
 ProjectSchema.methods.getSharingInfo = async function () {
 	const {
-		likes, shares, comments, num_users, num_posts, money_by_sharing,
-	} = await FacebookTracker.getProjectShortSummary(this.abstract.projectName)
+		likes, shares, comments, num_users, num_posts, money_by_sharing, post_messages,
+	} = await FacebookTracker.getProjectSummary(this.abstract.projectName)
 
-	return { likes, shares, comments, num_users, num_posts, money_by_sharing, }
+	// console.log('post_messages', post_messages);
+
+	let users = await Promise.all(post_messages.map(
+		async ({user_app_scope_id, user_id, name, likes, comments, shares,}) => {
+			// let user = await UserModel.findOne({ fb_id: user_app_scope_id })
+			let user = await UserModel.findOne({ name: '일반유저' })
+
+			return {
+				user: await user.toFormat('profile_admin'),
+				user_id: user.id,
+				name,
+				likes,
+				comments,
+				shares,
+			}
+		}
+	))
+
+	return { likes, shares, comments, num_users, num_posts, money_by_sharing, users}
 }
+
+ProjectSchema.methods.getPurchaseInfo = async function () {
+	let purchases = await PurchaseModel.findByProject(this)
+	purchases = await Promise.all(purchases.map(
+		async (p) => await p.toFormat('profile')
+	))
+
+	let stat = countBy(purchases.map(p => p.purchase_info), 'purchase_state')
+
+	return {
+		stat,
+		purchases,
+	}
+}
+
 
 
 // Create the 'User' model out of the 'ProjectSchema'

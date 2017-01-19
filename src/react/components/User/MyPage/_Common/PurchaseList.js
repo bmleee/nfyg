@@ -4,7 +4,8 @@ import { Link } from 'react-router'
 export default class PurchaseList extends Component {
   render() {
     const {
-      purchases // raw project model
+      purchases, // raw project model
+      other = false,
     } = this.props
 
     return (
@@ -49,7 +50,7 @@ export default class PurchaseList extends Component {
                     {/* TODO: correct summary url */}
                     <Link to={`/projects/${pName}`}>
                     <div className="pr-thumbnail">
-								      <div className="ex-centered">  
+								      <div className="ex-centered">
                       <img className="home-exhibition-image" src={imgSrc} alt=""/>
                       </div>
                     </div>
@@ -59,14 +60,12 @@ export default class PurchaseList extends Component {
                       <h4>{shortTitle}</h4>
                       </Link>
                       <span>{title} {purchaseAmount}개 : {amount}원</span>
-                      {/* purchase_state에 따라 활성화 / 비활성화 */}
-                      <button className="purchase-cancel-button">결제 취소</button>
+                      { !other && <button className="purchase-cancel-button" >결제 취소</button> }
                     </div>
-                    
                       {/* <span>받는이: {addressee_name}</span> 
-                       <span>결제 상태: {purchase_state}</span> 
-                       <span>주소: {zipcode} {address1} {address2}</span> 
-                       <span>상품 금액: {thresholdMoney}</span> 
+                       <span>결제 상태: {purchase_state}</span>
+                       <span>주소: {zipcode} {address1} {address2}</span>
+                       <span>상품 금액: {thresholdMoney}</span>
                        <span>배송비: {shippingFee}</span> */}
                   </div>
                 </div>

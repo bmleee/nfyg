@@ -4,7 +4,8 @@ import { Link } from 'react-router'
 export default class SharedProjects extends Component {
   render() {
     const {
-      sharedProjects // raw project model
+      sharedProjects, // raw project model
+      other = false,
     } = this.props
 
     return (

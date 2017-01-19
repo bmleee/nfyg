@@ -47,7 +47,7 @@ router.get('/:productName/:option?/:tab?', async (req, res, next) => {
 		return res.redirect('/404')
 	};
 
-	if(['edit', 'purchase'].includes(option)) {
+	if(['edit', 'rewards', 'addresses', 'payments', 'summary'].includes(option)) {
 		return next() // go to /:productName/edit
 	}
 
@@ -137,14 +137,20 @@ router.get('/:productName/purchase/:param', async (req, res) => {
 // TODO: check user authority
 router.get('/:productName/summary', isLoggedIn, async (req, res) => {
 	try {
-		let user = req.session.user
-		let product = await ProductModel.findOne({ 'abstract.productName': req.params.productName })
-			.populate('authorizedUsers')
+		let [
+			user,
+			product
+		] = await Promise.all([
+			UserModel.findById(req.session.user._id),
+			ProductModel.findOne({ 'abstract.productName': req.params.productName })
+				.populate('authorizedUsers qnas')
+		])
 
 		res.json({
-			user: renderUser.authorizedUser(user),
+			user: renderUser.authorizedUser(req.session.user),
 			data: {
-				summary: await product.toFormat('summary')
+				userType: user.getUserType(),
+				product_summary: await product.toFormat('summary')
 			}
 		})
 	} catch (e) {

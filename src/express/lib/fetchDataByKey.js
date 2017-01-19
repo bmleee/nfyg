@@ -43,25 +43,21 @@ const _fetcher = {
       .map(async (p) => await p.toFormat('profile_admin'))),
   users: async () => await Promise.all(
     (await UserModel.find({}))
-      .map(async (u) => await u.toFormat('profile_admin'))
-  ),
+      .map(async (u) => await u.toFormat('profile_admin'))),
   projects: async () => await Promise.all(
     (await ProjectModel.find({}))
-      .map(async (p) => await p.toFormat('profile_admin'))
-  ),
+      .map(async (p) => await p.toFormat('profile_admin'))),
   products: async () => await Promise.all(
     (await ProductModel.find({}))
-      .map(async (p) => await p.toFormat('profile_admin'))
-  ),
+      .map(async (p) => await p.toFormat('profile_admin'))),
   sponsors: async () => await Promise.all(
     (await SponsorModel.find({}))
-      .map(async (p) => await p.toFormat('profile_admin'))
-  ),
+      .map(async (p) => await p.toFormat('profile_admin'))),
 }
 
-const fetchDataByKey = async ({ user }, ...keys) => {
+const fetchDataByKey = async ({ user, ...others }, ...keys) => {
   const [
-    {project_names},
+    { project_names },
     purchases,
   ] = await Promise.all([
     FacebookTracker.getUserSummary(user.id),
@@ -69,7 +65,7 @@ const fetchDataByKey = async ({ user }, ...keys) => {
   ])
 
   return await Promise.all(keys.map(
-    async (k) => await _fetcher[k]({ project_names, purchases, user })
+    async (k) => await _fetcher[k]({ project_names, purchases, user, ...others })
   ))
 }
 

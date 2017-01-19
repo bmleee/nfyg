@@ -10,7 +10,7 @@ import {
   AuthorizedProjects,
   PurchaseList,
   SharedProjects,
-} from '../_Common'
+} from './_Common'
 
 import { fetchProfile } from '~/src/react/api/AppAPI'
 
@@ -76,7 +76,7 @@ export default class MyProfile extends Component {
           userType,
           profile
         }
-      } = await fetchProfile();
+      } = await fetchProfile(this.props.params.user_id);
 
       this.props.appUtils.setUser(user);
       this.setState({
@@ -98,31 +98,33 @@ export default class MyProfile extends Component {
 
     return (
       <div>
-        { this._renderCommon() }
+        {/* profile.user is valid in case of other profile */}
+        { this._renderCommon(profile.user) }
         {
           userType === 'admin' ? this._renderAdmin(profile)
             : userType === 'editor' ? this._renderEditor(profile)
             : userType === 'artist' ? this._renderArtist(profile)
             : userType === 'user' ?  this._renderUser(profile)
+            : userType === 'other' ?  this._renderUser(profile, true)
             : 'Loading...'
         }
       </div>
-    )
+    )  }
 
-
-  }
-
-  _renderCommon() {
+  _renderCommon(otherUser) {
     const {
       displayName,
+      display_name,
       image,
-    } = appUtils.getUser()
+    } = otherUser || appUtils.getUser()
 
-    return displayName && (
+    let name = displayName || display_name
+
+    return name && (
       <div className="mypage-info-container">
 				<div className="mypage-thumbnail-container">
 					<img className="profile-user-thumbnail" src={ image } alt=""/>
-					<h3>{ displayName }</h3>
+					<h3>{ name }</h3>
 				</div>
 			</div>
     )
@@ -147,7 +149,7 @@ export default class MyProfile extends Component {
           </TabList>
 
           <TabPanel>
-            { project && <Projects projects={projects}/>}
+            { projects && <Projects projects={projects}/>}
           </TabPanel>
           <TabPanel>
             { products && <Products products={products}/>}
@@ -184,7 +186,7 @@ export default class MyProfile extends Component {
             <Tab>미술소품 관리</Tab>
             <Tab>후원/구매 내역</Tab>
           </TabList>
-          
+
           <TabPanel>
             { project && <Projects projects={projects}/>}
           </TabPanel>
@@ -192,7 +194,7 @@ export default class MyProfile extends Component {
             { products && <Products products={products}/>}
           </TabPanel>
           <TabPanel>
-            <h4>공유 후원 프로젝트</h4> 
+            <h4>공유 후원 프로젝트</h4>
             { sharedProjects && <SharedProjects sharedProjects={sharedProjects}/>}
             <h4>리워드 후원 프로젝트</h4>
             { purchasedProjects && <PurchaseList purchases={purchasedProjects}/>}
@@ -228,7 +230,7 @@ export default class MyProfile extends Component {
             { authorizedProjects && <AuthorizedProjects authorizedProjects={authorizedProjects}/>}
           </TabPanel>
           <TabPanel>
-            <h4>공유 후원 프로젝트</h4>  
+            <h4>공유 후원 프로젝트</h4>
             { sharedProjects && <SharedProjects sharedProjects={sharedProjects}/>}
             <h4>리워드 후원 프로젝트</h4>
             { purchasedProjects && <PurchaseList purchases={purchasedProjects}/>}
@@ -240,7 +242,7 @@ export default class MyProfile extends Component {
     )
   }
 
-  _renderUser(profile) {
+  _renderUser(profile, other = false) {
     const {
       project: {
         sharedProjects,
@@ -253,18 +255,37 @@ export default class MyProfile extends Component {
 
     return (
       <div className="profile-wrapper">
-            
-            <h4>공유 후원 프로젝트</h4>  
+<<<<<<< 46fea2b9b218cdc017da6c86601cef5f03ed6d46:src/react/components/User/Profile/MyProfile/index.js
+
+            <h4>공유 후원 프로젝트</h4>
             { sharedProjects && <SharedProjects sharedProjects={sharedProjects}/>}
-            
+
             <h4>리워드 후원 프로젝트</h4>
             { purchasedProjects && <PurchaseList purchases={purchasedProjects}/>}
-            
+
             <h4>구매한 미술소품</h4>
             { purchasedProducts && <PurchaseList purchases={purchasedProducts}/>}
 
+=======
+        <Tabs>
+          <TabList>
+            <Tab>Shared Projects</Tab>
+            <Tab>Purchased Projects</Tab>
+            <Tab>Purchased Products</Tab>
+          </TabList>
+
+          <TabPanel>
+            { sharedProjects && <SharedProjects sharedProjects={sharedProjects} other={other}/>}
+          </TabPanel>
+          <TabPanel>
+            { purchasedProjects && <PurchaseList purchases={purchasedProjects} other={other}/>}
+          </TabPanel>
+          <TabPanel>
+            { purchasedProducts && <PurchaseList purchases={purchasedProducts} other={other}/>}
+          </TabPanel>
+        </Tabs>
+>>>>>>> sup:src/react/components/User/MyPage/index.js
       </div>
     )
   }
-
 }

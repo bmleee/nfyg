@@ -98,14 +98,14 @@ UserSchema.methods.toFormat = async function(type, ...args) {
 			const other = args[0] || false // show other user's profile
 			return await _renderMyProfile(this, other)
 		case 'profile_admin':
-			return pick(this.toJSON(), ['id', 'fb_id', 'name', 'display_name', 'local_email', 'fb_email'])
+			return pick(this.toJSON(), ['id', 'fb_id', 'name', 'display_name', 'local_email', 'fb_email', 'created_at'])
 		case 'summary':
 			let {
 				project_names, likes, shares, comments
 			} = await FacebookTracker.getUserSummary(this.id)
 			let projects = await ProjectModel.findByNames(project_names)
 			return {
-				...pick(this.toJSON(), ['id', 'fb_id', 'name', 'display_name', 'local_email', 'fb_email']),
+				...pick(this.toJSON(), ['id', 'fb_id', 'name', 'display_name', 'local_email', 'fb_email', 'created_at']),
 				projects: projects.map(p => p.abstract)
 			}
 		default:
@@ -173,18 +173,7 @@ const _renderMyProfile = async (_this, other = false) => {
 	try {
 		let sharedProjects, purchasedProjects, authorizedProjects, purchasedProducts, projects, products, users, sponsors;
 
-		if (other) { // otehr user's profile!
-			[ sharedProjects ] = await fetchDataByKey({user: _this}, KEYS.sharedProjects)
-
-			return {
-				project: {
-					sharedProjects,
-				},
-			}
-		}
-
-
-		if (_this.access_level === 0) { // normal user
+		if(other || _this.access_level === 0) { // normal user
 			[ sharedProjects, purchasedProjects, purchasedProducts ] = await fetchDataByKey({user: _this}, KEYS.sharedProjects, KEYS.purchasedProjects, KEYS.purchasedProducts)
 		} else if (_this.access_level === 1) { // artist
 			[ sharedProjects, purchasedProjects, purchasedProducts, authorizedProjects ] = await fetchDataByKey({user: _this}, KEYS.sharedProjects, KEYS.purchasedProjects, KEYS.purchasedProducts, KEYS.authorizedProjects)
@@ -197,6 +186,7 @@ const _renderMyProfile = async (_this, other = false) => {
 		}
 
 		return {
+			user: pick(_this.toJSON(), ['id', 'name', 'display_name', 'image']),
 			project: {
 				sharedProjects: sharedProjects,
 				purchasedProjects: purchasedProjects,

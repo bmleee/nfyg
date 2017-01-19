@@ -6,6 +6,11 @@ import QnAModel from './qna'
 import PostModel from './post'
 import PurchaseModel from './purchase'
 
+import FacebookTracker from '../../lib/FacebookTracker'
+import * as ac from '../lib/auth-check'
+
+import { sortBy, countBy } from 'lodash'
+
 const Schema = mongoose.Schema;
 
 export const restrictedNames = ['overview', 'post', 'ranking', 'abstract', 'artworks', 'qna', 'edit', 'new']
@@ -238,13 +243,22 @@ ProductSchema.methods.toFormat = async function (type, ...args) {
 				}
 
 			case 'summary':
+			let [
+				purchase_info,
+				authorizedUsers
+			] = await Promise.all([
+					this.getPurchaseInfo(),
+					Promise.all(this.authorizedUsers.map(async (u) => await u.toFormat('profile_admin')))
+			])
+
 				return {
 					abstract: this.abstract,
 					creator: this.creator,
 					funding: this.funding,
 					// posts: this.posts,
 					qnasa: this.qnasa,
-					authorizedUsers: this.authorizedUsers,
+					authorizedUsers,
+					purchase_info,
 				}
 
 			default:
@@ -299,6 +313,24 @@ ProductSchema.methods.pushQnA = async function (_id) {
 ProductSchema.methods.authorizedTo = function (user) {
 	return !!this.authorizedUsers.filter( _id => user.equals(user))
 }
+
+ProductSchema.methods.getPurchaseInfo = async function () {
+	let purchases = await PurchaseModel.findByProduct(this)
+	purchases = await Promise.all(purchases.map(
+		async (p) => await p.toFormat('profile')
+	))
+
+	let stat = countBy(purchases.map(p => p.purchase_info), 'purchase_state')
+
+	console.log('stat', stat);
+	console.log('purchases', purchases);
+
+	return {
+		stat,
+		purchases,
+	}
+}
+
 
 
 

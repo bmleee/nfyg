@@ -15,6 +15,7 @@ const PurchaseSchema = new Schema({
   project: { type: Schema.Types.ObjectId, ref: 'Project' },
   product: { type: Schema.Types.ObjectId, ref: 'Product' },
   user_info: {
+    name: { type: String, required: true },
     display_name: { type: String, required: true },
     id: { type: String, required: true },
     fb_id: { type: String,},
@@ -45,7 +46,8 @@ const PurchaseSchema = new Schema({
   purchase_info: { // TODO: add additional purchase information here. eg, shipping, ...
     purchase_state: {
       type: String,
-      enum: ['preparing', 'scheduled', 'cancel-by-user', 'cancel-by-api', 'cancel-by-system', 'purchased', 'refunded-by-user', 'refunded-by-system']
+      enum: ['preparing', 'scheduled', 'cancel-by-user', 'cancel-by-api', 'cancel-by-system', 'purchased', 'refunded-by-user', 'refunded-by-system'],
+      default: 'preparing',
     },
     merchant_uid: { type: String, }, // TODO: unique - true
     customer_uid: { type: String, },
@@ -153,10 +155,12 @@ PurchaseSchema.methods.toFormat = async function (type, ...args) {
         }
       case 'profile':
         return {
+          _id: this._id,
           project: this.project && this.project.abstract,
           product: this.product && this.product.abstract,
           address: this.address,
           purchase_info: this.purchase_info,
+          user: this.user_info,
           reward: this.reward,
           purchaseAmount: this.purchaseAmount,
           shippingFee: this.shippingFee
