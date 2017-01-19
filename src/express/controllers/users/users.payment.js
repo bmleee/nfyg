@@ -14,9 +14,9 @@ const router = express.Router();
 // TODO: filter payment keys: card_number, ...
 router.get('/', isLoggedIn, async (req, res) => {
 	try {
-		let payments = await PaymentModel.findByUser(req.session.user)
+		let payments = await PaymentModel.findByUser(req.user)
 		return res.json({
-			user: renderUser.authorizedUser(req.session.user),
+			user: renderUser.authorizedUser(req.user),
 			data: {
 				payments: await Promise.all(payments.map(x => ({
 					card_name: x.card_name,
@@ -27,7 +27,7 @@ router.get('/', isLoggedIn, async (req, res) => {
 		})
 	} catch (e) {
 		return res.status(400).json({
-			user: renderUser.authorizedUser(req.session.user),
+			user: renderUser.authorizedUser(req.user),
 			error: e.message
 		})
 	}
@@ -37,7 +37,7 @@ router.get('/', isLoggedIn, async (req, res) => {
 router.post('/', isLoggedIn, async (req, res) => {
 	const {
 		user
-	} = req.session
+	} = req
 	const body = _.pick(req.body, ['card_number', 'expiry', 'birth', 'pwd_2digit'])
 
 	try {

@@ -14,16 +14,16 @@ const router = express.Router();
 router.get('/', isLoggedIn, async (req, res) => {
 	console.log('users.address : /users/address');
 	try {
-		let addresses = await AddressModel.findByUser(req.session.user)
+		let addresses = await AddressModel.findByUser(req.user)
 		return res.json({
-			user: renderUser.authorizedUser(req.session.user),
+			user: renderUser.authorizedUser(req.user),
 			data: {
 				addresses: await Promise.all(addresses.map(x => x.toJSON()))
 			}
 		})
 	} catch (e) {
 		return res.status(400).json({
-			user: renderUser.authorizedUser(req.session.user),
+			user: renderUser.authorizedUser(req.user),
 			error: e.message
 		})
 	}
@@ -32,7 +32,7 @@ router.get('/', isLoggedIn, async (req, res) => {
 router.post('/', isLoggedIn, async (req, res) => {
 	const {
 		user
-	} = req.session
+	} = req
 	const body = _.pick(req.body, ['addressee_name', 'zipcode', 'address1', 'address2'])
 
 	try {

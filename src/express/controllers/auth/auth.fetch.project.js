@@ -54,7 +54,7 @@ router.get('/:projectName/:option?/:tab?', async (req, res, next) => {
 		return res.redirect('/404')
 	}
 
-	let user = req.session.user
+	let user = req.user
 	if (user) {
 		user = await UserModel.findOne({_id: user._id})
 	}
@@ -91,7 +91,7 @@ router.get('/:projectName/edit/:tab?', async (req, res) => {
 	console.log('/projects/:projectName/edit');
 
 	const { projectName } = req.params
-	const { user } = req.session
+	const { user } = req
 	const project = await ProjectModel.findOneByName(projectName)
 		.populate('sponsor')
 	console.log('/projects/:projectName/edit.project', project);
@@ -111,7 +111,7 @@ router.get('/:projectName/edit/:tab?', async (req, res) => {
 
 router.get('/:projectName/rewards', async (req, res) => {
 	try {
-		let user = renderUser.authorizedUser(req.session.user)
+		let user = renderUser.authorizedUser(req.user)
 
 		let doc = await ProjectModel.findOneByName(req.params.projectName)
 			.select({ 'funding.rewards': 1, 'funding.shippingFee': 1})
@@ -140,13 +140,13 @@ router.get('/:projectName/summary', isLoggedIn, async (req, res) => {
 			user,
 			project
 		] = await Promise.all([
-			UserModel.findById(req.session.user._id),
+			UserModel.findById(req.user._id),
 			ProjectModel.findOne({ 'abstract.projectName': req.params.projectName })
 				.populate('authorizedUsers sponsor posts qnas')
 		])
 
 		res.json({
-			user: renderUser.authorizedUser(req.session.user),
+			user: renderUser.authorizedUser(req.user),
 			data: {
 				userType: user.getUserType(),
 				project_summary: await project.toFormat('summary')
@@ -159,7 +159,7 @@ router.get('/:projectName/summary', isLoggedIn, async (req, res) => {
 })
 
 router.post('/:projectName/purchase', isLoggedIn, async (req, res) => {
-	let user = req.session.user
+	let user = req.user
 	let projectName = req.params.projectName
 	let {
 		addressIndex,
@@ -235,7 +235,7 @@ router.post('/:projectName?', async (req, res) => {
 
 router.post('/:projectName/posts', isLoggedIn, async (req, res) => {
 	try {
-		let user = req.session.user
+		let user = req.user
 		let projectName = req.params.projectName
 
 		let {
@@ -259,7 +259,7 @@ router.post('/:projectName/posts', isLoggedIn, async (req, res) => {
 router.post('/:projectName/qnas', isLoggedIn, async (req, res) => {
 	console.log('POST /proj/qnas');
 	try {
-		let user = req.session.user
+		let user = req.user
 		let projectName = req.params.projectName
 
 		let {

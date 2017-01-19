@@ -32,7 +32,7 @@ router.get('/', async (req, res) => {
 
 		res.json({
 			user: {
-				isLoggedIn: !!req.session.user,
+				isLoggedIn: !!req.user,
 				isAuthorized: true,
 			},
 			data: {
@@ -54,7 +54,7 @@ router.get('/:sponsorName/:tab?', async (req, res) => {
 	try {
 		const sponsor = await SponsorModel.findByName(req.params.sponsorName)
 		res.json({
-			user: renderUser.authorizedUser(req.session.user),
+			user: renderUser.authorizedUser(req.user),
 			data: {
 				sponsor: sponsor.toJSON()
 			}

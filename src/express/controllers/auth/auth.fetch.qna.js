@@ -29,7 +29,7 @@ const router = express.Router();
 
 router.post('/:_id/comment', isLoggedIn, async (req, res) => {
   try {
-    let user = req.session.user
+    let user = req.user
     let _id = req.params._id
     let text = req.body.text
 

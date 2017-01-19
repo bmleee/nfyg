@@ -33,7 +33,7 @@ router.get('/', async (req, res) => {
 
 		res.json({
 			user: {
-				isLoggedIn: !!req.session.user,
+				isLoggedIn: !!req.user,
 				isAuthorized: true,
 			},
 			data: {
@@ -61,7 +61,7 @@ router.get('/:exhibitionName/:option', async (req, res, next) => {
 
 		res.json({
 			user: {
-				isLoggedIn: !!req.session.user,
+				isLoggedIn: !!req.user,
 				isAuthorized: true,
 			},
 			data: {

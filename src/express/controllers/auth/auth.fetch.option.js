@@ -28,7 +28,7 @@ const router = express.Router();
 router.get('/sponsorName', async (req, res) => {
 	let docs = await SponsorModel.find({}, 'sponsorName displayName')
 
-	// if(ac.canEdit(req.session.user)) // TODO: activate auth check
+	// if(ac.canEdit(req.user)) // TODO: activate auth check
 		return res.json({
 			user: renderUser.authorizedUser, // TODO: according to auth-check
 			data: {

@@ -47,18 +47,12 @@ router.post('/signup', signupMulter.array(), (req, res) => {
 router.post('/login', signupMulter.array(), (req, res) => {
   return passport.authenticate('local', function (err, user, info) {
     if (err || !user) return res.redirect('/login')
-    req.session.user = user;
+    req.user = user;
 
     req.logIn(user, function(err) {
       if (err) { return res.redirect('/login') }
       res.redirect(req.params.referrer || '/') // TODO: redirect to referrer
     });
-
-    // req.session.save(function (err) {
-    //   console.log('saved session', req.session);
-    //   if (err) console.error(err);
-    //   res.redirect(req.params.referrer || '/') // TODO: redirect to referrer
-    // })
 
    })(req, res)
  })
@@ -67,25 +61,20 @@ router.get('/login-facebook', passport.authenticate('facebook', { scope: 'email'
 router.get('/login-facebook/callback', (req, res) => {
   return passport.authenticate('facebook', function (err, user, info) {
     if (err || !user) return res.redirect('/login')
-    req.session.user = user;
+    req.user = user;
 
-    req.session.save(function (err) {
+    req.logIn(user, function(err) {
+      if (err) { return res.redirect('/login') }
       // TODO: redirect to referrer
       res.redirect('/')
-    })
+    });
 
    })(req, res)
 })
 
 router.get('/logout', (req, res) => {
 	req.logout();
-  req.session.user = null;
-
-  req.session.save(function (err) {
-    if (err) console.error(err);
-    // TODO: redirect to referrer
-    res.redirect('/')
-  })
+  res.redirect('/')
 })
 
 export default router

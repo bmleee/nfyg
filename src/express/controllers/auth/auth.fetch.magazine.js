@@ -33,7 +33,7 @@ router.get('/magazines', async (req, res) => {
 
 		res.json({
 			user: {
-				isLoggedIn: !!req.session.user,
+				isLoggedIn: !!req.user,
 				isAuthorized: true,
 			},
 			data: {
@@ -59,7 +59,7 @@ router.get('/magazines/:magazineName/:option?', async (req, res, next) => {
 
 		res.json({
 			user: {
-				isLoggedIn: !!req.session.user,
+				isLoggedIn: !!req.user,
 				isAuthorized: true,
 			},
 			data: await magazine.toFormat('magazine_detail')
@@ -87,7 +87,7 @@ router.get('/exhibitions', async (req, res) => {
 
 		res.json({
 			user: {
-				isLoggedIn: !!req.session.user,
+				isLoggedIn: !!req.user,
 				isAuthorized: true,
 			},
 			data: {

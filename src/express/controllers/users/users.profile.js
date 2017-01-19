@@ -38,18 +38,18 @@ const router = express.Router()
 router.get('/', async (req, res) => { // return user-type, appropreate data (proj, prod, user, ...)
 	console.log('/users/profile/');
 	try {
-		if (!req.session.user) {
-			console.log('session.user is not defined');
-			console.log(req.session);
-			return res.json({ user: renderUser.authorizedUser(req.session.user) }) // let use show only other profile
+		if (!req.user) {
+			console.log('req,user is not defined');
+			console.log(req.user);
+			return res.json({ user: renderUser.authorizedUser(req.user) }) // let use show only other profile
 		}
 
-		let user = await UserModel.findById(req.session.user._id)
+		let user = await UserModel.findById(req.user._id)
 
 		console.log('fetched user', user);
 
 		res.json({
-			user: renderUser.authorizedUser(req.session.user),
+			user: renderUser.authorizedUser(req.user),
 			data: {
 				userType: user.getUserType(),
 				profile: await user.toFormat('profile'),
@@ -66,7 +66,7 @@ router.get('/:user_id', async (req, res) => {
 	try {
 		let user = await UserModel.findOne({ id: req.params.user_id })
 		res.json({
-			user: renderUser.authorizedUser(req.session.user),
+			user: renderUser.authorizedUser(req.user),
 			data: {
 				userType: 'other',
 				profile: await user.toFormat("profile", true)
@@ -80,7 +80,7 @@ router.get('/:user_id', async (req, res) => {
 
 router.get('/summary', isLoggedIn, async (req, res) => {
 	try {
-		let user = await UserModel.findById(req.session.user._id)
+		let user = await UserModel.findById(req.user._id)
 
 		res.json({
 			user: renderUser.authorizedUser(user),

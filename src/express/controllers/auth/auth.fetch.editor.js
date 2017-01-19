@@ -26,7 +26,7 @@ const router = express.Router();
 router.get('/project-editor/:tab?', async (req, res) => {
 	// TODO: let only editor, admin can access
 	res.json({
-		user: renderUser.authorizedUser(req.session.user),
+		user: renderUser.authorizedUser(req.user),
 		data: {}
 	})
 })
@@ -34,7 +34,7 @@ router.get('/project-editor/:tab?', async (req, res) => {
 router.get('/product-editor/:tab?', async (req, res) => {
 	// TODO: let only editor, admin can access
 	res.json({
-		user: renderUser.authorizedUser(req.session.user),
+		user: renderUser.authorizedUser(req.user),
 		data: {}
 	})
 })

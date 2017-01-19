@@ -57,12 +57,12 @@ router.get('/:productName/:option?/:tab?', async (req, res, next) => {
 
 		if (!product) throw new Error(`no such product in name of ${productName}`)
 
-		const productToRender = await product.toFormat('product_detail', req.session.user)
+		const productToRender = await product.toFormat('product_detail', req.user)
 
 		// console.log('productToRender', JSON.stringify(productToRender, undefined, 4));
 
 		res.status(200).json({
-			user: renderUser.authorizedUser(req.session.user),
+			user: renderUser.authorizedUser(req.user),
 			data: {
 				product: productToRender
 			}
@@ -79,7 +79,7 @@ router.get('/:productName/edit/:tab?', async (req, res) => {
 
 	try {
 		const { productName } = req.params
-		const { user } = req.session
+		const { user } = req
 		const product = await ProductModel.findOneByName(productName)
 		console.log('/product/:productName/edit.product', product);
 
@@ -141,13 +141,13 @@ router.get('/:productName/summary', isLoggedIn, async (req, res) => {
 			user,
 			product
 		] = await Promise.all([
-			UserModel.findById(req.session.user._id),
+			UserModel.findById(req.user._id),
 			ProductModel.findOne({ 'abstract.productName': req.params.productName })
 				.populate('authorizedUsers qnas')
 		])
 
 		res.json({
-			user: renderUser.authorizedUser(req.session.user),
+			user: renderUser.authorizedUser(req.user),
 			data: {
 				userType: user.getUserType(),
 				product_summary: await product.toFormat('summary')
