@@ -88,8 +88,8 @@ UserSchema.methods.getUserType = function () {
 		case 1: return 'artist'
 		case 10: return 'editor'
 		case 100: return 'admin'
-		default: throw new Error(`unknown user access level ${this.access_level}`)
 	}
+	throw new Error(`unknown user access level ${this.access_level}`)
 }
 
 UserSchema.methods.toFormat = async function(type, ...args) {
@@ -122,6 +122,8 @@ UserSchema.methods.supportedMoney = async function({projectName, productName}) {
 			PurchaseModel.findByUser(this),
 			FacebookTracker.getUserSummaryOnProject(this.id, projectName || productName),
 		])
+
+		console.log('shares', shares);
 
 		const sum = (a, b) => a + b
 

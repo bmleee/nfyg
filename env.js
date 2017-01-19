@@ -1,15 +1,15 @@
 var dbconfig = {
 	development: {
-		dbname: 'seven_pictures',
+		dbname: 'seven_pictures_development',
 		dbuser: '7pictures',
-		dbpassword: '7pictures',
-		dbhost: 'ds133348.mlab.com:33348'
+		dbpassword: '7pictures.co.kr',
+		dbhost: '52.78.222.50:27017'
 	},
 	seven_pictures_server_pre_scheme: {
-		dbname: 'seven_pictures_sever_pre_scheme',
+		dbname: 'seven_pictures_server_pre_scheme',
 		dbuser: '7pictures',
-		dbpassword: '7pictures',
-		dbhost: 'ds133398.mlab.com:33398'
+		dbpassword: '7pictures.co.kr',
+		dbhost: '52.78.222.50:27017'
 	}
 };
 
@@ -24,6 +24,11 @@ var url = {
 
 var EXPRESS_PORT = process.env.PORT || 3100
 var MONGODB_URL = EXPRESS_PORT === 8080 ? url.development : url.seven_pictures_server_pre_scheme
+var REDIS = {
+	HOST: '52.78.222.50',
+	PORT: '6379',
+	PASS: '7pictures.co.kr',
+}
 var FB_TRACKER_URL = 'http://52.78.222.50:3000'
 
 module.exports = {
@@ -31,4 +36,5 @@ module.exports = {
 	EXPRESS_PORT,
 	MONGODB_URL,
 	FB_TRACKER_URL,
+	REDIS,
 };

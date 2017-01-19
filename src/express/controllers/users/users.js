@@ -50,6 +50,7 @@ router.post('/login', signupMulter.array(), (req, res) => {
     req.session.user = user;
 
     req.session.save(function (err) {
+      console.log('saved session', req.session);
       if (err) console.error(err);
       res.redirect(req.params.referrer || '/') // TODO: redirect to referrer
     })

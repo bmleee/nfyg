@@ -18,7 +18,7 @@ import winstonLogger from './middlewares/logger'
 
 import router from './controllers'; // express router
 
-import { EXPRESS_PORT, MONGODB_URL } from '../../env';
+import { EXPRESS_PORT, REDIS } from '../../env';
 
 const app = express();
 const publicPath = path.join(__dirname, './../public');
@@ -32,11 +32,12 @@ app.use(cookieParser())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const MongoStore = require('connect-mongo')(session);
+const RedisStore = require('connect-redis')(session);
 app.use(session({
-	store: new MongoStore({
-		mongooseConnection: connection,
-		ttl: 14 * 24 * 60 * 60, // = 14 days. Default
+	store: new RedisStore({
+		host:	REDIS.HOST,
+		port: REDIS.PORT,
+		pass: REDIS.PASS,
 	}),
 	saveUninitialized: true,
 	resave: true,
