@@ -230,8 +230,12 @@ ProductSchema.methods.toFormat = async function (type, ...args) {
 					overview: this.overview,
 				}
 
-			case 'profile':
-				return this.abstract
+			case 'profile_admin':
+				let _json = this.toJSON()
+				return {
+					..._json.funding,
+					..._json.abstract,
+				}
 
 			default:
 				console.error(`Product toFormat can't accept this ${JSON.stringify(type)}`);

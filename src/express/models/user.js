@@ -55,7 +55,16 @@ const UserSchema = new Schema({
 	payments: [{ type: Schema.Types.ObjectId, ref: 'Payment' }],
 	projects: [{ type: Schema.Types.ObjectId, ref: 'Project' }],
 	products: [{ type: Schema.Types.ObjectId, ref: 'Project' }],
+
+	created_at: {type: Date, default: Date.now()},
+	updated_at: {type: Date, default: Date.now()},
+
 });
+
+UserSchema.pre('update', function (next) {
+	this.updated_at = Date.now()
+	next()
+})
 
 // Configure the 'UserSchema' to use getters and virtuals when transforming to JSON
 UserSchema.set('toJSON', {
@@ -87,6 +96,8 @@ UserSchema.methods.toFormat = async function(type, ...args) {
 		case 'profile':
 			const other = args[0] || false // show other user's profile
 			return await _renderMyProfile(this, other)
+		case 'profile_admin':
+			return pick(this.toJSON(), ['id', 'fb_id', 'name', 'display_name', 'local_email', 'fb_email'])
 		default:
 			throw new Error(`user to format can't accept type ${type}`)
 	}
@@ -171,7 +182,7 @@ const _renderMyProfile = async (_this, other = false) => {
 		const _fetcher = {
 			sharedProjects: async () => await Promise.all(
 				(await ProjectModel.findByNames(project_names))
-					.map(async (p) => await p.toFormat('profile'))),
+					.map(async (p) => await p.toFormat('shared_project'))),
 			purchasedProjects: async () => await Promise.all(
 				purchases
 					.filter(p => !!p.project)
@@ -182,15 +193,26 @@ const _renderMyProfile = async (_this, other = false) => {
 					.map(async (p) => await p.toFormat('profile'))),
 			authorizedProjects: async () => await Promise.all(
 				(await ProjectModel.findAuthorizedOnesToUser(_this))
-					.map(async (p) => await p.toFormat('profile'))),
-			users: async () => await UserModel.find({}),
-			projects: async () => await ProjectModel.find({}),
-			products: async () => await ProductModel.find({}),
-			sponsors: async () => await SponsorModel.find({}),
+					.map(async (p) => await p.toFormat('profile_admin'))),
+			users: async () => await Promise.all(
+				(await UserModel.find({}))
+					.map(async (u) => await u.toFormat('profile_admin'))
+			),
+			projects: async () => await Promise.all(
+				(await ProjectModel.find({}))
+					.map(async (p) => await p.toFormat('profile_admin'))
+			),
+			products: async () => await Promise.all(
+				(await ProductModel.find({}))
+					.map(async (p) => await p.toFormat('profile_admin'))
+			),
+			sponsors: async () => await Promise.all(
+				(await SponsorModel.find({}))
+					.map(async (p) => await p.toFormat('profile_admin'))
+			),
 		}
 
-		if (other) {
-			// otehr profile!
+		if (other) { // otehr user's profile!
 			let keys = ['sharedProjects',]
 
 			let [
@@ -213,7 +235,7 @@ const _renderMyProfile = async (_this, other = false) => {
 			keys = ['sharedProjects', 'purchasedProjects', 'purchasedProducts']
 		} else if (_this.access_level === 1) { // artist
 			keys = ['sharedProjects', 'purchasedProjects', 'purchasedProducts', 'authorizedProjects']
-		} else if (_this.access_level === 100) { // admin
+		} else if (_this.access_level === 10) { // editor
 			keys = ['sharedProjects', 'purchasedProjects', 'purchasedProducts', 'projects', 'products',]
 		} else if (_this.access_level === 100) { // admin
 			keys = ['projects', 'products', 'users', 'sponsors']

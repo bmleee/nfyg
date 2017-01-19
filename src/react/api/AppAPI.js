@@ -62,7 +62,6 @@ export async function fetchUserAndData() {
 	const config = {
 		method: 'get',
 		url: `/api/auth/fetch${window.location.pathname}`,
-		withCredentials: true,
 	}
 
 	console.log(`/api/auth/fetch${window.location.pathname}`);
@@ -83,7 +82,6 @@ export function fetchOptions(path) {
 	const config = {
 		method: 'get',
 		url: `/api/auth/fetch/options/${path}`,
-		withCredentials: true,
 	}
 
 	const ret = async () => {
@@ -106,7 +104,6 @@ export async function upsertProject(body) {
 	const config = {
 		method: 'post',
 		url: `/api/auth/fetch/projects/${param}`,
-		withCredentials: true,
 		data: body,
 	}
 
@@ -117,7 +114,6 @@ export async function upsertProduct(body) {
 	const config = {
 		method: 'post',
 		url: `/api/auth/fetch/products`,
-		withCredentials: true,
 		data: body,
 	}
 
@@ -137,7 +133,6 @@ export async function fetchPurchaseInfo(param) {
 	const config = {
 		method: 'get',
 		url: `/api/${base}${param}`,
-		withCredentials: true,
 	}
 
 	return await _request(config)
@@ -150,7 +145,6 @@ export async function purchaseReward({paymentIndex, rewardIndex, addressIndex}) 
 	const config = {
 		method: 'post',
 		url: `/api/auth/fetch${base}`,
-		withCredentials: true,
 		data: {
 			addressIndex,
 			rewardIndex,
@@ -165,7 +159,6 @@ export async function createAddress(address) {
 	const config = {
 		method: 'post',
 		url: `/api/users/address`,
-		withCredentials: true,
 		data: address,
 	}
 
@@ -176,7 +169,6 @@ export async function createPayment(payment) {
 	const config = {
 		method: 'post',
 		url: `/api/users/payment`,
-		withCredentials: true,
 		data: payment,
 	}
 
@@ -192,7 +184,6 @@ export async function createQnA({title = 'empty-title', text, projectName, produ
 	const config = {
 		method: 'post',
 		url: `/api/auth/fetch/${base}/qnas`,
-		withCredentials: true,
 		data: { title, text },
 	}
 
@@ -208,7 +199,6 @@ export async function createPost({projectName, productName, title, content, thre
 	const config = {
 		method: 'post',
 		url: `/api/auth/fetch/${base}/posts`,
-		withCredentials: true,
 		data: { title, content, thresholdMoney, isDirectSupport },
 	}
 
@@ -219,7 +209,6 @@ export async function createCommentOnQnA({text, qna_id}) {
 	const config = {
 		method: 'post',
 		url: `/api/auth/fetch/qnas/${qna_id}/comment`,
-		withCredentials: true,
 		data: { text, qna_id },
 	}
 
@@ -232,9 +221,15 @@ export async function createCommentOnPost({text, post_id}) {
 	const config = {
 		method: 'post',
 		url: `/api/auth/fetch/posts/${post_id}/comment`,
-		withCredentials: true,
 		data: { text },
 	}
 
+	return await _request(config)
+}
+
+export async function fetchProfile(user_id = '') {
+	const config = {
+		url: `/api/users/profile/${user_id}`,
+	}
 	return await _request(config)
 }

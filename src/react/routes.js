@@ -60,6 +60,9 @@ import { AdminProfileContainer, AdminProfileMain, AdminProfileProject, AdminProf
 import { ArtistProfileContainer, ArtistProfileMain, ArtistProfileProject, ArtistProfileProduct } from './components/User/Profile/ArtistProfile'
 import { EditorProfileContainer, EditorProfileMain, EditorProfileProject, EditorProfileProduct } from './components/User/Profile/EditorProfile'
 import { UserProfileContainer, UserProfileMain, UserProfileProject, UserProfileProduct } from './components/User/Profile/UserProfile'
+import MyProfile from './components/User/Profile/MyProfile'
+import OtherProfile from './components/User/Profile/OtherProfile'
+
 
 import { Sponsors } from './components/Sponsors'
 
@@ -157,8 +160,8 @@ const routes = (
 		<Route path="login" component={Login}></Route>
 		<Route path="signup" component={Signup}></Route>
 
+		{/* to dev rendering */}
 		<Route path="profile" component={SuperProfileContainer}>
-
 			<Route path="admin" component={AdminProfileContainer}>
 				<IndexRoute component={AdminProfileMain}></IndexRoute>
 				<Route path="main" component={AdminProfileMain}></Route>
@@ -188,8 +191,10 @@ const routes = (
 				<Route path="project" component={UserProfileProject}></Route>
 				<Route path="product" component={UserProfileProduct}></Route>
 			</Route>
-
 		</Route>
+
+		<Route path="user/me" component={MyProfile}></Route>
+		<Route path="user/:user_id" component={OtherProfile}></Route>
 
 		<Route path="sponsors" component={Sponsors}></Route>
 		<Route path="sponsors/:sponsorName/edit" component={SponsorEditor}></Route>

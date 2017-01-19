@@ -26,6 +26,7 @@ let PostSchema = new Schema({
 		thresholdMoney: {type: Number, required: true, default: 0},
 		title: {type: String, required: true},
 		created_at: {type: Date, default: Date.now()},
+		updated_at: {type: Date, default: Date.now()},
 		likes: [{type: Schema.Types.ObjectId, ref: 'User'}],
 		// numLikes: {type: Number, default: 0}, // TODO: be virtual field
 	},
@@ -61,7 +62,14 @@ PostSchema.pre('validate', function (next) {
 	}
 })
 
+PostSchema.pre('update', function (next) {
+	this.abstract.updated_at = Date.now()
+	next()
+})
+
 PostSchema.pre('save', function (next) {
+	this.updated_at = Date.now()
+
 	if (this.project) {
 		ProjectModel.update(
 			{_id: this.project},

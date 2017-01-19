@@ -63,6 +63,12 @@ PurchaseSchema.pre('validate', function (next) {
 	}
 })
 
+PurchaseSchema.pre('update', function (next) {
+	this.updated_at = Date.now()
+	next()
+})
+
+
 
 // Configure the 'PurchaseSchema' to use getters and virtuals when transforming to JSON
 PurchaseSchema.set('toJSON', {

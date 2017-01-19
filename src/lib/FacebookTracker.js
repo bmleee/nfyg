@@ -30,11 +30,23 @@ class FacebookTracker {
   }
 
   getProjectSummary = async (projectName) => {
-    projectName = 'klimtinside' // TODO: set original projectName
+    projectName = projectName.includes('test') ? 'how_we_art' : projectName // TODO: inactivate
+
     return await this._request({
       url: `/projects/${projectName}/summary`
     })
   }
+
+  // TODO: tracker should accept /summary/short
+  getProjectShortSummary = async (projectName) => {
+    projectName = projectName.includes('test') ? 'how_we_art' : projectName // TODO: inactivate
+
+    return await this._request({
+      url: `/projects/${projectName}/summary`
+    })
+  }
+
+
 
   // TODO: correct response on tracker side
   // returns { shares, comments, likes, project_names: [ String ], }

@@ -27,7 +27,8 @@ const ProjectSchema = new Schema({
 		]},
 		state: {type: String, required: true},     // refers to react/constants/selectOptions
 		postIntro: {type: String, required: true}, // TODO: change name, postIntro -> projectDescription
-		created_at: {type: Date, default: Date.now()}
+		created_at: {type: Date, default: Date.now()},
+		updated_at: {type: Date, default: Date.now()},
 	},
 
 	creator: {
@@ -95,6 +96,16 @@ const ProjectSchema = new Schema({
 // 	// this.numQnAs = this.qnas.length
 // 	next()
 // })
+
+ProjectSchema.pre('update', function (next) {
+	this.abstract.updated_at = Date.now()
+	next()
+})
+ProjectSchema.pre('save', function (next) {
+	this.abstract.updated_at = Date.now()
+	next()
+})
+
 
 // Configure the 'ProjectSchema' to use getters and virtuals when transforming to JSON
 ProjectSchema.set('toJSON', {
@@ -245,8 +256,13 @@ ProjectSchema.methods.toFormat = async function (type, ...args) {
 					overview: this.overview,
 				}
 
-			case 'profile':
-				return this.abstract
+			case 'profile_admin':
+			case 'shared_project':
+				let _json = this.toJSON()
+				return {
+					..._json.funding,
+					..._json.abstract,
+				}
 
 			default:
 				console.error(`ProjectModel.toFormat can't accept this ${JSON.stringify(type)}`);
@@ -301,6 +317,14 @@ ProjectSchema.methods.pushQnA = async function (_id) {
 
 ProjectSchema.methods.authorizedTo = function (user) {
 	return !!this.authorizedUsers.filter( _id => user.equals(user))
+}
+
+ProjectSchema.methods.getSharingInfo = async function () {
+	const {
+		likes, shares, comments, num_users, num_posts, money_by_sharing,
+	} = await FacebookTracker.getProjectShortSummary(this.abstract.projectName)
+
+	return { likes, shares, comments, num_users, num_posts, money_by_sharing, }
 }
 
 

@@ -45,7 +45,7 @@ export default class ProjectDetailContainer extends Component {
 
 	async componentDidMount() {
 		const res = await fetchUserAndData()
-		console.log('fetchUserAndData', res);
+		console.log(this);
 
 		const {
 			user,

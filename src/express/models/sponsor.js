@@ -1,6 +1,8 @@
 // Load the module dependencies
 import mongoose from 'mongoose'
 
+import pick from 'lodash.pick'
+
 const Schema = mongoose.Schema;
 
 // Define a new 'SponsorSchema'
@@ -19,6 +21,7 @@ var SponsorSchema = new Schema({
 	money: {type: Number, required: true},
 
 	created_at: {type: Date, default: Date.now()},
+	updated_at: {type: Date, default: Date.now()},
 
 	contacts: {
 		facebook: {type: String},
@@ -27,6 +30,14 @@ var SponsorSchema = new Schema({
 	}
 });
 
+SponsorSchema.pre('update', function (next) {
+	this.updated_at = Date.now()
+	next()
+})
+SponsorSchema.pre('save', function (next) {
+	this.updated_at = Date.now()
+	next()
+})
 
 
 // Configure the 'SponsorSchema' to use getters and virtuals when transforming to JSON
@@ -43,6 +54,8 @@ SponsorSchema.methods.toFormat = async function (type, ...args) {
 	switch (type) {
 		case 'sponsors':
 			return this.toJSON()
+		case 'profile_admin':
+			return pick(this.toJSON(), ['sponsorName', 'displayName', 'money', 'created_at'])
 		default:
 			{}
 	}

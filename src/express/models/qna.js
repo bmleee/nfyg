@@ -23,6 +23,7 @@ let QnASchema = new Schema({
 		// no: {type: Number, unique: true, required: true}, // n-th qna
 		title: {type: String, required: true},
 		created_at: {type: Date, default: Date.now()},
+		updated_at: {type: Date, default: Date.now()},
 		likes: [{type: Schema.Types.ObjectId, ref: 'User'}],
 		// numLikes: {type: Number, default: 0}, // TODO: be virtual field
 	},
@@ -45,6 +46,12 @@ QnASchema.pre('validate', function (next) {
 	if (this.project || this.exhibition || this.product) next()
 	else next(Error('One of project, exhibition, product field is reuqired!'))
 })
+
+QnASchema.pre('update', function (next) {
+	this.abstract.updated_at = Date.now()
+	next()
+})
+
 
 QnASchema.pre('save', function (next) {
 	if (this.project) {
