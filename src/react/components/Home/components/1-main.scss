@@ -388,6 +388,15 @@ div.magazine-list-button {
             width : 100%;
             padding : 0px 20px;
         }
+        .slick-slider {
+            padding-bottom : 50px;
+            .present-project-list-item-caption {
+                min-height : 110px;
+            }
+        }
+        .slick-dots {
+            bottom : 15px;
+        }
         .react-tabs [role=tab]:first-child {
     width : 180px;
     height : 36px;
@@ -438,7 +447,7 @@ div.present-project-list-item {
     }
 }
 div.present-project-list-item-container {
-    width : 49.9999% !important;
+    width : 49.9999%;
     padding-top : 10px;
 }
 div.present-more-project {
@@ -502,7 +511,12 @@ div.present-more-project {
    div.home-body {
        width : 100%;
     padding: 0px 20px;
-}
+        .slick-slider {
+            .present-project-list-item-caption {
+                min-height : 80px;
+            }
+        }
+    }
     h5 {
         font-size:14px;
         font-weight:500;
@@ -535,7 +549,7 @@ div.present-more-project {
     border : 1px solid #ddd;
 }
 div.present-project-list-item-container {
-    width : 100% !important;
+    width : 100%;
     padding : 8px 0px;
 }
 div.recent-exhibition-list-item {
@@ -715,7 +729,7 @@ position: absolute;
     border : 1px solid #ddd;
 }
 div.present-project-list-item-container {
-    width : 100% !important;
+    width : 100%;
     padding : 5px 0px;
 }
 div.recent-exhibition-list-item {

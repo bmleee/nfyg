@@ -27,8 +27,10 @@ const sliderSettings = {
 	}],
 };
 
-class ProjectReward extends Component {
 
+
+class ProjectReward extends Component {
+	
 	render() {
 		console.log('ProjectReward', this)
 		let { 

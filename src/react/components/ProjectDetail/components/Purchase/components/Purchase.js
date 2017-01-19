@@ -10,9 +10,7 @@ export default class C extends Component {
 			reward,
 			payment,
 			address,
-			
 			goToPreviousStage,
-
 			purchase
 		} = this.props
 

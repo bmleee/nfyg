@@ -37,3 +37,33 @@
     	height : 60px;
     }
 }
+
+.home-sub-title {
+		display: block;
+   		width: 97%;
+    	margin: 0px auto 20px auto;
+    	background: url(//t1.daumcdn.net/brunch/static/img/help/pc/bg_related_160905.gif)0 10px repeat-x;
+    	text-align: center;
+    	@media (max-width : 991px) {
+    		width : 95%;
+    	@media (max-width : 500px) {
+    	}
+    	}
+    	h3 {
+		display : inline-block;
+		padding : 0px 25px;
+		text-align : center;
+		color: #555;
+		font-weight : 600;
+		font-size : 22px;
+		background-color : #fff;
+		letter-spacing : -1px;
+		margin : 0px !important;
+		line-height : 20px;
+		@media (max-width : 991px) {
+    		font-size: 18px;
+    		padding : 0px 18px;
+    		font-weight : 600;
+    	}
+	}
+}

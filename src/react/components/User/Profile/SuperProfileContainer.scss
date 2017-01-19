@@ -50,6 +50,9 @@
 	}
 	.react-tabs [role=tab][aria-selected=true] {
 		color : #333;
+		border-radius: 3px 3px 0 0;
+	    -moz-border-radius: 3px 3px 0 0;
+	    -webkit-border-radius: 3px 3px 0 0;
 	}
 }
 .direct-display-img-container {

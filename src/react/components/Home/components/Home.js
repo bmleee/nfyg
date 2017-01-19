@@ -1,4 +1,9 @@
 import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router'
+import Progress from 'react-progressbar';
+
+import SuccessImage from '~/src/assets/images/success2.svg'
+
 import {
 	HomeHeader,
 	PresentProjectList,
@@ -16,27 +21,33 @@ import {
 
 import Modal from '~/src/react/components/react-awesome-modal';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import Slider from 'react-slick';
+
+const sliderSettings = {
+	dots: false,
+	infinite: true,
+	speed: 500,
+	slidesToShow: 3,
+	slidesToScroll: 3,
+	initialSlide: 0,
+	responsive: [{
+		breakpoint: 1024,
+		settings: {
+			slidesToShow: 3,
+			slidesToScroll: 3,
+		}
+	}, {
+		breakpoint: 991,
+		settings: {
+			slidesToShow: 2,
+			slidesToScroll: 2,
+			dots: true,
+			speed: 250
+		}
+	}],
+};
 
 class Home extends Component {
-
-	constructor(props) {
-    super(props);
-    this.state = {
-        visible : false
-    }
-  }
-
-  openModal() {
-    this.setState({
-        visible : true
-    });
-  }
-
-  closeModal() {
-    this.setState({
-        visible : false
-    });
-  }
 
 	render() {
 		console.log('LocalStorage', localStorage);
@@ -55,43 +66,6 @@ class Home extends Component {
 				<HomeHeader />
 				<div className ="home-body">
 					{/* <HomeInfo title="공유로 후원한 금액" amount={10000} /> */}
-
-
-						{/* 프로젝트 제안 MODAl
-						<input type="button" value="프로젝트 제안하기" onClick={() => this.openModal()} />
-
-						<Modal className="project-suggest-modal" visible={this.state.visible} width="480" height="560px" effect="fadeInDown" onClickAway={() => this.closeModal()}>
-						<div className="project-modal-header">
-							<h3 className="project-modal-header-title">프로젝트 제안하기</h3>
-							<a className="project-modal-header-close-container"><button className="project-modal-header-close" onClick={() => this.closeModal()}/></a>
-						</div>
-						<div className="project-modal-body">
-							<p className="project-modal-body-small-title">연락처(필 수)
-								<input className="project-modal-body-input-text" type="text" />
-							</p>
-							<p className="project-modal-body-small-title">이메일
-								<input className="project-modal-body-input-text" type="text" />
-							</p>
-							<p className="project-modal-body-small-title">프로젝트 내용(필 수)
-								<textarea className="project-modal-body-input-textarea" type="textarea"/>
-							</p>
-							<p className="project-modal-body-small-title">필요한 후원금(원)
-								<input className="project-modal-body-input-text" type="number" />
-							</p>
-							<p className="project-modal-body-small-title">후원금 용도
-								<textarea className="project-modal-body-input-textarea" type="textarea"/>
-							</p>
-							<p className="project-modal-body-small-title">관련 링크
-								<input className="project-modal-body-input-text" type="text"/>
-							</p>
-						</div>
-						<div className="project-modal-footer">
-							<a className="project-modal-header-save-container" onClick={() => this.closeModal()}><button type="submit" className="project-modal-header-save">제안하기</button></a>
-						</div>
-						</Modal>
-						*/}
-
-
 					<HomeHeading title="What's on?" />
 					<Tabs onSelect={this.handleSelect} selectedIndex={0}>
 					<TabList>
@@ -100,11 +74,89 @@ class Home extends Component {
 					</TabList>
 
 					<TabPanel>
-					<PresentProjectList projects={presentProjects} />
+						<PresentProjectList projects={presentProjects.slice(0, 4)} />
+						<div className="home-sub-title">
+							<h3>진행 중인 미술소품</h3>
+						</div>
+						<Slider {...sliderSettings}>
+							{ 
+								products.slice(0, 8).map(
+								({
+									imgSrc,
+									creator,
+									title,
+									currentMoney,
+									targetMoney,
+									numDirectSupports,
+									numIndirectSupports,
+									remainingDays,
+									link,
+									postIntro,
+								}, index) => (
+									<div className="present-project-list-item-container">
+										<div className="present-project-list-item" key={index}>
+											<Link to={link}>
+												<div className="pr-thumbnail">
+													<div className="ex-centered">
+														<img className="home-exhibition-image" src={imgSrc} />
+													</div>
+												</div>
+											</Link>
+											<div className="present-project-list-item-caption">
+												<Link to={link}><h3 className="project-list-title">{title}</h3></Link>
+												<div className="product-purchase-num"><p>000명</p>주문중</div>
+											</div>
+										</div>
+									</div>
+								)
+							) }
+						</Slider>
+						<PresentProjectList projects={presentProjects.slice(4, presentProjects.length)} />
 					</TabPanel>
 
 					<TabPanel>
-					<PresentProductList products={products} />
+						<PresentProductList products={products.slice(0, 4)} />
+						<div className="home-sub-title">
+							<h3>진행 중인 프로젝트</h3>
+						</div>
+						<Slider {...sliderSettings}>
+							{ 
+								presentProjects.slice(0, 8).map(
+									({
+										imgSrc,
+										creator,
+										title,
+										currentMoney,
+										targetMoney,
+										numDirectSupports,
+										numIndirectSupports,
+										remainingDays,
+										link,
+										postIntro,
+									}, index) => (
+										<div className="present-project-list-item-container">
+											<div className="present-project-list-item" key={index}>
+												<Link to={link}> {/* TODO: include :project_name */}
+													<div className="pr-thumbnail">
+														<div className="ex-centered">
+															<img className="home-exhibition-image" src={imgSrc} />
+														</div>
+													</div>
+												</Link>
+												<div className="present-project-list-item-caption">
+													<Link to={link}><h3 className="project-list-title">{title}</h3></Link>
+													<Progress completed={Math.min(100, Math.round(currentMoney / targetMoney * 100))} />
+													<div className="project-summary-detail">
+													{Math.round(currentMoney / targetMoney * 100)}%
+													</div>
+												</div>
+											</div>
+										</div>
+									))
+							}
+						</Slider>
+						<PresentProductList products={products.slice(4, products.length)} />
+
 					</TabPanel>
 					</Tabs>
 

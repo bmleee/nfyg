@@ -34,6 +34,10 @@ export default class C extends Component {
 			setPayment,
 		} = this.props
 
-		return (<div>{JSON.stringify(payments, undefined, 4)}</div>)
+		return (
+			<div>
+			{JSON.stringify(payments, undefined, 4)}
+			</div>
+		)
 	}
 }

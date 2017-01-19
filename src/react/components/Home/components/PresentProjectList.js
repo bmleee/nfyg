@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import Progress from 'react-progressbar';
 
-
+import { PresentProductList } from './';
 
 /**
  * required state
@@ -25,14 +25,6 @@ class PresentProjectList extends Component {
 			windowSize: 4,
 		}
 	}
-
-	// TODO: Async expand list (ajax request to more projects)
-	/*
-		async 버전:
-			GET /projects?from=0, count=3
-				- projectList 일부 반환
-				- more_projects: Boolean 으로 '더 많은 프로젝트 보기' 버튼 유지 / 삭제
-	*/
 	expandList() {
 		this.setState({
 			count: this.state.count + this.state.windowSize,
@@ -46,7 +38,9 @@ class PresentProjectList extends Component {
 	}
 
 	render() {
-		let { projects, } = this.props;
+		const { projects,
+				products
+		} = this.props;
 
 		let projectList = projects.map(
 			({
