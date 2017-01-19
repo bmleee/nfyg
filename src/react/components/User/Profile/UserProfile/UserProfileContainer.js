@@ -27,11 +27,11 @@ class Profile extends Component {
 		const { display_name, email, photoURL, role, likes, shares, comments, indirect_supports, direct_supports } = profile
 
 		const info = profile && (
-			<div className="profile-info-container">
-				<div className="profile-thumbnail-container">
+			<div className="mypage-info-container">
+				<div className="mypage-thumbnail-container">
 					<img className="profile-user-thumbnail" src={photoURL} alt=""/>
 					<h3>{display_name}</h3>
-					<p>{role}</p>
+					{/* <p>{role}</p> */}
 				</div>
 			</div>
 		)
@@ -141,8 +141,7 @@ class Profile extends Component {
 				<p className="direct-display-money">{ money.toLocaleString() }원</p>
 				</div>
 				<div className="direct-display-cancel">
-				<button className="direct-cancel-button">결제취소</button>
-				{/* 일정 기간이 지나 취소가 불가능 할 시에 
+				{/* <button className="direct-cancel-button">결제취소</button>
 				<button className="direct-cancel-button2">기간만료</button> 
 				*/}
 				</div>
@@ -163,14 +162,14 @@ class Profile extends Component {
 					
 					<Tabs onSelect={this.handleSelect} selectedIndex={0}>
 					<TabList>
-						<Tab>후원 내역</Tab>
+						{/* <Tab>후원 내역</Tab> */}
 						<Tab>프로필 설정</Tab>
 						<Tab>결제카드 등록</Tab>
 					</TabList>
 
-					<TabPanel>
+					{/* <TabPanel>
 						<div className="direct-supports-container">
-          <div className="indirect-support">
+        			<div className="indirect-support">
 					<h4>공유로 후원한 내역</h4>
 
 					<div className="indirect-support-detail-likes">
@@ -193,7 +192,7 @@ class Profile extends Component {
 						{directSupports}
 					</div>
 					</div>
-					</TabPanel>
+					</TabPanel> */}
 
 					<TabPanel>
 					 {profilesetting}

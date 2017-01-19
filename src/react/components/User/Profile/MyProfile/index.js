@@ -119,10 +119,12 @@ export default class MyProfile extends Component {
     } = appUtils.getUser()
 
     return displayName && (
-      <div className="profile-user-container">
-        { displayName }
-        <img src={ image } alt=""/>
-      </div>
+      <div className="mypage-info-container">
+				<div className="mypage-thumbnail-container">
+					<img className="profile-user-thumbnail" src={ image } alt=""/>
+					<h3>{ displayName }</h3>
+				</div>
+			</div>
     )
   }
 
@@ -138,10 +140,10 @@ export default class MyProfile extends Component {
       <div className="profile-wrapper">
         <Tabs>
           <TabList>
-            <Tab>Projects</Tab>
-            <Tab>Products</Tab>
-            <Tab>Useres</Tab>
-            <Tab>Sponsors</Tab>
+            <Tab>프로젝트 관리</Tab>
+            <Tab>미술소품 관리</Tab>
+            <Tab>사용자 관리</Tab>
+            <Tab>스폰서 관리</Tab>
           </TabList>
 
           <TabPanel>
@@ -178,13 +180,11 @@ export default class MyProfile extends Component {
       <div className="profile-wrapper">
         <Tabs>
           <TabList>
-            <Tab>Projects</Tab>
-            <Tab>Products</Tab>
-            <Tab>Shared Projects</Tab>
-            <Tab>Purchased Projects</Tab>
-            <Tab>Purchased Products</Tab>
+            <Tab>프로젝트 관리</Tab>
+            <Tab>미술소품 관리</Tab>
+            <Tab>후원/구매 내역</Tab>
           </TabList>
-
+          
           <TabPanel>
             { project && <Projects projects={projects}/>}
           </TabPanel>
@@ -192,12 +192,11 @@ export default class MyProfile extends Component {
             { products && <Products products={products}/>}
           </TabPanel>
           <TabPanel>
+            <h4>공유 후원 프로젝트</h4> 
             { sharedProjects && <SharedProjects sharedProjects={sharedProjects}/>}
-          </TabPanel>
-          <TabPanel>
+            <h4>리워드 후원 프로젝트</h4>
             { purchasedProjects && <PurchaseList purchases={purchasedProjects}/>}
-          </TabPanel>
-          <TabPanel>
+            <h4>구매한 미술소품</h4>
             { purchasedProducts && <PurchaseList purchases={purchasedProducts}/>}
           </TabPanel>
         </Tabs>
@@ -221,22 +220,19 @@ export default class MyProfile extends Component {
       <div className="profile-wrapper">
         <Tabs>
           <TabList>
-            <Tab>Authorized Projects</Tab>
-            <Tab>Shared Projects</Tab>
-            <Tab>Purchased Projects</Tab>
-            <Tab>Purchased Products</Tab>
+            <Tab>내 프로젝트</Tab>
+            <Tab>후원/구매 내역</Tab>
           </TabList>
 
           <TabPanel>
             { authorizedProjects && <AuthorizedProjects authorizedProjects={authorizedProjects}/>}
           </TabPanel>
           <TabPanel>
+            <h4>공유 후원 프로젝트</h4>  
             { sharedProjects && <SharedProjects sharedProjects={sharedProjects}/>}
-          </TabPanel>
-          <TabPanel>
+            <h4>리워드 후원 프로젝트</h4>
             { purchasedProjects && <PurchaseList purchases={purchasedProjects}/>}
-          </TabPanel>
-          <TabPanel>
+            <h4>구매한 미술소품</h4>
             { purchasedProducts && <PurchaseList purchases={purchasedProducts}/>}
           </TabPanel>
         </Tabs>
@@ -257,23 +253,16 @@ export default class MyProfile extends Component {
 
     return (
       <div className="profile-wrapper">
-        <Tabs>
-          <TabList>
-            <Tab>Shared Projects</Tab>
-            <Tab>Purchased Projects</Tab>
-            <Tab>Purchased Products</Tab>
-          </TabList>
-
-          <TabPanel>
+            
+            <h4>공유 후원 프로젝트</h4>  
             { sharedProjects && <SharedProjects sharedProjects={sharedProjects}/>}
-          </TabPanel>
-          <TabPanel>
+            
+            <h4>리워드 후원 프로젝트</h4>
             { purchasedProjects && <PurchaseList purchases={purchasedProjects}/>}
-          </TabPanel>
-          <TabPanel>
+            
+            <h4>구매한 미술소품</h4>
             { purchasedProducts && <PurchaseList purchases={purchasedProducts}/>}
-          </TabPanel>
-        </Tabs>
+
       </div>
     )
   }

@@ -118,11 +118,12 @@ class Headermenuabsolute extends Component {
 							<img className="menu-user-icon" src={image} width={32} height={32} />
 							<div className="user-hover-menu-arrow"></div>
 							<div className="user-hover-menu-container">
-								<Link to={`/profile/user`}>
-									<p className="header-menu-hover-text">프로필</p>
+								
+								<Link to={`/user/me`}>
+									<p className="header-menu-hover-text">내 페이지</p>
 								</Link>
 								<Link to={`/profile/user`}>
-									<p className="header-menu-hover-text">내 페이지</p>
+									<p className="header-menu-hover-text">프로필 설정</p>
 								</Link>
 								<a href="/api/users/logout">
 									<p className="header-menu-hover-text">로그아웃</p>

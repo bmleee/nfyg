@@ -1,9 +1,16 @@
 import keys from 'object-keys'
 
+import UserModel from '../models/user'
 import ProjectModel from '../models/project'
 import ProductModel from '../models/product'
 import SponsorModel from '../models/sponsor'
 import PurchaseModel from '../models/purchase'
+import PaymentModel from '../models/payment'
+import AddressModel from '../models/address'
+import QnAModel from '../models/qna'
+import PostModel from '../models/post'
+import ExhibitionModel from '../models/exhibition'
+import MagazineModel from '../models/magazine'
 
 import FacebookTracker from '../../lib/FacebookTracker'
 import pick from 'lodash.pick'

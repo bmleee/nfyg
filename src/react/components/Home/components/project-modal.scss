@@ -112,7 +112,7 @@
 }
 .project-modal-body-input-text {
     width : 100%;
-    border : 2px solid #bbb;
+    border : 1px solid #bbb;
 	border-radius : 3px;
 	outline : none;
 	height : 30px;
@@ -122,7 +122,7 @@
 .project-modal-body-input-textarea {
     width : 100%;
     max-width : 100%;
-    border : 2px solid #bbb;
+    border : 1px solid #bbb;
 	border-radius : 3px;
 	outline : none;
 	min-height : 78px;
@@ -138,14 +138,14 @@
 }
 
 .project-modal-body-input-text:focus, .project-modal-body-input-textarea:focus {
-    border : 2px solid #4b709a;
+    border : 1px solid #4b709a;
 }
 
 @media (max-width: 500px) {
 .project-modal-body-input-textarea {
     width : 100%;
     max-width : 100%;
-    border : 2px solid #bbb;
+    border : 1px solid #bbb;
 	border-radius : 3px;
 	outline : none;
 	min-height : 85px;

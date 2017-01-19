@@ -78,21 +78,20 @@ class Headermenumobile extends Component {
 							}
 							{
 							isLoggedIn && (
+							<Link to={`/user/me`}>
+							<div className="mobile-burger-profile-container">
+								<p className="mobile-burger-profile">내 페이지</p>
+							</div>
+							</Link>	)
+							}
+							{
+							isLoggedIn && (
 							<Link to={`/profile/user`}>
 							<div className="mobile-burger-profile-container">
 								<p className="mobile-burger-profile">프로필 설정</p>
 							</div>
 							</Link> )
 							}
-							{
-							isLoggedIn && (
-							<Link to={`/profile/user`}>
-							<div className="mobile-burger-profile-container">
-								<p className="mobile-burger-profile">내 페이지</p>
-							</div>
-							</Link>	)
-							}
-
 
 							{
 							!isLoggedIn && (
