@@ -30,7 +30,11 @@
 .project-detail {
 	display: flex;
 	flex-flow: column;
-
+	min-height : 800px;
+}
+.project-detail-loading {
+	min-height : 800px;
+	width : 800px;
 }
 
 .project-info {

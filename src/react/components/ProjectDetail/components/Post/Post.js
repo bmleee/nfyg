@@ -130,26 +130,28 @@ class Post extends Component {
 				{/* 권한이 있는 유저만 보이는 소식 작성 버튼/모달 */}
 				<button className="update-post-modal-button" onClick={() => this.openModal()}>소식 작성하기</button>
 
-				<Modal className="card-add-modal" visible={this.state.visible} width="420" height="460px" effect="fadeInDown" onClickAway={() => this.closeModal()}>
+				<Modal className="card-add-modal" visible={this.state.visible} width="700" height="460px" effect="fadeInDown" onClickAway={() => this.closeModal()}>
 					<div className="card-add-modal-container">
 						<button className="share-modal-close" onClick={() => this.closeModal()}/>
 						<div>
-							<p className="profile-small-title">소식 작성하기</p>
-							<div>
-								<span>제목</span><input type="text" name="post-title" id="post-title" placeholder="제목"/>
-								<span>열람 가능 최소 금액</span><input type="number" name="post-threshold-money" id="post-threshold-money" placeholder="열람 가능 최소 금액"/>
+							<div className="post-input-container">
+								<div className="post-input-title-container">
+								<p className="profile-small-title">제 목</p><input className="post-input-title" type="text" name="post-title" id="post-title"/>
+								</div>
+								<div className="post-input-number-container">
+								<p className="profile-small-title">열람 가능 금액(0 또는 공란은 전체공개)</p><input className="post-input-number" type="number" name="post-threshold-money" id="post-threshold-money"/>
+								</div>
 								{/* 직접 후원자에게만 보여주는 Post...? */}
 								{/* <span>직접 후원 전용</span><input type="checkbox" name="post-is-direct-support" id="post-is-direct-support" placeholder="직접 후원 전용"/> */}
-							</div>
-							<div className="modal-card-add-container">
-								<button className="modal-card-add" onClick={() => this._onClickAddPost()}>새소식 등록</button>
-								<button className="modal-card-add" onClick={() => this.closeModal()}>닫기</button>
 							</div>
 							<Editor
 								onChangeToRaw={this._onEditorChange}
 								raw={this.state.postEditorRaw}
 								ref="editor"
 							/>
+							<div className="modal-card-add-container">
+								<button className="modal-card-add" onClick={() => this._onClickAddPost()}>새소식 등록</button>
+							</div>
 						</div>
 
 					</div>

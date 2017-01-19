@@ -34,7 +34,7 @@
 	.qna-item-container {
 		display: flex;
     	flex-flow: row;
-    	margin-bottom : 8px;
+    	margin-bottom : 10px;
     	.qna-detail-text {
     		margin-bottom : 20px;
     		@media (max-width : 500px) {
@@ -94,6 +94,17 @@
 		@media (max-width : 500px) {
 				width : 50px !important;
 				height : 50px !important;
+				margin-right : 13px;
+			}	
+	}
+	.qna-form-user-icon-sub {
+		border-radius : 100px;
+		border : 2px solid #ddd;
+		margin-right : 20px;
+		@media (max-width : 500px) {
+				width : 40px !important;
+				height : 40px !important;
+				margin-right : 10px;
 			}	
 	}
 	.qna-form-textarea {
@@ -150,7 +161,7 @@
 				width : 120px;
 				display : inline-block;
 			@media (max-width : 500px) {
-				width : 89px;
+				width : 80px;
 			}	
 			}
 }

@@ -10,6 +10,7 @@ div, span, h1, h2, h3, h4, button {
     width : 100% !important;
 }
 .editorStyles__editor {
+    box-shadow : none !important;
     p {
        font-size : 18px !important;
         line-height : 1.5;
@@ -74,10 +75,10 @@ div, span, h1, h2, h3, h4, button {
         }
     }
 }
-.editorStyles__viewer {
+.editorStyles__viewer, .post-item-content-summary, .project-detail-overview-info {
     border : none !important;
     padding : 0px !important;
-    margin : 2em auto;
+    margin : 2em 0px;
     span {
         display : inline-block;
     }
@@ -104,6 +105,7 @@ div, span, h1, h2, h3, h4, button {
         color : #777;
         font-weight : 600;
         margin : 23px 0px;
+        font-family : FontAwesome,"Noto Sans DemiLight","Malgun Gothic";
         @media (max-width : 500px) {
              font-size : 26px !important;
         }

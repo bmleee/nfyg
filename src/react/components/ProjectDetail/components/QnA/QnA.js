@@ -82,12 +82,13 @@ class QnA extends Component {
 						<p className="sharing-fb-icon-list">
 							<img className="qna-form-user-icon" src={author.iconSrc} alt="" width={80} height={80}/>
 						</p>
-						<p className="sharing-summary">
-							<span><p className="sharing-name">{author.name}</p>{date2string(created_at)}</span>
-							<span className="qna-detail-text">{newLinedString(text)}</span>
-
+						
+							<p className="sharing-summary">
+								<span><p className="sharing-name">{author.name}</p>{date2string(created_at)}</span>
+								<span className="qna-detail-text">{newLinedString(text)}</span>
+							
 							{/* 대댓글 */}
-							<div className="qna-item-container">
+							
 								{
 									comments.map(({
 										author,
@@ -96,9 +97,9 @@ class QnA extends Component {
 										created_at,
 									}, index) => (
 										// div 로 한번 더 감쌌어요!
-										<div>
+										<div className="qna-item-container">
 											<p className="sharing-fb-icon-list">
-												<img className="qna-form-user-icon" src={author.iconSrc} alt="" width={80} height={80}/>
+												<img className="qna-form-user-icon-sub" src={author.iconSrc} alt="" width={70} height={70}/>
 											</p>
 											<p className="sharing-summary">
 												<span><p className="sharing-name">{author.name}</p>{date2string(created_at)}</span>
@@ -107,7 +108,7 @@ class QnA extends Component {
 										</div>
 									))
 								}
-							</div>
+							
 
 							<Collapsible trigger="댓글 남기기" transitionTime="0">
 							<div className="project-detail-qna-form">
@@ -121,8 +122,8 @@ class QnA extends Component {
 							</div>
 							</Collapsible>
 							{/* 대댓글 */}
-
 						</p>
+						
 					</div>
 			</div>
 		))

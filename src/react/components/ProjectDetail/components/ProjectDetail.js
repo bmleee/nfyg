@@ -23,7 +23,7 @@ export default class ProjectDetail extends Component {
 
 
 		console.log('ProjectDetail', this);
-
+		
 		if(loaded) {
 			return (
 				<div className="project-detail">
@@ -39,7 +39,7 @@ export default class ProjectDetail extends Component {
 			)
 		}
 		else {
-			return <div>Loading...</div>
+			return <div className="project-detail-loading"></div>
 		}
 	}
 }
