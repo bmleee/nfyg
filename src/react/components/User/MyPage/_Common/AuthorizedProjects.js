@@ -35,8 +35,8 @@ export default class AuthorizedProjects extends Component {
                     <Link to={`/projects/${projectName}`}>
                       <h4>{shortTitle}</h4>
                     </Link>
-                    <Link to={`/projects/${projectName}/detail`}>
-                      <button className="my-project-detail-button">후원자명단</button>
+                    <Link to={`/projects/${projectName}/summary`}>
+                      <button className="my-project-detail-button">상세내역</button>
                     </Link>
                     <Link to={`/projects/${projectName}/edit`}>
                       <button className="my-project-edit-button">수정하기</button>

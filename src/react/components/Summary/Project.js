@@ -66,52 +66,48 @@ export default class Project extends Component {
         sponsor
       }
     } = this.state
+    
+    let infoBackground = {
+			backgroundImage: `url("${ abstract && abstract.imgSrc }")`,
+			backgroundSize: 'cover',
+			backgroundPosition: 'center center',
+			backgroundRepeat: 'no-repeat'
+		}
+    
 
     let isAdmin = userType === 'admin'
 
     return (
-      <div className="summary-project-container" style={{ marginTop: '200px' }}>
+      <div className="summary-project-container">
+        <div className="purchase-heading" style={infoBackground}>
+          <div className="project-summary-header">
+            {/* <div className="project-summary-sponsor-name">{ sponsor && sponsor.displayName }</div> */}
+  					<h1 className="project-summary-title">{ abstract && abstract.longTitle }</h1>
+  					<p className="project-summary-state">{ abstract && abstract.state }</p>
+				  </div>
+				</div>
+				<div className="project-summary-body">
         <Tabs>
+        
           <TabList>
-            <Tab>Abstract</Tab>
-            <Tab>Creator</Tab>
-            <Tab>Funding</Tab>
-            <Tab>Authorized Users</Tab>
-            <Tab>Posts</Tab>
-            <Tab>QnAs</Tab>
-            <Tab>Sharing Info</Tab>
-            <Tab>Purchase Info</Tab>
-            <Tab>Sponsor</Tab>
+            <Tab>후원자 명단</Tab>
+            <Tab>소식 관리</Tab>
+            <Tab>관리자</Tab>
           </TabList>
 
           <TabPanel>
-            { abstract && <Abstract abstract={abstract} isAdmin={isAdmin} />}
-          </TabPanel>
-          <TabPanel>
-            { creator && <Creator creator={creator} isAdmin={isAdmin} />}
-          </TabPanel>
-          <TabPanel>
-            { funding && <Funding funding={funding} isAdmin={isAdmin} />}
-          </TabPanel>
-          <TabPanel>
-            { authorizedUsers && <AuthorizedUsers authorizedUsers={authorizedUsers} isAdmin={isAdmin} />}
+            { purchase_info && <PurchaseInfo purchaseInfo={purchase_info} isAdmin={isAdmin} />}
+            { sharing_info && <SharingInfo sharingInfo={sharing_info} isAdmin={isAdmin} />}
           </TabPanel>
           <TabPanel>
             { posts && <Posts posts={posts} isAdmin={isAdmin} />}
           </TabPanel>
           <TabPanel>
-            { qnas && <QnAs qnas={qnas} isAdmin={isAdmin} />}
+            { authorizedUsers && <AuthorizedUsers authorizedUsers={authorizedUsers} isAdmin={isAdmin} />}
           </TabPanel>
-          <TabPanel>
-            { sharing_info && <SharingInfo sharingInfo={sharing_info} isAdmin={isAdmin} />}
-          </TabPanel>
-          <TabPanel>
-            { purchase_info && <PurchaseInfo purchaseInfo={purchase_info} isAdmin={isAdmin} />}
-          </TabPanel>
-          <TabPanel>
-            { sponsor && <Sponsor sponsor={sponsor} isAdmin={isAdmin} />}
-          </TabPanel>
+          
         </Tabs>
+        </div>
       </div>
     )
   }

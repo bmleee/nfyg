@@ -1,0 +1,10 @@
+.notifications-tr {
+    top: 40% !important;
+    left: 50% !important;
+    bottom : 0 !important;
+    right : 0 !important;
+    text-align : center;
+}
+.notification.notification-success.notification-visible {
+    right : 50% !important;
+}

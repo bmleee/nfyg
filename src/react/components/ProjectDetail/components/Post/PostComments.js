@@ -14,9 +14,9 @@ class PostComments extends Component {
 	}
 
 	expandList = () => {
-		this.setState(update(this.state, {
-			count: { $set: this.state.count + this.state.windowSize },
-		}))
+		this.setState({
+			count: this.state.count + this.state.windowSize,
+		})
 	}
 
 	_onClickAddComment = async () => {
@@ -98,15 +98,8 @@ class PostComments extends Component {
 					</div>
 				</div>
 				<div>
-					{ item.slice(0, this.state.count) }
+					{ item }
 				</div>
-				<div>
-					{
-						this.state.numProjects > 4 && this.state.numProjects > this.state.count
-							? <button className="post-more-button" onClick={this.expandList.bind(this)}>댓글 더보기(00개)</button>
-							: null
-					}
-				 </div>
 			</div>
 		)
 	}

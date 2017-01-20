@@ -12,13 +12,13 @@ export default function (stat) {
 
   return (
     <div>
-      <h2>판매 현황</h2>
-      {
+      <h4>구매자 명단</h4>
+      {/*
         // Object.keys(stat).map((k, index) => {
         //   <span key={index}>{k}: {stat[k]}</span>
         // })
         arr
-      }
+      */}
     </div>
   )
 }

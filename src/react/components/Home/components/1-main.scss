@@ -290,10 +290,10 @@ div, span, h1, h2, h3, h4, button {
     color : #fff;
 }
 a, a:hover, a:focus {
-    color : #000 !important;
-    border : none !important;
-    outline : none !important;
-    text-decoration : none !important;
+    color : #000;
+    border : none;
+    outline : none;
+    text-decoration : none;
     transition : opacity, 220ms;
 }
 button:hover, button:focus {
@@ -391,11 +391,17 @@ div.magazine-list-button {
         .slick-slider {
             padding-bottom : 50px;
             .present-project-list-item-caption {
-                min-height : 110px;
+                min-height : 0px;
+            }
+            h4 {
+                margin-top : 5px !important;
             }
         }
         .slick-dots {
-            bottom : 15px;
+            bottom : 20px;
+        }
+        .slick-next, .slick-prev {
+            top : 45%;
         }
         .react-tabs [role=tab]:first-child {
     width : 180px;
@@ -510,7 +516,7 @@ div.present-more-project {
 }
    div.home-body {
        width : 100%;
-    padding: 0px 20px;
+        padding: 0px 20px;
         .slick-slider {
             .present-project-list-item-caption {
                 min-height : 80px;

@@ -92,7 +92,15 @@ class Headermenumobile extends Component {
 							</div>
 							</Link> )
 							}
-
+							
+							{
+							!isLoggedIn && (
+							<div className="mobile-burger-info-container">
+								<p className="mobile-burger-info">현재 '로그아웃'상태입니다.</p>
+								<p className="mobile-burger-info">'LOG IN/SIGN UP' 버튼을 눌러</p>
+								<p className="mobile-burger-info">예술후원을 시작해보세요!</p>
+							</div> )
+							}
 							{
 							!isLoggedIn && (
 							<Link to={`/login`}>

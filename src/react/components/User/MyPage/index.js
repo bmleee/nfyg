@@ -139,7 +139,7 @@ export default class MyProfile extends Component {
     } = profile
 
     return (
-      <div className="profile-wrapper">
+      <div className="admin-profile-wrapper">
         <Tabs>
           <TabList>
             <Tab>프로젝트 관리</Tab>

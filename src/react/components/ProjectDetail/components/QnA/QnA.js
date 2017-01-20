@@ -146,7 +146,7 @@ class QnA extends Component {
 				<div>
 					{
 						this.state.numProjects > 5 && this.state.numProjects > this.state.count
-							? <button className="post-more-button" onClick={this.expandList.bind(this)}>댓글 더보기(00개)</button>
+							? <button className="post-more-button" onClick={this.expandList.bind(this)}>댓글 더보기</button>
 							: null
 					}
 				 </div>

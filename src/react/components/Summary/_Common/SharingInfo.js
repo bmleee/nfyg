@@ -44,13 +44,13 @@ export default class SharingInfo extends Component {
     return (
       <div className="sharing-info-container">
         <div className="sharing-info-overview">
-          <h2>프로젝트 모금 현황</h2>
-          <span>댓글: {comments}</span>
-          <span>좋아요: {likes}</span>
-          <span>공유: {shares}</span>
-          <span>총 유저: {num_users}</span>
-          <span>총 공유 글: {num_posts}</span>
-          <span>총 모금액: {money_by_sharing}</span>
+          <h4>공유후원 명단</h4>
+          {/* <span>댓글: {comments}</span>
+              <span>좋아요: {likes}</span>
+              <span>공유: {shares}</span>
+              <span>총 유저: {num_users}</span>
+              <span>총 공유 글: {num_posts}</span>
+              <span>총 모금액: {money_by_sharing}</span> */}
         </div>
         <div className="charing-info-users-wrapper">
           <BootstrapTable data={users_info} exportCSV={true}

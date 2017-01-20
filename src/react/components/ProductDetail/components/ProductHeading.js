@@ -5,26 +5,33 @@ import Modal from '~/src/react/components/react-awesome-modal';
 import FontAwesome from 'react-fontawesome'
 import KakaoImage from '~/src/assets/images/kakaotalk.svg'
 
+import CopyToClipboard from 'react-copy-to-clipboard';
+
 class ProductHeading extends Component {
-
-	constructor(props) {
-    super(props);
-    this.state = {
-        visible : false
-    }
-  }
-
-  openModal() {
-    this.setState({
-        visible : true
-    });
-  }
-
-  closeModal() {
-    this.setState({
-        visible : false
-    });
-  }
+		state = {
+			copied: false,
+			visible: false,
+		}
+	
+	  openModal() {
+	    this.setState({
+	        visible : true
+	    });
+	  }
+	
+	  closeModal() {
+	    this.setState({
+	        visible : false
+	    });
+	  }
+	  
+	  onCopy() {
+		this.setState({
+			visible : false,
+			copied: true,
+	    });
+	  }
+  
 
 	render() {
 		console.log('ProductHeading', this);
@@ -64,6 +71,8 @@ class ProductHeading extends Component {
 			indirectSupporters,
 
 		} = this.props;
+		
+		const url = document.URL;
 
 
 		let remainingDays = ( new Date(dateTo).getTime() - new Date(dateFrom).getTime() ) / 1000 / 60 / 60 / 24
@@ -115,7 +124,12 @@ class ProductHeading extends Component {
 					<button className="ma-share-button-facebook"><FontAwesome name='facebook' size='lg' /></button>
 					<button className="ma-share-button-twitter"><FontAwesome name='twitter' size='lg' /></button>
 					<button className="ma-share-button-kakao"><KakaoImage className="ma-kakao-icon" width={36} height={36} /></button>
+					<CopyToClipboard text={url} onCopy={() => {
+						this.setState({copied: true, visible:false});
+						appUtils.setFlash({title: '', message: '클립보드에 복사되었습니다.', level: 'success', autoDismiss: 0, dismissible: true})
+					}}>
 					<button className="ma-share-button-url"><FontAwesome name='link' size='lg' /></button>
+					</CopyToClipboard>
 					</div>
 				</Modal>
 				</div>

@@ -10,7 +10,7 @@ const linkFormatter = (cell, row) => {
 	return <Link to={`/projects/${row.projectName}`}>{cell}</Link>;
 }
 const detailFormatter = (cell, row) => {
-	return <Link to={`/projects?id=${row.projectName}/summary`}><button className='btn btn-info'>Detail</button></Link>;
+	return <Link to={`/projects/${row.projectName}/summary`}><button className='btn btn-info'>Detail</button></Link>;
 }
 
 export default class Projects extends Component {
