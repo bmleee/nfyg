@@ -1,7 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import Progress from 'react-progressbar';
 
-class ProjectHeading extends Component {
+import { format } from 'url'
+
+import { FB_SHARER_URL } from '~/env'
+
+export default class ProjectHeading extends Component {
 
 	render() {
 		console.log('ProjectHeading', this);
@@ -94,12 +98,18 @@ class ProjectHeading extends Component {
 						{(currentMoney || 0).toLocaleString()}<span className="heading-summary-status">원</span></div>
 					</div>
 				</div>
-				<button className="share-button">페이스북 공유로 후원하기</button>
+				<button className="share-button" onClick={this.onClickShareFB}>페이스북 공유로 후원하기</button>
 			</div>
 
 			)
 	}
 
-}
+	async onClickShareFB() {
+		// let share_url = window.location.host + window.location.pathname
+		let share_url = '7pictures.co.kr/campaigns/m-art/'
+		let url = format({ host: FB_SHARER_URL, query: {u: share_url} })
 
-export default ProjectHeading;
+		window.open(url, '_blank', 'width=500, height=300')
+	}
+
+}
