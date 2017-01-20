@@ -1,0 +1,23 @@
+<html>
+	<head>
+		<title>제안 하기</title>
+	</head>
+	<body>
+		<h3>User</h3>
+		<div>
+			<% for (k of Object.keys(user.toJSON())) { %>
+				<div>
+					<%= k %> : <%= user.toJSON()[k] %>
+				</div>
+			<%} %>
+		</div>
+		<h3>Body</h3>
+		<div class="body">
+			<% for (k of Object.keys(body)) { %>
+				<div>
+					<%= k %> : <%= body[k] %>
+				</div>
+			<%} %>
+		</div>
+	</body>
+</html>

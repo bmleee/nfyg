@@ -3,6 +3,8 @@ import ImageGallery from '../../react-image-gallery'; // https://www.npmjs.com/p
 
 import { Link } from 'react-router';
 
+import { suggestProject } from '~/src/react/api/AppAPI'
+
 import Modal from '~/src/react/components/react-awesome-modal';
 
 class Headermenufixed extends Component {
@@ -25,6 +27,25 @@ class Headermenufixed extends Component {
         visible : false
     });
   }
+
+	async onClickSuggest() {
+		try {
+			let body = {
+				contact: document.getElementById('suggest-contact').value,
+				email: document.getElementById('suggest-email').value,
+				text: document.getElementById('suggest-text').value,
+				money: document.getElementById('suggest-money').value,
+				purpose: document.getElementById('suggest-purpose').value,
+				link: document.getElementById('suggest-link').value,
+			}
+
+			let r = await suggestProject(body)
+			console.log('suggestProject', r);
+			this.closeModal()
+		} catch (e) {
+			console.error(e);
+		}
+	}
 
 	render() {
 		let {
@@ -85,26 +106,26 @@ class Headermenufixed extends Component {
 									</div>
 									<div className="project-modal-body">
 										<p className="project-modal-body-small-title">연락처(필 수)
-											<input className="project-modal-body-input-text" type="text" />
+											<input className="project-modal-body-input-text" type="text" id="suggest-contact" />
 										</p>
 										<p className="project-modal-body-small-title">이메일
-											<input className="project-modal-body-input-text" type="text" />
+											<input className="project-modal-body-input-text" type="text" id="suggest-email" />
 										</p>
 										<p className="project-modal-body-small-title">제안 내용(필 수)
-											<textarea className="project-modal-body-input-textarea" type="textarea"/>
+											<textarea className="project-modal-body-input-textarea" type="textarea" id="suggest-text" />
 										</p>
 										<p className="project-modal-body-small-title">필요한 후원금(원)
-											<input className="project-modal-body-input-text" type="number" />
+											<input className="project-modal-body-input-text" type="number" id="suggest-money" />
 										</p>
 										<p className="project-modal-body-small-title">후원금 용도
-											<textarea className="project-modal-body-input-textarea" type="textarea"/>
+											<textarea className="project-modal-body-input-textarea" type="textarea" id="suggest-purpose" />
 										</p>
 										<p className="project-modal-body-small-title">관련 링크
-											<input className="project-modal-body-input-text" type="text"/>
+											<input className="project-modal-body-input-text" type="text" id="suggest-link" />
 										</p>
 									</div>
 									<div className="project-modal-footer">
-										<a className="project-modal-header-save-container" onClick={() => this.closeModal()}><button type="submit" className="project-modal-header-save">보내기</button></a>
+										<a className="project-modal-header-save-container" onClick={this.onClickSuggest}><button type="submit" className="project-modal-header-save">보내기</button></a>
 									</div>
 								</Modal>
 							)
@@ -116,7 +137,7 @@ class Headermenufixed extends Component {
 									<img className="menu-user-icon" src={image} width={32} height={32} />
 									<div className="user-hover-menu-arrow"></div>
 									<div className="user-hover-menu-container">
-										
+
 										<Link to={`/user/me`}>
 											<p className="header-menu-hover-text">내 페이지</p>
 										</Link>

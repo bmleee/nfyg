@@ -247,3 +247,13 @@ export async function fetchSummary({ projectName, productName, user_id }) {
 	}
 	return await _request(config)
 }
+
+export async function suggestProject(body) {
+	const config = {
+		method: 'post',
+		url: `/api/mail/suggest`,
+		data: body,
+	}
+
+	return await _request(config)
+}
