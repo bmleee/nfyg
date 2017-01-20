@@ -51,15 +51,17 @@ class PresentProductList extends Component {
 		let productList = products.map(
 			({
 				imgSrc,
-				creator,
+				// creator,
 				title,
 				currentMoney,
 				targetMoney,
-				numDirectSupports,
-				numIndirectSupports,
-				remainingDays,
+				// numDirectSupports,
+				// numIndirectSupports,
+				// remainingDays,
 				link,
 				postIntro,
+				numValidPurchases = 0,
+				purchaseSuccess = false,
 			}, index) => (
 				<div className="present-project-list-item-container">
 					<div className="present-project-list-item" key={index}>
@@ -67,14 +69,14 @@ class PresentProductList extends Component {
 							<div className="pr-thumbnail">
 								<div className="ex-centered">
 									<img className="home-exhibition-image" src={imgSrc} />
-									<SuccessImage className="success-icon" width={76} height={76} /> // TODO: purchase success flag from server
+									{ purchaseSuccess && <SuccessImage className="success-icon" width={76} height={76} /> }
 								</div>
 							</div>
 						</Link>
 						<div className="present-project-list-item-caption">
 							<Link to={link}><h3 className="project-list-title">{title}</h3></Link>
 							<h5>{postIntro}</h5>
-							<div className="product-purchase-num"><p>000명</p>주문중</div>
+							<div className="product-purchase-num"><p>{numValidPurchases}명</p>주문중</div>
 						</div>
 					</div>
 				</div>

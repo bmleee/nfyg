@@ -50,8 +50,6 @@ const sliderSettings = {
 class Home extends Component {
 
 	render() {
-		console.log('LocalStorage', localStorage);
-
 		const {
 			presentProjects,
 			// futureProjects,
@@ -79,7 +77,7 @@ class Home extends Component {
 							<h3>진행 중인 미술소품</h3>
 						</div>
 						<Slider {...sliderSettings}>
-							{ 
+							{
 								products.slice(0, 8).map(
 								({
 									imgSrc,
@@ -120,7 +118,7 @@ class Home extends Component {
 							<h3>진행 중인 프로젝트</h3>
 						</div>
 						<Slider {...sliderSettings}>
-							{ 
+							{
 								presentProjects.slice(0, 8).map(
 									({
 										imgSrc,
@@ -134,8 +132,8 @@ class Home extends Component {
 										link,
 										postIntro,
 									}, index) => (
-										<div className="present-project-list-item-container">
-											<div className="present-project-list-item" key={index}>
+										<div className="present-project-list-item-container" key={index}>
+											<div className="present-project-list-item">
 												<Link to={link}> {/* TODO: include :project_name */}
 													<div className="pr-thumbnail">
 														<div className="ex-centered">

@@ -152,24 +152,29 @@ ProductSchema.methods.toFormat = async function (type, ...args) {
 							},
 							targetMoney: this.funding.targetMoney,
 							currentMoney: this.funding.currentMoney,
-							numDirectSupports: await PurchaseModel.count({product: this}),
-							numIndirectSupports: Math.floor(Math.random() * 300), // TODO: from IndirectSupport
 							link: `/products/${this.abstract.productName}`,
 						}
 
 					case 'in-progress':
 					default:
+						let numValidPurchases = await PurchaseModel
+							.count({ 'product': this })
+							.where('purchase_info.purchase_state').in(['preparing', 'scheduled'])
+						let purchaseSuccess = this.funding.minPurchaseVolume <= numValidPurchases
+
 						return {
 							imgSrc: this.abstract.imgSrc,
 							creator: this.creator.creatorName,
 							title: this.abstract.shortTitle,
 							targetMoney: this.funding.targetMoney,
 							currentMoney: this.funding.currentMoney,
-							numDirectSupports: await PurchaseModel.count({product: this}),
-							numIndirectSupports: Math.floor(Math.random() * 300), // TODO: from IndirectSupport
+							// numDirectSupports: await PurchaseModel.count({product: this}),
+							// numIndirectSupports: Math.floor(Math.random() * 300), // TODO: from IndirectSupport
 							remainingDays: ( new Date(this.funding.dateTo).getTime() - new Date(this.funding.dateFrom).getTime() ) / 1000 / 60 / 60 / 24,
 							link: `/products/${this.abstract.productName}`,
 							postIntro: this.abstract.postIntro,
+							numValidPurchases,
+							purchaseSuccess,
 						}
 
 				} // end of switch abstract state

@@ -55,8 +55,8 @@ class PresentProjectList extends Component {
 				link,
 				postIntro,
 			}, index) => (
-				<div className="present-project-list-item-container">
-					<div className="present-project-list-item" key={index}>
+				<div className="present-project-list-item-container" key={index}>
+					<div className="present-project-list-item">
 						<Link to={link}> {/* TODO: include :project_name */}
 							<div className="pr-thumbnail">
 								<div className="ex-centered">
