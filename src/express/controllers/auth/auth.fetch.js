@@ -106,7 +106,7 @@ router.get('/search', async (req, res) => {
 			projects,
 			products,
 			magazines
-		] = await fetchDataByKey({q}, [ KEYS.projectsByName, KEYS.productsByName, KEYS.magazinesByName ])
+		] = await fetchDataByKey({q}, KEYS.projectsByName, KEYS.productsByName, KEYS.magazinesByName)
 
 		res.json({
 			projects,

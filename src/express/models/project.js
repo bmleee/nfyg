@@ -290,6 +290,9 @@ ProjectSchema.methods.toFormat = async function (type, ...args) {
 					purchase_info
 				}
 
+			case 'search_result':
+				return this.abstract
+
 			default:
 				console.error(`ProjectModel.toFormat can't accept this ${JSON.stringify(type)}`);
 				return ''

@@ -65,22 +65,36 @@ const _fetcher = {
   sponsors: async () => await Promise.all(
     (await SponsorModel.find({}))
       .map(async (p) => await p.toFormat('profile_admin'))),
-  projectsByName: async ({q}) => await ProjectModel.find({ 'abstract.projectName': q}),
-  productsByName: async ({q}) => await ProductModel.find({ 'abstract.productName': q}),
-  magazinesByName: async ({q}) => await MagazineModel.find({ 'abstract.magazineName': q}),
+  projectsByName: async ({q}) => await Promise.all(
+    (await ProjectModel.find({ 'abstract.projectName': q }))
+      .map(async (p) => await p.toFormat('search_result'))
+  ),
+  productsByName: async ({q}) => await Promise.all(
+    (await ProductModel.find({ 'abstract.productName': q }))
+      .map(async (p) => await p.toFormat('search_result'))
+  ),
+  magazinesByName: async ({q}) => await Promise.all(
+    (await MagazineModel.find({ 'abstract.magazineName': q }))
+      .map(async (m) => await m.toFormat('search_result'))
+  ),
 }
 
-const fetchDataByKey = async ({ user, ...others }, ...keys) => {
-  const [
-    { project_names },
-    purchases,
-  ] = await Promise.all([
-    FacebookTracker.getUserSummary(user.id),
-    PurchaseModel.findDetailByUser(user)
-  ])
+const fetchDataByKey = async ({ user, q, ...others }, ...keys) => {
+  let project_names, purchases;
+
+  if (KEYS.sharedProjects in keys) {
+    let r = await FacebookTracker.getUserSummary(user && user.id)
+    project_names = r.project_names
+  }
+  if (KEYS.purchasedProjects in keys || KEYS.purchasedProducts in keys) {
+    purchases = await PurchaseModel.findDetailByUser(user)
+  }
+  if (q) {
+    q = new RegExp(`.*${q}.*`, 'i')
+  }
 
   return await Promise.all(keys.map(
-    async (k) => await _fetcher[k]({ project_names, purchases, user, ...others })
+    async (k) => await _fetcher[k]({ project_names, purchases, user, q, ...others })
   ))
 }
 

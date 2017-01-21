@@ -125,6 +125,10 @@ MagazineSchema.methods.toFormat = async function (type) {
 				relatedMagazines: this.recommendedMagazines || [],
 				relatedExhibitions: this.recommendedExhibitions || [],
 			}
+
+		case 'search_result':
+			return this.abstract
+			
 		default:
 			console.error(`toFormat can't accept this ${JSON.stringify(type)}`);
 			return ''
