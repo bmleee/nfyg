@@ -5,7 +5,11 @@ import Modal from '~/src/react/components/react-awesome-modal';
 import FontAwesome from 'react-fontawesome'
 import KakaoImage from '~/src/assets/images/kakaotalk.svg'
 
+import { TwitterButton } from "react-social";
 import CopyToClipboard from 'react-copy-to-clipboard';
+
+
+
 
 class ProductHeading extends Component {
 		state = {
@@ -31,10 +35,45 @@ class ProductHeading extends Component {
 			copied: true,
 	    });
 	  }
+	  
+	componentDidMount() {
+		const {
+			abstract: {
+				imgSrc,
+				shortTitle
+			},
+		} = this.props;
+		
+
+		const imgSrcUrl = `${window.location.protocol}//${window.location.host}${imgSrc}`
+		const url = document.URL;
+		
+		console.log(imgSrcUrl)
+		
+		Kakao.init('0aad64ae5f685fcf0be27e3e654f8ef6');
+
+		Kakao.Link.createTalkLinkButton({
+		  container : '#kakao-link-btn',
+		  label : shortTitle,
+		  image : {
+		    src :imgSrcUrl,
+		    width : '300',
+		    height : '200',
+		  },
+		  webButton: {
+		    text: '7Pictures',
+		    url: url
+		  }
+		});
+		
+	}
+
   
 
 	render() {
 		console.log('ProductHeading', this);
+		
+	
 		const {
 			abstract: {
 				longTitle,
@@ -73,8 +112,7 @@ class ProductHeading extends Component {
 		} = this.props;
 		
 		const url = document.URL;
-
-
+		
 		let remainingDays = ( new Date(dateTo).getTime() - new Date(dateFrom).getTime() ) / 1000 / 60 / 60 / 24
 
 		const sharingInfo = (recent3Users || []).map( (fbId, index) => (
@@ -121,15 +159,20 @@ class ProductHeading extends Component {
 					<button className="share-modal-close" onClick={() => this.closeModal()}/>
 					</div>
 					<div className="share-modal-button-container">
-					<button className="ma-share-button-facebook"><FontAwesome name='facebook' size='lg' /></button>
-					<button className="ma-share-button-twitter"><FontAwesome name='twitter' size='lg' /></button>
-					<button className="ma-share-button-kakao"><KakaoImage className="ma-kakao-icon" width={36} height={36} /></button>
-					<CopyToClipboard text={url} onCopy={() => {
-						this.setState({copied: true, visible:false});
-						appUtils.setFlash({title: '', message: '클립보드에 복사되었습니다.', level: 'success', autoDismiss: 0, dismissible: true})
-					}}>
-					<button className="ma-share-button-url"><FontAwesome name='link' size='lg' /></button>
-					</CopyToClipboard>
+					
+						<button className="ma-share-button-facebook"><FontAwesome name='facebook' size='lg' /></button>
+						
+						<TwitterButton message={shortTitle} url={url} className="ma-share-button-twitter"><FontAwesome name='twitter' size='lg' /></TwitterButton>
+						
+						<button id="kakao-link-btn" className="ma-share-button-kakao"><KakaoImage className="ma-kakao-icon" width={36} height={36} /></button>
+
+						<CopyToClipboard text={url} onCopy={() => {
+							this.setState({copied: true, visible:false});
+							appUtils.setFlash({title: '', message: '클립보드에 복사되었습니다.', level: 'success', autoDismiss: 2, dismissible: true})
+						}}>
+						<button className="ma-share-button-url"><FontAwesome name='link' size='lg' /></button>
+						</CopyToClipboard>
+					
 					</div>
 				</Modal>
 				</div>
