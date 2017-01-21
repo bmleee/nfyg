@@ -21,6 +21,7 @@ export const KEYS = {
   purchasedProjects: 'purchasedProjects',
   purchasedProducts: 'purchasedProducts',
   authorizedProjects: 'authorizedProjects',
+  authorizedProducts: 'authorizedProducts',
 
   // admin
   users: 'users',
@@ -48,6 +49,9 @@ const _fetcher = {
       .map(async (p) => await p.toFormat('profile'))),
   authorizedProjects: async ({ user }) => await Promise.all(
     (await ProjectModel.findAuthorizedOnesToUser(user))
+      .map(async (p) => await p.toFormat('profile_admin'))),
+  authorizedProducts: async ({ user }) => await Promise.all(
+    (await ProductModel.findAuthorizedOnesToUser(user))
       .map(async (p) => await p.toFormat('profile_admin'))),
   users: async () => await Promise.all(
     (await UserModel.find({}))

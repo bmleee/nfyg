@@ -121,7 +121,7 @@ ProjectSchema.statics.findOneByName = function (name) {
 	return this.findOne({'abstract.projectName': name})
 }
 ProjectSchema.statics.findAuthorizedOnesToUser = function (user) {
-	return this.find({ authorizedUsers: { $in: [user._id] } })
+	return this.find({ authorizedUsers: { $in: [user._id || user] } })
 }
 ProjectSchema.statics.findByNames = function (names) {
 	let re = new RegExp(names.join('|'), "i")
@@ -232,11 +232,11 @@ ProjectSchema.methods.toFormat = async function (type, ...args) {
 							intro: this.abstract.postIntro,
 						},
 						posts,
+						recentPost: this.posts[0] && (Date.now() - this.posts[0].abstract.created_at) / 1000 / 60 / 60 / 24 < 1 // less than 1 day
 					},
 					qna: {
 						posts: qnas,
 					},
-					// TODO: async fetch data!
 					ranking: {
 						recent3DirectSupporters: [
 							"10153932539601313",

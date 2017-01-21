@@ -116,6 +116,13 @@ ProductSchema.set('toJSON', {
 ProductSchema.statics.findOneByName = function (name) {
 	return this.findOne({'abstract.productName': name})
 }
+ProductSchema.statics.findAuthorizedOnesToUser = function (user) {
+	return this.find({ authorizedUsers: { $in: [user._id || user] } })
+}
+ProductSchema.statics.findByNames = function (names) {
+	let re = new RegExp(names.join('|'), "i")
+	return this.find({ 'abstract.productName': re})
+}
 
 ProductSchema.methods.toFormat = async function (type, ...args) {
 

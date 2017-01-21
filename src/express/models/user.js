@@ -173,12 +173,12 @@ export default UserModel
 */
 const _renderMyProfile = async (_this, other = false) => {
 	try {
-		let sharedProjects, purchasedProjects, authorizedProjects, purchasedProducts, projects, products, users, sponsors;
+		let sharedProjects, purchasedProjects, authorizedProjects, authorizedProducts, purchasedProducts, projects, products, users, sponsors;
 
 		if(other || _this.access_level === 0) { // normal user
 			[ sharedProjects, purchasedProjects, purchasedProducts ] = await fetchDataByKey({user: _this}, KEYS.sharedProjects, KEYS.purchasedProjects, KEYS.purchasedProducts)
 		} else if (_this.access_level === 1) { // artist
-			[ sharedProjects, purchasedProjects, purchasedProducts, authorizedProjects ] = await fetchDataByKey({user: _this}, KEYS.sharedProjects, KEYS.purchasedProjects, KEYS.purchasedProducts, KEYS.authorizedProjects)
+			[ sharedProjects, purchasedProjects, purchasedProducts, authorizedProjects, authorizedProducts ] = await fetchDataByKey({user: _this}, KEYS.sharedProjects, KEYS.purchasedProjects, KEYS.purchasedProducts, KEYS.authorizedProjects, KEYS.authorizedProducts)
 		} else if (_this.access_level === 10) { // editor
 			[ sharedProjects, purchasedProjects, purchasedProducts, projects, products, ] = await fetchDataByKey({user: _this}, KEYS.sharedProjects, KEYS.purchasedProjects, KEYS.purchasedProducts, KEYS.projects, KEYS.products,)
 		} else if (_this.access_level === 100) { // admin
@@ -190,17 +190,18 @@ const _renderMyProfile = async (_this, other = false) => {
 		return {
 			user: pick(_this.toJSON(), ['id', 'name', 'display_name', 'image']),
 			project: {
-				sharedProjects: sharedProjects,
-				purchasedProjects: purchasedProjects,
-				authorizedProjects: authorizedProjects,
+				sharedProjects,
+				purchasedProjects,
+				authorizedProjects,
 			},
 			product: {
-				purchasedProducts: purchasedProducts,
+				purchasedProducts,
+				authorizedProducts
 			},
-			projects: projects,
-			products: products,
-			users: users,
-			sponsors: sponsors,
+			projects,
+			products,
+			users,
+			sponsors,
 		}
 	} catch (e) {
 		console.error(e);
