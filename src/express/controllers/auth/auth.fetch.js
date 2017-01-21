@@ -11,7 +11,7 @@
 
 import express from 'express';
 
-// import cache from '../../lib/cache'
+import fetchDataByKey, { KEYS } from '../../lib/fetchDataByKey'
 
 import UserModel from '../../models/user'
 import ProjectModel, {restrictedNames} from '../../models/project'
@@ -51,7 +51,6 @@ router.use('/', EditorRouter);
 
 router.use('/qnas', QnARouter);
 router.use('/posts', PostRouter);
-
 
 /**
  * auth level : anyone
@@ -97,6 +96,27 @@ router.get('/', async (req, res) => {
 		res.json({error: e.message})
 	}
 
+})
+
+router.get('/search', async (req, res) => {
+	try {
+		let q = req.query.q
+
+		let [
+			projects,
+			products,
+			magazines
+		] = await fetchDataByKey({q}, [ KEYS.projectsByName, KEYS.productsByName, KEYS.magazinesByName ])
+
+		res.json({
+			projects,
+			products,
+			magazines
+		})
+	} catch (e) {
+		console.error(e);
+		res.send(e.trace);
+	}
 })
 
 export default router;

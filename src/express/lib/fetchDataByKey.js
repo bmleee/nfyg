@@ -16,14 +16,22 @@ import FacebookTracker from '../../lib/FacebookTracker'
 import pick from 'lodash.pick'
 
 export const KEYS = {
+  // profile
   sharedProjects: 'sharedProjects',
   purchasedProjects: 'purchasedProjects',
   purchasedProducts: 'purchasedProducts',
   authorizedProjects: 'authorizedProjects',
+
+  // admin
   users: 'users',
   projects: 'projects',
   products: 'products',
   sponsors: 'sponsors',
+
+  // search
+  projectsByName: 'projectsByName',
+  productsByName: 'productsByName',
+  magazinesByName: 'magazinesByName',
 }
 
 const _fetcher = {
@@ -53,6 +61,9 @@ const _fetcher = {
   sponsors: async () => await Promise.all(
     (await SponsorModel.find({}))
       .map(async (p) => await p.toFormat('profile_admin'))),
+  projectsByName: async ({q}) => await ProjectModel.find({ 'abstract.projectName': q}),
+  productsByName: async ({q}) => await ProductModel.find({ 'abstract.productName': q}),
+  magazinesByName: async ({q}) => await MagazineModel.find({ 'abstract.magazineName': q}),
 }
 
 const fetchDataByKey = async ({ user, ...others }, ...keys) => {
