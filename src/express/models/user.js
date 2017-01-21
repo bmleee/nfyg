@@ -156,8 +156,9 @@ export default UserModel
 			purchasedProjects: [],
 			authorizedProjects: [],
 		},
-		project: {
-			purchasedProducts: []
+		product: {
+			purchasedProducts: [],
+			authorizedProducts: []
 		}
 	}
 

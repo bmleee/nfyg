@@ -77,6 +77,8 @@ class Post extends Component {
 			user,
 		} = this.props;
 
+		const canEdit = appUtils.getUser().canEdit
+
 		let title = "포스트 제목 예시";
 		let condition1 = "전체공개";
 		let condition2 = "후원자공개";
@@ -127,9 +129,7 @@ class Post extends Component {
 		return (
 			<div className="project-detail-post">
 
-				{/* 권한이 있는 유저만 보이는 소식 작성 버튼/모달 */}
-				<button className="update-post-modal-button" onClick={() => this.openModal()}>소식 작성하기</button>
-
+				{ canEdit && <button className="update-post-modal-button" onClick={() => this.openModal()}>소식 작성하기</button> }
 				<Modal className="card-add-modal" visible={this.state.visible} width="700" height="460px" effect="fadeInDown" onClickAway={() => this.closeModal()}>
 					<div className="card-add-modal-container">
 						<button className="share-modal-close" onClick={() => this.closeModal()}/>
