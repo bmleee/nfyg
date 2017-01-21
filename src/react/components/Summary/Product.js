@@ -54,36 +54,40 @@ export default class Product extends Component {
         purchase_info,
       }
     } = this.state
+    
+    let infoBackground = {
+			backgroundImage: `url("${ abstract && abstract.imgSrc }")`,
+			backgroundSize: 'cover',
+			backgroundPosition: 'center center',
+			backgroundRepeat: 'no-repeat'
+		}
 
     let isAdmin = userType === 'admin'
 
     return (
-      <div className="summary-project-container" style={{ marginTop: '200px' }}>
-        <Tabs>
-          <TabList>
-            <Tab>Abstract</Tab>
-            <Tab>Funding</Tab>
-            <Tab>Authorized Users</Tab>
-            <Tab>QnAs</Tab>
-            <Tab>Purchase Info</Tab>
-          </TabList>
-
-          <TabPanel>
-            { abstract && <Abstract abstract={abstract} isAdmin={isAdmin} />}
-          </TabPanel>
-          <TabPanel>
-            { funding && <Funding funding={funding} stat={purchase_info.stat} isAdmin={isAdmin} />}
-          </TabPanel>
-          <TabPanel>
-            { authorizedUsers && <AuthorizedUsers authorizedUsers={authorizedUsers} isAdmin={isAdmin} />}
-          </TabPanel>
-          <TabPanel>
-            { qnas && <QnAs qnas={qnas} isAdmin={isAdmin} />}
-          </TabPanel>
-          <TabPanel>
-            { purchase_info && <PurchaseInfo purchaseInfo={purchase_info} isAdmin={isAdmin} />}
-          </TabPanel>
-        </Tabs>
+      <div className="summary-project-container">
+        <div className="purchase-heading" style={infoBackground}>
+          <div className="project-summary-header">
+            {/* <div className="project-summary-sponsor-name">{ sponsor && sponsor.displayName }</div> */}
+  					<h1 className="project-summary-title">{ abstract && abstract.longTitle }</h1>
+  					<p className="project-summary-state">{ abstract && abstract.state }</p>
+				  </div>
+				</div>
+				<div className="project-summary-body">
+          <Tabs>
+            <TabList>
+              <Tab>구매자 명단</Tab>
+              <Tab>관리자</Tab>
+            </TabList>
+  
+            <TabPanel>
+              { purchase_info && <PurchaseInfo purchaseInfo={purchase_info} isAdmin={isAdmin} />}
+            </TabPanel>
+            <TabPanel>
+              { authorizedUsers && <AuthorizedUsers authorizedUsers={authorizedUsers} isAdmin={isAdmin} />}
+            </TabPanel>
+          </Tabs>
+        </div>
       </div>
     )
   }

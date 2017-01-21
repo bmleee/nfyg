@@ -103,7 +103,7 @@ class Home extends Component {
 												</div>
 											</Link>
 											<div className="present-project-list-item-caption">
-												<Link to={link}><h3 className="project-list-title">{title}</h3></Link>
+												<Link to={link}><h4 className="project-list-title">{title}</h4></Link>
 												<div className="product-purchase-num"><p>000명</p>주문중</div>
 											</div>
 										</div>
@@ -144,7 +144,7 @@ class Home extends Component {
 													</div>
 												</Link>
 												<div className="present-project-list-item-caption">
-													<Link to={link}><h3 className="project-list-title">{title}</h3></Link>
+													<Link to={link}><h4 className="project-list-title">{title}</h4></Link>
 													<Progress completed={Math.min(100, Math.round(currentMoney / targetMoney * 100))} />
 													<div className="project-summary-detail">
 													{Math.round(currentMoney / targetMoney * 100)}%

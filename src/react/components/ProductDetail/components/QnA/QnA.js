@@ -85,7 +85,7 @@ class QnA extends Component {
 					{/* 대댓글 */}
 						<div className="qna-item-container">
 						<p className="sharing-fb-icon-list">
-						<img className="qna-form-user-icon" src={author.iconSrc} alt="" width={80} height={80}/>
+						<img className="qna-form-user-icon-sub" src={author.iconSrc} alt="" width={70} height={70}/>
 						</p>
 						<p className="sharing-summary">
 						<span><p className="sharing-name">{author.name}</p>{date2string(created_at)}</span>

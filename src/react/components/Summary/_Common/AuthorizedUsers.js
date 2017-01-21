@@ -12,11 +12,13 @@ export default class AuthorizedUsers extends Component {
     return (
       <div>
         { authorizedUsers && this._renderAuthorizedUsers() }
+        <div className="authorized-user-button-container">
         {
           isAdmin && (
-            <button onClick={this.addNewAuthorizedUser}>New</button>
+          <button className="authorized-user-button" onClick={this.addNewAuthorizedUser}>관리자 추가하기</button>
           )
         }
+        </div>
       </div>
     )
   }

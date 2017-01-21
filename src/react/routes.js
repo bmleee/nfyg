@@ -70,6 +70,13 @@ import {
 
 import { Sponsors } from './components/Sponsors'
 
+import {
+	About,
+	Faq,
+	Privacy,
+	TermOfUse
+} from './components/Common/Footer/components'
+
 // <Route path="projects/:project_name" component={ProjectDetail}> // TODO: activate
 const routes = (
 	<Route path="/" component={App}>
@@ -207,6 +214,13 @@ const routes = (
 		<Route path="projects/:projectName/summary" component={ProjectSummary}></Route>
 		<Route path="products/:productName/summary" component={ProductSummary}></Route>
 		<Route path="users/:user_id/summary" component={UserSummary}></Route>
+		
+		{/* Footer components */}
+		<Route path="about" component={About}></Route>
+		<Route path="faq" component={Faq}></Route>
+		<Route path="privacy" component={Privacy}></Route>
+		<Route path="termofuse" component={TermOfUse}></Route>
+		
 
 		<Route path="test1" component={Test1}></Route>
 		<Route path="test2" component={Test2}></Route>

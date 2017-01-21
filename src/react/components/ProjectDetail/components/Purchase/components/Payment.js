@@ -101,8 +101,8 @@ export default class C extends Component {
 								</div>
 
 								<div>
-									<p className="profile-small-title">생년월일 6자리</p>
-									<input className="card-birth-text" type="text" value={birth} onChange={this._onChangeBirth} maxLength="6"/>
+									<p className="profile-small-title">생년월일 6자리 또는 사업자등록번호 10자리</p>
+									<input className="card-birth-text" type="text" value={birth} onChange={this._onChangeBirth} maxLength="10"/>
 								</div>
 
 								<div>

@@ -1,0 +1,69 @@
+.admin-profile-wrapper {
+  .react-tabs [role=tablist] {
+		width : 800px;
+		margin : 0px auto 30px auto;
+		@media (max-width : 991px) {
+			width : 95%;
+		}
+	}
+	.react-tabs [role=tab] {
+		width : 136px;
+		height : 38px;
+		text-align : center;
+		line-height : 1.7;
+		font-size : 14px;
+		font-weight : 600;
+		color : #777;
+		@media (max-width : 500px) {
+			width : 50%;
+			font-size : 12px;
+			height : 35px;
+			line-height : 1.8;
+		}
+	}
+	.react-tabs [role=tab][aria-selected=true] {
+		color : #333;
+		border-radius: 3px 3px 0 0;
+	    -moz-border-radius: 3px 3px 0 0;
+	    -webkit-border-radius: 3px 3px 0 0;
+	}
+  h4 {
+    color : #555 !important;
+    width : 100%;
+    margin-left : 4px;
+  }
+  width : 800px;
+  margin : 0px auto 50px auto;
+}
+
+.glyphicon {
+  font-family: 'Glyphicons Halflings' !important;
+}
+.glyphicon-export:before {
+  margin-right : 5px;
+}
+span.order {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left : 5px;
+  text-align : right;
+}
+.react-bs-table-container {
+  .th-inner.table-header-column {
+    display : none;
+  }
+}
+.react-bs-table-pagination {
+  .btn.btn-default.dropdown-toggle {
+    display : none;
+  }
+}
+@media (max-width: 991px) {
+  .admin-profile-wrapper {
+  width : 95%;
+}
+@media (max-width: 500px) {
+  .admin-profile-wrapper {
+}
+}
+}
