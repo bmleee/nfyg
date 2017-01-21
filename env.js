@@ -31,10 +31,13 @@ var REDIS = {
 }
 var FB_TRACKER_URL = 'http://52.78.222.50:3000'
 
+var FB_SHARER_URL = '//www.facebook.com/sharer/sharer.php'
+
 module.exports = {
 	DEV_PORT: 3002,
 	EXPRESS_PORT,
 	MONGODB_URL,
 	FB_TRACKER_URL,
 	REDIS,
+	FB_SHARER_URL
 };
