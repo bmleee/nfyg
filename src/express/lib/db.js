@@ -4,11 +4,6 @@ import autoIncrement from 'mongoose-auto-increment'
 
 import { MONGODB_URL } from '~/env';
 
-const cacheOptions = {
-	max:50,
-	maxAge:1000 * 60 * 2 // 5min
-}
-
 mongoose.Promise = Q.Promise;
 mongoose.connect(MONGODB_URL);
 
