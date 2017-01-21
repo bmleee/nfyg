@@ -2190,6 +2190,12 @@ cookie@0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.3.1.tgz#e7e0a1f9ef43b4c8ba925c5c5a96e806d16873bb"
 
+copy-to-clipboard@^3:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/copy-to-clipboard/-/copy-to-clipboard-3.0.5.tgz#4cd40e7c2ee159bc72d4f06b5bec8f9e0a1a3442"
+  dependencies:
+    toggle-selection "^1.0.3"
+
 core-js@^1.0.0:
   version "1.2.7"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-1.2.7.tgz#652294c14651db28fa93bd2d5ff2983a4f08c636"
@@ -4643,7 +4649,7 @@ iamport@^0.3.4:
     lodash "^4.17.2"
     request "^2.68.0"
 
-iconv-lite@0.4.15, iconv-lite@^0.4.5, iconv-lite@~0.4.11, iconv-lite@~0.4.13:
+iconv-lite@0.4.15, iconv-lite@^0.4.5, iconv-lite@~0.4.13:
   version "0.4.15"
   resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.15.tgz#fe265a218ac6a57cfe854927e9d04c19825eddeb"
 
@@ -7720,6 +7726,12 @@ react-collapsible@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/react-collapsible/-/react-collapsible-1.2.0.tgz#3603cc0cf1b7125e78162d83b748673353c2b92f"
 
+react-copy-to-clipboard@^4.2.3:
+  version "4.2.3"
+  resolved "https://registry.yarnpkg.com/react-copy-to-clipboard/-/react-copy-to-clipboard-4.2.3.tgz#268c5a0fbde9a95d96145014e7f85110b0e7fb8e"
+  dependencies:
+    copy-to-clipboard "^3"
+
 react-deep-force-update@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/react-deep-force-update/-/react-deep-force-update-2.0.1.tgz#4f7f6c12c3e7de42f345992a3c518236fa1ecad3"
@@ -7962,6 +7974,10 @@ react-slick@^0.14.5:
     object-assign "^4.1.0"
     react-responsive-mixin "^0.4.0"
     slick-carousel "^1.6.0"
+
+react-social@^1.7.1:
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/react-social/-/react-social-1.7.1.tgz#2da82e2d488fdeae02531be395681f1fec5e7e2c"
 
 react-sticky@^5.0.5:
   version "5.0.5"
@@ -9345,6 +9361,10 @@ to-arraybuffer@^1.0.0:
 to-fast-properties@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/to-fast-properties/-/to-fast-properties-1.0.2.tgz#f3f5c0c3ba7299a7ef99427e44633257ade43320"
+
+toggle-selection@^1.0.3:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/toggle-selection/-/toggle-selection-1.0.5.tgz#726c703de607193a73c32c7df49cd24950fc574f"
 
 topo@1.x.x:
   version "1.1.0"
