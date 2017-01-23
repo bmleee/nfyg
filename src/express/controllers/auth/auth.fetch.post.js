@@ -24,6 +24,7 @@ import {canEdit} from '../../lib/auth-check'
 
 import * as renderHelper from '../../lib/renderHelper'
 import * as renderUser from '../../lib/renderUser'
+import * as ac from '../../lib/auth-check'
 
 const router = express.Router();
 
@@ -40,6 +41,43 @@ router.post('/:_id/comment', isLoggedIn, async (req, res) => {
     res.json({ response: comment })
   } catch (e) {
     console.error(e);
+    res.status(400).json({ error: e.message })
+  }
+})
+
+router.delete('/:_id', isLoggedIn, async (req, res) => {
+  try {
+    let user = req.user
+
+    let post = await PostModel.findById(req.params._id).populate("project product")
+    if (!post) throw Error('No post found')
+
+    if (!ac.canEdit(user, post.project || post.product)) throw Error(`Can't delete unauthorized post`)
+
+    let r = await PostModel.remove({_id: post._id})
+
+    res.json({ response: r })
+  } catch (e) {
+    res.status(400).json({ error: e.message })
+  }
+})
+
+router.delete('/:_id/comment/:comment_index', isLoggedIn, async (req, res) => {
+  try {
+    let user = req.user
+
+    let post = await PostModel.findById(req.params._id).populate("project product")
+    if (!post) throw Error('No post found')
+
+    let comment = post.comments[req.params.comment_index]
+    if (!ac.canEditComment(user, post.product || post.project, comment)) throw Error(`Can't delete unauthorized post comment`)
+
+    post.comments.pop(req.params.comment_index)
+
+    let r = await post.save()
+
+    res.json({ response: r })
+  } catch (e) {
     res.status(400).json({ error: e.message })
   }
 })

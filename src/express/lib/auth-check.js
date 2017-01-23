@@ -48,6 +48,10 @@ export function canEdit (user, target) {
 	return false
 }
 
+export function canEditComment(user, target, comment) {
+	return canEdit(user, target) || comment.author.user.equals(user._id)
+}
+
 // SEE middlewares/passport
 // Define the Passport configuration method
 export default function(passport) {
