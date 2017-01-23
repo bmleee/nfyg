@@ -5,7 +5,9 @@ export function unauthorizedUser(user, canEdit = false) {
 		isAuthorized: false,
 		canEdit: canEdit,
 		displayName: user && user.display_name,
-		image: user && user.image
+		image: user && user.image,
+		fb_id: user && (user.fb_id || ''),
+		fb_access_token: user && (user.fb_access_token || ''),
 	}
 }
 
@@ -15,6 +17,8 @@ export function authorizedUser(user, canEdit = false) {
 		isAuthorized: true,
 		canEdit: canEdit,
 		displayName: user && user.display_name,
-		image: user && user.image
+		image: user && user.image,
+		fb_id: user.fb_id || '',
+		fb_access_token: user.fb_access_token || '',
 	}
 }

@@ -10,6 +10,8 @@ import bkfd2Password from 'pbkdf2-password'
 import { Strategy as LocalStrategy } from 'passport-local'
 import { Strategy as FacebookStrategy } from 'passport-facebook'
 
+import { FB_APP } from '~/env'
+
 const hasher = bkfd2Password();
 
 // Define the Passport configuration method
@@ -44,8 +46,8 @@ export default function(passport) {
 	}))
 
 	passport.use(new FacebookStrategy({
-		clientID: '173733359775456',
-    clientSecret: '5e2b6f76dd2056a75baa30bc53b5463f',
+		clientID: FB_APP.clientID,
+    clientSecret: FB_APP.clientSecret,
     callbackURL: "/api/users/login-facebook/callback",
     profileFields:['id', 'email', 'gender', 'link', 'displayName', 'name']
 	}, function(accessToken, refreshToken, profile, done) {

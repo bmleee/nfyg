@@ -33,11 +33,17 @@ var FB_TRACKER_URL = 'http://52.78.222.50:3000'
 
 var FB_SHARER_URL = '//www.facebook.com/sharer/sharer.php'
 
+var FB_APP = {
+	clientID: '173733359775456',
+	clientSecret: '5e2b6f76dd2056a75baa30bc53b5463f',
+}
+
 module.exports = {
 	DEV_PORT: 3002,
 	EXPRESS_PORT,
 	MONGODB_URL,
 	FB_TRACKER_URL,
 	REDIS,
-	FB_SHARER_URL
+	FB_SHARER_URL,
+	FB_APP
 };
