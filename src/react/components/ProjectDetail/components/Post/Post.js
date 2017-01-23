@@ -12,7 +12,7 @@ import {
 } from './';
 
 import {date2string} from '~/src/react/lib/utils'
-import { createPost } from '~/src/react/api/AppAPI'
+import { createPost, deletePost, } from '~/src/react/api/AppAPI'
 
 
 class Post extends Component {
@@ -68,6 +68,18 @@ class Post extends Component {
 		}
 	}
 
+	_onClickDeletePost = (post_id) => {
+		return async () => {
+			try {
+				const r = await deletePost({ post_id })
+				console.log('delete post ', r);
+				this.props._deletePost(post_id)
+			} catch (e) {
+				console.error(e);
+			}
+		}
+	}
+
 	render() {
 		const {
 			post: {
@@ -109,12 +121,13 @@ class Post extends Component {
 							? <span className="post-item-title-condition1">{condition1}</span>
 							: <span className="post-item-title-condition2">{condition2}</span>
 					}
+					{ canEdit && <button className="comment-delete-button" onClick={this._onClickDeletePost(_id)} /> }
 				</div>
 				<div className="post-item-content-summary">
 					{
 						opened
 							// ? <Viewer raw={content}/>
-							? <div dangerouslySetInnerHTML={{ __html: content }} />
+							? <div dangerouslySetInnerHTML={{ __html: content }} ></div>
 							: <div className="post-block">
 									<div className="post-block-icon"></div>
 									<p>프로젝트 공유 또는 리워드 구매를 통해</p>
@@ -122,7 +135,18 @@ class Post extends Component {
 							  </div>
 					}
 				</div>
-				{ opened ? <PostComments comments={comments} postLikes={likes} user={user} post_id={_id} _newCommentOnPost={this.props._newCommentOnPost} /> : null }
+				{
+					opened
+						? <PostComments
+						 		comments={comments}
+								postLikes={likes}
+								user={user}
+								post_id={_id}
+								_newCommentOnPost={this.props._newCommentOnPost}
+								_deleteCommentOnPost={this.props._deleteCommentOnPost}
+							/>
+						: null
+				}
 			</div>
 		))
 
@@ -136,7 +160,7 @@ class Post extends Component {
 						<div>
 							<div className="post-input-container">
 								<div className="post-input-title-container">
-								<p className="profile-small-title">제 목</p><input className="post-input-title" type="text" name="post-title" id="post-title"/>
+									<p className="profile-small-title">제 목</p><input className="post-input-title" type="text" name="post-title" id="post-title"/>
 								</div>
 								<div className="post-input-number-container">
 								<p className="profile-small-title">열람 가능 금액(0 또는 공란은 전체공개)</p><input className="post-input-number" type="number" name="post-threshold-money" id="post-threshold-money"/>

@@ -89,6 +89,19 @@ export default class ProjectDetailContainer extends Component {
 		}))
 	}
 
+	_deletePost = (post_id) => {
+		let index = this.state.post.posts.findIndex(p => p._id === post_id)
+		this.setState(update(this.state, {
+			post: {
+				posts: {
+					$splice: [
+						[index, 1]
+					]
+				}
+			}
+		}))
+	}
+
 	_newCommentOnPost = (post_id, comment) => {
 		let index = this.state.post.posts.findIndex(p => p._id === post_id)
 		this.setState(update(this.state, {
@@ -97,6 +110,23 @@ export default class ProjectDetailContainer extends Component {
 					[index]: {
 						comments: {
 							$push: [comment]
+						}
+					}
+				}
+			}
+		}))
+	}
+
+	_deleteCommentOnPost = (post_id, comment_index) => {
+		let index = this.state.post.posts.findIndex(p => p._id === post_id)
+		this.setState(update(this.state, {
+			post: {
+				posts: {
+					[index]: {
+						comments: {
+							$splice: [
+								[ comment_index, 1]
+							]
 						}
 					}
 				}
@@ -138,6 +168,8 @@ export default class ProjectDetailContainer extends Component {
 			_newCommentOnPost: this._newCommentOnPost,
 			_newQnA: this._newQnA,
 			_newCommentOnQnA: this._newCommentOnQnA,
+			_deletePost: this._deletePost,
+			_deleteCommentOnPost: this._deleteCommentOnPost,
 		}
 
 		let children = this.props.children

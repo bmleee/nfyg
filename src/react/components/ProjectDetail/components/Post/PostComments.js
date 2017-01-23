@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import update from 'immutability-helper'
 
-import { createCommentOnPost } from '~/src/react/api/AppAPI'
+import { createCommentOnPost, deleteComment } from '~/src/react/api/AppAPI'
 import { date2string, newLinedString, } from '~/src/react/lib/utils'
 
 class PostComments extends Component {
@@ -34,6 +34,19 @@ class PostComments extends Component {
 			document.querySelector(`#post-${post_id}-text`).value = ''
 		} catch (e) {
 			console.error(e);
+		}
+	}
+
+	_onClickDeleteComment = (comment_index) => {
+		return async () => {
+			try {
+				const r = await deleteComment({ post_id: this.props.post_id, comment_index: comment_index})
+				console.log(r);
+				this.props._deleteCommentOnPost(this.props.post_id, comment_index)
+			} catch (e) {
+				console.error(e);
+			}
+
 		}
 	}
 
@@ -79,8 +92,7 @@ class PostComments extends Component {
 					<p className="sharing-summary">
 					<span>
 						<p className="sharing-name">{name}</p>
-						{/* to do 자기가 쓴 댓글만 삭제하기 */}
-						<button className="comment-delete-button"/>
+						<button className="comment-delete-button" onClick={this._onClickDeleteComment(index)}/>
 					</span>
 					<span>{newLinedString(text)}</span>
 					</p>

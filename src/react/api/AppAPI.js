@@ -268,3 +268,21 @@ export async function search(q) {
 
 	return await _request(config)
 }
+
+export async function deletePost({ post_id }) {
+	const config = {
+		method: 'delete',
+		url: `/api/auth/fetch/posts/${post_id}`
+	}
+
+	return await _request(config)
+}
+
+export async function deleteComment({ post_id, qna_id, comment_index }) {
+	const config = {
+		method: 'delete',
+		url: `/api/auth/fetch/posts/${post_id}/comment/${comment_index}`
+	}
+
+	return await _request(config)
+}
