@@ -117,18 +117,24 @@ UserSchema.methods.supportedMoney = async function({projectName, productName}) {
 	try {
 		let [
 			purchases,
-			shares
+			{
+				shares,
+				likes,
+				comments,
+				posts,
+			},
 		] = await Promise.all([
-			PurchaseModel.findByUser(this),
+			PurchaseModel.find({user: this})
+				.select('purchase_info.amount'),
 			FacebookTracker.getUserSummaryOnProject(this.id, projectName || productName),
 		])
 
-		console.log('shares', shares);
-
 		const sum = (a, b) => a + b
 
-		return purchases.map(p => p.purchase_info.amount).reduce(sum) +
-			shares.map(s => 1000 + 200 * (s.comments + s.shares + s.likes)).reduce(sum)
+		const purchaseMoney = purchases && purchases.reduce(sum, 0)
+		const shareMoney = 1000 * (posts && posts.length) + 200 * (shares + likes, comments)
+
+		return (purchaseMoney || 0) + (shareMoney || 0)
 	} catch (e) {
 		console.error(e);
 		return 0;

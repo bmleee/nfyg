@@ -14,7 +14,7 @@ const _request = async (config) => {
 		return response.data
 	} catch (e) {
 		console.error(e, config);
-		return {error: e}
+		throw e
 	}
 }
 
@@ -279,9 +279,10 @@ export async function deletePost({ post_id }) {
 }
 
 export async function deleteComment({ post_id, qna_id, comment_index }) {
+	let base = post_id ? `posts/${post_id}` : `qnas/${qna_id}`
 	const config = {
 		method: 'delete',
-		url: `/api/auth/fetch/posts/${post_id}/comment/${comment_index}`
+		url: `/api/auth/fetch/${base}/comment/${comment_index}`
 	}
 
 	return await _request(config)

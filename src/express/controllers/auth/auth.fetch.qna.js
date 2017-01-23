@@ -51,12 +51,13 @@ router.delete('/:_id', isLoggedIn, async (req, res) => {
     let qna = await QnAModel.findById(req.params._id).populate("project product")
     if (!qna) throw Error('No qna found')
 
-    if (!ac.canEdit(user, qna.project || qna.product)) throw Error(`Can't delete unauthorized post`)
+    if (!ac.canEdit(user, qna)) throw Error(`Can't delete unauthorized post`)
 
     let r = await QnAModel.remove({_id: qna._id})
 
     res.json({ response: r })
   } catch (e) {
+    console.error(e);
     res.status(400).json({ error: e.message })
   }
 })
@@ -77,6 +78,7 @@ router.delete('/:_id/comment/:comment_index', isLoggedIn, async (req, res) => {
 
     res.json({ response: r })
   } catch (e) {
+    console.error(e);
     res.status(400).json({ error: e.message })
   }
 })

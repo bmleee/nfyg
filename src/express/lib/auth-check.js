@@ -32,7 +32,6 @@ export function isArtist (user) {
  */
 export function canEdit (user, target) {
 	if (!user) return false
-
 	if (isAdmin(user)) return true
 
 	if (target instanceof PostModel ||
@@ -45,10 +44,12 @@ export function canEdit (user, target) {
 		return isEditor(user) || (isArtist(user) && target.authorizedTo(user))
 	}
 
-	return false
+	throw Error(`can't accept target`)
 }
 
 export function canEditComment(user, target, comment) {
+	console.log('canEditComment.comment.author.user', comment.author.user);
+	console.log('canEditComment.user', user);
 	return canEdit(user, target) || comment.author.user.equals(user._id)
 }
 

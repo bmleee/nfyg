@@ -58,9 +58,9 @@ class QnA extends Component {
 		return async () => {
 			try {
 				const r = await deleteQnA({ qna_id })
-				console.log(r);
 				this.props._deleteQnA(qna_id)
 			} catch (e) {
+				alert('삭제할 수 없습니다.')
 				console.error(e);
 			}
 		}
@@ -70,10 +70,10 @@ class QnA extends Component {
 		return async () => {
 			try {
 				const r = await deleteComment({ qna_id, comment_index })
-				console.log(r);
 				this.props._deleteCommentOnQnA(qna_id, comment_index)
 			} catch (e) {
 				console.error(e);
+				alert('삭제할 수 없습니다.')
 			}
 		}
 	}

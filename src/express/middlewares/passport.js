@@ -61,7 +61,16 @@ export default function(passport) {
 		User.findOneByEmail(email, function(err, user) {
 			if (err) return done(err)
 			// user found
-			if (user) return done(null, user)
+			if (user) {
+				console.log('기존 회원 발견');
+				user.fb_access_token = refreshToken || accessToken
+				return user.save(function (err, user) {
+					if (err) return done(err)
+					return done(null, user)
+				})
+			}
+
+			console.log('새로운 회원');
 
 			// create new user
 			User.create({
@@ -69,7 +78,7 @@ export default function(passport) {
 				name: profile.displayName,
 				fb_id: profile.id,
 				fb_email: email,
-				fb_access_token: refreshToken,
+				fb_access_token: refreshToken || accessToken,
 				image: profile.profileUrl,
 			}, function(err, user) {
 				if (err) return done(err)
