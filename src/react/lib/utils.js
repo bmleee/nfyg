@@ -1,4 +1,5 @@
 import { Display } from '../constants'
+import { canUseDOM } from '~/src/lib/utils'
 
 import 'whatwg-fetch'
 
@@ -98,4 +99,8 @@ export function date2string (date) {
 
 export function newLinedString(string) {
   return string.split('\n').map(i => <span>{i}<br/></span>)
+}
+
+export function getFullUrl() {
+  return canUseDOM && `${window.location.protocol}//${window.location.host}${window.location.pathname}`
 }

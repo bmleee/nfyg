@@ -1,7 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import Progress from 'react-progressbar';
 
-import { format } from 'url'
+import { format, resolve } from 'url'
+
+import { getFullUrl } from '~/src/react/lib/utils'
 
 import { FB_SHARER_URL } from '~/env'
 
@@ -107,10 +109,21 @@ export default class ProjectHeading extends Component {
 
 	async onClickShareFB() {
 		// let share_url = window.location.host + window.location.pathname
-		let share_url = '7pictures.co.kr/campaigns/m-art/'
-		let url = format({ host: FB_SHARER_URL, query: {u: share_url} })
+		// let share_url = '7pictures.co.kr/campaigns/m-art/'
+		// let url = format({ host: FB_SHARER_URL, query: {u: share_url} })
+		//
+		// window.open(url, '_blank', 'width=500, height=300')
+		let url = getFullUrl()
 
-		window.open(url, '_blank', 'width=500, height=300')
+		console.log('url', url);
+
+		FB.ui({ method: 'share', href: url,},  function(response) {
+    	if (response && !response.error_message) {
+	      alert('Posting completed.');
+	    } else {
+	      alert('Error while posting.');
+			}
+		})
 	}
 
 }

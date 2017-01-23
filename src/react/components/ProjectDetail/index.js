@@ -148,6 +148,19 @@ export default class ProjectDetailContainer extends Component {
 		}))
 	}
 
+	_deleteQnA = (qna_id) => {
+		let index = this.state.qna.posts.findIndex(q => q._id === qna_id)
+		this.setState(update(this.state, {
+			qna: {
+				posts: {
+					$splice: [
+						[index, 1]
+					]
+				}
+			}
+		}))
+	}
+
 	_newCommentOnQnA = (qna_id, comment) => {
 		let index = this.state.qna.posts.findIndex(q => q._id === qna_id)
 		this.setState(update(this.state, {
@@ -156,6 +169,23 @@ export default class ProjectDetailContainer extends Component {
 					[index]: {
 						comments: {
 							$push: [comment]
+						}
+					}
+				}
+			}
+		}))
+	}
+
+	_deleteCommentOnQnA = (qna_id, comment_index) => {
+		let index = this.state.qna.posts.findIndex(p => p._id === qna_id)
+		this.setState(update(this.state, {
+			qna: {
+				posts: {
+					[index]: {
+						comments: {
+							$splice: [
+								[ comment_index, 1]
+							]
 						}
 					}
 				}
@@ -178,11 +208,13 @@ export default class ProjectDetailContainer extends Component {
 			_onSelectOptionChange: this._onSelectOptionChange,
 			user: this.props.appUtils.getUser(),
 			_newPost: this._newPost,
-			_newCommentOnPost: this._newCommentOnPost,
-			_newQnA: this._newQnA,
-			_newCommentOnQnA: this._newCommentOnQnA,
 			_deletePost: this._deletePost,
+			_newCommentOnPost: this._newCommentOnPost,
 			_deleteCommentOnPost: this._deleteCommentOnPost,
+			_newQnA: this._newQnA,
+			_deleteQnA: this._deleteQnA,
+			_newCommentOnQnA: this._newCommentOnQnA,
+			_deleteCommentOnQnA: this._deleteCommentOnQnA,
 		}
 
 		let children = this.props.children

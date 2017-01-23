@@ -286,3 +286,12 @@ export async function deleteComment({ post_id, qna_id, comment_index }) {
 
 	return await _request(config)
 }
+
+export async function deleteQnA({ qna_id }) {
+	const config = {
+		method: 'delete',
+		url: `/api/auth/fetch/qnas/${qna_id}`
+	}
+
+	return await _request(config)
+}

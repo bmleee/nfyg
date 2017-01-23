@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Select from 'react-select';
 
-import { createQnA, createCommentOnQnA } from '~/src/react/api/AppAPI'
+import { createQnA, createCommentOnQnA, deleteQnA, deleteComment } from '~/src/react/api/AppAPI'
 
 import { PostComments } from '../Post/';
 
@@ -54,6 +54,30 @@ class QnA extends Component {
 		}
 	}
 
+	_onClickDeleteQnA = (qna_id) => {
+		return async () => {
+			try {
+				const r = await deleteQnA({ qna_id })
+				console.log(r);
+				this.props._deleteQnA(qna_id)
+			} catch (e) {
+				console.error(e);
+			}
+		}
+	}
+
+	_onClickDeleteComment = (qna_id, comment_index) => {
+		return async () => {
+			try {
+				const r = await deleteComment({ qna_id, comment_index })
+				console.log(r);
+				this.props._deleteCommentOnQnA(qna_id, comment_index)
+			} catch (e) {
+				console.error(e);
+			}
+		}
+	}
+
 	componentDidMount() {
 		this.setState({
 			numProjects: this.props.qna.posts.length
@@ -82,18 +106,17 @@ class QnA extends Component {
 						<p className="sharing-fb-icon-list">
 							<img className="qna-form-user-icon" src={author.iconSrc} alt="" width={80} height={80}/>
 						</p>
-						
+
 							<p className="sharing-summary">
 								<span>
 									<p className="sharing-name">{author.name}</p>
 									{date2string(created_at)}
-									{/* to do 자기가 쓴 댓글만 삭제하기 */}
-									<button className="comment-delete-button"/>
+									<button className="comment-delete-button" onClick={this._onClickDeleteQnA(_id)}/>
 								</span>
 								<span className="qna-detail-text">{newLinedString(text)}</span>
-							
+
 							{/* 대댓글 */}
-							
+
 								{
 									comments.map(({
 										author,
@@ -110,8 +133,7 @@ class QnA extends Component {
 												<span>
 													<p className="sharing-name">{author.name}</p>
 													{date2string(created_at)}
-													{/* to do 자기가 쓴 댓글만 삭제하기 */}
-													<button className="comment-delete-button"/>
+													<button className="comment-delete-button" onClick={this._onClickDeleteComment(_id, index)}/>
 												</span>
 												<span>{newLinedString(text)}
 												</span>
@@ -119,7 +141,7 @@ class QnA extends Component {
 										</div>
 									))
 								}
-							
+
 
 							<Collapsible trigger="댓글 남기기" transitionTime="0">
 							<div className="project-detail-qna-form">
@@ -134,7 +156,7 @@ class QnA extends Component {
 							</Collapsible>
 							{/* 대댓글 */}
 						</p>
-						
+
 					</div>
 			</div>
 		))
