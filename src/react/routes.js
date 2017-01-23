@@ -74,7 +74,8 @@ import {
 	About,
 	Faq,
 	Privacy,
-	TermOfUse
+	TermOfUse,
+	Search
 } from './components/Common/Footer/components'
 
 // <Route path="projects/:project_name" component={ProjectDetail}> // TODO: activate
@@ -215,11 +216,12 @@ const routes = (
 		<Route path="products/:productName/summary" component={ProductSummary}></Route>
 		<Route path="users/:user_id/summary" component={UserSummary}></Route>
 		
-		{/* Footer components */}
+		{/* Footer, Search components */}
 		<Route path="about" component={About}></Route>
 		<Route path="faq" component={Faq}></Route>
 		<Route path="privacy" component={Privacy}></Route>
 		<Route path="termofuse" component={TermOfUse}></Route>
+		<Route path="Search" component={Search}></Route>
 		
 
 		<Route path="test1" component={Test1}></Route>

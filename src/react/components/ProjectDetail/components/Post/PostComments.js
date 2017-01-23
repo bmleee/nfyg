@@ -77,7 +77,11 @@ class PostComments extends Component {
 					<img className="qna-form-user-icon" src={iconSrc} alt="" width={80} height={80}/>
 					</p>
 					<p className="sharing-summary">
-					<span><p className="sharing-name">{name}</p></span>
+					<span>
+						<p className="sharing-name">{name}</p>
+						{/* to do 자기가 쓴 댓글만 삭제하기 */}
+						<button className="comment-delete-button"/>
+					</span>
 					<span>{newLinedString(text)}</span>
 					</p>
 				</div>
