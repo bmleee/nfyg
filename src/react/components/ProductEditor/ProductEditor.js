@@ -4,7 +4,7 @@ import ScrollToTop from 'react-scroll-up';
 
 import update from 'immutability-helper'
 
-import { fetchUserAndData, upsertProduct } from '../../api/AppAPI'
+import { fetchUserAndData, upsertProduct, upload_file } from '../../api/AppAPI'
 
 import { canUseDOM } from '~/src/lib/utils'
 
@@ -56,9 +56,11 @@ export default class ProductEditor extends Component {
 			reward: { // Depreciated
 				rewards: [],
 				newReward: { // temporary state to insert...
-					title: '',
+          title: '',
 					description: '',
 					isDirectSupport: false,
+          imgSrc: '',
+          maxPurchaseVolume: 0,
 					thresholdMoney: 0
 				}
 			},         // { title, description, isDirectSupport: T/F, threshold: 직접 후원 금액 또는 좋아요, 리공유 수, 전달일 }
@@ -76,6 +78,15 @@ export default class ProductEditor extends Component {
 			intro:'',
 			part1: '',
 			part2: ''
+		},
+
+    // related contents
+    relatedContent: {
+			contents: [],
+			newContent: {
+				imgSrc: '',
+				link: '',
+			}
 		},
 	}
 
@@ -116,10 +127,13 @@ export default class ProductEditor extends Component {
 			...this.state,
 			// Abstract
 			...this.abstractSubmitCallbacks,
+      contentHandlers: this.contentHandlers,
+
 			// Funding
 			...this.fundingSubmitCallbacks,
 			rewardHandlers: this.rewardHandlers,
       faqHandlers: this.faqHandlers,
+
 			// Overview
 			...this.overviewSubmitCallbacks,
 		})
@@ -207,6 +221,15 @@ export default class ProductEditor extends Component {
 				sponsorName: { $set: sponsorName }
 			}
 		})),
+    _onContentSubmit: ({newContent}) => this.setState(update(this.state, {
+			relatedContent: {
+        contents: { $push: [{...newContent}] },
+        newContent: {
+          imgSrc: { $set: '' },
+          link: { $set: '' },
+        }
+      }
+		}))
 	}
 
 	// Funding
@@ -243,10 +266,12 @@ export default class ProductEditor extends Component {
 						$push: [{...newReward}]
 					},
 					newReward: {
-						title: { $set: '' },
+            title: { $set: '' },
 						description: { $set: '' },
 						isDirectSupport: { $set: false },
-						thresholdMoney: { $set: 0 }
+						thresholdMoney: { $set: 0 },
+            maxPurchaseVolume: { $set: 0 },
+            imgSrc: { $set: ' '},
 					}
 				}
 			}
@@ -305,6 +330,30 @@ export default class ProductEditor extends Component {
 					reward: {
 						newReward: {
 							thresholdMoney: { $set: Number(e.target.value) }
+						}
+					}
+				}
+			}))
+		},
+    _onImgSrc: async (e) => {
+      let { sourceURL } = await upload_file(e.target.files[0])
+
+      this.setState(update(this.state, {
+				funding: {
+					reward: {
+						newReward: {
+							imgSrc: { $set: sourceURL }
+						}
+					}
+				}
+			}))
+		},
+    _onMaxPurcahseVolum: (e) => {
+      this.setState(update(this.state, {
+				funding: {
+					reward: {
+						newReward: {
+							maxPurchaseVolume: { $set: Number(e.target.value) }
 						}
 					}
 				}
@@ -382,6 +431,37 @@ export default class ProductEditor extends Component {
 		}))
 	}
 
+  // Content
+	contentHandlers = {
+	   _onImgSrc: async (e) => {
+       let { sourceURL } = await upload_file(e.target.files[0])
+
+       this.setState(update(this.state, {
+         relatedContent: {
+           newContent: {
+             imgSrc: { $set: sourceURL },
+           }
+         }
+       }))
+     },
+     _onLink: (e) => this.setState(update(this.state, {
+       relatedContent: {
+         newContent: {
+           link: { $set: e.target.value },
+         }
+       }
+     })),
+     deleteContent: (index) => this.setState(update(this.state, {
+       relatedContent: {
+         contents: {
+           $splice: [
+             [index, 1]
+           ]
+         }
+       }
+     })),
+	}
+
   client2server = () => {
     return {
       abstract: this.state.abstract,
@@ -398,14 +478,18 @@ export default class ProductEditor extends Component {
         faqs: this.state.funding.reward.faqs,
       },
       overview: {
-        intro: { $set: project.overview.intro },
+        intro: this.state.overview.intro,
         part1: {
-          raw: { $set: JSON.parse(project.overview.part1.raw) }
+          raw: JSON.stringify(this.state.overview.part1),
+          html: draftToHtml(this.state.overview.part1),
         },
         part2: {
-          raw: { $set: JSON.parse(project.overview.part2.raw) }
+          raw: JSON.stringify(this.state.overview.part2),
+          html: draftToHtml(this.state.overview.part2),
         },
-      }
+      },
+      isNew: this.state.tabLinkBase.includes('editor'),
+      relatedContents: this.state.relatedContent.contents
     }
   }
 
@@ -428,10 +512,17 @@ export default class ProductEditor extends Component {
       }
     },
     overview: {
-      intro: { $set: p.overview.intro },
-      part1: { $set: JSON.parse(p.overview.part1) },
-      part2: { $set: JSON.parse(p.overview.part2) },
-    }
+      intro: { $set: project.overview.intro },
+      part1: {
+        raw: { $set: JSON.parse(project.overview.part1.raw) }
+      },
+      part2: {
+        raw: { $set: JSON.parse(project.overview.part2.raw) }
+      },
+    },
+    relatedContent: {
+      contents: { $set: p.relatedContents },
+    },
   })
 
 	// 서버로 전송

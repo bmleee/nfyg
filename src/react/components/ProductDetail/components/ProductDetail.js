@@ -18,7 +18,9 @@ export default class ProductDetail extends Component {
 			loaded,
 			abstract: {
 				productName
-			}
+			},
+
+			relatedContents,
 		} = this.props; // TODO: product should be fetch in async way
 
 
@@ -27,14 +29,26 @@ export default class ProductDetail extends Component {
 		if(loaded) {
 			return (
 				<div className="project-detail">
-				<ProductHeading  {...this.props} />
+					<ProductHeading  {...this.props} />
 
-				<ProductTab productName={productName} />
+					<ProductTab productName={productName} />
 
-				{ this.props.children /* Overview, Post, Ranking, QnA */ }
-				<ScrollToTop showUnder={180} style={scrollStyle} duration={0} >
-					<button className="back-to-top" />
-				</ScrollToTop>
+					{ this.props.children /* Overview, Post, Ranking, QnA */ }
+					<ScrollToTop showUnder={180} style={scrollStyle} duration={0} >
+						<button className="back-to-top" />
+					</ScrollToTop>
+
+					<div>
+						관련 콘텐츠
+						{
+							relatedContents && relatedContents.map(({
+								imgSrc,
+								link
+							}, index) => (
+								<a href={link}><img src={imgSrc} alt=""/></a>
+							))
+						}
+					</div>
 				</div>
 			)
 		}

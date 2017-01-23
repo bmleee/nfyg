@@ -59,8 +59,10 @@ const ProjectSchema = new Schema({
 			{
 				title: {type: String, required: true},
 				description: {type: String, required: true},
+				imgSrc: {type: String,},
 				isDirectSupport: {type: Boolean, required: true},
 				thresholdMoney: {type: Number, required: true},
+				maxPurchaseVolume: {type: Number, required: true},
 			}
 		]
 	},
@@ -90,6 +92,12 @@ const ProjectSchema = new Schema({
 		ref: 'QnA'
 	}],
 	numQnAs: {type: Number, default: 0},
+
+	// Contents
+	relatedContents: [{
+		imgSrc: {type: String, required: true},
+		link: {type: String, required: true},
+	}]
 
 });
 
@@ -247,6 +255,7 @@ ProjectSchema.methods.toFormat = async function (type, ...args) {
 					},
 					directSupporters: (await PurchaseModel.findByProject(this)).map(async (_) => await _.toFormat('project_detail')),
 					indirectSupporters: indirectSupporters,
+					relatedContents: this.relatedContents,
 				}
 
 
@@ -257,6 +266,7 @@ ProjectSchema.methods.toFormat = async function (type, ...args) {
 					sponsor: this.sponsor.sponsorName,
 					funding: this.funding,
 					overview: this.overview,
+					relatedContents: this.relatedContents,
 				}
 
 			case 'profile_admin':

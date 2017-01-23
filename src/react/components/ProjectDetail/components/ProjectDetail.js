@@ -21,7 +21,9 @@ export default class ProjectDetail extends Component {
 			},
 			post: {
 				recentPost = false
-			}
+			},
+
+			relatedContents,
 		} = this.props; // TODO: project should be fetch in async way
 
 
@@ -30,14 +32,26 @@ export default class ProjectDetail extends Component {
 		if(loaded) {
 			return (
 				<div className="project-detail">
-				<ProjectHeading  {...this.props} />
+					<ProjectHeading  {...this.props} />
 
-				<ProjectTab projectName={projectName} recentPost={recentPost} />
+					<ProjectTab projectName={projectName} recentPost={recentPost} />
 
-				{ this.props.children /* Overview, Post, Ranking, QnA */ }
-				<ScrollToTop showUnder={180} style={scrollStyle} duration={0} >
-					<button className="back-to-top" />
-				</ScrollToTop>
+					{ this.props.children /* Overview, Post, Ranking, QnA */ }
+					<ScrollToTop showUnder={180} style={scrollStyle} duration={0} >
+						<button className="back-to-top" />
+					</ScrollToTop>
+
+					<div>
+						관련 콘텐츠
+						{
+							relatedContents && relatedContents.map(({
+								imgSrc,
+								link
+							}, index) => (
+								<a href={link}><img src={imgSrc} alt=""/></a>
+							))
+						}
+					</div>
 				</div>
 			)
 		}

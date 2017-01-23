@@ -109,7 +109,56 @@ const SponsorNameForm = ({value, onChange}) =>
 		loadOptions={async () => await fetchOptions('sponsor')}
 	/>
 
+	// ----
+	const RelatedContentWrapper = ({value, handlers}) => {
+		const {
+			deleteContent
+		} = handlers
 
+		let item = value && value.contents && value.contents.length > 0
+			? value.contents.map(({
+				imgSrc,
+				link
+			}, index) => (
+				<div className="editor-item-detail-wrapper">
+					<span className="item-deatail-small-title-saved">링크: {link}</span>
+					<img src={imgSrc}/>
+					<button className="item-deatail-delete" onClick={() => deleteContent(index)}>삭제하기</button>
+				</div>
+			))
+			: <span></span>
+
+		return (
+			<div className="recommends-wrapper-container">
+				{ item }
+			</div>
+		)
+	}
+	const RelatedContentForm = ({value, handlers}) => {
+		const {
+			imgSrc,
+			link
+		} = value.newContent
+
+		const {
+			_onImgSrc,
+			_onLink
+		} = handlers
+
+		return (
+			<div className="recommends-form-container">
+				<div>
+					<span className="item-deatail-small-title">링크</span>
+					<input type="text" value={link} onChange={_onLink}/>
+				</div>
+				<div>
+					<span className="item-deatail-small-title">이미지</span>
+					<input type="file" onChange={_onImgSrc} accept="image/*" />
+					<img src={imgSrc} alt="관런 콘텐츠 이미지를 추가하세요"/>
+				</div>
+			</div>
+		)
+	}
 
 const Abstract = ({
 	abstract: {
@@ -130,6 +179,8 @@ const Abstract = ({
 		sponsorName,
 	},
 
+	relatedContent,
+
 	// onSubmit callbacks
 	_onLongTitleSubmit,
 	_onShortTitleSubmit,
@@ -144,6 +195,10 @@ const Abstract = ({
 	_onCreatorDescriptionSubmit,
 
 	_onSponsorNameSubmit,
+
+	_onContentSubmit,
+
+	contentHandlers,
 }) => {
 
 
@@ -303,6 +358,24 @@ const Abstract = ({
 				className ="magazine-editor-detail"
 				classNameopen ="editor-open-container"
 			/> */}
+
+			<span className="editor-small-title">관련 콘텐츠</span>
+
+			<FormWrapper
+				title="관련 콘텐츠"
+				valueType={VALUE_TYPE.RECOMMEND}
+				alt="관련 콘텐츠를 추가하세요"
+				initialValue={relatedContent}
+				submitCaption="관련 콘텐츠를 추가하세요"
+				submitCaptionsub={'추가하기'}
+				onSubmit={_onContentSubmit}
+				handlers={contentHandlers}
+				Wrapper={RelatedContentWrapper}
+				Form={RelatedContentForm}
+				className ="magazine-editor-detail"
+				classNameopen ="editor-open-container"
+			/>
+
 
 		</div>
 	)

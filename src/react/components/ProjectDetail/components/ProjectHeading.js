@@ -44,6 +44,7 @@ export default class ProjectHeading extends Component {
 			directSupporters,
 			indirectSupporters,
 
+			relatedContents,
 		} = this.props;
 
 

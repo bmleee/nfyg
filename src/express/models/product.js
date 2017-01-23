@@ -59,8 +59,10 @@ const ProductSchema = new Schema({
 			{
 				title: {type: String, required: true},
 				description: {type: String, required: true},
+				imgSrc: {type: String,},
 				isDirectSupport: {type: Boolean, required: true},
 				thresholdMoney: {type: Number, required: true},
+				maxPurchaseVolume: {type: Number, required: true},
 			}
 		],
 		faqs: [
@@ -97,6 +99,11 @@ const ProductSchema = new Schema({
 	}],
 	numQnAs: {type: Number, default: 0},
 
+	// Contents
+	relatedContents: [{
+		imgSrc: {type: String, required: true},
+		link: {type: String, required: true},
+	}]
 });
 
 // ProductSchema.post('update', function (next) {
@@ -237,6 +244,7 @@ ProductSchema.methods.toFormat = async function (type, ...args) {
 			        "rank": 2
 			      },
 					],
+					relatedContents: this.relatedContents,
 				}
 
 			case 'edit':
@@ -245,6 +253,7 @@ ProductSchema.methods.toFormat = async function (type, ...args) {
 					creator: this.creator,
 					funding: this.funding,
 					overview: this.overview,
+					relatedContents: this.relatedContents,
 				}
 
 			case 'profile_admin':

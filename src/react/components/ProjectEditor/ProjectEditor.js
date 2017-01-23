@@ -7,7 +7,7 @@ import update from 'immutability-helper'
 
 import axios from 'axios'
 
-import { fetchUserAndData, upsertProject } from '../../api/AppAPI'
+import { fetchUserAndData, upsertProject, upload_file } from '../../api/AppAPI'
 
 import { canUseDOM } from '~/src/lib/utils'
 
@@ -58,6 +58,8 @@ export default class ProjectEditor extends Component {
 					title: '',
 					description: '',
 					isDirectSupport: false,
+          imgSrc: '',
+          maxPurchaseVolume: 0,
 					thresholdMoney: 0
 				}
 			}         // { title, description, isDirectSupport: T/F, threshold: 직접 후원 금액 또는 좋아요, 리공유 수, 전달일 }
@@ -68,7 +70,16 @@ export default class ProjectEditor extends Component {
 			intro:'',
 			part1: '',
 			part2: ''
-		}
+		},
+
+    // related contents
+    relatedContent: {
+			contents: [],
+			newContent: {
+				imgSrc: '',
+				link: '',
+			}
+		},
 	}
 
 	async componentDidMount() {
@@ -108,10 +119,13 @@ export default class ProjectEditor extends Component {
 			...this.state,
 			// Abstract
 			...this.abstractSubmitCallbacks,
-			// Funding
+			contentHandlers: this.contentHandlers,
+
+      // Funding
 			...this.fundingSubmitCallbacks,
 			rewardHandlers: this.rewardHandlers,
-			// Overview
+
+      // Overview
 			...this.overviewSubmitCallbacks,
 		})
 
@@ -198,6 +212,15 @@ export default class ProjectEditor extends Component {
 				sponsorName: { $set: sponsorName }
 			}
 		})),
+    _onContentSubmit: ({newContent}) => this.setState(update(this.state, {
+			relatedContent: {
+        contents: { $push: [{...newContent}] },
+        newContent: {
+          imgSrc: { $set: '' },
+          link: { $set: '' },
+        }
+      }
+		}))
 	}
 
 	// Funding
@@ -227,7 +250,9 @@ export default class ProjectEditor extends Component {
 						title: { $set: '' },
 						description: { $set: '' },
 						isDirectSupport: { $set: false },
-						thresholdMoney: { $set: 0 }
+						thresholdMoney: { $set: 0 },
+            maxPurchaseVolume: { $set: 0 },
+            imgSrc: { $set: ' '},
 					}
 				}
 			}
@@ -278,6 +303,30 @@ export default class ProjectEditor extends Component {
 				}
 			}))
 		},
+    _onImgSrc: async (e) => {
+      let { sourceURL } = await upload_file(e.target.files[0])
+
+      this.setState(update(this.state, {
+				funding: {
+					reward: {
+						newReward: {
+							imgSrc: { $set: sourceURL }
+						}
+					}
+				}
+			}))
+		},
+    _onMaxPurcahseVolum: (e) => {
+      this.setState(update(this.state, {
+				funding: {
+					reward: {
+						newReward: {
+							maxPurchaseVolume: { $set: Number(e.target.value) }
+						}
+					}
+				}
+			}))
+		},
 		deleteReward: (index) => {
 			this.setState(update(this.state, {
 				funding: {
@@ -313,6 +362,37 @@ export default class ProjectEditor extends Component {
 		}))
 	}
 
+  // Content
+	contentHandlers = {
+	   _onImgSrc: async (e) => {
+       let { sourceURL } = await upload_file(e.target.files[0])
+
+       this.setState(update(this.state, {
+         relatedContent: {
+           newContent: {
+             imgSrc: { $set: sourceURL },
+           }
+         }
+       }))
+     },
+     _onLink: (e) => this.setState(update(this.state, {
+       relatedContent: {
+         newContent: {
+           link: { $set: e.target.value },
+         }
+       }
+     })),
+     deleteContent: (index) => this.setState(update(this.state, {
+       relatedContent: {
+         contents: {
+           $splice: [
+             [index, 1]
+           ]
+         }
+       }
+     })),
+	}
+
   client2server = () => {
     return {
       abstract: this.state.abstract,
@@ -338,6 +418,7 @@ export default class ProjectEditor extends Component {
         },
       },
       isNew: this.state.tabLinkBase.includes('editor'),
+      relatedContents: this.state.relatedContent.contents
     }
   }
 
@@ -365,7 +446,10 @@ export default class ProjectEditor extends Component {
       part2: {
         raw: { $set: JSON.parse(project.overview.part2.raw) }
       },
-    }
+    },
+    relatedContent: {
+      contents: { $set: p.relatedContents },
+    },
   })
 
   // 서버로 전송

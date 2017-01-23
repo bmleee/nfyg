@@ -30,12 +30,12 @@ const sliderSettings = {
 
 
 class ProjectReward extends Component {
-	
+
 	render() {
 		console.log('ProjectReward', this)
-		let { 
+		let {
 			rewards,
-			projectName,	
+			projectName,
 		} = this.props;
 
 		if (rewards.length === 0) {
@@ -43,12 +43,14 @@ class ProjectReward extends Component {
 				title: '',
 				description: '',
 				imgSrc: '',
+				maxPurchaseVolume: 0,
+				thresholdMoney: 0,
 			}]
 		}
-		
+
 		console.log('ProjectReward.rewards', rewards);
 
-		const items = rewards.map( ({title, thresholdMoney, description, imgSrc = '/assets/images/slider-tumb2.jpg',}, index) => {
+		const items = rewards.map( ({title, thresholdMoney, description, imgSrc = '/assets/images/slider-tumb2.jpg', maxPurchaseVolume}, index) => {
 			title = title.split('\n').map((t, index) => (<span key={index}>{t}<br/></span>));
 
 			return (
@@ -57,9 +59,10 @@ class ProjectReward extends Component {
 						<div className="ex-centered">
 							<img className="home-exhibition-image" src={imgSrc} />
 						</div>
-					</div>	
+					</div>
 					<div className="project-detail-reward-title">
 						<p className="purchase-reward-title">{description}</p>
+						<p className="purchase-reward-title">최대 구매 수량: {maxPurchaseVolume}</p>
 						<p className="purchase-reward-description">{thresholdMoney.toLocaleString()}원</p>
 					</div>
 				</div>
