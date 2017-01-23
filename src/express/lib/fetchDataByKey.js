@@ -82,6 +82,7 @@ const _fetcher = {
 const fetchDataByKey = async ({ user, q, ...others }, ...keys) => {
   let project_names, purchases;
 
+  // preparing parameter
   if (KEYS.sharedProjects in keys) {
     let r = await FacebookTracker.getUserSummary(user && user.id)
     project_names = r.project_names
