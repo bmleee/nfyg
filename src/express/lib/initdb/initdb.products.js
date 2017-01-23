@@ -107,10 +107,10 @@ const createProduct = async ({state = 'preparing', artist}) => {
 				}
 		},
 		relatedContents: [
-			{ link: '//www.naver.com', imgSrc: 'http://img.naver.net/static/www/u/2013/0731/nmms_224940510.gif' },
-			{ link: '//www.naver.com', imgSrc: 'http://img.naver.net/static/www/u/2013/0731/nmms_224940510.gif' },
-			{ link: '//www.naver.com', imgSrc: 'http://img.naver.net/static/www/u/2013/0731/nmms_224940510.gif' },
-			{ link: '//www.naver.com', imgSrc: 'http://img.naver.net/static/www/u/2013/0731/nmms_224940510.gif' },
+			{ link: '//www.naver.com', imgSrc: 'http://img.naver.net/static/www/u/2013/0731/nmms_224940510.gif', 'title': randomString() },
+			{ link: '//www.naver.com', imgSrc: 'http://img.naver.net/static/www/u/2013/0731/nmms_224940510.gif', 'title': randomString() },
+			{ link: '//www.naver.com', imgSrc: 'http://img.naver.net/static/www/u/2013/0731/nmms_224940510.gif', 'title': randomString() },
+			{ link: '//www.naver.com', imgSrc: 'http://img.naver.net/static/www/u/2013/0731/nmms_224940510.gif', 'title': randomString() },
 		]
 	})
 }
@@ -240,10 +240,10 @@ export default async function initProduct() {
 				},
 	    },
 			relatedContents: [
-				{ link: '//www.naver.com', imgSrc: 'http://img.naver.net/static/www/u/2013/0731/nmms_224940510.gif' },
-				{ link: '//www.naver.com', imgSrc: 'http://img.naver.net/static/www/u/2013/0731/nmms_224940510.gif' },
-				{ link: '//www.naver.com', imgSrc: 'http://img.naver.net/static/www/u/2013/0731/nmms_224940510.gif' },
-				{ link: '//www.naver.com', imgSrc: 'http://img.naver.net/static/www/u/2013/0731/nmms_224940510.gif' },
+				{ link: '//www.naver.com', imgSrc: 'http://img.naver.net/static/www/u/2013/0731/nmms_224940510.gif', 'title': randomString() },
+				{ link: '//www.naver.com', imgSrc: 'http://img.naver.net/static/www/u/2013/0731/nmms_224940510.gif', 'title': randomString() },
+				{ link: '//www.naver.com', imgSrc: 'http://img.naver.net/static/www/u/2013/0731/nmms_224940510.gif', 'title': randomString() },
+				{ link: '//www.naver.com', imgSrc: 'http://img.naver.net/static/www/u/2013/0731/nmms_224940510.gif', 'title': randomString() },
 			]
 		})
 	} catch (e) {if (!JSON.stringify(e).includes('duplicate')) console.error(e);}

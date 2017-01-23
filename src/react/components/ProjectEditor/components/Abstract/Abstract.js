@@ -116,10 +116,12 @@ const RelatedContentWrapper = ({value, handlers}) => {
 
 	let item = value && value.contents && value.contents.length > 0
 		? value.contents.map(({
+			title,
 			imgSrc,
 			link
 		}, index) => (
 			<div className="editor-item-detail-wrapper">
+				<span className="item-deatail-small-title-saved">제목: {title}</span>
 				<span className="item-deatail-small-title-saved">링크: {link}</span>
 				<img src={imgSrc}/>
 				<button className="item-deatail-delete" onClick={() => deleteContent(index)}>삭제하기</button>
@@ -135,17 +137,23 @@ const RelatedContentWrapper = ({value, handlers}) => {
 }
 const RelatedContentForm = ({value, handlers}) => {
 	const {
+		title,
 		imgSrc,
 		link
 	} = value.newContent
 
 	const {
+		_onTitle,
 		_onImgSrc,
 		_onLink
 	} = handlers
 
 	return (
 		<div className="recommends-form-container">
+			<div>
+				<span className="item-deatail-small-title">제목</span>
+				<input type="text" value={title} onChange={_onTitle}/>
+			</div>
 			<div>
 				<span className="item-deatail-small-title">링크</span>
 				<input type="text" value={link} onChange={_onLink}/>

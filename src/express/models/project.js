@@ -95,6 +95,7 @@ const ProjectSchema = new Schema({
 
 	// Contents
 	relatedContents: [{
+		title: {type: String, required: true},
 		imgSrc: {type: String, required: true},
 		link: {type: String, required: true},
 	}]

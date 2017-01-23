@@ -84,6 +84,7 @@ export default class ProductEditor extends Component {
     relatedContent: {
 			contents: [],
 			newContent: {
+        title: '',
 				imgSrc: '',
 				link: '',
 			}
@@ -227,6 +228,7 @@ export default class ProductEditor extends Component {
         newContent: {
           imgSrc: { $set: '' },
           link: { $set: '' },
+          title: { $set: '' },
         }
       }
 		}))
@@ -373,6 +375,7 @@ export default class ProductEditor extends Component {
 			}))
 		}
 	}
+
   faqHandlers = {
 		_onQuestion: (e) => {
 			this.setState(update(this.state, {
@@ -410,6 +413,7 @@ export default class ProductEditor extends Component {
 			}))
 		}
 	}
+
 	// Overview
 	overviewSubmitCallbacks = {
 		_onIntroSubmit: (intro) => {
@@ -448,6 +452,13 @@ export default class ProductEditor extends Component {
        relatedContent: {
          newContent: {
            link: { $set: e.target.value },
+         }
+       }
+     })),
+     _onTitle: (e) => this.setState(update(this.state, {
+       relatedContent: {
+         newContent: {
+           title: { $set: e.target.value },
          }
        }
      })),

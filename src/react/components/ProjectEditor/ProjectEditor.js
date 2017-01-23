@@ -77,6 +77,7 @@ export default class ProjectEditor extends Component {
 			contents: [],
 			newContent: {
 				imgSrc: '',
+        title: '',
 				link: '',
 			}
 		},
@@ -218,6 +219,7 @@ export default class ProjectEditor extends Component {
         newContent: {
           imgSrc: { $set: '' },
           link: { $set: '' },
+          title: { $set: '' },
         }
       }
 		}))
@@ -379,6 +381,13 @@ export default class ProjectEditor extends Component {
        relatedContent: {
          newContent: {
            link: { $set: e.target.value },
+         }
+       }
+     })),
+     _onTitle: (e) => this.setState(update(this.state, {
+       relatedContent: {
+         newContent: {
+           title: { $set: e.target.value },
          }
        }
      })),
