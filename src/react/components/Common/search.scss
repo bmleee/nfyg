@@ -1,0 +1,65 @@
+.search-container {
+    width : 950px;
+    margin : 50px auto;
+}
+.search-for-keyword {
+    margin-bottom : 30px !important;
+    font-size : 20px !important;
+    color : #333;
+}
+.search-item-container {
+    width : 100%;
+    border-top : 1px solid #eee;
+    padding : 15px;
+}
+.search-item-container:last-child {
+    border-bottom : 1px solid #eee;
+}
+.search-image-container {
+    width : 90px;
+    height : 90px;
+    display : inline-block;
+    position: relative;
+	overflow : hidden;
+}
+.search-image-centered {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    -webkit-transform: translate(50%,50%);
+    -ms-transform: translate(50%,50%);
+    transform: translate(50%,50%);
+}
+.search-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    max-width : 200%;
+    height: auto;
+    width : auto;
+    -webkit-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+}
+
+.search-summary-container {
+    width : 825px;
+    height : 90px;
+    display : inline-block;
+    vertical-align : top;
+    padding-left : 20px;
+    .search-element-category {
+        margin-top : 0px !important;
+        font-size : 13px !important;
+    }
+    .search-element-title {
+        color : #444;
+        font-size : 16px !important;
+    }
+    .search-element-description {
+        font-size : 15px !important;
+        color : #666;
+    }
+}

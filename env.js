@@ -22,7 +22,7 @@ var url = {
 	seven_pictures_server_pre_scheme: config2url(dbconfig.seven_pictures_server_pre_scheme),
 }
 
-var EXPRESS_PORT = process.env.PORT || 3100
+var EXPRESS_PORT = process.env.PORT || 8080
 var MONGODB_URL = EXPRESS_PORT === 8080 ? url.development : url.seven_pictures_server_pre_scheme
 var REDIS = {
 	HOST: '52.78.222.50',
