@@ -61,8 +61,8 @@ class Headermenufixed extends Component {
 						<Link to={`/`}>
 							<img className="header-menu-logo" src='/assets/images/7pictures_favicon_white.svg'/>
 						</Link>
-						<form className="header-search-form">
-							<input className="header-search" type="search" placeholder="Search..." />
+						<form className="header-search-form" action="/search">
+							<input className="header-search" type="search" placeholder="Search..." name="q" />
 							<button className="header-search-submit" type="submit" />
 						</form>
 						<Link to={`/`}>

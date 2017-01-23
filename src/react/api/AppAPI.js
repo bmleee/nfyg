@@ -257,3 +257,14 @@ export async function suggestProject(body) {
 
 	return await _request(config)
 }
+
+export async function search(q) {
+	const config = {
+		url: `/api/auth/fetch/search`,
+		params: {
+			q
+		}
+	}
+
+	return await _request(config)
+}

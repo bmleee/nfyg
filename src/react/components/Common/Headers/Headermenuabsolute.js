@@ -41,9 +41,9 @@ class Headermenuabsolute extends Component {
 					<Link to={`/`}>
 						<img className="header-menu-logo" src='/assets/images/7pictures_favicon_black.svg'/>
 					</Link>
-					<form className="header-search-form">
-					<input className="header-search" type="search" placeholder="Search..." />
-					<button className="header-search-submit" type="submit" />
+					<form className="header-search-form" action="/search">
+						<input className="header-search" type="search" placeholder="Search..." name="q" />
+						<button className="header-search-submit" type="submit" />
 					</form>
 					<Link to={`/`}>
 						<p className="header-menu-text-left">What's on?</p>
@@ -118,7 +118,7 @@ class Headermenuabsolute extends Component {
 							<img className="menu-user-icon" src={image} width={32} height={32} />
 							<div className="user-hover-menu-arrow"></div>
 							<div className="user-hover-menu-container">
-								
+
 								<Link to={`/user/me`}>
 									<p className="header-menu-hover-text">내 페이지</p>
 								</Link>

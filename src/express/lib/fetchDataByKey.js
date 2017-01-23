@@ -30,14 +30,14 @@ export const KEYS = {
   sponsors: 'sponsors',
 
   // search
-  projectsByName: 'projectsByName',
-  productsByName: 'productsByName',
-  magazinesByName: 'magazinesByName',
+  projectsByQuery: 'projectsByQuery',
+  productsByQuery: 'productsByQuery',
+  magazinesByQuery: 'magazinesByQuery',
 }
 
 const _fetcher = {
   sharedProjects: async ({ project_names }) => await Promise.all(
-    (await ProjectModel.findByNames(project_names))
+    (await ProjectModel.findByQuerys(project_names))
       .map(async (p) => await p.toFormat('shared_project'))),
   purchasedProjects: async ({ purchases }) => await Promise.all(
     purchases
@@ -65,16 +65,40 @@ const _fetcher = {
   sponsors: async () => await Promise.all(
     (await SponsorModel.find({}))
       .map(async (p) => await p.toFormat('profile_admin'))),
-  projectsByName: async ({q}) => await Promise.all(
-    (await ProjectModel.find({ 'abstract.projectName': q }))
+  projectsByQuery: async ({q}) => await Promise.all(
+    (await ProjectModel.find({
+      $or: [
+        { 'abstract.projectName': q },
+        { 'abstract.longTitle': q },
+        { 'abstract.shortTitle': q },
+        { 'abstract.postIntro': q },
+        { 'abstract.category': q },
+      ]
+    }))
       .map(async (p) => await p.toFormat('search_result'))
   ),
-  productsByName: async ({q}) => await Promise.all(
-    (await ProductModel.find({ 'abstract.productName': q }))
+  productsByQuery: async ({q}) => await Promise.all(
+    (await ProductModel.find({
+      $or: [
+        { 'abstract.productName': q },
+        { 'abstract.longTitle': q },
+        { 'abstract.shortTitle': q },
+        { 'abstract.postIntro': q },
+        { 'abstract.category': q },
+      ]
+    }))
       .map(async (p) => await p.toFormat('search_result'))
   ),
-  magazinesByName: async ({q}) => await Promise.all(
-    (await MagazineModel.find({ 'abstract.magazineName': q }))
+  magazinesByQuery: async ({q}) => await Promise.all(
+    (await MagazineModel.find({
+      $or: [
+        { 'abstract.magazineName': q },
+        { 'abstract.longTitle': q },
+        { 'abstract.shortTitle': q },
+        { 'abstract.postIntro': q },
+        { 'abstract.category': q },
+      ]
+    }))
       .map(async (m) => await m.toFormat('search_result'))
   ),
 }

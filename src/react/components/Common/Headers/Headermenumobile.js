@@ -52,10 +52,10 @@ class Headermenumobile extends Component {
 
 					<Collapsible trigger="" transitionTime={100}>
 						<div className="header-search-form-opened">
-						<form className="header-search-form">
-							<button className="header-search-submit" type="submit" />
-							<input className="header-search" type="search" placeholder="Search..." />
-						</form>
+							<form className="header-search-form" action="/search">
+								<input className="header-search" type="search" placeholder="Search..." name="q" />
+								<button className="header-search-submit" type="submit" />
+							</form>
 						</div>
 					</Collapsible>
 
@@ -92,7 +92,7 @@ class Headermenumobile extends Component {
 							</div>
 							</Link> )
 							}
-							
+
 							{
 							!isLoggedIn && (
 							<div className="mobile-burger-info-container">
