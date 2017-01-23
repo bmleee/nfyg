@@ -62,7 +62,7 @@ class ProjectReward extends Component {
 					</div>
 					<div className="project-detail-reward-title">
 						<p className="purchase-reward-title">{description}</p>
-						<p className="purchase-reward-title">최대 구매 수량: {maxPurchaseVolume}</p>
+						{/* <p className="purchase-reward-title">최대 구매 수량: {maxPurchaseVolume}</p> */}
 						<p className="purchase-reward-description">{thresholdMoney.toLocaleString()}원</p>
 					</div>
 				</div>

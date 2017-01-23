@@ -25,6 +25,13 @@ export default class ProjectDetail extends Component {
 
 			relatedContents,
 		} = this.props; // TODO: project should be fetch in async way
+		
+		let infoBackground = (imgSrc) => ({
+			backgroundImage: `url(${imgSrc})`,
+			backgroundSize: 'cover',
+			backgroundPosition: 'center center',
+			backgroundRepeat: 'no-repeat'
+		})
 
 
 		console.log('ProjectDetail', this);
@@ -41,16 +48,27 @@ export default class ProjectDetail extends Component {
 						<button className="back-to-top" />
 					</ScrollToTop>
 
-					<div>
-						관련 콘텐츠
-						{
-							relatedContents && relatedContents.map(({
-								imgSrc,
-								link
-							}, index) => (
-								<a href={link}><img src={imgSrc} alt=""/></a>
-							))
-						}
+					<div className="magazine-detail-related-contents-list">
+						<div className="magazine-detail-related-contents-underline">
+						<h3>관련 콘텐츠</h3>
+						</div>
+						<div className="magazine-detail-related-contents-list-post-container">
+							{
+								relatedContents && relatedContents.map(({
+									title = 'sample title',
+									imgSrc,
+									link
+								}, index) => (
+									<a href={link} className="magazine-detail-related-contents-list-post-item">
+										<div className="magazine-detail-related-contents-list-post-item">
+											<div className="magazine-detail-related-contents-list-post-item-background" style={infoBackground(imgSrc)}>
+												<span>콘텐츠제목</span>
+											</div>
+										</div>	
+									</a>
+								))
+							}
+						</div>
 					</div>
 				</div>
 			)

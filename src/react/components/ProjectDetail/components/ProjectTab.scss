@@ -1,6 +1,6 @@
 .tab-red-dot {
     position : absolute;
-    margin : -4px 0px 0px 4px;
+    margin : -30px 30px;
 }
 .Select-control {
 	width : 20%;
@@ -82,6 +82,13 @@
     box-shadow : inset 0px -2px 0px 0px #4b709a;
     color : #4b709a;
     background : #fff;
+}
+.tab-red-dot {
+    position : absolute;
+    margin : -4px 10px;
+    @media (max-width: 323px) {
+        margin : -26px 20px;
+    }
 }
 }
 }

@@ -13,9 +13,9 @@ class MagazineDetailRelatedContentsList extends Component {
 
 		let magazines = relatedMagazines.map( ({id, imgSrc, title}, index) => (
 			<div className="magazine-detail-related-contents-list-post-item">
-			<div className="magazine-detail-related-contents-list-post-item-background" style={infoBackground(imgSrc)}>
-				<span>{title}</span>
-			</div>
+				<div className="magazine-detail-related-contents-list-post-item-background" style={infoBackground(imgSrc)}>
+					<span>{title}</span>
+				</div>
 			</div>
 		))
 
@@ -38,10 +38,6 @@ class MagazineDetailRelatedContentsList extends Component {
 				<div className="magazine-detail-related-contents-list-post-container">
 					{ magazines }
 				</div>
-				{/* <div className="magazine-detail-related-contents-list-exhibition-container">
-					<span>관련 전시</span>
-					{ exhibitions }
-				</div> */}
 			</div>
 		)
 	}
