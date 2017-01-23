@@ -84,7 +84,12 @@ class QnA extends Component {
 						</p>
 						
 							<p className="sharing-summary">
-								<span><p className="sharing-name">{author.name}</p>{date2string(created_at)}</span>
+								<span>
+									<p className="sharing-name">{author.name}</p>
+									{date2string(created_at)}
+									{/* to do 자기가 쓴 댓글만 삭제하기 */}
+									<button className="comment-delete-button"/>
+								</span>
 								<span className="qna-detail-text">{newLinedString(text)}</span>
 							
 							{/* 대댓글 */}
@@ -102,8 +107,14 @@ class QnA extends Component {
 												<img className="qna-form-user-icon-sub" src={author.iconSrc} alt="" width={70} height={70}/>
 											</p>
 											<p className="sharing-summary">
-												<span><p className="sharing-name">{author.name}</p>{date2string(created_at)}</span>
-												<span>{newLinedString(text)}</span>
+												<span>
+													<p className="sharing-name">{author.name}</p>
+													{date2string(created_at)}
+													{/* to do 자기가 쓴 댓글만 삭제하기 */}
+													<button className="comment-delete-button"/>
+												</span>
+												<span>{newLinedString(text)}
+												</span>
 											</p>
 										</div>
 									))
