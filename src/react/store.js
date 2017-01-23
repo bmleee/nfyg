@@ -10,11 +10,6 @@ import { routerReducer, routerMiddleware } from 'react-router-redux';
 // middlewares
 import thunk from 'redux-thunk';
 
-import { remoteActionMiddleware } from './middlewares'
-
-import { todos } from './reducers';
-import { ProjectEditor } from './reducers'
-
 export const DevTools = createDevTools(
 	<DockMonitor toggleVisibilityKey="ctrl-h" changePositionKey="ctrl-q">
 		<LogMonitor theme="tomorrow" preserveScrollTop={false} />
@@ -24,8 +19,6 @@ export const DevTools = createDevTools(
 
 const makeReducer = () => combineReducers({
 		routing: routerReducer,
-		todos,
-		// ProjectEditor,
 })
 
 /**
