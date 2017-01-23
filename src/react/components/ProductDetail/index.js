@@ -1,4 +1,8 @@
 import React, { Component, PropTypes } from 'react'
+import DocumentMeta from 'react-document-meta';
+
+import { canUseDOM } from '~/src/lib/utils'
+
 import { fetchJSONFile, fetchUserAndData } from '../../api/AppAPI'
 
 import { ProductDetail } from './components'
@@ -78,6 +82,15 @@ export default class ProductDetailContainer extends Component {
 	}
 
 	render() {
+		let abstract = this.state.abstract
+
+		let meta = canUseDOM && abstract && {
+			title: abstract.shortTitle,
+			meta: {
+				'og:image': `${window.location.protocol}//${window.location.host}${abstract.imgSrc}`,
+			}
+		}
+
 		let children = this.props.children
 			&& React.cloneElement(this.props.children, {
 				...this.state,
@@ -90,6 +103,7 @@ export default class ProductDetailContainer extends Component {
 					{...this.state}
 					_onSelectOptionChange={this._onSelectOptionChange}
 				>
+					<DocumentMeta {...meta} />
 					{ children }
 				</ProductDetail>
 			:

@@ -70,6 +70,7 @@
     "react-burger-menu": "^1.10.10",
     "react-collapsible": "^1.2.0",
     "react-copy-to-clipboard": "^4.2.3",
+    "react-document-meta": "^2.1.1",
     "react-draft-wysiwyg": "^1.5.8",
     "react-dropzone": "^3.7.3",
     "react-fontawesome": "^1.2.0",

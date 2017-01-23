@@ -1,5 +1,9 @@
 import React, { Component, PropTypes } from 'react'
+import DocumentMeta from 'react-document-meta';
+
 import update from 'immutability-helper'
+
+import { canUseDOM } from '~/src/lib/utils'
 
 import { fetchJSONFile, fetchUserAndData } from '../../api/AppAPI'
 
@@ -160,6 +164,15 @@ export default class ProjectDetailContainer extends Component {
 	}
 
 	render() {
+		let abstract = this.state.abstract
+
+		let meta = canUseDOM && abstract && {
+			title: abstract.shortTitle,
+			meta: {
+				'og:image': `${window.location.protocol}//${window.location.host}${abstract.imgSrc}`,
+			}
+		}
+
 		let props = {
 			...this.state,
 			_onSelectOptionChange: this._onSelectOptionChange,
@@ -182,6 +195,7 @@ export default class ProjectDetailContainer extends Component {
 				<ProjectDetail
 					{...props}
 				>
+					<DocumentMeta {...meta} />
 					{ children }
 				</ProjectDetail>
 			:
