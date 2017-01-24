@@ -38,6 +38,9 @@
 	padding-right : 10px;
 	margin-right : 10px;
 	border-right : 1px solid #888;
+	@media (max-width : 500px) {
+			line-height : 1;
+		}
 }
 .post-item-title-condition1, .post-item-title-condition2 {
 	display : inline-block;
@@ -48,6 +51,9 @@
 	color : #888;
 	padding-right : 10px;
 	margin-right : 10px;
+	@media (max-width : 500px) {
+			line-height : 1;
+		}
 }
 .post-item-title-condition1:before {
 	font-family : Ionicons;

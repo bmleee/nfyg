@@ -59,10 +59,10 @@ export default class ProjectDetail extends Component {
 									imgSrc,
 									link
 								}, index) => (
-									<a href={link} className="magazine-detail-related-contents-list-post-item">
+									<a href={link}>
 										<div className="magazine-detail-related-contents-list-post-item">
 											<div className="magazine-detail-related-contents-list-post-item-background" style={infoBackground(imgSrc)}>
-												<span>콘텐츠제목</span>
+												<span>콘텐츠제목 가나다라마바바사사사사사사사</span>
 											</div>
 										</div>	
 									</a>

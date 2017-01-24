@@ -109,8 +109,7 @@ class QnA extends Component {
 
 							<p className="sharing-summary">
 								<span>
-									<p className="sharing-name">{author.name}</p>
-									{date2string(created_at)}
+									<p className="sharing-name">{author.name}</p>{date2string(created_at)}
 									<button className="comment-delete-button" onClick={this._onClickDeleteQnA(_id)}/>
 								</span>
 								<span className="qna-detail-text">{newLinedString(text)}</span>

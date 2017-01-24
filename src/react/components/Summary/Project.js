@@ -48,7 +48,8 @@ export default class Project extends Component {
     } catch (e) {
       console.error(e);
     }
-
+    
+    window.scrollTo(0, 0)
   }
 
   render() {

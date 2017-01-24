@@ -53,8 +53,8 @@ class Headermenumobile extends Component {
 					<Collapsible trigger="" transitionTime={100}>
 						<div className="header-search-form-opened">
 							<form className="header-search-form" action="/search">
-								<input className="header-search" type="search" placeholder="Search..." name="q" />
 								<button className="header-search-submit" type="submit" />
+								<input className="header-search" type="search" placeholder="Search..." name="q" />
 							</form>
 						</div>
 					</Collapsible>

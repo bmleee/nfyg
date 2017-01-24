@@ -47,6 +47,8 @@ export default class PurchaseContainer extends Component {
 		this.setState({
 			stage: 1
 		})
+		
+		window.scrollTo(0, 0)
 	}
 
 	render() {
@@ -82,7 +84,6 @@ export default class PurchaseContainer extends Component {
 		console.log('Purchase', this);
 		return (
 			<div>
-				<button onClick={() => console.log(this.state)}>Log State</button>
 				<div className="purchase-heading" style={infoBackground}>
 					<h1 className="purchase-title">{title[stage]}</h1>
 				</div>
@@ -155,18 +156,21 @@ export default class PurchaseContainer extends Component {
 		this.setState(update(this.state, {
 			stage: { $set : 1 }
 		}))
+		window.scrollTo(0, 0)
 	}
 
 	goToNextStage = () => {
 		this.setState(update(this.state, {
 			stage: { $set : this.state.stage + 1 }
 		}))
+		window.scrollTo(0, 0)
 	}
 
 	goToPreviousStage = () => {
 		this.setState(update(this.state, {
 			stage: { $set : this.state.stage - 1 }
 		}))
+		window.scrollTo(0, 0)
 	}
 
 	setReward = (index, reward, shippingFee) => {

@@ -89,7 +89,7 @@
 	
 	.qna-form-user-icon {
 		border-radius : 100px;
-		border : 2px solid #ddd;
+		border : 1px solid #ddd;
 		margin-right : 20px;
 		@media (max-width : 500px) {
 				width : 50px !important;
@@ -99,7 +99,7 @@
 	}
 	.qna-form-user-icon-sub {
 		border-radius : 100px;
-		border : 2px solid #ddd;
+		border : 1px solid #ddd;
 		margin-right : 20px;
 		@media (max-width : 500px) {
 				width : 40px !important;
@@ -109,19 +109,19 @@
 	}
 	.qna-form-textarea {
 		width : 700px;
-		border : 2px solid #ddd;
+		border : 1px solid #ddd;
 		border-radius : 3px;
 		padding : 8px;
 		font-size : 16px;
 		@media (max-width : 991px) {
 				width : 100%;
 			@media (max-width : 500px) {
-				width : 100%;
+				width : 85%;
 			}	
 			}
 	}
 	.qna-form-textarea:focus {
-		border : 2px solid #4b709a;
+		border : 1px solid #4b709a;
 		outline : none;
 	}
 	.qna-form-submit-container {

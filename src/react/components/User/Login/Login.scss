@@ -9,6 +9,10 @@
     width: 100%;
     padding : 70px 0px 70px 0px;
     min-height : 750px;
+    @media (max-width : 500px) {
+        padding : 40px 0px 40px 0px;
+        min-height : 400px;
+    }
 }
 .user-login {
     width : 345px;

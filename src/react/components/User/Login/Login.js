@@ -7,7 +7,11 @@ import axios from 'axios'
 import { facebook_login } from '../../../../lib/firebase'
 
 class Login extends Component {
-
+	
+	componentDidMount () {
+          window.scrollTo(0, 0)
+        }
+	
 	render() {
 		console.log('Login', this);
 		return (

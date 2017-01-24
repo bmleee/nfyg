@@ -84,10 +84,10 @@ class PostComments extends Component {
 			numLikes,
 			text
 		}, index) => (
-			<div className="project-detail-post-item-comments-item" key={index}>
-				<div className="project-ranking-th">
+			<div className="project-detail-qna-item" key={index}>
+				<div className="qna-item-container">
 					<p className="sharing-fb-icon-list">
-					<img className="qna-form-user-icon" src={iconSrc} alt="" width={80} height={80}/>
+						<img className="qna-form-user-icon" src={iconSrc} alt="" width={80} height={80}/>
 					</p>
 					<p className="sharing-summary">
 					<span>
