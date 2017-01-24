@@ -198,6 +198,12 @@ ProductSchema.methods.toFormat = async function (type, ...args) {
 				let user = args[0];
 				let posts = this.posts.map(p => p.toFormat('product_detail', user))
 				let qnas = this.qnas.map(q => q.toFormat('product_detail'))
+
+				let numValidPurchases = await PurchaseModel
+					.count({ 'product': this })
+					.where('purchase_info.purchase_state').in(['preparing', 'scheduled'])
+				let purchaseSuccess = this.funding.minPurchaseVolume <= numValidPurchases
+
 				return {
 					abstract: this.abstract,
 					creator: this.creator,
@@ -246,6 +252,8 @@ ProductSchema.methods.toFormat = async function (type, ...args) {
 			      },
 					],
 					relatedContents: this.relatedContents,
+					purchaseSuccess,
+					numValidPurchases,
 				}
 
 			case 'edit':

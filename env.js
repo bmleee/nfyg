@@ -34,8 +34,13 @@ var FB_TRACKER_URL = 'http://52.78.222.50:3000'
 var FB_SHARER_URL = '//www.facebook.com/sharer/sharer.php'
 
 var FB_APP = {
-	clientID: '173733359775456',
-	clientSecret: '5e2b6f76dd2056a75baa30bc53b5463f',
+	// 7pictures-passport
+	// clientID: '173733359775456',
+	// clientSecret: '5e2b6f76dd2056a75baa30bc53b5463f',
+
+	// 7pictures - dev test
+	clientID: '361812380855194',
+	clientSecret: 'ae271e47f68fcd1137ff029daeec475c'
 }
 
 module.exports = {
@@ -45,5 +50,5 @@ module.exports = {
 	FB_TRACKER_URL,
 	REDIS,
 	FB_SHARER_URL,
-	FB_APP
+	FB_APP,
 };

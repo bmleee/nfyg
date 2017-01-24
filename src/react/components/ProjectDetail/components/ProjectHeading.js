@@ -113,11 +113,19 @@ export default class ProjectHeading extends Component {
 		// let url = format({ host: FB_SHARER_URL, query: {u: share_url} })
 		//
 		// window.open(url, '_blank', 'width=500, height=300')
-		let url = getFullUrl()
+
+
+		// let url = getFullUrl()
+		let url = 'http://localhost:3100/projects/thegreatgraffiti'
 
 		console.log('url', url);
 
-		FB.ui({ method: 'share', href: url,},  function(response) {
+		FB.ui({
+			method: 'share',
+			display: 'popup',
+			href: url,
+			quote: 'quotequotequote',
+		},  function(response) {
     	if (response && !response.error_message) {
 	      alert('Posting completed.');
 	    } else {
@@ -125,5 +133,15 @@ export default class ProjectHeading extends Component {
 			}
 		})
 	}
+
+// 	FB.ui(
+//  {
+//   method: 'share',
+//   href: 'https://developers.facebook.com/docs/'
+// }, function(response){
+// console.log(response)
+// });
+
+
 
 }

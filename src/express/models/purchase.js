@@ -3,6 +3,7 @@ import axios from 'axios'
 import md5 from 'md5'
 
 import IMP from '../lib/iamport'
+import Mailer from '../lib/Mailer'
 
 import Iamport from 'iamport'
 import config from '~/iamport.config.js'
@@ -87,28 +88,12 @@ PurchaseSchema.pre('save', async function (next) {
     let p = this.project || this.product
     let pName = p.abstract.projectName || p.abstract.productName
     // 미술소품 -> 30초 후 결제, 프로젝트 -> 해당 시간에 결제
-    let schedule_at = this.project ? new Date(this.project.funding.dateTo ).getTime() / 1000 // msec to sec
-      : Date.now() / 1000 + 30 // after 30 sec
+    let schedule_at = new Date(this.project.funding.dateTo ).getTime() / 1000 + 60 * 60 * 24 * 30 // schedule_at dateTo + 30 days : Don't let it be paid as scheduled date
 
     this.purchase_info.merchant_uid = `${pName}_${md5(`${user_id}_${randomNumber(10000)}_${Date.now()}`)}`
     this.purchase_info.customer_uid = user_id
     this.purchase_info.amount = this.reward.thresholdMoney * this.purchaseAmount + this.shippingFee
     this.purchase_info.schedule_at = schedule_at
-
-
-    console.log('this.purchase_info', this.purchase_info);
-
-    // SKIP THIS PROCESS!
-    // validate card info
-    // let {
-    //   card_name,
-    // } = await IMP.subscribe_customer.create({
-    //   customer_uid: this.purchase_info.customer_uid,
-    //   card_number: this.payment.card_number,
-    //   expiry: this.payment.expiry,
-    //   birth: this.payment.birth,
-    //   pwd_2digit: this.payment.pwd_2digit,
-    // })
 
     let {
       code,
@@ -124,8 +109,8 @@ PurchaseSchema.pre('save', async function (next) {
       schedules: [
         {
           merchant_uid: this.purchase_info.merchant_uid,
-          // schedule_at: this.purchase_info.schedule_at, // TODO: activate!
-          schedule_at: Date.now() / 1000 + 60, // after 1 min
+          schedule_at: this.purchase_info.schedule_at, // TODO: activate!
+          // schedule_at: Date.now() / 1000 + 60, // after 1 min
           amount: this.purchase_info.amount,
         }
       ]
@@ -168,6 +153,77 @@ PurchaseSchema.methods.toFormat = async function (type, ...args) {
     default:
       console.error(`toFormat can't accept this ${JSON.stringify(type)}`);
       return ''
+  }
+}
+
+PurchaseSchema.methods.processPurchase = async function () {
+  try {
+    // 기존 예약 결제 취소
+    IMP.subscribe.unschedule({
+      customer_uid: this.purchase_info.customer_uid,
+      merchant_uid: this.purchase_info.merchant_uid,
+    })
+
+    let user_id = this.user._id || this.user
+
+    let p = this.project || this.product
+    let pName = p.abstract.projectName || p.abstract.productName
+
+    this.purchase_info.merchant_uid = `${pName}_${md5(`${user_id}_${randomNumber(10000)}_${Date.now()}`)}`
+    this.purchase_info.amount = this.reward.thresholdMoney * this.purchaseAmount + this.shippingFee
+    this.purchase_info.schedule_at = Date.now() / 1000 + 15
+
+    // 15초 후 결제 실행
+    IMP.subscribe.schedule({
+      customer_uid: this.purchase_info.customer_uid,
+      checking_amount: 0,
+      card_number: this.payment.card_number,
+      expiry: this.payment.expiry,
+      birth: this.payment.birth,
+      pwd_2digit: this.payment.pwd_2digit,
+      schedules: [
+        {
+          merchant_uid: this.purchase_info.merchant_uid,
+          schedule_at: this.purchase_info.schedule_at, // TODO: activate!
+          amount: this.purchase_info.amount,
+        }
+      ],
+    })
+
+    this.purchase_info.purchase_state = 'scheduled'
+    return await this.save()
+  } catch (e) {
+    console.error(`Purchase ${this._id} processPurchase failed`);
+    console.error(e);
+    throw e
+  }
+}
+
+PurchaseSchema.methods.cancelByUser = async function () {
+  try {
+    IMP.subscribe.unschedule({
+      customer_uid: this.purchase_info.customer_uid,
+      merchant_uid: this.purchase_info.merchant_uid,
+    })
+
+    this.purchase_info.purchase_state = 'cancel-by-user'
+    await Mailer.sendPurchaseFailureMail(this, 'User cancelled purchase')
+    return await this.save()
+  } catch (e) {
+    console.error(`Purchase ${this._id} cancelByUser failed`);
+    console.error(e);
+  }
+}
+
+PurchaseSchema.methods.cancelByApi = async function (error_msg) {
+  try {
+    this.purchase_info.purchase_state = 'cancel-by-api'
+    console.log(`User ${this.user.id} purcahse cancelled by api : ${error_msg}`);
+    await Mailer.sendPurchaseFailureMail(this, error_msg)
+    return await this.save()
+  } catch (e) {
+    console.error(`Purchase ${this._id} Api failed`);
+    console.error(e);
   }
 }
 

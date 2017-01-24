@@ -1,0 +1,29 @@
+<html>
+	<head>
+		<title>결제 성공</title>
+	</head>
+	<body>
+		<h3>주문 내역</h3>
+		<a href="<%= url %>"><h4><%= pName %></h4></a>
+		<div>
+			주소: <%= JSON.stringify(address) %>
+		</div>
+
+		<div>
+			리워드: <%= JSON.stringify(reward) %>
+		</div>
+
+		<div>
+			구매 수량: <%= purchaseAmount %>
+		</div>
+
+		<div>
+			배송비: <%= shippingFee %>
+		</div>
+
+		<div>
+			결제 금액: <%= amount %>
+		</div>
+
+	</body>
+</html>
