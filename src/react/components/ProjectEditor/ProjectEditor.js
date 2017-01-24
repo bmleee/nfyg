@@ -457,7 +457,7 @@ export default class ProjectEditor extends Component {
       },
     },
     relatedContent: {
-      contents: { $set: p.relatedContents },
+      contents: { $set: project.relatedContents },
     },
   })
 

@@ -512,7 +512,7 @@ export default class ProductEditor extends Component {
       targetMoney: { $set: p.funding.targetMoney },
       dateFrom: { $set: p.funding.dateFrom },
       dateTo: { $set: p.funding.dateTo },
-      shippingFee: { $set: project.funding.shippingFee },
+      shippingFee: { $set: p.funding.shippingFee },
       minPurchaseVolume: { $set: p.funding.minPurchaseVolume },
       maxPurchaseVolume: { $set: p.funding.maxPurchaseVolume },
       reward: {
@@ -523,12 +523,12 @@ export default class ProductEditor extends Component {
       }
     },
     overview: {
-      intro: { $set: project.overview.intro },
+      intro: { $set: p.overview.intro },
       part1: {
-        raw: { $set: JSON.parse(project.overview.part1.raw) }
+        raw: { $set: JSON.parse(p.overview.part1.raw) }
       },
       part2: {
-        raw: { $set: JSON.parse(project.overview.part2.raw) }
+        raw: { $set: JSON.parse(p.overview.part2.raw) }
       },
     },
     relatedContent: {

@@ -143,11 +143,11 @@ export default class PurchaseContainer extends Component {
 
 		const stages = [
 			<div>Puchase Page Loading...</div>,
-			<PurchaseResult {...props} />,
 			<Reward {...props} />,
 			<Address {...props} />,
 			<Payment {...props} />,
 			<Purchase {...props} />,
+			<PurchaseResult {...props} />,
 		]
 
 		return stages[this.state.stage]

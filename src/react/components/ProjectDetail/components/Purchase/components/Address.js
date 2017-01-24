@@ -86,7 +86,7 @@ export default class C extends Component {
 						    />
 						<div className="purchase-stage-move-container">
 							<button className="purchase-stage-prev-button" onClick={goToPreviousStage}>이전 단계</button>
-							<button className="purchase-stage-next-button" onClick={goToNextStage}>결제 sdafasfd카드 선택</button>
+							<button className="purchase-stage-next-button" onClick={goToNextStage}>결제 카드 선택</button>
 						</div>
 				</div>
 			)
