@@ -273,4 +273,32 @@ router.post('/:projectName/qnas', isLoggedIn, async (req, res) => {
 	}
 })
 
+router.post('/:projectName/processPurchase', isLoggedIn, async (req, res) => {
+	try {
+		let user = req.user
+		let project = await ProjectModel.findOneByName(req.params.projectName)
+
+		if (!ac.canEdit(user, project)) throw Error(`can't process unauthorized process`)
+
+		let purchases = await PurchaseModel.findByProject(project)
+
+		let r = await Promise.all(purchases.map(
+			async (p) => {
+				try {
+					return await p.processPurchase()
+				} catch (e) {
+					console.error(e);
+					return { error: e.message }
+				}
+			}
+		))
+
+		console.log(r);
+		res.status({ response: r })
+	} catch (e) {
+		console.error(e);
+		res.status(400).json({error: e.message})
+	}
+})
+
 export default router;
