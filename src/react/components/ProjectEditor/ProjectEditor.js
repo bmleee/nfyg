@@ -1,4 +1,5 @@
 import React, { Component, PropType } from 'react'
+import Helmet from 'react-helmet'
 
 import ProjectEditorTab from './ProjectEditorTab'
 import ScrollToTop from 'react-scroll-up';
@@ -135,6 +136,13 @@ export default class ProjectEditor extends Component {
 		} else {
 			return (
 				<div className="exhibition-editor">
+          <Helmet
+            title="Latest Updates"
+            meta={[
+                {property: 'og:title', content: 'Latest Updates'},
+            ]}
+          />
+
 					<ProjectEditorTab
             tabLinkBase={this.state.tabLinkBase}
 						save={this.save}
