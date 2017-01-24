@@ -5,7 +5,7 @@ import Modal from '~/src/react/components/react-awesome-modal';
 import FontAwesome from 'react-fontawesome'
 import KakaoImage from '~/src/assets/images/kakaotalk.svg'
 
-import { TwitterButton } from "react-social";
+import { TwitterButton, FacebookButton } from "react-social";
 import CopyToClipboard from 'react-copy-to-clipboard';
 
 
@@ -117,6 +117,7 @@ class ProductHeading extends Component {
 		} = this.props;
 
 		const url = document.URL;
+		
 
 		let remainingDays = ( new Date(dateTo).getTime() - new Date(dateFrom).getTime() ) / 1000 / 60 / 60 / 24
 
@@ -130,6 +131,7 @@ class ProductHeading extends Component {
 			backgroundPosition: 'center center',
 			backgroundRepeat: 'no-repeat'
 		}
+		
 
 		/**
 		 * Issue
@@ -164,10 +166,14 @@ class ProductHeading extends Component {
 					<button className="share-modal-close" onClick={() => this.closeModal()}/>
 					</div>
 					<div className="share-modal-button-container">
+						
+						<FacebookButton media={`http://52.78.180.103:8080${imgSrc}`} appId='361812380855194' message={shortTitle} url={url} className="ma-share-button-facebook">
+						<FontAwesome name='facebook' size='lg' />
+						</FacebookButton>
 
-						<button className="ma-share-button-facebook"><FontAwesome name='facebook' size='lg' /></button>
-
-						<TwitterButton message={shortTitle} url={url} className="ma-share-button-twitter"><FontAwesome name='twitter' size='lg' /></TwitterButton>
+						<TwitterButton message={shortTitle} url={url} className="ma-share-button-twitter">
+						<FontAwesome name='twitter' size='lg' />
+						</TwitterButton>
 
 						<button id="kakao-link-btn" className="ma-share-button-kakao"><KakaoImage className="ma-kakao-icon" width={36} height={36} /></button>
 

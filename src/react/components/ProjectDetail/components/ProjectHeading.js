@@ -115,8 +115,8 @@ export default class ProjectHeading extends Component {
 		// window.open(url, '_blank', 'width=500, height=300')
 
 
-		// let url = getFullUrl()
-		let url = 'http://localhost:3100/projects/thegreatgraffiti'
+		 let url = getFullUrl()
+		// let url = 'http://localhost:3100/projects/thegreatgraffiti'
 
 		console.log('url', url);
 
