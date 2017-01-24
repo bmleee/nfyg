@@ -175,11 +175,6 @@ router.post('/:projectName/purchase', isLoggedIn, async (req, res) => {
 		let payment = (await PaymentModel.findByUser(user))[paymentIndex]
 		let reward = project.funding.rewards[rewardIndex]
 
-		console.log('project', project);
-		console.log('address', address);
-		console.log('payment', payment);
-		console.log('reward', reward);
-
 		let purchase = await PurchaseModel.create({
 			user,
 			user_info: user,
@@ -257,7 +252,6 @@ router.post('/:projectName/posts', isLoggedIn, async (req, res) => {
 })
 
 router.post('/:projectName/qnas', isLoggedIn, async (req, res) => {
-	console.log('POST /proj/qnas');
 	try {
 		let user = req.user
 		let projectName = req.params.projectName
