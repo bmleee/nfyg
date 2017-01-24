@@ -88,7 +88,7 @@ PurchaseSchema.pre('save', async function (next) {
     let p = this.project || this.product
     let pName = p.abstract.projectName || p.abstract.productName
     // 미술소품 -> 30초 후 결제, 프로젝트 -> 해당 시간에 결제
-    let schedule_at = new Date(this.project.funding.dateTo ).getTime() / 1000 + 60 * 60 * 24 * 30 // schedule_at dateTo + 30 days : Don't let it be paid as scheduled date
+    let schedule_at = new Date(p.funding.dateTo ).getTime() / 1000 + 60 * 60 * 24 * 30 // schedule_at dateTo + 30 days : Don't let it be paid as scheduled date
 
     this.purchase_info.merchant_uid = `${pName}_${md5(`${user_id}_${randomNumber(10000)}_${Date.now()}`)}`
     this.purchase_info.customer_uid = user_id

@@ -39,6 +39,7 @@ const defaultUsers = async () => {
 		display_name: '일반유저',
 		access_level: 0,
 		local_email: 'user@7pictures.co.kr',
+		fb_email: 'pjh@7pictures.co.kr',
 		password
 	}, function (err, user) {
 		if(err) console.error(err);
