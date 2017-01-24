@@ -121,7 +121,7 @@ export async function upsertProduct(body) {
 }
 
 export async function fetchPurchaseInfo(param) {
-
+	
 	if (!['rewards', 'address', 'payment'].includes(param)) {
 		alert(`purchase param ${param} is not valid!`)
 		window.location = '/'

@@ -101,7 +101,8 @@ export default class PurchaseContainer extends Component {
 
 		if (selectedRewardIndex < 0 | selectedRewardIndex < 0 | selectedPaymentIndex < 0) {
 			alert('결제 정보 오류. 처음부터 다시 진행 해 주세요')
-			this.goToFirstStage()
+			// this.goToFirstStage() // TODO: activate
+			return
 		}
 
 		try {
@@ -142,11 +143,11 @@ export default class PurchaseContainer extends Component {
 
 		const stages = [
 			<div>Puchase Page Loading...</div>,
+			<PurchaseResult {...props} />,
 			<Reward {...props} />,
 			<Address {...props} />,
 			<Payment {...props} />,
 			<Purchase {...props} />,
-			<PurchaseResult {...props} />,
 		]
 
 		return stages[this.state.stage]

@@ -94,6 +94,7 @@ class Post extends Component {
 		let title = "포스트 제목 예시";
 		let condition1 = "전체공개";
 		let condition2 = "후원자공개";
+		let postnum = 4;
 
 		console.log('Post', this);
 
@@ -113,7 +114,7 @@ class Post extends Component {
 			<div className="project-detail-post-item" key={index}>
 				<div className="post-item-title-summary">
 					<h3 className="post-item-title">{title}</h3>
-					<span className="post-item-title-detail">{index+1}번째 소식</span>
+					<span className="post-item-title-detail">{postnum}번째 소식</span>
 					<span className="post-item-title-detail">{date2string(created_at)}</span>
 					{
 						thresholdMoney === 0
