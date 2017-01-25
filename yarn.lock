@@ -2736,7 +2736,13 @@ download@^4.0.0, download@^4.1.2:
     vinyl-fs "^2.2.0"
     ware "^1.2.0"
 
-draft-js-utils@^0.1.7:
+draft-js-export-html@^0.5.2:
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/draft-js-export-html/-/draft-js-export-html-0.5.2.tgz#089e55ce06d5aed0dbd9af5eee2eb56c58a1c428"
+  dependencies:
+    draft-js-utils "^0.1.5"
+
+draft-js-utils@^0.1.5, draft-js-utils@^0.1.7:
   version "0.1.7"
   resolved "https://registry.yarnpkg.com/draft-js-utils/-/draft-js-utils-0.1.7.tgz#e2b6927ca620edf1855a4bfc1cf1d21080a70f16"
 
@@ -7716,9 +7722,9 @@ react-base16-styling@^0.4.1:
     lodash.flow "^3.3.0"
     pure-color "^1.2.0"
 
-react-bootstrap-table@^2.8.0:
-  version "2.9.1"
-  resolved "https://registry.yarnpkg.com/react-bootstrap-table/-/react-bootstrap-table-2.9.1.tgz#a3c39ced73d1597f7d676f082cbc3988fdf00015"
+react-bootstrap-table@^2.9.2:
+  version "2.9.2"
+  resolved "https://registry.yarnpkg.com/react-bootstrap-table/-/react-bootstrap-table-2.9.2.tgz#b1005d30f4606d8aa646ded585377f4067cf3e52"
   dependencies:
     "@allenfang/react-toastr" "2.8.2"
     classnames "^2.1.2"

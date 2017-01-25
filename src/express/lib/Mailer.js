@@ -27,7 +27,7 @@ const getOptions = ({
 	...others,
 })
 
-export default class Mailer {
+class Mailer {
   async sendPurchaseSuccessMail(purchase, url) {
     const {
       user,
@@ -111,3 +111,5 @@ export default class Mailer {
   }
 
 }
+
+export default new Mailer()

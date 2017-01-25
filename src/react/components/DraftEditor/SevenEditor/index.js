@@ -6,29 +6,7 @@ import '~/src/react/components/react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 import draftToHtml from 'draftjs-to-html';
 import draftToMarkdown from 'draftjs-to-markdown';
 
-// import uploadImageCallBack from '~/src/react/components/react-draft-wysiwyg/docs/src/util/uploadImageCallBack';
 import { upload_file } from '~/src/react/api/AppAPI';
-import bold from '~/src/react/components/react-draft-wysiwyg/docs/images/demo/bold.gif';
-import italic from '~/src/react/components/react-draft-wysiwyg/docs/images/demo/italic.gif';
-import underline from '~/src/react/components/react-draft-wysiwyg/docs/images/demo/underline.gif';
-import strikethrough from '~/src/react/components/react-draft-wysiwyg/docs/images/demo/strikethrough.gif';
-import subscript from '~/src/react/components/react-draft-wysiwyg/docs/images/demo/subscript.gif';
-import superscript from '~/src/react/components/react-draft-wysiwyg/docs/images/demo/superscript.gif';
-import eraser from '~/src/react/components/react-draft-wysiwyg/docs/images/demo/erase.gif';
-import left from '~/src/react/components/react-draft-wysiwyg/docs/images/demo/left-align.gif';
-import right from '~/src/react/components/react-draft-wysiwyg/docs/images/demo/right-align.gif';
-import center from '~/src/react/components/react-draft-wysiwyg/docs/images/demo/center-align.gif';
-import justify from '~/src/react/components/react-draft-wysiwyg/docs/images/demo/justify.gif';
-import ordered from '~/src/react/components/react-draft-wysiwyg/docs/images/demo/ordered.gif';
-import unordered from '~/src/react/components/react-draft-wysiwyg/docs/images/demo/unordered.gif';
-import indent from '~/src/react/components/react-draft-wysiwyg/docs/images/demo/indent.gif';
-import outdent from '~/src/react/components/react-draft-wysiwyg/docs/images/demo/outdent.gif';
-import link from '~/src/react/components/react-draft-wysiwyg/docs/images/demo/link.gif';
-import unlink from '~/src/react/components/react-draft-wysiwyg/docs/images/demo/unlink.gif';
-import image from '~/src/react/components/react-draft-wysiwyg/docs/images/demo/image.gif';
-import undo from '~/src/react/components/react-draft-wysiwyg/docs/images/demo/undo.gif';
-import redo from '~/src/react/components/react-draft-wysiwyg/docs/images/demo/redo.gif';
-
 import editorStyles from './editorStyles.css'
 
 const uploadCallback = async (file) => {

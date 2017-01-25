@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
 
+import { cancelPurchase } from '~/src/react/api/AppAPI'
+
 export default class PurchaseList extends Component {
   render() {
     const {
@@ -13,6 +15,7 @@ export default class PurchaseList extends Component {
         {
           !!purchases
             ? purchases.map(({
+              _id,
               project,
               product,
               address: {
@@ -60,15 +63,8 @@ export default class PurchaseList extends Component {
                       <h4>{shortTitle}</h4>
                       </Link>
                       <span>{title} {purchaseAmount}개 : {amount}원</span>
-                      { !other && <button className="purchase-cancel-button" >결제 취소</button> }
+                      { !other && <button className="purchase-cancel-button" onClick={this._onClickCancel(_id)}>결제 취소</button> }
                     </div>
-                      {/*
-                        <span>받는이: {addressee_name}</span>
-                        <span>결제 상태: {purchase_state}</span>
-                        <span>주소: {zipcode} {address1} {address2}</span>
-                        <span>상품 금액: {thresholdMoney}</span>
-                        <span>배송비: {shippingFee}</span>
-                      */}
                   </div>
                 </div>
               )
@@ -77,5 +73,17 @@ export default class PurchaseList extends Component {
         }
       </div>
     )
+  }
+  
+  _onClickCancel(_id) {
+    return async () => {
+      try {
+        const r = await cancelPurchase({ purchase_id: _id })
+        console.log(`Purchase ${_id} cancel result`)
+        console.log(r)
+      } catch (e) {
+        console.error(e)
+      }
+    }
   }
 }

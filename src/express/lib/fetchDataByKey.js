@@ -18,8 +18,8 @@ import pick from 'lodash.pick'
 export const KEYS = {
   // profile
   sharedProjects: 'sharedProjects',
-  purchasedProjects: 'purchasedProjects',
   purchasedProducts: 'purchasedProducts',
+  purchasedProjects: 'purchasedProjects',
   authorizedProjects: 'authorizedProjects',
   authorizedProducts: 'authorizedProducts',
 
@@ -36,14 +36,14 @@ export const KEYS = {
 }
 
 const _fetcher = {
-  sharedProjects: async ({ project_names }) => await Promise.all(
-    (await ProjectModel.findByQuerys(project_names))
+  sharedProjects: async ({ project_names = [] }) => await Promise.all(
+    (await ProjectModel.findByNames(project_names))
       .map(async (p) => await p.toFormat('shared_project'))),
-  purchasedProjects: async ({ purchases }) => await Promise.all(
+  purchasedProjects: async ({ purchases = [] }) => await Promise.all(
     purchases
       .filter(p => !!p.project)
       .map(async (p) => await p.toFormat('profile'))),
-  purchasedProducts: async ({ purchases }) => await Promise.all(
+  purchasedProducts: async ({ purchases = [] }) => await Promise.all(
     purchases
       .filter(p => !!p.product)
       .map(async (p) => await p.toFormat('profile'))),
@@ -105,15 +105,26 @@ const _fetcher = {
 
 const fetchDataByKey = async ({ user, q, ...others }, ...keys) => {
   let project_names, purchases;
+  
+  console.log('fetchDataByKey.keys', keys)
+  
+  console.log('KEYS.purchasedProjects in keys || KEYS.purchasedProducts in keys', KEYS.purchasedProjects in keys || KEYS.purchasedProducts in keys)
+  console.log('KEYS.sharedProjects in keys', KEYS.sharedProjects in keys)
+  console.log('KEYS.purchasedProjects', KEYS.purchasedProjects)
+  console.log('KEYS.purchasedProducts', KEYS.purchasedProducts)
 
-  // preparing parameter
-  if (KEYS.sharedProjects in keys) {
+  // preparing parameters
+  if (keys.includes(KEYS.sharedProjects)) {
     let r = await FacebookTracker.getUserSummary(user && user.id)
     project_names = r.project_names
   }
-  if (KEYS.purchasedProjects in keys || KEYS.purchasedProducts in keys) {
+  
+  if (keys.includes(KEYS.purchasedProjects)
+    || keys.includes(KEYS.purchasedProducts)) {
     purchases = await PurchaseModel.findDetailByUser(user)
+    console.log('purchases.length: ', purchases.length)
   }
+  
   if (q) {
     q = new RegExp(`.*${q}.*`, 'i')
   }

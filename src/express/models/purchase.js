@@ -159,10 +159,17 @@ PurchaseSchema.methods.toFormat = async function (type, ...args) {
 PurchaseSchema.methods.processPurchase = async function () {
   try {
     // 기존 예약 결제 취소
-    IMP.subscribe.unschedule({
-      customer_uid: this.purchase_info.customer_uid,
-      merchant_uid: this.purchase_info.merchant_uid,
-    })
+    console.log(`Post ${this._id}`)
+    console.log(this.purchase_info)
+    
+    try {
+      const cancel_result = await IMP.subscribe.unschedule({
+        customer_uid: this.purchase_info.customer_uid,
+        merchant_uid: this.purchase_info.merchant_uid,
+      })
+      
+      console.log(`Post ${this._id} cancel result: `, cancel_result)
+    } catch (e) {}
 
     let user_id = this.user._id || this.user
 
@@ -200,19 +207,35 @@ PurchaseSchema.methods.processPurchase = async function () {
 }
 
 PurchaseSchema.methods.cancelByUser = async function () {
-  try {
-    IMP.subscribe.unschedule({
-      customer_uid: this.purchase_info.customer_uid,
-      merchant_uid: this.purchase_info.merchant_uid,
-    })
-
-    this.purchase_info.purchase_state = 'cancel-by-user'
-    await Mailer.sendPurchaseFailureMail(this, 'User cancelled purchase')
+  
+  switch (this.purchase_info.purchase_state) {
+      case 'scheduled':
+        try {
+          IMP.subscribe.unschedule({
+            customer_uid: this.purchase_info.customer_uid,
+            merchant_uid: this.purchase_info.merchant_uid,
+          })
+        } catch (e) {
+          // console.error(`Purchase ${this._id} cancelByUser failed`);
+          // console.error(e);
+          // throw e;
+        }
+      case 'preparing':
+        this.purchase_info.purchase_state = 'cancel-by-user'
+        await Mailer.sendPurchaseFailureMail(this, 'User cancelled purchase')
+        break;
+        
+      case 'cancel-by-user':
+      case 'cancel-by-api':
+      case 'cancel-by-system':
+        throw `Post ${this._id} is alread cancelled`
+      
+      default:
+        console.log(`Post ${this._id} cancel purchase request on state ${this.purchase_info.purchase_state}`)
+    }
+    
     return await this.save()
-  } catch (e) {
-    console.error(`Purchase ${this._id} cancelByUser failed`);
-    console.error(e);
-  }
+   
 }
 
 PurchaseSchema.methods.cancelByApi = async function (error_msg) {
@@ -231,7 +254,7 @@ PurchaseSchema.statics.findByUser = function (user) {
 	return this.find({ user }).sort({ updated_at: -1})
 }
 PurchaseSchema.statics.findDetailByUser = function (user) {
-	return this.find({ user }).populate('project product').sort({ updated_at: -1})
+	return this.find({ user: user._id || user }).populate('project product').sort({ updated_at: -1})
 }
 PurchaseSchema.statics.findByProject = function (project) {
 	return this.find({ project }).sort({ updated_at: -1})

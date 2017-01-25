@@ -296,3 +296,12 @@ export async function deleteQnA({ qna_id }) {
 
 	return await _request(config)
 }
+
+export async function cancelPurchase({ purchase_id }) {
+	const config = {
+		method: 'delete',
+		url: `/api/auth/fetch/purchases/${purchase_id}`
+	}
+
+	return await _request(config)
+}

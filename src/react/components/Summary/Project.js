@@ -16,7 +16,7 @@ import {
 
 import { fetchSummary } from '~/src/react/api/AppAPI'
 
-export default class Project extends Component {
+export default class ProjectSummary extends Component {
   state = {
     userType: '',
     project_summary: {
@@ -68,6 +68,8 @@ export default class Project extends Component {
       }
     } = this.state
     
+    console.log(this)
+    
     let infoBackground = {
 			backgroundImage: `url("${ abstract && abstract.imgSrc }")`,
 			backgroundSize: 'cover',
@@ -97,8 +99,8 @@ export default class Project extends Component {
           </TabList>
 
           <TabPanel>
-            { purchase_info && <PurchaseInfo purchaseInfo={purchase_info} isAdmin={isAdmin} />}
-            { sharing_info && <SharingInfo sharingInfo={sharing_info} isAdmin={isAdmin} />}
+            { false && purchase_info && <PurchaseInfo purchaseInfo={purchase_info} isAdmin={isAdmin} />}
+            { false && sharing_info && <SharingInfo sharingInfo={sharing_info} isAdmin={isAdmin} />}
           </TabPanel>
           <TabPanel>
             { posts && <Posts posts={posts} isAdmin={isAdmin} />}

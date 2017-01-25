@@ -45,6 +45,10 @@ router.get('/:projectName/:option?/:tab?', async (req, res, next) => {
 		projectName,
 		option,
 	} = req.params;
+	
+	if(['null', 'undefined'].includes(req.params.tab)) {
+		return res.status(400).json({ error: 'unknown' })
+	}
 
 	if(['edit', 'rewards', 'addresses', 'payments', 'summary'].includes(option)) {
 		return next() // go to /:projectName/edit
@@ -280,7 +284,7 @@ router.post('/:projectName/processPurchase', isLoggedIn, async (req, res) => {
 
 		if (!ac.canEdit(user, project)) throw Error(`can't process unauthorized process`)
 
-		let purchases = await PurchaseModel.findByProject(project)
+		let purchases = await PurchaseModel.findByProject(project).populate('user project')
 
 		let r = await Promise.all(purchases.map(
 			async (p) => {

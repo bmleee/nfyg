@@ -187,7 +187,7 @@ const _renderMyProfile = async (_this, other = false) => {
 		} else if (_this.access_level === 1) { // artist
 			[ sharedProjects, purchasedProjects, purchasedProducts, authorizedProjects, authorizedProducts ] = await fetchDataByKey({user: _this}, KEYS.sharedProjects, KEYS.purchasedProjects, KEYS.purchasedProducts, KEYS.authorizedProjects, KEYS.authorizedProducts)
 		} else if (_this.access_level === 10) { // editor
-			[ sharedProjects, purchasedProjects, purchasedProducts, projects, products, ] = await fetchDataByKey({user: _this}, KEYS.sharedProjects, KEYS.purchasedProjects, KEYS.purchasedProducts, KEYS.projects, KEYS.products,)
+			[ sharedProjects, purchasedProjects, purchasedProducts, projects, products ] = await fetchDataByKey({user: _this}, KEYS.sharedProjects, KEYS.purchasedProjects, KEYS.purchasedProducts, KEYS.projects, KEYS.products)
 		} else if (_this.access_level === 100) { // admin
 			[ projects, products, users, sponsors ] = await fetchDataByKey({user: _this}, KEYS.projects, KEYS.products, KEYS.users, KEYS.sponsors)
 		} else {

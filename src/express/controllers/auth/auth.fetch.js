@@ -29,6 +29,8 @@ import SponsorRouter from './auth.fetch.sponsor'
 import PostRouter from './auth.fetch.post'
 import QnARouter from './auth.fetch.qna'
 
+import PurchaseRouter from './auth.fetch.purchase'
+
 import OptionRouter from './auth.fetch.option'
 import EditorRouter from './auth.fetch.editor'
 
@@ -51,6 +53,7 @@ router.use('/', EditorRouter);
 
 router.use('/qnas', QnARouter);
 router.use('/posts', PostRouter);
+router.use('/purchases', PurchaseRouter);
 
 /**
  * auth level : anyone

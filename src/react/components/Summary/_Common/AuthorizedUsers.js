@@ -5,16 +5,18 @@ import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table'
 export default class AuthorizedUsers extends Component {
   render() {
     const {
-      authorizedUsers,
-      isAdmin
+      authorizedUsers = null,
+      isAdmin = false
     } = this.props
+    
+    console.log(this)
 
     return (
       <div>
         { authorizedUsers && this._renderAuthorizedUsers() }
         <div className="authorized-user-button-container">
         {
-          isAdmin && (
+          authorizedUsers && isAdmin && (
           <button className="authorized-user-button" onClick={this.addNewAuthorizedUser}>관리자 추가하기</button>
           )
         }
@@ -28,50 +30,50 @@ export default class AuthorizedUsers extends Component {
       authorizedUsers,
       isAdmin
     } = this.props
+    
+    const deleteFormatter = (cell, row) => {
+    	return <button className='btn btn-info' onClick={this.deleteAuthorizedUser(row.id)}>Delete</button>
+    }
+  
+    const linkFormatter = (cell, row) => {
+    	return <Link to={`/users/${row.id}`}>{cell}</Link>;
+    }
+  
+    const detailFormatter = (cell, row) => {
+    	return <Link to={`/users/${row.id}/summary`}><button className='btn btn-info'>Detail</button></Link>;
+    }
 
     return (
       <div className="authorized-user-container">
         <BootstrapTable data={authorizedUsers} exportCSV={true}
-            search
-            columnFilter
-            hover
-            pagination >
-            <TableHeaderColumn width='50' dataSort={true} dataFormat={this.linkFormatter} dataField="id" isKey>id</TableHeaderColumn>
-            <TableHeaderColumn width='150' dataSort={true} dataFormat={this.linkFormatter} dataField="name" >본명</TableHeaderColumn>
-            <TableHeaderColumn width='150' dataSort={true} dataFormat={this.linkFormatter} dataField="display_name" dataAlign="center">닉네임</TableHeaderColumn>
-            <TableHeaderColumn width='150' dataSort={true} dataFormat={this.linkFormatter} dataField="local_email" >로컬 이메일</TableHeaderColumn>
-            <TableHeaderColumn width='150' dataSort={true} dataFormat={this.linkFormatter} dataField="fb_email" >페이스북 이메일</TableHeaderColumn>
-            <TableHeaderColumn width='150' dataSort={true} dataFormat={this.linkFormatter} dataField="created_at" >생성일</TableHeaderColumn>
-            <TableHeaderColumn width='100' dataField="detail" dataFormat={this.detailFormatter} export={false} >Detail</TableHeaderColumn>
-            { isAdmin && <TableHeaderColumn width='100' dataField="edit" dataFormat={this.deleteFormatter} export={false} >Delete</TableHeaderColumn> }
-          </BootstrapTable>
+          search
+          columnFilter
+          hover
+          pagination >
+          <TableHeaderColumn width='50' dataSort={true} dataFormat={linkFormatter} dataField="id" isKey>id</TableHeaderColumn>
+          <TableHeaderColumn width='150' dataSort={true} dataFormat={linkFormatter} dataField="name" >본명</TableHeaderColumn>
+          <TableHeaderColumn width='150' dataSort={true} dataFormat={linkFormatter} dataField="display_name" dataAlign="center">닉네임</TableHeaderColumn>
+          <TableHeaderColumn width='150' dataSort={true} dataFormat={linkFormatter} dataField="local_email" >로컬 이메일</TableHeaderColumn>
+          <TableHeaderColumn width='150' dataSort={true} dataFormat={linkFormatter} dataField="fb_email" >페이스북 이메일</TableHeaderColumn>
+          <TableHeaderColumn width='150' dataSort={true} dataFormat={linkFormatter} dataField="created_at" >생성일</TableHeaderColumn>
+          <TableHeaderColumn width='100' dataField="detail" dataFormat={detailFormatter} export={false} >Detail</TableHeaderColumn>
+          { isAdmin && <TableHeaderColumn width='100' dataField="edit" dataFormat={deleteFormatter} export={false} >Delete</TableHeaderColumn> }
+        </BootstrapTable>
       </div>
     )
   }
 
-  deleteFormatter = (cell, row) => {
-  	return <button className='btn btn-info' onClick={this.deleteAuthorizedUser(row.id)}>Delete</button>
-  }
-
-  linkFormatter = (cell, row) => {
-  	return <Link to={`/users/${row.id}`}>{cell}</Link>;
-  }
-
-  detailFormatter = (cell, row) => {
-  	return <Link to={`/users/${row.id}/summary`}><button className='btn btn-info'>Detail</button></Link>;
-  }
+  
 
   // TODO:
-  async addNewAuthorizedUser() {
-
-  }
+  // async addNewAuthorizedUser() {
+  // }
 
   // TODO:
-  deleteAuthorizedUser(user_id) {
-    return async () => {
-
-    }
-  }
+  // deleteAuthorizedUser(user_id) {
+  //   return async () => {
+  //   }
+  // }
 
 
 
