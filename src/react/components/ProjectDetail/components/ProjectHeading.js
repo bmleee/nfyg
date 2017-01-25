@@ -7,6 +7,8 @@ import { getFullUrl } from '~/src/react/lib/utils'
 
 import { FB_SHARER_URL } from '~/env'
 
+import { TwitterButton, FacebookButton, FacebookCount } from "react-social";
+
 export default class ProjectHeading extends Component {
 
 	render() {
@@ -17,6 +19,7 @@ export default class ProjectHeading extends Component {
 				shortTitle,
 				imgSrc,
 				category,
+				postIntro,
 			},
 
 			creator: {
@@ -62,6 +65,9 @@ export default class ProjectHeading extends Component {
 			backgroundPosition: 'center center',
 			backgroundRepeat: 'no-repeat'
 		}
+		
+		const url = document.URL;
+		const url2 = 'http://jwchoi85.tistory.com/165'
 
 		/**
 		 * Issue
@@ -101,6 +107,15 @@ export default class ProjectHeading extends Component {
 						{(currentMoney || 0).toLocaleString()}<span className="heading-summary-status">원</span></div>
 					</div>
 				</div>
+				
+				{/*
+				<FacebookButton sharer='true' media={`http://52.78.180.103:8080${imgSrc}`} appId='361812380855194' message={postIntro} url={url} className="share-button">
+				
+				페이스북 공유로 후원하기
+				<FacebookCount url={url}/> 
+				
+				</FacebookButton> */}
+				
 				<button className="share-button" onClick={this.onClickShareFB}>페이스북 공유로 후원하기</button>
 			</div>
 
@@ -116,10 +131,10 @@ export default class ProjectHeading extends Component {
 
 
 		 let url = getFullUrl()
-		// let url = 'http://localhost:3100/projects/thegreatgraffiti'
+		// let url2 = 'http://7pictures.co.kr'
 
-		console.log('url', url);
-
+		// console.log('url', url2);
+		
 		FB.ui({
 			method: 'share',
 			display: 'popup',

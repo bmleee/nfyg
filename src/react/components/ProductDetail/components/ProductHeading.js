@@ -5,7 +5,7 @@ import Modal from '~/src/react/components/react-awesome-modal';
 import FontAwesome from 'react-fontawesome'
 import KakaoImage from '~/src/assets/images/kakaotalk.svg'
 
-import { TwitterButton, FacebookButton } from "react-social";
+import { TwitterButton, FacebookButton, FacebookCount } from "react-social";
 import CopyToClipboard from 'react-copy-to-clipboard';
 
 
@@ -167,7 +167,7 @@ class ProductHeading extends Component {
 					</div>
 					<div className="share-modal-button-container">
 						
-						<FacebookButton media={`http://52.78.180.103:8080${imgSrc}`} appId='361812380855194' message={shortTitle} url={url} className="ma-share-button-facebook">
+						<FacebookButton sharer='true' media={`http://52.78.180.103:8080${imgSrc}`} appId='361812380855194' message={shortTitle} url={url} className="ma-share-button-facebook">
 						<FontAwesome name='facebook' size='lg' />
 						</FacebookButton>
 

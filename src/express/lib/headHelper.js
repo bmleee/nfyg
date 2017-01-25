@@ -7,7 +7,7 @@ const _get = async ({projectName, productName}) => {
 
   let title = p ? p.abstract.shortTitle : '7Pictures'
   let meta = p ? [
-    { property: 'og:image', content: p.abstract.imgSrc },
+    { property: 'og:image', content: `http://7pictures.kr:8080${p.abstract.imgSrc}` },
   ] : [ 
     { property: 'og:image', content: 'http://7pictures.co.kr/assets/images/favicon.ico' },
   ]
