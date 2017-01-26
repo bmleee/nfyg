@@ -305,3 +305,13 @@ export async function cancelPurchase({ purchase_id }) {
 
 	return await _request(config)
 }
+
+export async function processPurchase({ projectName, productName }) {
+	const base = projectName ? `projects/${projectName}` : `products/${productName}`
+	const config = {
+		method: 'post',
+		url: `/api/auth/fetch/${base}/processPurchase`
+	}
+
+	return await _request(config)
+}

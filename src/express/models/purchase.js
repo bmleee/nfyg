@@ -198,7 +198,8 @@ PurchaseSchema.methods.processPurchase = async function () {
     })
 
     this.purchase_info.purchase_state = 'scheduled'
-    return await this.save()
+    await this.save()
+    return this.toFormat('profile')
   } catch (e) {
     console.error(`Purchase ${this._id} processPurchase failed`);
     console.error(e);

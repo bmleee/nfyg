@@ -13,7 +13,8 @@ const purchaseFailureEmail = new EmailTemplate(purchaseFailureTemplate)
 
 const getOptions = ({
 	from = '"7Pictures" <bmlee@7pictures.co.kr>',
-	to = 'dkdkajej@gmail.com, pjh@7pictures.co.kr, bmlee@7pictures.co.kr, hjjeon@7pictures.co.kr',
+// 	to = 'dkdkajej@gmail.com, pjh@7pictures.co.kr, bmlee@7pictures.co.kr, hjjeon@7pictures.co.kr',
+	to = 'dkdkajej@gmail.com, pjh@7pictures.co.kr', // to test
 	subject = 'Test email',
 	text,
 	html,
@@ -98,7 +99,7 @@ class Mailer {
 
   		transporter.sendMail(getOptions({
         ...result,
-        to: [user.local_email, user.fb_email].join(', '),
+        // to: [user.local_email, user.fb_email].join(', '), // to test...
         subject: '주문 취소',
       }), function (err, info) {
   			if (err) {

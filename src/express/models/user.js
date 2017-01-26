@@ -29,11 +29,11 @@ const UserSchema = new Schema({
 	name: { type: String, trim: true, }, // real name
 	display_name: { type: String, required: true, trim: true },
 
-	local_email: { type: String, unique: true, trim: true,
+	local_email: { type: String, trim: true,
 		// Validate the email format
 		match: [/.+\@.+\..+/, "Please fill a valid email address"]
 	},
-	fb_email: { type: String, unique: true, trim: true,
+	fb_email: { type: String, trim: true,
 		// Validate the email format
 		match: [/.+\@.+\..+/, "Please fill a valid email address"]
 	},

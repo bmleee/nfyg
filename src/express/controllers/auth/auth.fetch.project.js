@@ -284,7 +284,9 @@ router.post('/:projectName/processPurchase', isLoggedIn, async (req, res) => {
 
 		if (!ac.canEdit(user, project)) throw Error(`can't process unauthorized process`)
 
-		let purchases = await PurchaseModel.findByProject(project).populate('user project')
+		let purchases = await PurchaseModel.findByProject(project)
+			.where('purchase_info.purchase_state').equals('preparing')
+			.populate('user project')
 
 		let r = await Promise.all(purchases.map(
 			async (p) => {
@@ -298,7 +300,7 @@ router.post('/:projectName/processPurchase', isLoggedIn, async (req, res) => {
 		))
 
 		console.log(r);
-		res.status({ response: r })
+		res.json({ response: r })
 	} catch (e) {
 		console.error(e);
 		res.status(400).json({error: e.message})

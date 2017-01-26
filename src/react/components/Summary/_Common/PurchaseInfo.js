@@ -6,14 +6,10 @@ import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table'
 import renderStat from './lib/renderStat'
 
 const userLinkFormatter = (cell, row) => {
-	return <Link to={`/users/${row.user_id}`}>{cell}</Link>;
-}
-// TODO:
-const linkFormatter = (cell, row) => {
-	return <Link to={`/users/${row.id}`}>{cell}</Link>;
+	return <Link to={`/user/${row.user_id}`}>{cell}</Link>;
 }
 const detailFormatter = (cell, row) => {
-	return <Link to={`/users/${row.id}`}>{cell}</Link>;
+	return <Link to={`/user/${row.user_id}`}>{cell}</Link>;
 }
 
 export default class PurchaseInfo extends Component {
@@ -38,6 +34,7 @@ export default class PurchaseInfo extends Component {
 			},
 			purchase_info: {
 				amount,
+				purchase_state,
 				customer_uid,
 				merchant_uid,
 				schedule_at,
@@ -57,6 +54,7 @@ export default class PurchaseInfo extends Component {
 			address: `${address1} ${address2} ${zipcode}`,
 			purchaseAmount,
 			shippingFee,
+			purchase_state,
 			title,
 			thresholdMoney,
 			name,
@@ -76,16 +74,17 @@ export default class PurchaseInfo extends Component {
               columnFilter
               hover
               pagination >
-              <TableHeaderColumn width='50' dataSort={true} dataFormat={linkFormatter} dataField="_id" isKey hidden>_id</TableHeaderColumn>
-							<TableHeaderColumn width='150' dataSort={true} dataFormat={linkFormatter} dataField="title" >물품 명</TableHeaderColumn>
+              <TableHeaderColumn width='50' dataSort={true} dataFormat={userLinkFormatter} dataField="_id" isKey hidden>_id</TableHeaderColumn>
+              <TableHeaderColumn width='150' dataSort={true} dataFormat={userLinkFormatter} dataField="purchase_state" >결제 상태</TableHeaderColumn>
+							<TableHeaderColumn width='150' dataSort={true} dataFormat={userLinkFormatter} dataField="title" >물품 명</TableHeaderColumn>
               <TableHeaderColumn width='150' dataSort={true} dataFormat={userLinkFormatter} dataField="name" >본명</TableHeaderColumn>
               <TableHeaderColumn width='150' dataSort={true} dataFormat={userLinkFormatter} dataField="display_name" dataAlign="center">닉네임</TableHeaderColumn>
-              <TableHeaderColumn width='150' dataSort={true} dataFormat={linkFormatter} dataField="addressee_name" >수취인 명</TableHeaderColumn>
-              <TableHeaderColumn width='150' dataSort={true} dataFormat={linkFormatter} dataField="address" >주소</TableHeaderColumn>
-              <TableHeaderColumn width='150' dataSort={true} dataFormat={linkFormatter} dataField="purchaseAmount" >주문 수량</TableHeaderColumn>
-              <TableHeaderColumn width='150' dataSort={true} dataFormat={linkFormatter} dataField="thresholdMoney" >단가</TableHeaderColumn>
-              <TableHeaderColumn width='150' dataSort={true} dataFormat={linkFormatter} dataField="shippingFee" >배송료</TableHeaderColumn>
-              <TableHeaderColumn width='150' dataSort={true} dataFormat={linkFormatter} dataField="amount" >총 금액</TableHeaderColumn>
+              <TableHeaderColumn width='150' dataSort={true} dataFormat={userLinkFormatter} dataField="addressee_name" >수취인 명</TableHeaderColumn>
+              <TableHeaderColumn width='150' dataSort={true} dataFormat={userLinkFormatter} dataField="address" >주소</TableHeaderColumn>
+              <TableHeaderColumn width='150' dataSort={true} dataFormat={userLinkFormatter} dataField="purchaseAmount" >주문 수량</TableHeaderColumn>
+              <TableHeaderColumn width='150' dataSort={true} dataFormat={userLinkFormatter} dataField="thresholdMoney" >단가</TableHeaderColumn>
+              <TableHeaderColumn width='150' dataSort={true} dataFormat={userLinkFormatter} dataField="shippingFee" >배송료</TableHeaderColumn>
+              <TableHeaderColumn width='150' dataSort={true} dataFormat={userLinkFormatter} dataField="amount" >총 금액</TableHeaderColumn>
             </BootstrapTable>
         </div>
       </div>

@@ -36,7 +36,7 @@ const defaultUsers = async () => {
 
 	createUser({
 		name: '일반유저',
-		display_name: '일반유저',
+		display_name: '일반유저2',
 		access_level: 0,
 		local_email: 'user@7pictures.co.kr',
 		fb_email: 'pjh@7pictures.co.kr',
@@ -118,9 +118,11 @@ export default async function initUsers() {
 
 	let user = await UserModel.findOne({name: "일반유저"})
 
-	console.log('trying to init user address & payment');
-	await initAddress(user)
-	await initPayment(user)
+	setTimeout(async () => {
+		console.log('trying to init user address & payment');
+		await initAddress(user)
+		await initPayment(user)
+	}, 0)
 
 	return
 }
