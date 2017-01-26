@@ -8,6 +8,8 @@ import Mailer from '../lib/Mailer'
 const router = express.Router()
 
 router.post('/', async (req, res) => {
+  console.log('iamport.post.body', req.body);
+  
   try {
     // https://github.com/iamport/iamport-manual/tree/master/%EC%9D%B8%EC%A6%9D%EA%B2%B0%EC%A0%9C
     const {
@@ -33,9 +35,14 @@ router.post('/', async (req, res) => {
       vbank_date = '', // 가상계좌 입금기한, UNIX timestamp
     } = req.body
 
-    console.log('iamport.post.body', req.body);
+    
 
     if (status === 'failed') {
+      let purchase = await PurchaseModel.findOneByMerchantId(merchant_uid)
+        .populate('user project product')
+      let r = await purchase.cancelByApi(error_msg)
+      await Mailer.sendPurchaseFailureMail(purchase, error_msg)
+    } else if (status === 'paid') {
       let purchase = await PurchaseModel.findOneByMerchantId(merchant_uid)
         .populate('user project product')
       let r = await purchase.cancelByApi(error_msg)
