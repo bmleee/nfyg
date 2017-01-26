@@ -14,7 +14,7 @@ import {
   Sponsor
 } from './_Common'
 
-import { fetchSummary } from '~/src/react/api/AppAPI'
+import { fetchSummary, processPurchase } from '~/src/react/api/AppAPI'
 
 export default class ProjectSummary extends Component {
   state = {
@@ -89,29 +89,41 @@ export default class ProjectSummary extends Component {
   					<p className="project-summary-state">{ abstract && abstract.state }</p>
 				  </div>
 				</div>
+				
+				<button onClick={this._onClickProcessPurchase}>구매요청</button>
+				
+				
 				<div className="project-summary-body">
-        <Tabs>
-        
-          <TabList>
-            <Tab>후원자 명단</Tab>
-            <Tab>소식 관리</Tab>
-            <Tab>관리자</Tab>
-          </TabList>
-
-          <TabPanel>
-            { false && purchase_info && <PurchaseInfo purchaseInfo={purchase_info} isAdmin={isAdmin} />}
-            { false && sharing_info && <SharingInfo sharingInfo={sharing_info} isAdmin={isAdmin} />}
-          </TabPanel>
-          <TabPanel>
-            { posts && <Posts posts={posts} isAdmin={isAdmin} />}
-          </TabPanel>
-          <TabPanel>
-            { authorizedUsers && <AuthorizedUsers authorizedUsers={authorizedUsers} isAdmin={isAdmin} />}
-          </TabPanel>
-          
-        </Tabs>
+          <Tabs>
+            <TabList>
+              <Tab>후원자 명단</Tab>
+              <Tab>소식 관리</Tab>
+              <Tab>관리자</Tab>
+            </TabList>
+  
+            <TabPanel>
+              { purchase_info && <PurchaseInfo purchaseInfo={purchase_info} isAdmin={isAdmin} />}
+              { sharing_info && <SharingInfo sharingInfo={sharing_info} isAdmin={isAdmin} />}
+            </TabPanel>
+            <TabPanel>
+              { posts && <Posts posts={posts} isAdmin={isAdmin} />}
+            </TabPanel>
+            <TabPanel>
+              { authorizedUsers && <AuthorizedUsers authorizedUsers={authorizedUsers} isAdmin={isAdmin} />}
+            </TabPanel>
+            
+          </Tabs>
         </div>
       </div>
     )
+  }
+  
+  _onClickProcessPurchase = async () => {
+    try {
+      const r = await processPurchase({ projectName: this.props.params.projectName })
+      console.log(r)
+    } catch (e) {
+      console.error(e)
+    }
   }
 }
