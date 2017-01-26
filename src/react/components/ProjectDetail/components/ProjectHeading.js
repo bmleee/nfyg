@@ -139,7 +139,6 @@ export default class ProjectHeading extends Component {
 			method: 'share',
 			display: 'popup',
 			href: url,
-			quote: 'quotequotequote',
 		},  function(response) {
     	if (response && !response.error_message) {
 	      alert('Posting completed.');
