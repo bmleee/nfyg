@@ -161,13 +161,13 @@ PurchaseSchema.methods.processPurchase = async function () {
     // 기존 예약 결제 취소
     console.log(`Post ${this._id}`)
     console.log(this.purchase_info)
-    
+
     try {
       const cancel_result = await IMP.subscribe.unschedule({
         customer_uid: this.purchase_info.customer_uid,
         merchant_uid: this.purchase_info.merchant_uid,
       })
-      
+
       console.log(`Post ${this._id} cancel result: `, cancel_result)
     } catch (e) {}
 
@@ -208,7 +208,7 @@ PurchaseSchema.methods.processPurchase = async function () {
 }
 
 PurchaseSchema.methods.cancelByUser = async function () {
-  
+
   switch (this.purchase_info.purchase_state) {
       case 'scheduled':
         try {
@@ -225,18 +225,18 @@ PurchaseSchema.methods.cancelByUser = async function () {
         this.purchase_info.purchase_state = 'cancel-by-user'
         await Mailer.sendPurchaseFailureMail(this, 'User cancelled purchase')
         break;
-        
+
       case 'cancel-by-user':
       case 'cancel-by-api':
       case 'cancel-by-system':
         throw `Post ${this._id} is alread cancelled`
-      
+
       default:
         console.log(`Post ${this._id} cancel purchase request on state ${this.purchase_info.purchase_state}`)
     }
-    
+
     return await this.save()
-   
+
 }
 
 PurchaseSchema.methods.cancelByApi = async function (error_msg) {
@@ -265,6 +265,15 @@ PurchaseSchema.statics.findByProduct = function (product) {
 }
 PurchaseSchema.statics.findOneByMerchantId = function (mid) {
 	return this.findOne({ 'purchase_info.merchant_uid': mid })
+}
+PurchaseSchema.statics.countValidPurchase = function ({ product, project, }) {
+	return this.count({
+    $or: [
+      { product: product },
+      { project: project }
+    ]
+  })
+    .where('purchase_info.purchase_state').in(['preparing', 'scheduled'])
 }
 
 // Create the 'User' model out of the 'PurchaseSchema'

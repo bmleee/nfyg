@@ -48,11 +48,11 @@ const sliderSettings = {
 };
 
 class Home extends Component {
-	
+
 	componentDidMount () {
           window.scrollTo(0, 0)
         }
-	
+
 	render() {
 		const {
 			presentProjects,
@@ -92,6 +92,7 @@ class Home extends Component {
 									numDirectSupports,
 									numIndirectSupports,
 									remainingDays,
+									numValidPurchases,
 									link,
 									postIntro,
 								}, index) => (
@@ -106,7 +107,7 @@ class Home extends Component {
 											</Link>
 											<div className="present-project-list-item-caption">
 												<Link to={link}><h4 className="project-list-title">{title}</h4></Link>
-												<div className="product-purchase-num"><p>000명</p>주문중</div>
+												<div className="product-purchase-num"><p>{numValidPurchases}명</p>주문중</div>
 											</div>
 										</div>
 									</div>

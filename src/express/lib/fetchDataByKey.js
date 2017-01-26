@@ -105,26 +105,18 @@ const _fetcher = {
 
 const fetchDataByKey = async ({ user, q, ...others }, ...keys) => {
   let project_names, purchases;
-  
-  console.log('fetchDataByKey.keys', keys)
-  
-  console.log('KEYS.purchasedProjects in keys || KEYS.purchasedProducts in keys', KEYS.purchasedProjects in keys || KEYS.purchasedProducts in keys)
-  console.log('KEYS.sharedProjects in keys', KEYS.sharedProjects in keys)
-  console.log('KEYS.purchasedProjects', KEYS.purchasedProjects)
-  console.log('KEYS.purchasedProducts', KEYS.purchasedProducts)
 
   // preparing parameters
   if (keys.includes(KEYS.sharedProjects)) {
     let r = await FacebookTracker.getUserSummary(user && user.id)
     project_names = r.project_names
   }
-  
+
   if (keys.includes(KEYS.purchasedProjects)
     || keys.includes(KEYS.purchasedProducts)) {
     purchases = await PurchaseModel.findDetailByUser(user)
-    console.log('purchases.length: ', purchases.length)
   }
-  
+
   if (q) {
     q = new RegExp(`.*${q}.*`, 'i')
   }

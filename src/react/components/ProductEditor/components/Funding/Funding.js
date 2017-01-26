@@ -219,21 +219,6 @@ const Funding = ({
 
 	return (
 		<div className="abstract-container">
-
-			<FormWrapper
-				title="목표 금액"
-				valueType={VALUE_TYPE.MONEY}
-				alt="목표 금액을 입력하세요"
-				initialValue={targetMoney}
-				submitCaption={'목표 금액을 입력하세요'}
-				submitCaptionsub={'입력하기'}
-				onSubmit={_onTargetMoneySubmit}
-				Wrapper={TargetMoneyWrapper}
-				Form={TargetMoneyForm}
-				className ="exhibition-long-title"
-				classNameopen ="editor-open-container"
-			/>
-
 			<FormWrapper
 				title="배송료"
 				valueType={VALUE_TYPE.MONEY}

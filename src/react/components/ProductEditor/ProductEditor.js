@@ -523,13 +523,9 @@ export default class ProductEditor extends Component {
       }
     },
     overview: {
-      intro: { $set: p.overview.intro },
-      part1: {
-        raw: { $set: JSON.parse(p.overview.part1.raw) }
-      },
-      part2: {
-        raw: { $set: JSON.parse(p.overview.part2.raw) }
-      },
+      intro: { $set: project.overview.intro },
+      part1: { $set: JSON.parse(project.overview.part1.raw) },
+      part2: { $set: JSON.parse(project.overview.part2.raw) },
     },
     relatedContent: {
       contents: { $set: p.relatedContents },

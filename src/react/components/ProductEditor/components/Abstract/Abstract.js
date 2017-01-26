@@ -33,9 +33,8 @@ const ImgSrcWrapper = ({value}) => !!value
 : (
 	<span></span>
 )
-const ImgSrcForm = ({value, onChange}) => (
-	<input type="file" value={value} onChange={onChange} />
-)
+const ImgSrcForm = ({value, onChange}) =>
+	<img src={value} alt=""/>
 
 // ----
 const CategoryWrapper = ({value}) => (
@@ -88,7 +87,7 @@ const CreatorImgSrcWrapper = ({value}) => !!value
 ? <img src={value} alt=""/>
 : <span></span>
 const CreatorImgSrcForm = ({value, onChange}) =>
-	<input type="file" value={value} onChange={onChange}/>
+	<img src={value} alt=""/>
 
 // ----
 const CreatorDescriptionWrapper = ({value}) => !!value
@@ -331,7 +330,7 @@ const Abstract = ({
 
 			<FormWrapper
 				title="진행자 소개"
-				valueType={VALUE_TYPE.IMAGE}
+				valueType={VALUE_TYPE.TEXT}
 				alt="작성자에 대해 간략히 설명해주세요"
 				initialValue={creatorDescription}
 				submitCaption={'진행자를 간략히 소개해주세요'}
@@ -343,7 +342,7 @@ const Abstract = ({
 				classNameopen ="editor-open-container"
 			/>
 
-			<span className="editor-small-title">스폰서 이름</span>
+			{/* <span className="editor-small-title">스폰서 이름</span> */}
 
 			{/* <FormWrapper
 				title="스폰서 이름"

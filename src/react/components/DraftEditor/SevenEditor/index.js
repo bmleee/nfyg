@@ -58,12 +58,12 @@ export default class SevenEditor extends Component {
 	};
 
 	componentDidMount() {
-		// console.log('SevenEditor.componentDidMount', this);
-		// console.log('typeof this.props.raw', typeof this.props.raw);
-		// console.log('this.props.raw', this.props.raw);
+		console.log('SevenEditor.componentDidMount', this);
+		console.log('typeof this.props.raw', typeof this.props.raw);
+		console.log('this.props.raw', this.props.raw);
 
 		// init empty raw content
-		let raw = typeof this.props.raw === 'string' ? JSON.parse(this.props.raw || `{"entityMap":{},"blocks":[]}`) : this.props.raw
+		let raw = typeof this.props.raw === 'string' ? JSON.parse(this.props.raw) : this.props.raw
 		let editorState;
 
 		if (!this.props.raw) editorState = EditorState.createEmpty()

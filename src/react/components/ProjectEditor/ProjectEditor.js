@@ -102,6 +102,8 @@ export default class ProjectEditor extends Component {
           ...this.server2client(data.project),
           tabLinkBase
         })
+
+        console.log(this.state)
       } else {
         this.setState({
           tabLinkBase
@@ -457,12 +459,8 @@ export default class ProjectEditor extends Component {
     },
     overview: {
       intro: { $set: project.overview.intro },
-      part1: {
-        raw: { $set: JSON.parse(project.overview.part1.raw) }
-      },
-      part2: {
-        raw: { $set: JSON.parse(project.overview.part2.raw) }
-      },
+      part1: { $set: JSON.parse(project.overview.part1.raw) },
+      part2: { $set: JSON.parse(project.overview.part2.raw) },
     },
     relatedContent: {
       contents: { $set: project.relatedContents },

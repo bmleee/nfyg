@@ -29,7 +29,8 @@ const ProductSchema = new Schema({
 		]},
 		state: {type: String, required: true},     // refers to react/constants/selectOptions
 		postIntro: {type: String, required: true},
-		created_at: {type: Date, default: Date.now()}
+		created_at: {type: Date, default: Date.now()},
+		updated_at: {type: Date, default: Date.now()},
 	},
 
 	creator: {
@@ -40,11 +41,6 @@ const ProductSchema = new Schema({
 	},
 
 	authorizedUsers: [{ type: Schema.Types.ObjectId, ref: 'User' }],
-
-	// sponsor: {
-	// 	type: Schema.Types.ObjectId,
-	// 	ref: 'Sponsor'
-	// },
 
 	// Funding
 	funding: {
@@ -183,8 +179,7 @@ ProductSchema.methods.toFormat = async function (type, ...args) {
 							title: this.abstract.shortTitle,
 							targetMoney: this.funding.targetMoney,
 							currentMoney: this.funding.currentMoney,
-							// numDirectSupports: await PurchaseModel.count({product: this}),
-							// numIndirectSupports: Math.floor(Math.random() * 300), // TODO: from IndirectSupport
+							numDirectSupports: await PurchaseModel.countValidPurchase({ product: this }),
 							remainingDays: ( new Date(this.funding.dateTo).getTime() - new Date(this.funding.dateFrom).getTime() ) / 1000 / 60 / 60 / 24,
 							link: `/products/${this.abstract.productName}`,
 							postIntro: this.abstract.postIntro,
@@ -199,9 +194,7 @@ ProductSchema.methods.toFormat = async function (type, ...args) {
 				let posts = this.posts.map(p => p.toFormat('product_detail', user))
 				let qnas = this.qnas.map(q => q.toFormat('product_detail'))
 
-				let numValidPurchases = await PurchaseModel
-					.count({ 'product': this })
-					.where('purchase_info.purchase_state').in(['preparing', 'scheduled'])
+				let numValidPurchases = await PurchaseModel.countValidPurchase({ product: this })
 				let purchaseSuccess = this.funding.minPurchaseVolume <= numValidPurchases
 
 				return {
