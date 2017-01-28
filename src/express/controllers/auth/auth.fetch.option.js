@@ -30,7 +30,7 @@ router.get('/sponsorName', async (req, res) => {
 
 	// if(ac.canEdit(req.user)) // TODO: activate auth check
 		return res.json({
-			user: renderUser.authorizedUser, // TODO: according to auth-check
+			user: renderUser.authorizedUser(req.user), // TODO: according to auth-check
 			data: {
 				options: docs.map( ({sponsorName, displayName}) => ({label: displayName, value: sponsorName}) )
 			}
@@ -42,7 +42,7 @@ router.get('/project', async (req, res) => {
 
 	// TODO: activate auth-check
 	return res.json({
-		user: renderUser.authorizedUser, // TODO: according to auth-check
+		user: renderUser.authorizedUser(req.user), // TODO: according to auth-check
 		data: {
 			options: docs.map( ({abstract: {projectName, longTitle}}) => ({label: longTitle, value: projectName}) )
 		}
@@ -55,7 +55,7 @@ router.get('/projectName', async (req, res) => {
 
 	// TODO: activate auth-check
 	return res.json({
-		user: renderUser.authorizedUser, // TODO: according to auth-check
+		user: renderUser.authorizedUser(req.user), // TODO: according to auth-check
 		data: {
 			options: docs.map( ({abstract: {projectName, longTitle}}) => ({label: longTitle, value: projectName}) )
 		}
@@ -68,11 +68,15 @@ router.get('/productName', async (req, res) => {
 
 	// TODO: activate auth-check
 	return res.json({
-		user: renderUser.authorizedUser, // TODO: according to auth-check
+		user: renderUser.authorizedUser(req.user), // TODO: according to auth-check
 		data: {
 			options: docs.map( ({abstract: {productName, longTitle}}) => ({label: longTitle, value: productName}) )
 		}
 	})
+})
+
+router.get('/magazineCategory', async (req, res) => {
+	
 })
 
 // TODO: add

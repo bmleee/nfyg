@@ -2,7 +2,11 @@ import React, { Component, PropTypes } from 'react';
 import { fetchPurchaseInfo } from '~/src/react/api/AppAPI'
 
 
-export default class C extends Component {
+export default class Purchase extends Component {
+	componentDidMount() {
+		window.scrollTo(0, 0)
+	}
+	
 	render() {
 
 		console.log('Purcase/components/Purchase', this);
@@ -25,7 +29,7 @@ export default class C extends Component {
 				</div>
 				<div className="purchase-stage-content-container">
 					<h4 className="purchase-detail-title">결제 정보를 확인해주세요.</h4>
-			
+
 						<p className="profile-small-title">옵션 및 수량</p>
 						<div className="purchase-reward-select-container">
 							<div className="purchase-reward-select">
@@ -35,8 +39,8 @@ export default class C extends Component {
 								<p className="purchase-reward-money">{reward.thresholdMoney.toLocaleString()}원</p>
 							</div>
 						</div>
-			
-			
+
+
 						<p className="profile-small-title">배송지</p>
 						<div className="purchase-reward-select-container">
 							<div className="purchase-reward-select">
@@ -44,8 +48,8 @@ export default class C extends Component {
 								<p className="purchase-reward-description">받는 분 : {address.addressee_name} 님</p>
 							</div>
 						</div>
-			
-			
+
+
 						<p className="profile-small-title">결제 카드</p>
 						<div className="purchase-reward-select-container">
 							<div className="purchase-reward-select">
@@ -53,10 +57,10 @@ export default class C extends Component {
 								<p className="purchase-reward-money">{payment.card_name} {payment.card_number}</p>
 							</div>
 						</div>
-			
+
 				</div>
 				<div className="purchase-stage-content-container-2">
-			
+
 						<p className="profile-small-title">최종 결제 금액</p>
 						<div className="purchase-reward-select-container">
 							<div className="purchase-reward-result">
@@ -64,7 +68,7 @@ export default class C extends Component {
 								<p className="purchase-reward-money">= {(reward.thresholdMoney+3000).toLocaleString()}원</p>
 							</div>
 						</div>
-						
+
 				</div>
 				<div className="purchase-stage-move-container">
 					<button className="purchase-stage-prev-button" onClick={goToPreviousStage}>이전 단계</button>

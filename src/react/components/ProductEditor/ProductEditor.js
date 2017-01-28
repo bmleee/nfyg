@@ -4,7 +4,7 @@ import ScrollToTop from 'react-scroll-up';
 
 import update from 'immutability-helper'
 
-import { fetchUserAndData, upsertProduct, upload_file } from '../../api/AppAPI'
+import { fetchUserAndData, upload_file, createProduct, updateProduct } from '../../api/AppAPI'
 
 import { canUseDOM } from '~/src/lib/utils'
 
@@ -92,23 +92,26 @@ export default class ProductEditor extends Component {
 	}
 
   async componentDidMount() {
-    const {
-      user,
-      data
-    } = await fetchUserAndData()
-
-    console.log('fetched data', data);
-
-    if (this.props.appUtils.setUser) this.props.appUtils.setUser(user)
-
-    let tabLinkBase = `/${(document.URL.match(/products\/.+\/edit/) || ['product-editor'])[0]}`
-
     try {
-      if(data.product) {
+      // 서버에서 State를 가져와 채워야 한다면 ...
+      const {
+        user,
+        data
+      } = await fetchUserAndData()
+
+      console.log('fetched data', data);
+
+      let tabLinkBase = `/${(document.URL.match(/products\/.+\/edit/) || ['product-editor'])[0]}`
+
+      appUtils.setUser(user)
+
+      if(data && data.product) {
         this.setState({
           ...this.server2client(data.product),
           tabLinkBase
         })
+
+        console.log(this.state)
       } else {
         this.setState({
           tabLinkBase
@@ -116,6 +119,8 @@ export default class ProductEditor extends Component {
       }
     } catch (e) {
       console.error(e);
+      alert(e.message)
+      this.props.history.goBack()
     }
 	}
 
@@ -474,6 +479,7 @@ export default class ProductEditor extends Component {
 	}
 
   client2server = () => {
+    console.log('state', this.state);
     return {
       abstract: this.state.abstract,
       creator: this.state.creator,
@@ -523,9 +529,9 @@ export default class ProductEditor extends Component {
       }
     },
     overview: {
-      intro: { $set: project.overview.intro },
-      part1: { $set: JSON.parse(project.overview.part1.raw) },
-      part2: { $set: JSON.parse(project.overview.part2.raw) },
+      intro: { $set: p.overview.intro },
+      part1: { $set: JSON.parse(p.overview.part1.raw) },
+      part2: { $set: JSON.parse(p.overview.part2.raw) },
     },
     relatedContent: {
       contents: { $set: p.relatedContents },
@@ -538,12 +544,19 @@ export default class ProductEditor extends Component {
     let body = this.client2server()
 
     try {
-      let r = await upsertProduct(body)
+      let r;
+
+      if(this.props.params.productName) {
+        r = await updateProduct(this.props.params.productName, body)
+      } else {
+        r = await createProduct(body)
+      }
+
       console.log(r);
-      this.props.appUtils.etFlash({title: 'product saved', message: JSON.stringify(r, undefined, 4), level: 'success'})
+      appUtils.etFlash({title: 'product saved', message: JSON.stringify(r, undefined, 4), level: 'success'})
     } catch (e) { // error from axios.request
       console.log(e);
-      this.props.appUtils.setFlash({title: 'product save error', message: JSON.stringify(e.response, undefined, 4), level: 'error', autoDismiss: 0, dismissible: true})
+      appUtils.setFlash({title: 'product save error', message: JSON.stringify(e.response, undefined, 4), level: 'error', autoDismiss: 0, dismissible: true})
     }
 	}
 }

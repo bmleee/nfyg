@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router'
 
 import {
 	MagazineDetailHeading,
@@ -12,11 +13,17 @@ class MagazineDetail extends Component {
 		console.log('MagazineDetail', this);
 		const {
 			magazine,
-			relatedMagazines,
-			relatedExhibitions
+			relatedContents,
+			next,
+			pre
 		} = this.props
 
 		const { content } = magazine;
+
+		const nextLink = next && `/magazines/${next.magazineName}`
+		const preLink = pre && `/magazines/${pre.magazineName}`
+
+		console.log(this);
 
 		return (
 			<div className="magazine-detail">
@@ -25,13 +32,12 @@ class MagazineDetail extends Component {
 				<MegazineDetailContents content={content} />
 
 				<div className="magazine-prev-next-button">
-				<button className="magazine-prev-button">PREV</button>
-				<button className="magazine-next-button">NEXT</button>
+					{ pre && <Link to={preLink}><button className="magazine-prev-button">PREV</button></Link> }
+					{ next && <Link to={nextLink}><button className="magazine-next-button">NEXT</button></Link> }
 				</div>
 
 				<MagazineDetailRelatedContentsList
-					relatedMagazines={relatedMagazines}
-					relatedExhibitions={relatedExhibitions} />
+					relatedContents={relatedContents} />
 			</div>
 		)
 	}

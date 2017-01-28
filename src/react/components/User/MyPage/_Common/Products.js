@@ -28,8 +28,7 @@ export default class Products extends Component {
                 columnFilter
                 hover
                 pagination >
-                <TableHeaderColumn width='50' dataSort={true} dataFormat={linkFormatter} dataField="_id" isKey hidden>id</TableHeaderColumn>
-                <TableHeaderColumn width='150' dataSort={true} dataFormat={linkFormatter} dataField="productName" >Project Name</TableHeaderColumn>
+                <TableHeaderColumn width='150' dataSort={true} dataFormat={linkFormatter} dataField="productName" isKey >Project Name</TableHeaderColumn>
                 <TableHeaderColumn width='150' dataSort={true} dataFormat={linkFormatter} dataField="state" dataAlign="center">상태</TableHeaderColumn>
                 <TableHeaderColumn width='150' dataSort={true} dataFormat={linkFormatter} dataField="longTitle" >긴 제목</TableHeaderColumn>
                 <TableHeaderColumn width='150' dataSort={true} dataFormat={linkFormatter} dataField="dateFrom" >시작일</TableHeaderColumn>

@@ -201,6 +201,7 @@ ProjectSchema.methods.toFormat = async function (type, ...args) {
 				let money = (canEdit || !user) ? 0 :  await user.supportedMoney({projectName: this.abstract.projectName});
 				let posts = this.posts.map(p => p.toFormat('project_detail', ac.canEdit(user, this), money))
 				let qnas = this.qnas.map(q => q.toFormat('project_detail'))
+				let numValidPurchases = await PurchaseModel.countValidPurchase({ project: this })
 
 				let {
 					likes, shares, comments, num_useres, num_posts,
@@ -257,6 +258,7 @@ ProjectSchema.methods.toFormat = async function (type, ...args) {
 					directSupporters: (await PurchaseModel.findByProject(this)).map(async (_) => await _.toFormat('project_detail')),
 					indirectSupporters: indirectSupporters,
 					relatedContents: this.relatedContents,
+					numValidPurchases,
 				}
 
 
@@ -311,49 +313,8 @@ ProjectSchema.methods.toFormat = async function (type, ...args) {
 
 	} catch (e) {
 		console.error(e);
-	} finally {
-
 	}
 }
-
-
-ProjectSchema.methods.pushPost = async function (post_id) {
-	try {
-		let posts = this.posts || []
-
-		if (post_id instanceof Array) {
-			posts.concat(post_id)
-		} else {
-			posts.push(post_id)
-		}
-
-		this.posts = Array.from(new Set(posts))
-		this.numPosts = Array.from(new Set(posts)).length
-		return await this.save()
-	} catch (e) {
-		console.error(e);
-		throw e
-	}
-}
-
-ProjectSchema.methods.pushQnA = async function (_id) {
-	try {
-		let qnas = this.qnas || []
-
-		if (_id instanceof Array) {
-			qnas.concat(_id)
-		} else {
-			qnas.push(_id)
-		}
-			this.qnas = Array.from(new Set(qnas))
-			this.numQnAs = Array.from(new Set(qnas)).length
-			return await this.save()
-	} catch (e) {
-		console.error(e);
-		throw e
-	}
-}
-
 
 ProjectSchema.methods.authorizedTo = function (user) {
 	return !!this.authorizedUsers.filter( _id => user.equals(user))
@@ -398,8 +359,6 @@ ProjectSchema.methods.getPurchaseInfo = async function () {
 		purchases,
 	}
 }
-
-
 
 // Create the 'User' model out of the 'ProjectSchema'
 const ProjectModel = mongoose.model('Project', ProjectSchema);

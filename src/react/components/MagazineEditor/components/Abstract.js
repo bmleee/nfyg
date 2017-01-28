@@ -1,9 +1,11 @@
 import React from 'react'
-
+import Select from 'react-select'
 import FormWrapper from '~/src/react/components/FormWrapper/FormWrapper'
 import { VALUE_TYPE } from '~/src/react/components/FormWrapper/constants'
 
 import { value2label, date2string } from '~/src/react/lib/utils'
+
+import { SelectOptions } from '~/src/react/constants'
 
 // ----
 const LongTitleWrapper = ({value}) => value
@@ -20,11 +22,29 @@ const ShortTitleForm = ({value, onChange}) =>
 	<input type="text" value={value} onChange={onChange} />
 
 // ----
-const ImgSrcWrapper = ({value}) => value
-	? <img src={value} alt=""/>
-	: <span></span>
+const ImgSrcWrapper = ({value}) => !!value
+? (
+		<img src={value} alt=""/>
+)
+: (
+	<span></span>
+)
 const ImgSrcForm = ({value, onChange}) =>
-	<input type="file" value={value} onChange={onChange} accept="Image/*" />
+	<img src={value} alt=""/>
+
+// ----
+const CategoryWrapper = ({value}) => (
+	<span>{value2label(SelectOptions.MagazineCategory, value)}</span>
+)
+const CategoryForm = ({value, onChange}) => (
+	<Select
+		value={value}
+		onChange={onChange}
+		options={SelectOptions.MagazineCategory.slice(1, SelectOptions.MagazineCategory.length )}
+	/>
+)
+
+
 
 // ----
 const MagazineNameWrapper = ({value}) => value
@@ -50,11 +70,11 @@ const CreatorNameForm = ({value, onChange}) =>
 	<input type="text" value={value} onChange={onChange} />
 
 // ----
-const CreatorImgSrcWrapper = ({value}) => value
+const CreatorImgSrcWrapper = ({value}) => !!value
 	? <img src={value} alt=""/>
 	: <span></span>
 const CreatorImgSrcForm = ({value, onChange}) =>
-	<input type="file" value={value} onChange={onChange} accept="Image/*" />
+	<img src={value} alt=""/>
 
 // ----
 const CreatorLocationWrapper = ({value}) => value
@@ -77,7 +97,8 @@ const Abstract = ({
 		shortTitle,
 		imgSrc,
 		magazineName,
-		description
+		description,
+		category
 	},
 
 	creator: {
@@ -91,6 +112,7 @@ const Abstract = ({
 	_onShortTitleSubmit,
 	_onImgSrcSubmit,
 	_onMagazineNameSubmit,
+	_onCategorySubmit,
 
 	_onCreatorNameSubmit,
 	_onCreatorImgSrcSubmit,
@@ -143,6 +165,19 @@ const Abstract = ({
 			/>
 
 			<FormWrapper
+				title="매거진 카테고리"
+				valueType={VALUE_TYPE.SELECT}
+				alt="매거진 카테고리를 선택하세요"
+				initialValue={category}
+				submitCaption={'카테고리를 선택하세요'}
+				submitCaptionsub={'선택하기'}
+				onSubmit={_onCategorySubmit}
+				Wrapper={CategoryWrapper}
+				Form={CategoryForm}
+				classNameopen ="editor-open-container"
+			/>
+
+			<FormWrapper
 				title="매거진 영문 제목"
 				valueType={VALUE_TYPE.TEXT}
 				alt=""
@@ -168,7 +203,7 @@ const Abstract = ({
 			/>
 
 			<span className="editor-small-title">작성자 정보</span>
-			
+
 			<FormWrapper
 				title="이 름"
 				valueType={VALUE_TYPE.TEXT}

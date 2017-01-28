@@ -99,6 +99,7 @@ const routes = (
 		</Route>
 
 		<Route path="projects/:projectName/purchase" component={ ProjectDetailPurchase }></Route>
+		<Route path="products/:productName/purchase" component={ ProjectDetailPurchase }></Route>
 
 		<Route path="products/:productName" component={ProductDetail}>
 			// Project Detail: Overview, Post, Ranking, QnA, ...
@@ -137,6 +138,13 @@ const routes = (
 			<Route path="post" component={ ExhibitionDetailPost }></Route>
 			<Route path="artworks" component={ ExhibitionDetailArtworks }></Route>
 			<Route path="qna" component={ ExhibitionDetailQnA }></Route> */}
+		</Route>
+
+		<Route path="magazines/:magazineName/edit" component={MagazineEditor}>
+			<IndexRoute component={MagazineEditorAbstract} />
+			<Route path="abstract" component={ MagazineEditorAbstract }></Route>
+			<Route path="content" component={ MagazineEditorContent }></Route>
+			<Route path="recommend" component={ MagazineEditorRecommend }></Route>
 		</Route>
 
 		<Route path="project-editor" component={ProjectEditor}>
@@ -215,14 +223,14 @@ const routes = (
 		<Route path="projects/:projectName/summary" component={ProjectSummary}></Route>
 		<Route path="products/:productName/summary" component={ProductSummary}></Route>
 		<Route path="users/:user_id/summary" component={UserSummary}></Route>
-		
+
 		{/* Footer, Search components */}
 		<Route path="about" component={About}></Route>
 		<Route path="faq" component={Faq}></Route>
 		<Route path="privacy" component={Privacy}></Route>
 		<Route path="termofuse" component={TermOfUse}></Route>
 		<Route path="Search" component={Search}></Route>
-		
+
 
 		<Route path="test1" component={Test1}></Route>
 		<Route path="test2" component={Test2}></Route>

@@ -191,6 +191,7 @@ ProductSchema.methods.toFormat = async function (type, ...args) {
 
 			case 'product_detail':
 				let user = args[0];
+				let canEdit = args[1]; // TODO: use this!
 				let posts = this.posts.map(p => p.toFormat('product_detail', user))
 				let qnas = this.qnas.map(q => q.toFormat('product_detail'))
 
@@ -278,7 +279,6 @@ ProductSchema.methods.toFormat = async function (type, ...args) {
 					abstract: this.abstract,
 					creator: this.creator,
 					funding: this.funding,
-					// posts: this.posts,
 					qnas: this.qnas,
 					authorizedUsers,
 					purchase_info,
@@ -294,45 +294,6 @@ ProductSchema.methods.toFormat = async function (type, ...args) {
 
 	} catch (e) {
 		console.error(e);
-	} finally {
-
-	}
-}
-
-ProductSchema.methods.pushPost = async function (post_id) {
-	try {
-		let posts = this.posts || []
-
-		if (post_id instanceof Array) {
-			posts.concat(post_id)
-		} else {
-			posts.push(post_id)
-		}
-
-		this.posts = Array.from(new Set(posts))
-		this.numPosts = Array.from(new Set(posts)).length
-		return await this.save()
-	} catch (e) {
-		console.error(e);
-		throw e
-	}
-}
-
-ProductSchema.methods.pushQnA = async function (_id) {
-	try {
-		let qnas = this.qnas || []
-
-		if (_id instanceof Array) {
-			qnas.concat(_id)
-		} else {
-			qnas.push(_id)
-		}
-			this.qnas = Array.from(new Set(qnas))
-			this.numQnAs = Array.from(new Set(qnas)).length
-			return await this.save()
-	} catch (e) {
-		console.error(e);
-		throw e
 	}
 }
 
@@ -348,17 +309,11 @@ ProductSchema.methods.getPurchaseInfo = async function () {
 
 	let stat = countBy(purchases.map(p => p.purchase_info), 'purchase_state')
 
-	console.log('stat', stat);
-	console.log('purchases', purchases);
-
 	return {
 		stat,
 		purchases,
 	}
 }
-
-
-
 
 const ProductModel = mongoose.model('Product', ProductSchema);
 export default ProductModel

@@ -9,14 +9,8 @@ import {
 
 class Overview extends Component {
 
-	constructor() {
-		super(...arguments);
-
-		this.state = {
-			seeMore: false,
-		}
-
-		this._onClick = this._onClick.bind(this)
+	state = {
+		seeMore: false,
 	}
 
 	_onClick() {
@@ -27,6 +21,9 @@ class Overview extends Component {
 
 	render() {
 		let {
+			abstract: {
+				productName
+			},
 			overview: {
 				intro,
 				part1,
@@ -39,12 +36,14 @@ class Overview extends Component {
 
 		return (
 			<div className="project-detail-overview">
-				{/* <ProductReward rewards={rewards} /> */}
+				<div className="project-detail-overview-info">
+					<div dangerouslySetInnerHTML={{ __html: part1}} />
+				</div>
+
+				<ProductReward productName={productName} rewards={rewards} />
 
 				<div className="project-detail-overview-info">
-					{/* <Viewer raw={part1} /> */}
-					<div dangerouslySetInnerHTML={{ __html: part1}} />
-					{/* this.state.seeMore ? <Viewer raw={part2} /> : <button onClick={this._onClick}>더보기</button> */}
+					<div dangerouslySetInnerHTML={{ __html: part2}} />
 				</div>
 			</div>
 		)

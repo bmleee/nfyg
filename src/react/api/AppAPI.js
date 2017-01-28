@@ -98,19 +98,27 @@ export function fetchOptions(path) {
 	return ret
 }
 
-export async function upsertProject(body) {
-	const param = document.URL.match(/projects\/.+\/edit/) ? document.URL.match(/projects\/.+\/edit/)[0].split('/')[1] : '' // get project name from url
-
+export async function createProject(body) {
 	const config = {
 		method: 'post',
-		url: `/api/auth/fetch/projects/${param}`,
+		url: `/api/auth/fetch/projects/`,
 		data: body,
 	}
 
 	return await _request(config)
 }
 
-export async function upsertProduct(body) {
+export async function updateProject(projectName, body) {
+	const config = {
+		method: 'put',
+		url: `/api/auth/fetch/projects/${projectName}`,
+		data: body,
+	}
+
+	return await _request(config)
+}
+
+export async function createProduct(body) {
 	const config = {
 		method: 'post',
 		url: `/api/auth/fetch/products`,
@@ -120,8 +128,38 @@ export async function upsertProduct(body) {
 	return await _request(config)
 }
 
+export async function updateProduct(productName, body) {
+	const config = {
+		method: 'put',
+		url: `/api/auth/fetch/products/${productName}`,
+		data: body,
+	}
+
+	return await _request(config)
+}
+
+export async function createMagazine(body) {
+	const config = {
+		method: 'post',
+		url: `/api/auth/fetch/magazines`,
+		data: body,
+	}
+
+	return await _request(config)
+}
+
+export async function updateMagazine(magazineName, body) {
+	const config = {
+		method: 'put',
+		url: `/api/auth/fetch/magazines/${magazineName}`,
+		data: body,
+	}
+
+	return await _request(config)
+}
+
 export async function fetchPurchaseInfo(param) {
-	
+
 	if (!['rewards', 'address', 'payment'].includes(param)) {
 		alert(`purchase param ${param} is not valid!`)
 		window.location = '/'
@@ -139,7 +177,7 @@ export async function fetchPurchaseInfo(param) {
 }
 
 // called /p/:pName/purchase
-export async function purchaseReward({paymentIndex, rewardIndex, addressIndex}) {
+export async function purchaseReward({paymentIndex, rewardIndex, addressIndex, purchaseAmount, shippingFee}) {
 	const base = window.location.pathname // /pro.../:pro...Name/purchase
 
 	const config = {
@@ -149,6 +187,8 @@ export async function purchaseReward({paymentIndex, rewardIndex, addressIndex}) 
 			addressIndex,
 			rewardIndex,
 			paymentIndex,
+			purchaseAmount,
+			shippingFee,
 		}
 	}
 

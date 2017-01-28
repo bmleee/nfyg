@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { fetchJSONFile, fetchUserAndData } from '../../../../api/AppAPI'
+import { fetchUserAndData, createMagazine, updateMagazine } from '../../../../api/AppAPI'
 
 import { MagazineDetail } from '../components'
 
@@ -8,48 +8,78 @@ class MagazineDetailContainer extends Component {
 		super(props)
 
 		this.state = {
-			relatedMagazines: [],
-			relatedExhibitions: [],
-			magazine: [],
+			relatedContents: [],
+			magazine: {},
+			next: {},
+			pre: {},
 
 			loaded: false,
 		}
 
 	}
 
+	async shouldComponentUpdate(nextProps, nextState) {
+		console.log(`${this.props.params.magazineName} -> ${nextProps.params.magazineName}`);
+
+		if (!this.state.loaded && nextState.loaded) {
+			return true
+		}
+
+		if (this.props.params.magazineName !== nextProps.params.magazineName) {
+			return await this.reflashState()
+		}
+
+		return false
+	}
+
 	async componentDidMount() {
-		const {
-			user,
-			data: {
-				magazine,
-				relatedMagazines,
-				relatedExhibitions
-			}
-		} = await fetchUserAndData()
-
-		// console.log('fetchUserAndData.r', r);
-
-		this.props.appUtils.setUser(user)
-		this.setState({
-			relatedMagazines: relatedMagazines,
-			relatedExhibitions: relatedExhibitions,
-			magazine: magazine,
-
-			loaded: true,
-		})
+		await this.reflashState()
 	}
 
 	render() {
-		const { relatedMagazines, relatedExhibitions, magazine } = this.state;
+		const {
+			magazine,
+			relatedContents,
+			next = null,
+			pre = null
+		 } = this.state;
 
 		return this.state.loaded
 		?
 			<MagazineDetail
-				relatedMagazines={relatedMagazines}
-				relatedExhibitions={relatedExhibitions}
-				magazine={magazine}	/>
+				{...this.state}
+			/>
 		:
 			<div></div>
+	}
+
+	async reflashState() {
+		try {
+			const {
+				user,
+				data: {
+					magazine,
+					relatedContents,
+					next,
+					pre,
+				}
+			} = await fetchUserAndData()
+
+			appUtils.setUser(user)
+
+			this.setState({
+				relatedContents,
+				magazine,
+				next,
+				pre,
+
+				loaded: true,
+			})
+
+			window.scrollTo(0, 0)
+		} catch (e) {
+			console.error(e);
+		}
 	}
 }
 

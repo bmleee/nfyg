@@ -4,9 +4,11 @@ import mongoose from 'mongoose'
 import UserModel from '../models/user'
 import ProjectModel from '../models/project'
 import ProductModel from '../models/product'
+import MagazineModel from '../models/magazine'
 import PostModel from '../models/post'
 import QnAModel from '../models/qna'
 import SponsorModel from '../models/sponsor'
+import PurchaseModel from '../models/purchase'
 // import PaymentModel from '../models/payment'
 
 /**
@@ -36,12 +38,20 @@ export function canEdit (user, target) {
 
 	if (target instanceof PostModel ||
 		target instanceof QnAModel) {
-		return target.author.user.equals(user._id)
+		return target.author.user.equals(user._id || user)
 	}
 
 	if (target instanceof ProjectModel ||
 		target instanceof ProductModel) {
 		return isEditor(user) || (isArtist(user) && target.authorizedTo(user))
+	}
+
+	if (target instanceof MagazineModel) {
+		return isEditor(user)
+	}
+
+	if(target instanceof PurchaseModel) {
+		return isEditor(user) || target.user.equals(user._id || user)
 	}
 
 	throw Error(`can't accept target`)

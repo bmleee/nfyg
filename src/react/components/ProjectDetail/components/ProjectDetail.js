@@ -34,7 +34,7 @@ export default class ProjectDetail extends Component {
 		})
 
 
-		console.log('ProjectDetail', this);
+		console.log(this);
 
 		if(loaded) {
 			return (

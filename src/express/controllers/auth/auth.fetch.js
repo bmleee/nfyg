@@ -34,9 +34,11 @@ import PurchaseRouter from './auth.fetch.purchase'
 import OptionRouter from './auth.fetch.option'
 import EditorRouter from './auth.fetch.editor'
 
-import { authorizedUser } from '../../lib/renderUser'
+import * as renderUser from '../../lib/renderUser'
+
 
 const router = express.Router();
+
 
 router.use('/', (req, res, next) => {
 	console.log('auth.fetch.url', req.url);
@@ -89,7 +91,7 @@ router.get('/', async (req, res) => {
 
 		res.json({
 			// user: authorizedUser(req.user),
-			user: authorizedUser(req.user),
+			user: renderUser.authorizedUser(req.user),
 			data: {
 				home
 			}
@@ -121,5 +123,7 @@ router.get('/search', async (req, res) => {
 		res.send(e.trace);
 	}
 })
+
+
 
 export default router;

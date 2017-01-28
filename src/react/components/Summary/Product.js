@@ -10,7 +10,7 @@ import {
   PurchaseInfo,
 } from './_Common'
 
-import { fetchSummary } from '~/src/react/api/AppAPI'
+import { fetchSummary, processPurchase } from '~/src/react/api/AppAPI'
 
 export default class Product extends Component {
   state = {
@@ -54,7 +54,7 @@ export default class Product extends Component {
         purchase_info,
       }
     } = this.state
-    
+
     let infoBackground = {
 			backgroundImage: `url("${ abstract && abstract.imgSrc }")`,
 			backgroundSize: 'cover',
@@ -73,13 +73,16 @@ export default class Product extends Component {
   					<p className="project-summary-state">{ abstract && abstract.state }</p>
 				  </div>
 				</div>
+
+        <button onClick={this._onClickProcessPurchase}>결제요청</button>
+
 				<div className="project-summary-body">
           <Tabs>
             <TabList>
               <Tab>구매자 명단</Tab>
               <Tab>관리자</Tab>
             </TabList>
-  
+
             <TabPanel>
               { purchase_info && <PurchaseInfo purchaseInfo={purchase_info} isAdmin={isAdmin} />}
             </TabPanel>
@@ -90,5 +93,15 @@ export default class Product extends Component {
         </div>
       </div>
     )
+  }
+
+  _onClickProcessPurchase = async () => {
+    try {
+      const r = await processPurchase({ productName: this.props.params.productName })
+      console.log(r)
+    } catch (e) {
+      console.error(e)
+      alert(e.message)
+    }
   }
 }

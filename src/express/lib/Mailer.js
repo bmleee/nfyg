@@ -11,6 +11,10 @@ const purchaseSuccessEmail = new EmailTemplate(purchaseSuccessTemplate)
 const purchaseFailureTemplate = path.join(__dirname, '../src/express/templates/email/purchaseFailure')
 const purchaseFailureEmail = new EmailTemplate(purchaseFailureTemplate)
 
+const purchaseResultTemplate = path.join(__dirname, '../src/express/templates/email/purchaseResult')
+const purchaseResultEmail = new EmailTemplate(purchaseResultTemplate)
+
+
 const getOptions = ({
 	from = '"7Pictures" <bmlee@7pictures.co.kr>',
 // 	to = 'dkdkajej@gmail.com, pjh@7pictures.co.kr, bmlee@7pictures.co.kr, hjjeon@7pictures.co.kr',
@@ -59,7 +63,7 @@ class Mailer {
   		transporter.sendMail(getOptions({
         ...result,
         to: [user.local_email, user.fb_email].join(', '),
-        subject: '주문 성공',
+        subject: '결제 성공',
       }), function (err, info) {
   			if (err) {
   				throw e
@@ -100,7 +104,7 @@ class Mailer {
   		transporter.sendMail(getOptions({
         ...result,
         // to: [user.local_email, user.fb_email].join(', '), // to test...
-        subject: '주문 취소',
+        subject: '결제 실패',
       }), function (err, info) {
   			if (err) {
   				throw e
@@ -111,6 +115,46 @@ class Mailer {
   	})
   }
 
+	async sendPurchaseResultMail(purchase) {
+		const {
+      user,
+      project = null,
+      product = null,
+      address,
+      payment,
+      reward,
+      purchaseAmount,
+      shippingFee,
+
+      purchase_info: {
+        amount
+      },
+    } = purchase
+
+    let pName = project ? project.abstract.projectName : product.abstract.productName
+
+		purchaseResultEmail.render({
+      user, pName, address, reward, purchaseAmount, shippingFee, amount,
+    }, 'ejs', function (e, result) {
+  		if (e) {
+  			throw e
+  		}
+
+  		let { html, text } = result
+
+  		transporter.sendMail(getOptions({
+        ...result,
+        // to: [user.local_email, user.fb_email].join(', '), // to test...
+        subject: '주문 청구',
+      }), function (err, info) {
+  			if (err) {
+  				throw e
+  			}
+
+  			return info
+  		})
+  	})
+	}
 }
 
 export default new Mailer()

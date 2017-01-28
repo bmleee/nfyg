@@ -45,27 +45,23 @@ router.get('/:projectName/:option?/:tab?', async (req, res, next) => {
 		projectName,
 		option,
 	} = req.params;
-	
+
+	if (restrictedNames.includes(projectName)) {
+		return res.redirect('/404')
+	};
+
 	if(['null', 'undefined'].includes(req.params.tab)) {
 		return res.status(400).json({ error: 'unknown' })
 	}
 
-	if(['edit', 'rewards', 'addresses', 'payments', 'summary'].includes(option)) {
+	if(['edit', 'rewards', 'addresses', 'payments', 'summary', 'purchase'].includes(option)) {
 		return next() // go to /:projectName/edit
-	}
-
-	if (restrictedNames.includes(projectName)) {
-		return res.redirect('/404')
 	}
 
 	let user = req.user
 	if (user) {
 		user = await UserModel.findOne({_id: user._id})
 	}
-
-	console.log('user', user);
-	console.log('user instanceof UserModel', user instanceof UserModel);
-	console.log('req.user instanceof UserModel', req.user instanceof UserModel);
 
 	try {
 		const project = await ProjectModel.findOneByName(projectName)
@@ -91,26 +87,30 @@ router.get('/:projectName/:option?/:tab?', async (req, res, next) => {
 })
 
 // TODO: check user authority
-router.get('/:projectName/edit/:tab?', async (req, res) => {
-	console.log('/projects/:projectName/edit');
+router.get('/:projectName/edit/:tab?', isLoggedIn, async (req, res) => {
+	try {
+		const { projectName } = req.params
+		const { user } = req
+		const project = await ProjectModel.findOneByName(projectName)
+			.populate('sponsor')
+		console.log('/projects/:projectName/edit.project', project);
 
-	const { projectName } = req.params
-	const { user } = req
-	const project = await ProjectModel.findOneByName(projectName)
-		.populate('sponsor')
-	console.log('/projects/:projectName/edit.project', project);
+		if (!ac.canEdit(user, project)) throw Error(`can't edit unauthorized project`)
 
-	// TODO: activate this
-	// if (!ac.canEdit(user, project)) {
-	// 	return res.status(401).json(renderHelper.unauthorizedUser(user))
-	// }
+		res.json({
+			user: renderUser.authorizedUser(user),
+			data: {
+				project: await project.toFormat('edit')
+			}
+		})
+	} catch (e) {
+		console.error(e);
+		res.status(400).json({
+			user: renderUser.authorizedUser(user),
+			error: e.message
+		})
+	}
 
-	res.json({
-		user: renderUser.authorizedUser(user),
-		data: {
-			project: await project.toFormat('edit')
-		}
-	})
 })
 
 router.get('/:projectName/rewards', async (req, res) => {
@@ -137,7 +137,6 @@ router.get('/:projectName/rewards', async (req, res) => {
 	}
 })
 
-// TODO: check user authority
 router.get('/:projectName/summary', isLoggedIn, async (req, res) => {
 	try {
 		let [
@@ -148,6 +147,8 @@ router.get('/:projectName/summary', isLoggedIn, async (req, res) => {
 			ProjectModel.findOne({ 'abstract.projectName': req.params.projectName })
 				.populate('authorizedUsers sponsor posts qnas')
 		])
+
+		if (!ac.canEdit(user, project)) throw Error(`can't access`)
 
 		res.json({
 			user: renderUser.authorizedUser(req.user),
@@ -162,9 +163,33 @@ router.get('/:projectName/summary', isLoggedIn, async (req, res) => {
 	}
 })
 
+router.get('/:projectName/purchase', isLoggedIn, async (req, res) => {
+	try {
+		let project = await ProjectModel.findOneByName(req.params.projectName)
+		if (!project) throw Error(`Unknown project to purchase`)
+		console.log('res', {
+			user: renderUser.authorizedUser(req.user),
+			data: {
+				abstract: project.abstract
+			}
+		});
+		res.json({
+			user: renderUser.authorizedUser(req.user),
+			data: {
+				abstract: project.abstract
+			}
+		})
+	} catch (e) {
+		console.error(e);
+		res.status(400).json({error: e.message})
+	}
+})
+
 router.post('/:projectName/purchase', isLoggedIn, async (req, res) => {
 	let user = req.user
 	let projectName = req.params.projectName
+
+	console.log('body', req.body);
 	let {
 		addressIndex,
 		rewardIndex,
@@ -191,7 +216,7 @@ router.post('/:projectName/purchase', isLoggedIn, async (req, res) => {
 		})
 
 		res.json({
-			response: purchase
+			response: !!purchase
 		})
 
 	} catch (error) {
@@ -202,30 +227,53 @@ router.post('/:projectName/purchase', isLoggedIn, async (req, res) => {
 	}
 })
 
-// create or update project
-// TODO: check authority
-router.post('/:projectName?', async (req, res) => {
+router.post('/', async (req, res) => {
 	console.log('POST /auth/fetch/projects');
 
 	try {
+		let user = req.user
+
+		if (!ac.isAdmin(user) && !ac.isEditor(user) && !ac.isArtist(user) ) throw Error(`unauthorized`)
+
 		const body = req.body
 		const isNew = body.isNew
 
 		const sponsor = await SponsorModel.findOne({sponsorName: body.sponsor.sponsorName})
 		body.sponsor = sponsor
 
-		if (isNew) {
-			const project = await ProjectModel.create(body)
-			res.json({ response: project })
-		} else {
-			const projectName = req.params.projectName
-			const r = await ProjectModel.update(
-				{ 'abstract.projectName': projectName },
-				body,
-				{ upsert: false, }
-			)
-			res.json({response: r.n === 1})
-		}
+		const project = await ProjectModel.create(body)
+		res.json({ response: true })
+
+	} catch (e) {
+		console.error(e);
+		res.status(400).json({ response: e })
+	}
+})
+
+router.put('/:projectName', async (req, res) => {
+	console.log('POST /auth/fetch/projects');
+
+	try {
+		let user = req.user
+
+		if (!ac.isAdmin(user) && !ac.isEditor(user) && !ac.isArtist(user) ) throw Error(`unauthorized`)
+
+		const body = req.body
+		const isNew = body.isNew
+
+		const sponsor = await SponsorModel.findOne({sponsorName: body.sponsor.sponsorName})
+		body.sponsor = sponsor
+
+		const projectName = req.params.projectName
+		const project = await ProjectModel.findOneByName(projectName)
+		if (!ac.canEdit(req.user, project)) throw Error(`can't edit unauthorized product`)
+
+		const r = await ProjectModel.update(
+			{ 'abstract.projectName': projectName },
+			body,
+			{ upsert: false, }
+		)
+		res.json({response: r.n === 1})
 	} catch (e) {
 		console.error(e);
 		res.status(400).json({ response: e })
@@ -305,6 +353,12 @@ router.post('/:projectName/processPurchase', isLoggedIn, async (req, res) => {
 		console.error(e);
 		res.status(400).json({error: e.message})
 	}
+})
+
+router.get('/*', (req, res) => {
+	res.json({
+		user: renderUser.authorizedUser(req.user),
+	})
 })
 
 export default router;

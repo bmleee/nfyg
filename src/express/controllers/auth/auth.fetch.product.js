@@ -16,9 +16,12 @@ import express from 'express';
 import UserModel from '../../models/user'
 import ProjectModel, {restrictedNames} from '../../models/project'
 import ProductModel from '../../models/product'
-import ExhibitionModel from '../../models/exhibition'
-import MagazineModel from '../../models/magazine'
+import PostModel from '../../models/post'
+import QnAModel from '../../models/qna'
 import SponsorModel from '../../models/sponsor'
+import AddressModel from '../../models/address'
+import PurchaseModel from '../../models/purchase'
+import PaymentModel from '../../models/payment'
 
 import * as mh from '../../lib/modelHelper'
 
@@ -47,19 +50,28 @@ router.get('/:productName/:option?/:tab?', async (req, res, next) => {
 		return res.redirect('/404')
 	};
 
-	if(['edit', 'rewards', 'addresses', 'payments', 'summary'].includes(option)) {
+	if(['null', 'undefined'].includes(req.params.tab)) {
+		return res.status(400).json({ error: 'unknown' })
+	}
+
+	if(['edit', 'rewards', 'addresses', 'payments', 'summary', 'purchase'].includes(option)) {
 		return next() // go to /:productName/edit
+	}
+
+	let user = req.user
+	if (user) {
+		user = await UserModel.findOne({_id: user._id})
 	}
 
 	try {
 		const product = await ProductModel.findOne({"abstract.productName": productName})
-			.populate('posts qnas')
+			.populate({ path: 'posts', options: { sort: {  'abstract.created_at': -1 } } })
+			.populate({ path: 'qnas', options: { sort: {  'abstract.created_at': -1 } } })
 
 		if (!product) throw new Error(`no such product in name of ${productName}`)
 
-		const productToRender = await product.toFormat('product_detail', req.user)
-
-		// console.log('productToRender', JSON.stringify(productToRender, undefined, 4));
+		const canEdit = ac.canEdit(user, product)
+		const productToRender = await product.toFormat('product_detail', req.user, canEdit)
 
 		res.status(200).json({
 			user: renderUser.authorizedUser(req.user),
@@ -73,9 +85,7 @@ router.get('/:productName/:option?/:tab?', async (req, res, next) => {
 	}
 })
 
-router.get('/:productName/edit/:tab?', async (req, res) => {
-	console.log('/products/:productName/edit');
-
+router.get('/:productName/edit/:tab?', isLoggedIn, async (req, res) => {
 
 	try {
 		const { productName } = req.params
@@ -83,10 +93,7 @@ router.get('/:productName/edit/:tab?', async (req, res) => {
 		const product = await ProductModel.findOneByName(productName)
 		console.log('/product/:productName/edit.product', product);
 
-		// TODO: activate this
-		// if (!ac.canEdit(user, project)) {
-		// 	return res.status(401).json(renderHelper.unauthorizedUser(user))
-		// }
+		if (!ac.canEdit(user, product)) throw Error(`can't edit unauthorized product`)
 
 		res.json({
 			user: renderUser.authorizedUser(user),
@@ -103,38 +110,30 @@ router.get('/:productName/edit/:tab?', async (req, res) => {
 	}
 })
 
-router.get('/:productName/purchase/:param', async (req, res) => {
-	let user = renderUser.authorizedUser(user)
+router.get('/:productName/rewards', async (req, res) => {
+	try {
+		let user = renderUser.authorizedUser(req.user)
 
-	switch (req.params.param) {
-		case 'rewards':
-			let doc = await ProductModel.findOneByName(req.params.productName)
-				.select({ 'funding.rewards': 1})
-				.exec()
-			return res.json({
-				user,
-				data: {
-					rewards: doc.funding.rewards
-				}
-			})
-		case 'addresses':
-			return res.redirect('/api/users/address')
-		case 'payments' :
-			return res.json({
-				user,
-				data: {
-					payments: [{message: 'payment model is not extablished'}]
-				}
-			})
-		default:
-			return res.status(400).json({
-				user,
-				error: `invalid param ${req.params.param}`
-			})
+		let doc = await ProductModel.findOneByName(req.params.productName)
+			.select({ 'funding.rewards': 1, 'funding.shippingFee': 1})
+			.exec()
+
+		return res.json({
+			user,
+			data: {
+				rewards: doc.funding.rewards,
+				shippingFee: doc.funding.shippingFee,
+			}
+		})
+	} catch (e) {
+		console.error(e);
+		res.status(400).json({
+			user,
+			error: e.message
+		})
 	}
 })
 
-// TODO: check user authority
 router.get('/:productName/summary', isLoggedIn, async (req, res) => {
 	try {
 		let [
@@ -145,6 +144,8 @@ router.get('/:productName/summary', isLoggedIn, async (req, res) => {
 			ProductModel.findOne({ 'abstract.productName': req.params.productName })
 				.populate('authorizedUsers qnas')
 		])
+
+		if (!ac.canEdit(user, product)) throw Error(`can't access`)
 
 		res.json({
 			user: renderUser.authorizedUser(req.user),
@@ -159,32 +160,140 @@ router.get('/:productName/summary', isLoggedIn, async (req, res) => {
 	}
 })
 
-
-// create or update product
-// TODO: check user authority
-router.post('/', async (req, res) => {
-	console.log('POST /auth/fetch/products');
-
+router.get('/:productName/purchase', isLoggedIn, async (req, res) => {
 	try {
-		const body = req.body
-		const productName = body.abstract.productName || ''
+		let product = await ProductModel.findOneByName(req.params.productName)
 
-		// upsert Project
-		const r = await ProductModel.update(
-			{ 'abstract.productName': productName },
-			body,
-			{ upsert: true, select: { 'abstract.productName': -1} }
-		)
-
-		console.log('upsert result', r);
-
-		res.json({response: r.n === 1})
+		res.json({
+			user: renderUser.authorizedUser(req.user),
+			data: {
+				abstract: product.abstract
+			}
+		})
 	} catch (e) {
 		console.error(e);
-		res.status(400).json({
-			response: e
+		res.status(400).json({error: e.message})
+	}
+})
+
+router.post('/:productName/purchase', isLoggedIn, async (req, res) => {
+	let user = req.user
+	let productName = req.params.productName
+	let {
+		addressIndex,
+		rewardIndex,
+		paymentIndex,
+		purchaseAmount,
+		shippingFee,
+	}  = req.body
+
+	try {
+		let product = await ProductModel.findOne({'abstract.productName': productName})
+		let address = (await AddressModel.findByUser(user))[addressIndex]
+		let payment = (await PaymentModel.findByUser(user))[paymentIndex]
+		let reward = product.funding.rewards[rewardIndex]
+
+		let purchase = await PurchaseModel.create({
+			user,
+			user_info: user,
+			product,
+			address: address.toJSON(),
+			payment: payment.toJSON(),
+			reward,
+			purchaseAmount,
+			shippingFee
+		})
+
+		res.json({
+			response: purchase
+		})
+
+	} catch (error) {
+		console.error(error);
+		res.state(400).json({
+			error
 		})
 	}
 })
+
+router.post('/', isLoggedIn,  async (req, res) => {
+	console.log('POST /auth/fetch/products');
+
+	try {
+		let user = req.user
+
+		if (!ac.isAdmin(user) && !ac.isEditor(user) && !ac.isArtist(user) ) throw Error(`unauthorized`)
+
+		const body = req.body
+
+		const product = await ProductModel.create(body)
+		res.json({ response: true })
+	} catch (e) {
+		console.error(e);
+		res.status(400).json({ response: e })
+	}
+})
+
+router.put('/:productName', isLoggedIn,  async (req, res) => {
+	console.log('POST /auth/fetch/products');
+
+	try {
+		let user = req.user
+
+		if (!ac.isAdmin(user) && !ac.isEditor(user) && !ac.isArtist(user) ) throw Error(`unauthorized`)
+
+		const body = req.body
+		
+		const productName = req.params.productName
+		const product = await ProductModel.findOneByName(productName)
+		if (!ac.canEdit(req.user, product)) throw Error(`can't edit unauthorized product`)
+
+		const r = await ProductModel.update(
+			{ 'abstract.productName': productName },
+			body,
+		)
+		res.json({response: r.n === 1})
+	} catch (e) {
+		console.error(e);
+		res.status(400).json({ response: e })
+	}
+})
+
+router.post('/:productName/processPurchase', isLoggedIn, async (req, res) => {
+	try {
+		let user = req.user
+		let product = await ProductModel.findOneByName(req.params.productName)
+
+		if (!ac.canEdit(user, product)) throw Error(`can't process unauthorized process`)
+
+		let purchases = await PurchaseModel.findByProduct(product)
+			.where('purchase_info.purchase_state').equals('preparing')
+			.populate('user product')
+
+		let r = await Promise.all(purchases.map(
+			async (p) => {
+				try {
+					return await p.processPurchase()
+				} catch (e) {
+					console.error(e);
+					return { error: e.message }
+				}
+			}
+		))
+
+		console.log(r);
+		res.json({ response: r })
+	} catch (e) {
+		console.error(e);
+		res.status(400).json({error: e.message})
+	}
+})
+
+router.get('/*', (req, res) => {
+	res.json({
+		user: renderUser.authorizedUser(req.user),
+	})
+})
+
 
 export default router;

@@ -11,6 +11,7 @@ export default class C extends Component {
 
 	async componentDidMount() {
 		await this._reflashAddresses()
+		window.scrollTo(0, 0)
 	}
 
 	render() {

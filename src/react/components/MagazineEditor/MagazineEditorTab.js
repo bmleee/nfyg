@@ -3,20 +3,20 @@ import { Link } from 'react-router'
 const buttonClassName = 'exhibition-editor-tab-button';
 const appliedClassName = 'exhibition-editor-tab-button-clicked';
 
-const MagazineEditorTab = ({save}) => {
-	
+const MagazineEditorTab = ({save, tabLinkBase}) => {
+
 	let url, isAbstract, isArtwork, isOverview;
 
 	url = document.URL;
-	isOverview = document.URL.includes('magazine-editor/content')
-	isArtwork = document.URL.includes('magazine-editor/recommend')
+	isOverview = document.URL.includes(`${tabLinkBase}/overview`)
+	isArtwork = document.URL.includes(`${tabLinkBase}/recommend`)
 	isAbstract = !(isOverview || isArtwork)
 
-	
+
 	const abstartClassName = isAbstract ? `${buttonClassName} ${appliedClassName}` : buttonClassName
 	const artwokrkClassName = isArtwork ? `${buttonClassName} ${appliedClassName}` : buttonClassName
 	const overviewClassName = isOverview ? `${buttonClassName} ${appliedClassName}` : buttonClassName
-	
+
 	return (
 	<div className="exhibition-editor-tab">
 	<div className="exhibition-editor-title">
@@ -25,9 +25,9 @@ const MagazineEditorTab = ({save}) => {
 		<h5>구독자 분들에게 매주 전달해드립니다.</h5>
 		</div>
 		<button className="share-button" onClick={save}>검토 요청하기</button>
-		<div className="exhibition-editor-tab-container"><Link to="/magazine-editor/abstract"><button className={abstartClassName}>매거진 개요</button></Link></div>
-		<div className="exhibition-editor-tab-container"><Link to="/magazine-editor/content"><button className={overviewClassName}>매거진 내용</button></Link></div>
-		<div className="exhibition-editor-tab-container"><Link to="/magazine-editor/recommend"><button className={artwokrkClassName}>관련 콘텐츠</button></Link></div>
+		<div className="exhibition-editor-tab-container"><Link to={`${tabLinkBase}/abstract`}><button className={abstartClassName}>매거진 개요</button></Link></div>
+		<div className="exhibition-editor-tab-container"><Link to={`${tabLinkBase}/content`}><button className={overviewClassName}>매거진 내용</button></Link></div>
+		<div className="exhibition-editor-tab-container"><Link to={`${tabLinkBase}/recommend`}><button className={artwokrkClassName}>관련 콘텐츠</button></Link></div>
 	</div>
 )}
 

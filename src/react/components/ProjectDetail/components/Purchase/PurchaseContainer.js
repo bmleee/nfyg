@@ -10,7 +10,7 @@ import {
 } from './components'
 
 import { canUseDOM } from  '~/src/lib/utils'
-import { purchaseReward } from '../../../../api/AppAPI'
+import { purchaseReward, fetchUserAndData } from '../../../../api/AppAPI'
 
 export default class PurchaseContainer extends Component {
 
@@ -34,29 +34,56 @@ export default class PurchaseContainer extends Component {
 		purchaseAmount: 1,
 		shippingFee: 0,
 
+
+		// 결제 성공 / 실패 여부
+		msg: '',
+
 		// 서버로 전송
 		selectedRewardIndex: -1,
 		selectedAddressIndex: -1,
 		selectedPaymentIndex: -1,
 
-		imgSrc: '',
+		abstract: {
+			imgSrc: ''
+		},
 	}
 
 	async componentDidMount() {
+		try {
+			const {
+				user,
+				data: {
+					abstract
+				}
+			} = await fetchUserAndData()
 
-		this.setState({
-			stage: 1
-		})
-		
-		window.scrollTo(0, 0)
+			console.log('abstract', abstract)
+
+			if (!user || !user.isLoggedIn) {
+				alert("로그인이 필요한 서비스입니다.")
+				return window.location = '/login'
+			}
+
+			appUtils.setUser(user)
+
+			this.setState({
+				stage: 1,
+				abstract
+			})
+		} catch (e) {
+			console.error(e);
+		}
+
+
 	}
 
 	render() {
 		const {
-			stage
+			stage,
+			abstract: {
+				imgSrc = '/assets/images/slider-tumb2.jpg'
+			}
 		} = this.state;
-
-		let imgSrc= '/assets/images/slider-tumb2.jpg';
 
 		let infoBackground = {
 			backgroundImage: `url("${imgSrc}")`,
@@ -65,12 +92,12 @@ export default class PurchaseContainer extends Component {
 			backgroundRepeat: 'no-repeat'
 		}
 
-				// 0 : loading...
-				// 1 : let user choose reward
-				// 2 : select choose payment
-				// 3 : select address
-				// 4 : progress purchase (use iamport API)
-				// 5 : show the result of the payment. success / fails
+		// 0 : loading...
+		// 1 : let user choose reward
+		// 2 : select choose payment
+		// 3 : select address
+		// 4 : progress purchase (use iamport API)
+		// 5 : show the result of the payment. success / fails
 
 		let title = [
 			'',
@@ -81,7 +108,6 @@ export default class PurchaseContainer extends Component {
 			'결제 완료',
 		];
 
-		console.log('Purchase', this);
 		return (
 			<div>
 				<div className="purchase-heading" style={infoBackground}>
@@ -97,6 +123,8 @@ export default class PurchaseContainer extends Component {
 			selectedRewardIndex,
 			selectedAddressIndex,
 			selectedPaymentIndex,
+			purchaseAmount,
+			shippingFee,
 		} = this.state
 
 		if (selectedRewardIndex < 0 | selectedRewardIndex < 0 | selectedPaymentIndex < 0) {
@@ -109,10 +137,13 @@ export default class PurchaseContainer extends Component {
 			let r = await purchaseReward({
 				addressIndex: selectedAddressIndex,
 				rewardIndex: selectedRewardIndex,
-				paymentIndex: selectedPaymentIndex
+				paymentIndex: selectedPaymentIndex,
+				purchaseAmount: purchaseAmount,
+				shippingFee: shippingFee
 			})
 
 			console.log('purchaseReward api response', r);
+			this.goToNextStage()
 		} catch (e) {
 			console.error(e);
 		}
@@ -128,6 +159,8 @@ export default class PurchaseContainer extends Component {
 			setAddress: this.setAddress,
 			setPayment: this.setPayment,
 			setPurchaseAmount: this.setPurchaseAmount,
+			setShippingFee: this.setShippingFee,
+			setErrorMessage: this.setErrorMessage,
 
 			selectedRewardIndex: this.state.selectedRewardIndex,
 			selectedAddressIndex: this.state.selectedAddressIndex,
@@ -137,6 +170,8 @@ export default class PurchaseContainer extends Component {
 			purchaseAmount: this.state.purchaseAmount,
 			address: this.state.address,
 			payment: this.state.payment,
+
+			msg: this.state.msg,
 
 			purchase: this.purchase,
 		}
@@ -189,6 +224,12 @@ export default class PurchaseContainer extends Component {
 		}))
 	}
 
+	setShippingFee = (shippingFee) => {
+		this.setState(update(this.state, {
+			shippingFee: { $set: Number(shippingFee) },
+		}))
+	}
+
 	setAddress = (index, address) => {
 		console.log('set address ', index);
 		this.setState(update(this.state, {
@@ -202,6 +243,12 @@ export default class PurchaseContainer extends Component {
 		this.setState(update(this.state, {
 			selectedPaymentIndex: { $set: index },
 			payment: { $set: payment },
+		}))
+	}
+
+	setErrorMessage = (msg) => {
+		this.setState(update(this.state, {
+			msg: { $set: msg }
 		}))
 	}
 

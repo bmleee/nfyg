@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { Magazines } from '../components'
 
-import { fetchJSONFile, fetchUserAndData } from '../../../api/AppAPI'
+import { fetchUserAndData, } from '../../../api/AppAPI'
 import { label2value } from '~/src/react/lib/utils'
 
 import { SelectOptions } from '../../../constants'
@@ -24,22 +24,23 @@ class MagazinesContainer extends Component {
 	}
 
 	async componentDidMount() {
+		try {
+			const {
+				user,
+				data: { magazines }
+			} = await fetchUserAndData()
 
-		const {
-			user,
-			data: { magazines }
-		} = await fetchUserAndData()
+			console.log('fetchUserAndData', magazines);
 
-		console.log('fetchUserAndData', magazines);
-
-		const res = await fetchJSONFile('magazines')
-
-		this.props.appUtils.setUser(user)
-		this.setState({
-			magazines: magazines,
-			filteredMagazines: magazines,
-			loaded: true,
-		})
+			appUtils.setUser(user)
+			this.setState({
+				magazines: magazines,
+				filteredMagazines: magazines,
+				loaded: true,
+			})
+		} catch (e) {
+			console.error(e);
+		}
 	}
 
 	_onChangeCategory = (category) => {

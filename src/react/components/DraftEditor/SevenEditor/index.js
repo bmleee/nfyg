@@ -63,7 +63,11 @@ export default class SevenEditor extends Component {
 		console.log('this.props.raw', this.props.raw);
 
 		// init empty raw content
-		let raw = typeof this.props.raw === 'string' ? JSON.parse(this.props.raw) : this.props.raw
+		let raw = this.props.raw;
+		try {
+			 raw = JSON.parse(this.props.raw)
+		} catch (e) {}
+
 		let editorState;
 
 		if (!this.props.raw) editorState = EditorState.createEmpty()

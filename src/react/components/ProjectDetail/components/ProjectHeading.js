@@ -50,6 +50,7 @@ export default class ProjectHeading extends Component {
 			indirectSupporters,
 
 			relatedContents,
+			numValidPurchases,
 		} = this.props;
 
 
@@ -65,7 +66,7 @@ export default class ProjectHeading extends Component {
 			backgroundPosition: 'center center',
 			backgroundRepeat: 'no-repeat'
 		}
-		
+
 		const url = document.URL;
 		const url2 = 'http://jwchoi85.tistory.com/165'
 
@@ -99,7 +100,7 @@ export default class ProjectHeading extends Component {
 								</div>
 							</p>
 						</div>
-						<div className="project-supporters-num">공유후원 {indirectSupporters.length}명 | 리워드후원 {directSupporters.length}명</div>
+						<div className="project-supporters-num">공유후원 {indirectSupporters.length}명 | 리워드후원 {numValidPurchases}명</div>
 						<Progress completed={Math.round(currentMoney / targetMoney * 100)} />
 						<div className="project-heading-summary-money">
 						<div className="project-heading-summary-percent">{Math.round(currentMoney / targetMoney * 100)}<span className="heading-summary-status">%</span></div>
@@ -107,15 +108,15 @@ export default class ProjectHeading extends Component {
 						{(currentMoney || 0).toLocaleString()}<span className="heading-summary-status">원</span></div>
 					</div>
 				</div>
-				
+
 				{/*
 				<FacebookButton sharer='true' media={`http://52.78.180.103:8080${imgSrc}`} appId='361812380855194' message={postIntro} url={url} className="share-button">
-				
+
 				페이스북 공유로 후원하기
-				<FacebookCount url={url}/> 
-				
+				<FacebookCount url={url}/>
+
 				</FacebookButton> */}
-				
+
 				<button className="share-button" onClick={this.onClickShareFB}>페이스북 공유로 후원하기</button>
 			</div>
 
@@ -134,7 +135,7 @@ export default class ProjectHeading extends Component {
 		// let url2 = 'http://7pictures.co.kr'
 
 		// console.log('url', url2);
-		
+
 		FB.ui({
 			method: 'share',
 			display: 'popup',

@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router'
 import Progress from 'react-progressbar';
 
 import Modal from '~/src/react/components/react-awesome-modal';
@@ -80,6 +81,7 @@ class ProductHeading extends Component {
 				shortTitle,
 				imgSrc,
 				category,
+				productName,
 			},
 
 			creator: {
@@ -117,7 +119,7 @@ class ProductHeading extends Component {
 		} = this.props;
 
 		const url = document.URL;
-		
+
 
 		let remainingDays = ( new Date(dateTo).getTime() - new Date(dateFrom).getTime() ) / 1000 / 60 / 60 / 24
 
@@ -131,7 +133,7 @@ class ProductHeading extends Component {
 			backgroundPosition: 'center center',
 			backgroundRepeat: 'no-repeat'
 		}
-		
+
 
 		/**
 		 * Issue
@@ -159,14 +161,14 @@ class ProductHeading extends Component {
 					</div>
 				</div>
 				<div className="share-button">
-				<button className="product-purchase-button">주문하기</button>
+					<Link to={`/products/${productName}/purchase`}><button className="product-purchase-button">주문하기</button></Link>
 				<button className="product-share-modal" onClick={() => this.openModal()} />
 				<Modal className="share-modal" visible={this.state.visible} width="355" height="130px" effect="fadeInDown" onClickAway={() => this.closeModal()}>
 					<div className="share-modal-close-container">
 					<button className="share-modal-close" onClick={() => this.closeModal()}/>
 					</div>
 					<div className="share-modal-button-container">
-						
+
 						<FacebookButton sharer='true' media={`http://52.78.180.103:8080${imgSrc}`} appId='361812380855194' message={shortTitle} url={url} className="ma-share-button-facebook">
 						<FontAwesome name='facebook' size='lg' />
 						</FacebookButton>

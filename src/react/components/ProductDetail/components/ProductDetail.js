@@ -31,7 +31,7 @@ export default class ProductDetail extends Component {
 		})
 
 
-		console.log('ProductDetail', this);
+		console.log(this);
 
 		if(loaded) {
 			return (

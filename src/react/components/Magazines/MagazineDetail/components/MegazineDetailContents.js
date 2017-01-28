@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { Viewer } from '~/src/react/components/DraftEditor/SevenEditor'
 
 const border = { border: '1px solid gray' }
 
@@ -9,7 +8,7 @@ class MagazineDetailContents extends Component {
 
 		return (
 			<div className="magazine-detail-contents">
-				<Viewer raw={content} />
+				<div dangerouslySetInnerHTML={{ __html: content}} />
 			</div>
 		)
 	}

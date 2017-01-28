@@ -199,6 +199,9 @@ PurchaseSchema.methods.processPurchase = async function () {
 
     this.purchase_info.purchase_state = 'scheduled'
     await this.save()
+
+    await Mailer.sendPurchaseResultMail(this)
+
     return this.toFormat('profile')
   } catch (e) {
     console.error(`Purchase ${this._id} processPurchase failed`);
@@ -229,7 +232,7 @@ PurchaseSchema.methods.cancelByUser = async function () {
       case 'cancel-by-user':
       case 'cancel-by-api':
       case 'cancel-by-system':
-        throw `Post ${this._id} is alread cancelled`
+        throw `Purchase ${this._id} is already cancelled : ${this.purchase_info.purchase_state}`
 
       default:
         console.log(`Post ${this._id} cancel purchase request on state ${this.purchase_info.purchase_state}`)
@@ -267,12 +270,8 @@ PurchaseSchema.statics.findOneByMerchantId = function (mid) {
 	return this.findOne({ 'purchase_info.merchant_uid': mid })
 }
 PurchaseSchema.statics.countValidPurchase = function ({ product, project, }) {
-	return this.count({
-    $or: [
-      { product: product },
-      { project: project }
-    ]
-  })
+  let q =  product ? { product } : { project }
+	return this.count(q)
     .where('purchase_info.purchase_state').in(['preparing', 'scheduled'])
 }
 

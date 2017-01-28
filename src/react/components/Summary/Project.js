@@ -48,7 +48,7 @@ export default class ProjectSummary extends Component {
     } catch (e) {
       console.error(e);
     }
-    
+
     window.scrollTo(0, 0)
   }
 
@@ -67,16 +67,16 @@ export default class ProjectSummary extends Component {
         sponsor
       }
     } = this.state
-    
+
     console.log(this)
-    
+
     let infoBackground = {
 			backgroundImage: `url("${ abstract && abstract.imgSrc }")`,
 			backgroundSize: 'cover',
 			backgroundPosition: 'center center',
 			backgroundRepeat: 'no-repeat'
 		}
-    
+
 
     let isAdmin = userType === 'admin'
 
@@ -89,9 +89,9 @@ export default class ProjectSummary extends Component {
   					<p className="project-summary-state">{ abstract && abstract.state }</p>
 				  </div>
 				</div>
-				
+
 				<button onClick={this._onClickProcessPurchase}>결제요청</button>
-				
+
 				<div className="project-summary-body">
           <Tabs>
             <TabList>
@@ -99,7 +99,7 @@ export default class ProjectSummary extends Component {
               <Tab>소식 관리</Tab>
               <Tab>관리자</Tab>
             </TabList>
-  
+
             <TabPanel>
               { purchase_info && <PurchaseInfo purchaseInfo={purchase_info} isAdmin={isAdmin} />}
               { sharing_info && <SharingInfo sharingInfo={sharing_info} isAdmin={isAdmin} />}
@@ -110,19 +110,20 @@ export default class ProjectSummary extends Component {
             <TabPanel>
               { authorizedUsers && <AuthorizedUsers authorizedUsers={authorizedUsers} isAdmin={isAdmin} />}
             </TabPanel>
-            
+
           </Tabs>
         </div>
       </div>
     )
   }
-  
+
   _onClickProcessPurchase = async () => {
     try {
       const r = await processPurchase({ projectName: this.props.params.projectName })
       console.log(r)
     } catch (e) {
       console.error(e)
+      alert(e.message)
     }
   }
 }

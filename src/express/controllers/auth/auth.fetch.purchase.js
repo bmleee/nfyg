@@ -14,13 +14,14 @@ import * as ac from '../../lib/auth-check'
 
 const router = express.Router();
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', isLoggedIn, async (req, res) => {
   try {
     let purchase = await PurchaseModel.findOne({_id: req.params.id})
       .populate('user project product')
-      
+
     if(!purchase) throw Error(`Unknown purchase id ${req.params.id}`)
-    
+    if(!ac.canEdit(req.user, purchase)) throw Error(`can't delete unauthorized purchase`)
+
     const r = await purchase.cancelByUser()
     res.json({ response: r })
   } catch (e) {

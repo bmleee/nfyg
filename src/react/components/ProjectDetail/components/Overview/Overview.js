@@ -9,14 +9,8 @@ import {
 
 class Overview extends Component {
 
-	constructor() {
-		super(...arguments);
-
-		this.state = {
-			seeMore: false,
-		}
-
-		this._onClick = this._onClick.bind(this)
+	state = {
+		seeMore: false,
 	}
 
 	_onClick() {
@@ -43,14 +37,12 @@ class Overview extends Component {
 		return (
 			<div className="project-detail-overview">
 				<div className="project-detail-overview-info">
-					{/* <Viewer raw={part1} /> */}
 					<div dangerouslySetInnerHTML={{ __html: part1}} />
 				</div>
 
 				<ProjectReward projectName={projectName} rewards={rewards} />
 
 				<div className="project-detail-overview-info">
-					{/* <Viewer raw={part2} /> */}
 					<div dangerouslySetInnerHTML={{ __html: part2}} />
 				</div>
 			</div>

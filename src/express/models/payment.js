@@ -27,7 +27,7 @@ PaymentSchema.pre('save', async function (next) {
     let {
       card_name,
     } = await IMP.subscribe_customer.create({
-      customer_uid: this.user,
+      customer_uid: this.user._id || this.user,
       card_number: this.card_number,
       expiry: this.expiry,
       birth: this.birth,
@@ -37,7 +37,7 @@ PaymentSchema.pre('save', async function (next) {
     this.card_name = card_name
     next()
   } catch (e) {
-    console.error(`faild to create payment User${this.user}`);
+    console.error(`faild to create payment User${this.user._id}`);
     console.error(e);
     throw e
   }

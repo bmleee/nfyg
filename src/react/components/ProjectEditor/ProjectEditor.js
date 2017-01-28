@@ -8,7 +8,7 @@ import update from 'immutability-helper'
 
 import axios from 'axios'
 
-import { fetchUserAndData, upsertProject, upload_file } from '../../api/AppAPI'
+import { fetchUserAndData, upload_file, createProject, updateProject } from '../../api/AppAPI'
 
 import { canUseDOM } from '~/src/lib/utils'
 
@@ -85,19 +85,22 @@ export default class ProjectEditor extends Component {
 	}
 
 	async componentDidMount() {
-		// 서버에서 State를 가져와 채워야 한다면 ...
-    const {
-      user,
-      data
-    } = await fetchUserAndData()
 
-    console.log('fetched project', data);
-
-    let tabLinkBase = `/${(document.URL.match(/projects\/.+\/edit/) || ['project-editor'])[0]}`
-
-    if (this.props.appUtils.setUser) this.props.appUtils.setUser(user)
     try {
-      if(data.project) {
+
+      // 서버에서 State를 가져와 채워야 한다면 ...
+      const {
+        user,
+        data
+      } = await fetchUserAndData()
+
+      console.log('fetched project', data);
+
+      let tabLinkBase = `/${(document.URL.match(/projects\/.+\/edit/) || ['project-editor'])[0]}`
+
+      appUtils.setUser(user)
+
+      if(data && data.project) {
         this.setState({
           ...this.server2client(data.project),
           tabLinkBase
@@ -111,6 +114,8 @@ export default class ProjectEditor extends Component {
       }
     } catch (e) {
       console.error(e);
+      alert(e.message)
+      this.props.history.goBack()
     }
 	}
 
@@ -413,6 +418,7 @@ export default class ProjectEditor extends Component {
 	}
 
   client2server = () => {
+    console.log('state', this.state);
     return {
       abstract: this.state.abstract,
       creator: this.state.creator,
@@ -473,7 +479,14 @@ export default class ProjectEditor extends Component {
     let body = this.client2server()
 
     try {
-      let r = await upsertProject(body)
+      let r;
+
+      if(this.props.params.projectName) {
+        r = await updateProject(this.props.params.projectName, body)
+      } else {
+        r = await createProject(body)
+      }
+
       console.log(r);
       this.props.appUtils.setFlash({title: 'project saved', message: JSON.stringify(r, undefined, 4), level: 'success'})
     } catch (e) { // error from axios.request

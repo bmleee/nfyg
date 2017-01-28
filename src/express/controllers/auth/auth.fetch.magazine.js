@@ -20,22 +20,26 @@ import ExhibitionModel from '../../models/exhibition'
 import MagazineModel from '../../models/magazine'
 import SponsorModel from '../../models/sponsor'
 
+import * as mh from '../../lib/modelHelper'
+
+import * as ac from '../../lib/auth-check'
+import isLoggedIn from '../../lib/login-check'
+import * as renderHelper from '../../lib/renderHelper'
+import * as renderUser from '../../lib/renderUser'
+
+
 const router = express.Router();
 
-// TODO: add res.json to user auth info
 // TODO: magazine paginaiton
 // TODO: magazine category select
-router.get('/magazines', async (req, res) => {
+router.get('/', async (req, res) => {
 	console.log('/magazines/', );
 
 	try {
 		const magazines = await MagazineModel.find({}).sort({"abstract.created_at": -1})
 
 		res.json({
-			user: {
-				isLoggedIn: !!req.user,
-				isAuthorized: true,
-			},
+			user: renderUser.authorizedUser(req.user),
 			data: {
 				magazines: await Promise.all(magazines.map(async (m) => await m.toFormat('magazines')))
 			}
@@ -48,7 +52,7 @@ router.get('/magazines', async (req, res) => {
 
 })
 
-router.get('/magazines/:magazineName/:option?', async (req, res, next) => {
+router.get('/:magazineName/:option?', async (req, res, next) => {
 	console.log('/magazines/' + req.params.magazineName);
 	if(['edit'].includes(req.params.option)) {
 		return next()
@@ -58,10 +62,7 @@ router.get('/magazines/:magazineName/:option?', async (req, res, next) => {
 		const magazine = await MagazineModel.findOne({"abstract.magazineName": req.params.magazineName})
 
 		res.json({
-			user: {
-				isLoggedIn: !!req.user,
-				isAuthorized: true,
-			},
+			user: renderUser.authorizedUser(req.user),
 			data: await magazine.toFormat('magazine_detail')
 		})
 	} catch (e) {
@@ -71,9 +72,69 @@ router.get('/magazines/:magazineName/:option?', async (req, res, next) => {
 
 })
 
-router.get('/magazines/:magazineName/edit', async (req, res) => {
-	console.log('/magazines/:magazineName/edit');
-	res.json({})
+router.get('/:magazineName/edit/:tab?', isLoggedIn, async (req, res) => {
+	try {
+		const { magazineName } = req.params
+		const { user } = req
+		const magazine = await MagazineModel.findOneByName(magazineName)
+
+		if (!ac.canEdit(user, magazine)) throw Error(`can't edit unauthorized magazine`)
+
+		res.json({
+			user: renderUser.authorizedUser(user),
+			data: {
+				magazine: await magazine.toFormat('edit')
+			}
+		})
+	} catch (e) {
+		console.error(e);
+		res.status(400).json({
+			user: renderUser.authorizedUser(user),
+			error: e.message
+		})
+	}
+})
+
+router.post('/', async (req, res) => {
+	console.log('POST /auth/fetch/magazines');
+
+	try {
+		let user = req.user
+
+		if (!ac.isAdmin(user) && !ac.isEditor(user) && !ac.isArtist(user) ) throw Error(`unauthorized`)
+
+		const body = req.body
+
+		const magazine = await MagazineModel.create(body)
+		res.json({ response: true })
+
+	} catch (e) {
+		console.error(e);
+		res.status(400).json({ response: e })
+	}
+})
+
+router.put('/:magazineName', async (req, res) => {
+	console.log('POST /auth/fetch/magazines');
+
+	try {
+		let user = req.user
+
+		if (!ac.isAdmin(user) && !ac.isEditor(user) && !ac.isArtist(user) ) throw Error(`unauthorized`)
+
+		const body = req.body
+
+		const magazineName = req.params.magazineName
+
+		const r = await MagazineModel.update(
+			{ 'abstract.magazineName': magazineName },
+			body,
+		)
+		res.json({response: r.n === 1})
+	} catch (e) {
+		console.error(e);
+		res.status(400).json({ response: e })
+	}
 })
 
 // TODO: add res.json to user auth info

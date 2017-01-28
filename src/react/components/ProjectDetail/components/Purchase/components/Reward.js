@@ -16,6 +16,10 @@ export default class C extends Component {
 				data: { rewards, shippingFee }
 			} = await fetchPurchaseInfo('rewards')
 
+			console.log('rewards', rewards);
+			console.log('shippingFee', shippingFee);
+
+			this.props.setShippingFee(shippingFee)
 			this.setState({ rewards, shippingFee })
 		} catch (e) {
 			console.error(e);

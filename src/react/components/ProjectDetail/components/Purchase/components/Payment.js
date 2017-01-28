@@ -32,6 +32,7 @@ export default class C extends Component {
 
 	async componentDidMount() {
 		await this._reflashPayments()
+		window.scrollTo(0, 0)
 	}
 
 	render() {
