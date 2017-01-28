@@ -19,24 +19,29 @@ import MagazineModel from '../../models/magazine'
 import SponsorModel from '../../models/sponsor'
 
 import * as ac from '../../lib/auth-check'
+import isLoggedIn from '../../lib/login-check'
+import * as renderHelper from '../../lib/renderHelper'
 import * as renderUser from '../../lib/renderUser'
 
 const router = express.Router();
 
-router.get('/project-editor/:tab?', async (req, res) => {
-	// TODO: let only editor, admin can access
-	res.json({
-		user: renderUser.authorizedUser(req.user),
-		data: {}
-	})
+router.get('/:editor/:tab?', async (req, res, next) => {
+	if (!['project-editor', 'product-editor', 'magazine-editor'].includes(req.params.editor)) {
+		return next()
+	}
+
+	try {
+		if (!ac.isAdmin(req.user) && !ac.isEditor(req.user)) throw Error(`unauthorized`)
+		res.json({
+			user: renderUser.authorizedUser(req.user, true),
+		})
+	} catch (e) {
+		res.status(400).json({
+			user: renderUser.unauthorizedUser(req.user, false),
+			error: e.message
+		 })
+	}
 })
 
-router.get('/product-editor/:tab?', async (req, res) => {
-	// TODO: let only editor, admin can access
-	res.json({
-		user: renderUser.authorizedUser(req.user),
-		data: {}
-	})
-})
 
 export default router;
