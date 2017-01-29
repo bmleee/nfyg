@@ -87,6 +87,7 @@ export default class PurchaseSummary extends Component {
         payment: {
           card_name= '',
           card_number= '',
+          expiry='',
         },
         reward: {
           title= '',
@@ -121,42 +122,47 @@ export default class PurchaseSummary extends Component {
   					<p className="project-summary-state">{ p && p.state }</p>
 				  </div>
 				</div>
-
-				<div className="project-summary-body">
-
-          <div className="project-summary-header">
-  					<h1 className="project-summary-title">배송지</h1>
-  					<p className="project-summary-state">{ `${addressee_name} ${address1} ${address2} ${zipcode}` }</p>
-				  </div>
-
-          <div className="project-summary-header">
-  					<h1 className="project-summary-title">결제 수단</h1>
-  					<p className="project-summary-state">{ `${card_name} ${card_number}` }</p>
-				  </div>
-
-          <div className="project-summary-header">
-  					<h1 className="project-summary-title">결제 금액</h1>
-  					<p className="project-summary-state">{ `${amount.toLocaleString()}` }원</p>
-				  </div>
-
-          <div className="project-summary-header">
-  					<h1 className="project-summary-title">결제 상태</h1>
-  					<p className="project-summary-state">{ `${purchase_state}` }</p>
-				  </div>
-
-          <div className="project-summary-header">
-  					<h1 className="project-summary-title">리워드</h1>
-  					<p className="project-summary-state">{ `${title}` }</p>
-  					<p className="project-summary-state">{ `${description}` }</p>
-  					<p className="project-summary-state">{ `${thresholdMoney.toLocaleString()}` }원</p>
-  					<p className="project-summary-state">{ `${purchaseAmount}` }개</p>
-  					<p className="project-summary-state">배송료: { `${shippingFee.toLocaleString()}` }원</p>
-				  </div>
-
-          <button onClick={this._onClickCancel(_id)}>구매 취소</button>
-
+        
+        <div className="purchase-reward-container">
+  				<div className="purchase-stage-content-container">
+  				  <p className="profile-small-title">옵션 및 수량</p>
+  						<div className="purchase-reward-select-container">
+  							<div className="purchase-reward-select">
+  								<p className="purchase-reward-title">{ `${title}` }</p>
+  								<p className="purchase-reward-description">{ `${description}` } : { `${purchaseAmount}` }개</p>
+  								<p className="purchase-reward-money">{ `${thresholdMoney.toLocaleString()}` }원</p>
+  							</div>
+  						</div>
+  					
+  					<p className="profile-small-title">배송지</p>
+  						<div className="purchase-reward-select-container">
+  							<div className="purchase-reward-select">
+  								<p className="purchase-reward-money">{ `${address1} ${address2} ${zipcode}` }</p>
+  								<p className="purchase-reward-description">{ `${addressee_name}` } 님</p>
+  							</div>
+  						</div>
+  						
+  				  <p className="profile-small-title">결제 카드</p>
+  						<div className="purchase-reward-select-container">
+  							<div className="purchase-reward-select">
+  								<p className="purchase-reward-money">{ `[${card_name}] ${card_number}` }</p>
+  								<p className="purchase-reward-description">유효기간 : { `${expiry}` }</p>
+  							</div>
+  						</div>
+          </div>
+          <div className="purchase-stage-content-container-2">
+            <p className="profile-small-title">최종 결제 금액</p>
+						<div className="purchase-reward-select-container">
+							<div className="purchase-reward-result">
+								<p className="purchase-reward-description">{ `${thresholdMoney.toLocaleString()}` }원 + { `${shippingFee.toLocaleString()}` }원(배송비)</p>
+								<p className="purchase-reward-money">= { `${amount.toLocaleString()}` }원({ `${purchase_state}` })</p>
+							</div>
+						</div>
+          </div>
+          <div className="purchase-detail-cancel-button-container">
+            <button className="purchase-detail-cancel-button" onClick={this._onClickCancel(_id)}>결제 예약 취소</button>
+          </div>
         </div>
-
       </div>
     )
   }

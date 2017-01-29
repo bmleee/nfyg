@@ -12,6 +12,13 @@ import { Strategy as FacebookStrategy } from 'passport-facebook'
 
 import { FB_APP } from '~/env'
 
+import Mailchimp from 'mailchimp-lite';
+let mailchimp = new Mailchimp({
+  key: 'b77eda5563facca7997e3d3914b7afbb-us13',
+  datacenter: 'us13'
+});
+
+
 const hasher = bkfd2Password();
 
 // Define the Passport configuration method
@@ -80,8 +87,23 @@ export default function(passport) {
 				fb_email: email,
 				fb_access_token: refreshToken || accessToken,
 				image: profile.profileUrl,
-			}, function(err, user) {
+			}, async function(err, user) {
 				if (err) return done(err)
+				
+				let subemail = user.fb_email
+				
+				const result = await mailchimp.v2.post('/lists/batch-subscribe', {
+				  id: 'c7e4765340',
+				  update_existing: true,
+				  double_optin: false,
+				  replace_interests: false,
+				  batch: [
+				    {email: {email: subemail}}
+				  ]
+				})
+				
+				console.log(result)
+				
 				return done(null, user)
 			})
 		})

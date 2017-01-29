@@ -133,6 +133,19 @@
   border-left : 1px solid #fff;
   margin-top : 15px;
 }
+.purchase-detail-cancel-button-container {
+  text-align: center;
+  margin: 20px 0;
+}
+.purchase-detail-cancel-button, .purchase-detail-cancel-button:focus {
+  width: 120px;
+  height: 40px;
+  background-color: #ddd;
+  border: none;
+  outline: 0;
+  color: #777;
+  font-weight: 700;
+}
 
 @media (max-width: 991px) {
   .project-summary-body {

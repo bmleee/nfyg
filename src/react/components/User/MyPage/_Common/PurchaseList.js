@@ -63,7 +63,7 @@ export default class PurchaseList extends Component {
                       <h4>{shortTitle}</h4>
                       </Link>
                       <span>{title} {purchaseAmount}개 : {amount}원</span>
-                      { !other && <button className="purchase-cancel-button" onClick={this._onClickCancel(_id)}>결제 취소</button> }
+                      {/* !other && <button className="purchase-cancel-button" onClick={this._onClickCancel(_id)}>결제 취소</button> */}
                       { !other && <Link to={`/purchases/${_id}/summary`}><button className="purchase-cancel-button">상세 내역</button></Link> }
                     </div>
                   </div>

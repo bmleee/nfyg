@@ -53,8 +53,8 @@ export default class Purchase extends Component {
 						<p className="profile-small-title">결제 카드</p>
 						<div className="purchase-reward-select-container">
 							<div className="purchase-reward-select">
+								<p className="purchase-reward-money">[{payment.card_name}] {payment.card_number}</p>
 								<p className="purchase-reward-description">유효기간 : {payment.expiry}</p>
-								<p className="purchase-reward-money">{payment.card_name} {payment.card_number}</p>
 							</div>
 						</div>
 
