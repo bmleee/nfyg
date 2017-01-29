@@ -28,8 +28,8 @@ export default class C extends Component {
 
 
 		return (
-			<div>
-				<div>
+			<div className="purchase-reward-container">
+				<div className="purchase-stage-content-container">
 					<p className="profile-small-title">배송지 추가</p>
 					<div className="profile-setting-address1-container">
 						<input className="profile-setting-address1" type="text" id="addressee_name" placeholder="받는 분 성함" />
@@ -49,9 +49,10 @@ export default class C extends Component {
 							<input className="profile-setting-address2" type="text" id="address2" placeholder="상세주소" />
 						</div>
 					</div>
-
+					
+					<div className="add-address-container">	
 					<button className="add-address-button" onClick={this._onClickAddAddress}>추가하기</button>
-				</div>
+					</div>
 
 				{
 					addresses && addresses.map(({
@@ -69,6 +70,7 @@ export default class C extends Component {
 					</div>
 					))
 				}
+				</div>
 			</div>
 		)
 

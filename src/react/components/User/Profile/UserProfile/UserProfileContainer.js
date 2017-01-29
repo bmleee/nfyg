@@ -128,8 +128,8 @@ export default class UserProfileContainer extends Component {
   				<textarea className="project-setting-textarea" type="textarea" id="user-intro"/>
 				</div>
 
-				<input className="profile-setting-checkbox" type="checkbox" />
-				<p className="profile-checkbox-title">이메일 수신여부</p>
+				{/* <input className="profile-setting-checkbox" type="checkbox" />
+				<p className="profile-checkbox-title">이메일 수신여부</p> */}
 
 				<div className="profile-setting-submit-container">
           <button className="profile-setting-submit" onClick={this._onClickUpdateProfile}>프로필 수정</button>
