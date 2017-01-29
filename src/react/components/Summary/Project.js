@@ -33,6 +33,10 @@ export default class ProjectSummary extends Component {
   }
 
   async componentDidMount() {
+    await this.reflashState()
+  }
+
+  reflashState = async () => {
     try {
       const {
         user,
@@ -101,14 +105,14 @@ export default class ProjectSummary extends Component {
             </TabList>
 
             <TabPanel>
-              { purchase_info && <PurchaseInfo purchaseInfo={purchase_info} isAdmin={isAdmin} />}
-              { sharing_info && <SharingInfo sharingInfo={sharing_info} isAdmin={isAdmin} />}
+              { purchase_info && <PurchaseInfo purchaseInfo={purchase_info} isAdmin={isAdmin} reflashState={this.reflashState} />}
+              { sharing_info && <SharingInfo sharingInfo={sharing_info} isAdmin={isAdmin} reflashState={this.reflashState} />}
             </TabPanel>
             <TabPanel>
-              { posts && <Posts posts={posts} isAdmin={isAdmin} />}
+              { posts && <Posts posts={posts} isAdmin={isAdmin} reflashState={this.reflashState} />}
             </TabPanel>
             <TabPanel>
-              { authorizedUsers && <AuthorizedUsers authorizedUsers={authorizedUsers} isAdmin={isAdmin} />}
+              { authorizedUsers && <AuthorizedUsers authorizedUsers={authorizedUsers} isAdmin={isAdmin} reflashState={this.reflashState} />}
             </TabPanel>
 
           </Tabs>

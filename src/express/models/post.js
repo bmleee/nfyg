@@ -63,7 +63,7 @@ PostSchema.pre('validate', function (next) {
 })
 
 PostSchema.pre('update', function (next) {
-	this.abstract.updated_at = Date.now()
+	// this.abstract.updated_at = Date.now()
 	next()
 })
 

@@ -59,20 +59,27 @@ router.post('/:_id/comment', isLoggedIn, async (req, res) => {
 
 router.put('/:_id', isLoggedIn, async (req, res) => {
   try {
-    let user = req.user
+    let {
+      user,
+      body
+    } = req
+
+    console.log('body', body);
 
     let post = await PostModel.findById(req.params._id).populate("project product")
     if (!post) throw Error('No post found')
 
     if (!ac.canEdit(user, post.project || post.product)) throw Error(`Can't delete unauthorized post`)
 
-    const r = await ProductModel.update(
+    const r = await PostModel.update(
 			{ '_id': post._id },
 			body,
 		)
+    console.log(r);
 
     res.json({ response: r.n === 1 })
   } catch (e) {
+    console.error(e);
     res.status(400).json({ error: e.message })
   }
 })

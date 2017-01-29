@@ -11,7 +11,7 @@ import Editor from '~/src/react/components/DraftEditor/SevenEditor'
 import renderComments from './lib/renderComments'
 
 import {date2string} from '~/src/react/lib/utils'
-import { createPost, fetchPost, updatePost } from '~/src/react/api/AppAPI'
+import { createPost, fetchPost, updatePost, deletePost } from '~/src/react/api/AppAPI'
 
 export default class Posts extends Component {
   state = {
@@ -154,11 +154,13 @@ export default class Posts extends Component {
 
   client2server() {
     return {
-      title: document.getElementById('post-title').value,
-      thresholdMoney: Number(document.getElementById('post-threshold-money').value),
+      abstract: {
+        title: document.getElementById('post-title').value,
+        thresholdMoney: Number(document.getElementById('post-threshold-money').value),
+      },
       content: {
-        raw: JSON.stringify(this.state.post.raw),
-        html: draftToHtml(this.state.post.raw),
+        raw: JSON.stringify(this.state.post.content.raw),
+        html: draftToHtml(this.state.post.content.raw),
       }
     }
   }
@@ -175,19 +177,33 @@ export default class Posts extends Component {
 
 
   // TODO:
-  deletePost = (_id) => {
+  deletePost = (post_id) => {
     return async () => {
+      if(confirm('삭제하시겠습니까?')) {
+        try {
+          const { response } = await deletePost({ post_id })
+          console.log(response);
+          alert('삭제했습니다.')
+          this.props.reflashState()
+        } catch (e) {
+          console.error(e);
+          alert(e.message)
+        }
 
+      }
     }
   }
 
-  // TODO: open modal and ..
-  async _onClickEditPost() {
+  _onClickEditPost = async () => {
     let post_id = this.state.post._id
     let body = this.client2server()
 
     try {
       let r = await updatePost({ post_id, body })
+      this.props.reflashState()
+      this.setState(update(this.state, {
+        visible: { $set: false }
+      }))
       console.log(r);
     } catch (e) {
       console.error(e);
