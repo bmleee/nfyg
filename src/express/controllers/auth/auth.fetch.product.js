@@ -51,7 +51,7 @@ router.get('/:productName/:option?/:tab?', async (req, res, next) => {
 	};
 
 	if(['null', 'undefined'].includes(req.params.tab)) {
-		return res.status(400).json({ error: 'unknown' })
+		return res.status(500).json({ error: 'unknown' })
 	}
 
 	if(['edit', 'rewards', 'addresses', 'payments', 'summary', 'purchase'].includes(option)) {
@@ -103,7 +103,7 @@ router.get('/:productName/edit/:tab?', isLoggedIn, async (req, res) => {
 		})
 	} catch (e) {
 		console.error(e);
-		res.status(400).json({
+		res.status(500).json({
 			user: renderUser.authorizedUser(user),
 			error: e.message
 		})
@@ -127,7 +127,7 @@ router.get('/:productName/rewards', async (req, res) => {
 		})
 	} catch (e) {
 		console.error(e);
-		res.status(400).json({
+		res.status(500).json({
 			user,
 			error: e.message
 		})
@@ -156,7 +156,7 @@ router.get('/:productName/summary', isLoggedIn, async (req, res) => {
 		})
 	} catch (e) {
 		console.error(e);
-		res.status(400).json({ error: e })
+		res.status(500).json({ error: e })
 	}
 })
 
@@ -172,7 +172,7 @@ router.get('/:productName/purchase', isLoggedIn, async (req, res) => {
 		})
 	} catch (e) {
 		console.error(e);
-		res.status(400).json({error: e.message})
+		res.status(500).json({error: e.message})
 	}
 })
 
@@ -230,7 +230,7 @@ router.post('/', isLoggedIn,  async (req, res) => {
 		res.json({ response: true })
 	} catch (e) {
 		console.error(e);
-		res.status(400).json({ response: e })
+		res.status(500).json({ response: e })
 	}
 })
 
@@ -255,7 +255,7 @@ router.put('/:productName', isLoggedIn,  async (req, res) => {
 		res.json({response: r.n === 1})
 	} catch (e) {
 		console.error(e);
-		res.status(400).json({ response: e })
+		res.status(500).json({ response: e })
 	}
 })
 
@@ -275,7 +275,7 @@ router.post('/:productName/qnas', isLoggedIn, async (req, res) => {
 		res.json({ response: qna.toFormat('project_detail')})
 	} catch (e) {
 		console.error(e);
-		res.status(400).json({
+		res.status(500).json({
 			error: e.message
 		})
 	}
@@ -308,7 +308,7 @@ router.post('/:productName/processPurchase', isLoggedIn, async (req, res) => {
 		res.json({ response: r })
 	} catch (e) {
 		console.error(e);
-		res.status(400).json({error: e.message})
+		res.status(500).json({error: e.message})
 	}
 })
 

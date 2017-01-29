@@ -36,7 +36,7 @@ router.get('/:_id', isLoggedIn, async (req, res) => {
     res.json({ post: post.toFormat('detail') })
   } catch (e) {
     console.error(e);
-    res.status(400).json({ error: e.message })
+    res.status(500).json({ error: e.message })
   }
 })
 
@@ -53,7 +53,7 @@ router.post('/:_id/comment', isLoggedIn, async (req, res) => {
     res.json({ response: comment })
   } catch (e) {
     console.error(e);
-    res.status(400).json({ error: e.message })
+    res.status(500).json({ error: e.message })
   }
 })
 
@@ -80,7 +80,7 @@ router.put('/:_id', isLoggedIn, async (req, res) => {
     res.json({ response: r.n === 1 })
   } catch (e) {
     console.error(e);
-    res.status(400).json({ error: e.message })
+    res.status(500).json({ error: e.message })
   }
 })
 
@@ -97,7 +97,7 @@ router.delete('/:_id', isLoggedIn, async (req, res) => {
 
     res.json({ response: r })
   } catch (e) {
-    res.status(400).json({ error: e.message })
+    res.status(500).json({ error: e.message })
   }
 })
 
@@ -117,7 +117,7 @@ router.delete('/:_id/comment/:comment_index', isLoggedIn, async (req, res) => {
 
     res.json({ response: r })
   } catch (e) {
-    res.status(400).json({ error: e.message })
+    res.status(500).json({ error: e.message })
   }
 })
 

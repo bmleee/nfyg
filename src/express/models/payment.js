@@ -23,6 +23,8 @@ PaymentSchema.set('toJSON', {
 });
 
 PaymentSchema.pre('save', async function (next) {
+  if (this.card_name) return next()
+
   try {
     let {
       card_name,

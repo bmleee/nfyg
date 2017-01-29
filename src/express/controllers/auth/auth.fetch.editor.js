@@ -36,7 +36,7 @@ router.get('/:editor/:tab?', async (req, res, next) => {
 			user: renderUser.authorizedUser(req.user, true),
 		})
 	} catch (e) {
-		res.status(401).json({
+		res.status(500).json({
 			user: renderUser.unauthorizedUser(req.user, false),
 			error: e.message
 		 })

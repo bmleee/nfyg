@@ -40,7 +40,7 @@ router.post('/:_id/comment', isLoggedIn, async (req, res) => {
 
   } catch (e) {
     console.error(e);
-    res.status(400).json({ error: e.message })
+    res.status(500).json({ error: e.message })
   }
 })
 
@@ -58,7 +58,7 @@ router.delete('/:_id', isLoggedIn, async (req, res) => {
     res.json({ response: r })
   } catch (e) {
     console.error(e);
-    res.status(400).json({ error: e.message })
+    res.status(500).json({ error: e.message })
   }
 })
 
@@ -79,7 +79,7 @@ router.delete('/:_id/comment/:comment_index', isLoggedIn, async (req, res) => {
     res.json({ response: r })
   } catch (e) {
     console.error(e);
-    res.status(400).json({ error: e.message })
+    res.status(500).json({ error: e.message })
   }
 })
 

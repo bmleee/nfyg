@@ -14,7 +14,7 @@ const _request = async (config) => {
 		return response.data
 	} catch (e) {
 		console.error(e, config);
-		throw e
+		throw Error(e.message)
 	}
 }
 
@@ -205,11 +205,29 @@ export async function createAddress(address) {
 	return await _request(config)
 }
 
+export async function deleteAddress(address_id) {
+	const config = {
+		method: 'delete',
+		url: `/api/users/address/${address_id}`,
+	}
+
+	return await _request(config)
+}
+
 export async function createPayment(payment) {
 	const config = {
 		method: 'post',
 		url: `/api/users/payment`,
 		data: payment,
+	}
+
+	return await _request(config)
+}
+
+export async function deletePayment(payment_id) {
+	const config = {
+		method: 'delete',
+		url: `/api/users/payment/${payment_id}`,
 	}
 
 	return await _request(config)
@@ -280,6 +298,20 @@ export async function createCommentOnPost({text, post_id}) {
 		method: 'post',
 		url: `/api/auth/fetch/posts/${post_id}/comment`,
 		data: { text },
+	}
+
+	return await _request(config)
+}
+
+export async function fetchUserProfile() {
+	return await _request({ url: '/api/users/profile/info' })
+}
+
+export async function updateUserProfile(body) {
+	const config = {
+		method: 'put',
+		url: `/api/users/profile/info`,
+		data: body,
 	}
 
 	return await _request(config)

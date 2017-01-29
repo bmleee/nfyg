@@ -33,6 +33,7 @@ const UserSchema = new Schema({
 		// Validate the email format
 		match: [/.+\@.+\..+/, "Please fill a valid email address"]
 	},
+
 	fb_email: { type: String, trim: true,
 		// Validate the email format
 		match: [/.+\@.+\..+/, "Please fill a valid email address"]
@@ -60,6 +61,12 @@ const UserSchema = new Schema({
 	created_at: {type: Date, default: Date.now()},
 	updated_at: {type: Date, default: Date.now()},
 
+	intro: { type: String, },
+
+	contact: { type: String, trim: true,
+		// Validate the email format
+		// match: [/\d+\-\d+\-\d+/, "올바른 핸드폰 번호를 입력하세요."]
+	},
 });
 
 UserSchema.pre('update', function (next) {

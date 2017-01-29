@@ -64,7 +64,7 @@ export default function renderReact (request, response, ) {
 		else if (redirectLocation) response.status(302).redirect(redirectLocation.pathname + redirectLocation.search);
 		else if (renderProps) {
 			await renderRoute({ response, routes: reactRoutes, renderProps, store, history });
-		} else response.status(404).render('404');
+		} else response.status(504).render('404');
 	})
 
 	// next()

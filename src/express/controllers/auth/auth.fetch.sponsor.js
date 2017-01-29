@@ -86,7 +86,7 @@ router.post('/', async (req, res) => {
 		res.json({response: r.n === 1})
 	} catch (e) {
 		console.error(e);
-		res.status(400).json({
+		res.status(500).json({
 			response: e
 		})
 	}

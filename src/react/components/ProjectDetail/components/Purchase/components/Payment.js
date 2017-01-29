@@ -4,7 +4,7 @@ import update from 'immutability-helper'
 import { Card, CardPanel, CardTitle } from 'react-materialize'
 
 import { isNumber } from '~/src/lib/utils'
-import { fetchPurchaseInfo, createPayment } from '~/src/react/api/AppAPI'
+import { fetchPurchaseInfo, createPayment, deletePayment } from '~/src/react/api/AppAPI'
 
 import Modal from '~/src/react/components/react-awesome-modal';
 
@@ -36,6 +36,7 @@ export default class C extends Component {
 	}
 
 	render() {
+		console.log(this);
 		const {
 			payments,
 			card_number,
@@ -64,6 +65,7 @@ export default class C extends Component {
 						<h4 className="card-list-title">결제카드를 선택해주세요.</h4>
 							{
 								payments.map(({
+									_id,
 									card_name,
 									card_number,
 									expiry,
@@ -72,7 +74,7 @@ export default class C extends Component {
 										<button className={"card-select-button" + (selectedPaymentIndex === index ? "selected": "" )} onClick={this._onClickPayment(index)}>
 												<p className="card-title">[{card_name}] {card_number}</p>
 												<p className="card-expiry">유효기간 : {expiry}</p>
-											<button className="card-delete">삭 제</button>
+											<button className="card-delete" onClick={this._onClickDeletePayment(_id)}>삭 제</button>
 										</button>
 									</div>
 								))
@@ -145,9 +147,11 @@ export default class C extends Component {
 		console.log(payment);
 
 		try {
-			await createPayment(payment)
+			const r = await createPayment(payment)
+			console.log('create payment result',r );
 		} catch (e) {
-			console.error(e);
+			console.error('create payment error', e);
+			alert("카드 정보를 올바르게 입력해주세요.")
 		} finally {
 			await this._reflashPayments()
 		}
@@ -155,6 +159,20 @@ export default class C extends Component {
 		this.setState(update(this.state, {
 			visible: { $set: false },
 		}))
+	}
+
+	_onClickDeletePayment = (payment_id) => {
+		return async () => {
+			try {
+				const r = await deletePayment(payment_id)
+				console.log('delete payment response', r);
+				await this._reflashPayments()
+			} catch (e) {
+				console.error('delete payment error', e);
+			} finally {
+
+			}
+		}
 	}
 
 	_reflashPayments = async () => {

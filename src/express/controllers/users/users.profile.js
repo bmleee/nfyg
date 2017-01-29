@@ -10,6 +10,8 @@
  */
 import express from 'express';
 
+import { pick } from 'lodash'
+
 // import cache from '../../lib/cache'
 
 import UserModel from '../../models/user'
@@ -57,12 +59,53 @@ router.get('/', async (req, res) => { // return user-type, appropreate data (pro
 		})
 	} catch (error) {
 		console.error(error);
-		res.status(400).json({ error })
+		res.status(500).json({ error })
+	}
+})
+
+
+router.get('/summary', isLoggedIn, async (req, res) => {
+	try {
+		let user = await UserModel.findById(req.user._id)
+
+		res.json({
+			user: renderUser.authorizedUser(user),
+			data: {
+				summary: await user.toFormat('summary')
+			}
+		})
+	} catch (e) {
+		console.error(e);
+		res.status(500).json({ error: e })
+	}
+})
+
+router.get('/info', isLoggedIn, async (req, res) => {
+	let user = req.user
+
+	res.json({
+		user: renderUser.authorizedUser(user),
+		data: {
+			profile: pick(user.toJSON(), ['fb_id', 'local_email', 'name', 'image', 'intro', 'contact'])
+		}
+	})
+})
+
+router.put('/info', isLoggedIn, async (req, res) => {
+	try {
+		const r = await UserModel.update(
+			{ _id: req.user._id },
+			req.body,
+		)
+
+		res.json({ response: r.n === 1 })
+	} catch (e) {
+		console.error(e);
+		res.status(500).json({ error: e.message })
 	}
 })
 
 router.get('/:user_id', async (req, res) => {
-	console.log('/users/profile/:user_Id');
 	try {
 		let user = await UserModel.findOne({ id: req.params.user_id })
 		res.json({
@@ -78,19 +121,5 @@ router.get('/:user_id', async (req, res) => {
 	}
 })
 
-router.get('/summary', isLoggedIn, async (req, res) => {
-	try {
-		let user = await UserModel.findById(req.user._id)
 
-		res.json({
-			user: renderUser.authorizedUser(user),
-			data: {
-				summary: await user.toFormat('summary')
-			}
-		})
-	} catch (e) {
-		console.error(e);
-		res.status(400).json({ error: e })
-	}
-})
 export default router

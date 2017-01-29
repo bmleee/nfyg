@@ -9,6 +9,7 @@ import PostModel from '../models/post'
 import QnAModel from '../models/qna'
 import SponsorModel from '../models/sponsor'
 import PurchaseModel from '../models/purchase'
+import PaymentModel from '../models/payment'
 // import PaymentModel from '../models/payment'
 
 /**
@@ -52,6 +53,10 @@ export function canEdit (user, target) {
 
 	if(target instanceof PurchaseModel) {
 		return isEditor(user) || target.user.equals(user._id || user)
+	}
+
+	if(target instanceof PaymentModel) {
+		return target.user.equals(user._id || user)
 	}
 
 	throw Error(`can't accept target`)

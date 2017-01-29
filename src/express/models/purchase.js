@@ -118,7 +118,7 @@ PurchaseSchema.pre('save', async function (next) {
     await next()
   } catch (e) {
     console.error(e);
-    next(Error(e))
+    throw e
   }
 })
 

@@ -8,7 +8,7 @@ import * as renderUser from './renderUser'
 
 export default function isLoggedIn(req, res, next) {
 	if (!req.user) {
-		return res.status(400).json({
+		return res.status(500).json({
 			user: renderUser.authorizedUser(req.user),
 			error: new Error('user nog logged in')
 		})

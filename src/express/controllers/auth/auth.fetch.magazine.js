@@ -88,7 +88,7 @@ router.get('/:magazineName/edit/:tab?', isLoggedIn, async (req, res) => {
 		})
 	} catch (e) {
 		console.error(e);
-		res.status(400).json({
+		res.status(500).json({
 			user: renderUser.authorizedUser(user),
 			error: e.message
 		})
@@ -110,7 +110,7 @@ router.post('/', async (req, res) => {
 
 	} catch (e) {
 		console.error(e);
-		res.status(400).json({ response: e })
+		res.status(500).json({ response: e })
 	}
 })
 
@@ -136,7 +136,7 @@ router.put('/:magazineName', async (req, res) => {
 		res.json({response: r.n === 1})
 	} catch (e) {
 		console.error(e);
-		res.status(400).json({ response: e })
+		res.status(500).json({ response: e })
 	}
 })
 
