@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
 
-export default class User extends Component {
+export default class UserSummary extends Component {
   render() {
     const {
       authorizedProjects // raw project model

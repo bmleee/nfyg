@@ -13,15 +13,15 @@ export {
 const Schema = mongoose.Schema;
 
 // from ~/src/react/constants
-export const categories = SelectOptions.MagazineCategory.map(x => x.value)
-// export const categories = [
-// 	{ "value": 'culture space', "label": "문화 공간" },
-// 	{ "value": 'exhibition / museum', "label": "전시 / 미술관" },
-// 	{ "value": 'art content', "label": "예술 컨텐츠" },
-// 	{ "value": 'art infomation', "label": "예술 정보" },
-// 	{ "value": 'purchase / collection', "label": "구매 및 소장" },
-// 	{ "value": 'purchase', "label": "구매" },
-// ].map(x => x.value)
+// export const categories = SelectOptions.MagazineCategory.map(x => x.value)
+export const categories = [
+	{ "value": 'culture space', "label": "문화 공간" },
+	{ "value": 'exhibition / museum', "label": "전시 / 미술관" },
+	{ "value": 'art content', "label": "예술 컨텐츠" },
+	{ "value": 'art infomation', "label": "예술 정보" },
+	{ "value": 'purchase / collection', "label": "구매 및 소장" },
+	{ "value": 'purchase', "label": "구매" },
+].map(x => x.value)
 
 // Define a new 'MagazineSchema'
 const MagazineSchema = new Schema({

@@ -12,7 +12,7 @@ import {
 
 import { fetchSummary, processPurchase } from '~/src/react/api/AppAPI'
 
-export default class Product extends Component {
+export default class ProductSummary extends Component {
   state = {
     userType: '',
     product_summary: {

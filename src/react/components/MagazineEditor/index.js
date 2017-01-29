@@ -273,7 +273,7 @@ export default class MagazineEditor extends Component {
         console.log('create result', res);
       }
 
-      appUtils.etFlash({title: 'magazine saved', message: JSON.stringify(res, undefined, 4), level: 'success'})
+      appUtils.setFlash({title: 'magazine saved', message: JSON.stringify(res, undefined, 4), level: 'success'})
 		} catch (e) {
 			console.error('save error', e);
       appUtils.setFlash({title: 'magazine save error', message: JSON.stringify(e.response, undefined, 4), level: 'error', autoDismiss: 0, dismissible: true})

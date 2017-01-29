@@ -130,6 +130,9 @@ router.put('/:magazineName', async (req, res) => {
 			{ 'abstract.magazineName': magazineName },
 			body,
 		)
+
+		console.log(r);
+
 		res.json({response: r.n === 1})
 	} catch (e) {
 		console.error(e);
