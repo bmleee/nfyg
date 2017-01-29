@@ -316,7 +316,7 @@ export default class ProjectEditor extends Component {
 				funding: {
 					reward: {
 						newReward: {
-							shippingDay: { $set: e.target.value } // react-select
+							shippingDay: { $set: e.target.value }
 						}
 					}
 				}

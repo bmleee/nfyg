@@ -39,7 +39,6 @@ router.get('/', isLoggedIn, async (req, res) => {
 
 // TODO: should notify error!
 router.post('/', isLoggedIn, async (req, res) => {
-	console.log('url', req.url);
 	try {
 		const {
 			user
@@ -58,14 +57,11 @@ router.post('/', isLoggedIn, async (req, res) => {
 	      birth: body.birth,
 	      pwd_2digit: body.pwd_2digit,
 	    })
+			body.card_name = card_name
 		} catch (e) {
 			console.error(e);
 			res.status(500).json({ error: e.message })
 		}
-
-		console.log('card_name', card_name);
-
-		body.card_name = card_name
 
 		let payment = await PaymentModel.create(body)
 
