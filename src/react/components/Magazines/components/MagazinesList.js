@@ -54,9 +54,11 @@ class MagazinesList extends Component {
 						<Link to={link}>
 							<div>
 								<Link to={link}><h4>{ title }</h4></Link>
+								{/*
 								<p>
 									<img className="magazine-writer-icon" src={iconSrc} width={24} height={24} alt=""/> {name} | {value2label(selectOptions, category)}
 								</p>
+								*/}
 							</div>
 							<p className="magazine-description">{description}</p>
 						</Link>

@@ -25,15 +25,15 @@
 	height: auto;
     vertical-align: top;
     display: inline-block;
-    padding :10px;
+    padding :5px;
 }
 .magazines-list {
 	width : 1192px;
 	margin : 0px auto;
-	padding : 40px 0px 20px 0px;
+	padding : 20px 0px 20px 0px;
 	@media (max-width: 1192px) {
             width : 100%;
-            padding : 40px 40px 20px 40px;
+            padding : 20px 40px 20px 40px;
         }
 }
 .magazine-category-button {

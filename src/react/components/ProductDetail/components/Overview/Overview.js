@@ -39,8 +39,10 @@ class Overview extends Component {
 				<div className="project-detail-overview-info">
 					<div dangerouslySetInnerHTML={{ __html: part1}} />
 				</div>
-
+				
+				{/*
 				<ProductReward productName={productName} rewards={rewards} />
+				*/}
 
 				<div className="project-detail-overview-info">
 					<div dangerouslySetInnerHTML={{ __html: part2}} />

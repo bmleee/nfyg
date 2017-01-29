@@ -48,9 +48,11 @@ class MagazinesHeading extends Component {
 				<div className="magazines-heading-nav">
 					<h2>Magazine</h2>
 				</div>
+				{/*
 				<div className="magazines-heading-category-container">
 					{ categoryButtons }
 				</div>
+				*/}
 			</div>
 		)
 	}
