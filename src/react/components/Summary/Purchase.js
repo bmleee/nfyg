@@ -163,6 +163,11 @@ export default class PurchaseSummary extends Component {
 
   _onClickCancel(_id) {
     return async () => {
+      if (!['preparing', 'scheduled'].includes(this.state.purchase_summary.purchase_info.purchase_state)) {
+        alert('이미 취소된 구매 내역입니다.')
+        return
+      }
+
       if (confirm('결제를 취소하시겠습니까?')) {
         try {
           const r = await cancelPurchase({ purchase_id: _id })
