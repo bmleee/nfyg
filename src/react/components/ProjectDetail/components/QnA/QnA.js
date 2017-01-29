@@ -31,7 +31,8 @@ class QnA extends Component {
 		try {
 			let text = document.getElementById("qna_text").value
 			let projectName = this.props.abstract.projectName
-			let { response } = await createQnA({text, projectName})
+			let productName = this.props.abstract.productName
+			let { response } = await createQnA({text, projectName, productName})
 			this.props._newQnA(response)
 			document.getElementById("qna_text").value = ''
 		} catch (e) {

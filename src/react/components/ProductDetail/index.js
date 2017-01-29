@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import update from 'immutability-helper'
 import DocumentMeta from 'react-document-meta';
 
 import { canUseDOM } from '~/src/lib/utils'
@@ -81,6 +82,61 @@ export default class ProductDetailContainer extends Component {
 		console.log(_.sortBy(indirectSupporters, o.value));
 	}
 
+	_newQnA = (qna) => {
+		this.setState(update(this.state, {
+			qna: {
+				posts: {
+					$unshift: [qna]
+				}
+			}
+		}))
+	}
+
+	_deleteQnA = (qna_id) => {
+		let index = this.state.qna.posts.findIndex(q => q._id === qna_id)
+		this.setState(update(this.state, {
+			qna: {
+				posts: {
+					$splice: [
+						[index, 1]
+					]
+				}
+			}
+		}))
+	}
+
+	_newCommentOnQnA = (qna_id, comment) => {
+		let index = this.state.qna.posts.findIndex(q => q._id === qna_id)
+		this.setState(update(this.state, {
+			qna: {
+				posts: {
+					[index]: {
+						comments: {
+							$push: [comment]
+						}
+					}
+				}
+			}
+		}))
+	}
+
+	_deleteCommentOnQnA = (qna_id, comment_index) => {
+		let index = this.state.qna.posts.findIndex(p => p._id === qna_id)
+		this.setState(update(this.state, {
+			qna: {
+				posts: {
+					[index]: {
+						comments: {
+							$splice: [
+								[ comment_index, 1]
+							]
+						}
+					}
+				}
+			}
+		}))
+	}
+
 	render() {
 		let abstract = this.state.abstract
 
@@ -91,17 +147,25 @@ export default class ProductDetailContainer extends Component {
 			}
 		}
 
+		let props = {
+			...this.state,
+			_onSelectOptionChange: this._onSelectOptionChange,
+			user: this.props.appUtils.getUser(),
+			_newQnA: this._newQnA,
+			_deleteQnA: this._deleteQnA,
+			_newCommentOnQnA: this._newCommentOnQnA,
+			_deleteCommentOnQnA: this._deleteCommentOnQnA,
+		}
+
 		let children = this.props.children
 			&& React.cloneElement(this.props.children, {
-				...this.state,
-				_onSelectOptionChange: this._onSelectOptionChange,
+				...props
 			});
 
 		return this.state.loaded
 			?
 				<ProductDetail
-					{...this.state}
-					_onSelectOptionChange={this._onSelectOptionChange}
+					{...props}
 				>
 					<DocumentMeta {...meta} />
 					{ children }

@@ -243,7 +243,7 @@ router.put('/:productName', isLoggedIn,  async (req, res) => {
 		if (!ac.isAdmin(user) && !ac.isEditor(user) && !ac.isArtist(user) ) throw Error(`unauthorized`)
 
 		const body = req.body
-		
+
 		const productName = req.params.productName
 		const product = await ProductModel.findOneByName(productName)
 		if (!ac.canEdit(req.user, product)) throw Error(`can't edit unauthorized product`)
@@ -258,6 +258,29 @@ router.put('/:productName', isLoggedIn,  async (req, res) => {
 		res.status(400).json({ response: e })
 	}
 })
+
+router.post('/:productName/qnas', isLoggedIn, async (req, res) => {
+	try {
+		let user = req.user
+		let productName = req.params.productName
+
+		let {
+			title = 'empty-title',
+			text,
+		} = req.body
+
+		let product = await ProductModel.findOne({'abstract.productName': productName})
+		let qna = await mh.createQnA({title, text, product, user})
+
+		res.json({ response: qna.toFormat('project_detail')})
+	} catch (e) {
+		console.error(e);
+		res.status(400).json({
+			error: e.message
+		})
+	}
+})
+
 
 router.post('/:productName/processPurchase', isLoggedIn, async (req, res) => {
 	try {
