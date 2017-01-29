@@ -61,6 +61,7 @@ export default class ProductEditor extends Component {
 					isDirectSupport: false,
           imgSrc: '',
           maxPurchaseVolume: 0,
+          shippingDay: '',
 					thresholdMoney: 0
 				}
 			},         // { title, description, isDirectSupport: T/F, threshold: 직접 후원 금액 또는 좋아요, 리공유 수, 전달일 }
@@ -278,6 +279,7 @@ export default class ProductEditor extends Component {
 						isDirectSupport: { $set: false },
 						thresholdMoney: { $set: 0 },
             maxPurchaseVolume: { $set: 0 },
+            shippingDay: { $set: ' '},
             imgSrc: { $set: ' '},
 					}
 				}
@@ -331,6 +333,17 @@ export default class ProductEditor extends Component {
 				}
 			}))
 		},
+    _onShippingDay: (e) => {
+      this.setState(update(this.state, {
+				funding: {
+					reward: {
+						newReward: {
+              shippingDay: { $set: e.target.value }
+						}
+					}
+				}
+			}))
+    },
 		_onThresholdMoney: (e) => {
 			this.setState(update(this.state, {
 				funding: {

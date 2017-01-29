@@ -16,11 +16,10 @@ export default class PurchaseResult extends Component {
 			address,
 			purchaseAmount,
 			setShippingFee,
-
 			msg,
 		} = this.props
 
-		const maxPurchaseVolume = "2017.3.20"
+		const shippingDay = reward.shippingDay || "2017.3.20"
 
 		return (
 			<div className="purchase-reward-container">
@@ -52,7 +51,7 @@ export default class PurchaseResult extends Component {
 					<h4 className="purchase-result-text">결제금액 : {reward.thresholdMoney.toLocaleString()}원</h4>
 					<h4 className="purchase-result-text">결제카드 : [{payment.card_name}] {payment.card_number}</h4>
 					<div className="purchase-shipping-info">
-						{/* 배송은 {maxPurchaseVolume} 예정되어 있습니다. */}
+						배송은 {shippingDay} 예정되어 있습니다.
 					</div>
 				</div>
 

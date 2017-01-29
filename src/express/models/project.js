@@ -61,6 +61,7 @@ const ProjectSchema = new Schema({
 				description: {type: String, required: true},
 				imgSrc: {type: String,},
 				isDirectSupport: {type: Boolean, required: true},
+				shippingDay: {type: String, required: true},
 				thresholdMoney: {type: Number, required: true},
 				maxPurchaseVolume: {type: Number, required: true},
 			}

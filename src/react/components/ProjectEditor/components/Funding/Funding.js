@@ -43,6 +43,7 @@ const RewardWrapper = ({value, handlers}) => {
 			isDirectSupport,
 			imgSrc,
 			maxPurchaseVolume,
+			shippingDay,
 			thresholdMoney
 		}, index) => (
 			<div className="editor-item-detail-wrapper">
@@ -52,6 +53,7 @@ const RewardWrapper = ({value, handlers}) => {
 				<span className="item-deatail-small-title-saved">구 분 : {value2label(SelectOptions.Reward, isDirectSupport)}</span>
 				<span className="item-deatail-small-title-saved">가 격 : {thresholdMoney.toLocaleString()}원</span>
 				<span className="item-deatail-small-title-saved">최대구매수량 : {maxPurchaseVolume}</span>
+				<span className="item-deatail-small-title-saved">배송일 : {shippingDay}</span>
 				<button className="item-deatail-delete" onClick={() => deleteReward(index)}>삭제하기</button>
 			</div>
 		))
@@ -72,6 +74,7 @@ const RewardForm = ({value, handlers, ...otherProps}) => {
 		isDirectSupport,
 		thresholdMoney,
 		imgSrc,
+		shippingDay,
 		maxPurchaseVolume,
 	} = value.newReward
 	const {
@@ -80,6 +83,7 @@ const RewardForm = ({value, handlers, ...otherProps}) => {
 		_onIsDirectSupport,
 		_onThresholdMoney,
 		_onImgSrc,
+		_onShippingDay,
 		_onMaxPurcahseVolum,
 	} = handlers
 
@@ -107,6 +111,11 @@ const RewardForm = ({value, handlers, ...otherProps}) => {
 			<div>
 				<span className="item-deatail-small-title">최대 구매 수량</span>
 				<input type="number" value={maxPurchaseVolume} onChange={_onMaxPurcahseVolum}/>
+			</div>
+
+			<div>
+				<span className="item-deatail-small-title">배송일</span>
+				<input type="date" value={shippingDay} onChange={_onShippingDay}/>
 			</div>
 
 			<div>

@@ -58,6 +58,7 @@ const ProductSchema = new Schema({
 				imgSrc: {type: String,},
 				isDirectSupport: {type: Boolean, required: true},
 				thresholdMoney: {type: Number, required: true},
+				shippingDay: {type: String, required: true},
 				maxPurchaseVolume: {type: Number, required: true},
 			}
 		],

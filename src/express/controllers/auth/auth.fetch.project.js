@@ -230,6 +230,8 @@ router.post('/:projectName/purchase', isLoggedIn, async (req, res) => {
 router.post('/', async (req, res) => {
 	console.log('POST /auth/fetch/projects');
 
+	console.log('body', req.body.funding.rewards);
+
 	try {
 		let user = req.user
 
