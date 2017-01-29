@@ -28,6 +28,18 @@ import * as ac from '../../lib/auth-check'
 
 const router = express.Router();
 
+router.get('/:_id', isLoggedIn, async (req, res) => {
+  console.log('588c99b2225da0200606c2b1588c99b2225da0200606c2b1588c99b2225da0200606c2b1588c99b2225da0200606c2b1');
+  try {
+    let post = await PostModel.findOne({ _id: req.params._id })
+    if (!post) throw Error(`Post ${req.params._id} not found`)
+    res.json({ post: post.toFormat('detail') })
+  } catch (e) {
+    console.error(e);
+    res.status(400).json({ error: e.message })
+  }
+})
+
 router.post('/:_id/comment', isLoggedIn, async (req, res) => {
   // create comment on post
   try {
@@ -41,6 +53,26 @@ router.post('/:_id/comment', isLoggedIn, async (req, res) => {
     res.json({ response: comment })
   } catch (e) {
     console.error(e);
+    res.status(400).json({ error: e.message })
+  }
+})
+
+router.put('/:_id', isLoggedIn, async (req, res) => {
+  try {
+    let user = req.user
+
+    let post = await PostModel.findById(req.params._id).populate("project product")
+    if (!post) throw Error('No post found')
+
+    if (!ac.canEdit(user, post.project || post.product)) throw Error(`Can't delete unauthorized post`)
+
+    const r = await ProductModel.update(
+			{ '_id': post._id },
+			body,
+		)
+
+    res.json({ response: r.n === 1 })
+  } catch (e) {
     res.status(400).json({ error: e.message })
   }
 })

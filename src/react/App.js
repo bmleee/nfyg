@@ -113,10 +113,11 @@ export default class App extends Component {
 	// propagate to children...!
 	appUtils = {
 		setUser: (user) => {
-			console.log('setUser.user', user);
-			this.setState(update(this.state, {
-				user: { $set : user }
-			}))
+			if (JSON.stringify(this.state.user) !== user) {
+				this.setState(update(this.state, {
+					user: { $set : user }
+				}))
+			}
 		},
 
 		getUser: () => this.state.user,

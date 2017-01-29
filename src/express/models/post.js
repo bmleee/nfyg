@@ -99,6 +99,7 @@ PostSchema.set('toJSON', {
 
 PostSchema.methods.toFormat = function (type, ...args) {
 	switch (type) {
+		case 'detail':
 		case 'project_detail':
 		case 'product_detail':
 			let canEdit = args[0];
@@ -117,6 +118,7 @@ PostSchema.methods.toFormat = function (type, ...args) {
 				numSupporters: 10, // TODO: [Definition] what is support of this post?????
 				likes: this.abstract.numLikes,
 				content: this.content.html,
+				contentRaw: this.content.raw,
 				comments: this.comments,
 				numComments: this.numComments, // TODO: apply react.post
 				thresholdMoney: this.abstract.thresholdMoney,

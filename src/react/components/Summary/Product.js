@@ -99,6 +99,7 @@ export default class Product extends Component {
     try {
       const r = await processPurchase({ productName: this.props.params.productName })
       console.log(r)
+      alert(`${r.length}명의 결제가 신청되었습니다.`)
     } catch (e) {
       console.error(e)
       alert(e.message)

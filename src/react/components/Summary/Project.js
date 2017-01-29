@@ -121,6 +121,7 @@ export default class ProjectSummary extends Component {
     try {
       const r = await processPurchase({ projectName: this.props.params.projectName })
       console.log(r)
+      alert(`${r.length}명의 결제가 신청되었습니다.`)
     } catch (e) {
       console.error(e)
       alert(e.message)

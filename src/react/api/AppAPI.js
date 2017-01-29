@@ -230,6 +230,10 @@ export async function createQnA({title = 'empty-title', text, projectName, produ
 	return await _request(config)
 }
 
+export async function fetchPost(post_id) {
+	return await _request({ url: `/api/auth/fetch/posts/${post_id}` })
+}
+
 export async function createPost({projectName, productName, title, content, thresholdMoney, isDirectSupport}) {
 	let base;
 
@@ -245,6 +249,19 @@ export async function createPost({projectName, productName, title, content, thre
 
 	return await _request(config)
 }
+
+export async function updatePost({post_id, body}) {
+	const config = {
+		method: 'put',
+		url: `/api/auth/fetch/posts/${post_id}`,
+		withCredentials: true,
+		data: body,
+	}
+
+	return await _request(config)
+}
+
+
 
 export async function createCommentOnQnA({text, qna_id}) {
 	const config = {
