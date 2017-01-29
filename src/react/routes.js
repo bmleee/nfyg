@@ -63,9 +63,10 @@ import { UserProfileContainer, UserProfileMain, UserProfileProject, UserProfileP
 import MyPage from './components/User/MyPage'
 
 import {
-	User as UserSummary,
-	Project as ProjectSummary,
-	Product as ProductSummary,
+	UserSummary,
+	ProjectSummary,
+	ProductSummary,
+	PurchaseSummary,
 } from './components/Summary'
 
 import { Sponsors } from './components/Sponsors'
@@ -223,6 +224,7 @@ const routes = (
 		<Route path="projects/:projectName/summary" component={ProjectSummary}></Route>
 		<Route path="products/:productName/summary" component={ProductSummary}></Route>
 		<Route path="users/:user_id/summary" component={UserSummary}></Route>
+		<Route path="purchases/:purchase_id/summary" component={PurchaseSummary}></Route>
 
 		{/* Footer, Search components */}
 		<Route path="about" component={About}></Route>

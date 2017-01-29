@@ -150,6 +150,22 @@ PurchaseSchema.methods.toFormat = async function (type, ...args) {
           purchaseAmount: this.purchaseAmount,
           shippingFee: this.shippingFee
         }
+      case 'summary':
+        return {
+          _id: this._id,
+          project: this.project && this.project.abstract,
+          product: this.product && this.product.abstract,
+          payment: {
+            card_name: this.payment.card_name,
+            card_number: this.payment.card_number.split('-')[3],
+          },
+          address: this.address,
+          purchase_info: this.purchase_info,
+          user: this.user_info,
+          reward: this.reward,
+          purchaseAmount: this.purchaseAmount,
+          shippingFee: this.shippingFee
+        }
     default:
       console.error(`toFormat can't accept this ${JSON.stringify(type)}`);
       return ''

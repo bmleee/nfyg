@@ -10,33 +10,61 @@ import {
   PurchaseInfo,
 } from './_Common'
 
-import { fetchSummary } from '~/src/react/api/AppAPI'
+import { fetchSummary, cancelPurchase } from '~/src/react/api/AppAPI'
 
-export default class Product extends Component {
+export default class PurchaseSummary extends Component {
   state = {
+    loaded: false,
     userType: '',
-    product_summary: {
-      abstract: null,
-      authorizedUsers: null,
-      funding: null,
-      qnas: null,
-      purchase_info: null,
+    purchase_summary: {
+      _id: '',
+      project: null,
+      product: null,
+      address: {
+        addressee_name: '',
+        zipcode: '',
+      	address1: '',
+      	address2: '',
+      },
+      payment: {
+        card_name: '',
+        card_number: '',
+      },
+      reward: {
+        title: '',
+        description: '',
+        thresholdMoney: '',
+      },
+      purchaseAmount: 0,
+      shippingFee: 0,
+
+      purchase_info: { // TODO: add additional purchase information here. eg, shipping, ...
+        purchase_state: '',
+        amount: 0,
+      },
     },
   }
 
   async componentDidMount() {
+    await this.reflashState()
+  }
+
+  reflashState = async () => {
     try {
       const {
         user,
         data: {
-          userType,
-          product_summary
+          // userType, // admin? artist?
+          purchase_summary
         }
-      } = await fetchSummary({ productName: this.props.params.productName })
+      } = await fetchSummary({ purchase_id: this.props.params.purchase_id })
 
       appUtils.setUser(user)
-      this.setState({ userType, product_summary })
-      console.log(product_summary);
+      console.log(purchase_summary);
+      this.setState({
+        loaded: true,
+        purchase_summary
+       })
     } catch (e) {
       console.error(e);
     }
@@ -45,50 +73,107 @@ export default class Product extends Component {
 
   render() {
     const {
-      userType,
-      product_summary: {
-        abstract,
-        authorizedUsers,
-        funding,
-        qnas,
-        purchase_info,
+      loaded,
+      purchase_summary: {
+        _id = '',
+        project = null,
+        product = null,
+        address: {
+          addressee_name = '',
+          zipcode= '',
+        	address1= '',
+        	address2= '',
+        },
+        payment: {
+          card_name= '',
+          card_number= '',
+        },
+        reward: {
+          title= '',
+          description= '',
+          thresholdMoney= '',
+        },
+        purchaseAmount= 0,
+        shippingFee= 0,
+
+        purchase_info: { // TODO= add additional purchase information here. eg, shipping, ...
+          purchase_state= '',
+          amount= 0,
+        },
       }
     } = this.state
-    
+
+    let p = project || product
+
     let infoBackground = {
-			backgroundImage: `url("${ abstract && abstract.imgSrc }")`,
+			backgroundImage: `url("${ p && p.imgSrc }")`,
 			backgroundSize: 'cover',
 			backgroundPosition: 'center center',
 			backgroundRepeat: 'no-repeat'
 		}
 
-    let isAdmin = userType === 'admin'
-
-    return (
+    return loaded && (
       <div className="summary-project-container">
+
         <div className="purchase-heading" style={infoBackground}>
           <div className="project-summary-header">
-            {/* <div className="project-summary-sponsor-name">{ sponsor && sponsor.displayName }</div> */}
-  					<h1 className="project-summary-title">{ abstract && abstract.longTitle }</h1>
-  					<p className="project-summary-state">{ abstract && abstract.state }</p>
+  					<h1 className="project-summary-title">{ p && p.longTitle }</h1>
+  					<p className="project-summary-state">{ p && p.state }</p>
 				  </div>
 				</div>
+
 				<div className="project-summary-body">
-          <Tabs>
-            <TabList>
-              <Tab>구매자 명단</Tab>
-              <Tab>관리자</Tab>
-            </TabList>
-  
-            <TabPanel>
-              { purchase_info && <PurchaseInfo purchaseInfo={purchase_info} isAdmin={isAdmin} />}
-            </TabPanel>
-            <TabPanel>
-              { authorizedUsers && <AuthorizedUsers authorizedUsers={authorizedUsers} isAdmin={isAdmin} />}
-            </TabPanel>
-          </Tabs>
+
+          <div className="project-summary-header">
+  					<h1 className="project-summary-title">배송지</h1>
+  					<p className="project-summary-state">{ `${addressee_name} ${address1} ${address2} ${zipcode}` }</p>
+				  </div>
+
+          <div className="project-summary-header">
+  					<h1 className="project-summary-title">결제 수단</h1>
+  					<p className="project-summary-state">{ `${card_name} ${card_number}` }</p>
+				  </div>
+
+          <div className="project-summary-header">
+  					<h1 className="project-summary-title">결제 금액</h1>
+  					<p className="project-summary-state">{ `${amount.toLocaleString()}` }원</p>
+				  </div>
+
+          <div className="project-summary-header">
+  					<h1 className="project-summary-title">결제 상태</h1>
+  					<p className="project-summary-state">{ `${purchase_state}` }</p>
+				  </div>
+
+          <div className="project-summary-header">
+  					<h1 className="project-summary-title">리워드</h1>
+  					<p className="project-summary-state">{ `${title}` }</p>
+  					<p className="project-summary-state">{ `${description}` }</p>
+  					<p className="project-summary-state">{ `${thresholdMoney.toLocaleString()}` }원</p>
+  					<p className="project-summary-state">{ `${purchaseAmount}` }개</p>
+  					<p className="project-summary-state">배송료: { `${shippingFee.toLocaleString()}` }원</p>
+				  </div>
+
+          <button onClick={this._onClickCancel(_id)}>구매 취소</button>
+
         </div>
+
       </div>
     )
+  }
+
+  _onClickCancel(_id) {
+    return async () => {
+      if (confirm('결제를 취소하시겠습니까?')) {
+        try {
+          const r = await cancelPurchase({ purchase_id: _id })
+          console.log(`Purchase ${_id} cancel result`)
+          console.log(r)
+          await this.reflashState()
+        } catch (e) {
+          console.error(e)
+          alert(e.message)
+        }
+      }
+    }
   }
 }

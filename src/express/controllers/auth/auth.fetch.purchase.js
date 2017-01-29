@@ -14,6 +14,29 @@ import * as ac from '../../lib/auth-check'
 
 const router = express.Router();
 
+router.get('/:id/summary', isLoggedIn, async (req, res) => {
+  try {
+    let user = req.user
+    let purchase = await PurchaseModel.findById(req.params.id)
+      .populate('user project product')
+    if (!purchase) throw Error(`unknown purchase ${req.params.id}`)
+
+    if (!ac.canEdit(user, purchase)) throw Error(`can't access unauthorized purchase`)
+
+    res.json({
+      user: renderUser.authorizedUser(user),
+      data: {
+        purchase_summary: await purchase.toFormat('summary'),
+      }
+    })
+  } catch (e) {
+
+  } finally {
+
+  }
+
+})
+
 router.delete('/:id', isLoggedIn, async (req, res) => {
   try {
     let purchase = await PurchaseModel.findOne({_id: req.params.id})
