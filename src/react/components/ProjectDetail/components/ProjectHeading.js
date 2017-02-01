@@ -8,7 +8,7 @@ import { getFullUrl } from '~/src/react/lib/utils'
 import { FB_SHARER_URL } from '~/env'
 
 import { TwitterButton, FacebookButton, FacebookCount } from "react-social";
-
+import { shareProject } from '../../../api/AppAPI'
 export default class ProjectHeading extends Component {
 
 	render() {
@@ -123,7 +123,7 @@ export default class ProjectHeading extends Component {
 			)
 	}
 
-	async onClickShareFB() {
+	onClickShareFB = async () => {
 		// let share_url = window.location.host + window.location.pathname
 		// let share_url = '7pictures.co.kr/campaigns/m-art/'
 		// let url = format({ host: FB_SHARER_URL, query: {u: share_url} })
@@ -140,9 +140,11 @@ export default class ProjectHeading extends Component {
 			method: 'share',
 			display: 'popup',
 			href: url,
-		},  function(response) {
+		},  async function(response) {
     	if (response && !response.error_message) {
-	      alert('Posting completed.');
+	      try {
+	      	await shareProject(this.props.abstract.projectName, url)
+	      } catch (e) {}
 	    } else {
 	      alert('Error while posting.');
 			}

@@ -41,6 +41,10 @@ var FB_APP = {
 	// 7pictures - dev test
 	clientID: '361812380855194',
 	clientSecret: 'ae271e47f68fcd1137ff029daeec475c'
+
+	// 7pictures
+	// clientID: '244902342546199',
+	// clientSecret: '0f9ac2c68c43551f0a646d15605c3741'
 }
 
 module.exports = {
