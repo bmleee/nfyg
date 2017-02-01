@@ -405,3 +405,15 @@ export async function processPurchase({ projectName, productName }) {
 
 	return await _request(config)
 }
+
+export async function shareProject(projectName, url) {
+	const config = {
+		method: 'post',
+		url: `/api/auth/fetch/projects/${projectName}/share`,
+		data: {
+			link: url
+		}
+	}
+
+	return await _request(config)
+}

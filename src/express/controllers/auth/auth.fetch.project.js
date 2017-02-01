@@ -23,6 +23,7 @@ import AddressModel from '../../models/address'
 import PurchaseModel from '../../models/purchase'
 import PaymentModel from '../../models/payment'
 
+import FacebookTracker from '../../../lib/FacebookTracker'
 import * as mh from '../../lib/modelHelper'
 
 import * as ac from '../../lib/auth-check'
@@ -54,7 +55,7 @@ router.get('/:projectName/:option?/:tab?', async (req, res, next) => {
 		return res.status(500).json({ error: 'unknown' })
 	}
 
-	if(['edit', 'rewards', 'addresses', 'payments', 'summary', 'purchase'].includes(option)) {
+	if(['edit', 'rewards', 'addresses', 'payments', 'summary', 'purchase',].includes(option)) {
 		return next() // go to /:projectName/edit
 	}
 
@@ -350,6 +351,24 @@ router.post('/:projectName/processPurchase', isLoggedIn, async (req, res) => {
 		))
 
 		console.log(r);
+		res.json({ response: r })
+	} catch (e) {
+		console.error(e);
+		res.status(500).json({error: e.message})
+	}
+})
+
+router.post('/:projectName/share', isLoggedIn, async (req, res) => {
+	try {
+		let user = req.user
+		let link = req.body.url
+		let project = await ProjectModel.findOneByName(req.params.projectName)
+
+		if (!project) throw Error(`Unknown project name ${req.params.projectName}`)
+
+		r = await FacebookTracker.userSharedProject(user, req.params.projectName, link)
+
+		console.log('FacebookTracker.userSharedProject.r', r);
 		res.json({ response: r })
 	} catch (e) {
 		console.error(e);

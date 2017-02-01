@@ -12,6 +12,8 @@ import { Strategy as FacebookStrategy } from 'passport-facebook'
 
 import { FB_APP } from '~/env'
 
+import FacebookTracker from '../../lib/FacebookTracker'
+
 import Mailchimp from 'mailchimp-lite';
 let mailchimp = new Mailchimp({
   key: 'b77eda5563facca7997e3d3914b7afbb-us13',
@@ -57,7 +59,7 @@ export default function(passport) {
     clientSecret: FB_APP.clientSecret,
     callbackURL: "/api/users/login-facebook/callback",
     profileFields:['id', 'email', 'gender', 'link', 'displayName', 'name']
-	}, function(accessToken, refreshToken, profile, done) {
+	}, async function(accessToken, refreshToken, profile, done) {
 		if (!profile.emails) return done(new Error(`can't get user email from facebook profile`))
 
 		let email = profile.emails[0].value
@@ -65,33 +67,39 @@ export default function(passport) {
 		// TODO: get long lived access token
 		// TODO: facebook tracker - /users/login
 
+    let long_lived_access_token = await FacebookTracker.getLongLivedUserAccessToken(refreshToken || accessToken)
+
 		User.findOneByEmail(email, function(err, user) {
 			if (err) return done(err)
 			// user found
 			if (user) {
 				console.log('기존 회원 발견');
-				user.fb_access_token = refreshToken || accessToken
-				return user.save(function (err, user) {
+				user.fb_access_token = long_lived_access_token
+        user.fb_id = profile.id
+				return user.save(async function (err, user) {
+          await FacebookTracker.fbUserLoggedIn(user)
+
 					if (err) return done(err)
 					return done(null, user)
 				})
 			}
 
 			console.log('새로운 회원');
-
 			// create new user
 			User.create({
 				display_name: profile.displayName,
 				name: profile.displayName,
 				fb_id: profile.id,
 				fb_email: email,
-				fb_access_token: refreshToken || accessToken,
+				fb_access_token: long_lived_access_token,
 				image: profile.profileUrl,
 			}, async function(err, user) {
 				if (err) return done(err)
-				
+
+        await FacebookTracker.fbUserLoggedIn(user)
+
 				let subemail = user.fb_email
-				
+
 				const result = await mailchimp.v2.post('/lists/batch-subscribe', {
 				  id: 'c7e4765340',
 				  update_existing: true,
@@ -101,9 +109,9 @@ export default function(passport) {
 				    {email: {email: subemail}}
 				  ]
 				})
-				
+
 				console.log(result)
-				
+
 				return done(null, user)
 			})
 		})
