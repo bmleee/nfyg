@@ -169,7 +169,7 @@ class ProductHeading extends Component {
 					</div>
 					<div className="share-modal-button-container">
 
-						<FacebookButton sharer='true' media={`http://52.78.180.103:8080${imgSrc}`} appId='361812380855194' message={shortTitle} url={url} className="ma-share-button-facebook">
+						<FacebookButton sharer='true' media={`http://52.78.133.247:8080${imgSrc}`} appId='244902342546199' message={shortTitle} url={url} className="ma-share-button-facebook">
 						<FontAwesome name='facebook' size='lg' />
 						</FacebookButton>
 

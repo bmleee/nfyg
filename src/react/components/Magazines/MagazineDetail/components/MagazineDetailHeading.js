@@ -47,7 +47,7 @@ class MagazineDetailHeading extends Component {
 				{/* <img src={imgSrc} alt=""/> */}
 				<h2> {title} </h2>
 				<div className="magazine-share-button-container">
-					<FacebookButton sharer='true' media={`http://52.78.180.103:8080${imgSrc}`} appId='361812380855194' message={title} url={url} className="ma-share-button-facebook">
+					<FacebookButton sharer='true' media={`http://52.78.133.247:8080${imgSrc}`} appId='244902342546199' message={title} url={url} className="ma-share-button-facebook">
 					<FontAwesome name='facebook' size='lg' />
 					</FacebookButton>
 					

@@ -63,12 +63,15 @@ export default function(passport) {
 		if (!profile.emails) return done(new Error(`can't get user email from facebook profile`))
 
 		let email = profile.emails[0].value
-
+		let long_lived_access_token = refreshToken || accessToken
 		// TODO: get long lived access token
 		// TODO: facebook tracker - /users/login
-
-    let long_lived_access_token = await FacebookTracker.getLongLivedUserAccessToken(refreshToken || accessToken)
-
+	try {
+		long_lived_access_token = await FacebookTracker.getLongLivedUserAccessToken(refreshToken || accessToken)
+	} catch (e) {
+		console.error(e.message)
+		console.error(e)
+	}
 		User.findOneByEmail(email, function(err, user) {
 			if (err) return done(err)
 			// user found
@@ -91,8 +94,9 @@ export default function(passport) {
 				name: profile.displayName,
 				fb_id: profile.id,
 				fb_email: email,
+				local_email: email,
 				fb_access_token: long_lived_access_token,
-				image: profile.profileUrl,
+				image: `http://graph.facebook.com/${profile.id}/picture?type=large`,
 			}, async function(err, user) {
 				if (err) return done(err)
 
