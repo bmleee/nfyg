@@ -77,6 +77,7 @@ const createProject = async ({sponsor, state = 'in-progress', artist, projectNam
 					thresholdMoney: 0,
 					imgSrc: 'http://img.naver.net/static/www/u/2013/0731/nmms_224940510.gif',
 					maxPurchaseVolume: randomNumber(100),
+					shippingDay: '2016-12-08',
 				},
 				{
 					title: "sample reward2",
@@ -85,6 +86,7 @@ const createProject = async ({sponsor, state = 'in-progress', artist, projectNam
 					thresholdMoney: 100,
 					imgSrc: 'http://img.naver.net/static/www/u/2013/0731/nmms_224940510.gif',
 					maxPurchaseVolume: randomNumber(100),
+					shippingDay: '2016-12-08',
 				},
 				{
 					title: "sample reward3",
@@ -93,6 +95,7 @@ const createProject = async ({sponsor, state = 'in-progress', artist, projectNam
 					thresholdMoney: 200,
 					imgSrc: 'http://img.naver.net/static/www/u/2013/0731/nmms_224940510.gif',
 					maxPurchaseVolume: randomNumber(100),
+					shippingDay: '2016-12-08',
 				}
 			],
 		},
@@ -197,6 +200,7 @@ export default async function initProject() {
 									thresholdMoney: 0,
 									imgSrc: 'http://img.naver.net/static/www/u/2013/0731/nmms_224940510.gif',
 									maxPurchaseVolume: randomNumber(100),
+									shippingDay: '2016-12-08',
 							},
 							{
 								title: randomString('sample reward title'),
@@ -205,6 +209,7 @@ export default async function initProject() {
 								thresholdMoney: 100,
 								imgSrc: 'http://img.naver.net/static/www/u/2013/0731/nmms_224940510.gif',
 								maxPurchaseVolume: randomNumber(100),
+								shippingDay: '2016-12-08',
 							},
 							{
 								title: randomString('sample reward title'),
@@ -213,6 +218,7 @@ export default async function initProject() {
 								thresholdMoney: 200,
 								imgSrc: 'http://img.naver.net/static/www/u/2013/0731/nmms_224940510.gif',
 								maxPurchaseVolume: randomNumber(100),
+								shippingDay: '2016-12-08',
 							}
 					],
 	    },
