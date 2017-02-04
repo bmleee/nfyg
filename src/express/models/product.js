@@ -125,6 +125,8 @@ ProductSchema.statics.findAuthorizedOnesToUser = function (user) {
 	return this.find({ authorizedUsers: { $in: [user._id || user] } })
 }
 ProductSchema.statics.findByNames = function (names) {
+	if (!names) return this.find({'abstract.productName': '______'})
+
 	let re = new RegExp(names.join('|'), "i")
 	return this.find({ 'abstract.productName': re})
 }

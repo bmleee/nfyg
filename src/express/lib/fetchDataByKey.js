@@ -36,18 +36,22 @@ export const KEYS = {
 }
 
 const _fetcher = {
-  sharedProjects: async ({ project_names = [] }) => await Promise.all(
-    (await ProjectModel.findByNames(project_names))
-      .map(async (p) => {
-        try {
-          return await p.toFormat('shared_project')
-        } catch (e) {
-          console.error('erorr to fetch sharedProjects');
-          console.error(e);
-          throw e
-        }
-      })),
-  purchasedProjects: async ({ purchases = [] }) => await Promise.all(
+  sharedProjects: async ({ project_names = [] }) => {
+    if (project_names.length === 0) return []
+
+    return  await Promise.all(
+      (await ProjectModel.findByNames(project_names))
+        .map(async (p) => {
+          try {
+            return await p.toFormat('shared_project')
+          } catch (e) {
+            console.error('erorr to fetch sharedProjects');
+            console.error(e);
+            throw e
+          }
+        }))
+  },
+  purchasedProjects: async ({ purchases = [] }) => !purchases ? [] : await Promise.all(
     purchases
       .filter(p => !!p.project)
       .map(async (p) => {
@@ -59,7 +63,7 @@ const _fetcher = {
           throw e
         }
       })),
-  purchasedProducts: async ({ purchases = [] }) => await Promise.all(
+  purchasedProducts: async ({ purchases = [] }) => !purchases ? [] : await Promise.all(
     purchases
       .filter(p => !!p.product)
       .map(async (p) => {
@@ -133,7 +137,8 @@ const fetchDataByKey = async ({ user, q, ...others }, ...keys) => {
     // preparing parameters
     if (keys.includes(KEYS.sharedProjects)) {
       let r = await FacebookTracker.getUserSummary(user)
-      project_names = r.project_names
+      project_names = r.project_names || []
+      console.log('user summary', r);
     }
 
     if (keys.includes(KEYS.purchasedProjects)

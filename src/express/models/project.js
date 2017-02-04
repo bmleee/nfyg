@@ -134,6 +134,8 @@ ProjectSchema.statics.findAuthorizedOnesToUser = function (user) {
 	return this.find({ authorizedUsers: { $in: [user._id || user] } })
 }
 ProjectSchema.statics.findByNames = function (names) {
+	if (!names) return this.find({'abstract.projectName': '______'})
+	
 	let re = new RegExp(names.join('|'), "i")
 	return this.find({'abstract.projectName': re})
 }
