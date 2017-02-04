@@ -125,10 +125,11 @@ class FacebookTracker {
 
   // TODO: correct response on tracker side
   // returns { shares, comments, likes, project_names: [ String ], }
-  getUserSummary = async (user_no) => {
-    user_no = 160 // TODO: deactivate this!
+  getUserSummary = async (user) => {
+    if (!user.fb_id) return []
+
     return await this._request({
-      url: `/users/${user_no}/summary`
+      url: `/users/${user.fb_id}/summary`
     })
   }
 

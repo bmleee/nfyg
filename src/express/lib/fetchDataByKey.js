@@ -38,15 +38,38 @@ export const KEYS = {
 const _fetcher = {
   sharedProjects: async ({ project_names = [] }) => await Promise.all(
     (await ProjectModel.findByNames(project_names))
-      .map(async (p) => await p.toFormat('shared_project'))),
+      .map(async (p) => {
+        try {
+          return await p.toFormat('shared_project')
+        } catch (e) {
+          console.error('erorr to fetch sharedProjects');
+          console.error(e);
+          throw e
+        }
+      })),
   purchasedProjects: async ({ purchases = [] }) => await Promise.all(
     purchases
       .filter(p => !!p.project)
-      .map(async (p) => await p.toFormat('profile'))),
+      .map(async (p) => {
+        try {
+          return await p.toFormat('profile')
+        } catch (e) {
+          console.error('erorr to fetch purchasedProjects');
+          console.error(e);
+          throw e
+        }
+      })),
   purchasedProducts: async ({ purchases = [] }) => await Promise.all(
     purchases
       .filter(p => !!p.product)
-      .map(async (p) => await p.toFormat('profile'))),
+      .map(async (p) => {
+        try {
+          return await p.toFormat('profile')
+        } catch (e) {
+          console.error('erorr to fetch purchasedProducts');
+          console.error(e);
+        }
+      })),
   authorizedProjects: async ({ user }) => await Promise.all(
     (await ProjectModel.findAuthorizedOnesToUser(user))
       .map(async (p) => await p.toFormat('profile_admin'))),
@@ -106,19 +129,24 @@ const _fetcher = {
 const fetchDataByKey = async ({ user, q, ...others }, ...keys) => {
   let project_names, purchases;
 
-  // preparing parameters
-  if (keys.includes(KEYS.sharedProjects)) {
-    let r = await FacebookTracker.getUserSummary(user && user.id)
-    project_names = r.project_names
-  }
+  try {
+    // preparing parameters
+    if (keys.includes(KEYS.sharedProjects)) {
+      let r = await FacebookTracker.getUserSummary(user)
+      project_names = r.project_names
+    }
 
-  if (keys.includes(KEYS.purchasedProjects)
-    || keys.includes(KEYS.purchasedProducts)) {
-    purchases = await PurchaseModel.findDetailByUser(user)
-  }
+    if (keys.includes(KEYS.purchasedProjects)
+      || keys.includes(KEYS.purchasedProducts)) {
+      purchases = await PurchaseModel.findDetailByUser(user)
+    }
 
-  if (q) {
-    q = new RegExp(`.*${q}.*`, 'i')
+    if (q) {
+      q = new RegExp(`.*${q}.*`, 'i')
+    }
+  } catch (e) {
+    console.error('error in fetchDataByKey');
+    console.error(e);
   }
 
   return await Promise.all(keys.map(
