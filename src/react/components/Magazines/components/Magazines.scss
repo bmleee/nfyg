@@ -27,7 +27,7 @@
 	overflow : hidden;
 }
 .magazine-list-item-info {
-	border : 1px solid #eee;
+	border : 1px solid #ddd;
 	padding : 10px 15px;
 }
 .magazine-menu-list-item {
@@ -56,10 +56,10 @@
 	background:none;
 	border : none;
 	outline : none;
-	color : #4b709a;
+	color : #150C8B;
 }
 .magazine-category-button:hover {
-	color : #4b709a;
+	color : #150C8B;
 }
 .magazines {
 	display: flex;
@@ -115,7 +115,7 @@
 		color : #555;
 	}
 	.magazine-category-button:focus {
-		color : #4b709a;
+		color : #150C8B;
 	}
 	.magazines-heading-category-item:nth-child(1), .magazines-heading-category-item:nth-child(2), .magazines-heading-category-item:nth-child(3) {
 		margin-bottom : 12px;

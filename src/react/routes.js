@@ -69,7 +69,7 @@ import {
 	PurchaseSummary,
 } from './components/Summary'
 
-import { Sponsors } from './components/Sponsors'
+import Sponsors from './components/Sponsors/Sponsors'
 
 import {
 	About,

@@ -24,7 +24,7 @@
 	display : inline-block;
 	font-size : 13px;
 	font-weight : 600;
-	color : #4b709a;
+	color : #150C8B;
 	margin-right : 8px;
 	@media (max-width : 500px) {
             font-size : 8px;
@@ -44,7 +44,7 @@
     display : inline-block;
 	font-size : 13px;
 	font-weight : 600;
-	color : #4b709a;
+	color : #150C8B;
 	margin-right : 8px;
 	@media (max-width : 500px) {
             font-size : 8px;
@@ -89,7 +89,7 @@
 .purchase-stage-next-button, .purchase-stage-next-button:focus {
     padding : 0px 20px;
     height : 40px;
-	background-color : #4b709a;
+	background-color : #150C8B;
 	border : none;
 	outline : none;
 	margin-right : 2px;
@@ -97,7 +97,7 @@
 	font-weight : 700;
 }
 .purchase-stage-next-button:hover {
-    background-color : #354c67;
+    background-color : #0d0669;
 }
 .purchase-stage-next-button:after {
     font-family : Ionicons;
@@ -115,7 +115,7 @@
     width: 100%;
     background: #fff;
     border-radius: 3px;
-    border: 2px solid #4b709a;
+    border: 2px solid #150C8B;
     outline: 0;
     padding: 35px 10px;
     text-align: center;

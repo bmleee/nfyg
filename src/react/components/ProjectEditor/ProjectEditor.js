@@ -501,10 +501,10 @@ export default class ProjectEditor extends Component {
       }
 
       console.log(r);
-      this.props.appUtils.setFlash({title: 'project saved', message: JSON.stringify(r, undefined, 4), level: 'success'})
+      this.props.appUtils.setFlash({title: '프로젝트가 등록되었습니다.', message: JSON.stringify(r, undefined, 4), level: 'success', autoDismiss: 3})
     } catch (e) { // error from axios.request
       console.log(e);
-      this.props.appUtils.setFlash({title: 'project save error', message: JSON.stringify(e.response, undefined, 4), level: 'error', autoDismiss: 0, dismissible: true})
+      this.props.appUtils.setFlash({title: '등록에 실패하였습니다.', message: JSON.stringify(e.response, undefined, 4), level: 'error', autoDismiss: 3, dismissible: true})
     }
   }
 }

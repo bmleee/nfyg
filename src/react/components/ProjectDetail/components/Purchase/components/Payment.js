@@ -114,7 +114,7 @@ export default class C extends Component {
 									<div className="card-password-none"></div><div className="card-password-none"></div>
 								</div>
 								<div className="card-add-ssl-info">
-								7Pictures는 업계 표준인 SSL 보안을 사용합니다. 이는 000님이 웹브라우저에서 입력하시는 정보가 7Pictures 서버로 전송되는데 있어 철저하게 암호화되고 있음을 뜻합니다.
+								7Pictures는 업계 표준인 SSL 보안을 사용합니다. 이는 웹브라우저에서 입력하시는 정보가 7Pictures 서버로 전송되는데 있어 철저하게 암호화되고 있음을 뜻합니다.
 								</div>
 							<div className="modal-card-add-container">
 								<button className="modal-card-add" onClick={this._onClickAddPayment}>카드등록</button>

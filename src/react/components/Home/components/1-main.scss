@@ -286,7 +286,7 @@ div, span, h1, h2, h3, h4, button {
     
 }
 ::selection {
-    background-color : #4b709a;
+    background-color : #150C8B;
     color : #fff;
 }
 a, a:hover, a:focus {
@@ -313,7 +313,7 @@ button:hover, button:focus {
     z-index: 55;
     margin: 0 auto;
     width: 800px;
-    background : #4b709a;
+    background : #150C8B;
     border : none;
     outline : none;
 }
@@ -422,7 +422,7 @@ div.magazine-list-button {
     color : #777;
     border-bottom : 1px solid #777;
     border : 1px solid #777;
-    border-left : 1px solid #4b709a;
+    border-left : 1px solid #150C8B;
     border-radius : 0px 3px 3px 0px;
 }
 .react-tabs [role=tablist] {
@@ -431,8 +431,8 @@ div.magazine-list-button {
     border : none;
 }
 .react-tabs [role=tab][aria-selected=true] {
-    border-color : #4b709a;
-    color : #4b709a;
+    border-color : #150C8B;
+    color : #150C8B;
 }
 }
     div.home-heading {
@@ -473,6 +473,10 @@ div.present-more-project {
     }
     h3.project-list-title {
         margin-top : 5px !important;
+        font-weight: 400; 
+    }
+    h4.project-list-title {
+        font-weight: 400;
     }
     h3 {
         font-size:24px;
@@ -512,7 +516,7 @@ div.present-more-project {
     z-index: 55;
     margin: 0 auto;
     width: 100%;
-    background : #4b709a;
+    background : #150C8B;
 }
    div.home-body {
        width : 100%;
@@ -669,7 +673,7 @@ position: absolute;
     z-index: 55;
     margin: 0 auto;
     width: 100%;
-    background : #4b709a;
+    background : #150C8B;
 }
  div.home-body {
     padding: 0px;
@@ -694,12 +698,12 @@ position: absolute;
         color : #777;
         border-bottom : 1px solid #777;
         border : 1px solid #777;
-        border-left : 1px solid #4b709a;
+        border-left : 1px solid #150C8B;
         border-radius : 0px 2px 2px 0px
     }
     .react-tabs [role=tab][aria-selected=true] {
-        border-color : #4b709a;
-        color : #4b709a;
+        border-color : #150C8B;
+        color : #150C8B;
     }
 }
 

@@ -53,7 +53,7 @@
     	}
     	.Collapsible__trigger.is-closed, .Collapsible__trigger.is-open {
     		border : none;
-    		color : #4b709a;
+    		color : #150C8B;
     		padding : 0px;
     		background : transparent;
     		display : inline-block;
@@ -121,7 +121,7 @@
 			}
 	}
 	.qna-form-textarea:focus {
-		border : 1px solid #4b709a;
+		border : 1px solid #150C8B;
 		outline : none;
 	}
 	.qna-form-submit-container {
@@ -137,7 +137,7 @@
 			border : none;
 			outline : none;
 			border-radius : 3px;
-			background : #4b709a;
+			background : #150C8B;
 			color : #fff;
 			font-size : 16px;
 			font-weight : 600;
@@ -151,7 +151,7 @@
 			}
 		}
 		.qna-form-submit:hover {
-			background : #354c67;
+			background : #0d0669;
 		}
 	}
 

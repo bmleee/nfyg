@@ -156,7 +156,7 @@ const FaqWrapper = ({value, handlers}) => {
 			answer
 		}, index) => (
 			<div className="editor-item-detail-wrapper">
-				<span className="item-deatail-small-title-saved">문 의 : {question}</span>
+				<span className="item-deatail-small-title-saved">질 문 : {question}</span>
 				<span className="item-deatail-small-title-saved">답 변 : {answer}</span>
 				<button className="item-deatail-delete" onClick={() => deleteFAQ(index)}>삭제하기</button>
 			</div>
@@ -182,12 +182,12 @@ const FaqForm = ({value, handlers}) => {
 	return (
 		<div className="funding-reward-form-container">
 			<div>
-				<span className="item-deatail-small-title">문의</span>
+				<span className="item-deatail-small-title">질 문</span>
 				<input type="text" value={question} onChange={_onQuestion} />
 			</div>
 
 			<div>
-				<span className="item-deatail-small-title">답변</span>
+				<span className="item-deatail-small-title">답 변</span>
 				<input type="text" value={answer} onChange={_onAnswer} />
 			</div>
 
@@ -251,7 +251,6 @@ const Funding = ({
 				onSubmit={_onMinBuyerSubmit}
 				Wrapper={MinBuyerWrapper}
 				Form={MinBuyerForm}
-				className ="exhibition-long-title"
 				classNameopen ="editor-open-container"
 			/>
 
@@ -265,7 +264,6 @@ const Funding = ({
 				onSubmit={_onMaxBuyerSubmit}
 				Wrapper={MaxBuyerWrapper}
 				Form={MaxBuyerForm}
-				className ="exhibition-long-title"
 				classNameopen ="editor-open-container"
 			/>
 
@@ -279,10 +277,8 @@ const Funding = ({
 				onSubmit={_onTargetMoneySubmit}
 				Wrapper={TargetMoneyWrapper}
 				Form={TargetMoneyForm}
-				className ="exhibition-long-title"
 				classNameopen ="editor-open-container"
 			/>
-
 
 
 			<FormWrapper
@@ -312,20 +308,21 @@ const Funding = ({
 				className ="exhibition-eng-title"
 				classNameopen ="editor-open-container"
 			/>
-
+			
+			<span className="editor-small-title">자주묻는 질문</span>
 
 			<FormWrapper
-				title="문의사항"
+				title="자주묻는 질문"
 				valueType={VALUE_TYPE.FAQ}
-				alt="문의사항"
+				alt="FAQ"
 				initialValue={faq}
-				submitCaption={'문의사항을 추가하세요'}
+				submitCaption={'자주묻는 질문을 추가하세요'}
 				submitCaptionsub={'추가하기'}
 				onSubmit={_onFaqSubmit}
 				handlers={faqHandlers}
 				Wrapper={FaqWrapper}
 				Form={FaqForm}
-				className ="exhibition-eng-title"
+				className ="magazine-editor-detail"
 				classNameopen ="editor-open-container"
 			/>
 

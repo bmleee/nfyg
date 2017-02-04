@@ -50,7 +50,7 @@
 	padding : 0px !important;
 	background : #fff;
 	border-radius : 5px;
-	border : 2px solid #4b709a;
+	border : 2px solid #150C8B;
 	outline : none;
 }
 .card-title {
@@ -67,7 +67,7 @@
 		padding : 0px 4px;
 		height : 22px;
 		line-height : 20px;
-		background : #4b709a;
+		background : #150C8B;
 		border-radius : 2px;
 		display : inline-block;
 }
@@ -107,7 +107,7 @@
 	border : none;
 	outline : none;
 	border-radius : 3px !important;
-	background : #4b709a;
+	background : #150C8B;
 	color : #fff;
 	font-weight : 600;
 	@media (max-width : 500px) {
@@ -115,7 +115,7 @@
 	}
 }
 .card-add:hover {
-	background : #354c67;
+	background : #0d0669;
 }
 .card-add:before {
 	font-family : Ionicons;
@@ -215,7 +215,7 @@
 	margin-right : 4px;
 }
 .card-num-text:focus, .expiry-month-text:focus, .expiry-year-text:focus, .card-birth-text:focus, .card-password-text:focus {
-	border-color : #4b709a;
+	border-color : #150C8B;
 }
 
 .card-add-ssl-info {
@@ -244,7 +244,7 @@
 	border : none;
 	outline : none;
 	border-radius : 3px !important;
-	background : #4b709a;
+	background : #150C8B;
 	color : #fff;
 	font-weight : 600;
 	font-size : 14px;
@@ -253,5 +253,5 @@
 	}
 }
 .modal-card-add:hover {
-	background : #354c67;
+	background : #0d0669;
 }

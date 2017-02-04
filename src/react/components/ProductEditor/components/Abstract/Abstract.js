@@ -214,7 +214,7 @@ const Abstract = ({
 			<span className="editor-small-title">미술소품 개요</span>
 
 			<FormWrapper
-				title="프로젝트 제목"
+				title="미술소품 제목"
 				valueType={VALUE_TYPE.TEXT}
 				alt="제목을 입력하세요"
 				initialValue={longTitle}
@@ -228,7 +228,7 @@ const Abstract = ({
 			/>
 
 			<FormWrapper
-				title="프로젝트 짧은 제목"
+				title="미술소품 짧은 제목"
 				valueType={VALUE_TYPE.TEXT}
 				alt="짧은 제목을 입력하세요"
 				initialValue={shortTitle}
@@ -239,11 +239,24 @@ const Abstract = ({
 				Form={ShortTitleForm}
 				classNameopen ="editor-open-container"
 			/>
+			
+			<FormWrapper
+				title="미술소품 요약"
+				valueType={VALUE_TYPE.TEXT}
+				alt="포스트탭에서 보여줄 인트로 문구를 입력하세요"
+				initialValue={postIntro}
+				submitCaption={'요약 내용을 입력하세요'}
+				submitCaptionsub={'입력하기'}
+				onSubmit={_onPostIntroSubmit}
+				Wrapper={PostIntroWrapper}
+				Form={PostIntroForm}
+				classNameopen ="editor-open-container"
+			/>
 
 			<FormWrapper
-				title="프로젝트 대표이미지"
+				title="미술소품 대표이미지"
 				valueType={VALUE_TYPE.IMAGE}
-				alt="프로젝트 이미지를 추가하세요"
+				alt="미술소품 이미지를 추가하세요"
 				initialValue={imgSrc}
 				submitCaption={'대표이미지를 등록하세요'}
 				submitCaptionsub={'등록하기'}
@@ -254,9 +267,9 @@ const Abstract = ({
 			/>
 
 			<FormWrapper
-				title="프로젝트 카테고리"
+				title="미술소품 카테고리"
 				valueType={VALUE_TYPE.SELECT}
-				alt="프로젝트 카테고리를 선택하세요"
+				alt="미술소품 카테고리를 선택하세요"
 				initialValue={category}
 				submitCaption={'카테고리를 선택하세요'}
 				submitCaptionsub={'선택하기'}
@@ -267,11 +280,11 @@ const Abstract = ({
 			/>
 
 			<FormWrapper
-				title="미술소품 영문 이름"
+				title="미술소품 주소"
 				valueType={VALUE_TYPE.TEXT}
-				alt="미술소품 영문 이름을 입력하세요"
+				alt="원하시는 링크를 입력하세요"
 				initialValue={productName}
-				submitCaption={'미술소품 영문 이름을 입력하세요'}
+				submitCaption={'원하시는 링크를 입력하세요'}
 				submitCaptionsub={'입력하기'}
 				onSubmit={_onProductNameSubmit}
 				Wrapper={ProductNameWrapper}
@@ -280,32 +293,19 @@ const Abstract = ({
 			/>
 
 			<FormWrapper
-				title="프로젝트 상태"
+				title="미술소품 상태"
 				valueType={VALUE_TYPE.SELECT}
-				alt="프로젝트 진행 상황을 선택하세요"
+				alt="미술소품 진행 상황을 선택하세요"
 				initialValue={state}
-				submitCaption={'프로젝트 상태를 선택하세요'}
+				submitCaption={'미술소품 상태를 선택하세요'}
 				submitCaptionsub={'선택하기'}
 				onSubmit={_onStateSubmit}
 				Wrapper={StateWrapper}
 				Form={StateForm}
-				classNameopen ="editor-open-container"
-			/>
-
-			<FormWrapper
-				title="프로젝트 요약"
-				valueType={VALUE_TYPE.TEXT}
-				alt="포스트탭에서 보여줄 인트로 문구를 입력하세요"
-				initialValue={postIntro}
-				submitCaption={'요약 내용을 입력하세요'}
-				submitCaptionsub={'입력하기'}
-				onSubmit={_onPostIntroSubmit}
-				Wrapper={PostIntroWrapper}
-				Form={PostIntroForm}
 				className ="exhibition-eng-title"
 				classNameopen ="editor-open-container"
 			/>
-
+			
 			<span className="editor-small-title">프로젝트 진행자</span>
 
 			<FormWrapper

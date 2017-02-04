@@ -68,10 +68,10 @@ const Overview = ({
 			/> */}
 
 			<FormWrapper
-				title="프로젝트 내용"
+				title="미술소품 내용"
 				valueType={VALUE_TYPE.RICH_TEXT}
 				initialValue={part1}
-				submitCaption="프로젝트 세부 내용을 입력하세요"
+				submitCaption="미술소품 세부 내용을 입력하세요"
 				submitCaptionsub={'입력하기'}
 				onSubmit={_onPart1Submit}
 				Wrapper={Part1Wrapper}
@@ -81,7 +81,7 @@ const Overview = ({
 			/>
 
 			<FormWrapper
-				title="프로젝트 내용(Part.2)"
+				title="미술소품 내용 Part.2"
 				valueType={VALUE_TYPE.RICH_TEXT}
 				initialValue={part2}
 				submitCaption="리워드 다음에 보여질 내용을 입력하세요"

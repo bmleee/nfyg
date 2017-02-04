@@ -75,7 +75,7 @@
 }
 .editor-save-button, .editor-save-button:focus {
 	padding : 6px 20px;
-	background-color : #4b709a;
+	background-color : #150C8B;
 	border : none;
 	border-radius : 0px 5px 5px 0px;
 	outline : none;
@@ -83,7 +83,7 @@
 	font-weight : 700;
 }
 .editor-save-button:hover {
-	background-color : #354c67;
+	background-color : #0d0669;
 }
 .editor-save-button:before {
 	font-family : Ionicons;
@@ -98,11 +98,11 @@
 	outline : none;
 	margin: 6px 0px 0px 0px;
 	text-align : left;
-	color : #4b709a;
+	color : #150C8B;
 	width : 100%;
 }
 .editor-open-button1:hover {
-	color : #354c67;
+	color : #0d0669;
 }
 .editor-open-button1:before {
 	font-family : Ionicons;
@@ -114,11 +114,11 @@
 	border : none;
 	outline : none;
 	margin: 6px 0px 0px 0px;
-	color : #4b709a;
+	color : #150C8B;
 	width : 100%;
 }
 .editor-open-button2:hover {
-	color : #354c67;
+	color : #0d0669;
 }
 .editor-open-button2:before {
 	font-family : Ionicons;
@@ -130,11 +130,11 @@
 	outline : none;
 	margin: 6px 0px 0px 0px;
 	text-align : left;
-	color : #4b709a;
+	color : #150C8B;
 	width : 100%;
 }
 .editor-open-button3:hover {
-	color : #354c67;
+	color : #0d0669;
 }
 .editor-open-button3:before {
 	font-family : Ionicons;
@@ -244,7 +244,7 @@
 		max-width : 100%;
 	}
 	input:focus, textarea:focus, .Select-control:focus {
-		border : 2px solid #4b709a;
+		border : 2px solid #150C8B;
 	}
 	input[type=date] {
 		width : 160px;
@@ -348,8 +348,8 @@
 	}
 }
 .dropzone-container:hover {
-	border-color : #4b709a;
-	color : #4b709a;
+	border-color : #150C8B;
+	color : #150C8B;
 }
 @media (max-width: 991px) {
 .artwork-container, .abstract-container {
