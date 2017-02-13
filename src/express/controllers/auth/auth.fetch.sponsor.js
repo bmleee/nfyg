@@ -45,11 +45,11 @@ router.get('/', async (req, res) => {
 	}
 })
 
-router.get('/:sponsorName/:tab?', async (req, res) => {
+router.get('/:sponsorName/:tab?', async (req, res, next) => {
 	console.log('api/auth/fetch/sponsors/:sponsorName');
-	// if (['edit'].includes(req.params.tab)) {
-	// 	return next()
-	// }
+	if (['edit'].includes(req.params.tab)) {
+		return next()
+	}
 
 	try {
 		const sponsor = await SponsorModel.findByName(req.params.sponsorName)
@@ -65,32 +65,68 @@ router.get('/:sponsorName/:tab?', async (req, res) => {
 	}
 })
 
-// create or update project
-// TODO: check authority
-router.post('/', async (req, res) => {
-	console.log('POST /auth/fetch/sponsors');
+router.get('/:sponsorName/edit', async (req, res) => {
+	let user = req.user
 
 	try {
-		const body = req.body
-		const sponsorName = body.sponsorName || ''
+		if (!ac.isAdmin(user) && !ac.isEditor(user)) throw Error(`unauthorized`)
 
-		// upsert Project
+		const sponsor = await SponsorModel.findByName(req.params.sponsorName)
+
+		res.json({
+			user: renderUser.authorizedUser(user),
+			data: {
+				sponsor: sponsor.toJSON()
+			}
+		})
+
+	} catch (e) {
+
+	}
+})
+
+router.post('/', async (req, res) => {
+	try {
+		let user = req.user
+
+		if (!ac.isAdmin(user) && !ac.isEditor(user)) throw Error(`unauthorized`)
+
+		const body = req.body
+
+		const sponsor = await SponsorModel.create(body)
+		res.json({ response: true })
+
+	} catch (e) {
+		console.error(e);
+		res.status(500).json({ response: e })
+	}
+})
+
+router.put('/:sponsorName', async (req, res) => {
+	try {
+		let user = req.user
+
+		if (!ac.isAdmin(user) && !ac.isEditor(user)) throw Error(`unauthorized`)
+
+		const body = req.body
+
+		const sponsorName = req.params.sponsorName
+		const sponsor = await SponsorModel.findByName(sponsorName)
+
+		if (sponsor.sponsorName !== body.sponsorName) throw Error(`Sponsor.sponsorName can't be changed!`)
+
 		const r = await SponsorModel.update(
 			{ 'sponsorName': sponsorName },
 			body,
-			{ upsert: true }
+			{ upsert: false, }
 		)
-
-		console.log('upsert result', r);
-
 		res.json({response: r.n === 1})
 	} catch (e) {
 		console.error(e);
-		res.status(500).json({
-			response: e
-		})
+		res.status(500).json({ response: e })
 	}
 })
+
 
 
 export default router;

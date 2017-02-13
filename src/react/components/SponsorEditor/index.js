@@ -27,7 +27,6 @@ export default class ProjectEditor extends Component {
 				facebook: '',
 				homepage: '',
 				blog: '',
-				tweeter: '',
 			}
 		},
 	}
@@ -37,18 +36,23 @@ export default class ProjectEditor extends Component {
 
 			const {
 				user,
-				data: {
-					sponsor
-				}
+				data
 			} = await fetchUserAndData()
 
-			if(this.props.appUtils.setUser) this.props.appUtils.setUser(user)
+      appUtils.setUser(user)
 
-			this.setState({sponsor})
+      if(data && data.sponsor) {
+        this.setState({
+          sponsor: data.sponsor,
+        })
 
-		} catch (e) {
-			console.error(e);
-		}
+        console.log(this.state)
+      }
+    } catch (e) {
+      console.error(e);
+      alert(e.message)
+      // this.props.history.goBack()
+    }
 	}
 
   render() {
@@ -168,34 +172,23 @@ export default class ProjectEditor extends Component {
 	// 서버로 전송
 	save = async () => {
 		console.log('state', this.state);
-		let body = this.client2server()
-		
-		try {
+	    let body = this.state.sponsor;
+	
+	    try {
 	      let r;
 	
-	      if(this.props.params.productName) {
+	      if(this.props.params.sponsorName) {
 	        r = await updateSponsor(this.props.params.sponsorName, body)
 	      } else {
 	        r = await createSponsor(body)
 	      }
 	
 	      console.log(r);
-	      appUtils.setFlash({title: '스폰서가 등록되었습니다.', message: JSON.stringify(r, undefined, 4), level: 'success', autoDismiss: 3})
+	      this.props.appUtils.setFlash({title: '스폰서가 등록되었습니다.', message: JSON.stringify(r, undefined, 4), level: 'success', autoDismiss: 3})
 	    } catch (e) { // error from axios.request
 	      console.log(e);
-	      appUtils.setFlash({title: '등록에 실패하였습니다.', message: JSON.stringify(e.response, undefined, 4), level: 'error', autoDismiss: 3, dismissible: true})
+	      this.props.appUtils.setFlash({title: '등록에 실패하였습니다.', message: JSON.stringify(e.response, undefined, 4), level: 'error', autoDismiss: 3, dismissible: true})
 	    }
-		{/* try {
-			const res = await axios.post(API_URL, {...this.state})
-			console.log('save response', res);
-		} catch (e) {
-			console.error('save error', e);
-		}
-		*/}
 	}
 
-	// 서버에서 받기
-	fetchProject = async () => {
-
-	}
 }

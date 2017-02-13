@@ -26,7 +26,7 @@ import * as renderUser from '../../lib/renderUser'
 const router = express.Router();
 
 router.get('/:editor/:tab?', async (req, res, next) => {
-	if (!['project-editor', 'product-editor', 'magazine-editor'].includes(req.params.editor)) {
+	if (!['project-editor', 'product-editor', 'magazine-editor', 'sponsor-editor'].includes(req.params.editor)) {
 		return next()
 	}
 

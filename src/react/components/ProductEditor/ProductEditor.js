@@ -505,7 +505,7 @@ export default class ProductEditor extends Component {
         minPurchaseVolume: this.state.funding.minPurchaseVolume,
         maxPurchaseVolume: this.state.funding.maxPurchaseVolume,
         rewards: this.state.funding.reward.rewards,
-        faqs: this.state.funding.reward.faqs,
+        faqs: this.state.funding.faq.faqs,
       },
       overview: {
         intro: this.state.overview.intro,
