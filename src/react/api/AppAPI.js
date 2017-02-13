@@ -417,3 +417,23 @@ export async function shareProject(projectName, url) {
 
 	return await _request(config)
 }
+
+export async function createSponsor(body) {
+	const config = {
+		method: 'post',
+		url: `/api/auth/fetch/sponsors/`,
+		data: body,
+	}
+
+	return await _request(config)
+}
+
+export async function updateSponsor(sponsorName, body) {
+	const config = {
+		method: 'put',
+		url: `/api/auth/fetch/sponsors/${sponsorName}`,
+		data: body,
+	}
+
+	return await _request(config)
+}
