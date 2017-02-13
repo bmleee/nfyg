@@ -159,9 +159,13 @@ export default class PurchaseSummary extends Component {
 							</div>
 						</div>
           </div>
-          <div className="purchase-detail-cancel-button-container">
-            <button className="purchase-detail-cancel-button" onClick={this._onClickCancel(_id)}>결제 예약 취소</button>
-          </div>
+           {
+            ['preparing'].includes(this.state.purchase_summary.purchase_info.purchase_state) && (
+              <div className="purchase-detail-cancel-button-container">
+                <button className="purchase-detail-cancel-button" onClick={this._onClickCancel(_id)}>결제 예약 취소</button>
+              </div>
+            )
+           }
         </div>
       </div>
     )
@@ -169,7 +173,7 @@ export default class PurchaseSummary extends Component {
 
   _onClickCancel(_id) {
     return async () => {
-      if (!['preparing', 'scheduled'].includes(this.state.purchase_summary.purchase_info.purchase_state)) {
+      if (!['결제예약', '결제완료'].includes(this.state.purchase_summary.purchase_info.purchase_state)) {
         alert('이미 취소된 구매 내역입니다.')
         return
       }

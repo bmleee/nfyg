@@ -14,7 +14,7 @@ router.post('/', async (req, res) => {
     // https://github.com/iamport/iamport-manual/tree/master/%EC%9D%B8%EC%A6%9D%EA%B2%B0%EC%A0%9C
     const {
       success = false, // 결제 성공 여부
-      error_code = '', // Iamport 서버에서 구현 안됨​
+      error_code = '', // Iamport 서버에서 구현 안됨
       error_msg = '', // 거래 처리 실패 시 메시지
       imp_uid, // iamport 에서 부여한 거래 id
       merchant_uid,
@@ -34,9 +34,13 @@ router.post('/', async (req, res) => {
       vbank_holder = '', // 가상계좌 예금주
       vbank_date = '', // 가상계좌 입금기한, UNIX timestamp
     } = req.body
-
     
+    console.log('POST /api/iamport req.body', req.body)
 
+    if (!merchant_uid) {
+      console.error(`merchant_uid is not specified`)
+    }
+    
     if (status === 'failed') {
       let purchase = await PurchaseModel.findOneByMerchantId(merchant_uid)
         .populate('user project product')

@@ -273,10 +273,10 @@ export default class MagazineEditor extends Component {
         console.log('create result', res);
       }
 
-      appUtils.setFlash({title: 'magazine saved', message: JSON.stringify(res, undefined, 4), level: 'success'})
+      appUtils.setFlash({title: '매거진이 등록되었습니다.', level: 'success'})
 		} catch (e) {
 			console.error('save error', e);
-      appUtils.setFlash({title: 'magazine save error', message: JSON.stringify(e.response, undefined, 4), level: 'error', autoDismiss: 0, dismissible: true})
+      appUtils.setFlash({title: '등록에 실패하였습니다.', level: 'error', autoDismiss: 3, dismissible: true})
 		}
 	}
 }

@@ -64,7 +64,7 @@ const RewardWrapper = ({value, handlers}) => {
 				<span className="item-deatail-small-title-saved">설 명 : {description}</span>
 				<span className="item-deatail-small-title-saved">구 분 : {value2label(SelectOptions.Reward, isDirectSupport)}</span>
 				<span className="item-deatail-small-title-saved">가 격 : {thresholdMoney.toLocaleString()}원</span>
-				<span className="item-deatail-small-title-saved">최대구매수량 : {maxPurchaseVolume}</span>
+				{/* <span className="item-deatail-small-title-saved">최대구매수량 : {maxPurchaseVolume}</span> */}
 				<span className="item-deatail-small-title-saved">배송일 : {shippingDay}</span>
 				<button className="item-deatail-delete" onClick={() => deleteReward(index)}>삭제하기</button>
 			</div>
@@ -103,12 +103,12 @@ const RewardForm = ({value, handlers, ...otherProps}) => {
 	return (
 		<div className="fuding-reward-form-container">
 			<div>
-				<span className="item-deatail-small-title">리워드 제목</span>
+				<span className="item-deatail-small-title">옵션 제목</span>
 				<input type="text" value={title} onChange={_onTitle} />
 			</div>
 
 			<div>
-				<span className="item-deatail-small-title">리워드 설명</span>
+				<span className="item-deatail-small-title">옵션 설명</span>
 				<input type="text" value={description} onChange={_onDescription} />
 			</div>
 
@@ -119,11 +119,12 @@ const RewardForm = ({value, handlers, ...otherProps}) => {
 					options={SelectOptions.Reward}
 				/>
 			</div>
-
+			{/*
 			<div>
 				<span className="item-deatail-small-title">최대 구매 수량</span>
 				<input type="number" value={maxPurchaseVolume} onChange={_onMaxPurcahseVolum}/>
 			</div>
+			*/}
 
 			<div>
 				<span className="item-deatail-small-title">배송일</span>
@@ -131,14 +132,14 @@ const RewardForm = ({value, handlers, ...otherProps}) => {
 			</div>
 
 			<div>
-				<span className="item-deatail-small-title">{isDirectSupport ? '직접' : '간접'} 후원 최소 금액</span>
+				<span className="item-deatail-small-title">제품 금액</span>
 				<input type="number" value={thresholdMoney} onChange={_onThresholdMoney} step="1000" />
 			</div>
 
 			<div>
 				<span className="item-deatail-small-title">이미지</span>
 				<input type="file" onChange={_onImgSrc} accept="image/*" />
-				{ imgSrc && <img src={imgSrc} alt="리워드 이미지를 입력하세요." accept="image/*"/> }
+				{ imgSrc && <img src={imgSrc} alt="제품 이미지를 입력하세요." accept="image/*"/> }
 			</div>
 
 		</div>
@@ -282,11 +283,11 @@ const Funding = ({
 
 
 			<FormWrapper
-				title="프로젝트 종료일"
+				title="미술소품 종료일"
 				valueType={VALUE_TYPE.DATE}
 				alt="프로젝트 종료일을 입력하세요"
 				initialValue={dateTo}
-				submitCaption={'프로젝트 종료일을 입력하세요'}
+				submitCaption={'미술소품 종료일을 입력하세요'}
 				submitCaptionsub={'입력하기'}
 				onSubmit={_onDateToSubmit}
 				Wrapper={DateToWrapper}
@@ -295,11 +296,11 @@ const Funding = ({
 			/>
 
 			<FormWrapper
-				title="프로젝트 리워드"
+				title="미술소품 옵션"
 				valueType={VALUE_TYPE.REWARD}
 				alt="리워드으"
 				initialValue={reward}
-				submitCaption={'리워드를 추가하세요'}
+				submitCaption={'미술소품을 추가하세요'}
 				submitCaptionsub={'추가하기'}
 				onSubmit={_onRewardSubmit}
 				handlers={rewardHandlers}

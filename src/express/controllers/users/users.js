@@ -57,9 +57,9 @@ router.post('/login', signupMulter.array(), (req, res) => {
    })(req, res)
  })
 
-router.get('/login-facebook', passport.authenticate('facebook', { scope: 'email' }))
+router.get('/login-facebook', passport.authenticate('facebook', { scope: ['user_posts'] }))
 router.get('/login-facebook/callback', (req, res) => {
-  return passport.authenticate('facebook', function (err, user, info) {
+  return passport.authenticate('facebook',function (err, user, info) {
     if (err || !user) return res.redirect('/login')
     req.user = user;
 

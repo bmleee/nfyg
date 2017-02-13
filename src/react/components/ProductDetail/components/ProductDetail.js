@@ -24,7 +24,7 @@ export default class ProductDetail extends Component {
 		} = this.props; // TODO: product should be fetch in async way
 
 		let infoBackground = (imgSrc) => ({
-			backgroundImage: `url(${imgSrc})`,
+			backgroundImage: `url("${imgSrc}")`,
 			backgroundSize: 'cover',
 			backgroundPosition: 'center center',
 			backgroundRepeat: 'no-repeat'
@@ -47,18 +47,19 @@ export default class ProductDetail extends Component {
 
 					<div className="magazine-detail-related-contents-list">
 						<div className="magazine-detail-related-contents-underline">
-						<h3>관련 콘텐츠</h3>
+							<h3>관련 콘텐츠</h3>
 						</div>
 						<div className="magazine-detail-related-contents-list-post-container">
 							{
 								relatedContents && relatedContents.map(({
+									title = 'sample title',
 									imgSrc,
 									link
 								}, index) => (
-									<a href={link}>
+									<a href={link} target="_blank">
 										<div className="magazine-detail-related-contents-list-post-item">
 											<div className="magazine-detail-related-contents-list-post-item-background" style={infoBackground(imgSrc)}>
-												<span>콘텐츠제목</span>
+												<span>{title}</span>
 											</div>
 										</div>
 									</a>

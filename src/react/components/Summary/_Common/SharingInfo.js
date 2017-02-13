@@ -4,10 +4,10 @@ import { Link } from 'react-router'
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table'
 
 const linkFormatter = (cell, row) => {
-	return <Link to={`/users/${row.id}`}>{cell}</Link>;
+	return <Link to={`/user/${row.id}`}>{cell}</Link>;
 }
 const detailFormatter = (cell, row) => {
-	return <Link to={`/users/${row.id}/summary`}><button className='btn btn-info'>Detail</button></Link>;
+	return <Link to={`/user/${row.id}`}><button className='btn btn-info'>Detail</button></Link>;
 }
 
 export default class SharingInfo extends Component {

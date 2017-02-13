@@ -56,9 +56,9 @@ export default function(passport) {
 
 	passport.use(new FacebookStrategy({
 		clientID: FB_APP.clientID,
-    clientSecret: FB_APP.clientSecret,
-    callbackURL: "/api/users/login-facebook/callback",
-    profileFields:['id', 'email', 'gender', 'link', 'displayName', 'name']
+	    clientSecret: FB_APP.clientSecret,
+	    callbackURL: "/api/users/login-facebook/callback",
+	    profileFields:['id', 'email', 'gender', 'link', 'displayName', 'name']
 	}, async function(accessToken, refreshToken, profile, done) {
 		if (!profile.emails) return done(new Error(`can't get user email from facebook profile`))
 

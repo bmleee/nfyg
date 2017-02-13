@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import 'whatwg-fetch'
 import FontAwesome from 'react-fontawesome'
 
+import { Link } from 'react-router';
+
 import { facebook_login } from '../../../../lib/firebase'
 
 const API_URL = '/api/test-api/signup'
@@ -10,6 +12,7 @@ const API_HEADERS = {
 	'Content-Type': false,
 	'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
 }
+
 
 export default class Signup extends Component {
 
@@ -34,12 +37,12 @@ export default class Signup extends Component {
 			})
 
 			const result = await response.json()
-
+			
 		} catch (e) {
 			console.log('signin fails!');
 			console.error(e);
 		} finally {
-
+			
 		}
 	}
 
@@ -50,9 +53,27 @@ export default class Signup extends Component {
 	componentDidMount () {
           window.scrollTo(0, 0)
         }
+    
+    checkpass = () => {
+    	let pass1 = document.getElementById('password');
+    	let pass2 = document.getElementById('password-confirm');
+    	
+    	console.log(pass1);
+    	console.log(pass2);
+    	
+    	let passcolor = "";
+    	let failcolor = "#ff6666";
+    	
+    	if(pass1.value == pass2.value) {
+    		pass2.style.borderColor = passcolor;
+    	}
+    	else {
+    		pass2.style.borderColor = failcolor;
+    	}
+    }
+    
 
 	render() {
-
 		return (
 			<div className="login-page">
 			<div className="user-login">
@@ -65,19 +86,23 @@ export default class Signup extends Component {
 
 				<form ref="form" method="post" action="/api/users/signup" encType="multipart/form-data" onSubmit={this._submit}>
 					<div>
-						<input type="email" className="user-login-id" name="email" placeholder="이메일" />
+						<input type="email" className="user-login-id" name="email" placeholder="로그인 이메일" />
 					</div>
 					<div>
-						<input type="password" className="user-login-password" name="password" placeholder="비밀번호" />
+						<input type="password" className="user-login-password" id="password" name="password" placeholder="비밀번호" />
 					</div>
 					<div>
-						<input type="text" className="user-login-username" name="display_name" placeholder="이름" />
+						<input type="password" className="user-login-password-confirm" id="password-confirm" name="password-confirm" onKeyUp={this.checkpass} placeholder="비밀번호 확인" />
+					</div>
+					<div>
+						<input type="text" className="user-login-username" name="display_name" placeholder="닉네임" />
 					</div>
 					{/* <div>
 						<input type="text" className="user-login-id" name="display_name" placeholder="닉네임" />
 					</div> */}
 					<div>
-						<input type="submit" className="login-btn" value="JOIN 7Pictures" />
+						<input type="submit" className="signup-btn" value="JOIN 7Pictures" />
+						<div className="signup-agree">버튼을 눌러<Link to={`/termofuse`}><p className="signup-termofuse">이용약관</p></Link>에 동의합니다.</div>
 					</div>
 				</form>
 			</div>

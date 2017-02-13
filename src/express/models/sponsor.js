@@ -16,7 +16,7 @@ var SponsorSchema = new Schema({
 
 	imgSrc: {type: String, required: true, default: 'https://i0.wp.com/7pictures.co.kr/wp-content/uploads/2016/08/7pictures_후원기업.jpg?fit=1004%2C378&ssl=1'},
 
-	logoSrc: {type: String, required: true, default: 'http://i0.wp.com/7pictures.co.kr/wp-content/themes/unity/templates/campaign/thumbimg2/flowerwall3.jpg'},
+	logoSrc: {type: String, required: false, default: 'http://i0.wp.com/7pictures.co.kr/wp-content/themes/unity/templates/campaign/thumbimg2/flowerwall3.jpg'},
 
 	money: {type: Number, required: true},
 

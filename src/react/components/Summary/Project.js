@@ -83,6 +83,7 @@ export default class ProjectSummary extends Component {
 
 
     let isAdmin = userType === 'admin'
+    let num = purchase_info && purchase_info.purchases.filter(p => p.purchase_info.purchase_state === 'preparing').length
 
     return (
       <div className="summary-project-container">
@@ -94,7 +95,7 @@ export default class ProjectSummary extends Component {
 				  </div>
 				</div>
 
-				<button onClick={this._onClickProcessPurchase}>결제요청</button>
+				
 
 				<div className="project-summary-body">
           <Tabs>
@@ -106,6 +107,9 @@ export default class ProjectSummary extends Component {
 
             <TabPanel>
               { purchase_info && <PurchaseInfo purchaseInfo={purchase_info} isAdmin={isAdmin} reflashState={this.reflashState} />}
+              <div className="last-purchase-button-container">
+                <button className="last-purchase-button" onClick={this._onClickProcessPurchase}>결제예약 {num}명 결제요청</button>
+              </div>
               { sharing_info && <SharingInfo sharingInfo={sharing_info} isAdmin={isAdmin} reflashState={this.reflashState} />}
             </TabPanel>
             <TabPanel>
@@ -125,7 +129,7 @@ export default class ProjectSummary extends Component {
     try {
       const r = await processPurchase({ projectName: this.props.params.projectName })
       console.log(r)
-      alert(`${r.length}명의 결제가 신청되었습니다.`)
+      alert(`${r.response.length}명의 결제가 신청되었습니다.`)
     } catch (e) {
       console.error(e)
       alert(e.message)

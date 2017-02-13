@@ -84,7 +84,7 @@ class PostComments extends Component {
 			numLikes,
 			text
 		}, index) => (
-			<div className="project-detail-qna-item" key={index}>
+			<div className="project-detail-post-qna-item" key={index}>
 				<div className="qna-item-container">
 					<p className="sharing-fb-icon-list">
 						<img className="qna-form-user-icon" src={iconSrc} alt="" width={80} height={80}/>
@@ -103,6 +103,9 @@ class PostComments extends Component {
 
 		return (
 			<div className="project-detail-post-item-comments-container">
+				<div>
+					{ item }
+				</div>
 				<div className="project-detail-qna-form">
 					<div className="qna-form-textarea-container">
 						<img className="qna-form-user-icon" src={image || '/assets/images/user_default.png'} alt="" width={80} height={80} />
@@ -113,9 +116,6 @@ class PostComments extends Component {
 						<button className="qna-form-submit" disabled={!isLoggedIn} onClick={this._onClickAddComment}>댓글 남기기</button>
 					</div>
 				</div>
-				<div>
-					{ item }
-				</div>
 			</div>
 		)
 	}
@@ -125,6 +125,7 @@ class PostComments extends Component {
 			commentsOpend: !this.state.commentsOpend,
 		});
 	}
+	
 
 }
 

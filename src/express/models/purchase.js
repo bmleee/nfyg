@@ -16,11 +16,11 @@ const PurchaseSchema = new Schema({
   project: { type: Schema.Types.ObjectId, ref: 'Project' },
   product: { type: Schema.Types.ObjectId, ref: 'Product' },
   user_info: {
-    name: { type: String, required: true },
-    display_name: { type: String, required: true },
+    name: { type: String, required: false },
+    display_name: { type: String, required: false },
     id: { type: String, required: true },
     fb_id: { type: String,},
-    image: { type: String, required: true },
+    image: { type: String, required: false },
   },
   address: {
     addressee_name: { type: String, required: true },
@@ -36,13 +36,13 @@ const PurchaseSchema = new Schema({
     pwd_2digit: { type: String, required: true},
   },
   reward: {
-    title: {type: String, required: true},
-    description: {type: String, required: true},
-    isDirectSupport: {type: Boolean, required: true},
-    thresholdMoney: {type: Number, required: true},
+    title: {type: String, required: false},
+    description: {type: String, required: false},
+    isDirectSupport: {type: Boolean, required: false},
+    thresholdMoney: {type: Number, required: false},
   },
-  purchaseAmount: {type: Number, required: true},
-  shippingFee: {type: Number, required: true},
+  purchaseAmount: {type: Number, required: false},
+  shippingFee: {type: Number, required: false},
 
   purchase_info: { // TODO: add additional purchase information here. eg, shipping, ...
     purchase_state: {

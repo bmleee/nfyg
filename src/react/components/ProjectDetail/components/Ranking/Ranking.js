@@ -71,7 +71,7 @@ class Ranking extends Component {
 							src={`https://graph.facebook.com/${fbId}/picture`} />
 					)
 				}
-				외 <p className="sharing-number">{ indirectSupporters.length - recent3IndirectSupporters.length }명</p>이 공유로 후원함
+				외 <p className="sharing-number">{ Math.max(0, indirectSupporters.length - recent3IndirectSupporters.length) }명</p>이 공유로 후원함
 			</div>
 		)
 
@@ -119,20 +119,20 @@ class Ranking extends Component {
 				    <ReadMore lines={1} onShowMore={this.props.onChange} text="더보기">
                 		{message}
             		</ReadMore>
-				    <span><p className="sharing-money">{(money+1000).toLocaleString()}원</p>을 후원함</span>
+				    <span><p className="sharing-money">{((comments*200)+(shares*200)+(likes*200)+(1000)).toLocaleString()}원</p>을 후원함</span>
 	        		</p>
 	        		<div className="sharing-icon-summary">
 		        	<p className="likes-num">
 			        	{ likes.toLocaleString() }
-						<img className="sharing-icon" src="https://7pictures.co.kr/wp-content/uploads/2016/08/likes.png" scale="0" />
+						<img className="sharing-icon" src="~/src/assets/images/facebookicon_likes.png" scale="0" />
 					</p>
 					<p className="likes-num">
 						{ comments.toLocaleString() }
-						<img className="sharing-icon" src="https://7pictures.co.kr/wp-content/uploads/2016/08/comment.png" scale="0" />
+						<img className="sharing-icon" src="~/src/assets/images/facebookicon_comment.png" scale="0" />
 					</p>
 					<p className="likes-num">
 						{ shares.toLocaleString() }
-						<img className="sharing-icon" src="https://7pictures.co.kr/wp-content/uploads/2016/08/share.png" scale="0" />
+						<img className="sharing-icon" src="~/src/assets/images/facebookicon_share.png" scale="0" />
 					</p>
 					</div>
 				</div>

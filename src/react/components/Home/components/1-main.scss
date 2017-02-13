@@ -376,6 +376,7 @@ div.magazine-list-button {
         padding : 8px 10px;
         height : auto;
         min-height : 125px;
+        border-top : 1px solid #ddd;
     }
     div.recent-exhibition-list-item {
         width : 33.3333%;
@@ -413,6 +414,10 @@ div.magazine-list-button {
     border : 1px solid #777;
     border-right : none;
     border-radius : 3px 0px 0px 3px;
+    display : inline-block;
+    line-height : 33px;
+    cursor : pointer;
+    padding : 0px;
 }
 .react-tabs [role=tab]:nth-child(2) {
     width : 180px;
@@ -424,11 +429,16 @@ div.magazine-list-button {
     border : 1px solid #777;
     border-left : 1px solid #150C8B;
     border-radius : 0px 3px 3px 0px;
+    display : inline-block;
+    line-height : 33px;
+    cursor : pointer;
+    padding : 0px;
 }
 .react-tabs [role=tablist] {
     margin : 5px 5px 10px 5px;
     text-align : center;
     border : none;
+    padding : 0px;
 }
 .react-tabs [role=tab][aria-selected=true] {
     border-color : #150C8B;
@@ -485,7 +495,6 @@ div.present-more-project {
     h2 { //page name
         font-size:38px;
         font-weight:500;
-        font-family:'Adobe Garamond W08','adobe-garamond-pro','AGaramondPro-Regular','Times New Roman','Times','serif';
     }
     h1 {
         font-size :40px;
@@ -689,7 +698,10 @@ position: absolute;
         border-bottom : 1px solid #777;
         border : 1px solid #777;
         border-right : none;
-        border-radius : 2px 0px 0px 2px
+        border-radius : 2px 0px 0px 2px;
+        line-height : 30px;
+        cursor : pointer;
+        padding : 0px;
     }
     .react-tabs [role=tab]:nth-child(2) {
         width : 50%;
@@ -699,7 +711,10 @@ position: absolute;
         border-bottom : 1px solid #777;
         border : 1px solid #777;
         border-left : 1px solid #150C8B;
-        border-radius : 0px 2px 2px 0px
+        border-radius : 0px 2px 2px 0px;
+        line-height : 30px;
+        cursor : pointer;
+        padding : 0px;
     }
     .react-tabs [role=tab][aria-selected=true] {
         border-color : #150C8B;
@@ -720,11 +735,11 @@ position: absolute;
         font-weight:700;
     }
     h2 {
-        font-size:28px;
+        font-size:25px;
         font-weight:500;
     }
     h1 {
-        font-size :28px;
+        font-size :26px;
         font-weight :800;
     }
     p:not([data-offset-key]),

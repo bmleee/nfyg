@@ -54,7 +54,7 @@ export default class C extends Component {
 						<div className="purchase-stage-text">배송지 입력</div>
 						<div className="purchase-stage-text">결제 카드 선택</div>
 						<div className="purchase-stage-text">결제 정보 확인</div>
-						<div className="purchase-stage-text-last">결제 완료</div>
+						<div className="purchase-stage-text-last">결제 예약 완료</div>
 					</div>
 					<div className="purchase-stage-content-container">
 					<p className="profile-small-title">옵션 선택</p>

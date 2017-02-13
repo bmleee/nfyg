@@ -265,7 +265,7 @@ const Abstract = ({
 				Form={ImgSrcForm}
 				classNameopen ="editor-open-container"
 			/>
-
+			
 			<FormWrapper
 				title="프로젝트 카테고리"
 				valueType={VALUE_TYPE.SELECT}
@@ -277,7 +277,7 @@ const Abstract = ({
 				Wrapper={CategoryWrapper}
 				Form={CategoryForm}
 				classNameopen ="editor-open-container"
-			/>
+			/> 
 
 			<FormWrapper
 				title="프로젝트 주소"

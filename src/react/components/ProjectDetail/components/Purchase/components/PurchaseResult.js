@@ -4,18 +4,42 @@ import { Link } from 'react-router'
 
 
 export default class PurchaseResult extends Component {
-	componentDidMount() {
+	state = {
+		rewards: [],
+		shippingFee: 0,
+	}
+
+	async componentDidMount() {
 		window.scrollTo(0, 0)
+		try {
+			const {
+				user,
+				data: { rewards, shippingFee }
+			} = await fetchPurchaseInfo('rewards')
+
+			console.log('rewards', rewards);
+			console.log('shippingFee', shippingFee);
+
+			this.props.setShippingFee(shippingFee)
+			this.setState({ rewards, shippingFee })
+		} catch (e) {
+			console.error(e);
+		}
+
 	}
 
 	render() {
-
+		
+		const {
+			rewards,
+			shippingFee
+		} = this.state
+		
 		const {
 			reward,
 			payment,
 			address,
 			purchaseAmount,
-			setShippingFee,
 			msg,
 		} = this.props
 
@@ -28,7 +52,7 @@ export default class PurchaseResult extends Component {
 					<div className="purchase-stage-text">배송지 입력</div>
 					<div className="purchase-stage-text">결제 카드 선택</div>
 					<div className="purchase-stage-text">결제 정보 확인</div>
-					<div className="purchase-stage-text-last-highlight">결제 완료</div>
+					<div className="purchase-stage-text-last-highlight">결제 예약 완료</div>
 				</div>
 
 				{
@@ -48,7 +72,7 @@ export default class PurchaseResult extends Component {
 
 				<div className="purchase-stage-result-container-2">
 					<h4 className="purchase-result-text">리워드명 : {reward.title} / {purchaseAmount}개</h4>
-					<h4 className="purchase-result-text">결제금액 : {reward.thresholdMoney.toLocaleString()}원</h4>
+					<h4 className="purchase-result-text">결제금액 : {((reward.thresholdMoney)+(shippingFee)).toLocaleString()}원</h4>
 					<h4 className="purchase-result-text">결제카드 : [{payment.card_name}] {payment.card_number}</h4>
 					<div className="purchase-shipping-info">
 						배송은 {shippingDay} 예정되어 있습니다.

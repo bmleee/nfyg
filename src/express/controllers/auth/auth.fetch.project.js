@@ -23,6 +23,7 @@ import AddressModel from '../../models/address'
 import PurchaseModel from '../../models/purchase'
 import PaymentModel from '../../models/payment'
 
+import Mailer from '../../lib/Mailer'
 import FacebookTracker from '../../../lib/FacebookTracker'
 import * as mh from '../../lib/modelHelper'
 
@@ -297,6 +298,31 @@ router.post('/:projectName/posts', isLoggedIn, async (req, res) => {
 
 		let project = await ProjectModel.findOne({'abstract.projectName': projectName})
 		let post = await mh.createPost({project, user, title, content, thresholdMoney, isDirectSupport})
+		
+		try {
+			let { post_messages } = await FacebookTracker.getProjectSummary(project.abstract.projectName)
+			let user_ids1 = post_messages.map(p => p.user_app_scope_id)
+			let users1 = await UserModel.findByAppIds(Array.from(new Set(user_ids1)))
+			
+			// console.log('user1', users1)
+			
+			let purchases = await PurchaseModel.findByProject(project).populate('user')
+			let users2 = purchases.map(p => p.user)
+			
+			
+			// console.log('user2', users2)
+			// console.log('purchases', purchases)
+			
+			let users = users1.concat(users2)
+			let mails = users.map(u => u.local_email)
+			mails = Array.from(new Set(mails))
+			
+			await Mailer.sendPostMail(req.params.projectName, mails)
+		} catch (e) {
+			console.error('Error while sending email')
+			console.error(e)
+		}
+		
 
 		res.json({ response: await post.toFormat('project_detail', true, 0) })
 
@@ -361,12 +387,12 @@ router.post('/:projectName/processPurchase', isLoggedIn, async (req, res) => {
 router.post('/:projectName/share', isLoggedIn, async (req, res) => {
 	try {
 		let user = req.user
-		let link = req.body.url
+		let link = req.body.url || req.body.link
 		let project = await ProjectModel.findOneByName(req.params.projectName)
 
 		if (!project) throw Error(`Unknown project name ${req.params.projectName}`)
 
-		r = await FacebookTracker.userSharedProject(user, req.params.projectName, link)
+		const r = await FacebookTracker.userSharedProject(user, req.params.projectName, link)
 
 		console.log('FacebookTracker.userSharedProject.r', r);
 		res.json({ response: r })

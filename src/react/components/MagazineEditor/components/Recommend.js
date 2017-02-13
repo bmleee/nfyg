@@ -62,7 +62,7 @@ const RelatedContentForm = ({value, handlers}) => {
 			<div>
 				<span className="item-deatail-small-title">이미지</span>
 				<input type="file" onChange={_onImgSrc} accept="image/*" />
-				<img src={imgSrc} alt="관런 콘텐츠 이미지를 추가하세요"/>
+				<img src={imgSrc} />
 			</div>
 		</div>
 	)

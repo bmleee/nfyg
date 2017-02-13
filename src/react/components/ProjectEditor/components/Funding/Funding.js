@@ -51,8 +51,8 @@ const RewardWrapper = ({value, handlers}) => {
 				<span className="item-deatail-small-title-saved">제 목 : {title}</span>
 				<span className="item-deatail-small-title-saved">설 명 : {description}</span>
 				<span className="item-deatail-small-title-saved">구 분 : {value2label(SelectOptions.Reward, isDirectSupport)}</span>
-				<span className="item-deatail-small-title-saved">가 격 : {thresholdMoney.toLocaleString()}원</span>
-				<span className="item-deatail-small-title-saved">최대구매수량 : {maxPurchaseVolume}</span>
+				<span className="item-deatail-small-title-saved">금 액 : {thresholdMoney.toLocaleString()}원</span>
+				{/* <span className="item-deatail-small-title-saved">최대구매수량 : {maxPurchaseVolume}</span> */}
 				<span className="item-deatail-small-title-saved">배송일 : {shippingDay}</span>
 				<button className="item-deatail-delete" onClick={() => deleteReward(index)}>삭제하기</button>
 			</div>
@@ -107,11 +107,12 @@ const RewardForm = ({value, handlers, ...otherProps}) => {
 					options={SelectOptions.Reward}
 				/>
 			</div>
-
+			{/*
 			<div>
 				<span className="item-deatail-small-title">최대 구매 수량</span>
 				<input type="number" value={maxPurchaseVolume} onChange={_onMaxPurcahseVolum}/>
 			</div>
+			*/}
 
 			<div>
 				<span className="item-deatail-small-title">배송일</span>
@@ -119,7 +120,7 @@ const RewardForm = ({value, handlers, ...otherProps}) => {
 			</div>
 
 			<div>
-				<span className="item-deatail-small-title">{isDirectSupport ? '직접' : '간접'} 후원 최소 금액</span>
+				<span className="item-deatail-small-title">리워드 금액</span>
 				<input type="number" value={thresholdMoney} onChange={_onThresholdMoney} step="1000" />
 			</div>
 

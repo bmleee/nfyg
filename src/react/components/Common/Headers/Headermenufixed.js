@@ -29,6 +29,7 @@ class Headermenufixed extends Component {
   }
 
 	async onClickSuggest() {
+		
 		try {
 			let body = {
 				contact: document.getElementById('suggest-contact').value,
@@ -41,7 +42,8 @@ class Headermenufixed extends Component {
 
 			let r = await suggestProject(body)
 			console.log('suggestProject', r);
-			this.closeModal()
+			appUtils.setFlash({title: '성공적으로 접수되었습니다. 검토 후 빠른 시일내에 답변드리겠습니다.', level: 'success', autoDismiss: 3})
+		    
 		} catch (e) {
 			console.error(e);
 		}
@@ -125,7 +127,7 @@ class Headermenufixed extends Component {
 										</p>
 									</div>
 									<div className="project-modal-footer">
-										<a className="project-modal-header-save-container" onClick={this.onClickSuggest}><button type="submit" className="project-modal-header-save">보내기</button></a>
+										<a className="project-modal-header-save-container" onClick={this.onClickSuggest}><button type="submit" className="project-modal-header-save" onClick={() => this.closeModal()}>보내기</button></a>
 									</div>
 								</Modal>
 							)

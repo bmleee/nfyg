@@ -59,7 +59,7 @@ export default class C extends Component {
 							<div className="purchase-stage-text">배송지 입력</div>
 							<div className="purchase-stage-text-highlight">결제 카드 선택</div>
 							<div className="purchase-stage-text">결제 정보 확인</div>
-							<div className="purchase-stage-text-last">결제 완료</div>
+							<div className="purchase-stage-text-last">결제 예약 완료</div>
 					</div>
 					<div className="card-list-container">
 						<h4 className="card-list-title">결제카드를 선택해주세요.</h4>
@@ -110,7 +110,7 @@ export default class C extends Component {
 
 								<div>
 									<p className="profile-small-title">비밀번호 앞 2자리</p>
-									<input className="card-password-text" type="text" value={pwd_2digit} onChange={this._onChangePwd} maxLength="2"/>
+									<input className="card-password-text" type="password" value={pwd_2digit} onChange={this._onChangePwd} maxLength="2"/>
 									<div className="card-password-none"></div><div className="card-password-none"></div>
 								</div>
 								<div className="card-add-ssl-info">

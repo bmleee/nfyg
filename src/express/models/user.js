@@ -89,6 +89,11 @@ UserSchema.statics.findOneByEmail = function (email, cb) {
 	}, cb)
 }
 
+UserSchema.statics.findByAppIds = function (fb_ids) {
+	let re = new RegExp(fb_ids.join('|'), "i")
+	return this.find({'fb_id': re})
+}
+
 UserSchema.methods.getUserType = function () {
 	switch (this.access_level) {
 		case 0: return 'user'
@@ -133,7 +138,7 @@ UserSchema.methods.supportedMoney = async function({projectName, productName}) {
 		] = await Promise.all([
 			PurchaseModel.find({user: this})
 				.select('purchase_info.amount'),
-			FacebookTracker.getUserSummaryOnProject(this.id, projectName || productName),
+			FacebookTracker.getUserSummaryOnProject(this, projectName || productName),
 		])
 
 		const sum = (a, b) => a + b

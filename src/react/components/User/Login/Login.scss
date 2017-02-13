@@ -23,7 +23,7 @@
     background : #fff;
 }
 
-.fb-login-btn, .login-btn {
+.fb-login-btn, .login-btn, .signup-btn {
     background : #000;
     width : 280px;
     color : #fff;
@@ -55,6 +55,24 @@
     margin-top : 10px;
     margin-bottom : 20px;
 }
+.signup-btn {
+    margin-top : 10px;
+    margin-bottom : 5px;
+}
+.signup-agree {
+    display : block;
+    font-size : 15px !important;
+    color : #333;
+    margin-bottom : 20px;
+    text-align : left;
+    margin-left : 3px;
+}
+.signup-termofuse {
+    display : inline-block;
+    font-size : 15px !important;
+    color : #150C8B;
+    margin-left : 5px !important;
+}
 
 .user-login-id {
     width : 280px;
@@ -68,16 +86,24 @@
     border : 2px solid #eee;
     height : 45px;
     padding-left : 10px;
+    margin-bottom : 10px;
+}
+.user-login-password-confirm {
+    width : 280px;
+    border : 2px solid #eee;
+    height : 45px;
+    padding-left : 10px;
+    margin-bottom : 10px;
 }
 .user-login-username {
     width : 280px;
     border : 2px solid #eee;
-    margin-top : 10px;
     height : 45px;
     padding-left : 10px;
+    margin-bottom : 10px;
 }
 
-.user-login-id:focus, .user-login-password:focus, .user-login-username:focus {
+.user-login-id:focus, .user-login-password:focus, .user-login-username:focus, .user-login-password-confirm:focus {
     outline : none;
     border : 2px solid #150C8B;
     transition : opacity, 250ms;

@@ -2,14 +2,20 @@ import ProjectModel from '../models/project'
 import ProductModel from '../models/product'
 import MagazineModel from '../models/magazine'
 
-const _get = async ({projectName, productName}) => {
-  let p = projectName ? await ProjectModel.findOneByName(projectName) : await ProductModel.findOneByName(productName)
-
-  let title = p ? p.abstract.shortTitle : '7Pictures'
+const _get = async ({projectName, productName, magazineName}) => {
+  let p = projectName ? 
+          await ProjectModel.findOneByName(projectName) : 
+          productName ? 
+          await ProductModel.findOneByName(productName) :
+          await MagazineModel.findOneByName(magazineName)
+  
+  let title = p ? p.abstract.longTitle : '7Pictures'
   let meta = p ? [
     { property: 'og:image', content: `http://7pictures.kr:8080${p.abstract.imgSrc}` },
+    { property: 'og:description', content: p.abstract.postIntro || p.abstract.description },
   ] : [ 
     { property: 'og:image', content: 'http://7pictures.co.kr/assets/images/favicon.ico' },
+    { property: 'og:description', content: '' },
   ]
 
   return {
@@ -25,7 +31,8 @@ export default async function headHelper(renderProps) {
     meta
   } = await _get({
     projectName: renderProps.params.projectName,
-    productName: renderProps.params.productName
+    productName: renderProps.params.productName,
+    magazineName: renderProps.params.magazineName
   })
 
   return new Head({ title, meta, })

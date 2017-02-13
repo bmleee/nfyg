@@ -121,7 +121,7 @@ export default async function initUsers() {
 	setTimeout(async () => {
 		console.log('trying to init user address & payment');
 		await initAddress(user)
-		await initPayment(user)
+		// await initPayment(user)
 	}, 0)
 
 	return

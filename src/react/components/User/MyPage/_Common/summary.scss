@@ -1,3 +1,18 @@
+.last-purchase-button-container {
+  text-align : center;
+  .last-purchase-button, .last-purchase-button:focus {
+    background : #150C8B;
+    border : none;
+    outline : none;
+    border-radius : 2px;
+    padding : 8px 20px;
+    color : #fff;
+    font-size : 16px;
+    font-weight : 600;
+    margin : -20px 0px 30px 0px;
+  }
+}
+
 .project-summary-header {
   height : 210px;
   background: rgba(0,0,0,.3);

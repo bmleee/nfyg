@@ -56,7 +56,7 @@ const MagazineNameForm = ({value, onChange}) =>
 // ----
 const MagazineDescriptionWrapper = ({value}) => value
 	? <span>{value}</span>
-	: <span>전시를 10자 이내 3줄 이내로 설명해 주세요</span>
+	: <span></span>
 const MagazineDescriptionForm = ({value, onChange}) =>
 	// <input type="textarea" value={value} onChange={onChange} />
 	<textarea value={value} onChange={onChange} cols="30" rows="3"/>
@@ -137,6 +137,19 @@ const Abstract = ({
 				className ="exhibition-long-title"
 				classNameopen ="editor-open-container"
 			/>
+			
+			<FormWrapper
+				title="매거진 요약"
+				valueType={VALUE_TYPE.TEXT}
+				alt=""
+				initialValue={description}
+				submitCaption="요약 내용을 입력하세요"
+				submitCaptionsub={'입력하기'}
+				onSubmit={_onDescriptionSubmit}
+				Wrapper={MagazineDescriptionWrapper}
+				Form={MagazineDescriptionForm}
+				classNameopen ="editor-open-container"
+			/>
 
 			{/* <FormWrapper
 				title="Abstract Short Title"
@@ -152,7 +165,7 @@ const Abstract = ({
 			/> */}
 
 			<FormWrapper
-				title="대표이미지"
+				title="매거진 대표이미지"
 				valueType={VALUE_TYPE.IMAGE}
 				alt=""
 				initialValue={imgSrc}
@@ -163,7 +176,7 @@ const Abstract = ({
 				Form={ImgSrcForm}
 				classNameopen ="editor-open-container"
 			/>
-
+			
 			<FormWrapper
 				title="매거진 카테고리"
 				valueType={VALUE_TYPE.SELECT}
@@ -178,28 +191,17 @@ const Abstract = ({
 			/>
 
 			<FormWrapper
-				title="매거진 영문 제목"
+				title="매거진 주소"
 				valueType={VALUE_TYPE.TEXT}
 				alt=""
 				initialValue={magazineName}
-				submitCaption="영문 제목을 입력하세요"
+				submitCaption="원하시는 링크를 입력하세요"
 				submitCaptionsub={'입력하기'}
 				onSubmit={_onMagazineNameSubmit}
 				Wrapper={MagazineNameWrapper}
 				Form={MagazineNameForm}
 				className ="exhibition-eng-title"
 				classNameopen ="editor-open-container"
-			/>
-
-			<FormWrapper
-				title="Abstract Magazine Description"
-				valueType={VALUE_TYPE.TEXT}
-				alt=""
-				initialValue={description}
-				submitCaption="입력하기"
-				onSubmit={_onDescriptionSubmit}
-				Wrapper={MagazineDescriptionWrapper}
-				Form={MagazineDescriptionForm}
 			/>
 
 			<span className="editor-small-title">작성자 정보</span>

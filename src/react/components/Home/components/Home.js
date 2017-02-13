@@ -62,6 +62,9 @@ class Home extends Component {
 			// pastProjects
 			products
 		} = this.props;
+		
+		console.log(products.length);
+		console.log(presentProjects.length);
 
 		return (
 			<div className="home">
@@ -107,7 +110,7 @@ class Home extends Component {
 											</Link>
 											<div className="present-project-list-item-caption">
 												<Link to={link}><h4 className="project-list-title">{title}</h4></Link>
-												<div className="product-purchase-num"><p>{numValidPurchases}명</p>주문중</div>
+												<div className="product-purchase-num"><p>{numDirectSupports}명</p>주문중</div>
 											</div>
 										</div>
 									</div>
@@ -159,7 +162,7 @@ class Home extends Component {
 							}
 						</Slider>
 						<PresentProductList products={products.slice(4, products.length)} />
-
+						
 					</TabPanel>
 					</Tabs>
 

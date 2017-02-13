@@ -22,11 +22,11 @@ const ProjectSchema = new Schema({
 		longTitle: {type: String, required: true},
 		shortTitle: {type: String, required: true},
 		imgSrc: {type: String, required: true},
-		category: {type: String, required: true}, // refers to react/constants/selectOptions
+		category: {type: String, required: false}, // refers to react/constants/selectOptions
 		projectName: {type: String, required: true, unique: true, validate: [
 			function(projectName) {
 				return !restrictedNames.includes(projectName);
-			}, `project name can't be one of ${restrictedNames}`
+			}, `이미 존재하는 링크입니다. ${restrictedNames}`
 		]},
 		state: {type: String, required: true},     // refers to react/constants/selectOptions
 		postIntro: {type: String, required: true}, // TODO: change name, postIntro -> projectDescription
@@ -36,7 +36,7 @@ const ProjectSchema = new Schema({
 
 	creator: {
 		creatorName: {type: String, required: true},
-		creatorImgSrc: {type: String, required: true},
+		creatorImgSrc: {type: String, required: false},
 		creatorLocation: {type: String, },
 		creatorDescription: {type: String,},
 	},
@@ -58,12 +58,12 @@ const ProjectSchema = new Schema({
 		rewards: [
 			{
 				title: {type: String, required: true},
-				description: {type: String, required: true},
+				description: {type: String, required: false},
 				imgSrc: {type: String,},
-				isDirectSupport: {type: Boolean, required: true},
-				shippingDay: {type: String, required: true},
+				isDirectSupport: {type: Boolean, required: false},
+				shippingDay: {type: String, required: false},
 				thresholdMoney: {type: Number, required: true},
-				maxPurchaseVolume: {type: Number, required: true},
+				maxPurchaseVolume: {type: Number, required: false},
 			}
 		]
 	},
@@ -76,8 +76,8 @@ const ProjectSchema = new Schema({
 			html: {type: String, required: true},
 		},
 		part2: {
-			raw: {type: String, required: true},
-			html: {type: String, required: true},
+			raw: {type: String, required: false},
+			html: {type: String, required: false},
 		},
 	},
 
@@ -146,6 +146,11 @@ ProjectSchema.methods.toFormat = async function (type, ...args) {
 	// console.log(`Project.toFormat(type: ${type}, args: ${args})`, this);
 
 	try {
+		let {
+			likes, shares, comments, num_useres, num_posts,
+			money_by_sharing, recent_3_user_ids,
+			post_messages
+		} = await FacebookTracker.getProjectSummary(this.abstract.projectName)
 
 		switch (type) {
 			case 'home':
@@ -188,10 +193,10 @@ ProjectSchema.methods.toFormat = async function (type, ...args) {
 							creator: this.creator.creatorName,
 							title: this.abstract.shortTitle,
 							targetMoney: this.funding.targetMoney,
-							currentMoney: this.funding.currentMoney,
+							currentMoney: this.funding.currentMoney + money_by_sharing,
 							numDirectSupports: await PurchaseModel.count({project: this}),
 							numIndirectSupports: Math.floor(Math.random() * 300), // TODO: from IndirectSupport
-							remainingDays: ( new Date(this.funding.dateTo).getTime() - new Date(this.funding.dateFrom).getTime() ) / 1000 / 60 / 60 / 24,
+							remainingDays: ( new Date(this.funding.dateTo).getTime() - new Date().getTime() ) / 1000 / 60 / 60 / 24,
 							link: `/projects/${this.abstract.projectName}`,
 							postIntro: this.abstract.postIntro,
 						}
@@ -205,12 +210,8 @@ ProjectSchema.methods.toFormat = async function (type, ...args) {
 				let posts = this.posts.map(p => p.toFormat('project_detail', ac.canEdit(user, this), money))
 				let qnas = this.qnas.map(q => q.toFormat('project_detail'))
 				let numValidPurchases = await PurchaseModel.countValidPurchase({ project: this })
-
-				let {
-					likes, shares, comments, num_useres, num_posts,
-					money_by_sharing, recent_3_user_ids,
-					post_messages
-				} = await FacebookTracker.getProjectSummary(this.abstract.projectName)
+				
+				
 				let indirectSupporters = post_messages.map(pm => ({
 					fbId: pm.user_app_scope_id,
 					name: pm.name,
@@ -232,7 +233,14 @@ ProjectSchema.methods.toFormat = async function (type, ...args) {
 						sponsorImgSrc: this.sponsor.imgSrc,
 						sponsorDescription: this.sponsor.description,
 					},
-					funding: this.funding,
+					funding: {
+						currentMoney: this.funding.currentMoney + money_by_sharing,
+						targetMoney: this.funding.targetMoney,
+						shippingFee: this.funding.shippingFee,
+						dateFrom: this.funding.dateFrom,
+						dateTo: this.funding.dateTo,
+						rewards: this.funding.rewards,
+					},
 					overview: {
 						intro: this.overview.intro,
 						part1: this.overview.part1.html,
@@ -332,9 +340,8 @@ ProjectSchema.methods.getSharingInfo = async function () {
 
 	let users = await Promise.all(post_messages.map(
 		async ({user_app_scope_id, user_id, name, likes, comments, shares,}) => {
-			// let user = await UserModel.findOne({ fb_id: user_app_scope_id })
-			let user = await UserModel.findOne({ name: '일반유저' })
-
+			let user = await UserModel.findOne({ fb_id: user_app_scope_id })
+			
 			return {
 				user: await user.toFormat('profile_admin'),
 				user_id: user.id,

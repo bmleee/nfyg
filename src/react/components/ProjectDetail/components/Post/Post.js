@@ -91,10 +91,8 @@ class Post extends Component {
 
 		const canEdit = appUtils.getUser().canEdit
 
-		let title = "포스트 제목 예시";
 		let condition1 = "전체공개";
 		let condition2 = "후원자공개";
-		let postnum = 4;
 
 		console.log('Post', this);
 
@@ -114,7 +112,7 @@ class Post extends Component {
 			<div className="project-detail-post-item" key={index}>
 				<div className="post-item-title-summary">
 					<h3 className="post-item-title">{title}</h3>
-					<span className="post-item-title-detail">{postnum}번째 소식</span>
+					<span className="post-item-title-detail">{posts.length - index}번째 소식</span>
 					<span className="post-item-title-detail">{date2string(created_at)}</span>
 					{
 						thresholdMoney === 0
@@ -125,7 +123,7 @@ class Post extends Component {
 				</div>
 				<div className="post-item-content-summary">
 					{
-						opened
+						opened || thresholdMoney === 0
 							// ? <Viewer raw={content}/>
 							? <div dangerouslySetInnerHTML={{ __html: content }} ></div>
 							: <div className="post-block">
@@ -136,7 +134,7 @@ class Post extends Component {
 					}
 				</div>
 				{
-					opened
+					opened || thresholdMoney === 0
 						? <PostComments
 						 		comments={comments}
 								postLikes={likes}
@@ -163,7 +161,7 @@ class Post extends Component {
 									<p className="profile-small-title">제 목</p><input className="post-input-title" type="text" name="post-title" id="post-title"/>
 								</div>
 								<div className="post-input-number-container">
-								<p className="profile-small-title">열람 가능 금액(0 또는 공란은 전체공개)</p><input className="post-input-number" type="number" name="post-threshold-money" id="post-threshold-money"/>
+								<p className="profile-small-title">열람 가능 금액(0은 전체공개)</p><input className="post-input-number" type="number" name="post-threshold-money" id="post-threshold-money"/>
 								</div>
 								{/* 직접 후원자에게만 보여주는 Post...? */}
 								{/* <span>직접 후원 전용</span><input type="checkbox" name="post-is-direct-support" id="post-is-direct-support" placeholder="직접 후원 전용"/> */}

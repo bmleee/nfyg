@@ -3,19 +3,46 @@ import { fetchPurchaseInfo } from '~/src/react/api/AppAPI'
 
 
 export default class Purchase extends Component {
-	componentDidMount() {
+	
+	state = {
+		rewards: [],
+		shippingFee: 0,
+	}
+
+	async componentDidMount() {
 		window.scrollTo(0, 0)
+		try {
+			const {
+				user,
+				data: { rewards, shippingFee }
+			} = await fetchPurchaseInfo('rewards')
+
+			console.log('rewards', rewards);
+			console.log('shippingFee', shippingFee);
+
+			this.props.setShippingFee(shippingFee)
+			this.setState({ rewards, shippingFee })
+		} catch (e) {
+			console.error(e);
+		}
+
 	}
 	
 	render() {
 
 		console.log('Purcase/components/Purchase', this);
+		
+		const {
+			rewards,
+			shippingFee
+		} = this.state
+		
 		const {
 			reward,
 			payment,
 			address,
 			goToPreviousStage,
-			purchase
+			purchase,
 		} = this.props
 
 		return (
@@ -25,7 +52,7 @@ export default class Purchase extends Component {
 					<div className="purchase-stage-text">배송지 입력</div>
 					<div className="purchase-stage-text">결제 카드 선택</div>
 					<div className="purchase-stage-text-highlight">결제 정보 확인</div>
-					<div className="purchase-stage-text-last">결제 완료</div>
+					<div className="purchase-stage-text-last">결제 예약 완료</div>
 				</div>
 				<div className="purchase-stage-content-container">
 					<h4 className="purchase-detail-title">결제 정보를 확인해주세요.</h4>
@@ -64,15 +91,15 @@ export default class Purchase extends Component {
 						<p className="profile-small-title">최종 결제 금액</p>
 						<div className="purchase-reward-select-container">
 							<div className="purchase-reward-result">
-								<p className="purchase-reward-description">{reward.thresholdMoney.toLocaleString()}원 + 3,000원(배송비)</p>
-								<p className="purchase-reward-money">= {(reward.thresholdMoney+3000).toLocaleString()}원</p>
+								<p className="purchase-reward-description">{reward.thresholdMoney.toLocaleString()}원 + {shippingFee.toLocaleString()}원(배송비)</p>
+								<p className="purchase-reward-money">= {((reward.thresholdMoney)+(shippingFee)).toLocaleString()}원</p>
 							</div>
 						</div>
 
 				</div>
 				<div className="purchase-stage-move-container">
 					<button className="purchase-stage-prev-button" onClick={goToPreviousStage}>이전 단계</button>
-					<button className="purchase-stage-next-button" onClick={purchase}>결제 하기</button>
+					<button className="purchase-stage-next-button" onClick={purchase}>결제 예약</button>
 				</div>
 			</div>
 		)

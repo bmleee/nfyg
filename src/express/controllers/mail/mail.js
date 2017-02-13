@@ -8,7 +8,7 @@ const transporter = nodemailer.createTransport('smtps://dkdkajej%40gmail.com:Iw2
 // const transporter = nodemailer.createTransport('smtp://bmlee%407pictures.co.kr:Thflatk4601#@smtp.worksmobile.com')
 const getOptions = ({
 	from = '"7Pictures" <bmlee@7pictures.co.kr>',
-	to = 'dkdkajej@gmail.com, pjh@7pictures.co.kr, bmlee@7pictures.co.kr, hjjeon@7pictures.co.kr',
+	to = 'bmlee@7pictures.co.kr',
 	subject = 'Test email',
 	text,
 	html,

@@ -63,12 +63,41 @@ class Post extends Component {
   				</Collapsible>
 			)
 		})
+		
+		let item3 =  (
+				<div>
+				<Collapsible trigger="배송은 언제 진행되나요?" transitionTime="0">
+    			 배송은 주문이 성공적으로 마감된 후, 7일 이내 일괄 배송됩니다.
+  				</Collapsible>
+  				<Collapsible trigger="결제 예약취소를 하고 싶습니다." transitionTime="0">
+    			 우측 상단의 마이페이지에서 해당 제품의 상세내역 보기에서 '결제 예약 취소'버튼을 클릭하시면 됩니다. 
+  				</Collapsible>
+  				<Collapsible trigger="배송지/옵션 변경하고 싶습니다." transitionTime="0">
+    			 해당제품의 결제 예약을 취소 한 후 다시 한번 결제를 진행해 주시면 됩니다.
+  				</Collapsible>
+  				<Collapsible trigger="상품을 받았는데 교환이나 반품/환불이 가능한가요?" transitionTime="0">
+    			 단순 변심에 의한 교환이나 반품/환불은 불가능 하며, 수령하신 물품이 불량인 경우에는 조치가 가능하오니 고객센터로 연락주시면 감사하겠습니다.
+  				</Collapsible>
+  				</div>
+		)
 
 
 		return (
 			<div className="project-detail-post">
 				<div className="product-faq-container">
 					{item2}
+				<Collapsible trigger="배송은 언제 진행되나요?" transitionTime="0">
+    			 배송은 주문이 성공적으로 마감된 후, 7일 이내 일괄 배송됩니다.
+  				</Collapsible>
+  				<Collapsible trigger="결제 예약취소를 하고 싶습니다." transitionTime="0">
+    			 우측 상단의 마이페이지에서 해당 제품의 상세내역 보기에서 '결제 예약 취소'버튼을 클릭하시면 됩니다. 
+  				</Collapsible>
+  				<Collapsible trigger="배송지/옵션 변경하고 싶습니다." transitionTime="0">
+    			 해당제품의 결제 예약을 취소 한 후 다시 한번 결제를 진행해 주시면 됩니다.
+  				</Collapsible>
+  				<Collapsible trigger="상품을 받았는데 교환이나 반품/환불이 가능한가요?" transitionTime="0">
+    			 단순 변심에 의한 교환이나 반품/환불은 불가능 하며, 수령하신 물품이 불량인 경우에는 조치가 가능하오니 댓글 혹은 고객센터로 연락주시면 감사하겠습니다.
+  				</Collapsible>
 				</div>
 			</div>
 			)

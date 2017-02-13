@@ -63,7 +63,7 @@ export default class ProductSummary extends Component {
 		}
 
     let isAdmin = userType === 'admin'
-
+    let num = purchase_info && purchase_info.purchases.filter(p => p.purchase_info.purchase_state === 'preparing').length
     return (
       <div className="summary-project-container">
         <div className="purchase-heading" style={infoBackground}>
@@ -73,9 +73,7 @@ export default class ProductSummary extends Component {
   					<p className="project-summary-state">{ abstract && abstract.state }</p>
 				  </div>
 				</div>
-
-        <button onClick={this._onClickProcessPurchase}>결제요청</button>
-
+				
 				<div className="project-summary-body">
           <Tabs>
             <TabList>
@@ -85,6 +83,9 @@ export default class ProductSummary extends Component {
 
             <TabPanel>
               { purchase_info && <PurchaseInfo purchaseInfo={purchase_info} isAdmin={isAdmin} />}
+              <div className="last-purchase-button-container">
+                <button className="last-purchase-button" onClick={this._onClickProcessPurchase}>결제예약 {num}명 결제요청</button>
+              </div>
             </TabPanel>
             <TabPanel>
               { authorizedUsers && <AuthorizedUsers authorizedUsers={authorizedUsers} isAdmin={isAdmin} />}
@@ -99,7 +100,7 @@ export default class ProductSummary extends Component {
     try {
       const r = await processPurchase({ productName: this.props.params.productName })
       console.log(r)
-      alert(`${r.length}명의 결제가 신청되었습니다.`)
+      alert(`${r.response.length}명의 결제가 신청되었습니다.`)
     } catch (e) {
       console.error(e)
       alert(e.message)

@@ -14,11 +14,14 @@ const purchaseFailureEmail = new EmailTemplate(purchaseFailureTemplate)
 const purchaseResultTemplate = path.join(__dirname, '../src/express/templates/email/purchaseResult')
 const purchaseResultEmail = new EmailTemplate(purchaseResultTemplate)
 
+const newPostInfoTemplate = path.join(__dirname, '../src/express/templates/email/newPostInfo')
+const newPostInfoEmail = new EmailTemplate(newPostInfoTemplate)
+
 
 const getOptions = ({
 	from = '"7Pictures" <bmlee@7pictures.co.kr>',
 // 	to = 'dkdkajej@gmail.com, pjh@7pictures.co.kr, bmlee@7pictures.co.kr, hjjeon@7pictures.co.kr',
-	to = 'dkdkajej@gmail.com, pjh@7pictures.co.kr', // to test
+	to, // = 'dkdkajej@gmail.com, pjh@7pictures.co.kr', // to test
 	subject = 'Test email',
 	text,
 	html,
@@ -103,7 +106,7 @@ class Mailer {
 
   		transporter.sendMail(getOptions({
         ...result,
-        // to: [user.local_email, user.fb_email].join(', '), // to test...
+        to: [user.local_email, user.fb_email].join(', '), // to test...
         subject: '결제 실패',
       }), function (err, info) {
   			if (err) {
@@ -144,7 +147,7 @@ class Mailer {
 
   		transporter.sendMail(getOptions({
         ...result,
-        // to: [user.local_email, user.fb_email].join(', '), // to test...
+        to: [user.local_email, user.fb_email].join(', '), // to test...
         subject: '주문 청구',
       }), function (err, info) {
   			if (err) {
@@ -155,6 +158,32 @@ class Mailer {
   		})
   	})
 	}
+	
+  // Send Post Mail to users...
+  async sendPostMail(projectName, mails) {
+    console.log('target mails', mails)
+    newPostInfoEmail.render({
+      projectName
+    }, 'ejs', function (e, result) {
+  		if (e) {
+  			throw e
+  		}
+
+  		let { html, text } = result
+
+  		transporter.sendMail(getOptions({
+        ...result,
+        to: mails.join(', '), // to test...
+        subject: `새로운 소식 : ${projectName}`,
+      }), function (err, info) {
+  			if (err) {
+  				throw e
+  			}
+
+  			return info
+  		})
+  	})
+  }
 }
 
 export default new Mailer()

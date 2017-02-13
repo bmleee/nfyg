@@ -34,7 +34,7 @@ class Login extends Component {
 					<div>
 						<input type="password" className="user-login-password" name="password" placeholder="비밀번호" ref="password" autoComplete="off" />
 					</div>
-					<button className="password-find">비밀번호 찾기</button>
+					{/* <button className="password-find">비밀번호 찾기</button> */}
 					<input type="submit" className="login-btn" value="LOG IN" onClick={this._onLocalClick} />
 				</form>
 				<p className="create-id-text">계정이 없으신가요?<Link to="/signup"><button className="create-id">새 계정 만들기</button></Link></p>

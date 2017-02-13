@@ -105,7 +105,7 @@ export default class PurchaseContainer extends Component {
 			'배송지 입력',
 			'결제 카드 선택',
 			'결제 정보 확인',
-			'결제 완료',
+			'결제 예약 완료',
 		];
 
 		return (
@@ -128,8 +128,8 @@ export default class PurchaseContainer extends Component {
 		} = this.state
 
 		if (selectedRewardIndex < 0 | selectedRewardIndex < 0 | selectedPaymentIndex < 0) {
-			alert('결제 정보 오류. 처음부터 다시 진행 해 주세요')
-			// this.goToFirstStage() // TODO: activate
+			alert('결제예약에 실패하였습니다. 결제 정보를 확인해주세요.')
+			this.goToFirstStage()
 			return
 		}
 

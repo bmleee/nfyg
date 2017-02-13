@@ -67,10 +67,16 @@ class PresentProjectList extends Component {
 						<div className="present-project-list-item-caption">
 							<Link to={link}><h3 className="project-list-title">{title}</h3></Link>
 							<h5>{postIntro}</h5>
-							<Progress completed={Math.min(100, Math.round(currentMoney / targetMoney * 100))} />
+							<Progress completed={Math.min(100, Math.ceil(currentMoney / targetMoney * 100))} />
 							<div className="project-summary-detail">
-							<div className="project-remain-days">{Math.round(currentMoney / targetMoney * 100)}%</div>
-							<div className="project-summary-current-money">D-{remainingDays}</div>
+							<div className="project-remain-days">{Math.ceil(currentMoney / targetMoney * 100)}%</div>
+							{
+								Math.ceil(remainingDays) > 0
+								?
+								<div className="project-summary-current-money">D-{Math.ceil(remainingDays)}</div>
+								:
+								<div className="project-summary-current-money">마감</div>
+							}
 							{(currentMoney || 0).toLocaleString()}원
 							</div>
 						    {/* 직접후원 {numDirectSupports}명 | 간접후원 {numIndirectSupports}명 */}

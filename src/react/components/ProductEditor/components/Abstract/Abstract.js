@@ -218,7 +218,7 @@ const Abstract = ({
 				valueType={VALUE_TYPE.TEXT}
 				alt="제목을 입력하세요"
 				initialValue={longTitle}
-				submitCaption={'전시 제목을 입력하세요'}
+				submitCaption={'미술소품 제목을 입력하세요'}
 				submitCaptionsub={'입력하기'}
 				onSubmit={_onLongTitleSubmit}
 				Wrapper={LongTitleWrapper}
@@ -232,7 +232,7 @@ const Abstract = ({
 				valueType={VALUE_TYPE.TEXT}
 				alt="짧은 제목을 입력하세요"
 				initialValue={shortTitle}
-				submitCaption={'전시 짧은 제목을 입력하세요'}
+				submitCaption={'미술소품 짧은 제목을 입력하세요'}
 				submitCaptionsub={'입력하기'}
 				onSubmit={_onShortTitleSubmit}
 				Wrapper={ShortTitleWrapper}
@@ -265,7 +265,7 @@ const Abstract = ({
 				Form={ImgSrcForm}
 				classNameopen ="editor-open-container"
 			/>
-
+			
 			<FormWrapper
 				title="미술소품 카테고리"
 				valueType={VALUE_TYPE.SELECT}

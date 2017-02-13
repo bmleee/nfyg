@@ -27,7 +27,7 @@ export default class ProjectDetail extends Component {
 		} = this.props; // TODO: project should be fetch in async way
 
 		let infoBackground = (imgSrc) => ({
-			backgroundImage: `url(${imgSrc})`,
+			backgroundImage: `url("${imgSrc}")`,
 			backgroundSize: 'cover',
 			backgroundPosition: 'center center',
 			backgroundRepeat: 'no-repeat'
@@ -59,7 +59,7 @@ export default class ProjectDetail extends Component {
 									imgSrc,
 									link
 								}, index) => (
-									<a href={link}>
+									<a href={link} target="_blank">
 										<div className="magazine-detail-related-contents-list-post-item">
 											<div className="magazine-detail-related-contents-list-post-item-background" style={infoBackground(imgSrc)}>
 												<span>{title}</span>

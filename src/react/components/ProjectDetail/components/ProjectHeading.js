@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Progress from 'react-progressbar';
+import { Link } from 'react-router'
 
 import { format, resolve } from 'url'
 
@@ -13,6 +14,13 @@ export default class ProjectHeading extends Component {
 
 	render() {
 		console.log('ProjectHeading', this);
+		
+		let {
+			isLoggedIn,
+			displayName,
+			image,
+		} = appUtils.getUser()
+		
 		const {
 			abstract: {
 				longTitle,
@@ -52,9 +60,10 @@ export default class ProjectHeading extends Component {
 			relatedContents,
 			numValidPurchases,
 		} = this.props;
+		
+		const today = new Date();
 
-
-		let remainingDays = ( new Date(dateTo).getTime() - new Date(dateFrom).getTime() ) / 1000 / 60 / 60 / 24
+		let remainingDays = ( new Date(dateTo).getTime() - today.getTime() ) / 1000 / 60 / 60 / 24
 
 		const sharingInfo = (recent3Users || []).map( (fbId, index) => (
 			<img className="sharing-fb-icon" key={index} width={32} height={32} src={`https://graph.facebook.com/${fbId}/picture`} scale="0"/>
@@ -68,7 +77,6 @@ export default class ProjectHeading extends Component {
 		}
 
 		const url = document.URL;
-		const url2 = 'http://jwchoi85.tistory.com/165'
 
 		/**
 		 * Issue
@@ -104,26 +112,42 @@ export default class ProjectHeading extends Component {
 						<Progress completed={Math.round(currentMoney / targetMoney * 100)} />
 						<div className="project-heading-summary-money">
 						<div className="project-heading-summary-percent">{Math.round(currentMoney / targetMoney * 100)}<span className="heading-summary-status">%</span></div>
-						<div className="project-heading-summary-dday">D-{remainingDays}<span className="heading-summary-status"></span></div>
+						{
+							Math.ceil(remainingDays) > 0
+							?
+							<div className="project-heading-summary-dday">D-{Math.ceil(remainingDays)}</div>
+							:
+							<div className="project-heading-summary-dday">마감</div>
+						}
 						{(currentMoney || 0).toLocaleString()}<span className="heading-summary-status">원</span></div>
 					</div>
 				</div>
-
-				{/*
-				<FacebookButton sharer='true' media={`http://52.78.180.103:8080${imgSrc}`} appId='361812380855194' message={postIntro} url={url} className="share-button">
-
-				페이스북 공유로 후원하기
-				<FacebookCount url={url}/>
-
-				</FacebookButton> */}
-
-				<button className="share-button" onClick={this.onClickShareFB}>페이스북 공유로 후원하기</button>
+				
+				{	Math.ceil(remainingDays) > 0
+					?
+							isLoggedIn && (
+							<button className="share-button" onClick={this.onClickShareFB}>페이스북 공유로 후원하기</button>
+						)
+					:
+						<div></div>
+				}
+				{	Math.ceil(remainingDays) > 0
+						?
+							!isLoggedIn && (
+						<Link to={`/login`}>			
+						<button className="share-button">페이스북 공유로 후원하기</button>
+						</Link>
+						)
+						:
+						<div></div>
+				}
 			</div>
 
 			)
 	}
 
 	onClickShareFB = async () => {
+		const projectName = this.props.abstract.projectName
 		// let share_url = window.location.host + window.location.pathname
 		// let share_url = '7pictures.co.kr/campaigns/m-art/'
 		// let url = format({ host: FB_SHARER_URL, query: {u: share_url} })
@@ -143,10 +167,13 @@ export default class ProjectHeading extends Component {
 		},  async function(response) {
     	if (response && !response.error_message) {
 	      try {
-	      	await shareProject(this.props.abstract.projectName, url)
-	      } catch (e) {}
+	      	const r = await shareProject(projectName, url)
+	      	console.log('shareProject result', r)
+	      } catch (e) {
+	      	console.error(e)
+	      }
 	    } else {
-	      alert('Error while posting.');
+	    	
 			}
 		})
 	}

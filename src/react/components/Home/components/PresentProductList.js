@@ -46,7 +46,9 @@ class PresentProductList extends Component {
 	}
 
 	render() {
-		let { products, } = this.props;
+		let { products } = this.props;
+		
+		console.log(products);
 
 		let productList = products.map(
 			({
@@ -55,12 +57,12 @@ class PresentProductList extends Component {
 				title,
 				currentMoney,
 				targetMoney,
-				// numDirectSupports,
+				numDirectSupports,
 				// numIndirectSupports,
 				// remainingDays,
 				link,
 				postIntro,
-				numValidPurchases = 0,
+				// numValidPurchases = 0,
 				purchaseSuccess = false,
 			}, index) => (
 				<div className="present-project-list-item-container">
@@ -76,7 +78,7 @@ class PresentProductList extends Component {
 						<div className="present-project-list-item-caption">
 							<Link to={link}><h3 className="project-list-title">{title}</h3></Link>
 							<h5>{postIntro}</h5>
-							<div className="product-purchase-num"><p>{numValidPurchases}명</p>주문중</div>
+							<div className="product-purchase-num"><p>{numDirectSupports}명</p>주문중</div>
 						</div>
 					</div>
 				</div>
@@ -89,11 +91,9 @@ class PresentProductList extends Component {
 					{ productList.slice(0, this.state.count) }
 				</div>
 				<div className="present-more-project">
-					{
-						this.state.numProducts > 4 && this.state.numProducts > this.state.count
-							? <button className="present-more-button" onClick={this.expandList.bind(this)}> VIEW MORE</button>
-							: null
-					}
+					
+							<button className="present-more-button" onClick={this.expandList.bind(this)}> VIEW MORE</button>
+							 
 				</div>
 			</div>
 

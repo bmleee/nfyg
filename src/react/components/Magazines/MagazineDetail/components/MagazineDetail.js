@@ -1,11 +1,16 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router'
+import ScrollToTop from 'react-scroll-up';
 
 import {
 	MagazineDetailHeading,
 	MegazineDetailContents,
 	MagazineDetailRelatedContentsList
 } from './'
+
+const scrollStyle = {
+  cursor: 'pointer',
+}
 
 class MagazineDetail extends Component {
 
@@ -35,6 +40,10 @@ class MagazineDetail extends Component {
 					{ pre && <Link to={preLink}><button className="magazine-prev-button">PREV</button></Link> }
 					{ next && <Link to={nextLink}><button className="magazine-next-button">NEXT</button></Link> }
 				</div>
+				
+				<ScrollToTop showUnder={180} style={scrollStyle} duration={0} >
+						<button className="back-to-top" />
+					</ScrollToTop>
 
 				<MagazineDetailRelatedContentsList
 					relatedContents={relatedContents} />

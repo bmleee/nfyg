@@ -197,9 +197,10 @@ export default class ProjectDetailContainer extends Component {
 		let abstract = this.state.abstract
 
 		let meta = canUseDOM && abstract && {
-			title: abstract.shortTitle,
+			title: abstract.longTitle,
 			meta: {
 				'og:image': `${window.location.protocol}//${window.location.host}${abstract.imgSrc}`,
+				'og:description' : abstract.postIntro,
 			}
 		}
 

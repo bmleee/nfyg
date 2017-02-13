@@ -3,6 +3,8 @@ import ImageGallery from '../../react-image-gallery'; // https://www.npmjs.com/p
 
 import { Link } from 'react-router';
 
+import { suggestProject } from '~/src/react/api/AppAPI'
+
 import Modal from '~/src/react/components/react-awesome-modal';
 
 
@@ -26,6 +28,26 @@ class Headermenuabsolute extends Component {
         visible : false
     });
   }
+  
+  async onClickSuggest() {
+		
+		try {
+			let body = {
+				contact: document.getElementById('suggest-contact').value,
+				email: document.getElementById('suggest-email').value,
+				text: document.getElementById('suggest-text').value,
+				money: document.getElementById('suggest-money').value,
+				purpose: document.getElementById('suggest-purpose').value,
+				link: document.getElementById('suggest-link').value,
+			}
+
+			let r = await suggestProject(body)
+			console.log('suggestProject', r);
+		    appUtils.setFlash({title: '성공적으로 접수되었습니다. 검토 후 빠른 시일내에 답변드리겠습니다.', level: 'success', autoDismiss: 3})
+		} catch (e) {
+			console.error(e);
+		}
+	}
 
 	render() {
 
@@ -69,7 +91,7 @@ class Headermenuabsolute extends Component {
 						<Link to={`/signup`}>
 							<p className="header-menu-text-right">SIGN UP</p>
 						</Link>
-						)
+							)
 						}
 
 						{
@@ -81,34 +103,34 @@ class Headermenuabsolute extends Component {
 						{
 							isLoggedIn && (
 						<Modal className="project-suggest-modal" visible={this.state.visible} width="480" height="560px" effect="fadeInDown" onClickAway={() => this.closeModal()}>
-							<div className="project-modal-header">
-							<h3 className="project-modal-header-title">제안하기</h3>
-							<a className="project-modal-header-close-container"><button className="project-modal-header-close" onClick={() => this.closeModal()}/></a>
-							</div>
-							<div className="project-modal-body">
-							<p className="project-modal-body-small-title">연락처(필 수)
-								<input className="project-modal-body-input-text" type="text" />
-							</p>
-							<p className="project-modal-body-small-title">이메일
-								<input className="project-modal-body-input-text" type="text" />
-							</p>
-							<p className="project-modal-body-small-title">제안 내용(필 수)
-								<textarea className="project-modal-body-input-textarea" type="textarea"/>
-							</p>
-							<p className="project-modal-body-small-title">필요한 후원금(원)
-								<input className="project-modal-body-input-text" type="number" />
-							</p>
-							<p className="project-modal-body-small-title">후원금 용도
-								<textarea className="project-modal-body-input-textarea" type="textarea"/>
-							</p>
-							<p className="project-modal-body-small-title">관련 링크
-								<input className="project-modal-body-input-text" type="text"/>
-							</p>
-							</div>
-							<div className="project-modal-footer">
-							<a className="project-modal-header-save-container" onClick={() => this.closeModal()}><button type="submit" className="project-modal-header-save">보내기</button></a>
-							</div>
-						</Modal>
+									<div className="project-modal-header">
+										<h3 className="project-modal-header-title">제안하기</h3>
+										<a className="project-modal-header-close-container"><button className="project-modal-header-close" onClick={() => this.closeModal()}/></a>
+									</div>
+									<div className="project-modal-body">
+										<p className="project-modal-body-small-title">연락처(필 수)
+											<input className="project-modal-body-input-text" type="text" id="suggest-contact" />
+										</p>
+										<p className="project-modal-body-small-title">이메일
+											<input className="project-modal-body-input-text" type="text" id="suggest-email" />
+										</p>
+										<p className="project-modal-body-small-title">제안 내용(필 수)
+											<textarea className="project-modal-body-input-textarea" type="textarea" id="suggest-text" />
+										</p>
+										<p className="project-modal-body-small-title">필요한 후원금(원)
+											<input className="project-modal-body-input-text" type="number" id="suggest-money" />
+										</p>
+										<p className="project-modal-body-small-title">후원금 용도
+											<textarea className="project-modal-body-input-textarea" type="textarea" id="suggest-purpose" />
+										</p>
+										<p className="project-modal-body-small-title">관련 링크
+											<input className="project-modal-body-input-text" type="text" id="suggest-link" />
+										</p>
+									</div>
+									<div className="project-modal-footer">
+										<a className="project-modal-header-save-container" onClick={this.onClickSuggest}><button type="submit" className="project-modal-header-save" onClick={() => this.closeModal()}>보내기</button></a>
+									</div>
+								</Modal>
 						)
 						}
 

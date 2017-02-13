@@ -32,7 +32,7 @@ const MagazineSchema = new Schema({
 		// shortTitle: {type: String, required: true},
 		imgSrc: {type: String, required: true},
 		description: {type: String, required: true},
-		category: {type: String, required: true, validate: [
+		category: {type: String, required: false, validate: [
 			function (category) {
 				return categories.includes(category)
 			}, `magazine category is not valid category. must be one of ${categories}`
@@ -46,8 +46,8 @@ const MagazineSchema = new Schema({
 	},
 
 	creator: {
-		creatorName: {type: String, required: true},
-		creatorImgSrc: {type: String, required: true},
+		creatorName: {type: String, required: false},
+		creatorImgSrc: {type: String, required: false},
 		// creatorLocation: {type: String, required: true},
 		// creatorDescription: {type: String, required: true},
 	},
@@ -59,9 +59,9 @@ const MagazineSchema = new Schema({
 
 	// Contents
 	relatedContents: [{
-		title: {type: String, required: true},
-		imgSrc: {type: String, required: true},
-		link: {type: String, required: true},
+		title: {type: String, required: false},
+		imgSrc: {type: String, required: false},
+		link: {type: String, required: false},
 	}]
 
 });
@@ -120,11 +120,6 @@ MagazineSchema.methods.toFormat = async function (type) {
 					},
 					imgSrc: this.abstract.imgSrc,
 					descriptions: this.abstract.description.split('\n'),
-					descriptions: [ // TODO: MagazineEditor should upload this field
-						"관객과 작품으로 소통하기 위해서",
-		        "누구나 알고 있는 자연을 작품의 소재로 선택하고,",
-		        "나만의 색과 기법을 통해 작품에 감성을 담아낸다."
-					],
 					content: this.content.html || '',
 				},
 				relatedContents: this.relatedContents || [],

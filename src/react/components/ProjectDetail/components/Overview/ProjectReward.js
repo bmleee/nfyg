@@ -38,17 +38,16 @@ class ProjectReward extends Component {
 			projectName,
 		} = this.props;
 
-		if (rewards.length === 0) {
-			rewards = [{
-				title: '',
-				description: '',
-				imgSrc: '',
-				maxPurchaseVolume: 0,
-				thresholdMoney: 0,
-			}]
-		}
 
 		console.log('ProjectReward.rewards', rewards);
+		
+		console.log(rewards.length);
+		
+		let {
+			isLoggedIn,
+			displayName,
+			image,
+		} = appUtils.getUser()
 
 		const items = rewards.map( ({title, thresholdMoney, description, imgSrc = '/assets/images/slider-tumb2.jpg', maxPurchaseVolume}, index) => {
 			title = title.split('\n').map((t, index) => (<span key={index}>{t}<br/></span>));
@@ -69,13 +68,30 @@ class ProjectReward extends Component {
 		})
 
 		return (
+			rewards.length === 0
+			?
+			<div className="project-detail-reward">
+				
+			</div>
+			:
 			<div className="project-detail-reward">
 				<Slider {...sliderSettings} >
 				{ items }
 				</Slider>
+				{
+							isLoggedIn && (
 				<Link to={`/projects/${projectName}/purchase`}>
 					<button className="move-purchase-page">리워드 구매로 후원하기</button>
 				</Link>
+						)
+				}
+				{
+							!isLoggedIn && (
+				<Link to={`/login`}>
+					<button className="move-purchase-page">리워드 구매로 후원하기</button>
+				</Link>
+						)
+				}
 			</div>
 		)
 	}

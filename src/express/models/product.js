@@ -21,7 +21,7 @@ const ProductSchema = new Schema({
 		longTitle: {type: String, required: true},
 		shortTitle: {type: String, required: true},
 		imgSrc: {type: String, required: true},
-		category: {type: String, required: true}, // refers to react/constants/selectOptions
+		category: {type: String, required: false}, // refers to react/constants/selectOptions
 		productName: {type: String, required: true, unique: true, validate: [
 			function(productName) {
 				return !restrictedNames.includes(productName);
@@ -34,10 +34,10 @@ const ProductSchema = new Schema({
 	},
 
 	creator: {
-		creatorName: {type: String, required: true},
-		creatorImgSrc: {type: String, required: true},
-		creatorLocation: {type: String, required: true},
-		creatorDescription: {type: String, required: true},
+		creatorName: {type: String, required: false},
+		creatorImgSrc: {type: String, required: false},
+		creatorLocation: {type: String, required: false},
+		creatorDescription: {type: String, required: false},
 	},
 
 	authorizedUsers: [{ type: Schema.Types.ObjectId, ref: 'User' }],
@@ -49,23 +49,23 @@ const ProductSchema = new Schema({
 		dateFrom: {type: String, required: true}, // 작성 시작 일
 		dateTo: {type: String, required: true}, // 바로 다음날
 		shippingFee: {type: Number, default: 0},
-		minPurchaseVolume: {type: Number, required: true}, // 최소 주문 수량
-		maxPurchaseVolume: {type: Number, required: true}, // 최대 주문 수량
+		minPurchaseVolume: {type: Number, required: false}, // 최소 주문 수량
+		maxPurchaseVolume: {type: Number, required: false}, // 최대 주문 수량
 		rewards: [
 			{
 				title: {type: String, required: true},
 				description: {type: String, required: true},
 				imgSrc: {type: String,},
-				isDirectSupport: {type: Boolean, required: true},
+				isDirectSupport: {type: Boolean, required: false},
 				thresholdMoney: {type: Number, required: true},
-				shippingDay: {type: String, required: true},
-				maxPurchaseVolume: {type: Number, required: true},
+				shippingDay: {type: String, required: false},
+				maxPurchaseVolume: {type: Number, required: false},
 			}
 		],
 		faqs: [
 			{
-				question: {type: String, required: true},
-				answer: {type: String, required: true},
+				question: {type: String, required: false},
+				answer: {type: String, required: false},
 			}
 		]
 	},
@@ -78,8 +78,8 @@ const ProductSchema = new Schema({
 			html: {type: String, required: true},
 		},
 		part2: {
-			raw: {type: String, required: true},
-			html: {type: String, required: true},
+			raw: {type: String, required: false},
+			html: {type: String, required: false},
 		},
 	},
 
@@ -98,9 +98,9 @@ const ProductSchema = new Schema({
 
 	// Contents
 	relatedContents: [{
-		title: {type: String, required: true},
-		imgSrc: {type: String, required: true},
-		link: {type: String, required: true},
+		title: {type: String, required: false},
+		imgSrc: {type: String, required: false},
+		link: {type: String, required: false},
 	}]
 });
 
@@ -116,6 +116,11 @@ ProductSchema.set('toJSON', {
 	getters: true,
 	virtuals: true
 });
+
+ProductSchema.pre('save', function (next) {
+	this.abstract.updated_at = Date.now()
+	next()
+})
 
 // find helper
 ProductSchema.statics.findOneByName = function (name) {
@@ -183,7 +188,7 @@ ProductSchema.methods.toFormat = async function (type, ...args) {
 							targetMoney: this.funding.targetMoney,
 							currentMoney: this.funding.currentMoney,
 							numDirectSupports: await PurchaseModel.countValidPurchase({ product: this }),
-							remainingDays: ( new Date(this.funding.dateTo).getTime() - new Date(this.funding.dateFrom).getTime() ) / 1000 / 60 / 60 / 24,
+							remainingDays: ( new Date(this.funding.dateTo).getTime() - new Date().getTime() ) / 1000 / 60 / 60 / 24,
 							link: `/products/${this.abstract.productName}`,
 							postIntro: this.abstract.postIntro,
 							numValidPurchases,

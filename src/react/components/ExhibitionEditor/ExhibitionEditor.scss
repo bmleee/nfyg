@@ -160,6 +160,15 @@
 	background : transparent !important;
 	min-height : 500px;
 }
+.abstract-container {
+	.rdw-editor-main {
+		height: 360px;
+		overflow : hidden;
+	}
+	.DraftEditor-root {
+		overflow: auto;
+	}
+}
 .form-wrapper {
 	padding : 10px 10px;
 	min-height : 82px;
@@ -204,7 +213,7 @@
 	border : 1px solid #eee;
 	img {
 		max-width : 100%;
-		max-height : 400px;
+		max-height : 100%;
 		height : auto;
 		width : auto;
 		margin : 15px 0px;
@@ -251,12 +260,14 @@
 	}
 	input[type=file] {
 		width : 49.9999%;
-		height : 270px;
-		padding : 120px 80px;
+		height : 40px;
+		border : none;
+		outline : none;
+		margin-bottom : 0px;
+		font-weight : 600;
+		color : #333;
 		@media (max-width: 500px) {
 			width : 100% !important;
-			height : 200px;
-			padding : 80px 70px;
 		}
 	}
 	div.Select.Select--single.is-searchable.has-value {
@@ -336,7 +347,7 @@
 	text-align : center;
 	color : #888;
 	.dropzone-text {
-		line-height : 36px;
+		line-height : 46px;
 		font-size : 14px;
 		font-weight : 600;
 	}

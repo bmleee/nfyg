@@ -566,10 +566,10 @@ export default class ProductEditor extends Component {
       }
 
       console.log(r);
-      appUtils.etFlash({title: '미술소품이 등록되었습니다.', message: JSON.stringify(r, undefined, 4), level: 'success', autoDismiss: 3})
+      appUtils.setFlash({title: '미술소품이 등록되었습니다.', level: 'success', autoDismiss: 3})
     } catch (e) { // error from axios.request
       console.log(e);
-      appUtils.setFlash({title: '등록에 실패하였습니다.', message: JSON.stringify(e.response, undefined, 4), level: 'error', autoDismiss: 3, dismissible: true})
+      appUtils.setFlash({title: '등록에 실패하였습니다.', level: 'error', autoDismiss: 3, dismissible: true})
     }
 	}
 }
