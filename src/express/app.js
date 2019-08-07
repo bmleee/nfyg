@@ -2,7 +2,7 @@ import express from 'express'
 import session from 'express-session';
 import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
-// import flash from 'connect-flash'
+import flash from 'connect-flash'
 
 import logger from 'morgan'
 import serialize from 'serialize-javascript'
@@ -20,8 +20,12 @@ import router from './controllers'; // express router
 
 import { EXPRESS_PORT, REDIS } from '../../env';
 
+import nocache from 'node-nocache';
+
 const app = express();
 const publicPath = path.join(__dirname, './../public');
+
+app.use(express.static(__dirname + './../public'));
 
 app.set('views', path.join(publicPath, '../src/express/'));
 app.set('view engine', 'ejs');
@@ -29,23 +33,27 @@ app.set('view engine', 'ejs');
 app.use(winstonLogger);
 // app.use(logger('dev'));
 app.use(cookieParser())
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({limit: '100mb'}));
+app.use(bodyParser.urlencoded({limit: '100mb', extended: true}));
+
+app.use(nocache);
 
 const RedisStore = require('connect-redis')(session);
 app.use(session({
 	store: new RedisStore({
-		host:	REDIS.HOST,
+		host: REDIS.HOST,
 		port: REDIS.PORT,
 		pass: REDIS.PASS,
 	}),
 	saveUninitialized: true,
-	resave: true,
+	resave: false,
 	secret: `2xtReam.py-H@rd-2-R2ad`,
-
+	key: `2xtFeam.py-H@rd-2-5wxvq`,
+	cookie: { maxAge: 1000 * 60 * 60 * 24 * 15 },
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash());
 
 // use passport middlewares
 import applyPassport from './middlewares/passport'

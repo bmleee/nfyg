@@ -9,12 +9,14 @@ export default class FundingContainer extends Component {
 		targetMoney: 0,
 		dateFrom: new Date().toISOString().substring(0, 10),     							// 작성 시작 일
 		dateTo: new Date(Date.now() + 1000 * 60 * 60 * 24).toISOString().substring(0, 10),	// 바로 다음날
+		etcrewardActive: false,
+		mustrewardActive: true,
 		reward: {
 			rewards: [],
 			newReward: { // temporary state to insert...
 				title: '',
 				description: '',
-				isDirectSupport: false,
+				isDirectSupport: true,
 				thresholdMoney: 0
 			}
 		}         // { title, description, isDirectSupport: T/F, threshold: 직접 후원 금액 또는 좋아요, 리공유 수, 전달일 }
@@ -28,6 +30,8 @@ export default class FundingContainer extends Component {
 			_onTargetMoneySubmit={this._onTargetMoneySubmit}
 			_onDateToSubmit={this._onDateToSubmit}
 			_onRewardSubmit={this._onRewardSubmit}
+			_onEtcrewardActiveSubmit={this._onEtcrewardActiveSubmit}
+			_onMustrewardActiveSubmit={this._onMustrewardActiveSubmit}
 			rewardHandlers={this.rewardHandlers}
 			/>
 		)
@@ -35,6 +39,8 @@ export default class FundingContainer extends Component {
 
 	_onTargetMoneySubmit = (targetMoney) => this.setState({targetMoney})
 	_onDateToSubmit = (dateTo) => this.setState({dateTo})
+	_onEtcrewardActiveSubmit = (etcrewardActive) => this.setState({etcrewardActive})
+	_onMustrewardActiveSubmit = (mustrewardActive) => this.setState({mustrewardActive})
 	_onRewardSubmit = ({newReward}) => {
 		const {
 			title,

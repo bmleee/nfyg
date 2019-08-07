@@ -1,9 +1,23 @@
 <html>
+	<link rel="stylesheet" type="text/css" href="style.css"/>
 	<head>
-		<title>새로운 소식</title>
+		<title>[7Pictures] <%= shortTitle %> - 새로운 소식</title>
 	</head>
 	<body>
-		<h3><%= projectName %>에 새로운 소식이 등록되었습니다.</h3>
-		<a href="http://7pictures.kr:8080/projects/<%= projectName %>"><button>바로가기</button</button></a>
+		<div class="mail-body">
+			<div class="mail-logo-body">
+				<img class="mail-logo" src="https://netflix-salon.co.kr/assets/images/7pictures_mail.jpg" > 
+			</div>
+			<div class="mail-content-body">
+				<div class="mail-content-title">[새로운 소식]</div>
+				<div class="mail-content-text">
+					<%= shortTitle %> 프로젝트에 새로운 소식이 등록되었습니다.
+				</div>
+				<div class="mail-content-empty"></div>
+				<div class="mail-content-text">
+					소식제목 : <a href="https://netflix-salon.co.kr/<%= p_alter %>/<%= projectName %>/post"> <%= postTitle %> </a>
+				</div>
+			</div>
+		</div>
 	</body>
 </html>

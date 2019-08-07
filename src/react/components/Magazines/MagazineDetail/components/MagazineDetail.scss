@@ -37,15 +37,58 @@
     font-size : 13px;
 }
 .magazine-prev-button:hover, .magazine-next-button:hover {
-    border : 1px solid #150C8B;
-    color : #150C8B;
+    border : 1px solid #6662ff;
+    color : #6662ff;
+}
+.magazine_pre_hover_title, .magazine_next_hover_title {
+    display: none;
+    color: #6662ff;
+    font-size: 13px;
+    text-align: center;
+    padding: 5px 10px;
+    border: 1px solid #6662ff;
+    height: 40px;
+    line-height: 28px;
+    max-width: 300px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-wrap: normal;
+    overflow: hidden;
+    @media(max-width : 600px) {
+            max-width: 150px;
+            @media(max-width : 400px) {
+                display : none;
+            }
+    }
+}
+.magazine_pre_hover_title {
+    margin-left: 5px;
+    vertical-align: bottom;
+}
+.magazine_next_hover_title {
+    float: right;
+    margin-right: 5px;
+}
+.magazine-prev-link:hover, .magazine-next-link:hover {
+    .magazine_pre_hover_title, .magazine_next_hover_title {
+        display : inline-block;
+        @media(max-width : 400px) {
+                display : none;
+        }
+    }
+    .magazine-prev-button, .magazine-next-button {
+    border : 1px solid #6662ff;
+    color : #6662ff;
+    }
 }
 .magazine-detail-contents {
     width : 800px;
     margin : 0px auto 60px auto;
-    min-height : 500px;
+    min-height : 300px;
     img {
-        margin : 10px 0px;
+        display : block;
+		margin : 10px auto 0px auto;
+		max-width : 100% !important;
     }
 }
 .magazine-detail-related-contents-list {

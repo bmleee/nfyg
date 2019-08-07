@@ -14,19 +14,28 @@ const RelatedContentWrapper = ({value, handlers}) => {
 	} = handlers
 
 	let items = value && value.contents && value.contents.length > 0
-		? value.contents.map( ({
-			title,
-			imgSrc,
-			link
-		}, index) => (
-			<div className="editor-item-detail-wrapper">
-				<span className="item-deatail-small-title-saved">제 목 : {title}</span>
-				<span className="item-deatail-small-title-saved">링 크 : {link}</span>
-				<img src={imgSrc} alt=""/>
-				<button className="item-deatail-delete" onClick={() => deleteContent(index)}>삭제하기</button>
-			</div>
+		? value.contents.map(({
+				title,
+				imgSrc,
+				link,
+				infoBackground = { 
+					backgroundImage: `url(${imgSrc})`,
+					backgroundSize: 'cover',
+					backgroundPosition: 'center center',
+					backgroundRepeat: 'no-repeat' }
+			}, index) => (
+				<div className="editor-related-item">
+					<a href={link} target="_blank">
+						<div className="editor-related-item-image" style={infoBackground}>
+							<span className="editor-related-item-title">{title}</span>
+						</div>
+					</a>
+					<button className="editor-related-item-delete" onClick={() => deleteContent(index)}>
+						삭제하기
+					</button>
+				</div>
 		) )
-		: <span></span>
+		: <span className="form-wrapper-span"></span>
 
 	return (
 		<div className="recommends-wrapper-container">
@@ -35,7 +44,7 @@ const RelatedContentWrapper = ({value, handlers}) => {
 	)
 }
 const RelatedContentForm = ({value, handlers}) => {
-	console.log('handlers', handlers)
+	// console.log('handlers', handlers)
 
 	const {
 		title,
@@ -53,11 +62,11 @@ const RelatedContentForm = ({value, handlers}) => {
 		<div className="recommends-form-container">
 			<div>
 				<span className="item-deatail-small-title">제목</span>
-				<input type="text" value={title} onChange={_onTitle}/>
+				<input className="editor_input" type="text" value={title} onChange={_onTitle}/>
 			</div>
 			<div>
-				<span className="item-deatail-small-title">링크</span>
-				<input type="text" value={link} onChange={_onLink}/>
+				<span className="item-deatail-small-title">링크(https 또는 http로 시작하는 주소를 입력해주세요.)</span>
+				<input className="editor_input" type="text" value={link} onChange={_onLink}/>
 			</div>
 			<div>
 				<span className="item-deatail-small-title">이미지</span>
@@ -88,7 +97,7 @@ const Recommend = ({
 				Wrapper={RelatedContentWrapper}
 				Form={RelatedContentForm}
 				className ="magazine-editor-detail"
-				classNameopen ="editor-open-container"
+				classNameopen ="editor-open-container-middle"
 			/>
 		</div>
 	)

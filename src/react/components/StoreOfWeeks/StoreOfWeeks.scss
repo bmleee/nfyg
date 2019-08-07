@@ -1,0 +1,30 @@
+.store-of-weeks-body {
+	width : 900px;
+	@media(max-width : 991px) {
+		width : 95%;
+		@media(max-width : 500px) {
+			width : 100%;
+		}
+	}
+}
+.store-of-weeks-img {
+	
+}
+
+.store-of-weeks-link-padding {
+	text-align : center;
+	margin-bottom : 20px;
+}
+.store-of-weeks-link {
+	color: #6662ff;
+    display: inline-block;
+    border-bottom: 1px solid #6662ff;
+    font-size: 18px;
+    font-family: NanumSquare;
+    padding-bottom: 2px;
+}
+.store-of-weeks-link:after {
+	font-family : FontAwesome;
+	content : "\f105";
+	margin-left : 5px;
+}

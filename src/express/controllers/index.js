@@ -10,6 +10,8 @@ import mail from './mail'
 import payment from './payment'
 import iamport from './iamport'
 
+import flash from 'connect-flash'
+
 const router = express.Router()
 
 router.use('/test-api', testAPI)

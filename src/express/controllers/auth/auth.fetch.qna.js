@@ -28,6 +28,45 @@ import * as ac from '../../lib/auth-check'
 
 const router = express.Router();
 
+router.post('/contact', isLoggedIn, async (req, res) => {
+  
+		let user = req.user
+		let {
+			title,
+			text
+		} = req.body
+    
+    let body = {
+      author: {
+        name: user.display_name,
+        iconSrc: user.image,
+        user: user._id
+      },
+      abstract: {
+        title : title + ' 문의',
+        likes: [],
+        created_at: Date.now()
+      },
+      text,
+      comments: [],
+      user,
+      user_info: user
+    }
+    
+    try {
+      let qna = await QnAModel.create(body)
+      console.log('qnaqnaqna', qna)
+      res.json({ response: qna.toFormat('profile')})
+    }
+    catch (error) {
+			console.error('contact qna error!', error);
+			res.state(400).json({
+				error
+			})
+		}
+		
+})
+
 router.post('/:_id/comment', isLoggedIn, async (req, res) => {
   try {
     let user = req.user
@@ -73,6 +112,27 @@ router.delete('/:_id/comment/:comment_index', isLoggedIn, async (req, res) => {
     if (!ac.canEditComment(user, qna.product || qna.project, comment)) throw Error(`Can't delete unauthorized post comment`)
 
     qna.comments.pop(req.params.comment_index)
+
+    let r = await qna.save()
+
+    res.json({ response: r })
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ error: e.message })
+  }
+})
+
+router.delete('/:_id/contactcomment/:contact_comment_index', isLoggedIn, async (req, res) => {
+  try {
+    let user = req.user
+
+    let qna = await QnAModel.findById(req.params._id)
+    if (!qna) throw Error('No post found')
+
+    let comment = qna.comments[req.params.contact_comment_index]
+    if (!ac.canEditContactComment(user, comment)) throw Error(`Can't delete unauthorized post comment`)
+
+    qna.comments.pop(req.params.contact_comment_index)
 
     let r = await qna.save()
 

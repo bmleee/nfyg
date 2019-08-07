@@ -31,7 +31,7 @@ const sliderSettings = {
 class ProductReward extends Component {
 
 	render() {
-		console.log(this)
+		// console.log(this)
 		let {
 			rewards,
 			productName,
@@ -47,7 +47,7 @@ class ProductReward extends Component {
 			}]
 		}
 
-		console.log('ProductReward.rewards', rewards);
+		// console.log('ProductReward.rewards', rewards);
 
 		const items = rewards.map( ({title, thresholdMoney, description, imgSrc = '/assets/images/slider-tumb2.jpg', maxPurchaseVolume}, index) => {
 			title = title.split('\n').map((t, index) => (<span key={index}>{t}<br/></span>));

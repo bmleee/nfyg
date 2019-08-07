@@ -28,10 +28,9 @@
 		display: flex;
 		flex-flow: column;
 		padding-bottom : 30px;
-		border-bottom : 2px solid #eee;
 
 		& > div {
-			display: flex;
+			display: block;
 			flex-flow: row;
 
 			& > div {
@@ -61,12 +60,13 @@
     	}
     	.Collapsible__trigger.is-closed, .Collapsible__trigger.is-open {
     		border : none;
-    		color : #150C8B;
+    		color : #6662ff;
     		padding : 0px;
     		background : transparent;
     		display : inline-block;
 			font-weight : 600;
 			line-height : 27px;
+			min-height : auto;
 			height : 38px;
 			cursor : pointer;
     	}
@@ -99,6 +99,7 @@
 		border-radius : 100px;
 		border : 1px solid #ddd;
 		margin-right : 20px;
+		vertical-align : top;
 		@media (max-width : 500px) {
 				width : 50px !important;
 				height : 50px !important;
@@ -122,14 +123,14 @@
 		padding : 8px;
 		font-size : 16px;
 		@media (max-width : 991px) {
-				width : 100%;
+				width : calc(100% - 100px);
 			@media (max-width : 500px) {
-				width : 85%;
+				width : calc(100% - 63px);
 			}	
 			}
 	}
 	.qna-form-textarea:focus {
-		border : 1px solid #150C8B;
+		border : 1px solid #6662ff;
 		outline : none;
 	}
 	.qna-form-submit-container {
@@ -139,37 +140,38 @@
 		display :flex !important;
 		}
 		.qna-form-submit {
-			margin-top : 8px;
+			margin-top : 4px;
 			width : 700px;
 			height : 40px;
 			border : none;
 			outline : none;
 			border-radius : 3px;
-			background : #150C8B;
+			background : #6662ff;
 			color : #fff;
 			font-size : 16px;
 			font-weight : 600;
+			font-family : NanumSquare;
 			@media (max-width : 991px) {
-				width : 100%;
+				width : calc(100% - 100px);
 				height : 38px;
 				font-size : 15px;
 			@media (max-width : 500px) {
-				width : 100%;
+				width : calc(100% - 63px);
 			}	
 			}
 		}
 		.qna-form-submit:hover {
-			background : #0d0669;
+			background : #5346ff;
 		}
 	}
 
 
 .qna-form-submit-empty {
 			@media (max-width : 991px) {
-				width : 120px;
+				width : 100px;
 				display : inline-block;
 			@media (max-width : 500px) {
-				width : 80px;
+				width : 63px;
 			}	
 			}
 }
@@ -192,4 +194,40 @@
     @media (max-width : 500px) {
 				font-size: 18px;
 	}	
+}
+
+.project-creator {
+	padding : 20px 50px;
+	border : 1px solid #f1f1f1;
+	text-align : center;
+	margin-bottom : 20px;
+	@media (max-width : 500px) {
+		padding : 20px;
+	}
+}
+.project-creator-img-container {
+	
+}
+.project-creator-img {
+	width : 50px;
+	height : 50px;
+	border-radius : 100px;
+	border : 1px solid #f1f1f1;
+}
+.project-creator-info-container {
+	margin-top : 10px;
+}
+.project-creator-name {
+	font-size : 16px;
+	font-weight : 600;
+	color : #6662ff;
+	margin-bottom : 2px;
+}
+.project-creator-description {
+	font-size : 12px;
+	color : #444;
+}
+.project-creator-email {
+	font-size : 10px;
+	color : #777;
 }

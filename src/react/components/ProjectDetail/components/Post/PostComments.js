@@ -33,7 +33,7 @@ class PostComments extends Component {
 			this.props._newCommentOnPost(post_id, response)
 			document.querySelector(`#post-${post_id}-text`).value = ''
 		} catch (e) {
-			console.error(e);
+			// console.error(e);
 		}
 	}
 
@@ -41,10 +41,10 @@ class PostComments extends Component {
 		return async () => {
 			try {
 				const r = await deleteComment({ post_id: this.props.post_id, comment_index: comment_index})
-				console.log(r);
+				// console.log(r);
 				this.props._deleteCommentOnPost(this.props.post_id, comment_index)
 			} catch (e) {
-				console.error(e);
+				// console.error(e);
 			}
 
 		}
@@ -94,7 +94,7 @@ class PostComments extends Component {
 						<p className="sharing-name">{name}</p>
 						<button className="comment-delete-button" onClick={this._onClickDeleteComment(index)}/>
 					</span>
-					<span>{newLinedString(text)}</span>
+					<span>{text}</span>
 					</p>
 				</div>
 			</div>

@@ -4,67 +4,67 @@ import FormWrapper from '~/src/react/components/FormWrapper/FormWrapper'
 import { VALUE_TYPE } from '~/src/react/components/FormWrapper/constants'
 
 const SponsorNameWrapper = ({value}) => value
-	? <span>{value}</span>
-	: <span></span>
+	? <span className="form-wrapper-span">{value}</span>
+	: <span className="form-wrapper-span"></span>
 
 const SponsorNameForm = ({value, onChange}) =>
-	<input type="text" value={value} onChange={onChange}/>
+	<input className="editor_input" type="text" value={value} onChange={onChange}/>
 
 const DisplayNameWrapper = ({value}) => value
-	? <span>{value}</span>
-	: <span></span>
+	? <span className="form-wrapper-span">{value}</span>
+	: <span className="form-wrapper-span"></span>
 
 const DisplayNameForm = ({value, onChange}) =>
-	<input type="text" value={value} onChange={onChange}/>
+	<input className="editor_input" type="text" value={value} onChange={onChange}/>
 
 const DescriptionWrapper = ({value}) => value
-	? <span>{value}</span>
-	: <span></span>
+	? <span className="form-wrapper-span">{value}</span>
+	: <span className="form-wrapper-span"></span>
 
 const DescriptionForm = ({value, onChange}) =>
-	<input type="text" value={value} onChange={onChange}/>
+	<input className="editor_input" type="text" value={value} onChange={onChange}/>
 
 const ImgSrcWrapper = ({value}) => value
 	? <img src={value} alt=""/>
-	: <span></span>
+	: <span className="form-wrapper-span"></span>
 
 const ImgSrcForm = ({value, onChange}) =>
-	<img src={value} alt="스폰서 이미지를 입력해 주세요"/>
+	<img src={value}/>
 
 const LogoSrcWrapper = ({value}) => value
 	? <img src={value} alt=""/>
-	: <span></span>
+	: <span className="form-wrapper-span"></span>
 
 const LogoSrcForm = ({value, onChange}) =>
-	<img src={value} alt="스폰서 로고 이미지를 입력해 주세요"/>
+	<img src={value}/>
 
 const MoneyWrapper = ({value}) => value
-	? <span>{value.toLocaleString()}원</span>
-	: <span></span>
+	? <span className="form-wrapper-span">{value.toLocaleString()}원</span>
+	: <span className="form-wrapper-span"></span>
 
 const MoneyForm = ({value, onChange}) =>
-	<input type="number" value={Number(value)} onChange={onChange} step="1000 "/>
+	<input className="editor_input" type="number" value={Number(value)} onChange={onChange} step="1000 "/>
 
 const FacebookWrapper = ({value}) => value
-	? <span>{value}</span>
-	: <span></span>
+	? <span className="form-wrapper-span">{value}</span>
+	: <span className="form-wrapper-span"></span>
 
 const FacebookForm = ({value, onChange}) =>
-	<input type="text" value={value} onChange={onChange}/>
+	<input className="editor_input" type="text" value={value} onChange={onChange}/>
 
 const HomepageWrapper = ({value}) => value
-	? <span>{value}</span>
-	: <span></span>
+	? <span className="form-wrapper-span">{value}</span>
+	: <span className="form-wrapper-span"></span>
 
 const HomepageForm = ({value, onChange}) =>
-	<input type="text" value={value} onChange={onChange}/>
+	<input className="editor_input" type="text" value={value} onChange={onChange}/>
 
 const BlogWrapper = ({value}) => value
-	? <span>{value}</span>
-	: <span></span>
+	? <span className="form-wrapper-span">{value}</span>
+	: <span className="form-wrapper-span"></span>
 
 const BlogForm = ({value, onChange}) =>
-	<input type="text" value={value} onChange={onChange}/>
+	<input className="editor_input" type="text" value={value} onChange={onChange}/>
 
 const Body = ({
 	sponsor: {
@@ -110,17 +110,18 @@ const Body = ({
 				title="스폰서 영문 이름"
 				valueType={VALUE_TYPE.TEXT}
 				initialValue={sponsorName}
-				submitCaption="주소로 사용할 영문 이름을 입력하세요"
+				submitCaption="링크주소를 입력하세요"
 				onSubmit={_onSponsorName}
 				Wrapper={SponsorNameWrapper}
 				Form={SponsorNameForm}
+				classNameopen ="editor-open-container"
 			/>
 
 			<FormWrapper
 				title="스폰서 설명"
 				valueType={VALUE_TYPE.TEXT}
 				initialValue={description}
-				submitCaption={'전시 제목을 입력하세요'}
+				submitCaption={'스폰서 설명을 입력하세요'}
 				submitCaptionsub={'입력하기'}
 				onSubmit={_onDescription}
 				Wrapper={DescriptionWrapper}

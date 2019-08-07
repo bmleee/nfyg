@@ -14,12 +14,18 @@ const Footer = () => {
 	return (
 	 	<div className="footer">
 			{
-				document.URL.match(/(projects)|(products)|(editor)|(edit)/) 
+				document.URL.match(/(purchase)|(summary)/)
+				?  <Mainfooter/>
+				:
+					document.URL.match(/(projects)|(products)|(sticker)|(blind-poster)/) 
 					? <Subfooter/>
 					: <Mainfooter/>
 			}
 			{
-				document.URL.match(/(projects)|(products)|(editor)|(edit)/) 
+				document.URL.match(/(purchase)|(summary)/)
+				?  <Mobilefooter/>
+				:
+					document.URL.match(/(projects)|(products)|(sticker)|(blind-poster)/) 
 					? <Mobilefootersub/>
 					: <Mobilefooter/>
 			}

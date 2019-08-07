@@ -1,29 +1,32 @@
 <html>
+	<link rel="stylesheet" type="text/css" href="style.css"/>
 	<head>
-		<title>결제 실패</title>
+		<title>[7Pictures] 결제 예약 취소 : <%= result_description %> </title>
 	</head>
 	<body>
-		<h3>결제 실패</h3>
-
-		<div>
-			주소: <%= JSON.stringify(address) %>
+		<div class="mail-body">
+			<div class="mail-logo-body">
+				<img class="mail-logo" src="https://netflix-salon.co.kr/assets/images/7pictures_mail.jpg" > 
+			</div>
+			<div class="mail-content-body">
+				<div class="mail-content-title">[결제 예약 취소]</div>
+				<div class="mail-content-text">안녕하세요, <%= user.display_name %>님!</div>
+				<div class="mail-content-text">7Pictures 프로젝트 후원에 취소하셨네요ㅜ^ㅜ</div>
+				<div class="mail-content-empty"></div>
+				<h3>취소 내역</h3>
+				<div class="mail-content-text">
+					제 목 : <a href="<%= pNameLink %>"> <%= pTitle %> </a>
+				</div>
+				<div class="mail-content-text">
+					품 명 : <%= result_description %>
+				</div>
+				<div class="mail-content-text">
+					금 액 : <%= amount %>원
+				</div>
+				<div class="mail-content-empty"></div>
+				<div class="mail-content-text">아쉽지만 다른 프로젝트 후원에서 뵙겠습니다.</div>
+			</div>
 		</div>
-
-		<div>
-			리워드: <%= JSON.stringify(reward) %>
-		</div>
-
-		<div>
-			구매 수량: <%= purchaseAmount %>
-		</div>
-
-		<div>
-			배송비: <%= shippingFee %>
-		</div>
-
-		<div>
-			결제 금액: <%= amount %>
-		</div>
-
+		
 	</body>
 </html>

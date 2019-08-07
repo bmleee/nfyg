@@ -8,8 +8,8 @@
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
-    line-height: 1.2em;
-    height: 3.6em;
+    line-height: 1.4em;
+    height: 4.2em;
 }
 .magazines-heading-category-item {
 	display : inline-block;
@@ -25,22 +25,31 @@
 	position: relative;
 	padding-top :60%;
 	overflow : hidden;
+	border : 1px solid #eee;
+	border-bottom : 0px;
+	border-radius : 7px 7px 0px 0px;
 }
 .magazine-list-item-info {
-	border : 1px solid #ddd;
-	padding : 10px 15px;
+	border : 1px solid #eee;
+	padding : 10px 10px 15px 10px;
+	border-radius : 0px 0px 7px 7px;
+	h4 {
+		margin-top : 3px;
+		font-size : 17px;
+		line-height: 1.4em;
+	}
 }
 .magazine-menu-list-item {
 	width : 33.33333%;
 	height: auto;
     vertical-align: top;
     display: inline-block;
-    padding :5px;
+    padding : 8px;
 }
 .magazines-list {
 	width : 1192px;
 	margin : 0px auto;
-	padding : 20px 0px 20px 0px;
+	padding : 0px 0px 20px 0px;
 	@media (max-width: 1192px) {
             width : 100%;
             padding : 20px 40px 20px 40px;
@@ -56,10 +65,10 @@
 	background:none;
 	border : none;
 	outline : none;
-	color : #150C8B;
+	color : #6662ff;
 }
 .magazine-category-button:hover {
-	color : #150C8B;
+	color : #6662ff;
 }
 .magazines {
 	display: flex;
@@ -73,6 +82,10 @@
             width : 100%;
             padding : 15px 50px 20px 50px;
         }
+    h2 {
+    	font-family : "NanumSquare";
+    	// font-weight : 600;
+    }
 }
 .magazines-heading-category-container {
 	width : 1172px;
@@ -115,7 +128,7 @@
 		color : #555;
 	}
 	.magazine-category-button:focus {
-		color : #150C8B;
+		color : #6662ff;
 	}
 	.magazines-heading-category-item:nth-child(1), .magazines-heading-category-item:nth-child(2), .magazines-heading-category-item:nth-child(3) {
 		margin-bottom : 12px;
@@ -163,8 +176,9 @@
 	    display: -webkit-box;
 	    -webkit-line-clamp: 2;
 	    -webkit-box-orient: vertical;
-	    line-height: 1.2em;
-	    height: 2.4em;
+	    line-height: 1.3em;
+	    height: 2.6em;
+	    margin-top : 5px;
     }
     img {
         margin-right : 2px;

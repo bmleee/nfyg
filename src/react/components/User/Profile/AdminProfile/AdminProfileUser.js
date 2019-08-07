@@ -7,7 +7,7 @@ export default class AdminProfileMain extends Component {
 
 	async componentDidMount() {
 		const r = await fetchUserAndData()
-		console.log('fetchUserAndData.r', r);
+		// console.log('fetchUserAndData.r', r);
 		// TODO: let r.user, r.data is authenticated!
 	}
 

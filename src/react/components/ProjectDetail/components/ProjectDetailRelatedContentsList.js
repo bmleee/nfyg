@@ -29,12 +29,16 @@ class ProjectDetailRelatedContentsList extends Component {
 				<span>{title}</span>
 			</div>
 		))
+		
+		console.log('relatetd-projects', projects)
 
 		return (
 			<div className="magazine-detail-related-contents-list">
+				{ projects.length > 0 ?
 				<div className="magazine-detail-related-contents-underline">
 				<h3>관련 콘텐츠</h3>
 				</div>
+				: null }
 				<div className="magazine-detail-related-contents-list-post-container">
 					{ projects }
 				</div>

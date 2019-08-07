@@ -63,6 +63,79 @@ router.get('/', async (req, res) => { // return user-type, appropreate data (pro
 	}
 })
 
+router.get('/userlist', async (req, res) => { // return user-type, appropreate data (proj, prod, user, ...)
+	console.log('/users/profile/userlist');
+	try {
+		if (!req.user) {
+			console.log('req,user is not defined');
+			console.log(req.user);
+			return res.json({ user: renderUser.authorizedUser(req.user) }) // let use show only other profile
+		}
+
+		let user = await UserModel.findById(req.user._id)
+
+		res.json({
+			user: renderUser.authorizedUser(req.user),
+			data: {
+				userType: user.getUserType(),
+				profile: await user.toFormat('userlist'),
+			}
+		})
+	} catch (error) {
+		console.error(error);
+		res.status(500).json({ error })
+	}
+})
+
+router.get('/likelist', async (req, res) => { // return user-type, appropreate data (proj, prod, user, ...)
+	console.log('/users/profile/likelist');
+	try {
+		if (!req.user) {
+			console.log('req,user is not defined');
+			console.log(req.user);
+			return res.json({ user: renderUser.authorizedUser(req.user) }) // let use show only other profile
+		}
+
+		let user = await UserModel.findById(req.user._id)
+
+		console.log('fetched user', user);
+
+		res.json({
+			user: renderUser.authorizedUser(req.user),
+			data: {
+				userType: user.getUserType(),
+				profile: await user.toFormat('likelist'),
+			}
+		})
+	} catch (error) {
+		console.error(error);
+		res.status(500).json({ error })
+	}
+})
+
+router.get('/contactqna', async (req, res) => { // return user-type, appropreate data (proj, prod, user, ...)
+	console.log('/users/profile/');
+	try {
+		if (!req.user) {
+			console.log('req,user is not defined');
+			return res.json({ user: renderUser.authorizedUser(req.user) }) // let use show only other profile
+		}
+
+		let user = await UserModel.findById(req.user._id)
+
+		res.json({
+			user: renderUser.authorizedUser(req.user),
+			data: {
+				userType: user.getUserType(),
+				qnas: await user.toFormat('qnas'),
+				likes: await user.toFormat('likelist'),
+			}
+		})
+	} catch (error) {
+		console.error('프로필 QNA 페쳐 에러', error);
+		res.status(500).json({ error })
+	}
+})
 
 router.get('/summary', isLoggedIn, async (req, res) => {
 	try {
@@ -86,7 +159,7 @@ router.get('/info', isLoggedIn, async (req, res) => {
 	res.json({
 		user: renderUser.authorizedUser(user),
 		data: {
-			profile: pick(user.toJSON(), ['fb_id', 'local_email', 'name', 'image', 'intro', 'contact'])
+			profile: pick(user.toJSON(), ['fb_id', 'local_email', 'display_name', 'name', 'image', 'intro', 'contact', 'sub_email'])
 		}
 	})
 })
@@ -95,7 +168,7 @@ router.put('/info', isLoggedIn, async (req, res) => {
 	try {
 		const r = await UserModel.update(
 			{ _id: req.user._id },
-			req.body,
+			req.body
 		)
 
 		res.json({ response: r.n === 1 })
@@ -107,6 +180,7 @@ router.put('/info', isLoggedIn, async (req, res) => {
 
 router.get('/:user_id', async (req, res) => {
 	try {
+		console.log('req.params.user_id', req.params.user_id)
 		let user = await UserModel.findOne({ id: req.params.user_id })
 		res.json({
 			user: renderUser.authorizedUser(req.user),

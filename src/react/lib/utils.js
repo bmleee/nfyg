@@ -68,6 +68,37 @@ export function value2label (options, targetValue) {
   return '';
 }
 
+export function value2link (options, targetValue) {
+  for(let {value, link} of options) {
+    if (value === targetValue) {
+      console.log('returned: ', link)
+      return link;
+    }
+  }
+  return '';
+}
+
+export function value2mainvalue (options, targetValue) {
+  for(let {value, main_value} of options) {
+    if (value === targetValue) {
+      console.log('returned: ', main_value)
+      return main_value;
+    }
+  }
+  return '';
+}
+
+export function value2elements (options, targetValue) {
+  for(let {value, elements} of options) {
+    if (value === targetValue) {
+      console.log('returned: ', elements)
+      return elements;
+    }
+  }
+  return '';
+}
+
+
 /**
  * react-select option value to label
  * @param  {[type]} options     [description]
@@ -82,6 +113,15 @@ export function label2value (options, targetLabel) {
     }
   }
   return '';
+}
+
+export function value2array (targetValue) {
+  targetValue = targetValue.replace(/, /gi, ',')
+
+  let value2array = new Array;
+  value2array = targetValue.split(',')
+  
+  return value2array;
 }
 
 /**

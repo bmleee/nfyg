@@ -43,7 +43,7 @@ class FacebookTracker {
         method: 'post',
         url: '/users/login',
         data: {
-          user_id: user.id,
+          user_id: user.fb_id,
           user_app_scope_id: user.fb_id,
           access_token: user.fb_access_token,
         }
@@ -57,6 +57,7 @@ class FacebookTracker {
 
   userSharedProject = async (user, project_name, link) => {
     if (!user.fb_id) { // local login
+      console.log('no fb_iddddnumIndirectSupportsddddddd');
       return;
     }
 
@@ -65,7 +66,7 @@ class FacebookTracker {
         method: 'post',
         url: '/projects/share',
         data: {
-          user_id: user.id,
+          user_id: user.fb_id,
           project_name: project_name,
           access_token: user.fb_access_token,
           link: link
@@ -73,7 +74,7 @@ class FacebookTracker {
       })
       console.log('fbUserLoggedIn.r', r);
     } catch (e) {
-      console.error(e);
+      console.error('공유기능 에러입니다다다당', e);
     }
   }
 
@@ -123,8 +124,11 @@ class FacebookTracker {
 
   // returns { shares, comments, likes, project_names: [ String ], }
   getUserSummary = async (user) => {
-    if (!user || !user.fb_id) return {}
-
+    if (!user || !user.fb_id) {
+      console.log('getUserSummary_error1', user)
+      console.log('getUserSummary_error2', user.fb_id)
+      return {}
+    }
     return await this._request({
       url: `/users/${user.fb_id}/summary`
     })

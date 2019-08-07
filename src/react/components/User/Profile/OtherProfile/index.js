@@ -26,7 +26,7 @@ export default class OtherProfile extends Component {
         profile
       })
     } catch (e) {
-      console.error(e);
+      // console.error(e);
     }
   }
 

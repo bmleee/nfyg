@@ -25,7 +25,7 @@ export default class MagazineEditor extends Component {
 			longTitle: '',
 			shortTitle: '',
 			imgSrc: '',
-      category: '',       // 건강, 라이프, ...
+        category: '',       // 건강, 라이프, ...
 			magazineName: '',
 			description: '',
 		},
@@ -40,16 +40,33 @@ export default class MagazineEditor extends Component {
 		content: '',
 
     // related contents
-    relatedContent: {
+	    relatedContent: {
 			contents: [],
 			newContent: {
-        title: '',
+        		title: '',
 				imgSrc: '',
 				link: '',
 			}
 		},
-
-	}
+		
+		headingSlider: {
+			contents: [],
+			newContent: {
+				imgSrc: ''
+			}
+		},
+		
+		artworks: {
+			contents: [],
+			newContent: {
+				artist: '',
+        		title: '',
+        		year: '',
+        		price: '',
+				imgSrc: '',
+			}
+		},
+}
 
   async componentDidMount() {
     try {
@@ -59,7 +76,7 @@ export default class MagazineEditor extends Component {
         data
       } = await fetchUserAndData()
 
-      console.log('fetched data', data);
+      // console.log('fetched data', data);
 
       let tabLinkBase = `/${(document.URL.match(/magazines\/.+\/edit/) || ['magazine-editor'])[0]}`
 
@@ -71,14 +88,14 @@ export default class MagazineEditor extends Component {
           tabLinkBase
         })
 
-        console.log(this.state)
+        // console.log(this.state)
       } else {
         this.setState({
           tabLinkBase
         })
       }
     } catch (e) {
-      console.error(e);
+      // console.error(e);
       alert(e.message)
       this.props.history.goBack()
     }
@@ -100,7 +117,7 @@ export default class MagazineEditor extends Component {
 
 		 // related contents
 		 ...this.relatedContentSubmitCallbacks,
-     contentHandlers: this.contentHandlers,
+    	contentHandlers: this.contentHandlers,
 
 		})
 
@@ -181,26 +198,49 @@ export default class MagazineEditor extends Component {
 	contentSubmitCallbacks = {
 		_onContentSubmit: (raw) => this.setState(update(this.state, {
 			content: { $set: raw }
+		})),
+		
+		_onSliderContentSubmit: ({newContent}) => this.setState(update(this.state, {
+			headingSlider: {
+		        contents: { $push: [{...newContent}] },
+		        newContent: {
+	            	imgSrc: { $set: '' },
+		        }
+    		}
+		})),
+		
+		_onArtworksContentSubmit: ({newContent}) => this.setState(update(this.state, {
+			artworks: {
+		        contents: { $push: [{...newContent}] },
+		        newContent: {
+		        	artist: { $set: '' },
+		        	title: { $set: '' },
+		        	year: { $set: '' },
+		        	price: { $set: '' },
+	            	imgSrc: { $set: '' },
+		        }
+    		}
 		}))
 	}
 
 
 	// Recommended Magazines
 	relatedContentSubmitCallbacks = {
-    _onRelatedContentSubmit: ({newContent}) => this.setState(update(this.state, {
+    	_onRelatedContentSubmit: ({newContent}) => this.setState(update(this.state, {
 			relatedContent: {
-        contents: { $push: [{...newContent}] },
-        newContent: {
-          imgSrc: { $set: '' },
-          link: { $set: '' },
-          title: { $set: '' },
-        }
-      }
+		        contents: { $push: [{...newContent}] },
+		        newContent: {
+	            	imgSrc: { $set: '' },
+	            	link: { $set: '' },
+	            	title: { $set: '' },
+		        }
+    		}
 		}))
 	}
 
   // Content
 	contentHandlers = {
+
 	   _onImgSrc: async (e) => {
        let { sourceURL } = await upload_file(e.target.files[0])
 
@@ -235,10 +275,81 @@ export default class MagazineEditor extends Component {
          }
        }
      })),
-	}
+     
+     _onSilderImgSrc: async (e) => {
+       let { sourceURL } = await upload_file(e.target.files[0])
+
+       this.setState(update(this.state, {
+         headingSlider: {
+           newContent: {
+             imgSrc: { $set: sourceURL },
+           }
+         }
+       }))
+     },
+     deleteSlider: (index) => this.setState(update(this.state, {
+       headingSlider: {
+         contents: {
+           $splice: [
+             [index, 1]
+           ]
+         }
+       }
+     })),
+  
+     _onArtworkImgSrc: async (e) => {
+       let { sourceURL } = await upload_file(e.target.files[0])
+
+       this.setState(update(this.state, {
+         artworks: {
+           newContent: {
+             imgSrc: { $set: sourceURL },
+           }
+         }
+       }))
+     },
+     _onArtist: (e) => this.setState(update(this.state, {
+       artworks: {
+         newContent: {
+           artist: { $set: e.target.value },
+         }
+       }
+     })),
+     _onArtworkTitle: (e) => this.setState(update(this.state, {
+       artworks: {
+         newContent: {
+           title: { $set: e.target.value },
+         }
+       }
+     })),
+     _onArtworkYear: (e) => this.setState(update(this.state, {
+       artworks: {
+         newContent: {
+           year: { $set: e.target.value },
+         }
+       }
+     })),
+     _onArtworkPrice: (e) => this.setState(update(this.state, {
+       artworks: {
+         newContent: {
+           price: { $set: e.target.value },
+         }
+       }
+     })),
+     deleteArtwork: (index) => this.setState(update(this.state, {
+       artworks: {
+         contents: {
+           $splice: [
+             [index, 1]
+           ]
+         }
+       }
+     })),
+     
+  }
 
   client2server = () => {
-    console.log('state', this.state);
+    // console.log('state', this.state);
     return {
       abstract: this.state.abstract,
       creator: this.state.creator,
@@ -246,36 +357,44 @@ export default class MagazineEditor extends Component {
         raw: JSON.stringify(this.state.content),
         html: draftToHtml(this.state.content),
       },
-      relatedContents: this.state.relatedContent.contents
+      relatedContents: this.state.relatedContent.contents,
+      headingSlider: this.state.headingSlider.contents,
+      artworks: this.state.artworks.contents
     }
   }
 
   server2client = (m) => update(this.state, {
     abstract: { $set: m.abstract },
     creator: { $set: m.creator },
-    content: { $set: m.content.raw },
+    content: { $set: JSON.parse(m.content.raw) },
     relatedContent: {
       contents: { $set: m.relatedContents }
+    },
+    headingSlider: {
+      contents: { $set: m.headingSlider }
+    },
+    artworks: {
+      contents: { $set: m.artworks }
     }
   })
 
 	save = async () => {
-		console.log('body', this.client2server());
+		// console.log('body', this.client2server());
     const body = this.client2server()
 
 		try {
       let res;
       if (this.props.params.magazineName) {
         res = await updateMagazine(this.props.params.magazineName, body)
-        console.log('update result', res);
+        // console.log('update result', res);
       } else {
         res = await createMagazine(body)
-        console.log('create result', res);
+        // console.log('create result', res);
       }
 
       appUtils.setFlash({title: '매거진이 등록되었습니다.', level: 'success'})
 		} catch (e) {
-			console.error('save error', e);
+			// console.error('save error', e);
       appUtils.setFlash({title: '등록에 실패하였습니다.', level: 'error', autoDismiss: 3, dismissible: true})
 		}
 	}

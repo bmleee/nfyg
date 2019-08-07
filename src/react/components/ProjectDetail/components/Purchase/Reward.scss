@@ -1,3 +1,18 @@
+.purchase-reward-comment {
+	max-width : 100%;
+	min-width : 100%;
+	width : 100%;
+	border-radius : 3px;
+	border : 1px solid #bbb;
+	outline : none;
+	height : 80px;
+	padding : 8px;
+}
+.purchase-reward-comment:focus {
+	border-color : #6662ff;
+	outline : none;
+}
+
 .purchase-stage-content-container {
 	padding : 8px 16px;
 	background : #f8f8f8;
@@ -37,7 +52,7 @@
 	width : 100%;
 	background : #fff;
 	border-radius : 3px;
-	border : 2px solid #150C8B;
+	border : 1px solid #6662ff;
 	outline : none;
 	padding : 35px 10px;
 }
@@ -48,8 +63,8 @@
 }
 .purchase-reward-description {
 	font-size : 14px !important;
-	font-weight : 600 !important;
-	color : #777;
+	font-weight : 400 !important;
+	color : #555;
 }
 .purchase-reward-money {
 	font-size : 16px !important;
@@ -74,7 +89,7 @@
 		color : #333;
 	}
 	.purchase-reward-num:focus {
-		border-color : #150C8B;
+		border-color : #6662ff;
 	}
 }
 .purchase-reward-summoney-container {
@@ -88,4 +103,288 @@
 		width : 100%;
 		line-height : 32px;
 	}
+}
+
+.purchase-reward-limit {
+	width: 100%;
+    background: #eee;
+    border-radius: 3px;
+    border: 1px solid #eee;
+    outline: 0;
+    padding: 35px 10px;
+    text-align: center;
+}
+.purchase-reward-limit-title {
+	font-size: 18px!important;
+    font-weight: 600!important;
+    color: #777;
+    font-family: NanumSquare;
+}
+.purchase-reward-limit-money {
+	font-size: 16px!important;
+    font-weight: 600!important;
+    color: #777;
+    font-family: NanumSquare;
+}
+
+.purchase-reward-limit-end {
+	font-size: 13px!important;
+    color: #777;
+    margin-bottom : 4px !important;
+    font-family: NanumSquare;
+}
+.purchase-reward-limit-ing {
+	font-size: 13px!important;
+    color: #6662ff;
+    margin-bottom : 4px !important;
+    font-family: NanumSquare;
+}
+
+.etc-reward-description {
+	outline : none;
+	border : none;
+	border-bottom : 1px solid #ddd;
+	padding : 4px 10px;
+	color : #6662ff;
+	font-size : 15px;
+	display : block;
+	width : 75%;
+	margin : 10px auto;
+	@media (max-width : 500px) {
+            width : 100%;
+            font-size : 14px;
+    }
+}
+.etc-reward-thresholdMoney-container {
+	display : block;
+	width : 75%;
+	margin : 10px auto;
+	@media (max-width : 500px) {
+            width : 100%;
+    }
+}
+.etc-reward-thresholdMoney {
+	outline : none;
+	border : none;
+	border-bottom : 1px solid #ddd;
+	padding : 4px 10px;
+	color : #6662ff;
+	font-size : 15px;
+	width : 96%;
+	@media (max-width : 500px) {
+            font-size : 14px;
+            width : 94%;
+    }
+}
+.etc-reward-thresholdMoney-container-sub {
+	display : inline-block;
+	width : 4%;
+	font-size : 15px;
+	font-weight : 600;
+	@media (max-width : 500px) {
+            font-size : 14px;
+            width : 5%;
+    }
+}
+.etc-reward-description:focus, .etc-reward-thresholdMoney:focus {
+	border-bottom : 1px solid #6662ff;
+}
+
+.reward-number-limit {
+	width : 40px;
+	height : 20px;
+	font-size : 12px;
+	line-height : 20px;
+	color : #777;
+	background : #ddd;
+	border-radius : 3px;
+	margin : 0 auto 4px auto;
+	font-family: NanumSquare;
+}
+.reward-number {
+	width : 40px;
+	height : 20px;
+	font-size : 12px;
+	line-height : 20px;
+	color : #fff;
+	background : #6662ff;
+	border-radius : 3px;
+	margin : 0 auto 4px auto;
+	font-family: NanumSquare;
+}
+
+.purchase-reward-shippingday {
+	font-size : 12px !important;
+	color : #666;
+	padding-top : 5px;
+	margin-bottom : 6px !important;
+}
+
+.purchase-reward-detail-container {
+	
+}
+.purchase-reward-detail-item, .purchase-reward-detail-item:focus {
+	display : block;
+	width : 100%;
+	background : transparent;
+	color : #555;
+	padding : 5px;
+	outline : none;
+	border : none;
+	border-bottom : 1px solid #ddd;
+	font-size : 16px;
+}
+.purchase-reward-detail-item:hover {
+	background : #6662ff;
+	color : #fff;
+	border-bottom : 1px solid #6662ff;
+}
+
+.reward-detail-item-container {
+	width: 100%;
+    background: #fff;
+    border-radius: 3px;
+    border: 1px solid #eee;
+    outline: 0;
+    padding: 10px;
+    margin : 5px 0px;
+}
+
+.reward-detail-row-1 {
+	font-size : 14px;
+	font-weight : 600;
+	color : #444;
+	margin-bottom : 5px;
+	@media(max-width :500px) {
+		font-size : 13px;
+	}
+}
+.reward-detail-row-2 {
+	
+}
+.reward-detail-amount-container {
+	display : inline-block;
+	width : 40%;
+	text-align : left;
+	@media(max-width :500px) {
+		width : 45%;
+	}
+}
+.reward-detail-amount-down {
+	width : 30%;
+	outline : 0;
+	border : 1px solid #999;
+	height : 34px;
+	background : #fff;
+	color : #555;
+	@media(max-width :500px) {
+		width : 34px;
+	}
+}
+.reward-detail-amount-down:before {
+	font-family : Ionicons;
+	content : "\f209";
+	@media(max-width :500px) {
+		margin-left : -3px;
+	}
+}
+.reward-detail-amount {
+	display: inline-block;
+	height : 34px;
+	width : 40%;
+	border-top : 1px solid #999;
+	border-bottom : 1px solid #999;
+	background : #fff;
+	color : #555;
+	vertical-align : top;
+	text-align : center;
+	line-height : 32px;
+	font-weight : 600;
+	font-family: NanumSquare;
+}
+.reward-detail-amount-up {
+	width : 30%;
+	outline : 0;
+	border : 1px solid #999;
+	height : 34px;
+	background : #fff;
+	color : #555;
+	@media(max-width :500px) {
+		width : 34px;
+	}
+}
+.reward-detail-amount-up:before {
+	font-family : Ionicons;
+	content : "\f218";
+	@media(max-width :500px) {
+		margin-left : -3px;
+	}
+}
+.reward-detail-price-container {
+	display : inline-block;
+	width : 60%;
+	text-align : right;
+	@media(max-width :500px) {
+		width : 55%;
+	}
+}
+.reward-detail-price {
+	display : inline-block;
+	font-weight : 600;
+	font-size : 14px;
+	color : #444;
+	font-family: NanumSquare;
+	@media(max-width :500px) {
+		font-size : 13px;
+	}
+}
+.reward-detail-remove {
+	width : 34px;
+	outline : 0;
+	border : 1px solid #999;
+	height : 34px;
+	background : #fff;
+	color : #555;
+	margin-left : 5px;
+	text-align : center;
+}
+.reward-detail-remove:before {
+	font-family : Ionicons;
+	content : "\f12a";
+	@media(max-width :500px) {
+		margin-left : -3px;
+	}
+}
+.result-price-container {
+	padding : 8px;
+	border-top : 1px solid #eee;
+	margin-top : 12px;
+}
+.result-price-container-left {
+	display : inline-block;
+	width : 65%;
+	text-align : left;
+	font-weight : 600;
+	font-size : 14px;
+	color : #555;
+	font-family: NanumSquare;
+	@media(max-width :500px) {
+		font-size : 12px;
+	}
+}
+.result-price-container-right {
+	display : inline-block;
+	width : 35%;
+	text-align : right;
+	font-weight : 600;
+	font-size : 16px;
+	color : #555;
+	font-family: NanumSquare;
+	@media(max-width :500px) {
+		font-size : 14px;
+	}
+}
+
+.reward-description-change {
+	margin-top : 5px;
 }

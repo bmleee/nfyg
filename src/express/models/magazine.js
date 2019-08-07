@@ -15,28 +15,20 @@ const Schema = mongoose.Schema;
 // from ~/src/react/constants
 // export const categories = SelectOptions.MagazineCategory.map(x => x.value)
 export const categories = [
-	{ "value": 'culture space', "label": "문화 공간" },
-	{ "value": 'exhibition / museum', "label": "전시 / 미술관" },
-	{ "value": 'art content', "label": "예술 컨텐츠" },
-	{ "value": 'art infomation', "label": "예술 정보" },
-	{ "value": 'purchase / collection', "label": "구매 및 소장" },
-	{ "value": 'purchase', "label": "구매" },
+	{ "value": 'culture space', "label": "매거진" },
+	{ "value": 'exhibition / museum', "label": "전시" },
 ].map(x => x.value)
 
 // Define a new 'MagazineSchema'
 const MagazineSchema = new Schema({
-	no: {type: Number, required: true, unique: true},
+	no: {type: Number, required: false, unique: true},
 
 	abstract: {
-		longTitle: {type: String, required: true},
+		longTitle: {type: String, required: false},
 		// shortTitle: {type: String, required: true},
-		imgSrc: {type: String, required: true},
-		description: {type: String, required: true},
-		category: {type: String, required: false, validate: [
-			function (category) {
-				return categories.includes(category)
-			}, `magazine category is not valid category. must be one of ${categories}`
-		]}, // refers to react/constants/selectOptions
+		imgSrc: {type: String, required: false},
+		description: {type: String, required: false},
+		category: {type: String, required: false}, // refers to react/constants/selectOptions
 		magazineName: {type: String, required: true, unique: true, validate: [
 			function (magazineName) {
 				return !restrictedNames.includes(magazineName)
@@ -53,9 +45,21 @@ const MagazineSchema = new Schema({
 	},
 
 	content: {
-		raw: {type: String, required: true},
-		html: {type: String, required: true},
+		raw: {type: String, required: false},
+		html: {type: String, required: false},
 	},
+	
+	headingSlider: [{
+		imgSrc: {type: String, required: false}
+	}],
+	
+	artworks: [{
+		artist: {type: String, required: false},
+		title: {type: String, required: false},
+		year: {type: String, required: false},
+		price: {type: Number, required: false},
+		imgSrc: {type: String, required: false}
+	}],
 
 	// Contents
 	relatedContents: [{
@@ -85,6 +89,7 @@ MagazineSchema.methods.toFormat = async function (type) {
 					iconSrc: this.creator.creatorImgSrc,
 				},
 				link: `/magazines/${this.abstract.magazineName}`,
+				abstract: this.abstract,
 			}
 		case 'magazines':
 			return {
@@ -96,7 +101,8 @@ MagazineSchema.methods.toFormat = async function (type) {
 				imgSrc: this.abstract.imgSrc,
 				category: this.abstract.category,
 				description: this.abstract.description,
-				link: `/magazines/${this.abstract.magazineName}`
+				link: `/magazines/${this.abstract.magazineName}`,
+				abstract: this.abstract,
 			}
 		case 'magazine_detail':
 			let [
@@ -107,9 +113,9 @@ MagazineSchema.methods.toFormat = async function (type) {
 				this.getPreviousMagazine()
 			])
 
-			console.log('next', (next && next.no) || -1);
-			console.log('this', this.no || -1);
-			console.log('pre', (pre && pre.no) || -1);
+			// console.log('next', (next && next.no) || -1);
+			// console.log('this', this.no || -1);
+			// console.log('pre', (pre && pre.no) || -1);
 
 			return {
 				magazine: {
@@ -120,11 +126,18 @@ MagazineSchema.methods.toFormat = async function (type) {
 					},
 					imgSrc: this.abstract.imgSrc,
 					descriptions: this.abstract.description.split('\n'),
-					content: this.content.html || '',
+					content: this.content.html,
+					contentraw: this.content.raw,
 				},
+				Linktitle: this.abstract.longTitle,
+				LinkimgSrc: this.abstract.imgSrc,
+				description: this.abstract.description,
+				headingSlider: this.headingSlider || [],
+				artworks: this.artworks || [],
 				relatedContents: this.relatedContents || [],
 				next: next && next.abstract,
 				pre: pre && pre.abstract,
+				abstract: this.abstract,
 			}
 
 		case 'edit':
@@ -132,7 +145,9 @@ MagazineSchema.methods.toFormat = async function (type) {
 				abstract: this.abstract,
 				creator: this.creator,
 				content: this.content,
-				relatedContents: this.relatedContents || [],
+				headingSlider: this.headingSlider,
+				artworks: this.artworks,
+				relatedContents: this.relatedContents,
 			}
 
 		case 'search_result':

@@ -1,0 +1,13 @@
+.PastSpecialCategory-container {
+    
+}
+.PastSpecialCategory-banner {
+    height: 160px;
+    border-radius: 10px;
+    margin: 10px 0px;
+    @media(max-width:500px) {
+        height : 110px;
+        border-radius: 0px;
+        margin: 0px;
+    }
+}

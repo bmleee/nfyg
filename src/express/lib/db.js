@@ -14,7 +14,7 @@ connection.once('open', () => {
 	console.log('mongoose is connected to ', MONGODB_URL);
 })
 .on('error', (error) => {
-	console.log(error);
+	console.log('몽구스 에러당당당', error);
 })
 
 export default connection

@@ -1,7 +1,8 @@
 module.exports = {
-  apiKey: "AIzaSyD_wiBd6kgCc6i80O9MMVBf5KrVSkd2jkM",
-  authDomain: "pictures-d1c7a.firebaseapp.com",
-  databaseURL: "https://pictures-d1c7a.firebaseio.com",
+  apiKey: "AIzaSyCK8yjkX2YqU8w76fkl2KtGiwzyl4WVm2Q",
+  authDomain: "sevenpictures-c2f50.firebaseapp.com",
+  databaseURL: "https://sevenpictures-c2f50.firebaseio.com",
+  projectId: "sevenpictures-c2f50",
   storageBucket: "",
-  messagingSenderId: "749847540079"
+  messagingSenderId: "520012965594"
 }

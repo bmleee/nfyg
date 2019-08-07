@@ -3,16 +3,19 @@ import fs from 'fs'
 import path from 'path'
 import express from 'express'
 import multer from 'multer'
+import md5 from 'md5'
 
 import { checkMimeType } from '../lib/utils'
 
 const router = express.Router();
 
+
+
 const storage = multer.diskStorage({
   destination: path.resolve(__dirname, '../public/uploads/'),
   filename: (req, file, next) => {
-    req.filename = file.originalname // append filename to request object
-    next(null, file.originalname)
+    req.filename =  md5(Date.now().toString().substring(0, 8) + '_' + file.originalname)  // append filename to request object
+    next(null, req.filename)
   },
 	limits: {fileSize: 1000000, files:1},
   fileFilter: (req, file, cb) => {

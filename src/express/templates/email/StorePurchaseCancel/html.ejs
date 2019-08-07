@@ -1,0 +1,31 @@
+<html>
+	<link rel="stylesheet" type="text/css" href="style.css"/>
+	<head>
+		<title>[7Pictures] 구매 취소 - <%= Title %> : <%= result_description %> </title>
+	</head>
+	<body>
+		<div class="mail-body">
+			<div class="mail-logo-body">
+				<img class="mail-logo" src="https://netflix-salon.co.kr/assets/images/7pictures_mail.jpg" > 
+			</div>
+			<div class="mail-content-body">
+				<div class="mail-content-title">[구매 취소]</div>
+				<div class="mail-content-text">안녕하세요, <%= address.addressee_name %>님!</div>
+				<div class="mail-content-text">7Pictures 상점 구매가 취소 되었습니다.</div>
+				<div class="mail-content-empty"></div>
+				<h3>취소 내역</h3>
+				<div class="mail-content-text">
+					상 점 : <a href="<%= Link %>"> <%= Title %> </a>
+				</div>
+				<div class="mail-content-text">
+					품 명 : <%= result_description %>
+				</div>
+				<div class="mail-content-text">
+					금 액 : <%= amount %>원
+				</div>
+				<div class="mail-content-empty"></div>
+			</div>
+		</div>
+
+	</body>
+</html>

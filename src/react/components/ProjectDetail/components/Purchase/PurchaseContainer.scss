@@ -9,6 +9,7 @@
         line-height : 210px;
         background : rgba(0, 0, 0, 0.3);
         margin : 0px !important;
+        font-family : NanumSquare;
         @media (max-width : 500px) {
             line-height : 140px;
         }
@@ -16,6 +17,7 @@
 }
 .purchase-stage-text-container {
     margin-bottom : 20px;
+    font-family : NanumSquare;
     @media (max-width : 500px) {
             text-align : center;
     }
@@ -24,8 +26,9 @@
 	display : inline-block;
 	font-size : 13px;
 	font-weight : 600;
-	color : #150C8B;
+	color : #6662ff;
 	margin-right : 8px;
+	font-family : NanumSquare;
 	@media (max-width : 500px) {
             font-size : 8px;
             margin-right : 5px;
@@ -35,6 +38,7 @@
 	display : inline-block;
 	font-size : 13px;
 	margin-right : 8px;
+	font-family : NanumSquare;
 	@media (max-width : 500px) {
             font-size : 8px;
             margin-right : 5px;
@@ -44,8 +48,9 @@
     display : inline-block;
 	font-size : 13px;
 	font-weight : 600;
-	color : #150C8B;
+	color : #6662ff;
 	margin-right : 8px;
+	font-family : NanumSquare;
 	@media (max-width : 500px) {
             font-size : 8px;
             margin-right : 5px;
@@ -68,13 +73,15 @@
 }
 .purchase-stage-prev-button, .purchase-stage-prev-button:focus {
     width : 100px;
-    height : 40px;
+    height : 45px;
 	background-color : #ddd;
 	border : none;
 	outline : none;
 	margin-right : 2px;
 	color : #777;
 	font-weight : 700;
+	font-family : NanumSquare;
+	font-size : 17px;
 }
 .purchase-stage-prev-button:hover {
     background-color : #ccc;
@@ -83,29 +90,107 @@
     font-family : Ionicons;
 	content : "\f3d2";
 	margin-right : 5px;
-	font-size : 11px;
+	font-size : 13px;
 	vertical-align : text-bottom;
 }
 .purchase-stage-next-button, .purchase-stage-next-button:focus {
     padding : 0px 20px;
-    height : 40px;
-	background-color : #150C8B;
+    height : 45px;
+	background-color : #6662ff;
 	border : none;
 	outline : none;
 	margin-right : 2px;
 	color : #fff;
 	font-weight : 700;
+	font-family : NanumSquare;
+	font-size : 17px;
 }
 .purchase-stage-next-button:hover {
-    background-color : #0d0669;
+    background-color : #5346ff;
 }
 .purchase-stage-next-button:after {
     font-family : Ionicons;
 	content : "\f3d3";
 	margin-left : 5px;
-	font-size : 11px;
+	font-size : 13px;
 	vertical-align : text-bottom;
 }
+
+.purchase-stage-next-button-disabled, .purchase-stage-next-button-disabled:focus {
+    padding : 0px 20px;
+    height : 45px;
+	background-color : #ddd;
+	border : none;
+	outline : none;
+	margin-right : 2px;
+	color : #777;
+	font-weight : 700;
+	font-family : NanumSquare;
+	font-size : 17px;
+}
+
+.purchase-stage-next-button-disabled:after {
+    font-family : Ionicons;
+	content : "\f3d3";
+	margin-left : 5px;
+	font-size : 13px;
+	vertical-align : text-bottom;
+}
+
+.purchase-stage-next-button-loading, .purchase-stage-next-button-loading:focus {
+    padding : 0px 21px;
+    height : 45px;
+	background-color : #ddd;
+	border : none;
+	outline : none;
+	margin-right : 2px;
+	color : #777;
+	font-weight : 700;
+	font-family : NanumSquare;
+	vertical-align: top;
+	.spinner {
+      height : auto;
+      margin : 0px auto;
+      width: 63.594px;
+      text-align: center;
+    }
+    
+    .spinner > div {
+      width: 8px;
+      height: 8px;
+      background-color: #6662ff;
+      border-radius: 100%;
+      display: inline-block;
+      -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+      animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+    }
+    
+    .spinner .bounce1 {
+      -webkit-animation-delay: -0.32s;
+      animation-delay: -0.32s;
+    }
+    
+    .spinner .bounce2 {
+      -webkit-animation-delay: -0.16s;
+      animation-delay: -0.16s;
+    }
+    
+    @-webkit-keyframes sk-bouncedelay {
+      0%, 80%, 100% { -webkit-transform: scale(0) }
+      40% { -webkit-transform: scale(1.0) }
+    }
+    
+    @keyframes sk-bouncedelay {
+      0%, 80%, 100% { 
+        -webkit-transform: scale(0);
+        transform: scale(0);
+      } 40% { 
+        -webkit-transform: scale(1.0);
+        transform: scale(1.0);
+      }
+    }
+}
+
 .purchase-detail-title {
     text-align: center;
     color: #555 !important;
@@ -115,8 +200,67 @@
     width: 100%;
     background: #fff;
     border-radius: 3px;
-    border: 2px solid #150C8B;
+    border: 2px solid #6662ff;
     outline: 0;
     padding: 35px 10px;
     text-align: center;
+}
+
+.purchase-agree-container {
+    text-align : center;
+    margin-top : 10px;
+    .purchase-checkbox {
+        width: 27px!important;
+    }
+    .rc-checkbox-inner {
+        width: 21px !important;
+        height: 21px !important;
+    }
+    .rc-checkbox-checked .rc-checkbox-inner:after, .rc-checkbox-inner:after {
+        width: 8px;
+        height: 13px;
+    }
+    .rc-checkbox-checked .rc-checkbox-inner:after, .rc-checkbox-inner:after {
+        left: 5.5px;
+        top: 0.5px;
+    }
+    .purchase-termofuse {
+        display: inline-block;
+        font-size: 16px!important;
+        color: #444;
+        font-weight: 600 !important;
+        margin-left: 0!important;
+        cursor : pointer;
+        @media(max-width : 500px) {
+            font-size: 14px!important;
+            border-bottom : 1px solid #555;
+            @media(max-width : 350px) {
+                font-size: 12px!important;
+                border-bottom : 1px solid #555;
+            }
+        }
+    }
+}
+
+.purchase-modal-container {
+    padding: 25px;
+    height: 300px;
+    overflow: auto;
+    text-align: left;
+}
+
+.purchase-agree {
+}
+
+.purchase-end-container {
+    background: #f8f8f8;
+    border-radius: 3px;
+    font-size : 28px;
+    text-align : center;
+    padding : 100px 30px;
+    margin-top : 40px;
+    font-family : NanumSquare;
+    @media(max-width : 500px) {
+        font-size : 24px;
+    }
 }

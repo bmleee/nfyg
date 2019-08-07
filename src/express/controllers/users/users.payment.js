@@ -24,15 +24,20 @@ router.get('/', isLoggedIn, async (req, res) => {
 				payments: await Promise.all(payments.map(x => ({
 					_id: x._id,
 					card_name: x.card_name,
-					card_number: x.card_number.split('-')[3],
+					card_number: x.card_number,
 					expiry: x.expiry,
-				})))
+					birth: x.birth,
+					pwd_2digit: x.pwd_2digit,
+				}))),
+				message_error: req.flash('error')
 			}
 		})
 	} catch (e) {
 		return res.status(500).json({
 			user: renderUser.authorizedUser(req.user),
-			error: e.message
+			data: {
+				message_error: req.flash('error')
+			}
 		})
 	}
 })
@@ -45,23 +50,28 @@ router.post('/', isLoggedIn, async (req, res) => {
 		} = req
 		const body = _.pick(req.body, ['card_number', 'expiry', 'birth', 'pwd_2digit'])
 		body.user = user
-
+		
 		// check card number
 		try {
 			let {
 	      card_name,
 	    } = await IMP.subscribe_customer.create({
-	      customer_uid: user._id || user,
+	      customer_uid: user.id + '-' + body.card_number.substring(15, 19) + '-7Pictures',
 	      card_number: body.card_number,
 	      expiry: body.expiry,
 	      birth: body.birth,
 	      pwd_2digit: body.pwd_2digit,
-	    })
+	    })	
 			body.card_name = card_name
 		} catch (e) {
-			console.error(e);
+			// console.error(e);
+			req.flash('error', e.message);
 			res.status(500).json({ error: e.message })
 		}
+		
+		body.card_number = body.card_number.substring(15, 19)
+		body.birth = ''
+		body.pwd_2digit = ''
 
 		let payment = await PaymentModel.create(body)
 
@@ -70,9 +80,8 @@ router.post('/', isLoggedIn, async (req, res) => {
 			response: { payment }
 		})
 	} catch (e) {
-		console.log(`[User ${user.id}] faild to create payment`);
 		console.error(e);
-		res.status(500).jsonp({
+		res.status(500).json({
 			error: e.message
 		})
 	}

@@ -1,0 +1,299 @@
+.storelist-header {
+    .image-gallery-fullscreen-button:hover::before, .image-gallery-left-nav:hover::before, .image-gallery-play-button:hover::before, .image-gallery-right-nav:hover::before {
+        
+        @media(max-width : 991px) {
+            color: #fff!important;
+        }
+    }
+    .image-gallery-fullscreen-button::before, .image-gallery-left-nav::before, .image-gallery-play-button::before, .image-gallery-right-nav::before {
+        
+        @media(max-width : 991px) {
+            color: #eee!important;
+        }
+    }
+    .image-gallery-left-nav, .image-gallery-right-nav {
+        @media(max-width : 991px) { 
+            top : 57% !important;
+        }
+    }
+    .image-gallery-description {
+        display : none;
+        @media(max-width : 991px) {
+            display : block;
+            padding: 90px 40px 8px 40px!important;
+        }
+    }
+    .store-slide-info {
+        display : block;
+        @media(max-width : 991px) {
+            display : none;
+        }
+    }
+    .image-gallery-slide {
+        @media(max-width : 991px) {
+            height : 330px;
+        }
+    }
+}
+.store-slide-info {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: -webkit-linear-gradient(left, transparent 10%, rgba(0,0,0,.1) 35%, rgba(0,0,0,.2) 50%, rgba(0,0,0,.22) 67%, rgba(0,0,0,.2) 88%, rgba(0,0,0,.1) 100%);
+}
+.store-slide-subject {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    font-size: 17px;
+    font-weight: 800;
+    color: #fff;
+    border-bottom: 1px solid #fff;
+    padding-bottom: 15px;
+    text-align: left;
+    font-family : NanumSquare;
+}
+.store-slide-title {
+    position: absolute;
+    top: 52%;
+    left: 50%;
+    font-size: 40px;
+    font-weight: 600;
+    color: #fff;
+    font-family : NanumSquare;
+}
+.store-slide-description {
+    position: absolute;
+    top: 62%;
+    left: 50%;
+    font-size: 23px;
+    font-weight: 400;
+    color: #fff;
+    font-family : NanumSquare;
+}
+
+
+.store-list-body {
+    width: 1172px;
+    margin: 35px auto 50px auto;
+    @media(max-width : 1172px) {
+            width: 95%;
+            @media(max-width : 500px) {
+                width: 100%;
+                margin : 0px auto;
+            }
+    }
+}
+.store-list-container {
+    width: 33.333333333333%;
+    display: inline-block;
+    padding: 10px;
+    height: 270px;
+    vertical-align : middle;
+    @media(max-width : 1172px) {
+            width: 50%;
+            @media(max-width : 500px) {
+                width: 100%;
+                height: 250px;
+                padding: 0px;
+            }
+    }
+}
+.store-list-item {
+    height: 250px;
+    border-radius : 5px;
+    @media(max-width : 500px) {
+        border-radius : 0px;
+    }
+}
+.store-list-item-caption {
+    padding-top: 143px;
+    padding-left: 20px;
+    padding-bottom: 22px;
+    padding-right: 20px;
+    background-color: rgba(0,0,0,0.3);
+    height: 250px;
+    border-radius : 5px;
+    @media(max-width : 500px) {
+        border-radius : 0px;
+    }
+}
+.store-list-item-title {
+    font-size: 18px;
+    color: #000;
+    background: #fff;
+    padding: 5px 6px;
+    font-weight: 900;
+    display: inline;
+    margin-bottom: 0px;
+    font-family: NanumSquare;
+}
+.store-list-item-description {
+    font-size: 20px;
+    font-weight: 400;
+    color: #fff;
+    display: block;
+    margin-top: 5px;
+    font-family: NanumSquare;
+}
+
+.store-of-weeks-body {
+	width : 900px;
+	margin : 0px auto;
+	@media(max-width : 991px) {
+		width : 95%;
+		@media(max-width : 500px) {
+			width : 100%;
+		}
+	}
+	.start-body-space-40 {
+	    @media(max-width : 500px) {
+			display : none;
+		}
+	}
+}
+.store-of-weeks-img {
+	max-width : 100%;
+}
+
+.store-of-weeks-link-container {
+    display: inline-block;
+    width: 50%;
+    vertical-align: middle;
+    padding : 5px;
+    @media(max-width:500px) {
+        width : 100%;
+        padding : 0px;
+    }
+}
+.store-of-weeks-link-background {
+    height: 200px;
+    display: table;
+    width: 100%;
+    border-radius : 5px;
+    @media(max-width:500px) {
+        height: 180px;
+        border-radius : 0px;
+    }
+}
+.store-of-weeks-link-title {
+    display: table-cell;
+    padding: 0 25px;
+    font-weight: 400;
+    font-size: 24px;
+    color: #fff;
+    line-height: 26px;
+    background-color: rgba(0,0,0,.35);
+    text-align: center;
+    vertical-align: middle;
+    word-break: break-word;
+    height: 200px;
+    font-family : NanumSquare;
+    border-radius : 5px;
+    @media(max-width:500px) {
+        height: 180px;
+        border-radius : 0px;
+    }
+}
+
+.store-of-weeks-link-padding {
+    padding : 0px 35px;
+    @media(max-width:500px) {
+        padding : 0px;
+    }
+}
+
+
+.store-sort-button-off {
+    border: none;
+    outline: none;
+    padding: 4px 8px;
+    background: #6662ff;
+    color: #fff;
+    margin-right: 4px;
+    margin-bottom : 4px;
+    font-family : NanumSquare;
+    min-width : 28.75px;
+}
+
+.store-sort-button-on {
+    border: none;
+    outline: none;
+    padding: 4px 8px;
+    background: #bbb;
+    color: #fff;
+    margin-right: 4px;
+    margin-bottom : 4px;
+    font-family : NanumSquare;
+    min-width : 28.75px;
+}
+
+.store-sort-all-off {
+    border: none;
+    outline: none;
+    padding: 4px 8px;
+    background: #6662ff;
+    color: #fff;
+    margin-right: 4px;
+    margin-bottom : 4px;
+    font-family : NanumSquare;
+    min-width : 61.5px;
+}
+.store-sort-all-on {
+    border: none;
+    outline: none;
+    padding: 4px 8px;
+    background: #bbb;
+    color: #fff;
+    margin-right: 4px;
+    margin-bottom : 4px;
+    font-family : NanumSquare;
+    min-width : 61.5px;
+}
+
+.store-sort-container1 {
+    padding : 0px 10px;
+    //display : none;
+    @media(max-width:500px) {
+        display : none;
+    }
+}
+
+.store-sort-container2 {
+    margin-bottom : 20px;
+    padding : 0px 10px;
+    //display : none;
+    @media(max-width:500px) {
+       display : none;
+    }
+}
+
+.store-main-to-list {
+    text-align: center;
+    border: 1px solid #888;
+    padding: 12px;
+    border-radius: 3px;
+    margin-top: 35px;
+    margin-bottom: 20px;
+    margin-left: 15px;
+    margin-right: 15px;
+    @media(max-width:500px) {
+        margin-top : 20px;
+    }
+}
+.store-main-to-list:hover {
+    border-color : #444;
+}
+.store-main-to-list-link {
+    width: 100%;
+    display: block;
+    font-size: 17px;
+    font-weight: 600;
+    color: #777;
+    font-family: NanumSquare;
+}
+.store-main-to-list-link:hover {
+    color : #444;
+}

@@ -1,11 +1,8 @@
 .tab-red-dot {
     position : absolute;
-    margin : -30px 30px;
+    margin : -5px 8px;
 }
-.Select-control {
-	width : 20%;
-	float : right;
-}
+
 .Select-menu-outer {
 	width : 20%;
 	position : absolute;
@@ -32,8 +29,8 @@
     color : #777;
 }
 .project-tab-button-clicked {
-    box-shadow : 0px 1px 0px 0px #150C8B;
-    color : #150C8B;
+    box-shadow : 0px 1px 0px 0px #6662ff;
+    color : #6662ff;
 }
 @media (max-width: 991px) {
     
@@ -49,14 +46,10 @@
     border : none;
 }
 .project-tab-button-clicked {
-    box-shadow : 0px 1px 0px 0px #150C8B;
-    color : #150C8B;
+    box-shadow : 0px 1px 0px 0px #6662ff;
+    color : #6662ff;
 }
 @media (max-width: 500px) {
-    .Select-control {
-	width : 100%;
-	float : right;
-    }
     .Select-menu-outer {
 	width : 100%;
 	position : absolute;
@@ -79,15 +72,15 @@
     }
 }
 .project-tab-button-clicked {
-    box-shadow : inset 0px -2px 0px 0px #150C8B;
-    color : #150C8B;
+    box-shadow : inset 0px -2px 0px 0px #6662ff;
+    color : #6662ff;
     background : #fff;
 }
 .tab-red-dot {
     position : absolute;
     margin : -4px 10px;
     @media (max-width: 323px) {
-        margin : -26px 20px;
+        margin : -4px 10px;
     }
 }
 }

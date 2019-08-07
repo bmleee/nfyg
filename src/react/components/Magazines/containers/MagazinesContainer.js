@@ -30,7 +30,7 @@ class MagazinesContainer extends Component {
 				data: { magazines }
 			} = await fetchUserAndData()
 
-			console.log('fetchUserAndData', magazines);
+			// console.log('fetchUserAndData', magazines);
 
 			appUtils.setUser(user)
 			this.setState({
@@ -39,7 +39,7 @@ class MagazinesContainer extends Component {
 				loaded: true,
 			})
 		} catch (e) {
-			console.error(e);
+			// console.error(e);
 		}
 	}
 
@@ -47,7 +47,7 @@ class MagazinesContainer extends Component {
 		const { categories } = this.state
 
 
-		console.log('category', category);
+		// console.log('category', category);
 		let newList = []
 
 		if (category === categories[0]) newList = Object.assign([], this.state.magazines)
@@ -62,7 +62,7 @@ class MagazinesContainer extends Component {
 	render() {
 		const { magazines, filteredMagazines, categories, currentCategory } = this.state;
 
-		console.log('MagazinesContainer', this);
+		// console.log('MagazinesContainer', this);
 
 		return this.state.loaded
 		?

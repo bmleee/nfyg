@@ -47,8 +47,10 @@ export default class ProductDetailContainer extends Component {
 	}
 
 	async componentDidMount() {
+		window.scrollTo(0, 0)
+		
 		const res = await fetchUserAndData()
-		console.log('fetchUserAndData', res);
+		// console.log('fetchUserAndData', res);
 
 		const {
 			user,
@@ -79,7 +81,62 @@ export default class ProductDetailContainer extends Component {
 			selectValue: o.value,
 		})
 
-		console.log(_.sortBy(indirectSupporters, o.value));
+		// console.log(_.sortBy(indirectSupporters, o.value));
+	}
+	
+	_newPost = (post) => {
+		this.setState(update(this.state, {
+			post: {
+				posts: {
+					$unshift: [post]
+				}
+			}
+		}))
+	}
+	
+	_deletePost = (post_id) => {
+		let index = this.state.post.posts.findIndex(p => p._id === post_id)
+		this.setState(update(this.state, {
+			post: {
+				posts: {
+					$splice: [
+						[index, 1]
+					]
+				}
+			}
+		}))
+	}
+	
+	_newCommentOnPost = (post_id, comment) => {
+		let index = this.state.post.posts.findIndex(p => p._id === post_id)
+		this.setState(update(this.state, {
+			post: {
+				posts: {
+					[index]: {
+						comments: {
+							$push: [comment]
+						}
+					}
+				}
+			}
+		}))
+	}
+	
+	_deleteCommentOnPost = (post_id, comment_index) => {
+		let index = this.state.post.posts.findIndex(p => p._id === post_id)
+		this.setState(update(this.state, {
+			post: {
+				posts: {
+					[index]: {
+						comments: {
+							$splice: [
+								[ comment_index, 1]
+							]
+						}
+					}
+				}
+			}
+		}))
 	}
 
 	_newQnA = (qna) => {
@@ -151,6 +208,10 @@ export default class ProductDetailContainer extends Component {
 			...this.state,
 			_onSelectOptionChange: this._onSelectOptionChange,
 			user: this.props.appUtils.getUser(),
+			_newPost: this._newPost,
+			_deletePost: this._deletePost,
+			_newCommentOnPost: this._newCommentOnPost,
+			_deleteCommentOnPost: this._deleteCommentOnPost,
 			_newQnA: this._newQnA,
 			_deleteQnA: this._deleteQnA,
 			_newCommentOnQnA: this._newCommentOnQnA,
@@ -171,6 +232,6 @@ export default class ProductDetailContainer extends Component {
 					{ children }
 				</ProductDetail>
 			:
-				<div>Loading...</div>
+				<div className="home-is-loading"></div>
 	}
 }

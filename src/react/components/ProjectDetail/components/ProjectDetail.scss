@@ -19,17 +19,22 @@
 .project-detail-post, .project-detail-ranking, .project-detail-qna, .exhibition-artworks-container {
 	width : 800px;
 	margin : 0px auto 60px auto;
-	min-height : 600px;
 }
 .project-detail-overview-info {
 	width : 100%;
+	img {
+		display : block;
+		margin : 15px auto 15px auto;
+		max-width : 100% !important;
+		height : auto;
+	}
 }
 .project-detail-reward, .exhibition-detail-recommended-exhibitions {
 	width : 100%;
 }
 .project-detail {
-	display: flex;
-	flex-flow: column;
+	// display: flex;
+	// flex-flow: column;
 	min-height : 800px;
 	margin-bottom : 50px;
 }
@@ -45,7 +50,7 @@
 	background : rgba(0, 0, 0, 0.4);
 }
 .project-info-bottom {
-	margin-top : 110px;
+	margin-top : 85px;
 }
 
 @media (max-width: 991px) {
@@ -57,7 +62,7 @@
     	height : 400px !important;
     }
 .project-info {
-	padding-top : 100px;
+	padding-top : 75px;
 	height : 400px;
 }
 .project-info-bottom {
@@ -70,7 +75,7 @@
 }
 @media (max-width: 500px) {
 	.project-detail-overview {
-		flex-flow: column;
+		// flex-flow: column;
 	}
 	.project-detail-overview-info {
 	width : 100%;
@@ -92,7 +97,7 @@
 	height : 400px;
 }
 .project-info-bottom {
-	margin-top : 100px;
+	margin-top : 65px;
 }
 .project-title {
 	min-height : 60px;
@@ -101,9 +106,9 @@
 }
 
 .back-to-top, .back-to-top:focus, .back-to-top:active  {
-	background-color : transparent;
-	border-radius : 2px;
-	border : 1px solid #150C8B;
+	background-color : rgba(102, 98, 255, 0.8);
+	border-radius : 50px;
+	border : 0px;
 	outline : none;
 	width : 40px;
 	height : 40px;
@@ -126,7 +131,7 @@
 	font-family : Ionicons;
 	font-size : 32px;
 	content : "\f3d8";
-	color : #150C8B;
+	color : #fff;
 	line-height : 32px;
 	text-align : center;
 	letter-spacing : 0px;

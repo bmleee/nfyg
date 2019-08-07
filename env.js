@@ -1,15 +1,15 @@
 var dbconfig = {
 	development: {
 		dbname: 'seven_pictures_development',
-		dbuser: '7pictures',
-		dbpassword: '7pictures.co.kr',
-		dbhost: '52.78.222.50:27017'
+		dbuser: 'sevenpictures',
+		dbpassword: 'sevenpictures',
+		dbhost: '15.164.27.162:27017'
 	},
 	seven_pictures_server_pre_scheme: {
 		dbname: 'seven_pictures_server_pre_scheme',
-		dbuser: '7pictures',
-		dbpassword: '7pictures.co.kr',
-		dbhost: '52.78.222.50:27017'
+		dbuser: 'sevenpicturesadmin',
+		dbpassword: 'sevenpicturesadmin',
+		dbhost: '15.164.27.162:27017'
 	}
 };
 
@@ -25,11 +25,11 @@ var url = {
 var EXPRESS_PORT = process.env.PORT || 8080
 var MONGODB_URL = EXPRESS_PORT === 8080 ? url.development : url.seven_pictures_server_pre_scheme
 var REDIS = {
-	HOST: '52.78.222.50',
+	HOST: '15.164.27.162',
 	PORT: '6379',
 	PASS: '7pictures.co.kr',
 }
-var FB_TRACKER_URL = 'http://52.78.222.50:3000'
+var FB_TRACKER_URL = 'http://15.164.27.162:3000'
 
 var FB_SHARER_URL = '//www.facebook.com/sharer/sharer.php'
 
@@ -44,7 +44,7 @@ var FB_APP = {
 
 	// 7pictures
 	 clientID: '244902342546199',
-	 clientSecret: '0f9ac2c68c43551f0a646d15605c3741'
+	 clientSecret: '01d249474dd91e3a1ecb363f6d153d21'
 }
 
 module.exports = {

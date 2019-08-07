@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import FontAwesome from 'react-fontawesome'
+import MetaTags from 'react-meta-tags';
 
 import { fetchJSONFile, fetchUserAndData } from '../../api/AppAPI'
 
@@ -17,7 +18,7 @@ class Sponsors extends Component {
 			}
 		} = await fetchUserAndData()
 
-		if(this.props.appUtils.setUser) this.props.appUtils.setUser(user)
+		// appUtils.setUser(user)
 		this.setState({ sponsors })
 	}
 
@@ -55,7 +56,7 @@ class Sponsors extends Component {
 					<div className="sponsor-icons">
 						{
 							!!homepage
-								?	<a href={homepage}>
+								?	<a href={homepage} target="_blank">
 										<FontAwesome className='sponsor-icon-homepage' name='home'
 										 size='lg' />
 								  </a>
@@ -63,7 +64,7 @@ class Sponsors extends Component {
 						}
 						{
 							!!facebook
-								? <a href={facebook}>
+								? <a href={facebook} target="_blank">
 										<FontAwesome className='sponsor-icon-facebook' name='facebook'
 											size='lg' />
 									</a>
@@ -71,7 +72,7 @@ class Sponsors extends Component {
 						}
 						{
 							!!blog
-								? <a href={blog}>
+								? <a href={blog} target="_blank">
 										<FontAwesome className='sponsor-icon-blog' name='pencil'
 										  size='lg'/>
 									</a>
@@ -85,12 +86,18 @@ class Sponsors extends Component {
 
 		return (
 			<div className="sponsor">
+				<MetaTags>
+		            <title>스폰서 - 7Pictures</title>
+		        </MetaTags>
 				<div className="sponsor-haeding">
 					<h2>Sponsors</h2>
 					{/* <p>지속적인 문화예술 활동을 가능하게 해주는 기업/단체</p> */}
 				</div>
 				<div className="sponsor-list-container">
 					{ sponsorList }
+				</div>
+				<div className="home-empty-space">
+						
 				</div>
 			</div>
 		)

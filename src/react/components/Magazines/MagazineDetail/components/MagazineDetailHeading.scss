@@ -11,7 +11,9 @@
 		position: relative;
 		text-align : center;
 		margin : 50px auto 18px auto;
-		width: 800px;
+		width: 550px;
+		letter-spacing : -2px;
+		line-height : 1.3;
 		@media (max-width: 991px) {
 			width: 90%;
 		@media (max-width: 500px) {
@@ -36,7 +38,7 @@
 	color : #333;
 }
 .ma-share-button-facebook:hover, .ma-share-button-twitter:hover, .ma-share-button-url:hover {
-	color : #150C8B;
+	color : #6662ff;
 }
 .ma-share-button-facebook:focus, .ma-share-button-twitter:focus, .ma-share-button-url:focus, .ma-share-button-kakao:focus {
 	outline : none;
@@ -55,7 +57,7 @@
 	}
 }
 .ma-share-button-kakao:hover {
-	fill : #150C8B;
+	fill : #6662ff;
 
 }
 .ma-kakao-icon {

@@ -6,7 +6,7 @@
 		margin-right : 3px;
 		font-size : 14px !important;
 		font-weight : 600 !important;
-		color : #150C8B;
+		color : #6662ff;
 	}
 }
 .success-icon {
@@ -41,30 +41,149 @@
 
 .home-sub-title {
 		display: block;
-   		width: 97%;
-    	margin: 0px auto 20px auto;
+   		width: 98%;
+    	margin: 20px auto;
     	background: url(//t1.daumcdn.net/brunch/static/img/help/pc/bg_related_160905.gif)0 10px repeat-x;
-    	text-align: center;
+    	text-align: left;
     	@media (max-width : 991px) {
-    		width : 95%;
-    	@media (max-width : 500px) {
-    	}
+    		width : 98%;
+        	@media (max-width : 500px) {
+        	    margin: 8px auto;
+        	}
     	}
     	h3 {
 		display : inline-block;
-		padding : 0px 25px;
+		padding : 0px 20px 0px 0px;
 		text-align : center;
 		color: #555;
 		font-weight : 500;
-		font-size : 22px;
+		font-size : 21px;
 		background-color : #fff;
 		letter-spacing : -1px;
 		margin : 0px !important;
 		line-height : 20px;
+		font-family : NanumSquare;
 		@media (max-width : 991px) {
     		font-size: 18px;
-    		padding : 0px 18px;
-    		font-weight : 500;
+    		padding : 0px 18px 0px 0px;
     	}
 	}
+}
+
+.D-day-notice {
+    position: absolute;
+    right: 6px;
+    bottom: 8px;
+    z-index: 1;
+    color: #fff;
+    background: rgba(102, 99, 229, 0.7);
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 400;
+    font-family: NanumSquare;
+    border-radius: 20px;
+}
+
+
+.sort-button, .sort-button:focus {
+	border: none;
+    color: #666;
+    background: 0 0;
+    outline: 0;
+    margin-left: 10px;
+    font-size: 17px;
+    background: #ddd;
+    padding: 0px 12px 0px 0px;
+    height: 37px;
+    border-radius: 3px;
+    font-family : NanumSquare;
+    font-weight : 600;
+    @media(max-width : 991px) {
+        margin-bottom : 15px;
+        margin-left: 8px;
+        @media(max-width : 500px) {
+        	margin-left: 3px;
+        	margin-top: 12px;
+        	margin-bottom : 20px;
+        }
+    }
+}
+.sort-button:before {
+	font-family: Ionicons;
+    content: "\f4a6";
+    font-size: 20px;
+    font-weight : 400;
+    padding: 8px;
+    background: #eee;
+    border-radius: 3px 0px 0px 3px;
+    vertical-align: middle;
+    margin-right: 11px;
+}
+
+.sort-button-container {
+	position: absolute;
+    margin-left: 10px;
+    margin-top: 5px;
+    width: 102.92px;
+    z-index : 3;
+    @media(max-width : 991px) {
+        margin-top : -10px;
+        margin-left: 8px;
+        @media(max-width : 500px) {
+        	margin-left: 3px;
+        	margin-top: -15px;
+        }
+    }
+}
+.sort-button-new {
+    width: 100%;
+    background: #fff;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    padding: 3px 0px;
+    border-radius: 3px 3px 0px 0px;
+    color: #666;
+    outline: none;
+    font-family : NanumSquare;
+}
+.sort-button-popular {
+    width: 100%;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-top: 0px;
+    font-size: 16px;
+    padding: 3px 0px;
+    border-radius: 0px;
+    color: #666;
+    outline: none;
+    font-family : NanumSquare;
+}
+.sort-button-end {
+    width: 100%;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-top: 0px;
+    font-size: 16px;
+    padding: 3px 0px;
+    border-radius: 0px 0px 3px 3px;
+    color: #666;
+    outline: none;
+    font-family : NanumSquare;
+}
+
+.project-sub-title {
+    color: #D93D3D;
+    font-weight: 600;
+    font-family: "Noto Sans KR", sans-serif;
+    min-height : 30px;
+}
+.project-sub-notice {
+    color: #D93D3D;
+    font-weight: 600;
+    font-family: "Noto Sans KR", sans-serif;
+}
+.project-sub-notice:before {
+    font-family: Ionicons;
+    content: "\f1e4";
+    margin-right: 6px;
 }

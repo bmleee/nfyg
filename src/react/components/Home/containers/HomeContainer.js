@@ -25,13 +25,10 @@ class HomeContainer extends Component {
 				}
 			} = await fetchUserAndData()
 
-			console.log('fetchUserAndData.user', user);
-			console.log('fetchUserAndData.data.home', home);
-
 			this.props.appUtils.setUser(user)
 			this.setState({ home, loaded: true })
 		} catch (e) {
-			console.error(e);
+			// console.error(e);
 		}
 
 	}

@@ -18,13 +18,18 @@ export default class Projects extends Component {
     const {
       projects // raw project model
     } = this.props
-
+    
+    // console.log(projects)
+    
+    const projectnotnull = projects.filter(function(val) { return val !== null; })
+    
+    // console.log('projectnotnull', projectnotnull)
 
     return (
       <div>
         {
-          !!projects
-            ? <BootstrapTable data={projects} exportCSV={true}
+          !!projectnotnull
+            ? <BootstrapTable data={projectnotnull} exportCSV={true}
                 search
                 columnFilter
                 hover

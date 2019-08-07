@@ -21,12 +21,16 @@ class MagazineDetailRelatedContentsList extends Component {
 					</div>
 				</a>
 		))
+		
+		// console.log('contents', contents)
 
 		return (
 			<div className="magazine-detail-related-contents-list">
+				{ contents.length > 0 ?
 				<div className="magazine-detail-related-contents-underline">
 					<h3>관련 콘텐츠</h3>
 				</div>
+				: null }
 				<div className="magazine-detail-related-contents-list-post-container">
 					{ contents }
 				</div>

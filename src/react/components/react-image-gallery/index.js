@@ -595,13 +595,13 @@ export default class ImageGallery extends React.Component {
             onError={onImageError.bind(this)}
         />
         </div>
-        <a href={item.sliderlink}>
+        <div className="Link_sub_div2"><Link to={item.sliderlink}>
             <span className='image-gallery-description'>
               {item.description}
               <h4>{item.descriptionsub}</h4>
             </span>
-        <button className='image-gallery-more-button'>{item.morebuttontext}</button>
-        </a>
+            {/* <button className='image-gallery-more-button'>{item.morebuttontext}</button> */}
+        </Link></div>
       </div>
     );
   }

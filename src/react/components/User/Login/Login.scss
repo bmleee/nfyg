@@ -1,3 +1,9 @@
+.request-signup {
+    font-size : 13px;
+    color : red;
+    padding : 15px 20px 10px 20px;
+}
+
 .login-7pictures-logo {
     width : 180px;
     height : auto;
@@ -7,11 +13,11 @@
 .login-page {
     background : #eee;
     width: 100%;
-    padding : 70px 0px 70px 0px;
-    min-height : 750px;
+    padding : 100px 0px 100px 0px;
+    min-height : 820px;
     @media (max-width : 500px) {
         padding : 40px 0px 40px 0px;
-        min-height : 400px;
+        min-height : 430px;
     }
 }
 .user-login {
@@ -30,11 +36,12 @@
     height : 45px;
     border : none;
     outline : none;
-    font-size : 15px;
+    font-size : 17px;
     font-weight : 700;
+    font-family : NanumSquare;
 }
 .fb-login-btn:hover, .login-btn:hover {
-    background : #150C8B;
+    background : #6662ff;
     transition : opacity, 250ms;
 }
 
@@ -49,11 +56,10 @@
 .login-more {
     margin-bottom : 25px !important;
     font-size : 14px;
+    font-family : NanumSquare;
 }
 
 .login-btn {
-    margin-top : 10px;
-    margin-bottom : 20px;
 }
 .signup-btn {
     margin-top : 10px;
@@ -61,7 +67,7 @@
 }
 .signup-agree {
     display : block;
-    font-size : 15px !important;
+    font-size : 12px !important;
     color : #333;
     margin-bottom : 20px;
     text-align : left;
@@ -69,9 +75,18 @@
 }
 .signup-termofuse {
     display : inline-block;
-    font-size : 15px !important;
-    color : #150C8B;
-    margin-left : 5px !important;
+    font-size : 12px !important;
+    color : #6662ff;
+    margin-left : 0px !important;
+}
+.subscribe-agree {
+    display : block;
+    font-size : 12px !important;
+    color : #333;
+    margin-bottom : 20px;
+    text-align : left;
+    margin-left : 3px;
+    margin-top : 5px;
 }
 
 .user-login-id {
@@ -82,6 +97,7 @@
     padding-left : 10px;
 }
 .user-login-password {
+    font-family : "Malgun Gothic";
     width : 280px;
     border : 2px solid #eee;
     height : 45px;
@@ -105,7 +121,7 @@
 
 .user-login-id:focus, .user-login-password:focus, .user-login-username:focus, .user-login-password-confirm:focus {
     outline : none;
-    border : 2px solid #150C8B;
+    border : 2px solid #6662ff;
     transition : opacity, 250ms;
 }
 
@@ -113,31 +129,162 @@
     background : transparent;
     border : none;
     outline : none;
-    font-size : 16px;
+    font-size : 17px;
     font-weight : 600;
-    text-align : right;
-    float : right;
-    margin-top : 5px;
+    margin-bottom : 10px;
     padding: 0px !important;
+    font-family : NanumSquare;
 }
 .create-id {
     background : transparent;
     border : none;
     outline : none;
-    font-size : 16px;
+    font-size : 17px;
     font-weight : 600;
     padding: 0px !important;
     margin-left : 5px;
+    font-family : NanumSquare;
 }
 .password-find:hover, .create-id:hover {
-    color : #150C8B;
+    color : #6662ff;
 }
 .create-id-text {
     text-align : left;
     margin-top : 15px !important;
-    font-size : 16px !important;
+    font-size : 17px !important;
+    font-family : NanumSquare;
 }
 
 .user-login-form {
+    
+}
+
+.login-error-container {
+    background: transparent;
+    margin: 0px 3px 20px;
+    border: 1px solid #a94442;
+    padding: 6px;
+}
+
+.login-error-message {
+    font-size : 15px !important;
+    font-weight : 600 !important;
+    color : #a94442;
+}
+
+.forgot-form {
+    display : block;
+    margin-bottom : 20px;
+    margin-top : 5px;
     border-bottom : 2px solid #eee;
+    text-align : right;
+}
+
+
+.rc-checkbox-checked:hover .rc-checkbox-inner {
+  border-color: #6662ff;
+}
+.rc-checkbox-checked .rc-checkbox-inner {
+  border-color: #6662ff;
+  background-color: #6662ff;
+}
+.rc-checkbox-checked .rc-checkbox-inner:after {
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  display: table;
+  width: 5px;
+  height: 8px;
+  border: 2px solid #ffffff;
+  border-top: 0;
+  border-left: 0;
+  content: ' ';
+  -webkit-animation-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+          animation-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  -webkit-animation-duration: 0.3s;
+          animation-duration: 0.3s;
+  -webkit-animation-name: amCheckboxOut;
+          animation-name: amCheckboxOut;
+}
+.rc-checkbox-disabled.rc-checkbox-checked:hover .rc-checkbox-inner {
+  border-color: #6662ff;
+}
+.rc-checkbox-disabled.rc-checkbox-checked .rc-checkbox-inner {
+  background-color: #f3f3f3;
+  border-color: #6662ff;
+}
+.rc-checkbox-disabled.rc-checkbox-checked .rc-checkbox-inner:after {
+  -webkit-animation-name: none;
+          animation-name: none;
+  border-color: #cccccc;
+}
+.rc-checkbox-disabled:hover .rc-checkbox-inner {
+  border-color: #6662ff;
+}
+.rc-checkbox-disabled .rc-checkbox-inner {
+  border-color: #6662ff;
+  background-color: #f3f3f3;
+}
+.rc-checkbox-disabled .rc-checkbox-inner:after {
+  -webkit-animation-name: none;
+          animation-name: none;
+  border-color: #f3f3f3;
+}
+.rc-checkbox-disabled .rc-checkbox-inner-input {
+  cursor: default;
+}
+@-webkit-keyframes amCheckboxIn {
+  0% {
+    opacity: 0;
+    -webkit-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+    -webkit-transform: scale(0, 0) rotate(45deg);
+            transform: scale(0, 0) rotate(45deg);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+    -webkit-transform: scale(1, 1) rotate(45deg);
+            transform: scale(1, 1) rotate(45deg);
+  }
+}
+@keyframes amCheckboxIn {
+  0% {
+    opacity: 0;
+    -webkit-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+    -webkit-transform: scale(0, 0) rotate(45deg);
+            transform: scale(0, 0) rotate(45deg);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+    -webkit-transform: scale(1, 1) rotate(45deg);
+            transform: scale(1, 1) rotate(45deg);
+  }
+}
+@-webkit-keyframes amCheckboxOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes amCheckboxOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.user-login {
+    .fa-facebook-f:before, .fa-facebook:before {
+        font-size : 20px;
+    }
 }

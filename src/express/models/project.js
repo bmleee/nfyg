@@ -7,6 +7,8 @@ import PostModel from './post'
 import PurchaseModel from './purchase'
 import UserModel from './user'
 
+import LikeModel from './like'
+
 import FacebookTracker from '../../lib/FacebookTracker'
 import * as ac from '../lib/auth-check'
 
@@ -23,7 +25,7 @@ const ProjectSchema = new Schema({
 		shortTitle: {type: String, required: true},
 		imgSrc: {type: String, required: true},
 		category: {type: String, required: false}, // refers to react/constants/selectOptions
-		projectName: {type: String, required: true, unique: true, validate: [
+		projectName: {type: String, required: false, unique: true, validate: [
 			function(projectName) {
 				return !restrictedNames.includes(projectName);
 			}, `이미 존재하는 링크입니다. ${restrictedNames}`
@@ -35,10 +37,11 @@ const ProjectSchema = new Schema({
 	},
 
 	creator: {
-		creatorName: {type: String, required: true},
+		creatorName: {type: String, required: false},
 		creatorImgSrc: {type: String, required: false},
-		creatorLocation: {type: String, },
-		creatorDescription: {type: String,},
+		creatorLocation: {type: String, required: false},
+		creatorDescription: {type: String, required: false},
+		creatorEmail: {type: String, required: false},
 	},
 
 	authorizedUsers: [{ type: Schema.Types.ObjectId, ref: 'User' }],
@@ -51,19 +54,25 @@ const ProjectSchema = new Schema({
 	// Funding
 	funding: {
 		currentMoney: {type: Number, required: true},   // 직접 / 간접 후원에 의해 추가됨
+		currentMoney_sub: {type: Number, required: true},
+		numValidPurchases_sub: {type: Number, required: true},
 		targetMoney: {type: Number, required: true},
 		shippingFee: {type: Number, default: 0},
 		dateFrom: {type: String, required: true}, // 작성 시작 일
 		dateTo: {type: String, required: true}, // 바로 다음날
+		etcrewardActive: {type: Boolean, required: false},
+		mustrewardActive: {type: Boolean, required: false},
+		remainingDays_sub: {type: Number, required: false, default: 0},
 		rewards: [
 			{
-				title: {type: String, required: true},
+				title: {type: String, required: false},
 				description: {type: String, required: false},
 				imgSrc: {type: String,},
 				isDirectSupport: {type: Boolean, required: false},
 				shippingDay: {type: String, required: false},
-				thresholdMoney: {type: Number, required: true},
+				thresholdMoney: {type: Number, required: false},
 				maxPurchaseVolume: {type: Number, required: false},
+				vaildcount: {type: Number, required: false, default: 0},
 			}
 		]
 	},
@@ -93,14 +102,17 @@ const ProjectSchema = new Schema({
 		ref: 'QnA'
 	}],
 	numQnAs: {type: Number, default: 0},
+	subValidPurchases: {type: Number, default: 0},
+	orderNum: {type: Number, default: 0},
+	numIndirectSupports : {type: Number, default: 0},
 
 	// Contents
 	relatedContents: [{
-		title: {type: String, required: true},
-		imgSrc: {type: String, required: true},
-		link: {type: String, required: true},
+		title: {type: String, required: false},
+		imgSrc: {type: String, required: false},
+		link: {type: String, required: false},
 	}]
-
+	
 });
 
 // ProjectSchema.pre('update', function (next) {
@@ -147,16 +159,39 @@ ProjectSchema.methods.toFormat = async function (type, ...args) {
 
 	try {
 		let {
-			likes, shares, comments, num_useres, num_posts,
+			likes, shares, comments, num_users, num_posts,
 			money_by_sharing, recent_3_user_ids,
 			post_messages
 		} = await FacebookTracker.getProjectSummary(this.abstract.projectName)
-
+		
+		//console.log('num_useres', num_users)
+		//console.log('likes', likes)
+		//console.log('shares', shares)
+		//console.log('comments', comments)
+		//console.log('money_by_sharing', money_by_sharing)
+		//console.log('num_posts', num_posts)
+		// console.log('post_messages', post_messages)
+		
+		let project_purchase_info = await this.contentgetPurchaseInfo()
+		
+		var DirectMoneySum = 0;
+		 for(var idx in project_purchase_info && project_purchase_info.purchases){
+			DirectMoneySum += Number(project_purchase_info && project_purchase_info.purchases[idx].purchase_info.amount);
+		}
+		
+		this.funding.currentMoney_sub = DirectMoneySum;
+		this.funding.numValidPurchases_sub = await PurchaseModel.countValidPurchase({ project: this })
+		await this.save()
+		
+		// let	purchase_info = await Promise.all(this.getPurchaseInfo())
+		
 		switch (type) {
 			case 'home':
 				switch (this.abstract.state) {
+					
 
 					case 'preparing':
+						
 						return {
 							imgSrc: this.abstract.imgSrc,
 							title: this.abstract.shortTitle,
@@ -169,6 +204,7 @@ ProjectSchema.methods.toFormat = async function (type, ...args) {
 								iconSrc: this.creator.creatorImgSrc,
 							},
 							link: `/projects/${this.abstract.projectName}`,
+							projectName: this.abstract.projectName,
 						}
 
 					case 'completed':
@@ -182,11 +218,13 @@ ProjectSchema.methods.toFormat = async function (type, ...args) {
 							targetMoney: this.funding.targetMoney,
 							currentMoney: this.funding.currentMoney,
 							numDirectSupports: await PurchaseModel.count({project: this}),
-							numIndirectSupports: Math.floor(Math.random() * 300), // TODO: from IndirectSupport
+							numIndirectSupports: num_posts,
 							link: `/projects/${this.abstract.projectName}`,
+							projectName: this.abstract.projectName,
 						}
 
 					case 'in-progress':
+						
 					default:
 						return {
 							imgSrc: this.abstract.imgSrc,
@@ -195,22 +233,37 @@ ProjectSchema.methods.toFormat = async function (type, ...args) {
 							targetMoney: this.funding.targetMoney,
 							currentMoney: this.funding.currentMoney + money_by_sharing,
 							numDirectSupports: await PurchaseModel.count({project: this}),
-							numIndirectSupports: Math.floor(Math.random() * 300), // TODO: from IndirectSupport
-							remainingDays: ( new Date(this.funding.dateTo).getTime() - new Date().getTime() ) / 1000 / 60 / 60 / 24,
+							numIndirectSupports: num_posts,
+							remainingDays: ((new Date(this.funding.dateTo).getTime() + 86400000) - new Date().getTime() ) / 1000 / 60 / 60 / 24,
 							link: `/projects/${this.abstract.projectName}`,
 							postIntro: this.abstract.postIntro,
+							abstract: this.abstract,
+							projectName : this.abstract.projectName,
+							project_purchase_info,
+							DirectMoneySum,
+							orderNum: this.orderNum,
 						}
-
+					
 				} // end of switch this.abstract.state
 
 			case 'project_detail':
 				let user = args[0];
 				let canEdit = args[1];
-				let money = (canEdit || !user) ? 0 :  await user.supportedMoney({projectName: this.abstract.projectName});
+				let money = (canEdit || !user) ? 0 :  await user.supportedMoney(this);
 				let posts = this.posts.map(p => p.toFormat('project_detail', ac.canEdit(user, this), money))
 				let qnas = this.qnas.map(q => q.toFormat('project_detail'))
 				let numValidPurchases = await PurchaseModel.countValidPurchase({ project: this })
 				
+				let like = await LikeModel.findByUserAndProject(user, this)
+				let like_num = await LikeModel.findByProject(this)
+				
+				for(var i in this.funding.rewards) {
+					for(var e in project_purchase_info && project_purchase_info.purchases) {
+						if(project_purchase_info && project_purchase_info.purchases[e].result_description.indexOf(this.funding.rewards[i].title) != -1) {
+							this.funding.rewards[i].vaildcount = this.funding.rewards[i].vaildcount + project_purchase_info && project_purchase_info.purchases[e].purchaseAmount;
+						}
+					}
+				}
 				
 				let indirectSupporters = post_messages.map(pm => ({
 					fbId: pm.user_app_scope_id,
@@ -222,7 +275,12 @@ ProjectSchema.methods.toFormat = async function (type, ...args) {
 					comments: pm.shares,
 					money: (pm.likes + pm.comments + pm.shares) * 200,
 				}))
-
+				
+				
+				// console.log('프로젝트this', this)
+				
+				console.log('구매내역', purchase_info)
+				
 				return {
 					abstract: this.abstract,
 					creator: this.creator,
@@ -257,6 +315,7 @@ ProjectSchema.methods.toFormat = async function (type, ...args) {
 					},
 					qna: {
 						posts: qnas,
+						recentQnA: this.qnas[0] && (Date.now() - this.qnas[0].abstract.created_at) / 1000 / 60 / 60 / 24 < 3
 					},
 					ranking: {
 						recent3DirectSupporters: [
@@ -268,8 +327,16 @@ ProjectSchema.methods.toFormat = async function (type, ...args) {
 					},
 					directSupporters: (await PurchaseModel.findByProject(this)).map(async (_) => await _.toFormat('project_detail')),
 					indirectSupporters: indirectSupporters,
+					numIndirectSupports: num_posts,
 					relatedContents: this.relatedContents,
 					numValidPurchases,
+					subValidPurchases: this.subValidPurchases,
+					orderNum: this.orderNum,
+					project_purchase_info,
+					DirectMoneySum,
+					funding_reward : this.funding.rewards,
+					like : like[0],
+					like_num
 				}
 
 
@@ -293,14 +360,16 @@ ProjectSchema.methods.toFormat = async function (type, ...args) {
 
 			case 'summary':
 				let [
-					sharing_info,
+					// sharing_info,
 					purchase_info,
 					authorizedUsers
 				] = await Promise.all([
-						this.getSharingInfo(), // likes, shares, comments, num_users, num_posts, money_by_sharing,
+						// this.getSharingInfo(), // likes, shares, comments, num_users, num_posts, money_by_sharing,
 						this.getPurchaseInfo(),
 						Promise.all(this.authorizedUsers.map(async (u) => await u.toFormat('profile_admin')))
 				])
+				
+				console.log('posts2222', this.posts)
 
 				return {
 					abstract: this.abstract,
@@ -310,7 +379,7 @@ ProjectSchema.methods.toFormat = async function (type, ...args) {
 					qnas: sortBy( this.qnas, (p) => -new Date(p.abstract.created_at).getTime()),
 					sponsor: this.sponsor,
 					authorizedUsers,
-					sharing_info,
+					// sharing_info,
 					purchase_info
 				}
 
@@ -358,6 +427,20 @@ ProjectSchema.methods.getSharingInfo = async function () {
 
 ProjectSchema.methods.getPurchaseInfo = async function () {
 	let purchases = await PurchaseModel.findByProject(this)
+	purchases = await Promise.all(purchases.map(
+		async (p) => await p.toFormat('profile')
+	))
+
+	let stat = countBy(purchases.map(p => p.purchase_info), 'purchase_state')
+
+	return {
+		stat,
+		purchases,
+	}
+}
+
+ProjectSchema.methods.contentgetPurchaseInfo = async function () {
+	let purchases = await PurchaseModel.findByProject(this).where('purchase_info.purchase_state').in(['preparing', 'scheduled', 'failed'])
 	purchases = await Promise.all(purchases.map(
 		async (p) => await p.toFormat('profile')
 	))

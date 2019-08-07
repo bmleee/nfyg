@@ -1,28 +1,38 @@
 <html>
+	<link rel="stylesheet" type="text/css" href="style.css"/>
 	<head>
-		<title>결제 예약 내역</title>
+		<title>[7Pictures] 결제 예약 내역 : <%= result_description %> </title>
 	</head>
 	<body>
-		<h3>결제 예약 내역</h3>
-		<h4><%= pName %></h4>
-		<div>
-			주소: <%= JSON.stringify(address) %>
-		</div>
-
-		<div>
-			리워드: <%= JSON.stringify(reward) %>
-		</div>
-
-		<div>
-			구매 수량: <%= purchaseAmount %>
-		</div>
-
-		<div>
-			배송비: <%= shippingFee %>
-		</div>
-
-		<div>
-			결제 금액: <%= amount %>
+		<div class="mail-body">
+			<div class="mail-logo-body">
+				<img class="mail-logo" src="https://netflix-salon.co.kr/assets/images/7pictures_mail.jpg" > 
+			</div>
+			<div class="mail-content-body">
+				<div class="mail-content-title">[결제 예약]</div>
+				<div class="mail-content-text">안녕하세요, <%= user.display_name %>님!</div>
+				<div class="mail-content-text">7Pictures 프로젝트 후원에 감사드립니다.</div>
+				<div class="mail-content-empty"></div>
+				<h3>예약 내역</h3>
+				<div class="mail-content-text">
+					제 목 : <a href="<%= pNameLink %>"> <%= pTitle %> </a>
+				</div>
+				<div class="mail-content-text">
+					품 명 : <%= result_description %>
+				</div>
+				<div class="mail-content-text">
+					금 액 : <%= amount %>원
+				</div>
+				<div class="mail-content-text">
+					<%= new_Dday %> 자동으로 결제가 진행됩니다.
+				</div>
+				<h3>예약 취소 안내</h3>
+				<div class="mail-content-text">
+					결제 예약 취소는 홈페이지 우측상단의 '내 페이지'에서 <%= Dday %> 이전까지 가능합니다.
+				</div>
+				<div class="mail-content-empty"></div>
+				<div class="mail-content-text">다시한번 프로젝트 후원에 감사드립니다!</div>
+			</div>
 		</div>
 
 	</body>

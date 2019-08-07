@@ -1,0 +1,140 @@
+.project-detail-overview {
+	// display: flex;
+	// flex-flow: column;
+	margin-bottom : 60px !important;
+
+	.project-detail-overview-info {
+		// display: flex;
+		// flex-flow: column;
+		.editorStyles__viewerWrapper {
+			width : 100%;
+		}
+		h3 {
+			margin-bottom : 20px;
+		}
+	}
+}
+
+.project-notice {
+	padding : 15px;
+	margin-bottom : 2px;
+	border : 1px solid #f1f1f1;
+	font-family : NanumSquare;
+}
+.project-notice-element-1 {
+	font-size : 15px;
+	margin-bottom : 8px;
+	color : #6662ff;
+	font-family : NanumSquare;
+}
+.project-notice-element-2 {
+	font-size : 14px;
+	margin-bottom : 8px;
+	font-family : NanumSquare;
+}
+.project-notice-element {
+	font-size : 14px;
+	font-family : NanumSquare;
+}
+.project-notice-strong {
+	display : inline-block;
+	font-weight : 600;
+	margin-right : 3px;
+	font-family : NanumSquare;
+}
+.project-notice-strong-sub {
+	display : inline-block;
+	font-weight : 600;
+	margin-left : 6px;
+	margin-right : 3px;
+	font-family : NanumSquare;
+}
+.project-notice-strong-2 {
+	font-weight : 600;
+	font-family : NanumSquare;
+}
+
+.project-notice-element-3 {
+	font-size : 14px;
+	margin-top : 8px;
+	font-family : NanumSquare;
+}
+
+
+
+
+.contact-container {
+	width: 800px;
+    margin: 0px auto 30px auto;
+    text-align: center;
+    padding: 25px 20px;
+    background: #f3f3f3;
+	@media(max-width:991px) {
+		width : 90%;
+		@media(max-width:500px) {
+			width : 100%;
+		}
+	}
+}
+.contact-text{
+    color: #666;
+    font-size: 12px;
+    line-height : 1.6;
+}
+.contact-button {
+	margin-top: 0;
+    background: #6662ff;
+    padding: 10px 80px;
+    border: none;
+    outline: 0;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: NanumSquare;
+    border-radius: 3px;
+    @media(max-width:991px) {
+    	
+		@media(max-width:500px) {
+			padding : 10px 15px;
+			width : 100%;
+		}
+	}
+}
+.contact-type {
+	margin-bottom: 10px;
+    font-size: 14px;
+    color: #555;
+    font-weight: 600;
+}
+
+.contact-type-select {
+	width: 100%;
+    height: 35px;
+    border-radius: 2px;
+    margin-top: 5px;
+    font-weight: 400;
+    font-size: 15px;
+    padding: 5px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: url(https://7pictures.kr/assets/images/down-arrow.svg) no-repeat right 10px center;
+    background-size : 20px;
+}
+.contact-content {
+    font-size: 14px;
+    color: #555;
+    font-weight: 600;
+}
+.contact-content-textarea {
+	width: 100%;
+    min-height: 155px;
+    margin-top: 5px;
+    padding: 5px 8px;
+    font-weight: 400;
+    border-radius : 2px;
+    max-width: 440px;
+    max-height: 155px;
+    @media(max-width : 500px) {
+        padding: 5px 3px;
+    }
+}

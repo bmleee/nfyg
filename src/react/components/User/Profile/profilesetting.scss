@@ -1,12 +1,13 @@
 .profile-setting-container {
 	width : 800px;
 	margin : 0px auto 60px auto;
+	min-height : 800px;
 }
 .profile-setting-detail {
 	margin : 12px 0px;
 }
 .profile-setting-detail-m {
-	margin : 12px 0px;
+	margin : 0px;
 	display : inline-block;
 	width : 50%;
 }
@@ -18,12 +19,14 @@
 	color : #555;
 	margin : 7px 0px !important;
 	font-weight : 600 !important;
+	font-family : NanumSquare;
 }
 .profile-checkbox-title {
 	font-size : 14px !important;
 	color : #555;
 	font-weight : 600 !important;
 	display : inline-block;
+	font-family: NanumSquare;
 }
 .profile-user-img-setting-container {
 	padding : 15px;
@@ -66,9 +69,10 @@
 	padding : 0px 8px;
 	font-weight : 600 !important;
 	color : #333;
+	font-family: NanumSquare;
 }
 .profile-setting-text:focus {
-	border-color : #150C8B;
+	border-color : #6662ff;
 }
 .profile-setting-num-container-1 {
 	display : inline-block;
@@ -93,9 +97,10 @@
 	padding : 0px 8px;
 	font-weight : 600 !important;
 	color : #333;
+	font-family: NanumSquare;
 }
 .profile-setting-num-1:focus {
-	border-color : #150C8B;
+	border-color : #6662ff;
 }
 .profile-setting-num-2, .profile-setting-num-3 {
 	border : 1px solid #bbb;
@@ -106,9 +111,10 @@
 	padding : 0px 8px;
 	font-weight : 600 !important;
 	color : #333;
+	font-family: NanumSquare;
 }
 .profile-setting-num-2:focus, .profile-setting-num-3:focus {
-	border-color : #150C8B;
+	border-color : #6662ff;
 }
 .project-setting-textarea {
 	border : 1px solid #bbb;
@@ -121,32 +127,53 @@
 	font-weight : 600 !important;
 	color : #333;
 	height : 80px;
+	font-family: NanumSquare;
 }
 .project-setting-textarea:focus {
-	border-color : #150C8B;
+	border-color : #6662ff;
 }
-.profile-setting-search-address-container {
-	display : inline-block;
-	width : 18%;
-	padding-right : 6px;
+.profile-setting-search-address-container-wrap {
+	display : none;
+	width : 20%;
+	padding : 6px 6px 0px 0px;
 	.profile-setting-search-address {
 		border : none;
 		outline : none;
 		border-radius : 3px;
-		background : #150C8B;
+		background : #6662ff;
 		color : #fff;
 		height : 36px;
 		width : 100%;
 		font-weight : 600;
+		font-family: NanumSquare;
 	}
 	.profile-setting-search-address:hover {
-		background : #0d0669;
+		background : #5346ff;
+	}
+}
+.profile-setting-search-address-container {
+	display : inline-block;
+	width : 20%;
+	padding : 6px 6px 0px 0px;
+	.profile-setting-search-address {
+		border : none;
+		outline : none;
+		border-radius : 3px;
+		background : #6662ff;
+		color : #fff;
+		height : 36px;
+		width : 100%;
+		font-weight : 600;
+		font-family: NanumSquare;
+	}
+	.profile-setting-search-address:hover {
+		background : #5346ff;
 	}
 }
 .profile-setting-postcode-container {
 	display : inline-block;
-	width : 32%;
-	padding-right : 10px;
+	width : 30%;
+	padding-right : 10px !important;
 	.profile-setting-postcode {
 		border : 1px solid #bbb;
 		border-radius : 3px;
@@ -156,16 +183,16 @@
 		padding : 0px 8px;
 		font-weight : 600 !important;
 		color : #333;
+		font-family: NanumSquare;
 	}
 	.profile-setting-postcode:focus {
-		border-color : #150C8B;
+		border-color : #6662ff;
 	}
 }
 .profile-setting-address1-container {
 	display : inline-block;
 	width : 50%;
 	padding-top : 6px;
-	padding-right : 10px;
 	.profile-setting-address1 {
 		border : 1px solid #bbb;
 		border-radius : 3px;
@@ -175,9 +202,10 @@
 		padding : 0px 8px;
 		font-weight : 600 !important;
 		color : #333;
+		font-family: NanumSquare;
 	}
 	.profile-setting-address1:focus {
-		border-color : #150C8B;
+		border-color : #6662ff;
 	}
 }
 .profile-setting-address2-container {
@@ -193,9 +221,29 @@
 		padding : 0px 8px;
 		font-weight : 600 !important;
 		color : #333;
+		font-family: NanumSquare;
 	}
 	.profile-setting-address2:focus {
-		border-color : #150C8B;
+		border-color : #6662ff;
+	}
+}
+.profile-setting-addressdetail-container {
+	display : inline-block;
+	width : 100%;
+	padding-top : 6px;
+	.profile-setting-address2 {
+		border : 1px solid #bbb;
+		border-radius : 3px;
+		outline : none;
+		width : 100%;
+		height : 36px;
+		padding : 0px 8px;
+		font-weight : 600 !important;
+		color : #333;
+		font-family: NanumSquare;
+	}
+	.profile-setting-address2:focus {
+		border-color : #6662ff;
 	}
 }
 .profile-setting-submit-container {
@@ -203,18 +251,20 @@
 	margin : 35px 0px;
 }
 .profile-setting-submit {
-		border : none;
-		outline : none;
-		border-radius : 3px !important;
-		background : #150C8B;
-		color : #fff;
-		height : 36px;
-		width : 20%;
-		font-weight : 600;
-	}
-	.profile-setting-submit:hover {
-		background : #0d0669;
-	}
+	border : none;
+	outline : none;
+	border-radius : 3px !important;
+	background : #6662ff;
+	color : #fff;
+	height : 40px;
+	width : 20%;
+	font-weight : 600;
+	font-family: NanumSquare;
+	font-size : 17px;
+}
+.profile-setting-submit:hover {
+	background : #5346ff;
+}
 @media (max-width : 991px) {
 	.profile-setting-container {
 	width : 95%;
@@ -222,6 +272,12 @@
 	}
 	.profile-setting-submit {
 		width : 30%;
+	}
+	.profile-setting-search-address-container {
+		display : none;
+	}
+	.profile-setting-search-address-container-wrap {
+		display : inline-block !important;
 	}
 @media (max-width : 500px) {
 	.profile-user-img-setting-container {
@@ -244,7 +300,10 @@
 		padding : 0px !important;
 	}
 	.profile-setting-search-address-container {
-		width : 30%;
+		
+	}
+	.profile-setting-search-address-container-wrap {
+		width : 40%;
 		.profile-setting-search-address {
 			font-size : 13px;
 		}
@@ -254,8 +313,8 @@
 		font-size : 13px;
 	}
 	.profile-setting-postcode-container {
-		width : 70%;
-		padding-right : 0px;
+		width : 60%;
+		padding-right : 0px !important;
 	}
 	.profile-setting-address1-container {
 		display : block;
@@ -263,6 +322,10 @@
 		padding-right : 0px;
 	}
 	.profile-setting-address2-container {
+		display : block;
+		width : 100%;
+	}
+	.profile-setting-addressdetail-container {
 		display : block;
 		width : 100%;
 	}

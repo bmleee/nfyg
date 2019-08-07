@@ -29,7 +29,6 @@ import * as ac from '../../lib/auth-check'
 const router = express.Router();
 
 router.get('/:_id', isLoggedIn, async (req, res) => {
-  console.log('588c99b2225da0200606c2b1588c99b2225da0200606c2b1588c99b2225da0200606c2b1588c99b2225da0200606c2b1');
   try {
     let post = await PostModel.findOne({ _id: req.params._id })
     if (!post) throw Error(`Post ${req.params._id} not found`)
@@ -68,6 +67,8 @@ router.put('/:_id', isLoggedIn, async (req, res) => {
 
     let post = await PostModel.findById(req.params._id).populate("project product")
     if (!post) throw Error('No post found')
+    
+    body.abstract.created_at = post.abstract.created_at || Date.now();
 
     if (!ac.canEdit(user, post.project || post.product)) throw Error(`Can't delete unauthorized post`)
 

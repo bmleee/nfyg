@@ -25,7 +25,7 @@ import * as renderUser from '../../lib/renderUser'
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-	console.log('api/auth/fetch/sponsors/', );
+	console.log('api/auth/fetch/sponsors/' );
 
 	try {
 		const sponsors = await SponsorModel.find({}).sort({"abstract.created_at": -1})

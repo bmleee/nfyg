@@ -9,17 +9,17 @@ import { SelectOptions } from '~/src/react/constants'
 
 // ----
 const LongTitleWrapper = ({value}) => value
-	? <span>{value}</span>
-	: <span></span>
+	? <span className="form-wrapper-span">{value}</span>
+	: <span className="form-wrapper-span"></span>
 const LongTitleForm = ({value, onChange}) =>
-	<input type="text" value={value} onChange={onChange} />
+	<input className="editor_input" type="text" value={value} onChange={onChange} />
 
 // ----
 const ShortTitleWrapper = ({value}) => value
-	? <span>{value}</span>
-	: <span></span>
+	? <span className="form-wrapper-span">{value}</span>
+	: <span className="form-wrapper-span"></span>
 const ShortTitleForm = ({value, onChange}) =>
-	<input type="text" value={value} onChange={onChange} />
+	<input className="editor_input" type="text" value={value} onChange={onChange} />
 
 // ----
 const ImgSrcWrapper = ({value}) => !!value
@@ -27,14 +27,14 @@ const ImgSrcWrapper = ({value}) => !!value
 		<img src={value} alt=""/>
 )
 : (
-	<span></span>
+	<span className="form-wrapper-span"></span>
 )
 const ImgSrcForm = ({value, onChange}) =>
 	<img src={value} alt=""/>
 
 // ----
 const CategoryWrapper = ({value}) => (
-	<span>{value2label(SelectOptions.MagazineCategory, value)}</span>
+	<span className="form-wrapper-span">{value2label(SelectOptions.MagazineCategory, value)}</span>
 )
 const CategoryForm = ({value, onChange}) => (
 	<Select
@@ -48,15 +48,21 @@ const CategoryForm = ({value, onChange}) => (
 
 // ----
 const MagazineNameWrapper = ({value}) => value
-	? <span>{value}</span>
-	: <span></span>
+	? <span className="form-wrapper-span">https://netflix-salon.co.kr/magazines/{value}</span>
+	: <span className="form-wrapper-span"></span>
 const MagazineNameForm = ({value, onChange}) =>
-	<input type="text" value={value} onChange={onChange} />
+	<div>
+		<span className="form-wrapper-title">매거진 주소</span>
+		<span className="form-wrapper-description">매거진 페이지로 들어올 수 있는 마지막주소(URL)를 입력해주세요.</span>
+		<div className="editor-link-text">https://netflix-salon.co.kr/magazines/</div>
+		<input className="editor-link-input" type="text" value={value} onChange={onChange} maxLength={28}/>
+		<span className="editor-remain-char">{28 - value.length}자 남았습니다.</span>
+	</div>
 
 // ----
 const MagazineDescriptionWrapper = ({value}) => value
-	? <span>{value}</span>
-	: <span></span>
+	? <span className="form-wrapper-span">{value}</span>
+	: <span className="form-wrapper-span"></span>
 const MagazineDescriptionForm = ({value, onChange}) =>
 	// <input type="textarea" value={value} onChange={onChange} />
 	<textarea value={value} onChange={onChange} cols="30" rows="3"/>
@@ -64,31 +70,31 @@ const MagazineDescriptionForm = ({value, onChange}) =>
 
 // ----
 const CreatorNameWrapper = ({value}) => value
-	? <span>{value}</span>
-	: <span></span>
+	? <span className="form-wrapper-span">{value}</span>
+	: <span className="form-wrapper-span"></span>
 const CreatorNameForm = ({value, onChange}) =>
-	<input type="text" value={value} onChange={onChange} />
+	<input className="editor_input" type="text" value={value} onChange={onChange} />
 
 // ----
 const CreatorImgSrcWrapper = ({value}) => !!value
 	? <img src={value} alt=""/>
-	: <span></span>
+	: <span className="form-wrapper-span"></span>
 const CreatorImgSrcForm = ({value, onChange}) =>
 	<img src={value} alt=""/>
 
 // ----
 const CreatorLocationWrapper = ({value}) => value
-	? <span>{value}</span>
-	: <span></span>
+	? <span className="form-wrapper-span">{value}</span>
+	: <span className="form-wrapper-span"></span>
 const CreatorLocationForm = ({value, onChange}) =>
-	<input type="text" value={value} onChange={onChange} />
+	<input className="editor_input" type="text" value={value} onChange={onChange} />
 
 // ----
 const CreatorDescriptionWrapper	 = ({value}) => value
-	? <span>{value}</span>
-	: <span></span>
+	? <span className="form-wrapper-span">{value}</span>
+	: <span className="form-wrapper-span"></span>
 const CreatorDescriptionForm = ({value, onChange}) =>
-	<input type="text" value={value} onChange={onChange} />
+	<input className="editor_input" type="text" value={value} onChange={onChange} />
 
 
 const Abstract = ({

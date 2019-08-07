@@ -1,0 +1,31 @@
+<html>
+	<link rel="stylesheet" type="text/css" href="style.css"/>
+	<head>
+		<title>[7Pictures] <%= items %> 발송완료</title>
+	</head>
+	<body>
+		<div class="mail-body">
+			<div class="mail-logo-body">
+				<img class="mail-logo" src="https://netflix-salon.co.kr/assets/images/7pictures_mail.jpg" > 
+			</div>
+			<div class="mail-content-body">
+				<div class="mail-content-title">[발송 완료]</div>
+				<div class="mail-content-text">안녕하세요, <%= name %>님!</div>
+				<div class="mail-content-text">구매하신 <%= title %>의 <%= items %> 발송이 완료 되었습니다.</div>
+				<div class="mail-content-empty"></div>
+				<h3>발송 내역</h3>
+				<div class="mail-content-text">
+					품 명 : <%= title %>의 <%= items %>
+				</div>
+				<div class="mail-content-text">
+					택배사 : <a href="<%= shippingCompany_link %>"> <%= shippingCompany %> </a>
+				</div>
+				<div class="mail-content-text">
+					송장번호 : <%= invoice_number %>
+				</div>
+				<div class="mail-content-empty"></div>
+				<div class="mail-content-text">구매해주셔서 감사합니다!</div>
+			</div>
+		</div>
+	</body>
+</html>

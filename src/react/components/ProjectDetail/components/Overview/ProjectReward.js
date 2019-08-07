@@ -32,16 +32,15 @@ const sliderSettings = {
 class ProjectReward extends Component {
 
 	render() {
-		console.log(this)
+		// console.log(this)
 		let {
 			rewards,
 			projectName,
 		} = this.props;
-
-
-		console.log('ProjectReward.rewards', rewards);
 		
-		console.log(rewards.length);
+		
+
+		// console.log('ProjectReward.rewards', rewards);
 		
 		let {
 			isLoggedIn,
@@ -68,11 +67,9 @@ class ProjectReward extends Component {
 		})
 
 		return (
-			rewards.length === 0
+			rewards.length === 0 
 			?
-			<div className="project-detail-reward">
-				
-			</div>
+			<div></div>
 			:
 			<div className="project-detail-reward">
 				<Slider {...sliderSettings} >
@@ -93,6 +90,8 @@ class ProjectReward extends Component {
 						)
 				}
 			</div>
+			
+			
 		)
 	}
 

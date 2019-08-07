@@ -25,7 +25,7 @@ let PostSchema = new Schema({
 		isDirectSupport: {type: Boolean, required: true, default: false},
 		thresholdMoney: {type: Number, required: true, default: 0},
 		title: {type: String, required: true},
-		created_at: {type: Date, default: Date.now()},
+		created_at: {type: Date},
 		updated_at: {type: Date, default: Date.now()},
 		likes: [{type: Schema.Types.ObjectId, ref: 'User'}],
 		// numLikes: {type: Number, default: 0}, // TODO: be virtual field
@@ -105,9 +105,8 @@ PostSchema.methods.toFormat = function (type, ...args) {
 			let canEdit = args[0];
 			let money = args[1];
 
-			// console.log('money: ', money);
-			// console.log(this);
-
+			//console.log('money: ', money);
+			
 			// get user's support money
 			return {
 				_id: this._id,
@@ -115,8 +114,6 @@ PostSchema.methods.toFormat = function (type, ...args) {
 				author: this.author,
 				title: this.abstract.title,
 				created_at: this.abstract.created_at,
-				numSupporters: 10, // TODO: [Definition] what is support of this post?????
-				likes: this.abstract.numLikes,
 				content: this.content.html,
 				contentRaw: this.content.raw,
 				comments: this.comments,

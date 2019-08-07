@@ -13,18 +13,24 @@ import { fetchOptions } from '~/src/react/api/AppAPI'
 
 // ----
 const LongTitleWrapper = ({value}) => (
-	<span>{value}</span>
+	<span className="form-wrapper-span">{value}</span>
 )
 const LongTitleForm = ({value, onChange}) => (
-	<input type="text" value={value} onChange={onChange} />
+	<div>
+		<span className="form-wrapper-title">프로젝트 제목</span>
+		<input className="editor_input" type="text" value={value} onChange={onChange} maxLength={32} />
+	</div>
 )
 
 // ----
 const ShortTitleWrapper = ({value}) => (
-	<span>{value}</span>
+	<span className="form-wrapper-span">{value}</span>
 )
 const ShortTitleForm = ({value, onChange}) => (
-	<input type="text" value={value} onChange={onChange} />
+	<div>
+		<span className="form-wrapper-title">프로젝트 짧은 제목</span>
+		<input className="editor_input" type="text" value={value} onChange={onChange} maxLength={32} />
+	</div>
 )
 
 // ----
@@ -33,80 +39,124 @@ const ImgSrcWrapper = ({value}) => !!value
 		<img src={value} alt=""/>
 )
 : (
-	<span></span>
+	<span className="form-wrapper-span"></span>
 )
-const ImgSrcForm = ({value, onChange}) =>
-	<img src={value} alt=""/>
+const ImgSrcForm = ({value, onChange}) => (
+	<div>
+		<span className="form-wrapper-title">프로젝트 대표이미지</span>
+		<img src={value} alt=""/>
+	</div>
+)
 // ----
 const CategoryWrapper = ({value}) => (
-	<span>{value2label(SelectOptions.ProjectCategory, value)}</span>
+	<span className="form-wrapper-span">{value2label(SelectOptions.ProjectCategory, value)}</span>
 )
 const CategoryForm = ({value, onChange}) => (
-	<Select
-		value={value}
-		onChange={onChange}
-		options={SelectOptions.ProjectCategory}
-	/>
+	<div>
+		<span className="form-wrapper-title">프로젝트 카테고리</span>
+		<Select
+			value={value}
+			onChange={onChange}
+			options={SelectOptions.ProjectCategory}
+		/>
+	</div>
 )
 
 // ----
 const ProjectNameWrapper = ({value}) => !!value
-?	<span>{value}</span>
-: <span></span>
+?	<span className="form-wrapper-span">https://netflix-salon.co.kr/projects/{value}</span>
+: <span className="form-wrapper-span"></span>
 const ProjectNameForm = ({value, onChange}) => (
-	<input type="text" value={value} onChange={onChange} />
+	<div>
+		<span className="form-wrapper-title">프로젝트 주소</span>
+		<div className="editor-link-text">https://netflix-salon.co.kr/projects/</div>
+		<input className="editor-link-input" type="text" value={value} onChange={onChange} maxLength={28} />
+	</div>
 )
 
 // ----
 const StateWrapper = ({value}) => !!value
-?	<span>{value2label(SelectOptions.ProjectState, value)}</span>
-: <span></span>
+?	<span className="form-wrapper-span">{value2label(SelectOptions.ProjectState, value)}</span>
+: <span className="form-wrapper-span"></span>
 const StateForm = ({value, onChange}) => (
-	<Select
-		value={value}
-		onChange={onChange}
-		options={SelectOptions.ProjectState}
-	/>
+	<div>
+		<span className="form-wrapper-title">프로젝트 상태</span>
+		<Select
+			value={value}
+			onChange={onChange}
+			options={SelectOptions.ProjectState}
+		/>
+	</div>
 )
 
 // ----
 const PostIntroWrapper = ({value}) => !!value
-?	<span>{value}</span>
-: <span></span>
-const PostIntroForm = ({value, onChange}) =>
-	<textarea rows="3" cols="45" value={value} onChange={onChange}/>
-
+?	<span className="form-wrapper-span">{value}</span>
+:	<span className="form-wrapper-span"></span>
+const PostIntroForm = ({value, onChange}) => (
+	<div>
+		<span className="form-wrapper-title">프로젝트 요약</span>
+		<textarea rows="3" cols="45" value={value} onChange={onChange} maxLength={100}/>
+	</div>
+)
 // ----
 const CreatorNameWrapper = ({value}) => !!value
-? <span>{value}</span>
-: <span></span>
-const CreatorNameForm = ({value, onChange}) =>
-	<input type="text" value={value} onChange={onChange}/>
-
+? <span className="form-wrapper-span">{value}</span>
+: <span className="form-wrapper-span"></span>
+const CreatorNameForm = ({value, onChange}) => (
+	<div>
+		<span className="form-wrapper-title">진행자 이름</span>
+		<input className="editor_input" type="text" value={value} onChange={onChange} maxLength={20}/>
+	</div>
+)
 // ----
 const CreatorImgSrcWrapper = ({value}) => !!value
 ? <img src={value} alt=""/>
-: <span></span>
-const CreatorImgSrcForm = ({value, onChange}) =>
-	<img src={value} alt=""/>
+: <span className="form-wrapper-span"></span>
+const CreatorImgSrcForm = ({value, onChange}) => (
+	<div>
+		<span className="form-wrapper-title">프로필 이미지</span>
+		
+		{ !!value ? <img src={value} alt=""/> : null }
+	</div>
+)
 
 // ----
 const CreatorDescriptionWrapper = ({value}) => !!value
-? <span>{value}</span>
-: <span></span>
-const CreatorDescriptionForm = ({value, onChange}) =>
-	<textarea rows="3" cols="45" value={value} onChange={onChange}/>
+? <span className="form-wrapper-span">{value}</span>
+: <span className="form-wrapper-span"></span>
+const CreatorDescriptionForm = ({value, onChange}) => (
+	<div>
+		<span className="form-wrapper-title">진행자 소개</span>
+		<textarea rows="3" cols="45" value={value} onChange={onChange} maxLength={50}/>
+	</div>
+)
+
+// ---
+const CreatorEmailWrapper = ({value}) => !!value
+? <span className="form-wrapper-span">{value}</span>
+: <span className="form-wrapper-span"></span>
+const CreatorEmailForm = ({value, onChange}) => (
+	<div>
+		<span className="form-wrapper-title">진행자 메일주소</span>
+		<input className="editor_input" type="text" value={value} onChange={onChange} />
+	</div>
+)
 
 // ----
 const SponsorNameWrapper = ({value}) => !!value
-? <span>{value}</span>
-: <span></span>
-const SponsorNameForm = ({value, onChange}) =>
-<Select.Async
-	value={value}
-	onChange={onChange}
-	loadOptions={fetchOptions('sponsorName')}
-/>
+? <span className="form-wrapper-span">{value}</span>
+: <span className="form-wrapper-span"></span>
+const SponsorNameForm = ({value, onChange}) => (
+	<div>
+		<span className="form-wrapper-title">스폰서 이름</span>
+		<Select.Async
+			value={value}
+			onChange={onChange}
+			loadOptions={fetchOptions('sponsorName')}
+		/>
+	</div>
+)
 
 // ----
 const RelatedContentWrapper = ({value, handlers}) => {
@@ -116,18 +166,27 @@ const RelatedContentWrapper = ({value, handlers}) => {
 
 	let item = value && value.contents && value.contents.length > 0
 		? value.contents.map(({
-			title,
-			imgSrc,
-			link
-		}, index) => (
-			<div className="editor-item-detail-wrapper">
-				<span className="item-deatail-small-title-saved">제목: {title}</span>
-				<span className="item-deatail-small-title-saved">링크: {link}</span>
-				<img src={imgSrc}/>
-				<button className="item-deatail-delete" onClick={() => deleteContent(index)}>삭제하기</button>
-			</div>
+				title,
+				imgSrc,
+				link,
+				infoBackground = { 
+					backgroundImage: `url(${imgSrc})`,
+					backgroundSize: 'cover',
+					backgroundPosition: 'center center',
+					backgroundRepeat: 'no-repeat' }
+			}, index) => (
+				<div className="editor-related-item">
+					<a href={link} target="_blank">
+						<div className="editor-related-item-image" style={infoBackground}>
+							<span className="editor-related-item-title">{title}</span>
+						</div>
+					</a>
+					<button className="editor-related-item-delete" onClick={() => deleteContent(index)}>
+						삭제하기
+					</button>
+				</div>
 		))
-		: <span></span>
+		: <span className="form-wrapper-span"></span>
 
 	return (
 		<div className="recommends-wrapper-container">
@@ -152,16 +211,16 @@ const RelatedContentForm = ({value, handlers}) => {
 		<div className="recommends-form-container">
 			<div>
 				<span className="item-deatail-small-title">제목</span>
-				<input type="text" value={title} onChange={_onTitle}/>
+				<input className="editor_input" type="text" value={title} onChange={_onTitle} maxLength={16}/>
 			</div>
 			<div>
-				<span className="item-deatail-small-title">링크</span>
-				<input type="text" value={link} onChange={_onLink}/>
+				<span className="item-deatail-small-title">링크(https 또는 http로 시작하는 주소를 입력해주세요.)</span>
+				<input className="editor_input" type="text" value={link} onChange={_onLink}/>
 			</div>
 			<div>
 				<span className="item-deatail-small-title">이미지</span>
 				<input type="file" onChange={_onImgSrc} accept="image/*" />
-				<img src={imgSrc} alt="관런 콘텐츠 이미지를 추가하세요"/>
+				<img src={imgSrc}/>
 			</div>
 		</div>
 	)
@@ -181,9 +240,11 @@ const Abstract = ({
 		creatorName,
 		creatorImgSrc,
 		creatorDescription,
+		creatorEmail,
 	},
 	sponsor: {
 		sponsorName,
+		displayName
 	},
 
 	relatedContent,
@@ -200,8 +261,11 @@ const Abstract = ({
 	_onCreatorNameSubmit,
 	_onCreatorImgSrcSubmit,
 	_onCreatorDescriptionSubmit,
+	
+	_onCreatorEmailSubmit,
 
 	_onSponsorNameSubmit,
+	_onDisplayNameSubmit,
 
 	_onContentSubmit,
 
@@ -346,6 +410,19 @@ const Abstract = ({
 				onSubmit={_onCreatorDescriptionSubmit}
 				Wrapper={CreatorDescriptionWrapper}
 				Form={CreatorDescriptionForm}
+				classNameopen ="editor-open-container"
+			/>
+			
+			<FormWrapper
+				title="진행자 메일주소"
+				valueType={VALUE_TYPE.TEXT}
+				alt="진행자 메일주소를 입력해주세요"
+				initialValue={creatorEmail}
+				submitCaption={'진행자 메일주소를 입력해주세요'}
+				submitCaptionsub={'입력하기'}
+				onSubmit={_onCreatorEmailSubmit}
+				Wrapper={CreatorEmailWrapper}
+				Form={CreatorEmailForm}
 				className ="exhibition-eng-title"
 				classNameopen ="editor-open-container"
 			/>
@@ -356,7 +433,7 @@ const Abstract = ({
 				title="스폰서 이름"
 				valueType={VALUE_TYPE.SELECT}
 				alt="스폰서 이름을 입력 해 주세요"
-				initialValue={sponsorName}
+				initialValue={displayName}
 				submitCaption={'스폰서 이름을 입력하세요'}
 				submitCaptionsub={'입력하기'}
 				onSubmit={_onSponsorNameSubmit}

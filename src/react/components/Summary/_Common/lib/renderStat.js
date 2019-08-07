@@ -12,8 +12,9 @@ export default function (stat) {
 
   return (
     <div>
-      <h4>구매자 명단</h4>
       {/*
+      <h4>구매자 명단</h4>
+      
         // Object.keys(stat).map((k, index) => {
         //   <span key={index}>{k}: {stat[k]}</span>
         // })

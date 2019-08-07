@@ -8,18 +8,19 @@ import { canUseDOM } from '~/src/lib/utils'
 
 
 const IntroWrapper = ({value}) => !!value
-? <span>{value}</span>
-: <span>소개 문구를 입력하세요</span>
+? <span className="form-wrapper-span">{value}</span>
+: <span className="form-wrapper-span">소개 문구를 입력하세요</span>
 
 const IntroForm = ({value, onChange}) =>
 	<input type="text" value={value} onChange={onChange} />
 
 
 const Part1Wrapper = ({value}) => (
-	<span></span>
+	<span className="form-wrapper-span"></span>
 )
 const Part1Form = ({value, onChange}) => (
 	<div>
+		<span className="form-wrapper-title">프로젝트 내용</span>
 		<Editor
 			raw={value}
 			onChangeToRaw={onChange}
@@ -27,10 +28,11 @@ const Part1Form = ({value, onChange}) => (
 	</div>
 )
 const Part2Wrapper = ({value}) => (
-	<span></span>
+	<span className="form-wrapper-span"></span>
 )
 const Part2Form = ({value, onChange}) => (
 	<div>
+		<span className="form-wrapper-title">프로젝트 내용 Part2</span>
 		<Editor
 			raw={value}
 			onChangeToRaw={onChange}

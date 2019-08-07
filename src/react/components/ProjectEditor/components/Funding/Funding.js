@@ -10,25 +10,62 @@ import { value2label } from '~/src/react/lib/utils'
 
 const TargetMoneyWrapper = ({value}) => !!value
 ? (
-	<span>{value.toLocaleString()}원</span>
+	<span className="form-wrapper-span">{value.toLocaleString()}원</span>
 )
 : (
-	<span></span>
+	<span className="form-wrapper-span"></span>
 )
 const TargetMoneyForm = ({value, onChange}) => (
-	<input type="number" value={Number(value)} onChange={onChange} />
+	<div>
+		<span className="form-wrapper-title">목표 금액</span>
+		<input className="editor_input" type="number" value={Number(value)} onChange={onChange} maxLength={15} />
+	</div>
 )
 const DateToWrapper = ({value}) => (
-	<span>{value}</span>
+	<span className="form-wrapper-span">{value}</span>
 )
 const DateToForm = ({value, onChange}) => (
-	<input type="date" value={value} onChange={onChange} />
+	<div>
+		<span className="form-wrapper-title">프로젝트 종료일</span>
+		<input className="editor_input" type="date" value={value} onChange={onChange} />
+	</div>
 )
 const ShippingFeeWrapper = ({value}) => (
-	<span>{value}</span>
+	<span className="form-wrapper-span">{value}</span>
 )
 const ShippingFeeForm = ({value, onChange}) => (
-	<input type="number" value={Number(value)} onChange={onChange} />
+	<div>
+		<span className="form-wrapper-title">배송료</span>
+		<input className="editor_input" type="number" value={Number(value)} onChange={onChange} maxLength={5} />
+	</div>
+)
+
+const EtcrewardActiveWrapper = ({value}) => (
+	<span className="form-wrapper-span">{value2label(SelectOptions.EtcrewardActive, value)}</span>
+)
+const EtcrewardActiveForm = ({value, onChange}) => (
+	<div>
+		<span className="form-wrapper-title">기타옵션 여부</span>
+		<Select
+			value={value}
+			onChange={onChange}
+			options={SelectOptions.EtcrewardActive}
+		/>
+	</div>
+)
+
+const MustrewardActiveWrapper = ({value}) => (
+	<span className="form-wrapper-span">{value2label(SelectOptions.MustrewardActive, value)}</span>
+)
+const MustrewardActiveForm = ({value, onChange}) => (
+	<div>
+		<span className="form-wrapper-title">무조건 리워드 여부</span>
+		<Select
+			value={value}
+			onChange={onChange}
+			options={SelectOptions.MustrewardActive}
+		/>
+	</div>
 )
 
 const RewardWrapper = ({value, handlers}) => {
@@ -46,18 +83,18 @@ const RewardWrapper = ({value, handlers}) => {
 			shippingDay,
 			thresholdMoney
 		}, index) => (
-			<div className="editor-item-detail-wrapper">
-				<img src={imgSrc} alt=""/>
-				<span className="item-deatail-small-title-saved">제 목 : {title}</span>
-				<span className="item-deatail-small-title-saved">설 명 : {description}</span>
-				<span className="item-deatail-small-title-saved">구 분 : {value2label(SelectOptions.Reward, isDirectSupport)}</span>
-				<span className="item-deatail-small-title-saved">금 액 : {thresholdMoney.toLocaleString()}원</span>
-				{/* <span className="item-deatail-small-title-saved">최대구매수량 : {maxPurchaseVolume}</span> */}
-				<span className="item-deatail-small-title-saved">배송일 : {shippingDay}</span>
+			<div className="editor-reward-item-container">
+				{/* <img src={imgSrc} alt=""/> */}
+				{/* <span className="item-deatail-small-title-saved">구 분 : {value2label(SelectOptions.Reward, isDirectSupport)}</span> */}
+				{ maxPurchaseVolume == 0 ? null : <p className="purchase-reward-limit-ing">한정수량 {maxPurchaseVolume}개</p> }
+				<p className="purchase-reward-title">{title}</p>
+				<p className="purchase-reward-description">{description}</p>
+				<p className="purchase-reward-money">{thresholdMoney.toLocaleString()}원</p>
+				{ shippingDay == "" || " " ? <p className="purchase-reward-shippingday">펀딩 마감 후 3주 이내 배송 예정</p> : <p className="purchase-reward-shippingday">{shippingDay} 배송 예정</p> }
 				<button className="item-deatail-delete" onClick={() => deleteReward(index)}>삭제하기</button>
 			</div>
 		))
-		: <span></span>
+		: <span className="form-wrapper-span"></span>
 
 	return (
 		<div className="reward-wrapper-container">
@@ -92,43 +129,43 @@ const RewardForm = ({value, handlers, ...otherProps}) => {
 		<div className="fuding-reward-form-container">
 			<div>
 				<span className="item-deatail-small-title">리워드 제목</span>
-				<input type="text" value={title} onChange={_onTitle} />
+				<input className="editor_input" type="text" value={title} onChange={_onTitle} maxLength={32} />
 			</div>
 
 			<div>
 				<span className="item-deatail-small-title">리워드 설명</span>
-				<input type="text" value={description} onChange={_onDescription} />
+				<input className="editor_input" type="text" value={description} onChange={_onDescription} />
 			</div>
 
-			<div>
+			{/* <div>
 				<span className="item-deatail-small-title">직/간접 후원 여부</span>
 				<Select
 					value={isDirectSupport} onChange={_onIsDirectSupport}
 					options={SelectOptions.Reward}
 				/>
-			</div>
-			{/*
+			</div> */}
+			
 			<div>
-				<span className="item-deatail-small-title">최대 구매 수량</span>
-				<input type="number" value={maxPurchaseVolume} onChange={_onMaxPurcahseVolum}/>
+				<span className="item-deatail-small-title">한정 수량(0은 한정수량 없음)</span>
+				<input className="editor_input" type="number" value={maxPurchaseVolume} onChange={_onMaxPurcahseVolum}/>
 			</div>
-			*/}
+			
 
 			<div>
 				<span className="item-deatail-small-title">배송일</span>
-				<input type="date" value={shippingDay} onChange={_onShippingDay}/>
+				<input className="editor_input" type="date" value={shippingDay} onChange={_onShippingDay}/>
 			</div>
 
 			<div>
 				<span className="item-deatail-small-title">리워드 금액</span>
-				<input type="number" value={thresholdMoney} onChange={_onThresholdMoney} step="1000" />
+				<input className="editor_input" type="number" value={thresholdMoney} onChange={_onThresholdMoney} step="1000" />
 			</div>
 
-			<div>
+			{/* <div>
 				<span className="item-deatail-small-title">이미지</span>
 				<input type="file" onChange={_onImgSrc} />
 				{ imgSrc && <img src={imgSrc} alt="리워드 이미지를 입력하세요." accept="image/*"/> }
-			</div>
+			</div> */}
 
 		</div>
 	)
@@ -141,6 +178,10 @@ const Funding = ({
 		dateFrom,
 		dateTo,
 		shippingFee,
+		
+		etcrewardActive,
+		mustrewardActive,
+		
 		reward,
 	},
 
@@ -149,6 +190,9 @@ const Funding = ({
 	_onDateToSubmit,
 	_onShippingFeeSubmit,
 	_onRewardSubmit,
+	
+	_onEtcrewardActiveSubmit,
+	_onMustrewardActiveSubmit,
 
 	// onChange callbacks
 	rewardHandlers,
@@ -156,21 +200,7 @@ const Funding = ({
 
 	return (
 		<div className="abstract-container">
-
-			<FormWrapper
-				title="목표 금액"
-				valueType={VALUE_TYPE.MONEY}
-				alt="목표 금액을 입력하세요"
-				initialValue={targetMoney}
-				submitCaption={'목표 금액을 입력하세요'}
-				submitCaptionsub={'입력하기'}
-				onSubmit={_onTargetMoneySubmit}
-				Wrapper={TargetMoneyWrapper}
-				Form={TargetMoneyForm}
-				className ="exhibition-long-title"
-				classNameopen ="editor-open-container"
-			/>
-
+			
 			<FormWrapper
 				title="배송료"
 				valueType={VALUE_TYPE.MONEY}
@@ -181,6 +211,33 @@ const Funding = ({
 				onSubmit={_onShippingFeeSubmit}
 				Wrapper={ShippingFeeWrapper}
 				Form={ShippingFeeForm}
+				className ="exhibition-long-title"
+				classNameopen ="editor-open-container"
+			/>
+			
+			<FormWrapper
+				title="목표 금액"
+				valueType={VALUE_TYPE.MONEY}
+				alt="목표 금액을 입력하세요"
+				initialValue={targetMoney}
+				submitCaption={'목표 금액을 입력하세요'}
+				submitCaptionsub={'입력하기'}
+				onSubmit={_onTargetMoneySubmit}
+				Wrapper={TargetMoneyWrapper}
+				Form={TargetMoneyForm}
+				classNameopen ="editor-open-container"
+			/>
+			
+			<FormWrapper
+				title="무조건 리워드 여부"
+				valueType={VALUE_TYPE.SELECT}
+				alt="무조건 리워드 여부를 선택하세요"
+				initialValue={mustrewardActive}
+				submitCaption={'무조건 리워드/달성시 리워드'}
+				submitCaptionsub={'선택하기'}
+				onSubmit={_onMustrewardActiveSubmit}
+				Wrapper={MustrewardActiveWrapper}
+				Form={MustrewardActiveForm}
 				classNameopen ="editor-open-container"
 			/>
 
@@ -196,9 +253,26 @@ const Funding = ({
 				Form={DateToForm}
 				classNameopen ="editor-open-container"
 			/>
+			
+			
+			<FormWrapper
+				title="기타옵션 여부"
+				valueType={VALUE_TYPE.SELECT}
+				alt="기타옵션 여부를 선택하세요"
+				initialValue={etcrewardActive}
+				submitCaption={'활성화/비활성화'}
+				submitCaptionsub={'선택하기'}
+				onSubmit={_onEtcrewardActiveSubmit}
+				Wrapper={EtcrewardActiveWrapper}
+				Form={EtcrewardActiveForm}
+				className ="exhibition-eng-title"
+				classNameopen ="editor-open-container-last"
+			/>
+			
+			<span className="editor-small-title2">프로젝트 옵션</span>
 
 			<FormWrapper
-				title="프로젝트 리워드"
+				title="리워드 옵션"
 				valueType={VALUE_TYPE.REWARD}
 				alt="리워드으"
 				initialValue={reward}
@@ -208,8 +282,8 @@ const Funding = ({
 				handlers={rewardHandlers}
 				Wrapper={RewardWrapper}
 				Form={RewardForm}
-				className ="exhibition-eng-title"
-				classNameopen ="editor-open-container"
+				className ="magazine-editor-detail"
+				classNameopen ="editor-open-container-middle"
 			/>
 		</div>
 	)

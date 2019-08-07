@@ -18,7 +18,17 @@
 		display : inline-block;
 		height : 13px;
 		line-height : 13px;
-		padding : 0px 8px;
+		padding : 0px 6px;
+		border-right : 1px solid #eee;
+	}
+	.footer-mobile-text-last {
+		font-size : 13px !important;
+		font-weight : 400 !important;
+		color : #eee;
+		display : inline-block;
+		height : 13px;
+		line-height : 13px;
+		padding : 0px 6px;
 	}
 	.footer-mobile-second {
 		text-align : center;
@@ -72,4 +82,19 @@
 
 }
 }
+}
+
+.footer-mobile-contact {
+	text-align : center;
+	margin-top : 7px;
+}
+.footer-mobile-contact-button {
+	background: transparent;
+    color: #fefefe;
+    font-size: 15px;
+    padding: 4px 19px;
+    border: 1px solid gray;
+    border-radius: 0px;
+    outline: none;
+    font-family : NanumSquare;
 }

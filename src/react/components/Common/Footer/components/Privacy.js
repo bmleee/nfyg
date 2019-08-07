@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import MetaTags from 'react-meta-tags';
 
 export default class Privacy extends Component {
     
@@ -9,8 +10,11 @@ export default class Privacy extends Component {
     render() {
         return (
             <div className="terms-container">
+                <MetaTags>
+		            <title>개인정보처리방침 - 7Pictures</title>
+		        </MetaTags>
                 <div className="terms-title-container">
-                    <h3 className="terms-main-title">개인정보 취급방침</h3>
+                    <h3 className="terms-main-title">개인정보처리방침</h3>
                     <p className="terms-main-title-sub">시행일 : 2016년 6월 10일 ~ 현재</p>
                 </div>
                 <div className="terms-item-container">
@@ -19,7 +23,7 @@ export default class Privacy extends Component {
                     ㈜세븐픽쳐스 (이하 “회사”라고 함)는 이용자의 동의를 기반으로 개인정보를 수집·이용 및 제공하고 
                     있으며, 이용자의 권리 (개인정보자기결정권)를 적극적으로 보장합니다. 회사는 정보통신서비스제공자가 
                     준수하여야 하는 대한민국의 관계 법령 및 개인정보보호 규정, 가이드라인을 준수하고 있습니다.
-                    “개인정보취급방침”이란 이용자의 소중한 개인정보를 보호하여 안심하고 서비스를 이용할 수 있도록 
+                    “개인정보처리방침”이란 이용자의 소중한 개인정보를 보호하여 안심하고 서비스를 이용할 수 있도록 
                     회사가 세븐픽쳐스(7Pictures)서비스를 운영함에 있어 준수해야 할 지침을 말합니다.
                     본인은 ㈜세븐픽쳐스(www.7pictures.co.kr)의 이용과 관련하여 회사가 해당 서비스의 제공 및 각종 
                     부가정보 제공 또는 컨설팅 목적으로 개인정보를 수집, 활용하는데 동의하며 회사와 회사와 타기관 
@@ -44,7 +48,7 @@ export default class Privacy extends Component {
                     </p>
                 </div>
                 <div className="terms-item-container">
-                    <h4 className="terms-small-title">제3조 개인정보의 이용</h4>
+                    <h4 className="terms-small-title">제3조 개인정보의 이용 및 목적</h4>
                     <p className="terms-elements">
                     이용자의 개인정보를 다음과 같은 목적으로만 이용하며, 목적이 변경될 경우에는 반드시 사전에 
                     이용자에게 동의를 구하도록 하겠습니다.
@@ -135,7 +139,7 @@ export default class Privacy extends Component {
                     <p className="terms-elements">
                     회원 및 법정 대리인은 언제든지 등록되어 있는 자신 또는 대리자의 개인정보를 조회하거나 
                     수정할 수 있으며, 회원탈퇴절차를 통해 가입해지를 요청할 수도 있습니다.
-                    회원 혹은 대리인의 개인정보 조회, 수정을 위해서는 홈페이지의 ‘마이페이지’ 내의 ‘정보변경’을, 
+                    회원 혹은 대리인의 개인정보 조회, 수정을 위해서는 홈페이지의 ‘내 페이지’ 내의 ‘정보변경’을, 
                     가입해지 (동의철회)를 성명, 아이디(가입 시 기재한 이메일) 등의 정보를 탈퇴의사와 함께 문의하기에 
                     게시하거나, 동일한 내용을 기재하여 help@7pictures.co.kr 으로 이메일을 보내면 탈퇴하실 수 
                     있습니다. 이 외에도, 회사의 개인정보관리책임자(이병만, bmlee@7pictures.co.kr, 010-2619-9235)에게 
@@ -209,14 +213,14 @@ export default class Privacy extends Component {
                     </p>
                 </div>
                 <div className="terms-item-container">
-                    <h4 className="terms-small-title">제9조 개인정보취급방침의 개정 및 공지</h4>
+                    <h4 className="terms-small-title">제9조 개인정보처리방침의 개정 및 공지</h4>
                     <p className="terms-elements">
                     회사는 위 내용에 대한 추가, 삭제 및 수정이 있을 경우에는 시행일 7일 전부터 홈페이지 상에 
                     공지하여 이용자에게 설명 드리겠습니다. 단, 이용자의 소중한 권리 또는 의무에 중요한 내용 
                     변경은 최소 30일전에 말씀 드리도록 하겠습니다.
                     </p>
                     <p className="terms-elements">
-                    개인정보취급방침 시행일자 : 2016년 6월 10일
+                    개인정보처리방침 시행일자 : 2016년 6월 10일
                     </p>
                 </div>
             </div>

@@ -1,0 +1,18 @@
+.user-qna-head-container {
+    background: #fff;
+}
+.user-qna-head {
+    text-align: center;
+    width: 100%;
+    padding: 60px 0;
+    @media(max-width: 991px) {
+        width : 80%;
+        margin : 0px auto;
+    }
+}
+.user-qna-title {
+    font-size: 32px;
+    font-weight: 600;
+    color: #555;
+    font-family: NanumSquare;
+}

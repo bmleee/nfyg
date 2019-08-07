@@ -1,5 +1,40 @@
 .project-detail {
-	display: flex;
-	flex-flow: column;
-
+	// display: flex;
+	// flex-flow: column;
+	
+	.ReactTabs.react-tabs {
+        width : 100%;
+    }
+    .react-tabs [role=tablist] {
+		width :	800px;
+		margin : 0px auto 30px auto;
+		border-bottom : 0px;
+		@media (max-width : 991px) {
+			width : 100%;
+		}
+	}
+	.react-tabs [role=tab] {
+	    padding: 18px 0px 15px 0px;
+        width: 33.33333333%;
+        background: #fff;
+        box-shadow: 0 1px 0 0 #ddd;
+        border: none;
+        outline: 0;
+        font-weight: 500;
+        color: #777;
+        text-align: center;
+        height: auto;
+        font-family: NanumSquare;
+        font-size: 18px;
+		@media (max-width : 500px) {
+			font-size : 16px;
+			padding: 13px 0px;
+		}
+	}
+	.react-tabs [role=tab][aria-selected=true] {
+		    box-shadow: 0 1px 0 0 #6662ff;
+		    color: #6662ff;
+		    background: #fff;
+		    border-radius : 0px !important;
+	}
 }

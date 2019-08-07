@@ -62,9 +62,11 @@ class Post extends Component {
 
 			let { response } = await createPost({projectName, title, content, thresholdMoney, isDirectSupport})
 			this.props._newPost(response)
-			this.closeModal()
+			this.setState({
+				visible : false
+			});
 		} catch (e) {
-			console.error(e);
+			// console.error(e);
 		}
 	}
 
@@ -72,10 +74,10 @@ class Post extends Component {
 		return async () => {
 			try {
 				const r = await deletePost({ post_id })
-				console.log('delete post ', r);
+				// console.log('delete post ', r);
 				this.props._deletePost(post_id)
 			} catch (e) {
-				console.error(e);
+				// console.error(e);
 			}
 		}
 	}
@@ -88,20 +90,22 @@ class Post extends Component {
 			},
 			user,
 		} = this.props;
-
+		
+		const postgetuser = appUtils.getUser()
 		const canEdit = appUtils.getUser().canEdit
 
 		let condition1 = "전체공개";
 		let condition2 = "후원자공개";
-
-		console.log('Post', this);
-
+		
+		console.log('posts', posts)
+		
 		const item = posts.map( ({
 			_id,
 			opened,
 			author,
 			title,
 			created_at,
+			created_at_new=date2string(created_at),
 			numSupporters,
 			likes,
 			post,
@@ -113,18 +117,16 @@ class Post extends Component {
 				<div className="post-item-title-summary">
 					<h3 className="post-item-title">{title}</h3>
 					<span className="post-item-title-detail">{posts.length - index}번째 소식</span>
-					<span className="post-item-title-detail">{date2string(created_at)}</span>
+					<span className="post-item-title-detail">{created_at_new}</span>
 					{
 						thresholdMoney === 0
 							? <span className="post-item-title-condition1">{condition1}</span>
 							: <span className="post-item-title-condition2">{condition2}</span>
 					}
-					{/* canEdit && <button className="comment-delete-button" onClick={this._onClickDeletePost(_id)} /> */}
 				</div>
 				<div className="post-item-content-summary">
 					{
 						opened || thresholdMoney === 0
-							// ? <Viewer raw={content}/>
 							? <div dangerouslySetInnerHTML={{ __html: content }} ></div>
 							: <div className="post-block">
 									<div className="post-block-icon"></div>

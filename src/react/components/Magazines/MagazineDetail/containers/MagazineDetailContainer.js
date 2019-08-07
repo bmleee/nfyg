@@ -8,11 +8,12 @@ class MagazineDetailContainer extends Component {
 		super(props)
 
 		this.state = {
+			artworks: [],
+			headingSlider: [],
 			relatedContents: [],
 			magazine: {},
 			next: {},
 			pre: {},
-
 			loaded: false,
 		}
 
@@ -38,6 +39,8 @@ class MagazineDetailContainer extends Component {
 
 	render() {
 		const {
+			artworks,
+			headingSlider,
 			magazine,
 			relatedContents,
 			next = null,
@@ -58,6 +61,8 @@ class MagazineDetailContainer extends Component {
 			const {
 				user,
 				data: {
+					artworks,
+					headingSlider,
 					magazine,
 					relatedContents,
 					next,
@@ -68,17 +73,18 @@ class MagazineDetailContainer extends Component {
 			appUtils.setUser(user)
 
 			this.setState({
+				artworks,
+				headingSlider,
 				relatedContents,
 				magazine,
 				next,
 				pre,
-
 				loaded: true,
 			})
 
 			window.scrollTo(0, 0)
 		} catch (e) {
-			console.error(e);
+			console.error('매거진 페쳐 에러', e);
 		}
 	}
 }

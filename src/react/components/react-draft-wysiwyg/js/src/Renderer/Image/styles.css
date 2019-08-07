@@ -1,7 +1,7 @@
 .rdw-image-alignment-options-popup {
   position: absolute;;
   background: white;
-  display: flex;
+  display: none;
   padding: 5px 2px;
   border-radius: 2px;
   border: 1px solid #F1F1F1;

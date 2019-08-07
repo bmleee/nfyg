@@ -51,7 +51,7 @@ export default class Posts extends Component {
       posts
     } = this.props
 
-    console.log(this);
+    // console.log(this);
 
     return (
       <div className="post-container">
@@ -71,7 +71,7 @@ export default class Posts extends Component {
             return (
               <div className="summary-post-container" key={index}>
                 <h3 className="summary-post-list-title">{title}</h3>
-                <span className="summary-post-list-money">최소열람금액 : {thresholdMoney.toLocaleString()}원</span>
+                
                 <div dangerouslySetInnerHTML={{ __html: content.html }}></div>
                 {/*<span>댓글 수: {comments.length}</span>
                   <div>
@@ -140,13 +140,13 @@ export default class Posts extends Component {
         document.getElementById('post-title').value = post.title
         document.getElementById('post-threshold-money').value = post.thresholdMoney
 
-        console.log('fetched post', post);
-        console.log('state', this.state);
+        // console.log('fetched post', post);
+        // console.log('state', this.state);
 
 
 
       } catch (e) {
-        console.error(e);
+        // console.error(e);
         alert(e.message)
       }
     }
@@ -182,11 +182,11 @@ export default class Posts extends Component {
       if(confirm('삭제하시겠습니까?')) {
         try {
           const { response } = await deletePost({ post_id })
-          console.log(response);
+          // console.log(response);
           alert('삭제했습니다.')
           this.props.reflashState()
         } catch (e) {
-          console.error(e);
+          // console.error(e);
           alert(e.message)
         }
 
@@ -204,9 +204,9 @@ export default class Posts extends Component {
       this.setState(update(this.state, {
         visible: { $set: false }
       }))
-      console.log(r);
+      // console.log(r);
     } catch (e) {
-      console.error(e);
+      // console.error(e);
     }
 
   }

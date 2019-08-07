@@ -22,6 +22,7 @@ import SponsorModel from '../../models/sponsor'
 import AddressModel from '../../models/address'
 import PurchaseModel from '../../models/purchase'
 import PaymentModel from '../../models/payment'
+import LikeModel from '../../models/like'
 
 import Mailer from '../../lib/Mailer'
 import FacebookTracker from '../../../lib/FacebookTracker'
@@ -79,14 +80,16 @@ router.get('/:projectName/:option?/:tab?', async (req, res, next) => {
 		res.status(200).json({
 			user: renderUser.authorizedUser(user, canEdit),
 			data: {
-				project: projectToRender
+				project: projectToRender,
+				project_summary: await project.toFormat('project_detail')
 			}
 		})
 	} catch (e) {
-		console.error(e);
+		// console.error(e);
 		res.json({error: e.message})
 	}
 })
+
 
 // TODO: check user authority
 router.get('/:projectName/edit/:tab?', isLoggedIn, async (req, res) => {
@@ -131,7 +134,7 @@ router.get('/:projectName/rewards', async (req, res) => {
 			}
 		})
 	} catch (e) {
-		console.error(e);
+		// console.error(e);
 		res.status(500).json({
 			user,
 			error: e.message
@@ -178,7 +181,8 @@ router.get('/:projectName/purchase', isLoggedIn, async (req, res) => {
 		res.json({
 			user: renderUser.authorizedUser(req.user),
 			data: {
-				abstract: project.abstract
+				abstract: project.abstract,
+				funding: project.funding
 			}
 		})
 	} catch (e) {
@@ -197,14 +201,18 @@ router.post('/:projectName/purchase', isLoggedIn, async (req, res) => {
 		rewardIndex,
 		paymentIndex,
 		purchaseAmount,
+		comment,
 		shippingFee,
+		reward,
+		result_price,
+		result_description,
 	}  = req.body
 
 	try {
 		let project = await ProjectModel.findOne({'abstract.projectName': projectName})
 		let address = (await AddressModel.findByUser(user))[addressIndex]
 		let payment = (await PaymentModel.findByUser(user))[paymentIndex]
-		let reward = project.funding.rewards[rewardIndex]
+		let reward2 = project.funding.rewards[rewardIndex]
 
 		let purchase = await PurchaseModel.create({
 			user,
@@ -214,7 +222,10 @@ router.post('/:projectName/purchase', isLoggedIn, async (req, res) => {
 			payment: payment.toJSON(),
 			reward,
 			purchaseAmount,
-			shippingFee
+			comment,
+			shippingFee,
+			result_price,
+			result_description,
 		})
 
 		res.json({
@@ -226,6 +237,70 @@ router.post('/:projectName/purchase', isLoggedIn, async (req, res) => {
 		res.state(400).json({
 			error
 		})
+	}
+})
+
+router.get('/:projectName/like', isLoggedIn, async (req, res) => {
+	let projectName = req.params.projectName
+	
+	try {
+		let project_sub = await ProjectModel.findOne({'abstract.projectName': projectName})
+		let project = await LikeModel.find({ project: project_sub })
+		
+		res.json({
+			user: renderUser.authorizedUser(req.user),
+			data: {
+				project
+			}
+		})
+	} catch (e) {
+		// console.error('1231231231313213', e);
+		res.status(500).json({error: e.message})
+	}	
+})
+
+router.post('/:projectName/like', isLoggedIn, async (req, res) => {
+	let user = req.user
+	let projectName = req.params.projectName
+	let {
+		like_state
+	}  = req.body
+	
+	try {
+		let project = await ProjectModel.findOne({'abstract.projectName': projectName})
+		let like = await LikeModel.create({
+			user,
+			user_info: user,
+			project,
+			like_state
+		})
+		console.log('project_like', like)
+		res.json({
+			response: like
+		})
+	}
+	catch (error) {
+		// console.error('like create error!', error);
+		res.state(400).json({
+			error
+		})
+	}
+})
+
+router.delete('/:projectName/like/:id', isLoggedIn, async (req, res) => {
+	try {
+	let user = req.user
+	let like = await LikeModel.findById(req.params.id)
+
+	if(!ac.canEdit(user, like)) throw new Error(`User ${user.id} can't remove address ${like._id}`)
+
+	let r = await like.remove()
+
+	res.json({ response: !!r })
+
+	} catch (e) {
+		console.error('like deleto error!!', e);
+		res.status(500).json({ error: e })
 	}
 })
 
@@ -249,6 +324,7 @@ router.post('/', async (req, res) => {
 		res.json({ response: true })
 
 	} catch (e) {
+		console.error('error num1');
 		console.error(e);
 		res.status(500).json({ response: e })
 	}
@@ -279,6 +355,28 @@ router.put('/:projectName', async (req, res) => {
 		)
 		res.json({response: r.n === 1})
 	} catch (e) {
+		console.error('error num1');
+		console.error(e);
+		res.status(500).json({ response: e })
+	}
+})
+
+router.put('/:projectName/purchase/validcount', async (req, res) => {
+
+	try {
+		const body = req.body
+		const isNew = body.isNew
+
+		const projectName = req.params.projectName
+		const project = await ProjectModel.findOneByName(projectName)
+
+		const r = await ProjectModel.update(
+			{ 'abstract.projectName': projectName },
+			body
+		)
+		res.json({response: r.n === 1})
+	} catch (e) {
+		console.error('error num1');
 		console.error(e);
 		res.status(500).json({ response: e })
 	}
@@ -288,6 +386,7 @@ router.post('/:projectName/posts', isLoggedIn, async (req, res) => {
 	try {
 		let user = req.user
 		let projectName = req.params.projectName
+		let shortTitle = req.params.shortTitle
 
 		let {
 			title,
@@ -309,15 +408,14 @@ router.post('/:projectName/posts', isLoggedIn, async (req, res) => {
 			let purchases = await PurchaseModel.findByProject(project).populate('user')
 			let users2 = purchases.map(p => p.user)
 			
-			
 			// console.log('user2', users2)
-			// console.log('purchases', purchases)
+			// console.log('title', project.abstract.shortTitle)
 			
 			let users = users1.concat(users2)
 			let mails = users.map(u => u.local_email)
 			mails = Array.from(new Set(mails))
 			
-			await Mailer.sendPostMail(req.params.projectName, mails)
+			await Mailer.sendPostMail('projects', req.params.projectName, project.abstract.shortTitle, title,  mails)
 		} catch (e) {
 			console.error('Error while sending email')
 			console.error(e)
@@ -344,6 +442,16 @@ router.post('/:projectName/qnas', isLoggedIn, async (req, res) => {
 
 		let project = await ProjectModel.findOne({'abstract.projectName': projectName})
 		let qna = await mh.createQnA({title, text, project, user})
+		
+		try {
+			// console.log('QNAS---project', project)
+			
+			await Mailer.sendQnAMail(project.abstract.shortTitle, text, project.creator.creatorEmail)
+			
+		} catch (e) {
+			console.error('Error while sending email')
+			console.error(e)
+		}
 
 		res.json({ response: qna.toFormat('project_detail')})
 	} catch (e) {
@@ -364,7 +472,14 @@ router.post('/:projectName/processPurchase', isLoggedIn, async (req, res) => {
 		let purchases = await PurchaseModel.findByProject(project)
 			.where('purchase_info.purchase_state').equals('preparing')
 			.populate('user project')
-
+			
+			
+		let r;
+		for(var i = 0; i < purchases.length; i++) {
+		  r = await purchases[i].processPurchase()
+		}
+		
+		/* 
 		let r = await Promise.all(purchases.map(
 			async (p) => {
 				try {
@@ -375,6 +490,45 @@ router.post('/:projectName/processPurchase', isLoggedIn, async (req, res) => {
 				}
 			}
 		))
+		*/
+
+		console.log(r);
+		res.json({ response: r })
+	} catch (e) {
+		console.error(e);
+		res.status(500).json({error: e.message})
+	}
+})
+
+router.post('/:projectName/processPurchasefailed', isLoggedIn, async (req, res) => {
+	try {
+		let user = req.user
+		let project = await ProjectModel.findOneByName(req.params.projectName)
+
+		if (!ac.canEdit(user, project)) throw Error(`can't process unauthorized process`)
+
+		let purchases = await PurchaseModel.findByProject(project)
+			.where('purchase_info.purchase_state').equals('failed')
+			.populate('user project')
+			
+			
+		let r;
+		for(var i = 0; i < purchases.length; i++) {
+		  r = await purchases[i].processPurchase()
+		}
+		
+		/* 
+		let r = await Promise.all(purchases.map(
+			async (p) => {
+				try {
+					return await p.processPurchase()
+				} catch (e) {
+					console.error(e);
+					return { error: e.message }
+				}
+			}
+		))
+		*/
 
 		console.log(r);
 		res.json({ response: r })
@@ -391,6 +545,10 @@ router.post('/:projectName/share', isLoggedIn, async (req, res) => {
 		let project = await ProjectModel.findOneByName(req.params.projectName)
 
 		if (!project) throw Error(`Unknown project name ${req.params.projectName}`)
+		
+		console.log('req.params.projectName', req.params.projectName)
+		//console.log('link', link)
+		//console.log('project', project)
 
 		const r = await FacebookTracker.userSharedProject(user, req.params.projectName, link)
 
@@ -407,5 +565,6 @@ router.get('/*', (req, res) => {
 		user: renderUser.authorizedUser(req.user),
 	})
 })
+
 
 export default router;

@@ -5,13 +5,13 @@ import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 
 // TODO: correct link url
 const editFormatter = (cell, row) => {
-	console.log('row', row);
+	// console.log('row', row);
 	return <Link to={`/project-editor?id=${row.id}`}><button className='btn btn-info'>Edit</button></Link>;
 }
 
 // TODO: correct link url
 const detailFormatter = (cell, row) => {
-	console.log('row', row);
+	// console.log('row', row);
 	return <Link to={`/project-editor?id=${row.id}`}><button className='btn btn-info'>Detail</button></Link>;
 }
 

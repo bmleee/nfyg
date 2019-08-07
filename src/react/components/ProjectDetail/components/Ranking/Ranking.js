@@ -44,6 +44,7 @@ class Ranking extends Component {
 			},
 			directSupporters,
 			indirectSupporters,
+			numIndirectSupports,
 			selectValue,
 			selectOptions,
 			_onSelectOptionChange,
@@ -71,7 +72,7 @@ class Ranking extends Component {
 							src={`https://graph.facebook.com/${fbId}/picture`} />
 					)
 				}
-				외 <p className="sharing-number">{ Math.max(0, indirectSupporters.length - recent3IndirectSupporters.length) }명</p>이 공유로 후원함
+				외 <p className="sharing-number">{ Math.max(0, numIndirectSupports - recent3IndirectSupporters.length) }명</p>이 공유로 후원함
 			</div>
 		)
 
@@ -95,6 +96,8 @@ class Ranking extends Component {
 
 			return <div className="project-detail-ranking-best"> { special } { base } </div>
 		}
+		
+		console.log('indirectSupporters', indirectSupporters)
 
 		const rankingDetail = indirectSupporters.map( ({
 			fbId,
@@ -115,7 +118,7 @@ class Ranking extends Component {
 					</p>
 
 					<p className="sharing-summary">
-				    <span><p className="sharing-name">{name}</p>{' '}{date2string(support_at) /* TODO: Date to string... */}</span>
+				    <span><p className="sharing-name">{name}</p>{' '}{/* date2string(support_at || new Date()) /* TODO: Date to string... */}</span>
 				    <ReadMore lines={1} onShowMore={this.props.onChange} text="더보기">
                 		{message}
             		</ReadMore>
@@ -124,15 +127,15 @@ class Ranking extends Component {
 	        		<div className="sharing-icon-summary">
 		        	<p className="likes-num">
 			        	{ likes.toLocaleString() }
-						<img className="sharing-icon" src="~/src/assets/images/facebookicon_likes.png" scale="0" />
+						<img className="sharing-icon" src="/assets/images/facebookicon2_like.png" scale="0" />
 					</p>
 					<p className="likes-num">
 						{ comments.toLocaleString() }
-						<img className="sharing-icon" src="~/src/assets/images/facebookicon_comment.png" scale="0" />
+						<img className="sharing-icon" src="/assets/images/facebookicon2_comment.png" scale="0" />
 					</p>
 					<p className="likes-num">
 						{ shares.toLocaleString() }
-						<img className="sharing-icon" src="~/src/assets/images/facebookicon_share.png" scale="0" />
+						<img className="sharing-icon" src="/assets/images/facebookicon2_share.png" scale="0" />
 					</p>
 					</div>
 				</div>
@@ -146,6 +149,8 @@ class Ranking extends Component {
 
 			</div>
 		))
+		
+		// console.log('rankingDetail', rankingDetail)
 
 		return (
 			<div className="project-detail-ranking">

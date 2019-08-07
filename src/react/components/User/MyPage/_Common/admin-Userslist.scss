@@ -3,7 +3,7 @@
 		width : 800px;
 		margin : 0px auto 30px auto;
 		@media (max-width : 991px) {
-			width : 95%;
+			width : 100%;
 		}
 	}
 	.react-tabs [role=tab] {
@@ -14,6 +14,7 @@
 		font-size : 14px;
 		font-weight : 600;
 		color : #777;
+		font-family : NanumSquare;
 		@media (max-width : 500px) {
 			width : 50%;
 			font-size : 12px;

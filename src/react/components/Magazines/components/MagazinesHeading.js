@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import Slider from 'react-slick';
-import MediaQuery from 'react-responsive'
 
 import { displayType } from '../../../lib/utils'
 import { Display } from '../../../constants'
@@ -46,7 +45,7 @@ class MagazinesHeading extends Component {
 		return (
 			<div className="magazines-heading">
 				<div className="magazines-heading-nav">
-					<h2>Magazine</h2>
+					<h2>매거진</h2>
 				</div>
 				{/*
 				<div className="magazines-heading-category-container">

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import MetaTags from 'react-meta-tags';
 
 export default class TermOfUse extends Component {
     componentDidMount () {
@@ -8,6 +9,9 @@ export default class TermOfUse extends Component {
     render() {
         return (
             <div className="terms-container">
+                <MetaTags>
+		            <title>이용약관 - 7Pictures</title>
+		        </MetaTags>
                 <div className="terms-title-container">
                     <h3 className="terms-main-title">세븐픽쳐스 이용약관</h3>
                     <h4 className="terms-main-title-sub">최종갱신일 : 2016 년 6월 10일</h4>
@@ -325,7 +329,7 @@ export default class TermOfUse extends Component {
                     <h4 className="terms-small-title">제12조 회원정보의 변경</h4>
                     <p className="terms-elements">
                     1. 회원은 이용신청 시 기재한 사항이 변경되었을 경우, 즉시 해당사항을 수정해야 합니다. 
-                    회원정보의 변경은 로그인을 한 후 마이페이지의 회원정보에서 변경할 수 있습니다. 
+                    회원정보의 변경은 로그인을 한 후 내 페이지의 회원정보에서 변경할 수 있습니다. 
                     단, 아이디(ID) 및 성명은 수정할 수 없음을 원칙으로 합니다.
                     </p>
                     <p className="terms-elements">

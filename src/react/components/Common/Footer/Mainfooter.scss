@@ -1,11 +1,14 @@
 .footer {
-	background : #444;
-	border-top : 1px solid #fff;
+	background : #222;
 }
 .footer-desktop {
 	width : 1140px;
 	padding : 20px 0px 24px 0px;
 	margin : 0px auto;
+	@media(max-width : 1192px) {
+		width : 100%;
+		padding : 20px 20px 24px 20px;
+	}
 }
 .footer-mobile {
 	display : none;
@@ -19,6 +22,7 @@
 	line-height : 13px;
 	padding : 0px 8px;
 	border-right : 1px solid #eee;
+	font-family : NanumSquare;
 }
 .footer-container-first {
 	.footer-sns {
@@ -55,7 +59,7 @@
 	        content : "\f23d";
 	    }
 	}
-	a:nth-child(6) {
+	a:nth-child(7) {
 		.footer-sns {
 			margin : 0.7px 3px 0px 0px;
 		}
@@ -70,6 +74,7 @@
 	line-height : 12px;
 	padding : 0px 8px;
 	border-right : 1px solid #ccc;
+	font-family : NanumSquare;
 }
 .footer-text-second:last-child {
 	border-right : none;
@@ -90,11 +95,35 @@
 .footer {
 	width : 100%;
 	padding : 5px 20px;
-	background : #555;
+	background : #222;
 	border-top : none;
 }
 @media (max-width: 500px) {
 	
 }
 }
+}
+
+.footer-container-left {
+	width : 85%;
+	display : inline-block;
+}
+.footer-container-right {
+	width : 15%;
+	display : inline-block;
+	text-align : right;
+}
+.project-modal-body {
+	text-align : left;
+}
+.footer-contact-button {
+	background: transparent;
+    color: #fefefe;
+    font-size: 16px;
+    padding: 5px 10px;
+    border: 1px solid gray;
+    border-radius: 0px;
+    vertical-align: text-bottom;
+    outline: none;
+    font-family : NanumSquare;
 }

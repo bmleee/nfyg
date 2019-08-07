@@ -32,19 +32,19 @@ export default class AuthorizedProjects extends Component {
                   </div>
                   </Link>
                   <div className="present-project-list-item-caption">
-                    <Link to={`/projects/${projectName}`}>
-                      <h4>{shortTitle}</h4>
-                    </Link>
-                    <Link to={`/projects/${projectName}/summary`}>
-                      <button className="my-project-detail-button">상세내역</button>
-                    </Link>
-                    <Link to={`/projects/${projectName}/edit`}>
+                    <div className="present-project-list-item-caption-top">
+                      <Link to={`/projects/${projectName}`}>
+                        <h4>{shortTitle}</h4>
+                      </Link>
+                    </div>
+                    <div className="present-project-list-item-caption-bottom">
+                      <Link to={`/projects/${projectName}/summary`}>
+                        <button className="my-project-detail-button">상세내역</button>
+                      </Link>
+                    </div>
+                    {/*<Link to={`/projects/${projectName}/edit`}>
                       <button className="my-project-edit-button">수정하기</button>
-                    </Link>
-                    {/* <span>시작일: {dateFrom}</span>
-                      <span>종료일: {dateTo}</span>
-                      <span>상태: {state}</span>
-                      <span>카테고리: {category}</span> */}
+                    </Link> */}
                   </div>
                 </div>
               </div>

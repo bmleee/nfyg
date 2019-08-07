@@ -6,14 +6,15 @@ import axios from 'axios'
 
 const Schema = mongoose.Schema;
 const PaymentSchema = new Schema({
-  user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-  card_name: { type: String, },
-  card_number: { type: String, required: true},
-  expiry: { type: String, required: true},
-  birth: { type: String, required: true},
-  pwd_2digit: { type: String, required: true},
+  user: { type: Schema.Types.ObjectId, ref: 'User' },
+  card_name: { type: String },
+  card_number: { type: String },
+  expiry: { type: String },
+  birth: { type: String },
+  pwd_2digit: { type: String },
   created_at: { type: Date, default: Date.now() },
 	updated_at: { type: Date, default: Date.now() },
+	// error_msg: { type: String, required: false},
 });
 
 // Configure the 'PaymentSchema' to use getters and virtuals when transforming to JSON
@@ -24,12 +25,16 @@ PaymentSchema.set('toJSON', {
 
 PaymentSchema.pre('save', async function (next) {
   if (this.card_name) return next()
+  
+  // console.log('this.user._id', this.user._id)
+  
+  // console.log('this.user', this.user)
 
   try {
     let {
       card_name,
     } = await IMP.subscribe_customer.create({
-      customer_uid: this.user._id || this.user,
+      customer_uid: this.user.id + '-' + this.card_number.substring(15, 19) + '-7Pictures',
       card_number: this.card_number,
       expiry: this.expiry,
       birth: this.birth,
@@ -41,6 +46,7 @@ PaymentSchema.pre('save', async function (next) {
   } catch (e) {
     console.error(`faild to create payment User${this.user._id}`);
     console.error(e);
+    // let error_msg : e.message
     throw e
   }
 })

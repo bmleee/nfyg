@@ -39,7 +39,7 @@ export default class SharingInfo extends Component {
       }
     }) => ({ comments, likes, shares, name, display_name, id, local_email, fb_email}))
 
-    console.log(users_info);
+    // console.log(users_info);
 
     return (
       <div className="sharing-info-container">

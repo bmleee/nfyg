@@ -50,7 +50,7 @@ router.post('/', async (req, res) => {
       let purchase = await PurchaseModel.findOneByMerchantId(merchant_uid)
         .populate('user project product')
       let r = await purchase.cancelByApi(error_msg)
-      await Mailer.sendPurchaseSuccessMail(purchase, receipt_url)
+      await Mailer.sendPurchaseSuccessMail(purchase, '7pictures.co.kr')
     }
 
     res.json({})

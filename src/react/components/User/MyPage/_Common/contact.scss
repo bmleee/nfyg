@@ -1,0 +1,257 @@
+.contact-list-container {
+    
+}
+.contact-list-title-empty {
+    
+}
+.contact-list-item {
+    padding: 10px;
+    background: #f9f9f9;
+    border-radius: 3px;
+    margin-bottom : 10px;
+    .Collapsible__trigger.is-open {
+        text-align: center;
+        color: #6662ff;
+        margin-top: 10px;
+        font-size: 13px;
+        font-weight: 600;
+        margin-bottom : 5px;
+        cursor : pointer;
+    }
+    .Collapsible__trigger.is-closed {
+        text-align: center;
+        color: #6662ff;
+        margin-top: 10px;
+        font-size: 13px;
+        font-weight: 600;
+        margin-bottom : 5px;
+        cursor : pointer;
+    }
+    .Collapsible__trigger.is-open:after {
+        font-family : Ionicons;
+		content : "\f3d8";
+		margin-left : 4px;
+    }
+    .Collapsible__trigger.is-closed:after {
+        font-family : Ionicons;
+		content : "\f3d0";
+		margin-left : 4px;
+    }
+}
+.contact-item-title-container {
+    width: 82%;
+    display: inline-block;
+    text-align: left;
+}
+.contact-item-title {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 3px;
+    width: auto;
+    text-align: center;
+    background: #6662ff;
+    color: #fff;
+    border-radius: 2px;
+    padding: 5px 10px;
+    display : inline-block;
+}
+.contact-item-created_at {
+    display: inline-block;
+    margin-left: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #666;
+}
+.contact-item-delete-container {
+    width: 18%;
+    text-align: right;
+    display: inline-block;
+}
+.contact-item-delete {
+    padding: 5px 10px;
+    border: none;
+    outline: 0;
+    border-radius: 2px;
+    font-weight: 600;
+    color: #555;
+    font-size: 13px;
+    margin-bottom: 3px;
+    background: #ddd;
+}
+.contact-item-ok {
+    padding: 5px 10px;
+    border: none;
+    outline: 0;
+    border-radius: 2px;
+    font-weight: 600;
+    color: #fff;
+    font-size: 13px;
+    margin-bottom: 3px;
+    background: #4fa77e;
+}
+.contact-item-text {
+    font-size: 17px;
+    color: #555;
+    width: 100%;
+    font-weight: 600;
+    margin-top : 4px;
+}
+.contact-comment-container {
+    margin-top: 10px;
+    border-top: 1px dashed #ccc;
+    padding: 10px 5px 0px 5px;
+}
+.contact-comment {
+    width: calc(100% - 11px);
+    display: inline-block;
+    padding-left : 10px;
+}
+.contact-comment-icon {
+    vertical-align : top;
+    width: 11px;
+    display: inline-block; 
+    color : #777;
+    transform: rotate(180deg);
+}
+.contact-comment-icon:before {
+    font-family : Ionicons;
+    content: "\f4c7";
+}
+.contact-comment-top {
+    
+}
+.contact-comment-name {
+    font-size: 11px;
+    margin-bottom: 3px;
+    font-weight: 600;
+}
+.contact-comment-delete {
+    
+}
+.contact-comment-text {
+    font-size: 17px;
+    color: #555;
+    font-weight : 600;
+}
+.contact-comment-form {
+    
+}
+.contact-comment-textarea-container {
+    
+}
+.contact-comment-textarea {
+    width: 100%;
+    max-width: 100%;
+    height: 50px;
+    max-height: 50px;
+    border-radius: 2px;
+    padding: 5px 8px;
+    @media(max-width : 500px) {
+        padding: 5px 3px;
+    }
+}
+.contact-comment-textarea:focus {
+    outline : none;
+    border : 1px solid #6662ff;
+    border-radius : 2px;
+}
+.contact-comment-submit-container {
+    
+}
+.contact-comment-submit, .contact-comment-submit:focus  {
+    width: 100%;
+    border: none;
+    background: #6662ff;
+    padding: 7px 0px;
+    color: #fff;
+    font-weight: 600;
+    outline: none;
+    border-radius: 2px;
+}
+
+.contact-container {
+	width: 800px;
+    margin: 22px auto 30px auto;
+    text-align: center;
+    padding: 25px 20px;
+    background: #f3f3f3;
+	@media(max-width:991px) {
+		width : 100%;
+		@media(max-width:500px) {
+			width : 100%;
+		}
+	}
+}
+.contact-text{
+    color: #666;
+    font-size: 13px;
+    line-height : 1.6;
+    font-family : NanumSquare;
+}
+.contact-button, .contact-button:focus {
+	margin-top: 0;
+    background: #6662ff;
+    padding: 10px 80px;
+    border: none;
+    outline: 0;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: NanumSquare;
+    border-radius: 3px;
+    @media(max-width:991px) {
+    	
+		@media(max-width:500px) {
+			padding : 10px 15px;
+			width : 100%;
+		}
+	}
+}
+.contact-button:before {
+    font-family: FontAwesome;
+    content: "\f0e0";
+    font-weight: 400;
+    margin-right: 8px;
+}
+.contact-type {
+	margin-bottom: 10px;
+    font-size: 17px;
+    color: #555;
+    font-weight: 600;
+    font-family : NanumSquare;
+}
+
+.contact-type-select {
+	width: 100%;
+    height: 35px;
+    border-radius: 2px;
+    margin-top: 5px;
+    font-weight: 400;
+    font-size: 15px;
+    padding: 5px 8px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: url(https://7pictures.kr/assets/images/down-arrow.svg) no-repeat right 10px center;
+    background-size : 20px;
+    font-family : SpoqaHanSans;
+    outline : none;
+}
+.contact-content {
+    font-size: 17px;
+    color: #555;
+    font-weight: 600;
+    font-family : NanumSquare;
+}
+.contact-content-textarea {
+	width: 100%;
+    min-height: 150px;
+    margin-top: 5px;
+    padding: 5px 8px;
+    font-weight: 400;
+    font-size: 15px;
+    border-radius : 2px;
+    max-width: 440px;
+    max-height: 150px;
+    font-family : SpoqaHanSans;
+    outline : none;
+}

@@ -1,0 +1,78 @@
+.magazine-detail-artwork-contents-list {
+    width: 840px;
+    margin: 0px auto;
+}
+.magazine-detail-artwork-masonry {
+    height: auto;
+}
+.magazine-detail-artwork-content-container {
+	padding: 20px;
+	width: 33.33333%;
+}
+.magazine-detail-artwork-img {
+	width: 100%;
+	margin-bottom : 10px;
+}
+.magazine-detail-artwork-artist {
+	font-size : 14px;
+	font-weight : bold;
+}
+.magazine-detail-artwork-title {
+	font-size : 14px;
+	font-style: italic;
+    margin-left: -2.4px;
+}
+.magazine-detail-artwork-price {
+	font-size : 14px;
+}
+
+@media(max-width : 991px) {
+	.magazine-detail-artwork-contents-list {
+		width : 100%;
+		padding : 0px 40px;
+	}
+	.magazine-detail-artwork-masonry {
+		
+	}
+	.magazine-detail-artwork-content-container {
+		padding: 10px;
+		width: 50%;
+	}
+	.magazine-detail-artwork-img {
+		
+	}
+	.magazine-detail-artwork-artist {
+		
+	}
+	.magazine-detail-artwork-title {
+		
+	}
+	.magazine-detail-artwork-price {
+		
+	}
+
+@media(max-width : 500px) {
+	.magazine-detail-artwork-contents-list {
+		padding : 0px 10px;
+	}
+	.magazine-detail-artwork-masonry {
+		
+	}
+	.magazine-detail-artwork-content-container {
+		padding: 7px;
+	}
+	.magazine-detail-artwork-img {
+		
+	}
+	.magazine-detail-artwork-artist {
+		
+	}
+	.magazine-detail-artwork-title {
+		
+	}
+	.magazine-detail-artwork-price {
+		
+	}
+	
+}
+}

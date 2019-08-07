@@ -9,17 +9,17 @@ export default class AuthorizedUsers extends Component {
       isAdmin = false
     } = this.props
     
-    console.log(this)
+    // console.log(this)
 
     return (
       <div>
         { authorizedUsers && this._renderAuthorizedUsers() }
         <div className="authorized-user-button-container">
-        {
+        {/*
           authorizedUsers && isAdmin && (
           <button className="authorized-user-button" onClick={this.addNewAuthorizedUser}>관리자 추가하기</button>
           )
-        }
+        */}
         </div>
       </div>
     )

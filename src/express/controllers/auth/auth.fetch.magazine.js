@@ -57,7 +57,6 @@ router.get('/:magazineName/:option?', async (req, res, next) => {
 	if(['edit'].includes(req.params.option)) {
 		return next()
 	}
-
 	try {
 		const magazine = await MagazineModel.findOne({"abstract.magazineName": req.params.magazineName})
 
@@ -69,7 +68,6 @@ router.get('/:magazineName/:option?', async (req, res, next) => {
 		console.error(e);
 		res.json({error: e.message})
 	}
-
 })
 
 router.get('/:magazineName/edit/:tab?', isLoggedIn, async (req, res) => {
@@ -144,7 +142,7 @@ router.put('/:magazineName', async (req, res) => {
 // TODO: exhibition paginaiton
 // TODO: magazine genre select
 router.get('/exhibitions', async (req, res) => {
-	console.log('/exhibitions/', );
+	// console.log('/exhibitions/', );
 
 	try {
 		const exhibitions = await ExhibitionModel.find({}).sort({"abstract.created_at": -1})

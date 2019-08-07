@@ -21,24 +21,10 @@ class MagazineDetailHeading extends Component {
 		const imgSrcUrl2 = encodeURI(imgSrcUrl)
 		const url = document.URL;
 
-		console.log(imgSrcUrl)
-		console.log(imgSrcUrl2)
+		// // console.log(imgSrcUrl)
+		// // console.log(imgSrcUrl2)
 
 		Kakao.init('0aad64ae5f685fcf0be27e3e654f8ef6');
-
-		Kakao.Link.createTalkLinkButton({
-		  container : '#kakao-link-btn',
-		  label : title,
-		  image : {
-		    src :imgSrcUrl2,
-		    width : '300',
-		    height : '200',
-		  },
-		  webButton: {
-		    text: '7Pictures',
-		    url: url
-		  }
-		});
 
 	}
 	
@@ -57,7 +43,7 @@ class MagazineDetailHeading extends Component {
 			}
 		}
 		
-		console.log(imgSrcUrl)
+		// // console.log(imgSrcUrl)
 
 		return (
 			<div className="magazine-detail-heading">
@@ -65,13 +51,6 @@ class MagazineDetailHeading extends Component {
 				<DocumentMeta {...meta} />
 				<h2> {title} </h2>
 				<div className="magazine-share-button-container">
-					
-					{/*
-					<FacebookButton sharer='true' media={imgSrcUrl} appId='244902342546199' message={title} url={url} className="ma-share-button-facebook">
-					<FontAwesome name='facebook' size='lg' />
-					</FacebookButton>
-					*/}
-					
 					
 					<button className="ma-share-button-facebook" onClick={this.onClickShareFB}>
 					<FontAwesome name='facebook' size='lg' />
@@ -82,7 +61,7 @@ class MagazineDetailHeading extends Component {
 					<FontAwesome name='twitter' size='lg' />
 					</TwitterButton>
 					
-					<button id="kakao-link-btn" className="ma-share-button-kakao"><KakaoImage className="ma-kakao-icon" width={23} height={23} /></button>
+					<button id="kakao-link-btn" onClick={this.sendkakaolink} className="ma-share-button-kakao"><KakaoImage className="ma-kakao-icon" width={23} height={23} /></button>
 					
 					<CopyToClipboard text={url} onCopy={() => {
 							this.setState({copied: true, visible:false});
@@ -104,12 +83,12 @@ class MagazineDetailHeading extends Component {
 		//
 		// window.open(url, '_blank', 'width=500, height=300')
 		
-		console.log(title)
+		// // console.log(title)
 
 		 let url = getFullUrl()
 		// let url2 = 'http://7pictures.co.kr'
 
-		// console.log('url', url2);
+		// // console.log('url', url2);
 
 		FB.ui({
 			method: 'share',
@@ -119,14 +98,52 @@ class MagazineDetailHeading extends Component {
     	if (response && !response.error_message) {
 	      try {
 	      	const r = await shareProject(title, url)
-	      	console.log('shareProject result', r)
+	      	// console.log('shareProject result', r)
 	      } catch (e) {
-	      	console.error(e)
+	      	// console.error(e)
 	      }
 	    } else {
 	    	
 			}
 		})
+	}
+	
+	sendkakaolink = async () => {
+		
+		const {
+			abstract: {
+				imgSrc,
+				longTitle,
+				description
+			},
+		} = this.props;
+
+		const imgSrcUrl = `${window.location.protocol}//${window.location.host}${imgSrc}`
+		const imgSrcUrl2 = encodeURI(imgSrcUrl)
+		const url = document.URL;
+		
+		Kakao.Link.sendDefault({
+		  // container : '#kakao-link-btn',
+		  objectType: 'feed',
+		  content: {
+	        title: longTitle,
+	        description: description,
+	        imageUrl: imgSrcUrl2,
+	        link: {
+	          mobileWebUrl: url,
+	          webUrl: url
+	        }
+	      },
+	      buttons: [
+	        {
+	          title: '자세히 보기',
+	          link: {
+	            mobileWebUrl: url,
+	            webUrl: url
+	          }
+	        }
+		  ]
+		});
 	}
 	
 }

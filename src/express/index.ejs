@@ -5,12 +5,57 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="robots" content="index, follow">
+		<meta name="description" content="넷플릭스기반 문화예술 커뮤니티">
 
 		<%- head.toString() %>
-
+		
+		<script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=y3ib0lp92exgvqtyicgdo7asx0v4tkoxc6jyyq7fpuui8wsz"></script>
+		
 		<script src="/bower_components/jquery/dist/jquery.min.js" charset="utf-8"></script>
 		<script src="/bower_components/underscore/underscore-min.js" charset="utf-8"></script>
-		<script src="/assets/js/bootstrap.min.js" charset="utf-8"></script>
+		<!-- <script src="/assets/js/bootstrap.min.js" charset="utf-8"></script> -->
+		
+		<!-- google optimize -->
+		<style>.async-hide { opacity: 0 !important} </style>
+		<script>
+			(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
+			h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
+			(a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;
+			})(window,document.documentElement,'async-hide','dataLayer',4000,
+			{'GTM-WTT46K5':true});
+		</script>
+		
+		<!-- google analytics -->
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+		  
+		  ga('create', 'UA-75010987-2', 'auto');
+		  ga('require', 'GTM-WTT46K5');
+		  ga('send', 'pageview');
+		</script>
+		
+		<!-- Facebook Pixel Code -->
+		<script>
+		  !function(f,b,e,v,n,t,s)
+		  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+		  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+		  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+		  n.queue=[];t=b.createElement(e);t.async=!0;
+		  t.src=v;s=b.getElementsByTagName(e)[0];
+		  s.parentNode.insertBefore(t,s)}(window, document,'script',
+		  'https://connect.facebook.net/en_US/fbevents.js');
+		  fbq('init', '392118290996112');
+		  fbq('track', 'PageView');
+		</script>
+		<noscript>
+			<img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=392118290996112&ev=PageView&noscript=1"/>
+		</noscript>
+		<!-- End Facebook Pixel Code -->
+
 
 		<!-- rich editor -->
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css" rel="stylesheet" type="text/css">
@@ -21,7 +66,10 @@
 		<!-- slick  -->
 		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" />
 		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
-
+		
+		<!-- nanumsquare -->
+		<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css" />
+		
 		<!-- react-select -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.min.js"></script>
@@ -30,7 +78,7 @@
 		<script src="https://unpkg.com/classnames/index.js"></script>
 		<script src="https://unpkg.com/react-input-autosize/dist/react-input-autosize.js"></script>
 		<script src="https://unpkg.com/react-select/dist/react-select.js"></script>
-		<link rel="stylesheet" href="https://unpkg.com/react-select/dist/react-select.css">
+		<link rel="stylesheet" href="https://unpkg.com/react-select@1.2.0/dist/react-select.css">
 
 		<!-- react-bootstrap-table -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/react-bootstrap-table/2.8.0/react-bootstrap-table-all.min.css">
@@ -50,6 +98,7 @@
 		<!--<link rel="stylesheet" href="/assets/css/Draft.css"> -->
 		<!--<link rel="stylesheet" href="/assets/css/_draft.css">-->
 		<!--<link rel="stylesheet" href="/assets/css/RichEditor.css">-->
+		<!--<link rel="canonical" href="https://7pictures.co.kr">-->
 	</head>
 	<body>
 		<script>
@@ -75,14 +124,17 @@
 		   }(document, 'script', 'facebook-jssdk'));
 
 		</script>
-
+		
+		
+		
 		<div id='root'><%- content %></div>
 		<div id='devtools'></div>
 		<script id='initial-state'>
 			window.__initialState__= <%- initialState %>
 		</script>
 
-		<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+		<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
+		
 		<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 		<script src="/react-app.js" charset="utf-8"></script>
 		<script src="/assets/js/main.js" charset="utf-8"></script>

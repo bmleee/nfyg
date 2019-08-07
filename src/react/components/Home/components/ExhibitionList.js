@@ -33,7 +33,7 @@ class ExhibitionList extends Component {
 						</div>
 					</div>
 					<div className="ex-list-info">
-						<Link to={link}><h4 className="ex-list-title">{title}{" : "}{name}</h4></Link>
+						<div className="Link_sub_div"><Link to={link}><h4 className="ex-list-title">{title}{" : "}{name}</h4></Link></div>
 					<p className="ex-location-schedule">{ address } | { schedule }</p>
 					{/* <p className="ex-artist-name"><img className="ex-icon" width={26} height={26} src={iconSrc} alt=""/>{"   "}{ name }</p> */}
 					</div>

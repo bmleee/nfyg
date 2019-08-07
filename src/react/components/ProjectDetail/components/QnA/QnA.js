@@ -1,13 +1,18 @@
 import React, { Component, PropTypes } from 'react';
 import Select from 'react-select';
 
-import { createQnA, createCommentOnQnA, deleteQnA, deleteComment } from '~/src/react/api/AppAPI'
+import { createQnA, createCommentOnQnA, deleteQnA, deleteComment, createContactQnA } from '~/src/react/api/AppAPI'
 
 import { PostComments } from '../Post/';
 
 import { SelectOptions } from '../../../../constants'
 import { date2string, newLinedString } from '~/src/react/lib/utils'
 import Collapsible from 'react-collapsible';
+import SweetAlert from 'sweetalert-react';
+import Modal from '~/src/react/components/react-awesome-modal';
+
+import update from 'immutability-helper'
+import { Link } from 'react-router';
 
 const selectOptions = SelectOptions.QnA
 
@@ -18,7 +23,7 @@ class QnA extends Component {
 	state = {
 		numProjects: 0,
 		count: 5,
-		windowSize: 5,
+		windowSize: 5
 	}
 
 	expandList = () => {
@@ -36,11 +41,9 @@ class QnA extends Component {
 			this.props._newQnA(response)
 			document.getElementById("qna_text").value = ''
 		} catch (e) {
-			console.error(e);
+			// console.error(e);
 		}
 	}
-
-
 
 	_onClickAddQnAComment = (index, _id) => {
 		return async () => {
@@ -50,7 +53,7 @@ class QnA extends Component {
 				this.props._newCommentOnQnA(_id, response)
 				document.getElementById(`qna_${index}_comment`).value = ''
 			} catch (e) {
-				console.error(e);
+				// console.error(e);
 			}
 		}
 	}
@@ -62,7 +65,7 @@ class QnA extends Component {
 				this.props._deleteQnA(qna_id)
 			} catch (e) {
 				alert('삭제할 수 없습니다.')
-				console.error(e);
+				// console.error(e);
 			}
 		}
 	}
@@ -73,7 +76,7 @@ class QnA extends Component {
 				const r = await deleteComment({ qna_id, comment_index })
 				this.props._deleteCommentOnQnA(qna_id, comment_index)
 			} catch (e) {
-				console.error(e);
+				// console.error(e);
 				alert('삭제할 수 없습니다.')
 			}
 		}
@@ -86,9 +89,24 @@ class QnA extends Component {
 	}
 
 	render() {
-		console.log(this);
-		let { qna: { posts } } = this.props;
-
+		let { 
+			qna: { posts },
+			creator,
+			authorizedUser,
+			athor_user
+		} = this.props;
+		
+		let author_link = ""
+		
+		if(authorizedUser.indexOf("@7pictures.co.kr") == -1) {
+			author_link = "/user/" +  athor_user.id.toString()
+		}
+		
+		let {
+			isLoggedIn,
+			displayName,
+			image,
+		} = appUtils.getUser()
 
 		const item = posts.map( ({
 			_id,
@@ -96,6 +114,7 @@ class QnA extends Component {
 			author,
 			title,
 			created_at,
+			created_at_new=date2string(created_at),
 			numSupporters,
 			likes,
 			text,
@@ -110,10 +129,10 @@ class QnA extends Component {
 
 							<p className="sharing-summary">
 								<span>
-									<p className="sharing-name">{author.name}</p>{date2string(created_at)}
+									<p className="sharing-name">{author.name}</p>{created_at_new}
 									<button className="comment-delete-button" onClick={this._onClickDeleteQnA(_id)}/>
 								</span>
-								<span className="qna-detail-text">{newLinedString(text)}</span>
+								<span className="qna-detail-text">{text}</span>
 
 							{/* 대댓글 */}
 
@@ -123,6 +142,7 @@ class QnA extends Component {
 										title,
 										text,
 										created_at,
+										created_at_comment_new=date2string(created_at),
 									}, index) => (
 										// div 로 한번 더 감쌌어요!
 										<div className="qna-item-container">
@@ -132,10 +152,10 @@ class QnA extends Component {
 											<p className="sharing-summary">
 												<span>
 													<p className="sharing-name">{author.name}</p>
-													{date2string(created_at)}
+													{created_at_comment_new}
 													<button className="comment-delete-button" onClick={this._onClickDeleteComment(_id, index)}/>
 												</span>
-												<span>{newLinedString(text)}
+												<span>{text}
 												</span>
 											</p>
 										</div>
@@ -150,7 +170,11 @@ class QnA extends Component {
 									<textarea className="qna-form-textarea" cols="30" rows="4" id={`qna_${index}_comment`} placeholder=""></textarea>
 								</div>
 								<div className="qna-form-submit-container">
+									{ !isLoggedIn ?
+									<button className="qna-form-submit" onClick={() => this.openModal2()}>댓글 남기기</button>
+									:
 									<button className="qna-form-submit" onClick={this._onClickAddQnAComment(index, _id)}>댓글 남기기</button>
+									}
 								</div>
 							</div>
 							</Collapsible>
@@ -163,14 +187,67 @@ class QnA extends Component {
 
 		return (
 			<div className="project-detail-qna">
+				<div className="project-creator">
+					{ authorizedUser.indexOf("@7pictures.co.kr") == -1
+					?
+					<div className="project-creator-img-container">
+						{ creator.creatorImgSrc == "" ? 
+						<Link to={author_link}><img className="project-creator-img" src="/assets/images/user_default.png" /></Link>
+						:
+						<Link to={author_link}><img className="project-creator-img" src={creator.creatorImgSrc} /></Link>
+						}
+					</div>
+					:
+					<div className="project-creator-img-container">
+						{ creator.creatorImgSrc == "" ? 
+						<img className="project-creator-img" src="/assets/images/user_default.png" />
+						:
+						<img className="project-creator-img" src={creator.creatorImgSrc} />
+						}
+					</div>
+					}
+					{ authorizedUser.indexOf("@7pictures.co.kr") == -1
+					?
+					<div className="project-creator-info-container">
+						<Link to={author_link}>
+							<div className="project-creator-name">
+								{creator.creatorName}
+							</div>
+						</Link>
+						<Link to={author_link}>
+							<div className="project-creator-description">
+								{creator.creatorDescription}
+							</div>
+						</Link>
+						<Link to={author_link}>
+							<div className="project-creator-email">
+								{authorizedUser}
+							</div>
+						</Link>
+					</div>
+					:
+					<div className="project-creator-info-container">
+						<div className="project-creator-name">
+							{creator.creatorName}
+						</div>
+						<div className="project-creator-description">
+							{creator.creatorDescription}
+						</div>
+					</div>
+					}
+				</div>
 				<div className="project-detail-qna-form">
 					<div className="qna-form-textarea-container">
-						<img className="qna-form-user-icon" src="/assets/images/user_default.png" alt="" width={80} height={80} />
-						<textarea className="qna-form-textarea" name="" id="qna_text" cols="30" rows="4" placeholder="후원자 분들만 댓글을 남길 수 있습니다."></textarea>
+						<img className="qna-form-user-icon" src={image} alt="" width={80} height={80} />
+						<textarea className="qna-form-textarea" name="" id="qna_text" cols="30" rows="4" placeholder="궁금하신 점을 댓글로 남겨주세요."></textarea>
 					</div>
 					<div className="qna-form-submit-container">
 						<p className="qna-form-submit-empty"/>
+						{ !isLoggedIn ?
+						<button className="qna-form-submit" onClick={() => this.openModal2()}>댓글 남기기</button>
+						:
 						<button className="qna-form-submit" onClick={this._onClickAddQnA}>댓글 남기기</button>
+						}
 					</div>
 				</div>
 				<div>
@@ -183,6 +260,8 @@ class QnA extends Component {
 							: null
 					}
 				 </div>
+				 
+				 
 			</div>
 		)
 	}

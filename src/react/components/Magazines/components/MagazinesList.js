@@ -16,7 +16,7 @@ class MagazinesList extends Component {
 		super(...arguments);
 
 		this.state = {
-			numProjects: 0,
+			numMagazines: 0,
 			count: 6,
 			windowSize: 6,
 		}
@@ -25,6 +25,13 @@ class MagazinesList extends Component {
 	expandList() {
 		this.setState({
 			count: this.state.count + this.state.windowSize,
+		})
+	}
+	
+	componentDidMount() {
+		
+		this.setState({
+			numMagazines: this.props.magazines.length
 		})
 	}
 
@@ -53,7 +60,7 @@ class MagazinesList extends Component {
 					<div className="magazine-list-item-info">
 						<Link to={link}>
 							<div>
-								<Link to={link}><h4>{ title }</h4></Link>
+								<div><Link to={link}><h4>{ title }</h4></Link></div>
 								{/*
 								<p>
 									<img className="magazine-writer-icon" src={iconSrc} width={24} height={24} alt=""/> {name} | {value2label(selectOptions, category)}
@@ -70,13 +77,17 @@ class MagazinesList extends Component {
 
 		return (
 			<div className="magazines-list">
-				{ items.slice(0, this.state.count) }
+				{/* items.slice(0, this.state.count) }
 				<div className="present-more-project">
 					{
-						this.state.numProjects < this.state.count
+						this.state.numMagazines > 6 && this.state.numMagazines > this.state.count
 							? <button className="present-more-button" onClick={this.expandList.bind(this)}> 매거진 더보기</button>
 							: null
 					}
+				</div> */}
+				{ items }
+				<div className="home-empty-space">
+						
 				</div>
 			</div>
 		)

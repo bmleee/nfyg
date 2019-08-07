@@ -24,7 +24,7 @@ const MagazineEditorTab = ({save, tabLinkBase}) => {
 		{/* <h5>예술 관련 소식들을 작성해주세요.</h5>
 		<h5>구독자 분들에게 매주 전달해드립니다.</h5> */}
 		</div>
-		<button className="share-button" onClick={save}>검토 요청하기</button>
+		<button className="share-button" onClick={save}>매거진 발행하기</button>
 		<div className="exhibition-editor-tab-container"><Link to={`${tabLinkBase}/abstract`}><button className={abstartClassName}>매거진 개요</button></Link></div>
 		<div className="exhibition-editor-tab-container"><Link to={`${tabLinkBase}/content`}><button className={overviewClassName}>매거진 내용</button></Link></div>
 		<div className="exhibition-editor-tab-container"><Link to={`${tabLinkBase}/recommend`}><button className={artwokrkClassName}>관련 콘텐츠</button></Link></div>

@@ -18,11 +18,12 @@ let QnASchema = new Schema({
 	project: { type: Schema.Types.ObjectId, ref: 'Project'},
 	product: { type: Schema.Types.ObjectId, ref: 'Product'},
 	exhibition: { type: Schema.Types.ObjectId, ref: 'Exhibition'},
+	user: { type: Schema.Types.ObjectId, ref: 'User', required: false },
 	abstract: {
 		openType: {type: String, enum: ['to-all', 'to-supporter', 'to-buyer', 'to-sharer', 'to-creator']}, // to-supporter = to-buyer || to-sharer
 		// no: {type: Number, unique: true, required: true}, // n-th qna
 		title: {type: String, required: true},
-		created_at: {type: Date, default: Date.now()},
+		created_at: {type: Date},
 		updated_at: {type: Date, default: Date.now()},
 		likes: [{type: Schema.Types.ObjectId, ref: 'User'}],
 		// numLikes: {type: Number, default: 0}, // TODO: be virtual field
@@ -34,16 +35,26 @@ let QnASchema = new Schema({
 			iconSrc: {type: String, required: true},
 			user: {type: Schema.Types.ObjectId, ref: 'User', required: true}, // used when check edit authority
 		},
-		created_at: {type: Date, default: Date.now()},
+		created_at: {type: Date},
 		text: {type: String, required: true},
 		likes: [{type: Schema.Types.ObjectId, ref: 'User'}],
 		// numLikes: {type: Number, default: 0}, // TODO: be virtual field
 	}],
+	user_info: {
+	    name: { type: String, required: false },
+	    display_name: { type: String, required: false },
+	    local_email: { type: String, required: false },
+	    id: { type: String, required: false },
+	    fb_id: { type: String, required: false },
+	    image: { type: String, required: false },
+	},
+	store_admin: { type: String, required: false },
+	product_admin: { type: String, required: false }
 	// numComments: {type: Number, default: 0}, // TODO: be virtual field
 });
 
 QnASchema.pre('validate', function (next) {
-	if (this.project || this.exhibition || this.product) next()
+	if (this.project || this.exhibition || this.product || this.author.user) next()
 	else next(Error('One of project, exhibition, product field is reuqired!'))
 })
 
@@ -91,7 +102,7 @@ QnASchema.pre('save', function (next) {
 			}
 		)
 	}
-
+	else next()
 })
 
 // Configure the 'QnASchema' to use getters and virtuals when transforming to JSON
@@ -101,6 +112,11 @@ QnASchema.set('toJSON', {
 });
 
 QnASchema.methods.toFormat = function (type, ...args) {
+	let isCommented = false;
+    if(this.comments.length != 0) {
+		isCommented = true;
+	}
+	
 	switch (type) {
 		case 'project_detail':
 		case 'product_detail':
@@ -114,8 +130,34 @@ QnASchema.methods.toFormat = function (type, ...args) {
 				numSupporters: 10, // TODO: [Definition]
 				likes: this.abstract.numLikes,
 				text: this.text,
-				comments: this.comments
+				comments: this.comments,
+				product_admin: this.product_admin,
+				isCommented: isCommented
 			}
+		case 'profile':
+			return {
+	          opened: true,
+			  _id: this._id,
+			  user: this.user_info,
+			  author: this.author,
+			  title: this.abstract.title,
+			  created_at: this.abstract.created_at,
+			  text: this.text,
+			  comments: this.comments,
+			  isCommented: isCommented
+	        }
+	    case 'profile_admin':
+			return {
+	          opened: true,
+			  _id: this._id,
+			  user: this.user_info,
+			  author: this.author,
+			  title: this.abstract.title,
+			  created_at: this.abstract.created_at,
+			  text: this.text,
+			  comments: this.comments,
+			  isCommented: isCommented
+	        }
 		default:
 			console.error(`toFormat can't accept this ${JSON.stringify(type)}`);
 			return ''
@@ -148,7 +190,8 @@ QnASchema.methods.commentedByUser = async function(user, text) {
 				user: user._id
 			},
 			text,
-			likes: []
+			likes: [],
+			created_at: Date.now()
 		})
 		this.comments = comments
 		this.numComments = comments.length
@@ -176,6 +219,18 @@ QnASchema.methods.userLikesComment = async function(user, commentIndex) {
 		console.error(e);
 		throw new Error(`User ${user.id} can't like comment ${this.comments[commentIndex]}`)
 	}
+}
+
+QnASchema.statics.findDetailByUser = function (user) {
+	return this.find({ user: user._id || user || user.local_email || user.fb_email })
+}
+
+QnASchema.statics.findDetailByStore = function (user) {
+	return this.find({ "store_admin" : user.local_email || user.fb_email })
+}
+
+QnASchema.statics.findDetailByProduct = function (user) {
+	return this.find({ "product_admin" : user.local_email || user.fb_email })
 }
 
 // QnASchema.plugin(autoIncrement.plugin, { model: 'QnA', field: 'abstract.no' });

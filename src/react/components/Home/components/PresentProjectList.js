@@ -1,8 +1,21 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import Progress from 'react-progressbar';
+import { fetchSummary, processPurchase } from '~/src/react/api/AppAPI'
 
 import { PresentProductList } from './';
+
+import {
+  Abstract,
+  AuthorizedUsers,
+  Creator,
+  Funding,
+  Posts,
+  QnAs,
+  SharingInfo,
+  PurchaseInfo,
+  Sponsor
+} from '../../Summary/_Common'
 
 /**
  * required state
@@ -16,13 +29,14 @@ import { PresentProductList } from './';
  */
 
 class PresentProjectList extends Component {
+	
 	constructor() {
 		super(...arguments);
 
 		this.state = {
 			numProjects: 0,
-			count: 4,
-			windowSize: 4,
+			count: 6,
+			windowSize: 3,
 		}
 	}
 	expandList() {
@@ -41,6 +55,8 @@ class PresentProjectList extends Component {
 		const { projects,
 				products
 		} = this.props;
+		
+		// console.log('projectList', this);
 
 		let projectList = projects.map(
 			({
@@ -54,22 +70,26 @@ class PresentProjectList extends Component {
 				remainingDays,
 				link,
 				postIntro,
+				projectName,
+				project_purchase_info,
+				DirectMoneySum,
 			}, index) => (
+				
 				<div className="present-project-list-item-container" key={index}>
 					<div className="present-project-list-item">
-						<Link to={link}> {/* TODO: include :project_name */}
+						<div><Link to={link}> {/* TODO: include :project_name */}
 							<div className="pr-thumbnail">
 								<div className="ex-centered">
 									<img className="home-exhibition-image" src={imgSrc} />
 								</div>
 							</div>
-						</Link>
+						</Link></div>
 						<div className="present-project-list-item-caption">
-							<Link to={link}><h3 className="project-list-title">{title}</h3></Link>
+							<div><Link to={link}><h3 className="project-list-title">{title}</h3></Link></div>
 							<h5>{postIntro}</h5>
-							<Progress completed={Math.min(100, Math.ceil(currentMoney / targetMoney * 100))} />
+							<Progress completed={Math.min(100, Math.ceil((currentMoney + DirectMoneySum) / targetMoney * 100))} />
 							<div className="project-summary-detail">
-							<div className="project-remain-days">{Math.ceil(currentMoney / targetMoney * 100)}%</div>
+							<div className="project-remain-days">{Math.ceil((currentMoney + DirectMoneySum)  / targetMoney * 100)}%</div>
 							{
 								Math.ceil(remainingDays) > 0
 								?
@@ -77,7 +97,7 @@ class PresentProjectList extends Component {
 								:
 								<div className="project-summary-current-money">마감</div>
 							}
-							{(currentMoney || 0).toLocaleString()}원
+							{((currentMoney + DirectMoneySum)  || 0).toLocaleString()}원
 							</div>
 						    {/* 직접후원 {numDirectSupports}명 | 간접후원 {numIndirectSupports}명 */}
 						</div>
@@ -88,15 +108,22 @@ class PresentProjectList extends Component {
 
 		return (
 			<div className="present-project-list">
+				
+				{/*
 				<div className="present-project-list-container">
 					{ projectList.slice(0, this.state.count) }
 				</div>
 				<div className="present-more-project">
 					{
-						this.state.numProjects > 4 && this.state.numProjects > this.state.count
+						this.state.numProjects > 6 && this.state.numProjects > this.state.count
 							? <button className="present-more-button" onClick={this.expandList.bind(this)}> VIEW MORE</button>
 							: null
 					}
+				</div>
+				*/}
+				
+				<div className="present-project-list-container">
+					{ projectList }
 				</div>
 			</div>
 

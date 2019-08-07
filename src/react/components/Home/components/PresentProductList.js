@@ -48,38 +48,64 @@ class PresentProductList extends Component {
 	render() {
 		let { products } = this.props;
 		
-		console.log(products);
+		console.log('products-fetch-test', products);
 
 		let productList = products.map(
 			({
 				imgSrc,
-				// creator,
+				//creator,
 				title,
-				currentMoney,
+				//currentMoney,
+				currentMoney_sub2,
 				targetMoney,
 				numDirectSupports,
 				// numIndirectSupports,
-				// remainingDays,
+				remainingDays,
 				link,
 				postIntro,
 				// numValidPurchases = 0,
-				purchaseSuccess = false,
+				// purchaseSuccess = false,
+				DirectMoneySum,
+				subValidPurchases,
 			}, index) => (
 				<div className="present-project-list-item-container">
 					<div className="present-project-list-item" key={index}>
-						<Link to={link}>
+						<div><Link to={link}>
 							<div className="pr-thumbnail">
+								{/*
+									Math.ceil(remainingDays) >= 5	
+									? null
+									: Math.ceil(remainingDays) <= 0 ? <div className="D-day-notice">펀딩 마감</div>
+									: Math.ceil(remainingDays) < 5 ? <div className="D-day-notice">마감 {Math.ceil(remainingDays)}일전</div> : null
+								*/}
 								<div className="ex-centered">
-									<img className="home-exhibition-image" src={imgSrc} />
-									{ purchaseSuccess && <SuccessImage className="success-icon" width={76} height={76} /> }
+									{ imgSrc == null ? null : <img className="home-exhibition-image" src={imgSrc} /> }
 								</div>
 							</div>
-						</Link>
+						</Link></div>
+						
+						
 						<div className="present-project-list-item-caption">
-							<Link to={link}><h3 className="project-list-title">{title}</h3></Link>
+							<div><Link to={link}><h3 className="project-list-title">{title}</h3></Link></div>
+							<div className="project-sub-title">넷플릭스를 보는 날이면 연희동을 가야한다</div>
 							<h5>{postIntro}</h5>
-							<div className="product-purchase-num"><p>{numDirectSupports}명</p>주문중</div>
+							<div className="project-sub-notice">추후 공지</div>
+							{/*
+							<Progress completed={Math.min(100, Math.ceil((currentMoney_sub2 + DirectMoneySum) / targetMoney * 100))} />
+							<div className="project-summary-detail">
+							<div className="project-remain-days">{Math.ceil((currentMoney_sub2 + DirectMoneySum)  / targetMoney * 100)}%</div>
+							{
+								Math.ceil(remainingDays) > 0
+								?
+								<div className="project-summary-current-money">{numDirectSupports + subValidPurchases}명 주문중</div>
+								:
+								<div className="project-summary-current-money">{numDirectSupports + subValidPurchases}명 주문</div>
+							}
+							{((currentMoney_sub2 + DirectMoneySum)  || 0).toLocaleString()}원
+							</div>
+							*/}
 						</div>
+						
 					</div>
 				</div>
 			)
@@ -87,13 +113,18 @@ class PresentProductList extends Component {
 
 		return (
 			<div className="present-project-list">
-				<div className="present-project-list-container">
+				{/* <div className="present-project-list-container">
 					{ productList.slice(0, this.state.count) }
 				</div>
 				<div className="present-more-project">
-					
-							<button className="present-more-button" onClick={this.expandList.bind(this)}> VIEW MORE</button>
-							 
+					{
+						this.state.numProducts > 4 && this.state.numProducts > this.state.count
+							? <button className="present-more-button" onClick={this.expandList.bind(this)}> VIEW MORE</button>
+							: null
+					}
+				</div> */}
+				<div className="present-project-list-container">
+					{ productList }
 				</div>
 			</div>
 

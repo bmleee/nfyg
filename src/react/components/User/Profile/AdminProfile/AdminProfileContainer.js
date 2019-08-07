@@ -21,7 +21,7 @@ export default class AdminProfileContainer extends Component {
 			profile: this.props.profile
 		})
 
-		console.log('AdminProfileContainer', this);
+		// console.log('AdminProfileContainer', this);
 
 		return (
 			<div className="profile-admin-container">

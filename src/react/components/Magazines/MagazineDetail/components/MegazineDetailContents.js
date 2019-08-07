@@ -1,10 +1,19 @@
 import React, { Component, PropTypes } from 'react';
 
-const border = { border: '1px solid gray' }
-
 class MagazineDetailContents extends Component {
 	render() {
-		const { content, } = this.props;
+		let { content } = this.props;
+		
+		// 동영상 iframe 태그 변경(동영상 갯수 더 필요할 시 행추가)
+		content = content.replace("allowFullScreen />", "allowFullScreen></iframe>")
+		content = content.replace("allowFullScreen />", "allowFullScreen></iframe>")
+		content = content.replace("allowFullScreen />", "allowFullScreen></iframe>")
+		content = content.replace("allowFullScreen />", "allowFullScreen></iframe>")
+		content = content.replace("allowFullScreen />", "allowFullScreen></iframe>")
+		content = content.replace("allowFullScreen />", "allowFullScreen></iframe>")
+		content = content.replace("allowFullScreen />", "allowFullScreen></iframe>")
+		
+		// console.log('content', content)
 
 		return (
 			<div className="magazine-detail-contents">

@@ -54,7 +54,7 @@ async function renderRoute ({ response, routes, renderProps, store, history }) {
 /**
  * function to be exported
  */
-export default function renderReact (request, response, ) {
+export default function renderReact (request, response) {
 	const memoryHistory = createMemoryHistory(request.url);
 	const store = configureStore(memoryHistory);
 	const history = syncHistoryWithStore(memoryHistory, store);

@@ -4,7 +4,7 @@
 	display : inline-block;
 }
 .sharing-money {
-	color : #150C8B;
+	color : #6662ff;
 	font-weight : 600 !important;
 	display : inline-block;
 }
@@ -18,7 +18,7 @@
 		text-align : right;
 		margin-bottom : 3px;
 		font-weight : 600;
-		color : #150C8B;
+		color : #6662ff;
 		font-size : 18px;
 	}
 }
@@ -51,8 +51,13 @@
 
 	}
 	.Select-control {
+		width : 20%;
+		float : right;
 		border : 2px solid #eee;
 		border-radius : 3px !important;
+		@media(max-width : 500px) {
+			width : 100%;
+		}
 	}
 	.Select-clear-zone {
 		width : 6px;
@@ -89,7 +94,7 @@
 		display : none;
 	}
 	a {
-		color : #150C8B !important;
+		color : #6662ff !important;
 		font-weight : 600;
 	}
 	a:before {
@@ -126,7 +131,7 @@
 }
 
 .likes-text {
-	color : #150C8B;
+	color : #6662ff;
 	font-weight : 800;
 }
 
@@ -144,7 +149,7 @@
 }
 
 .sharing-number {
-	color : #150C8B;
+	color : #6662ff;
 	display : inline-block;
 	font-size : 17px !important;
 	font-weight : 600 !important;

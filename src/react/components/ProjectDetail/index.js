@@ -48,8 +48,10 @@ export default class ProjectDetailContainer extends Component {
 	}
 
 	async componentDidMount() {
+		window.scrollTo(0, 0)
+		
 		const res = await fetchUserAndData()
-		console.log(this);
+		// console.log(this);
 
 		const {
 			user,
@@ -80,7 +82,7 @@ export default class ProjectDetailContainer extends Component {
 			selectValue: o.value,
 		})
 
-		console.log(_.sortBy(indirectSupporters, o.value));
+		// console.log(_.sortBy(indirectSupporters, o.value));
 	}
 
 	_newPost = (post) => {
@@ -232,6 +234,6 @@ export default class ProjectDetailContainer extends Component {
 					{ children }
 				</ProjectDetail>
 			:
-				<div>Loading...</div>
+				<div className="home-is-loading"></div>
 	}
 }

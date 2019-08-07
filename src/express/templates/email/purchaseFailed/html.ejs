@@ -1,0 +1,35 @@
+<html>
+	<link rel="stylesheet" type="text/css" href="style.css"/>
+	<head>
+		<title>[7Pictures] 결제 실패 - <%= pTitle %> : <%= fail_reason %> </title>
+	</head>
+	<body>
+		<div class="mail-body">
+			<div class="mail-logo-body">
+				<img class="mail-logo" src="https://netflix-salon.co.kr/assets/images/7pictures_mail.jpg" > 
+			</div>
+			<div class="mail-content-body">
+				<div class="mail-content-title">[결제 실패]</div>
+				<div class="mail-content-text">안녕하세요, <%= user.display_name %>님!</div>
+				<div class="mail-content-text">7Pictures 예약결제가 다음과 같은 원인으로 실패되었습니다.</div>
+				<div class="mail-content-empty"></div>
+				<h3>실패 내역</h3>
+				<div class="mail-content-text">
+					제 목 : <a href="<%= pNameLink %>"> <%= pTitle %> </a>
+				</div>
+				<div class="mail-content-text">
+					품 명 : <%= result_description %>
+				</div>
+				<div class="mail-content-text">
+					금 액 : <%= amount %>원
+				</div>
+				<div class="mail-content-text">
+					실패 원인 : <%= fail_reason %>
+				</div>
+				<div class="mail-content-empty"></div>
+				<div class="mail-content-text">실패 원인을 확인하시고 재결제 기간내에(5일) 해결해주세요!</div>
+			</div>
+		</div>
+		
+	</body>
+</html>

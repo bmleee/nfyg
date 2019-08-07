@@ -26,17 +26,13 @@ export default class ProjectSummary extends Component {
       funding: null,
       posts: null,
       qnas: null,
-      sharing_info: null,
+      // sharing_info: null,
       purchase_info: null,
       sponsor: null,
     },
   }
 
   async componentDidMount() {
-    await this.reflashState()
-  }
-
-  reflashState = async () => {
     try {
       const {
         user,
@@ -48,10 +44,13 @@ export default class ProjectSummary extends Component {
 
       appUtils.setUser(user)
       this.setState({ userType, project_summary })
-      console.log(project_summary);
+      // console.log('서머리1', project_summary);
     } catch (e) {
-      console.error(e);
+      // console.error(e);
     }
+  }
+
+  reflashState = async () => {
 
     window.scrollTo(0, 0)
   }
@@ -66,13 +65,13 @@ export default class ProjectSummary extends Component {
         funding,
         posts,
         qnas,
-        sharing_info,
+        // sharing_info,
         purchase_info,
         sponsor
       }
     } = this.state
 
-    console.log(this)
+    // console.log('스테이트서머리', this.state)
 
     let infoBackground = {
 			backgroundImage: `url("${ abstract && abstract.imgSrc }")`,
@@ -80,7 +79,6 @@ export default class ProjectSummary extends Component {
 			backgroundPosition: 'center center',
 			backgroundRepeat: 'no-repeat'
 		}
-
 
     let isAdmin = userType === 'admin'
     let num = purchase_info && purchase_info.purchases.filter(p => p.purchase_info.purchase_state === 'preparing').length
@@ -107,10 +105,14 @@ export default class ProjectSummary extends Component {
 
             <TabPanel>
               { purchase_info && <PurchaseInfo purchaseInfo={purchase_info} isAdmin={isAdmin} reflashState={this.reflashState} />}
+              
+              { userType == 'admin' ?
               <div className="last-purchase-button-container">
                 <button className="last-purchase-button" onClick={this._onClickProcessPurchase}>결제예약 {num}명 결제요청</button>
               </div>
-              { sharing_info && <SharingInfo sharingInfo={sharing_info} isAdmin={isAdmin} reflashState={this.reflashState} />}
+              : null }
+              
+              {/* sharing_info && <SharingInfo sharingInfo={sharing_info} isAdmin={isAdmin} reflashState={this.reflashState} /> */}
             </TabPanel>
             <TabPanel>
               { posts && <Posts posts={posts} isAdmin={isAdmin} reflashState={this.reflashState} />}
@@ -128,10 +130,10 @@ export default class ProjectSummary extends Component {
   _onClickProcessPurchase = async () => {
     try {
       const r = await processPurchase({ projectName: this.props.params.projectName })
-      console.log(r)
+      // console.log(r)
       alert(`${r.response.length}명의 결제가 신청되었습니다.`)
     } catch (e) {
-      console.error(e)
+      // console.error(e)
       alert(e.message)
     }
   }

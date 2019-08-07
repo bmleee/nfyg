@@ -6,6 +6,7 @@ import UserProfileAddressSetting from './UserProfileAddressSetting'
 
 import { fetchUserProfile, updateUserProfile, upload_file } from '../../../../api/AppAPI'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import MetaTags from 'react-meta-tags';
 
 export default class UserProfileContainer extends Component {
 
@@ -13,13 +14,17 @@ export default class UserProfileContainer extends Component {
     profile: {
       fb_id: '',
       local_email: '',
+      sub_email: '',
       name: '',
+      display_name: '',
       image: '',
       intro: '',
     },
   }
 
   async componentDidMount() {
+    window.scrollTo(0, 0)
+    
     try {
       const {
         user,
@@ -28,45 +33,50 @@ export default class UserProfileContainer extends Component {
         }
       } = await fetchUserProfile()
 
-      console.log('fetched profile', profile);
-
       appUtils.setUser(user)
       this.setState({ profile })
 
       const {
         fb_id = '',
         local_email = '',
+        sub_email = '',
         name,
+        display_name,
         image = '',
         intro = '',
         contact = ''
       } = profile
 
-      document.getElementById('user-email').value = local_email
-      document.getElementById('user-name').value = name
-      document.getElementById('user-intro').value = intro
-      contact && contact.split('-').forEach((c, i) => {
-        document.getElementById(`user-contact-${i}`).value = c
-      })
 
     } catch (e) {
-      console.error(e);
+      // console.error(e);
     }
   }
 
 
 	render() {
-		const { profile } = this.state
+		let { profile } = this.state
 
     if (!profile) return <div>Loading...</div>
-
-		const {
+    
+    const {
+      displayName,
+      display_name,
+    } = appUtils.getUser()
+    
+		let {
       fb_id,
       local_email,
-      name,
       image,
       intro,
+      contact,
+      sub_email
     } = profile
+    
+    let new_contact = profile.contact && profile.contact.split("-")
+    let real_email = !profile && profile.sub_email ? profile && profile.local_email : profile && profile.sub_email
+    
+    let name = displayName || display_name
 
 		const info = profile && (
 			<div className="mypage-info-container">
@@ -95,37 +105,29 @@ export default class UserProfileContainer extends Component {
 
 				<div className="profile-setting-detail-m">
   				<p className="profile-small-title">이 름</p>
-  				<input className="profile-setting-text" type="text" id="user-name"/>
+  				<input className="profile-setting-text" value={profile.display_name} onChange={this._onChangeName} type="text" id="user-name"/>
 				</div>
 
 				<div className="profile-setting-detail-m">
 				<p className="profile-small-title">연락처</p>
-  				<div className="profile-setting-num-container-1">
-			      <input className="profile-setting-num-1" type="number" maxLength="3" id="user-contact-0"/>
-  				</div>
-
-  				<div className="profile-setting-num-container-2">
-			      <input className="profile-setting-num-2" type="number" maxLength="4" id="user-contact-1"/>
-  				</div>
-
-  				<div className="profile-setting-num-container-3">
-			      <input className="profile-setting-num-3" type="number" maxLength="4" id="user-contact-2"/>
-  				</div>
-				</div>
-
-				<div className="profile-setting-detail-m">
-				      <p className="profile-small-title">이메일</p>
-				    <input className="profile-setting-text" type="text" id="user-email" />
-				</div>
-
-				<div className="profile-setting-detail-m">
-  				<p className="profile-small-title">페이스북 주소</p>
-  				<input className="profile-setting-text" type="text" value={`www.facebook.com/${fb_id}`}/>
+  				<input className="profile-setting-text" type="text" value={profile.contact} onChange={this._onChangeContact} id="user-contact"/>
 				</div>
 
 				<div className="profile-setting-detail">
+				      <p className="profile-small-title">이메일</p>
+				    <input className="profile-setting-text" type="text" value={profile.sub_email || profile.local_email} onChange={this._onChangeSubemail} id="user-email"/>
+				</div>
+        
+        {/*
+				<div className="profile-setting-detail-m">
+  				<p className="profile-small-title">페이스북 주소</p>
+  				<input className="profile-setting-text" type="text" value={`www.facebook.com/${fb_id}`} readOnly/>
+				</div>
+				*/}
+
+				<div className="profile-setting-detail">
   				<p className="profile-small-title">자기소개</p>
-  				<textarea className="project-setting-textarea" type="textarea" id="user-intro"/>
+  				<textarea className="project-setting-textarea" value={intro} onChange={this._onChangeIntro} type="textarea" id="user-intro"/>
 				</div>
 
 				{/* <input className="profile-setting-checkbox" type="checkbox" />
@@ -144,14 +146,17 @@ export default class UserProfileContainer extends Component {
 		else
 			return (
 				<div className="profile">
+				  <MetaTags>
+		            <title>프로필 설정 - 7Pictures</title>
+		      </MetaTags>
 					{info}
 
 					<Tabs onSelect={this.handleSelect} selectedIndex={0}>
 					<TabList>
 						{/* <Tab>후원 내역</Tab> */}
-						<Tab>프로필 설정</Tab>
-						<Tab>결제카드 등록</Tab>
-						<Tab>배송지 등록</Tab>
+						<Tab><div className="profile_tab1">프로필</div></Tab>
+						<Tab><div className="profile_tab2">결제카드</div></Tab>
+						<Tab><div className="profile_tab3">배송지</div></Tab>
 					</TabList>
 
 					<TabPanel>
@@ -212,7 +217,7 @@ export default class UserProfileContainer extends Component {
 
     let file = e.target.files[0]
 
-    console.log('file to upload', file);
+    // console.log('file to upload', file);
     const { sourceURL } = await upload_file(file)
 
     this.setState(update(this.state, {
@@ -221,25 +226,59 @@ export default class UserProfileContainer extends Component {
       }
     }))
   }
+  
+  _onChangeName = (e) => {
+    let n = e.target.value
+    this.setState(update(this.state, {
+      profile: {
+        display_name: { $set: n }
+      }
+    }))
+  }
+  
+  _onChangeSubemail = (e) => {
+    let n = e.target.value
+    this.setState(update(this.state, {
+      profile: {
+        sub_email: { $set: n }
+      }
+    }))
+  }
+  
+  _onChangeContact = (e) => {
+    let n = e.target.value
+    this.setState(update(this.state, {
+      profile: {
+        contact: { $set: n }
+      }
+    }))
+  }
+  
+  _onChangeIntro = (e) => {
+    let n = e.target.value
+    this.setState(update(this.state, {
+      profile: {
+        intro: { $set: n }
+      }
+    }))
+  }
 
   _onClickUpdateProfile = async () => {
     let body = {
-      local_email: document.getElementById('user-email').value || '',
-      name: document.getElementById('user-name').value || '',
+      sub_email: document.getElementById('user-email').value || '',
+      display_name: document.getElementById('user-name').value || '',
       image: this.state.profile.image,
       intro: document.getElementById('user-intro').value || '',
-      contact: [0,1,2].map( (i) => document.getElementById(`user-contact-${i}`).value || '' ).join('-')
+      contact: document.getElementById('user-contact').value || ''
     }
 
-    console.log(body)
-
-    alert('!@#')
+    alert('프로필이 성공적으로 변경되었습니다.')
 
     try {
       let r = await updateUserProfile(body)
-      console.log(r)
+      // console.log(r)
     } catch (e) {
-      console.error(e);
+      // console.error(e);
     }
   }
 }

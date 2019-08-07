@@ -6,140 +6,11 @@
         background : #fff;
         z-index: 100;
         width: 100%;
-        border-bottom : 1px solid #bbb;
-    }
-    .Collapsible {
-        display : inline-block;
-        float : left;
-        position : fixed;
-        width : 60px;
-    }
-    .Collapsible__contentOuter {
-        margin-top : 1px;
-        width : 991px;
-        background : #fff;
-    }
-    .Collapsible__trigger.is-open {
-	    width: 60px;
-        height: 54px;
-        background : transparent;
-        border : none;
-        outline : none;
-        border-right : 1px solid #bbb;
-        color : #333;
-        vertical-align : middle;
-        padding: 10px;
-        cursor : pointer;
-        text-align : center;
-    }
-    .Collapsible__trigger.is-open:before {
-    	font-family : Ionicons;
-        content : "\f3d8";
-        font-size : 28px;
-        line-height : 1.2;
-        width : 54px;
-        height : 54px;
-    }
-    .Collapsible__trigger.is-closed {
-    	width: 60px;
-        height: 54px;
-        background : transparent;
-        border : none;
-        outline : none;
-        border-right : 1px solid #bbb;
-        color : #333;
-        vertical-align : middle;
-        padding: 10px;
-        cursor : pointer;
-        text-align : center;
-    }
-    .Collapsible__trigger.is-closed:before {
-    	font-family : Ionicons;
-    	content : "\f2f5";
-    	font-size : 28px;
-        line-height : 1.3;
-        width : 54px;
-        height : 54px;
-    }
-    .Collapsible__contentInner {
-
-    }
-
-.header-search-form-opened {
-    border-bottom : 1px solid #bbb;
-    .header-search-form {
-        display : inline-block;
-    }
-    .header-search {
-        height : 54px;
-        background : transparent;
-        border : none;
-        outline : none;
-        color : #333;
-        vertical-align : middle;
-        padding : 0px 10px;
-        width : 240px;
-        background : #fff;
-        
-    }
-    .header-search::-webkit-input-placeholder {
-        color : #333;
-    }
-    .header-search::-moz-placeholder {
-        color : #333;
-    }
-    .header-search:-ms-input-placeholder {
-        color : #333;
-    }
-    .header-search:-moz-placeholder {
-        color : #333;
-    }
-    .header-search-submit {
-        width: 60px;
-        height: 54px;
-        background : #fff;
-        border : none;
-        outline : none;
-        border-right : 1px solid #bbb;
-        color : #333;
-        vertical-align : middle;
-        padding: 10px;
-    }
-    .header-search-submit:before {
-        font-family : Ionicons;
-        content : "\f2f5";
-        font-size : 28px;
-        line-height : 1.3;
-        width : 54px;
-        height : 54px;
+        border-bottom : 1px solid #ddd;
     }
     
-}
 
-.header-menu-mobile-search {
-    display : inline-block;
-    float : left;
-    position : fixed;
-    .header-search-open {
-        width: 60px;
-        height: 54px;
-        background : transparent;
-        border : none;
-        outline : none;
-        border-right : 1px solid #bbb;
-        color : #333;
-        vertical-align : middle;
-        padding: 10px;
-    }
-    .header-search-open:before {
-        font-family : Ionicons;
-        content : "\f2f5";
-        font-size : 28px;
-        line-height : 1.1;
-        width : 54px;
-        height : 54px;
-    }
-}
+
 .header-menu-mobile-logo {
     width : 100%;
     text-align : center;
@@ -151,30 +22,36 @@
     }
 }
 
-.header-menu-mobile-burger {
-    display : inline-block;
-    position : fixed;
-    float : right;
-    right : 0;
+.header-menu-mobile-list {
+        display : inline-block;
+        position : fixed;
+        left : 0;
+        z-index : 1;
     .bm-overlay {
-    left : 0;
+        right : 0;
     }
     .bm-menu {
         width : 100%;
         text-align : center;
-        padding : 10px 9px 20px 9px;
+        padding : 10px 9px;
     }
     .bm-menu-wrap {
-        background : #333;
+        background : rgba(0,0,0,0.8);
+    }
+    .bm-burger-button {
+        z-index: 1;
+        width: 60px;
+        height: 54px;
+        text-align: center;
+        line-height: 52px;
     }
     .bm-icon {
-        width: 60px !important;
-        height: 54px !important;
+        width: 60px!important;
+        height: 54px!important;
         background: 0 0;
         border: none;
         outline: 0;
-        border-left: 1px solid #bbb;
-        color: #333;
+        color: #000;
         vertical-align: middle;
         padding: 10px;
     }
@@ -182,198 +59,140 @@
         font-family: Ionicons;
         content: "\f20e";
         font-size: 34px;
-        line-height: 1;
-        width: 54px;
-        height: 54px;
+        line-height: 0.5;
     }
     .bm-cross-button {
       height: 54px;
       width: 54px;
-      display : none;
+      right: 16px !important;
+      top: 10px !important;
     }
     .bm-cross {
       background: #fff;
-      height: 18px !important;
+      height: 22px !important;
       width: 3px !important;
-      display : none;
-    }
-    .mobile-burger-user-icon {
-        border-radius : 100px;
-        border : 1px solid #fff;
-        margin : 20px auto 10px auto;
-    }
-    .mobile-burger-user-name {
-        font-size : 14px !important;
-        font-weight : 600 !important;
-        color : #fff;
-    }
-    .mobile-burger-profile-container {
-        display : inline-block;
-        width : 50%;
-        padding : 3px;
-        margin-top : 8px;
-        .mobile-burger-profile {
-            font-size : 13px !important;
-            color : #fff;
-            border : 1px solid #fff;
-            border-radius : 2px;
-            height : 25px;
-            line-height : 23px;
-        }
-    }
-    .mobile-burger-login, .mobile-burger-signup {
-        font-size : 18px !important;
-        font-weight : 600 !important;
-        color : #fff;
-        background : #222;
-        height: 36px;
-        margin: 10px 0px;
-        line-height: 36px;
     }
     
-    .mobile-burger-whatson {
-        font-size : 20px !important;
-        font-weight : 600 !important;
-        color : #fff;
-        height: 50px;
-        line-height: 47px;
-        border-top : 1px solid #fff;
-        margin-top : 30px;
-    }
-    .mobile-burger-magazine {
-        font-size : 20px !important;
-        font-weight : 600 !important;
-        color : #fff;
-        height: 50px;
-        line-height: 47px;
-        border-top : 1px solid #fff;
-    }
-    .mobile-burger-sponsor {
-        font-size : 20px !important;
-        font-weight : 600 !important;
-        color : #fff;
-        height: 50px;
-        line-height: 47px;
-        border-top : 1px solid #fff;
-        border-bottom : 1px solid #fff;
-    }
-    .mobile-burger-suggest-modal-button {
-        margin-top : 30px;
-        font-size : 18px !important;
-        font-weight : 600 !important;
-        color : #fff;
-        width : 100%;
-        height: 38px;
-        line-height: 34px;
-        border: 1px solid #fff;
-        border-radius : 3px;
-        background : transparent;
-    }
-    .mobile-burger-suggest-modal-button:hover, .mobile-burger-suggest-modal-button:focus {
-        border: 1px solid #150C8B;
-        border-radius : 3px;
-        background : #150C8B;
-    }
-    div {
+}
+
+
+.header-menu-mobile-burger, .mobile-category-container {
         display : inline-block;
+        position : fixed;
+        right : 0;
+    .bm-overlay {
+        left : 0;
     }
-    .project-modal-header {
-        display : block !important;
-    }
-    .suggest-modal-button, .suggest-modal-button:focus {
-        height : 33px;
-        padding : 0px 18px;
-        background : transparent;
-        outline : none;
-        border : 1px solid #333;
-        border-radius : 2px;
-        color : #333;
-        vertical-align : middle;
-        font-weight : 600;
-        margin-right : 20px;
-        transition : opacity, 220ms;
-    }
-    .suggest-modal-button:hover {
-        border : 1px solid #150C8B;
-        background : #150C8B;
-        color : #fff;
-        transition : opacity, 220ms;
-        }
-    .mobile-burger-sns-container {
-        display : block;
+    .bm-menu {
         width : 100%;
-        margin-top : 30px;
-        .mobile-burger-sns {
-            display : inline-block;
-            width : 25%;
-            height : 43.5px;
-            vertical-align : middle;
-            .mobile-burger-sns-facebook, .mobile-burger-sns-instagram, .mobile-burger-sns-kakaotalk, .mobile-burger-sns-blog {
-                border : none;
-                border-radius : 100px;
-                color : #777;
-                background : transparent;
-                outline : none;
-                width : 100%;
-                height : 100%;
-            }
-            .mobile-burger-sns-facebook:before {
-                font-family : Ionicons;
-                font-size : 28px;
-                content : "\f231";
-                
-            }
-            .mobile-burger-sns-instagram:before {
-                font-family : Ionicons;
-                font-size : 28px;
-                content : "\f350";
-            }
-            .kakao-icon {
-                fill : #777;
-                line-height : 0.9;
-            }
-            .mobile-burger-sns-blog:before {
-                font-family : Ionicons;
-                font-size : 28px;
-                content : "\f23d";
-            }
-        }
+        text-align : center;
+        padding : 10px 9px;
     }
-    .mobile-burger-logout-container {
-        display : block;
-        text-align : right;
+    .bm-menu-wrap {
+        background : rgba(0,0,0,0.8);
     }
-    .mobile-burger-logout {
-        border : none;
-        outline : none;
-        font-size : 13px;
-        font-weight : 600;
-        color : #fff;
-        background : transparent;
-        margin-top : 10px;
+    .bm-burger-button {
+        z-index: 1;
+        width: 60px;
+        height: 54px;
+        text-align: center;
+        line-height: 52px;
     }
-    .mobile-burger-logout:after {
-        font-family : Ionicons;
-        content : "\f29f";
-        margin-left : 3px;
+    .bm-icon {
+        background: 0 0;
+        outline: 0;
+        color: #333;
+        vertical-align: middle;
+        width: 31px !important;
+        height: 31px !important;
+        border: 1px solid #ddd;
+        border-radius: 100px;
+    }
+    .bm-cross-button {
+      height: 54px;
+      width: 54px;
+      right: 16px !important;
+        top: 10px !important;
+    }
+    .bm-cross {
+      background: #fff;
+      height: 22px !important;
+      width: 3px !important;
+    }
+    .mobile-burger-user-icon {
+        border-radius: 100px;
+        border: 1px solid #eee;
+        vertical-align: top;
+        margin-left: 10px;
+        margin-top: 2px;
     }
     
     }
 }
 
-.header-menu-mobile-empty-space {
+.mobile-burger-user-icon {
+    border-radius: 100px;
+    border: 1px solid #ddd;
+    vertical-align: top;
+    margin-left: 10px;
+    margin-top: 2px;
+}
+
+.header-menu-mobile-login {
+    z-index: 1;
+}
+.header-menu-mobile-login-button {
+    width: 60px;
+    height: 54px;
+    background: 0 0;
+    border: none;
+    outline: 0;
+    color: #333;
+    vertical-align: middle;
+    padding: 10px;
+}
+.header-menu-mobile-login-button:before {
+    font-family: Ionicons;
+    content: "\f3a0";
+    font-size: 26px;
+    line-height: 1.3;
+}
+
+.header-menu-mobile-burger-empty {
+    width : 100%;
+    height : 50px;
+}
+
+.mobile-header-margin {
     display : none;
     @media (max-width : 991px) {
-        display : block;
         width : 100%;
-        height : 54px;
+        display : block;
+        height : 55px;
     }
 }
-.mobile-burger-info-container {
-    margin : 30px 0px;
-}
-.mobile-burger-info {
-    margin : 0px !important;
-    font-size : 11px !important;
-    color : #fff;
+
+.mobile-category-container {
+    display : none;
+    
+    @media(max-width : 500px) {
+        display : block;
+        margin: 0px auto;
+    }
+    .mobile-category-tab {
+        padding: 13px 23px 13px 23px;
+        font-size: 16px;
+        width: 50%;
+        background: #fff;
+        box-shadow: inset 0 -1px 0 0 #ddd;
+        border: none;
+        outline: 0;
+        font-weight: 500;
+        color : #777;
+    }
+    .mobile-category-tab.mobile-category-tab-clicked {
+        box-shadow: inset 0 -1px 0 0 #6662ff;
+        color: #6662ff;
+        background: #fff;
+    }
 }

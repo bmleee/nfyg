@@ -11,6 +11,7 @@ export async function createQnA({project, product, title, text, user}) {
     abstract: {
       title,
       likes: [],
+      created_at: Date.now(),
     },
     text,
     comments: [],
@@ -20,6 +21,27 @@ export async function createQnA({project, product, title, text, user}) {
   else if (product) body.product = product
   else throw new Error(`can't create qna. one of project or product must be specified`)
 
+  return await QnAModel.create(body)
+}
+
+export async function createContactQnA({title, text, user}) {
+  let body = {
+    author: {
+      name: user.display_name,
+      iconSrc: user.image,
+      user: user._id,
+    },
+    abstract: {
+      title,
+      likes: [],
+      created_at: Date.now(),
+    },
+    text,
+    comments: [],
+    user,
+    user_info: user,
+  }
+  
   return await QnAModel.create(body)
 }
 
@@ -33,6 +55,7 @@ export async function createCommentOnQnA({_id, text, user}) {
     },
     text,
     likes: [],
+    created_at: Date.now(),
   }
 
   return await QnAModel.update(
@@ -54,7 +77,7 @@ export async function createPost({project, product, user, title, content, thresh
       isDirectSupport,
       title,
       thresholdMoney,
-      likes: [],
+      created_at: Date.now(),
     },
     content,
     comments: [],

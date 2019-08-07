@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import update from 'immutability-helper'
-
+import SweetAlert from 'sweetalert-react';
 import { Card, CardPanel, CardTitle } from 'react-materialize'
 
 import { isNumber } from '~/src/lib/utils'
-import { fetchPurchaseInfo, createPayment, deletePayment } from '~/src/react/api/AppAPI'
+import { fetchPurchaseInfo, createPayment, deletePayment, getPayment } from '~/src/react/api/AppAPI'
 
 import Modal from '~/src/react/components/react-awesome-modal';
 
@@ -16,6 +16,8 @@ export default class C extends Component {
 		birth: '',
 		pwd_2digit: '',
 		visible : false,
+		message_error: '',
+		show: false,
 	}
 
 	openModal = () => {
@@ -27,29 +29,35 @@ export default class C extends Component {
 	closeModal = () => {
 		this.setState(update(this.state, {
 			visible: { $set: false },
+			show: { $set: false }
 		}))
 	}
 
 	async componentDidMount() {
 		await this._reflashPayments()
 		window.scrollTo(0, 0)
+	
 	}
 
 	render() {
-		console.log(this);
+		// console.log('C1', this);
 		const {
 			payments,
 			card_number,
 			expiry,
 			birth,
 			pwd_2digit,
+			message_error,
 		} = this.state
 
 		const {
-			goToNextStage,
+			goToNextStage3,
 			goToPreviousStage,
 			selectedPaymentIndex,
 		} = this.props
+		
+		
+		// // console.log('message_error', message_error);
 
 		return !payments ? <div>Payment Loading...</div>
 			: (
@@ -72,7 +80,7 @@ export default class C extends Component {
 								}, index) => (
 									<div className="card-container">
 										<button className={"card-select-button" + (selectedPaymentIndex === index ? "selected": "" )} onClick={this._onClickPayment(index)}>
-												<p className="card-title">[{card_name}] {card_number}</p>
+												<p className="card-title">[{card_name}] {card_number.substring(card_number.length-4, card_number.length)}</p>
 												<p className="card-expiry">유효기간 : {expiry}</p>
 											<button className="card-delete" onClick={this._onClickDeletePayment(_id)}>삭 제</button>
 										</button>
@@ -90,16 +98,17 @@ export default class C extends Component {
 
 								<div>
 									<p className="profile-small-title">카드번호 16자리</p>
-									{
-										card_number.map((c, index) => <input className="card-num-text" type="text" value={c} onChange={this._onChangeCardNumber(index)} maxLength="4"/>)
-									}
+									<input className="card-num-text" type="text" value={card_number[0]} onChange={this._onChangeCardNumber(0)} maxLength="4"/>
+									<input className="card-num-text" type="text" value={card_number[1]} onChange={this._onChangeCardNumber(1)} maxLength="4"/>
+									<input className="card-num-text" type="password" value={card_number[2]} onChange={this._onChangeCardNumber(2)} maxLength="4"/>
+									<input className="card-num-text" type="text" value={card_number[3]} onChange={this._onChangeCardNumber(3)} maxLength="4"/>
 								</div>
 
 								<div>
-									<p className="profile-small-title">유효기간 (YYYY/MM)</p>
+									<p className="profile-small-title">유효기간 (MONTH/YEAR)</p>
 									<div>
-										<input className="expiry-year-text" type="text" value={expiry[0]} onChange={this._onChangeExpiry(0)} maxLength="4"/>
 										<input className="expiry-month-text" type="text" value={expiry[1]} onChange={this._onChangeExpiry(1)} maxLength="2"/>
+										<input className="expiry-month-text" type="text" value={expiry[0]} onChange={this._onChangeExpiry(0)} maxLength="2"/>
 									</div>
 								</div>
 
@@ -121,9 +130,18 @@ export default class C extends Component {
 							</div>
 						</div>
 					</Modal>
+					
+					<SweetAlert
+			          show={this.state.show}
+			          title=""
+			          text={message_error}
+			          onConfirm={this.closeModal}
+			          confirmButtonText="확 인"
+			        />
+					
 						<div className="purchase-stage-move-container">
 							<button className="purchase-stage-prev-button" onClick={goToPreviousStage}>이전 단계</button>
-							<button className="purchase-stage-next-button" onClick={goToNextStage}>결제 정보 확인</button>
+							<button className="purchase-stage-next-button" onClick={goToNextStage3}>결제 정보 확인</button>
 						</div>
 				</div>
 			)
@@ -131,30 +149,44 @@ export default class C extends Component {
 	}
 
 	_onClickPayment = (index) =>  {
-		return () => this.props.setPayment(index, this.state.payments[index])
+		return () => {
+			this.props.setPayment(index, this.state.payments[index])
+			//// console.log('C3_this.state.payments', this.state.payments[index]);
+			//// console.log('C3', this);
+		}
 	}
 
 
 	_onClickAddPayment = async () => {
 		let payment = {
-			card_number: this.state.card_number.join('-'),
-		  expiry: this.state.expiry.join('-'),
+		  card_number: this.state.card_number.join('-'),
+		  expiry: '20' + this.state.expiry.join('-'),
 		  birth: this.state.birth,
 		  pwd_2digit: this.state.pwd_2digit,
 		}
-
-		console.log(this.state);
-		console.log(payment);
+		
+		//// console.log('C4', this);
+		//// console.log('_onClickAddPayment', this.state);
+		//// console.log('_onClickAddPayment2', payment);
 
 		try {
-			const r = await createPayment(payment)
-			console.log('create payment result',r );
+			await createPayment(payment)
 		} catch (e) {
-			console.error('create payment error', e);
-			alert("카드 정보를 올바르게 입력해주세요.")
+			const e_r = await getPayment(payment)
+			// // console.error('카드등록 에러메시지', e_r.data);
+			
+			let n = e_r.data.message_error
+			this.setState(update(this.state, {
+				message_error: { $set: n },
+				show: { $set: true }
+			}))
+			
+			// alert(e_r.data.message_error)
 		} finally {
 			await this._reflashPayments()
 		}
+		
+		this.props.setPayment(0, this.state.payments[0])
 
 		this.setState(update(this.state, {
 			visible: { $set: false },
@@ -165,10 +197,10 @@ export default class C extends Component {
 		return async () => {
 			try {
 				const r = await deletePayment(payment_id)
-				console.log('delete payment response', r);
+				// console.log('delete payment response', r);
 				await this._reflashPayments()
 			} catch (e) {
-				console.error('delete payment error', e);
+				// console.error('delete payment error', e);
 			} finally {
 
 			}
@@ -184,15 +216,14 @@ export default class C extends Component {
 
 			this.setState({ payments })
 		} catch (e) {
-			console.error(e);
+			// console.error(e);
 		}
 	}
 
 	_onChangeCardNumber = (index) => {
 		return (e) => {
 			let n = e.target.value
-			if(!isNumber(n)) alert ('숫자만 입력 가능합니다.')
-			else {
+			{
 				this.setState(update(this.state, {
 					card_number: {
 						[index]: { $set: n }
@@ -210,8 +241,7 @@ export default class C extends Component {
 		return (e) => {
 			let n = e.target.value
 			let _n = Number(n)
-			if(!isNumber(n)) alert ('숫자만 입력 가능합니다.')
-			else if(n.length === length[index] && _n < mins[index] || _n > maxs[index]) {
+			if(n.length === length[index] && _n < mins[index] || _n > maxs[index]) {
 				alert('올바른 숫자를 입력하세요')
 				this.setState(update(this.state, {
 					expiry: {
@@ -231,8 +261,7 @@ export default class C extends Component {
 
 	_onChangeBirth = (e) => {
 		let n = e.target.value
-		if(!isNumber(n)) alert ('숫자만 입력 가능합니다.')
-		else {
+		{
 			this.setState(update(this.state, {
 				birth: { $set: n }
 			}))
@@ -240,8 +269,7 @@ export default class C extends Component {
 	}
 	_onChangePwd = (e) => {
 		let n = e.target.value
-		if(!isNumber(n)) alert ('숫자만 입력 가능합니다.')
-		else {
+		{
 			this.setState(update(this.state, {
 				pwd_2digit: { $set: n }
 			}))

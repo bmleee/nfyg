@@ -1,0 +1,25 @@
+html {
+  font-weight: bold;
+}
+
+div.mail-body {
+    background : #eee;
+    padding : 20px;
+}
+
+div.mail-logo-body {
+    text-align : center;
+    margin-top : 30px;
+    margin-bottom : 50px;
+    background : transparent;
+}
+div.mail-content-empty {
+    height : 20px;
+}
+
+div.mail-content-body {
+    background : #fff;
+    padding : 20px;
+    width : 90%;
+    margin : 0px auto 20px auto;
+}

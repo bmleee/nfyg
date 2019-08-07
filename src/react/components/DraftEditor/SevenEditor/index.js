@@ -6,6 +6,8 @@ import '~/src/react/components/react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 import draftToHtml from 'draftjs-to-html';
 import draftToMarkdown from 'draftjs-to-markdown';
 
+import EmbeddedImage from '~/src/assets/images/video-player.png'
+
 import { upload_file } from '~/src/react/api/AppAPI';
 import editorStyles from './editorStyles.css'
 
@@ -61,6 +63,7 @@ export default class SevenEditor extends Component {
 		console.log('SevenEditor.componentDidMount', this);
 		console.log('typeof this.props.raw', typeof this.props.raw);
 		console.log('this.props.raw', this.props.raw);
+		console.log('this.props', this.props);
 
 		// init empty raw content
 		let raw = this.props.raw;
@@ -80,6 +83,8 @@ export default class SevenEditor extends Component {
 
 	render() {
 		let editorState = this.state.editorState;
+		
+		console.log('editorState', editorState)
 
 		return (
 			<div className={editorStyles.wrapper}>
@@ -94,6 +99,9 @@ export default class SevenEditor extends Component {
 						onEditorStateChange={this.onChange}
 						placeholder="내용을 입력해주세요."
 						ref={(node) => this.editor = node}
+						toolbar={{
+							embedded: { icon: EmbeddedImage, className: 'demo-option-custom', popupClassName: 'demo-popup-custom' }
+						}}
 					/>
 				</div>
 			</div>
@@ -132,7 +140,7 @@ export class Viewer extends Component {
 		try {
 			editorState = EditorState.createWithContent(convertFromRaw(raw));
 		} catch (e) {
-			console.error(e)
+			console.error('에디터 에러 2', e)
 			editorState = EditorState.createEmpty()
 		}
 

@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import MetaTags from 'react-meta-tags';
 
 import {
 	MagazinesHeading,
@@ -15,7 +16,9 @@ class Magazines extends Component {
 
 		return (
 			<div className="magazines">
-
+				<MetaTags>
+		            <title>매거진 - 7Pictures</title>
+		        </MetaTags>
 				<MagazinesHeading
 					currentCategory={currentCategory}
 					categories={categories}
