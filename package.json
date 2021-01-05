@@ -22,7 +22,7 @@
   "dependencies": {
     "@tinymce/tinymce-react": "^2.0.3",
     "aws-sdk": "^2.6.10",
-    "axios": "^0.15.3",
+    "axios": "^0.21.1",
     "body-parser": "^1.15.2",
     "bootstrap": "^3.3.7",
     "chai": "^3.5.0",
