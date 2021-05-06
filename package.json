@@ -76,7 +76,7 @@
     "react-collapsible": "^1.2.0",
     "react-copy-to-clipboard": "^4.2.3",
     "react-document-meta": "^2.1.1",
-    "react-draft-wysiwyg": "^1.5.8",
+    "react-draft-wysiwyg": "^1.14.6",
     "react-dropzone": "^3.7.3",
     "react-favicon": "0.0.5",
     "react-fontawesome": "^1.2.0",
