@@ -54,7 +54,7 @@
     "immutability-helper": "^2.0.0",
     "immutable": "^3.8.1",
     "isomorphic-fetch": "^2.2.1",
-    "lodash": "^4.16.4",
+    "lodash": "^4.17.21",
     "mailchimp-lite": "^1.0.8",
     "md5": "^2.2.1",
     "method-override": "^2.3.7",
